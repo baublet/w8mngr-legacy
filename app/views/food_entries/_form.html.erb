@@ -1,0 +1,46 @@
+<%= form_for @foodentry do |f| %>
+ 
+  <% if @foodentry.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@foodentry.errors.count, "error") %> prohibited
+        this entry from being saved:
+      </h2>
+      <ul>
+        <% @foodentry.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+	  <%= f.label :description %><br>
+	  <%= f.text_field :description %>
+  </p>
+  
+  <p>
+	  <%= f.label :calories %><br>
+	  <%= f.text_field :calories %>
+  </p>
+
+  <p>
+	  <%= f.label :fat %><br>
+	  <%= f.text_field :fat %>
+  </p>
+
+  <p>
+	  <%= f.label :carbs %><br>
+	  <%= f.text_field :carbs %>
+  </p>
+
+  <p>
+	  <%= f.label :protein %><br>
+	  <%= f.text_field :protein %>
+  </p>
+
+  <p>
+	  <%= f.submit %>
+  </p>
+ 
+<% end %>

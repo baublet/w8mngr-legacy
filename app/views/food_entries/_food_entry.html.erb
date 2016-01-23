@@ -1,0 +1,12 @@
+<tr>
+	<td><%= food_entry.description %></td>
+	<td><%= food_entry.calories %></td>
+	<td><%= food_entry.fat %></td>
+	<td><%= food_entry.carbs %></td>
+	<td><%= food_entry.protein %></td>
+	<td><%= link_to 'Show', food_entry_path(food_entry) %></td>
+	<td><%= link_to 'Edit', edit_food_entry_path(food_entry) %></td>
+	<td><%= link_to 'Delete', food_entry_path(food_entry),
+				method: :delete,
+				data: { confirm: 'Are you sure?' } %></td>
+</tr>
