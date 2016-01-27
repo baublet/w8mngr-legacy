@@ -1,12 +1,39 @@
-<tr>
-	<td><%= food_entry.description %></td>
-	<td><%= food_entry.calories %></td>
-	<td><%= food_entry.fat %></td>
-	<td><%= food_entry.carbs %></td>
-	<td><%= food_entry.protein %></td>
-	<td><%= link_to 'Show', food_entry_path(food_entry) %></td>
-	<td><%= link_to 'Edit', edit_food_entry_path(food_entry) %></td>
-	<td><%= link_to 'Delete', food_entry_path(food_entry),
-				method: :delete,
-				data: { confirm: 'Are you sure?' } %></td>
-</tr>
+<div class="row <%= (food_entry[:id].nil?) ? "new" : "entry" %>">
+	<%= form_for food_entry do |f| %>
+	    <%= f.hidden_field :day %>
+
+	    <% if food_entry.errors.any? %>
+	        <%= render partial: "shared/error_messages", locals: {errors: food_entry.errors} %>
+	    <% end %>
+	    <div class="col long">
+	    	<%= f.text_field :description, placeholder: :Description %>
+	    </div>
+
+	    <div class="col short">
+	        <%= f.text_field :calories, placeholder: :Calories %>
+	    </div>
+
+	    <div class="col short">
+	            <%= f.text_field :fat, placeholder: :Fat %>
+	    </div>
+
+	    <div class="col short">
+	            <%= f.text_field :carbs, placeholder: :Carbs %>
+	    </div>
+
+	    <div class="col short">
+	            <%= f.text_field :protein, placeholder: :Protein %>
+	    </div>
+	    
+		<div class="col long">
+	        <% if food_entry[:id].nil? %>
+	                <%= f.submit "New Entry" %>
+	        <% else %>
+	            <%= f.submit "Save" %>
+	            <%= link_to 'Delete', food_entry_path(food_entry),
+	                        method: :delete,
+	                        data: { confirm: 'Are you sure?' } %>
+	        <% end %>
+		</div>
+	<% end %>
+</div>

@@ -1,10 +1,10 @@
 class FoodEntriesController < ApplicationController
-	before_action :logged_in_user, only: [:create, :destroy]
+	before_action :logged_in_user, only: [:create, :destroy, :update]
 	before_action :correct_user, only: [:update, :destroy]
 
 	def index
 		@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
-		@foodentry = current_user.foodentries.build(day: current_day)
+		@newfoodentry = current_user.foodentries.build(day: current_day)
 	end
 
 	def show
@@ -12,39 +12,35 @@ class FoodEntriesController < ApplicationController
 	end
 
 	def new
-		@foodentry = current_user.foodentries.build
+		@newfoodentry = current_user.foodentries.build
 	end
 
 	def create
 		@foodentry = current_user.foodentries.build(food_entry_params)
 		if @foodentry.save
-			@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
-			@foodentry = current_user.foodentries.build(day: current_day)
-			render 'index'
+			redirect_to '/foodlog/' + params[:food_entry][:day]
 		else
-			render 'new'
+			@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
+			@newfoodentry = current_user.foodentries.build(day: current_day)
+			render 'index'
 		end
-	end
-
-	def edit
-		@foodentry = current_user.foodentries.find(params[:id])
 	end
 
 	def update
 		@foodentry = current_user.foodentries.find(params[:id])
-
 		if @foodentry.update(food_entry_params)
-			redirect_to food_entries_path
+			redirect_to '/foodlog/' + params[:food_entry][:day]
 		else
-			render 'edit'
+			@newfoodentry = current_user.foodentries.build(day: current_day)
+			render 'index'
 		end
 	end
 
 	def destroy
 		@foodentry = current_user.foodentries.find(params[:id])
+		day = @foodentry[:day]
 		@foodentry.destroy
-
-		redirect_to food_entries_path
+		redirect_to '/foodlog/' + day.to_s
 	end
 
 	private

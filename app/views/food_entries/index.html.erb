@@ -1,16 +1,15 @@
 <h1>Food Log</h1>
 
-<table>
-	<tr>
-		<th>Description</th>
-		<th>Calories</th>
-		<th>Fat</th>
-		<th>Carbs</th>
-		<th>Protein</th>
-		<th colspan="2"></th>
-	</tr>
-
+<div class="foodlog table">
+	<div class="row header">
+		<div class="col long">Description</div>
+		<div class="col short">Calories</div>
+		<div class="col short">Fat</div>
+		<div class="col short">Carbs</div>
+		<div class="col short">Protein</div>
+		<div class="col long"></div>
+	</div>
 	<%= render @foodentries %>
+	<% @foodentry = @newfoodentry %>
+	<%= render @foodentry %>
 </table>
-
-<%= render 'form' %>

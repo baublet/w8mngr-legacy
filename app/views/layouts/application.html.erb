@@ -8,26 +8,33 @@
 </head>
 <body>
 
+<header>
+    <h1><%= link_to "w8mngr", root_path %></h1>
+    <h2>The Lifestyle Tracker</h2>
+</header>
+
+<nav>
+    <% if logged_in? %>
+        <%= link_to "Profile", current_user %>
+    	<%= link_to "Logout", logout_path, method: "delete" %>
+        <%= link_to "Food Log", food_entries_path %>
+    <% else %>
+        <%= link_to "Sign Up", signup_path %>
+    	<%= link_to "Login", login_path %>
+    <% end %>
+</nav>
+
 <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
 <% end %>
 
 <% if logged_in? %>
-    Prev: <%= link_to previous_day, controller: 'food_entries', day: previous_day %><br>
-    Day: <%= current_day %><br>
-    Next: <%= link_to next_day, controller: 'food_entries', day: next_day %>
+    Prev: <%= link_to nice_day(previous_day), controller: 'food_entries', day: previous_day %><br>
+    Day: <%= nice_day(current_day) %><br>
+    Next: <%= link_to nice_day(next_day), controller: 'food_entries', day: next_day %>
 <% end %>
 
 <%= yield %>
-
-<% if logged_in? %>
-    <%= link_to "Profile", current_user %>
-	<%= link_to "Logout", logout_path, method: "delete" %>
-    <%= link_to "Food Log", food_entries_path %>
-<% else %>
-    <%= link_to "Sign Up", signup_path %>
-	<%= link_to "Login", login_path %>
-<% end %>
 
 </body>
 </html>

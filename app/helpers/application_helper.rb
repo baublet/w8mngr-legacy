@@ -17,7 +17,7 @@ module ApplicationHelper
         if @current_day.nil?
             # Here, I want a date range between 1985 and 2085. If I get to be
             # 100 years old, surely someone can change this line for me...
-            passed_day = params[:day]|| params[:food_entry][:day]
+            passed_day = params[:day]
             if passed_day.nil? || passed_day.to_i < 19850501 || passed_day.to_i > 20850501
                 passed_day = Date.today.strftime('%Y%m%d')
             end
@@ -34,6 +34,7 @@ module ApplicationHelper
         return @previous_day
     end
 
+    # Returns the next day in our DB's day storage format
     def next_day
         if @next_day.nil?
             @next_day = convert_day_to_date(current_day).tomorrow.strftime('%Y%m%d')
@@ -41,10 +42,13 @@ module ApplicationHelper
         return @next_day
     end
 
-    private
-
     # Converts YYYYMMDD to a Date object
     def convert_day_to_date(string)
         return Date.strptime(string,"%Y%m%d")
+    end
+    
+    # Converts YYYYMMDD into a nice looking date (Saturday, January 1, 2010)
+    def nice_day(string)
+        return convert_day_to_date(string).strftime('%A, %B %e, %Y')
     end
 end
