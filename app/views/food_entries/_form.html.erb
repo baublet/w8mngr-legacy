@@ -1,14 +1,15 @@
 <%= form_for @foodentry do |f| %>
- 
+    <%= f.hidden_field :day %>
+
     <% if @foodentry.errors.any? %>
         <%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
     <% end %>
- 
+
     <p>
 	    <%= f.label :description %><br>
 	    <%= f.text_field :description %>
     </p>
-  
+
     <p>
         <%= f.label :calories %><br>
         <%= f.text_field :calories %>
@@ -32,5 +33,5 @@
     <p>
         <%= f.submit %>
     </p>
- 
+
 <% end %>

@@ -12,11 +12,18 @@
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
 <% end %>
 
+<% if logged_in? %>
+    Prev: <%= link_to previous_day, controller: 'food_entries', day: previous_day %><br>
+    Day: <%= current_day %><br>
+    Next: <%= link_to next_day, controller: 'food_entries', day: next_day %>
+<% end %>
+
 <%= yield %>
 
 <% if logged_in? %>
     <%= link_to "Profile", current_user %>
 	<%= link_to "Logout", logout_path, method: "delete" %>
+    <%= link_to "Food Log", food_entries_path %>
 <% else %>
     <%= link_to "Sign Up", signup_path %>
 	<%= link_to "Login", login_path %>
