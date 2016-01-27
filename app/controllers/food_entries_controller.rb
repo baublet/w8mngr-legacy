@@ -5,14 +5,10 @@ class FoodEntriesController < ApplicationController
 	def index
 		@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
 		@newfoodentry = current_user.foodentries.build(day: current_day)
-	end
-
-	def show
-		@foodentry = current_user.foodentries.find(params[:id])
-	end
-
-	def new
-		@newfoodentry = current_user.foodentries.build
+		@total_calories = @foodentries.map{|f| f['calories']}.compact.reduce(0, :+)
+		@total_fat = @foodentries.map{|f| f['fat']}.compact.reduce(0, :+)
+		@total_carbs = @foodentries.map{|f| f['carbs']}.compact.reduce(0, :+)
+		@total_protein = @foodentries.map{|f| f['protein']}.compact.reduce(0, :+)
 	end
 
 	def create

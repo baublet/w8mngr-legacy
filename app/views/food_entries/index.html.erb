@@ -1,15 +1,23 @@
 <h1>Food Log</h1>
 
-<div class="foodlog table">
+<div class="foodlog-table">
 	<div class="row header">
 		<div class="col long">Description</div>
-		<div class="col short">Calories</div>
-		<div class="col short">Fat</div>
-		<div class="col short">Carbs</div>
-		<div class="col short">Protein</div>
+		<div class="col">Calories</div>
+		<div class="col">Fat</div>
+		<div class="col">Carbs</div>
+		<div class="col">Protein</div>
 		<div class="col long"></div>
 	</div>
 	<%= render @foodentries %>
+	<div class="row header totals">
+		<div class="col long">Totals</div>
+		<div class="col"><%= @total_calories %></div>
+		<div class="col"><%= @total_fat %></div>
+		<div class="col"><%= @total_carbs %></div>
+		<div class="col"><%= @total_protein %></div>
+		<div class="col long"></div>
+	</div>
 	<% @foodentry = @newfoodentry %>
 	<%= render @foodentry %>
 </table>

@@ -1,3 +1,31 @@
 // Place all the styles related to the food_entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.foodlog-table {
+	width:100%;
+	.header {
+		font-weight:bold;
+	}
+	.row {
+		display:block;
+		border-bottom:1px solid #ccc;
+		white-space:nowrap;
+		overflow:hidden;
+	}
+	.col {
+		display:inline-block;
+		border-right:1px solid #ccc;
+		width:12.5%;
+		max-width:12.5%;
+		overflow:hidden;
+		white-space:nowrap;
+	}
+	.long {
+		width:25%;
+		max-width:25%;
+	}
+	input[type="text"] {
+		width:100%;
+
+	}
+}

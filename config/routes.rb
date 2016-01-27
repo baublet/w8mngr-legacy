@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     delete 'logout'         => 'sessions#destroy'
     get    'foodlog'        => 'food_entries#index'
     get    '/foodlog/:day'  => 'food_entries#index'
-    resources :food_entries
+    resources :food_entries,only: [:index, :create, :update, :destroy]
     resources :users
 end

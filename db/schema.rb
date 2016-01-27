@@ -15,14 +15,14 @@ ActiveRecord::Schema.define(version: 20160125152242) do
 
   create_table "food_entries", force: :cascade do |t|
     t.string   "description"
-    t.integer  "calories"
-    t.integer  "fat"
-    t.integer  "carbs"
-    t.integer  "protein"
-    t.integer  "day"
+    t.integer  "calories",    default: 0
+    t.integer  "fat",         default: 0
+    t.integer  "carbs",       default: 0
+    t.integer  "protein",     default: 0
+    t.integer  "day",                     null: false
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at"
