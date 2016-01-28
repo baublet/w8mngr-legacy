@@ -4,6 +4,7 @@ class CreateFoodEntries < ActiveRecord::Migration
       t.string :description
       t.integer :calories,  null: false, default: 0
       t.integer :fat
+      t.integer :carbs
       t.integer :protein
       t.integer :day,       null: false
       t.references :user,   index: true, foreign_key: true

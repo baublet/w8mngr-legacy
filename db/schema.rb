@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20160125152242) do
 
   create_table "food_entries", force: :cascade do |t|
     t.string   "description"
-    t.integer  "calories",    default: 0
-    t.integer  "fat",         default: 0
-    t.integer  "carbs",       default: 0
-    t.integer  "protein",     default: 0
+    t.integer  "calories",    default: 0, null: false
+    t.integer  "fat"
+    t.integer  "carbs"
+    t.integer  "protein"
     t.integer  "day",                     null: false
     t.integer  "user_id"
     t.datetime "created_at",              null: false
