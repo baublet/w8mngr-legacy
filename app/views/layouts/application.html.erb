@@ -13,6 +13,8 @@
     <h2>The Lifestyle Tracker</h2>
 </header>
 
+<hr>
+
 <nav>
     <% if logged_in? %>
         <%= link_to "Profile", current_user %>
@@ -24,6 +26,8 @@
     <% end %>
 </nav>
 
+<hr>
+
 <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
 <% end %>
@@ -33,6 +37,8 @@
     Day: <%= nice_day(current_day) %><br>
     Next: <%= link_to nice_day(next_day), controller: 'food_entries', day: next_day %>
 <% end %>
+
+<hr>
 
 <%= yield %>
 
