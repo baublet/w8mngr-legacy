@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 							dependent: :destroy
 
 	attr_accessor :remember_token
-	before_save { self.email = email.downcase }
+	before_save { email.downcase! }
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 					  uniqueness: { case_sensitive: false }
 
 	has_secure_password
-	validates :password, length: { minimum: 6 }
+	validates :password, presence: true, length: { minimum: 6 }
 
 	# Returns a hash digest of the given string
 	def User.digest(string)
