@@ -9,7 +9,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     test "login with valid email and password then logout" do
         get login_path
         assert_template 'sessions/new'
-        post login_path, session: {email: 'test@example.com', password: 'foobar'}
+        post login_path, session: {email: 'test@example.com', password: 'password'}
         assert logged_in?
         assert_redirected_to @user
         follow_redirect!
