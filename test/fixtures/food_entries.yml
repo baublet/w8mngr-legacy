@@ -1,19 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  description: MyString
-  calories: 1
-  fat: 1
-  carbs: 1
-  protein: 1
-  user_id: 1
-  day: 19850502
-
-two:
-  description: MyString
-  calories: 1
-  fat: 1
-  carbs: 1
-  protein: 1
-  user_id: 1
-  day: 19850502
+test:
+    description: test
+    calories: 111
+    day: 20000101
+    user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>

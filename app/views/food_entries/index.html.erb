@@ -1,5 +1,9 @@
 <h1>Food Log</h1>
 
+<% if !@foodentry.nil? && @foodentry.errors.any? %>
+	<%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
+<% end %>
+
 <div class="foodlog-table">
 	<div class="row header">
 		<div class="col long">Description</div>
