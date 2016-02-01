@@ -8,6 +8,7 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include SessionsHelper
+  include ApplicationHelper
 
   # Logs in a test user
   def log_in_as(user, options = {})

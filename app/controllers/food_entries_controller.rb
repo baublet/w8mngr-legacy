@@ -3,40 +3,34 @@ class FoodEntriesController < ApplicationController
 	before_action :correct_user, only: [:update, :destroy]
 
 	def index
-		@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
-		@newfoodentry = current_user.foodentries.build(day: current_day)
-		@total_calories = @foodentries.map{|f| f['calories']}.compact.reduce(0, :+)
-		@total_fat = @foodentries.map{|f| f['fat']}.compact.reduce(0, :+)
-		@total_carbs = @foodentries.map{|f| f['carbs']}.compact.reduce(0, :+)
-		@total_protein = @foodentries.map{|f| f['protein']}.compact.reduce(0, :+)
+		show_list
 	end
 
 	def create
-		@foodentry = current_user.foodentries.build(food_entry_params)
-		if @foodentry.save
-			redirect_to '/foodlog/' + params[:food_entry][:day]
-		else
-			@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
-			@newfoodentry = current_user.foodentries.build(day: current_day)
-			render 'index'
+		@newfoodentry = current_user.foodentries.build(food_entry_params)
+		if @newfoodentry.save
+			@newfoodentry = current_user.foodentries.where(day: current_day)
 		end
+		show_list
 	end
 
 	def update
 		@foodentry = current_user.foodentries.find(params[:id])
-		if @foodentry.update(food_entry_params)
-			redirect_to '/foodlog/' + params[:food_entry][:day]
+		if !@foodentry.nil?
+			if @foodentry.update(food_entry_params)
+				flash[:success] = "Entry successfully updated."
+			end
 		else
-			@newfoodentry = current_user.foodentries.build(day: current_day)
-			render 'index'
+			flash[:error] = "You cannot edit another user's entries!"
 		end
+		show_list
 	end
 
 	def destroy
 		@foodentry = current_user.foodentries.find(params[:id])
 		day = @foodentry[:day]
 		@foodentry.destroy
-		redirect_to '/foodlog/' + day.to_s
+		show_list
 	end
 
 	private
@@ -49,5 +43,16 @@ class FoodEntriesController < ApplicationController
 	def correct_user
 		@foodentry = current_user.foodentries.find_by(id: params[:id])
 		redirect_to root_url if @foodentry.nil?
+	end
+
+	def show_list
+		@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
+		@total_calories = @foodentries.map{|f| f['calories']}.compact.reduce(0, :+)
+		@total_fat = @foodentries.map{|f| f['fat']}.compact.reduce(0, :+)
+		@total_carbs = @foodentries.map{|f| f['carbs']}.compact.reduce(0, :+)
+		@total_protein = @foodentries.map{|f| f['protein']}.compact.reduce(0, :+)
+
+		@newfoodentry ||= current_user.foodentries.build(day: current_day)
+		render 'index'
 	end
 end
