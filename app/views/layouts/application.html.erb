@@ -6,27 +6,25 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= controller.controller_name %>">
 
 <header>
-    <h1><%= link_to "w8mngr", root_path %></h1>
-    <h2>The Lifestyle Tracker</h2>
+
+    <h1 class="site-title"><%= link_to "w8mngr", root_path %></h1>
+    <h2 class="site-subtitle">The Lifestyle Tracker</h2>
+
+    <nav>
+        <% if logged_in? %>
+            <%= link_to "Profile", current_user %>
+        	<%= link_to "Logout", logout_path, method: "delete" %>
+            <%= link_to "Food Log", food_entries_path %>
+        <% else %>
+            <%= link_to "Sign Up", signup_path %>
+        	<%= link_to "Login", login_path %>
+        <% end %>
+    </nav>
+
 </header>
-
-<hr>
-
-<nav>
-    <% if logged_in? %>
-        <%= link_to "Profile", current_user %>
-    	<%= link_to "Logout", logout_path, method: "delete" %>
-        <%= link_to "Food Log", food_entries_path %>
-    <% else %>
-        <%= link_to "Sign Up", signup_path %>
-    	<%= link_to "Login", login_path %>
-    <% end %>
-</nav>
-
-<hr>
 
 <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
@@ -37,8 +35,6 @@
     Day: <%= nice_day(current_day) %><br>
     Next: <%= link_to nice_day(next_day), controller: 'food_entries', day: next_day %>
 <% end %>
-
-<hr>
 
 <%= yield %>
 
