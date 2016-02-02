@@ -6,7 +6,7 @@
     z-index: 10;
     background: $black;
     overflow: hidden;
-    padding-top: 150px;
+    padding: 150px 0 0;
     .suggestion {
         position: relative;
         z-index: 10;
@@ -14,9 +14,11 @@
         font-size:2rem;
         color: $white;
         margin: 0;
-        padding: 1.5rem .5rem 0;
+        padding: 6.5rem .5rem 0;
         text-align: center;
-        text-shadow: 1px 1px 5px $black;
+        text-shadow: 1px 1px 2px #000,
+                     1px 1px 2px #000,
+                     3px 3px 5px #000;
         &.second {
             font-size: 1.5rem;
             padding: .5rem .5rem 0;
@@ -26,7 +28,7 @@
         position: relative;
         z-index: 10;
         text-align: center;
-        margin: 8rem auto 2rem;
+        margin: 2rem auto 2rem;
     }
     .banner {
     }
@@ -43,8 +45,15 @@
 .welcome header {
     position: absolute;
     top: 0;
-    left: 0;
     z-index: 15;
     width: 100%;
     background: transparent;
+    padding: 0;
+}
+
+.welcome .content {
+    padding: 0;
+}
+.welcome .what-is-it {
+    padding: 0 1rem;
 }
