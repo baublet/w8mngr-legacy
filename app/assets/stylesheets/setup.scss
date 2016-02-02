@@ -1,0 +1,25 @@
+$black: #111111;
+$white: #fcfcfc;
+$red: #F63700;
+$color-primary: #007E80;
+$color-secondary: #F63700;
+// My color pallette:  http://www.colourlovers.com/palette/1365151/piccadilly_sparrows
+
+$font-stack: "Open Sans", "Helvetica", "Trebuchet MS", "Verdana";
+// Only include the outside font if we're not on mobile!
+@media (min-width: 640px) {
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700,700italic,300,400italic);
+}
+
+@import "icons",
+        "global",
+        "header",
+        "nav",
+        "buttons",
+        "forms",
+        "messages",
+        // Page-specific blocks
+        "welcome",
+        "users",
+        "sessions",
+        "food_entries";

@@ -1,0 +1,43 @@
+nav {
+}
+
+.nav-toggle {
+    display:none;
+    & ~ .navigation-options {
+        display: none;
+    }
+    &:checked ~ .navigation-options {
+        display: block;
+    }
+    &:checked ~ .nav-toggle-btn {
+        background: rgba(0,0,0,.85);
+        color: $white;
+        &:after {
+            content: "\e9c0";
+        }
+    }
+}
+
+.nav-toggle-btn {
+    font-family: 'icomoon';
+    cursor: pointer;
+    font-size:2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+    float: right;
+    padding:.2rem .5rem;
+    line-height:2.25rem;
+    color: rgba($white, .75);
+    &:hover {
+        color: $white;
+    }
+    &:after {
+        content: "\e9bf";
+    }
+}
+.navigation-options {
+    background: rgba(0,0,0,.85);
+    padding: 1rem;
+    margin-top: 2.65rem;
+    border-radius:5px;
+    border-top-right-radius: 0;
+}

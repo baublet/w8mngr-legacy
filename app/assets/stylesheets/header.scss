@@ -1,0 +1,25 @@
+header {
+    background: $black;
+    color: $white;
+    padding: .5rem 1rem;
+}
+header brand, header nav {
+    display:inline-block;
+    vertical-align: top;
+    width:49%;
+}
+.site-title {
+    a {
+        display: block;
+        color: $color-primary;
+        text-indent: -999px;
+        width: 150px;
+        height: 73px;
+        background: asset_url('logo.svg') top left no-repeat;
+        background-size:contain;
+        -webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,.25));
+    }
+}
+.site-subtitle {
+    display: none;
+}
