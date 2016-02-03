@@ -23,13 +23,12 @@ nav {
     font-family: 'icomoon';
     cursor: pointer;
     font-size:2rem;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
     float: right;
     padding:.2rem .5rem;
     line-height:2.25rem;
-    color: rgba($white, .5);
+    color: $white;
     &:hover {
-        color: $white;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
     }
     &:after {
         content: "\e9bf";

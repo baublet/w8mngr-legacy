@@ -20,7 +20,14 @@ a {
     text-decoration: none;
     &:hover {
         color: darken($color-primary,10%);
-        text-decoration: underline;
+    }
+}
+
+.content p a, .content li a {
+    border-bottom: 1px dashed rgba($black, .25);
+    &:hover {
+        text-decoration: none;
+        border-bottom: 1px solid darken($color-primary,10%);
     }
 }
 
@@ -29,7 +36,6 @@ h1, h2, h3, h4 {
     a {
         color: $black;
         &:hover{
-            text-decoration: none;
             color: $color-secondary;
         }
     }
@@ -43,6 +49,9 @@ h1 {
 h2 {
     font-size: 2rem;
     font-weight: 300;
+}
+h3 {
+    font-size: 1.5rem;
 }
 
 ul, ol {
@@ -61,4 +70,21 @@ ul {
 
 section {
     padding: 0 1rem;
+}
+
+blockquote {
+    margin: 2rem;
+    padding: .5rem 0 .5rem 1rem;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    border-left: 3px solid rgba($black, .25);
+    border-radius: 5px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
 }

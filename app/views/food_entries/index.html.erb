@@ -7,6 +7,7 @@
 <% end %>
 
 <div class="foodlog-table">
+	<% if @foodentries.size > 0 %>
 	<div class="row header">
 		<div class="col long">Description</div>
 		<div class="col">Calories</div>
@@ -24,6 +25,9 @@
 		<div class="col"><%= @total_protein %></div>
 		<div class="col meta"></div>
 	</div>
+	<% else %>
+		<p>You haven't entered any entries yet today. Add some using the form below!</p>
+	<% end %>
 	<% @foodentry = @newfoodentry %>
 	<%= render @foodentry %>
 </table>

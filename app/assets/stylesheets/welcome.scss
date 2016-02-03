@@ -42,7 +42,7 @@
     }
 }
 
-.welcome header {
+.welcome.index header {
     position: absolute;
     top: 0;
     z-index: 15;
@@ -51,9 +51,9 @@
     padding: 0;
 }
 
-.welcome .content {
+.welcome.index .content {
     padding: 0;
 }
-.welcome .what-is-it {
+.what-is-it {
     padding: 0 1rem;
 }

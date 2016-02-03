@@ -39,9 +39,9 @@
 					<span class="screen-reader-text">Save Entry</span>
 					<span class="icon-floppy-disk"></span>
 				<% end %>
-	            <%= link_to food_entry_path(food_entry),
-	                        method: :delete,
-	                        data: { confirm: 'Are you sure?' },
+	            <%= link_to food_entry_delete_path(food_entry),
+	                        #method: :delete,
+	                        #data: { confirm: 'Are you sure?' },
 							class: 'food-log btn delete',
 							title: 'Delete Entry' do %>
 					<span class="icon-cross"></span>
