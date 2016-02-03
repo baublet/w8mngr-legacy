@@ -43,4 +43,38 @@
     font-size: 1.5rem;
     padding:1rem 2rem;
     text-transform: uppercase;
+    width: 100%;
+    text-align:center;
+}
+
+.btn.food-log {
+    padding: .75rem 0;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: lighten($black, 50%);
+    &:hover {
+        color: $black;
+    }
+}
+.btn.food-log.delete:hover {
+    color: $red;
+}
+.btn.food-log.new {
+    padding: 1rem;
+    float: right;
+    background-color: $color-primary-light;
+    color: rgba($white, .75);
+    line-height: 1rem;
+    &:hover {
+        color: $white;
+    }
+    strong {
+        padding-left: 1rem;
+        font-weight: bold;
+        font-size: .8rem;
+        text-transform: uppercase;
+        vertical-align: middle;
+    }
 }

@@ -19,14 +19,23 @@
         <input type="checkbox" class="nav-toggle" id="nav-toggle" selected>
         <label for="nav-toggle" class="nav-toggle-btn"><span class="screen-reader-text">Options</span></label>
         <div class="navigation-options">
-        <% if logged_in? %>
-            <%= link_to "Profile", current_user %>
-        	<%= link_to "Logout", logout_path, method: "delete" %>
-            <%= link_to "Food Log", food_entries_path %>
-        <% else %>
-            <%= link_to "Sign Up", signup_path %>
-        	<%= link_to "Login", login_path %>
-        <% end %>
+            <h2 class="navigation-title">Navigation</h2>
+            <ul class="navigation-list">
+                <li><%= link_to "Home", root_path %></li>
+                <li><a href="">How to Manage</a></li>
+                <li><a href="">Meals Database</a></li>
+            <% if logged_in? %>
+                <li class="welcome-back sep">Welcome back, <%= current_user.email %>!</li>
+                <li><%= link_to "Food Log", food_entries_path %></li>
+                <li><%= link_to "Profile", current_user %></li>
+                <li class="sep"></li>
+            	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
+            <% else %>
+                <li><%= link_to "Sign Up", signup_path %></li>
+            	<li class="sep"><%= render 'sessions/login_form' %></li>
+                <li></li>
+            <% end %>
+            </ul>
         </div>
     </nav>
 
@@ -34,12 +43,6 @@
 
 <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
-<% end %>
-
-<% if logged_in? %>
-    Prev: <%= link_to nice_day(previous_day), controller: 'food_entries', day: previous_day %><br>
-    Day: <%= nice_day(current_day) %><br>
-    Next: <%= link_to nice_day(next_day), controller: 'food_entries', day: next_day %>
 <% end %>
 
 <section class="content">

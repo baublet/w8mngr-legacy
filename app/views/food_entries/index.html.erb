@@ -1,4 +1,6 @@
-<h1>Food Log</h1>
+<%= render partial: "shared/day_navigator" %>
+
+<h1><span class="icon-table2"></span> Food Log</h1>
 
 <% if !@foodentry.nil? && @foodentry.errors.any? %>
 	<%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
@@ -11,7 +13,7 @@
 		<div class="col">Fat</div>
 		<div class="col">Carbs</div>
 		<div class="col">Protein</div>
-		<div class="col long"></div>
+		<div class="col meta"></div>
 	</div>
 	<%= render @foodentries %>
 	<div class="row header totals">
@@ -20,7 +22,7 @@
 		<div class="col"><%= @total_fat %></div>
 		<div class="col"><%= @total_carbs %></div>
 		<div class="col"><%= @total_protein %></div>
-		<div class="col long"></div>
+		<div class="col meta"></div>
 	</div>
 	<% @foodentry = @newfoodentry %>
 	<%= render @foodentry %>

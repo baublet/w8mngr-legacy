@@ -1,4 +1,5 @@
 nav {
+    position: relative;
 }
 
 .nav-toggle {
@@ -26,7 +27,7 @@ nav {
     float: right;
     padding:.2rem .5rem;
     line-height:2.25rem;
-    color: rgba($white, .75);
+    color: rgba($white, .5);
     &:hover {
         color: $white;
     }
@@ -40,4 +41,73 @@ nav {
     margin-top: 2.65rem;
     border-radius:5px;
     border-top-right-radius: 0;
+    min-width: 250px;
+    position: absolute;
+    right: 0;
+}
+.navigation-title {
+    font-size: .9rem;
+    text-transform:uppercase;
+    margin:0 0 1rem;
+    font-weight: 800;
+}
+.navigation-list {
+    list-style-type: none;
+    padding:0;
+    font-weight:500;
+    font-size: .8rem;
+    a {
+        display: block;
+        color: $color-primary-light;
+        padding: .75rem;
+        &:hover {
+            background: $color-primary;
+            color: $white;
+            text-decoration:none;
+        }
+    }
+    .sep {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed rgba($white, .5);
+    }
+}
+
+nav .login {
+    input[type="text"], input[type="email"], input[type="password"] {
+        margin-bottom: .5rem;
+        font-size: 1rem;
+    }
+    .btn {
+        margin-bottom: 0;
+        font-size: 1rem;
+        float: right;
+        width: auto;
+    }
+    label {
+        display: none;
+    }
+}
+
+.day-navigator {
+    padding: 1rem 0;
+    text-align: center;
+    background: $color-primary;
+    margin: 0 -1rem;
+    a {
+        display: inline-block;
+        font-size: 1.5rem;
+        color: $white;
+        &:hover {
+            color: $color-primary-light;
+            text-decoration: none;
+        }
+    }
+}
+.current-day {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    line-height: 1.5rem;
+    vertical-align: top;
+    color: lighten($color-primary-light, 25%);
 }

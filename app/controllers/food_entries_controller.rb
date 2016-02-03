@@ -9,7 +9,7 @@ class FoodEntriesController < ApplicationController
 	def create
 		@newfoodentry = current_user.foodentries.build(food_entry_params)
 		if @newfoodentry.save
-			@newfoodentry = current_user.foodentries.where(day: current_day)
+			@newfoodentry = nil
 		end
 		show_list
 	end
@@ -52,7 +52,7 @@ class FoodEntriesController < ApplicationController
 		@total_carbs = @foodentries.map{|f| f['carbs']}.compact.reduce(0, :+)
 		@total_protein = @foodentries.map{|f| f['protein']}.compact.reduce(0, :+)
 
-		@newfoodentry ||= current_user.foodentries.build(day: current_day)
+		@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
 		render 'index'
 	end
 end

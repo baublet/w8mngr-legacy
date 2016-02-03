@@ -1,0 +1,13 @@
+<% if logged_in? %>
+<div class="day-navigator">
+    <%= link_to controller: 'food_entries', day: previous_day do %>
+        <span class="icon-circle-left"></span>
+    <% end %>
+
+    <span class="current-day"><%= nice_day(current_day) %></span>
+
+    <%= link_to controller: 'food_entries', day: next_day do %>
+        <span class="icon-circle-right"></span>
+    <% end %>
+    </div>
+<% end %>
