@@ -39,6 +39,7 @@ end
 
 
 group :production do
+    gem 'puma'
     gem 'pg',   '0.17.1'
 end
 
