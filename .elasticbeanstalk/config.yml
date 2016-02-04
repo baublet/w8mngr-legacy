@@ -1,9 +1,9 @@
 branch-defaults:
   master:
-    environment: w8mngr-dev
+    environment: null
     group_suffix: null
 global:
-  application_name: w8mngr
+  application_name: w8mngr2
   default_ec2_keyname: aws-eb
   default_platform: Ruby 2.2 (Puma)
   default_region: us-east-1
