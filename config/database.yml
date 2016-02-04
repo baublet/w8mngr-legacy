@@ -24,7 +24,7 @@ test:
 # http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Ruby.rds.html#create_deploy_Ruby.rds.newDB
 production:
     adapter: postgresql
-    encoding: utf8
+    encoding: unicode
     database: <%= ENV['RDS_DB_NAME'] %>
     username: <%= ENV['RDS_USERNAME'] %>
     password: <%= ENV['RDS_PASSWORD'] %>
