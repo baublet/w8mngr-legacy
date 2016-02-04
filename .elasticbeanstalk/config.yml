@@ -3,7 +3,7 @@ branch-defaults:
     environment: null
     group_suffix: null
 global:
-  application_name: w8mngr2
+  application_name: w8mngr
   default_ec2_keyname: aws-eb
   default_platform: Ruby 2.2 (Puma)
   default_region: us-east-1
