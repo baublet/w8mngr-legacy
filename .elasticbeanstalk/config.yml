@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: rails-beanstalk-env
+    environment: null
     group_suffix: null
 global:
   application_name: w8mngr
@@ -9,3 +9,8 @@ global:
   default_region: us-east-1
   profile: eb-cli
   sc: git
+  RDS_DB_NAME: w8mngr
+  RDS_USERNAME: baublet
+  RDS_PASSWORD: 12coast12
+  RDS_HOSTNAME: w8mngrmaster.ckdhgpwmxgek.us-east-1.rds.amazonaws.com
+  RDS_PORT: 5432
