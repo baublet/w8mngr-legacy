@@ -19,7 +19,7 @@
 # Ignore the byebug history
 /.byebug_history
 # Ignore my large assets (for now)/asset-sources/*
-# Elastic Beanstalk Files
+# Elastic Beanstalk Files.ebextentions/*
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
