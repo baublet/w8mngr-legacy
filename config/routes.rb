@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get    'login'          => 'sessions#new'
     post   'login'          => 'sessions#create'
     delete 'logout'         => 'sessions#destroy'
+    get    'logout'         => 'sessions#destroy'
     get    'foodlog'        => 'food_entries#index'
     get    '/foodlog/:day'  => 'food_entries#index'
     resources :food_entries,

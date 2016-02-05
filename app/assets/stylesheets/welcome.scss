@@ -19,9 +19,13 @@
         text-shadow: 1px 1px 2px #000,
                      1px 1px 2px #000,
                      3px 3px 5px #000;
+        white-space:nowrap;
+        animation: slideInLeft 3s 0s 1 alternate backwards;
         &.second {
             font-size: 1.5rem;
             padding: .5rem .5rem 0;
+            animation: none;
+            animation: slideInRight 6s 0s 1;
         }
     }
     .sign-up {

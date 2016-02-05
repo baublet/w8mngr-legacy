@@ -1,0 +1,56 @@
+// For the home page elements
+@keyframes slideInLeft {
+    0% {
+        text-indent: -250px;
+        opacity: 0;
+    }
+    100% {
+        text-indent: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        text-indent: 250px;
+        opacity: 0;
+    }
+    15% {
+        text-indent: 250px;
+        opacity: 0;
+    }
+    100% {
+        text-indent: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes pulsateSecondaryColor {
+    0% {
+        box-shadow: 0 0 0 1px rgba($color-secondary, .75);
+    }
+    100% {
+        box-shadow: 0 0 0 15px rgba($color-secondary, 0);
+    }
+}
+
+
+// Best for about 3-4 seconds of animation
+@keyframes blinkFadeOut {
+    2.5% {
+        opacity: 1;
+    }
+    5% {
+        opacity: 0;
+    }
+    7.5% {
+        opacity: 1;
+    }
+    10% {
+        opacity: 0;
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

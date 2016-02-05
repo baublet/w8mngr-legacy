@@ -43,6 +43,7 @@ nav {
     min-width: 250px;
     position: absolute;
     right: 0;
+    z-index:99;
 }
 .navigation-title {
     font-size: .9rem;
@@ -59,6 +60,7 @@ nav {
         display: block;
         color: $color-primary-light;
         padding: .75rem;
+        border-radius: 3px;
         &:hover {
             background: $color-primary;
             color: $white;

@@ -9,7 +9,7 @@
 <div class="foodlog-table">
 	<% if @foodentries.size > 0 %>
 	<div class="row header">
-		<div class="col long">Description</div>
+		<div class="col long"></div>
 		<div class="col">Calories</div>
 		<div class="col">Fat</div>
 		<div class="col">Carbs</div>
@@ -18,11 +18,11 @@
 	</div>
 	<%= render @foodentries %>
 	<div class="row header totals">
-		<div class="col long">Totals</div>
-		<div class="col"><%= @total_calories %></div>
-		<div class="col"><%= @total_fat %></div>
-		<div class="col"><%= @total_carbs %></div>
-		<div class="col"><%= @total_protein %></div>
+		<div class="col long">Totals:</div>
+		<div class="col calories" title="Calories"><span><%= number_with_delimiter(@total_calories) %></span></div>
+		<div class="col" title="Fat"><%= @total_fat %></div>
+		<div class="col" title="Carbs"><%= @total_carbs %></div>
+		<div class="col" title="Protein"><%= @total_protein %></div>
 		<div class="col meta"></div>
 	</div>
 	<% else %>
