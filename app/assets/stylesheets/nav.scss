@@ -1,5 +1,12 @@
 nav {
     position: relative;
+    .meta a {
+        color: $color-primary-light;
+        &:hover {
+            color: $white;
+            text-decoration: underline;
+        }
+    }
 }
 
 .nav-toggle {
@@ -56,7 +63,7 @@ nav {
     padding:0;
     font-weight:500;
     font-size: .8rem;
-    a {
+    li > a {
         display: block;
         color: $color-primary-light;
         padding: .75rem;
@@ -84,6 +91,13 @@ nav .login {
         font-size: 1rem;
         float: right;
         width: auto;
+        padding: 1rem;
+        &:hover {
+            margin-bottom:-5px;
+        }
+        &:active {
+            margin-bottom: 0;
+        }
     }
     label {
         display: none;

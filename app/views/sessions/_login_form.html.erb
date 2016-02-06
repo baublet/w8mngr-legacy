@@ -2,11 +2,14 @@
     <%= form_for(:session, url: login_path, :html => {:class => "large"}) do |f| %>
 
     	<%= f.label :email %>
-    	<%= f.email_field :email, placeholder: 'Username' %>
+    	<%= f.email_field :email, placeholder: 'Email Address' %>
 
     	<%= f.label :password %>
     	<%= f.password_field :password, placeholder: 'Password' %>
 
-    	<%= f.submit "Log in", class: "btn" %>
+    	<div class="meta">
+            <%= link_to 'Forgot Password', new_password_reset_path %>
+            <%= f.submit "Log in", class: "btn" %>
+        </div>
     <% end %>
 </div>

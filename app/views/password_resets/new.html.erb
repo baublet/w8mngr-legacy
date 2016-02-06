@@ -1,0 +1,14 @@
+<% provide(:title, "Password Reset") %>
+
+<h1>Forgot Password</h1>
+
+<%= form_for(:password_reset, url: password_resets_path, :html => {:class => "large"}) do |f| %>
+
+	<%= f.label :email %>
+	<%= f.email_field :email, placeholder: 'Email Address' %>
+
+    <%= f.submit "Reset Password", class: "btn" %>
+
+<% end %>
+
+<p>Don't have an account? <%= link_to 'Sign up.', signup_path %> It's free!</p>

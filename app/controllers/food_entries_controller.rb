@@ -18,10 +18,10 @@ class FoodEntriesController < ApplicationController
 		@foodentry = current_user.foodentries.find(params[:id])
 		if !@foodentry.nil?
 			if @foodentry.update(food_entry_params)
-				flash[:success] = "Entry successfully updated."
+				flash.now[:success] = "Entry successfully updated."
 			end
 		else
-			flash[:error] = "You cannot edit another user's entries!"
+			flash.now[:error] = "You cannot edit another user's entries!"
 		end
 		show_list
 	end
