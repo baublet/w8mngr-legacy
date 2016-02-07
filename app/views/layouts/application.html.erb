@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta charset="UTF-8" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %> <%= controller.action_name %>">
 
@@ -28,6 +29,8 @@
                 <li class="welcome-back sep">Welcome back, <%= current_user.email %>!</li>
                 <li><%= link_to "Food Log", food_entries_path %></li>
                 <li><%= link_to "Profile", current_user %></li>
+                <li class="sep"></li>
+                <li><%= link_to "Food Database", foods_path %></li>
                 <li class="sep"></li>
             	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
             <% else %>

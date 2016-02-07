@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  type: 
+  calories: 1
+  fat: 1
+  carbs: 1
+  protein: 1
+  amount: 1
+  measurement: 
+  serving_size: 1
+
+two:
+  name: MyString
+  description: MyString
+  type: 
+  calories: 1
+  fat: 1
+  carbs: 1
+  protein: 1
+  amount: 1
+  measurement: 
+  serving_size: 1

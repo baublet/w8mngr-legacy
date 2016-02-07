@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :foods
   get 'password_resets/new'
 
   get 'password_resets/edit'
