@@ -18,7 +18,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         assert_select "a[href=?]", logout_path
         assert_not_nil cookies['remember_token']
         # Follows the logout_path using the HTTP DELETE method
-        delete logout_path
+        get logout_path
         # The guide has this, but I find it fails because all of the cookies
         # are unsigned and deleted, and logged_in? relies on the existence of
         # cookies. After logout is called, all cookies are nuked, so trying to
@@ -27,7 +27,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         # assert_not logged_in?
         assert_redirected_to root_url
         follow_redirect!
-        assert_select "a[href=?]", login_path
         assert_select "a[href=?]", logout_path, count: 0
     end
 

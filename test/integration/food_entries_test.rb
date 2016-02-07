@@ -45,7 +45,7 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
         create_food_entry
         # Find the delete link in the foodlog-table row
         delete_link = css_select ".foodlog-table .row.entry a"
-        delete delete_link[0]["href"]
+        get delete_link[0]["href"]
         assert_select "form.edit_food_entry", count: 0
     end
 

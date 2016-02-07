@@ -8,16 +8,19 @@
     border-radius: 5px;
     padding: .5rem 1rem;
     color: rgba(255,255,255,.75);
-    border-bottom: 5px solid transparent;
     outline: none;
+    margin-bottom: 0;
     &:hover {
+        margin-bottom:-5px;
         color: #fff;
         text-decoration: none;
-        border-color: darken($color-primary, 10%);
+        border-bottom: 5px solid darken($color-primary, 10%);
     }
     &:active {
+        margin-bottom: 0;
         border-bottom:0;
-        border-top: 5px solid darken($color-primary, 10%);
+        //border-top: 5px solid darken($color-primary, 10%);
+        box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.5);
     }
     &.banner {
         padding: 1rem 2rem;
@@ -27,22 +30,24 @@
         font-weight: 500;
         font-size:.9rem;
         color: $white;
+        animation: pulsateSecondaryColor 3s 4s 99 forwards normal;
         &:hover {
             //background-color: darken($color-secondary, 10%);
             box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.75);
             border-color: darken($color-secondary, 10%);
+            animation: none;
         }
-        &:active{
-            border-top: 5px solid darken($color-secondary, 10%);
-            border-bottom: 0;
+        &:active {
+            box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.5);
         }
     }
 }
 
 .large .btn {
     font-size: 1.5rem;
-    padding:1rem 2rem;
+    padding:1.5rem;
     text-transform: uppercase;
+    font-weight: 700;
     width: 100%;
     text-align:center;
 }
@@ -54,12 +59,18 @@
     border: none;
     text-decoration: none;
     color: lighten($black, 50%);
+    margin: 0;
     &:hover {
         color: $black;
+    }
+    &:active {
+        box-shadow: none;
+        transform: translate(1px, 1px);
     }
 }
 .btn.food-log.delete:hover {
     color: $red;
+    margin-bottom:0;
 }
 .btn.food-log.new {
     padding: 1rem;
@@ -67,8 +78,13 @@
     background-color: $color-primary-light;
     color: rgba($white, .75);
     line-height: 1rem;
+    box-shadow:  none;
     &:hover {
         color: $white;
+        box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);
+    }
+    &:active {
+        box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.15);
     }
     strong {
         padding-left: 1rem;

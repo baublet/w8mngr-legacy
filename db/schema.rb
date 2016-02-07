@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125152242) do
+ActiveRecord::Schema.define(version: 20160205233210) do
 
   create_table "food_entries", force: :cascade do |t|
     t.string   "description"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20160125152242) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
 end
