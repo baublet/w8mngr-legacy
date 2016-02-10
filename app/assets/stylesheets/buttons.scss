@@ -8,15 +8,19 @@
     color: rgba(255,255,255,.75);
     outline: none;
     margin-bottom: 0;
-    
+
     font-size: 1.5rem;
     padding:1.5rem;
     text-transform: uppercase;
     font-weight: 700;
     width: 100%;
     text-align:center;
-    
-    
+
+    span {
+        margin-right: .75rem;
+    }
+
+
     &:hover {
         margin-bottom:-5px;
         color: #fff;
@@ -60,7 +64,7 @@
     text-align:center;
 }
 
-.btn.food-log {
+.btn.meta {
     padding: .75rem 0;
     font-size: 1rem;
     background: none;
@@ -76,14 +80,16 @@
         transform: translate(1px, 1px);
     }
 }
-.btn.food-log.delete:hover {
+.btn.meta.delete:hover {
     color: $red;
     margin-bottom:0;
 }
-.btn.food-log.new {
+.food-log.btn.new {
+    width: auto;
     padding: 1rem;
     float: right;
     background-color: $color-primary-light;
+    border: none;
     color: rgba($white, .75);
     line-height: 1rem;
     box-shadow:  none;
@@ -95,7 +101,6 @@
         box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.15);
     }
     strong {
-        padding-left: 1rem;
         font-weight: bold;
         font-size: .8rem;
         text-transform: uppercase;

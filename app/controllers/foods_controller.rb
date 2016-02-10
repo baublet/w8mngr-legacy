@@ -1,12 +1,12 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
-  
+
   before_action :logged_in_user, only: [:new, :create, :destroy, :update]
   before_action :correct_user, only: [:update, :destroy]
 
   # GET /foods
   def index
-    @foods = Food.all
+    @foods = current_user.foods.all
   end
 
   # GET /foods/1
@@ -15,7 +15,7 @@ class FoodsController < ApplicationController
 
   # GET /foods/new
   def new
-    @food = Food.new
+    @food = current_user.foods.new
   end
 
   # GET /foods/1/edit
@@ -24,7 +24,7 @@ class FoodsController < ApplicationController
 
   # POST /foods
   def create
-    @food = Food.new(food_params)
+    @food = current_user.foods.new(food_params)
 
     if @food.save
       redirect_to @food, notice: 'Food was successfully created.'
@@ -51,14 +51,14 @@ class FoodsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_food
-      @food = Food.find(params[:id])
+      @food = current_user.foods.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def food_params
       params.require(:food).permit(:name, :description, :food_type, :calories, :fat, :carbs, :protein, :amount, :measurement, :serving_size)
     end
-    
+
     def correct_user
 		@food = current_user.foods.find_by(id: params[:id])
 		redirect_to root_url if @food.nil?

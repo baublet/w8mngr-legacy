@@ -92,3 +92,12 @@ strong {
 em {
     font-style: italic;
 }
+
+.page-meta {
+    text-align: right;
+    margin: 1rem 0 2rem;
+    .btn {
+        font-size: 1rem;
+        padding: .5rem 1rem;
+    }
+}

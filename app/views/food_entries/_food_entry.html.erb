@@ -35,14 +35,14 @@
 						<strong>New Entry</strong>
 					<% end %>
 	        <% else %>
-				<%= button_tag(type: 'submit', class: 'btn food-log', title: 'Save Entry') do %>
+				<%= button_tag(type: 'submit', class: 'btn meta', title: 'Save Entry') do %>
 					<span class="screen-reader-text">Save Entry</span>
 					<span class="icon-floppy-disk"></span>
 				<% end %>
 	            <%= link_to food_entry_delete_path(food_entry),
 	                        #method: :delete,
 	                        #data: { confirm: 'Are you sure?' },
-							class: 'food-log btn delete',
+							class: 'btn meta delete',
 							title: 'Delete Entry' do %>
 					<span class="icon-cross"></span>
 				<% end %>

@@ -15,7 +15,7 @@
 			height: 12.75rem;
 		}
 	}
-	
+
 	.tab {
 		display: inline-block;
 		background-color: #fafafa;
@@ -30,7 +30,7 @@
 			color: $white;
 		}
 	}
-	
+
 	input[type="radio"] {
 		display: none;
 		&:checked + .tab {
@@ -38,7 +38,7 @@
 			color: $white;
 		}
 	}
-	
+
 	.common-food, .packaged-food {
 		padding: 2rem 9px 0;
 		background-color: rgba($color-primary, .05);
@@ -54,12 +54,47 @@
 			font-style: italic;
 		}
 	}
-	
+
 	#food_food_type_common_food:checked ~ .common-food {
 		display: block;
 	}
-	
+
 	#food_food_type_packaged_food:checked ~ .packaged-food {
 		display: block;
+	}
+}
+
+.foods-table {
+	width: 100%;
+	th {
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: .75rem;
+	}
+	h2 {
+		margin: 0 0 .5rem;
+		font-size: 1.6rem;
+		.icon-pencil {
+			position: absolute;
+			margin: .5rem 0 0 -1.25rem;
+			font-size: .75rem;
+			opacity: .8;
+		}
+	}
+	tbody tr td {
+		padding: 1rem .5rem;
+		border-bottom: 1px solid #eee;
+	}
+
+	tbody tr:nth-child(even) td {
+		border-bottom-color: #ccc;
+	}
+
+	td, th {
+		text-align: center;
+	}
+
+	td.long {
+		text-align: left;
 	}
 }

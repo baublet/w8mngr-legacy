@@ -1,5 +1,9 @@
 <%= form_for(@food, :html => {:class => "food-form"}) do |f| %>
 
+    <% if @food.errors.any? %>
+        <%= render partial: "shared/error_messages", locals: {errors: @food.errors} %>
+    <% end %>
+
     <div class="info">
         <%= f.label :name, :class=>'req' %>
         <%= f.text_field :name, placeholder: "Name", class: 'name' %>
@@ -7,7 +11,7 @@
         <%= f.label :description, :class=>'req' %>
         <%= f.text_area :description, placeholder: "Description" %>
     </div>
-    
+
     <div class="macros">
         <%= f.label :calories, :class=>'req' %>
         <%= f.number_field :calories, placeholder: "Calories" %>
@@ -30,7 +34,7 @@
 
     <div class="common-food">
         <p>E.g., butter, cream cheese, sugar, flour, peanut butter, an apple, etc.</p>
-        
+
         <%= f.label :amount %>
         <%= f.number_field :amount, placeholder: "Amount" %>
 
@@ -39,10 +43,10 @@
             [o.titleize, o]
         }) %>
     </div>
-    
+
     <div class="packaged-food">
         <p>E.g., can of beans, dried noodles, a Cliff Bar, etc.</p>
-        
+
         <%= f.label :serving_size %>
         <%= f.number_field :serving_size, placeholder: "Serving Size" %>
     </div>
