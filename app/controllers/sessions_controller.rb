@@ -8,9 +8,13 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
         login user
         remember user
-        redirect_to user
+        if session[:forwarding_url]
+            redirect_to session[:forwarding_url]
+        else
+            redirect_to user
+        end
     else
-        flash.now[:danger] = 'Invalid email/password combination'
+        flash.now[:error] = 'Invalid email/password combination'
         render 'new'
     end
   end

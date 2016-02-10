@@ -39,7 +39,7 @@
 		}
 	}
 	
-	.ingredient, .packaged-food {
+	.common-food, .packaged-food {
 		padding: 2rem 9px 0;
 		background-color: rgba($color-primary, .05);
 		border-top: 3px solid $color-primary;
@@ -55,7 +55,7 @@
 		}
 	}
 	
-	#food_food_type_ingredient:checked ~ .ingredient {
+	#food_food_type_common_food:checked ~ .common-food {
 		display: block;
 	}
 	

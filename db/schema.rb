@@ -39,9 +39,13 @@ ActiveRecord::Schema.define(version: 20160207180145) do
     t.integer  "amount"
     t.integer  "measurement"
     t.integer  "serving_size"
+    t.integer  "user_id"
+    t.integer  "public",       default: 0
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  add_index "foods", ["user_id"], name: "index_foods_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

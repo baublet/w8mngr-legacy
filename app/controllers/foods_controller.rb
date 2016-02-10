@@ -1,5 +1,8 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
+  
+  before_action :logged_in_user, only: [:new, :create, :destroy, :update]
+  before_action :correct_user, only: [:update, :destroy]
 
   # GET /foods
   def index
@@ -55,4 +58,9 @@ class FoodsController < ApplicationController
     def food_params
       params.require(:food).permit(:name, :description, :food_type, :calories, :fat, :carbs, :protein, :amount, :measurement, :serving_size)
     end
+    
+    def correct_user
+		@food = current_user.foods.find_by(id: params[:id])
+		redirect_to root_url if @food.nil?
+	end
 end

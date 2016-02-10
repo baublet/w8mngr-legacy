@@ -1,11 +1,20 @@
 class Food < ActiveRecord::Base
 	
+	belongs_to	:user
+	validates	:user_id,	presence: true
+	
+	enum public: {
+		priv:	0,
+		pub:	1
+	}
+	
 	enum food_type: {
-		ingredient: 0,
+		common_food: 0,
 		packaged_food: 1
 	}
 	
 	enum measurement: {
+		na: 12,
 		tsp: 0,
 		tbsp: 1,
 		cup: 2,
