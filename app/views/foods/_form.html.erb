@@ -8,49 +8,20 @@
         <%= f.label :name, :class=>'req' %>
         <%= f.text_field :name, placeholder: "Name", class: 'name' %>
 
-        <%= f.label :description, :class=>'req' %>
+        <%= f.label :description %>
         <%= f.text_area :description, placeholder: "Description" %>
     </div>
-
-    <div class="macros">
-        <%= f.label :calories, :class=>'req' %>
-        <%= f.number_field :calories, placeholder: "Calories" %>
-
-        <%= f.label :fat %>
-        <%= f.number_field :fat, placeholder: "Fat" %>
-
-        <%= f.label :carbs %>
-        <%= f.number_field :carbs, placeholder: "Carbs" %>
-
-        <%= f.label :protein %>
-        <%= f.number_field :protein, placeholder: "Protein" %>
-    </div>
-
-    <%= f.label :food_type, :class=>'req' %>
-    <% Food.food_types.keys.each do |type| %>
-        <%= f.radio_button :food_type, type %>
-        <%= f.label "food_type_" + type, type.titleize, :class=>'tab' %>
+    
+    <h2>Measurements</h2>
+    
+    <% if @food.id.nil? %>
+        <p>Each food requires at least one measurement, be it by cups, weight, cookie, slice, or whatever. Because foods can come in many different variations, weights, shapes, and sizes, you can add multiple measurements to allow for easier tracking.</p>
     <% end %>
+    
+    <%= render @food.measurements %>
+    
+    <%= render @newmeasurement %>
 
-    <div class="common-food">
-        <p>E.g., butter, cream cheese, sugar, flour, peanut butter, an apple, etc.</p>
-
-        <%= f.label :amount %>
-        <%= f.number_field :amount, placeholder: "Amount" %>
-
-        <%= f.label :measurement %>
-        <%= f.select(:measurement, Food.measurements.keys.map {|o|
-            [o.titleize, o]
-        }) %>
-    </div>
-
-    <div class="packaged-food">
-        <p>E.g., can of beans, dried noodles, a Cliff Bar, etc.</p>
-
-        <%= f.label :serving_size %>
-        <%= f.number_field :serving_size, placeholder: "Serving Size" %>
-    </div>
-
-    <%= f.submit "Create Food", class: "btn" %>
+    <%= f.submit (@food.id.nil?) ? "Create Food" : "Save Food", class: "btn" %>
 
 <% end %>

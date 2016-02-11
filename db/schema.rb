@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207180145) do
+ActiveRecord::Schema.define(version: 20160211144205) do
 
   create_table "food_entries", force: :cascade do |t|
     t.string   "description"
@@ -31,21 +31,26 @@ ActiveRecord::Schema.define(version: 20160207180145) do
   create_table "foods", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "food_type",    default: 0
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "foods", ["user_id"], name: "index_foods_on_user_id"
+
+  create_table "measurements", force: :cascade do |t|
+    t.integer  "amount"
+    t.string   "unit"
     t.integer  "calories"
     t.integer  "fat"
     t.integer  "carbs"
     t.integer  "protein"
-    t.integer  "amount"
-    t.integer  "measurement"
-    t.integer  "serving_size"
-    t.integer  "user_id"
-    t.integer  "public",       default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "foods", ["user_id"], name: "index_foods_on_user_id"
+  add_index "measurements", ["food_id"], name: "index_measurements_on_food_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

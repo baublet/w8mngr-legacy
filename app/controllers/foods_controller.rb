@@ -16,31 +16,76 @@ class FoodsController < ApplicationController
   # GET /foods/new
   def new
     @food = current_user.foods.new
+    @newmeasurement = Measurement.new
   end
 
   # GET /foods/1/edit
   def edit
+    @food = current_user.foods.find(params[:id])
+    @newmeasurement = Measurement.new
   end
 
   # POST /foods
   def create
     @food = current_user.foods.new(food_params)
-
+    @measurement = @food.measurements.new(measurement_params(params[:measurement]['0']))
+    
     if @food.save
-      redirect_to @food, notice: 'Food was successfully created.'
+        @newmeasurement = Measurement.new
+        render :edit
     else
-      render :new
+        @food.measurements.clear
+        @newmeasurement = Measurement.new(measurement_params(params[:measurement]['0']))
+        render :new
     end
   end
 
   # PATCH/PUT /foods/1
-  def update
-    if @food.update(food_params)
-      redirect_to @food, notice: 'Food was successfully updated.'
-    else
-      render :edit
+    def update
+        @newmeasurement = Measurement.new
+        food_update_error = ''
+        if @food.update(food_params)
+            
+            # Update existing measurements
+            @food.measurements.each do |measurement|
+                if params[:measurement][measurement.id.to_s].present?
+                    if !measurement.update( measurement_params(params[:measurement][measurement.id.to_s]) )
+                        food_update_error = "One or more of your measurements failed to save."
+                    end
+                end
+            end
+            
+            # Add a new measurement, if the form is filled in
+            new_measurement_params = measurement_params(params[:measurement]['0'])
+            if  !new_measurement_params[:amount].blank? ||
+                !new_measurement_params[:unit].blank? ||
+                !new_measurement_params[:calories].blank? ||
+                !new_measurement_params[:fat].blank? ||
+                !new_measurement_params[:carbs].blank? ||
+                !new_measurement_params[:protein].blank?
+                
+                @newmeasurement = @food.measurements.new(new_measurement_params)
+                
+                if !@newmeasurement.save
+                    food_update_error = "One or more of your measurements failed to save."
+                else
+                    @newmeasurement = Measurement.new
+                end
+                
+            end
+            
+        else
+            food_update_error = "Your food entry failed to save."
+        end
+        
+        if food_update_error.blank?
+            flash.now[:success] = "Entry successfully saved!"
+        else
+            flash.now[:error] = food_update_error
+        end
+        
+        render :edit
     end
-  end
 
   # DELETE /foods/1
   def destroy
@@ -56,7 +101,12 @@ class FoodsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def food_params
-      params.require(:food).permit(:name, :description, :food_type, :calories, :fat, :carbs, :protein, :amount, :measurement, :serving_size)
+      params.require(:food).permit(:name, :description)
+    end
+    
+    def measurement_params(params)
+        params = ActionController::Parameters.new(params)
+        params.permit(:amount, :unit, :calories, :fat, :carbs, :protein)
     end
 
     def correct_user

@@ -1,67 +1,5 @@
 .food-form {
-	@media (min-width: 700px) {
-		.info, .macros {
-			display: inline-block;
-			vertical-align: top;
-		}
-		.info {
-			width: 60%;
-		}
-		.macros {
-			width: 39%;
-			padding-left: 2rem;
-		}
-		textarea {
-			height: 12.75rem;
-		}
-	}
 
-	.tab {
-		display: inline-block;
-		background-color: #fafafa;
-		color: rgba($black, .5);
-		padding: .5rem 1rem;
-		margin: .5rem 0 0 .5rem;
-		cursor: pointer;
-		border-top-left-radius: 3px;
-		border-top-right-radius: 3px;
-		&:hover {
-			background-color: rgba($color-primary, .5);
-			color: $white;
-		}
-	}
-
-	input[type="radio"] {
-		display: none;
-		&:checked + .tab {
-			background-color: $color-primary;
-			color: $white;
-		}
-	}
-
-	.common-food, .packaged-food {
-		padding: 2rem 9px 0;
-		background-color: rgba($color-primary, .05);
-		border-top: 3px solid $color-primary;
-		border-bottom: 3px solid $color-primary;
-		border-radius: 9px;
-		display:none;
-		margin-bottom: 2rem;
-		p {
-			font-size: .9em;
-			margin: 0 0 1rem;
-			opacity: .75;
-			font-style: italic;
-		}
-	}
-
-	#food_food_type_common_food:checked ~ .common-food {
-		display: block;
-	}
-
-	#food_food_type_packaged_food:checked ~ .packaged-food {
-		display: block;
-	}
 }
 
 .foods-table {
@@ -96,5 +34,18 @@
 
 	td.long {
 		text-align: left;
+	}
+}
+
+.measurement-box {
+	background: rgba($color-primary, .1);
+	padding: 1rem;
+	border-radius: 5px;
+	margin-bottom: 2rem;
+	border: 3px solid $color-primary;
+	border-left:0;
+	border-right: 0;
+	input:last-child {
+		margin-bottom: 0;
 	}
 }

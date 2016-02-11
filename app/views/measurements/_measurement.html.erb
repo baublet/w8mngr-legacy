@@ -1,0 +1,31 @@
+<% if measurement.id.nil?
+	measurement.id = 0
+end %>
+
+<% if !@food.id.nil? && measurement.id == 0 %>
+<h2>New Measurement</h2>
+<% end %>
+
+<% if measurement.errors.any? %>
+	<%= render partial: "shared/error_messages", locals: {errors: measurement.errors} %>
+<% end %>
+
+<div class="<%= measurement.id == 0 ? 'new ' : '' %>measurement-box">
+	<%= label_tag("measurement_" + measurement.id.to_s + "_amount", "Amount") %>
+	<%= number_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "Amount") %>
+	
+	<%= label_tag("measurement_" + measurement.id.to_s + "_unit", "Unit") %>
+	<%= text_field_tag("measurement[" + measurement.id.to_s + "][unit]", measurement.unit, placeholder: "Unit") %>
+	
+	<%= label_tag("measurement_" + measurement.id.to_s + "_calories", "Calories") %>
+	<%= number_field_tag("measurement[" + measurement.id.to_s + "][calories]", measurement.calories, placeholder: "calories") %>
+	
+	<%= label_tag("measurement_" + measurement.id.to_s + "_fat", "Fat") %>
+	<%= number_field_tag("measurement[" + measurement.id.to_s + "][fat]", measurement.fat, placeholder: "Fat") %>
+	
+	<%= label_tag("measurement_" + measurement.id.to_s + "_carbs", "Carbs") %>
+	<%= number_field_tag("measurement[" + measurement.id.to_s + "][carbs]", measurement.carbs, placeholder: "Carbs") %>
+	
+	<%= label_tag("measurement_" + measurement.id.to_s + "_protein", "Protein") %>
+	<%= number_field_tag("measurement[" + measurement.id.to_s + "][protein]", measurement.protein, placeholder: "Protein") %>
+</div>

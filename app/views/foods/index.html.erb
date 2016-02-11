@@ -7,6 +7,8 @@
     <% end %>
 </div>
 
+<% if @foods.size > 0 %>
+
 <table class="foods-table">
   <thead>
     <tr>
@@ -28,16 +30,7 @@
                         <%= food.name %>
                     <% end %>
                 </h2>
-                <% if food.common_food? %>
-                    <%= food.amount %> <%= food.measurement %>
-                <% else %>
-                    <%= food.serving_size %>
-                <% end %>
             </td>
-            <td><%= food.calories %></td>
-            <td><%= food.fat %></td>
-            <td><%= food.carbs %></td>
-            <td><%= food.protein %></td>
             <td>
                 <%= link_to food, :class => 'btn meta delete' do %>
                     <span class="icon-cross"></span>
@@ -48,3 +41,9 @@
     <% end %>
   </tbody>
 </table>
+
+<% else %>
+
+<p>You don't have any saved foods. To add some, click the button above. You may also not need any. Our database is quite robust!</p>
+
+<% end %>
