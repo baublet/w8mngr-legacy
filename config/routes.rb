@@ -20,13 +20,16 @@ Rails.application.routes.draw do
 
     resources :food_entries,
                             only: [:index, :create, :update, :destroy]
-    get    '/food_entries/delete/:id' =>
+    get     '/food_entries/delete/:id' =>
                                 'food_entries#destroy',
                                 as: :food_entry_delete
     resources :users
     
-    resources :foods
-    get    '/foods/delete/:id' =>
+    resources :foods,
+                            only: [:new, :index, :create, :update, :destroy]
+    get     '/foods/delete/:id' =>
                                 'foods#destroy',
                                 as: :food_delete
+    get     '/foods/search(/:day)' => 'foods#search',
+                                as: :food_search
 end

@@ -12,6 +12,27 @@ class FoodsController < ApplicationController
   # GET /foods/1
   def show
   end
+  
+  def search
+      #TODO: save the date they pass in a cookie, if it's passed
+      #
+  end
+  
+  def find
+      #TODO: first, search the user's saved foods
+      # TODO: Matches? Then load up the first measurements of each
+      
+      #TODO: then, search the wider database
+      # TODO: Matches? Load up the first measurements of each
+      
+      #TODO: then, search the USDA API
+      # TODO: Matches? Load up all the measurements of the top 5 matches
+      #  TODO: Check the matches against the database and add them if they aren't already there
+      
+      #TODO: Matches? Show the search_results view template
+      
+      #TODO: No matches at all? Tell them and display the new foods form
+  end
 
   # GET /foods/new
   def new
@@ -112,6 +133,7 @@ class FoodsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_food
+        byebug
       @food = current_user.foods.find(params[:id])
     end
 
