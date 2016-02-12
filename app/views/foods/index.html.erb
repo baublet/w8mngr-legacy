@@ -10,16 +10,6 @@
 <% if @foods.size > 0 %>
 
 <table class="foods-table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Calories</th>
-      <th>Fat</th>
-      <th>Carbs</th>
-      <th>Protein</th>
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
     <% @foods.each do |food| %>
         <tr>
@@ -30,9 +20,10 @@
                         <%= food.name %>
                     <% end %>
                 </h2>
+                <p><%= food.description %></p>
             </td>
-            <td>
-                <%= link_to food, :class => 'btn meta delete' do %>
+            <td class="meta">
+                <%= link_to food_delete_path(food), :class => 'btn delete-btn' do %>
                     <span class="icon-cross"></span>
                     <span class="screen-reader-text">Delete</span>
                 <% end %>

@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  resources :foods
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
     root   'welcome#index'
     get    'privacy'        => 'welcome#privacy_policy'
     get    'contact'        => 'welcome#contact_form'
@@ -17,6 +12,8 @@ Rails.application.routes.draw do
     get    'logout'         => 'sessions#destroy'
     resources :password_resets,
                             only: [:new, :create, :edit, :update]
+    #get 'password_resets/new'
+    #get 'password_resets/edit'
 
     get    'foodlog'        => 'food_entries#index'
     get    '/foodlog/:day'  => 'food_entries#index'
@@ -24,8 +21,12 @@ Rails.application.routes.draw do
     resources :food_entries,
                             only: [:index, :create, :update, :destroy]
     get    '/food_entries/delete/:id' =>
-                               'food_entries#destroy',
-                            as: :food_entry_delete
+                                'food_entries#destroy',
+                                as: :food_entry_delete
     resources :users
-
+    
+    resources :foods
+    get    '/foods/delete/:id' =>
+                                'foods#destroy',
+                                as: :food_delete
 end

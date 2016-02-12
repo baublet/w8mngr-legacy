@@ -7,4 +7,5 @@ class Food < ActiveRecord::Base
 							length: { minimum: 2,  maximum: 155 }
 
 	has_many	:measurements, dependent: :destroy
+	validates	:measurements, :presence => true
 end

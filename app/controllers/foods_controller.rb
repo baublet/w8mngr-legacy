@@ -31,11 +31,12 @@ class FoodsController < ApplicationController
     @measurement = @food.measurements.new(measurement_params(params[:measurement]['0']))
     
     if @food.save
+        flash.now[:success] = "Your food was successfully created!"
         @newmeasurement = Measurement.new
         render :edit
     else
         @food.measurements.clear
-        @newmeasurement = Measurement.new(measurement_params(params[:measurement]['0']))
+        @newmeasurement = @measurement
         render :new
     end
   end
@@ -49,8 +50,19 @@ class FoodsController < ApplicationController
             # Update existing measurements
             @food.measurements.each do |measurement|
                 if params[:measurement][measurement.id.to_s].present?
-                    if !measurement.update( measurement_params(params[:measurement][measurement.id.to_s]) )
-                        food_update_error = "One or more of your measurements failed to save."
+                    if params[:measurement][measurement.id.to_s][:delete] == 'yes'
+                        # We don't want to delete the last measurement on a food item
+                        if @food.measurements.size > 1
+                            measurement.destroy
+                            # We have to reload here so the food associations are updated
+                            @food.reload
+                        else
+                            food_update_error = "Can't delete the selected measurement(s). You need at least one measurement on a food entry."
+                        end
+                    else
+                        if !measurement.update( measurement_params(params[:measurement][measurement.id.to_s]) )
+                            food_update_error = "One or more of your measurements failed to save."
+                        end
                     end
                 end
             end
@@ -67,6 +79,7 @@ class FoodsController < ApplicationController
                 @newmeasurement = @food.measurements.new(new_measurement_params)
                 
                 if !@newmeasurement.save
+                    @food.reload
                     food_update_error = "One or more of your measurements failed to save."
                 else
                     @newmeasurement = Measurement.new
@@ -89,8 +102,11 @@ class FoodsController < ApplicationController
 
   # DELETE /foods/1
   def destroy
+    # TODO: Mark these as "deleted" in the database, because we don't want users to be able to delete
+    # foods that are used in other users' recipes...
     @food.destroy
-    redirect_to foods_url, notice: 'Food was successfully destroyed.'
+    flash[:success] = 'Food was successfully deleted.'
+    redirect_to foods_url
   end
 
   private

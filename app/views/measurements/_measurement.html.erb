@@ -10,22 +10,43 @@ end %>
 	<%= render partial: "shared/error_messages", locals: {errors: measurement.errors} %>
 <% end %>
 
+<% if measurement.id != 0 %>
+	<div class="foods-measurement-delete">
+		<%= check_box("measurement[" + measurement.id.to_s + "]", "delete", {}, "yes", "no") %>
+		<%= label_tag "measurement_" + measurement.id.to_s + "_delete" do %>
+			<span class="screen-reader-text">Delete the following measurement?</span>
+		<% end %>
+	</div>
+<% end %>
+
 <div class="<%= measurement.id == 0 ? 'new ' : '' %>measurement-box">
-	<%= label_tag("measurement_" + measurement.id.to_s + "_amount", "Amount") %>
-	<%= number_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "Amount") %>
+	<div class="col">
+		<%= label_tag("measurement_" + measurement.id.to_s + "_amount", "Amount") %>
+		<%= number_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "e.g. 1, 2, 3, etc.") %>
+	</div>
 	
-	<%= label_tag("measurement_" + measurement.id.to_s + "_unit", "Unit") %>
-	<%= text_field_tag("measurement[" + measurement.id.to_s + "][unit]", measurement.unit, placeholder: "Unit") %>
+	<div class="col">
+		<%= label_tag("measurement_" + measurement.id.to_s + "_unit", "Unit") %>
+		<%= text_field_tag("measurement[" + measurement.id.to_s + "][unit]", measurement.unit, placeholder: "Slice, OZ, Grams, etc.") %>
+	</div>
 	
-	<%= label_tag("measurement_" + measurement.id.to_s + "_calories", "Calories") %>
-	<%= number_field_tag("measurement[" + measurement.id.to_s + "][calories]", measurement.calories, placeholder: "calories") %>
+	<div class="col">
+		<%= label_tag("measurement_" + measurement.id.to_s + "_calories", "Calories") %>
+		<%= number_field_tag("measurement[" + measurement.id.to_s + "][calories]", measurement.calories) %>
+	</div>
 	
-	<%= label_tag("measurement_" + measurement.id.to_s + "_fat", "Fat") %>
-	<%= number_field_tag("measurement[" + measurement.id.to_s + "][fat]", measurement.fat, placeholder: "Fat") %>
+	<div class="col">
+		<%= label_tag("measurement_" + measurement.id.to_s + "_fat", "Fat") %>
+		<%= number_field_tag("measurement[" + measurement.id.to_s + "][fat]", measurement.fat) %>
+	</div>
 	
-	<%= label_tag("measurement_" + measurement.id.to_s + "_carbs", "Carbs") %>
-	<%= number_field_tag("measurement[" + measurement.id.to_s + "][carbs]", measurement.carbs, placeholder: "Carbs") %>
+	<div class="col">
+		<%= label_tag("measurement_" + measurement.id.to_s + "_carbs", "Carbs") %>
+		<%= number_field_tag("measurement[" + measurement.id.to_s + "][carbs]", measurement.carbs) %>
+	</div>
 	
-	<%= label_tag("measurement_" + measurement.id.to_s + "_protein", "Protein") %>
-	<%= number_field_tag("measurement[" + measurement.id.to_s + "][protein]", measurement.protein, placeholder: "Protein") %>
+	<div class="col">
+		<%= label_tag("measurement_" + measurement.id.to_s + "_protein", "Protein") %>
+		<%= number_field_tag("measurement[" + measurement.id.to_s + "][protein]", measurement.protein) %>
+	</div>
 </div>
