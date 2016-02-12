@@ -23,13 +23,21 @@ Rails.application.routes.draw do
     get     '/food_entries/delete/:id' =>
                                 'food_entries#destroy',
                                 as: :food_entry_delete
+    get     '/food_entries/:day/add/:food_id' =>
+                                'food_entries#index',
+                                as: :food_entry_add
+
     resources :users
-    
+
     resources :foods,
-                            only: [:new, :index, :create, :update, :destroy]
+                            only: [:new, :edit, :index, :create, :update, :destroy]
     get     '/foods/delete/:id' =>
                                 'foods#destroy',
                                 as: :food_delete
     get     '/foods/search(/:day)' => 'foods#search',
                                 as: :food_search
+    get     '/foods/q/' => 'foods#find',
+                                as: :food_find
+    get     '/foods/pull/:ndbno' => 'foods#pull',
+                                as: :food_pull
 end

@@ -92,11 +92,12 @@
     margin-top: 1rem;
     width: auto;
     padding: 1rem;
-    float: right;
     background-color: $color-primary-light;
     color: rgba($white, .75);
     line-height: 1rem;
     box-shadow:  none;
+    position: relative;
+    z-index: 99;
     &:hover {
         border: none;
         margin-bottom: 0;
@@ -111,5 +112,18 @@
         font-size: .8rem;
         text-transform: uppercase;
         vertical-align: middle;
+    }
+}
+
+.search-btn, .barecode-btn {
+    border: none;
+    margin: 0;
+    overflow:hidden;
+    padding: 0;
+    &:hover {
+        border: none;
+    }
+    &:active {
+        box-shadow:none;
     }
 }

@@ -1,8 +1,10 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
 
-  before_action :logged_in_user, only: [:new, :create, :destroy, :update]
+  before_action :logged_in_user, only: [:add, :new, :create, :destroy, :update]
   before_action :correct_user, only: [:update, :destroy]
+
+  include FoodsHelper
 
   # GET /foods
   def index
@@ -12,26 +14,87 @@ class FoodsController < ApplicationController
   # GET /foods/1
   def show
   end
-  
+
   def search
       #TODO: save the date they pass in a cookie, if it's passed
       #
   end
-  
+
   def find
-      #TODO: first, search the user's saved foods
-      # TODO: Matches? Then load up the first measurements of each
-      
-      #TODO: then, search the wider database
+
+      @searchresults = []
+
+      #TODO: Search the wider database with a preference for the user's saved and liked foods
       # TODO: Matches? Load up the first measurements of each
-      
+
       #TODO: then, search the USDA API
-      # TODO: Matches? Load up all the measurements of the top 5 matches
-      #  TODO: Check the matches against the database and add them if they aren't already there
-      
+      @searchresults = @searchresults + searchUSDA(params[:q])
+
       #TODO: Matches? Show the search_results view template
-      
+
       #TODO: No matches at all? Tell them and display the new foods form
+  end
+
+  # This method downloads the params[:ndbno] from the USDA website if it doesn't already
+  # exist and adds it to the database as belonging to our unspecified superuser (id=0).
+  # It then redirects the user to the food log page with the entry filled out
+  def pull
+      ndbno = params[:ndbno]
+      @food = Food.find_by(ndbno: ndbno)
+      if @food.nil?
+          @result = getUSDAEntry(ndbno)
+
+          ndbno = @result["ndbno"]
+          name = @result["name"]
+          @food = Food.new(user_id: 1, name: name, ndbno: ndbno)
+
+          # Loop through the nutrients and build our measurements
+          measurements = {}
+          @result["nutrients"][0]["measures"].each do |measure|
+              measurements[measure["label"]] = {
+                  "unit" => measure["label"],
+                  "amount" => 1,
+                  "calories" => 0,
+                  "fat" => 0,
+                  "carbs" => 0,
+                  "protein" => 0
+              }
+          end
+
+          # Calories (always [1])
+          @result["nutrients"][1]["measures"].each do |measure|
+              measurements[measure["label"]]["calories"] += measure["value"].to_i
+          end
+
+          # Fat (always [3])
+          @result["nutrients"][3]["measures"].each do |measure|
+              measurements[measure["label"]]["fat"] += measure["value"].to_i
+          end
+
+          # Carbs (always [4])
+          @result["nutrients"][4]["measures"].each do |measure|
+              measurements[measure["label"]]["carbs"] += measure["value"].to_i
+          end
+
+          # Protein (always [2])
+          @result["nutrients"][2]["measures"].each do |measure|
+              measurements[measure["label"]]["protein"] += measure["value"].to_i
+          end
+
+          measurements.each do |measurement|
+              @food.measurements.new(measurement.second)
+          end
+
+          if !@food.save
+              # TODO: Log this behavior
+              flash[:error] = "Unexpected error pulling the food from foreign source. Please contact the administrator."
+              redirect_to food_search_path
+          end
+
+          # TODO: If it didn't save, redirect to the food search page and throw an error
+          # TODO: If it saved, or we're already storing this item redirect them to the food entry with this item loaded
+    end
+    redirect_to food_entry_add_path(current_day, @food.id)
   end
 
   # GET /foods/new
@@ -50,7 +113,7 @@ class FoodsController < ApplicationController
   def create
     @food = current_user.foods.new(food_params)
     @measurement = @food.measurements.new(measurement_params(params[:measurement]['0']))
-    
+
     if @food.save
         flash.now[:success] = "Your food was successfully created!"
         @newmeasurement = Measurement.new
@@ -62,12 +125,24 @@ class FoodsController < ApplicationController
     end
   end
 
+  # Adds :ndbno from the USDA's database if it isn't already in our database
+  def add
+    # TODO: Make sure this NDB number isn't already in the database (if it is, just skip the next steps)
+
+    # TODO: Query the NDB api
+    # TODO: Build the new food and all of its measurements and save it
+    # TODO: If it worked, redirect them to the food log using the cookie they stored, or the current day if it's not there, with the new food's ID
+    # TODO: If, for some reason, it failed, we want to notify the admin and throw a pretty fatal error. something went pretty wrong here
+
+    # TODO: If the NDB number is already in the database, just find its id and redirect them as you did above
+  end
+
   # PATCH/PUT /foods/1
     def update
         @newmeasurement = Measurement.new
         food_update_error = ''
         if @food.update(food_params)
-            
+
             # Update existing measurements
             @food.measurements.each do |measurement|
                 if params[:measurement][measurement.id.to_s].present?
@@ -87,7 +162,7 @@ class FoodsController < ApplicationController
                     end
                 end
             end
-            
+
             # Add a new measurement, if the form is filled in
             new_measurement_params = measurement_params(params[:measurement]['0'])
             if  !new_measurement_params[:amount].blank? ||
@@ -96,28 +171,28 @@ class FoodsController < ApplicationController
                 !new_measurement_params[:fat].blank? ||
                 !new_measurement_params[:carbs].blank? ||
                 !new_measurement_params[:protein].blank?
-                
+
                 @newmeasurement = @food.measurements.new(new_measurement_params)
-                
+
                 if !@newmeasurement.save
                     @food.reload
                     food_update_error = "One or more of your measurements failed to save."
                 else
                     @newmeasurement = Measurement.new
                 end
-                
+
             end
-            
+
         else
             food_update_error = "Your food entry failed to save."
         end
-        
+
         if food_update_error.blank?
             flash.now[:success] = "Entry successfully saved!"
         else
             flash.now[:error] = food_update_error
         end
-        
+
         render :edit
     end
 
@@ -133,7 +208,6 @@ class FoodsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_food
-        byebug
       @food = current_user.foods.find(params[:id])
     end
 
@@ -141,7 +215,7 @@ class FoodsController < ApplicationController
     def food_params
       params.require(:food).permit(:name, :description)
     end
-    
+
     def measurement_params(params)
         params = ActionController::Parameters.new(params)
         params.permit(:amount, :unit, :calories, :fat, :carbs, :protein)

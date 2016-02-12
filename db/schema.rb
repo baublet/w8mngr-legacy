@@ -31,11 +31,13 @@ ActiveRecord::Schema.define(version: 20160211144205) do
   create_table "foods", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "ndbno"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "foods", ["name"], name: "index_foods_on_name"
   add_index "foods", ["user_id"], name: "index_foods_on_user_id"
 
   create_table "measurements", force: :cascade do |t|
