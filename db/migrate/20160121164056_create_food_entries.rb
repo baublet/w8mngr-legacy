@@ -1,13 +1,13 @@
 class CreateFoodEntries < ActiveRecord::Migration
   def change
     create_table :food_entries do |t|
-      t.string :description
-      t.integer :calories,  null: false, default: 0
-      t.integer :fat
-      t.integer :carbs
-      t.integer :protein
-      t.integer :day,       null: false
-      t.references :user,   index: true, foreign_key: true
+      t.text       :description,null: false
+      t.integer    :calories,   null: false, default: 0, limit: 5
+      t.integer    :fat,        limit: 3
+      t.integer    :carbs,      limit: 3
+      t.integer    :protein,    limit: 3
+      t.integer    :day,        null: false
+      t.references :user,       index: true, foreign_key: true
 
       t.timestamps null: false
     end

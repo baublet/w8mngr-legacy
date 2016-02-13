@@ -71,7 +71,9 @@
 	padding-left: 6rem;
 	position: relative;
 	box-shadow: 0 0 5px rgba(0,0,0,.5);
-	label {
+	color: $white;
+	label, .label {
+		display: block;
 		color: $white;
 		position: absolute;
 		left: .5rem;
@@ -122,7 +124,7 @@
 			max-width: 16.666%;
 			vertical-align: top;
 		}
-		label {
+		label, .label {
 			text-align: left;
 			position: static;
 			padding:0;
@@ -131,4 +133,137 @@
 			}
 		}
 	}
+}
+
+.measurement-box.in-transition {
+	position: relative;
+	margin: 4rem 0 0;
+	.label {
+		padding-top: 0;
+	}
+	.col {
+		padding: .5rem 0;
+	}
+	.unit {
+		width: auto;
+		max-width: none;
+		padding: .25rem .5rem 0;
+		font-weight: bold;
+		font-size: .8rem;
+		color: rgba($black, .5);
+		position: absolute;
+		top:-1.5rem;
+		left: 1rem;
+		height: 1.5rem;
+		z-index: 0;
+		border-radius: 5px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+		span {
+			font-weight: normal;
+			color: rgba($black, .35);
+		}
+	}
+	@include mqAfterSize(540px) {
+		padding: .5rem 1rem;
+		.col, .label {
+			text-align: center;
+		}
+		.label {
+			margin-bottom: 1rem;
+		}
+	}
+	.food-log-new-btn {
+		font-size: .75rem;
+		position: absolute;
+		right: 1rem;
+		bottom: 1rem;
+		@include mqBetweenSizes(540px, 600px) {
+			span {
+				margin: 0;
+			}
+			.btn-text {
+				display: none;
+			}
+		}
+	}
+}
+
+.food-search-form {
+    margin: 1rem 0;
+    padding: 0;
+	position: relative;
+	input[type=text] {
+		font-size: 2rem;
+		padding-right: 3.25rem;
+		margin-bottom: 0;
+	}
+	.search-btn {
+		padding-right: .5rem;
+		position: absolute;
+		top: .5rem;
+		right: -.5rem;
+		font-size: 2.5rem;
+		width: auto;
+		background: transparent;
+		color: rgba($black, .25);
+		&:hover {
+			color: rgba($black, .75);
+		}
+	}
+}
+
+.search-result {
+	margin:0;
+	padding: 1rem 1rem 1rem 3rem;
+	border-bottom: 1px solid rgba($black, .1);
+	h2 {
+		font-size: 1.2rem;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		font-weight: 400;
+		a::before {
+			top: .25rem;
+			font-size: .75rem;
+			font-family: icomoon;
+			position: absolute;
+			left: -2rem;
+			content: "\ea0a";
+			opacity: .5;
+		}
+		a:hover::before {
+			opacity: 1;
+		}
+	}
+	p {
+		font-size: .75rem;
+		font-style:italic;
+		margin: 0;
+		padding: 0;
+		opacity: .75;
+	}
+	&:nth-child(odd) {
+		background: rgba($black, .035);
+	}
+	&:hover {
+		background: $color-primary;
+		color: $white;
+		box-shadow: 0 0 5px rgba(0,0,0,.5);
+		h2 a {
+			color: $white;
+			&:hover {
+				color: $white;
+			}
+		}
+	}
+}
+
+.search-results-information {
+	font-size: .8rem;
+	color: rgba($black, .35);
+	font-weight: bold;
+	margin: 0 -1rem 2rem;
+	border-left: 1rem solid rgba($black, .05);
+	padding: 1rem 2rem 1rem 1rem
 }

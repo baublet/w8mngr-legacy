@@ -22,7 +22,7 @@ end %>
 <div class="<%= measurement.id == 0 ? 'new ' : '' %>measurement-box">
 	<div class="col">
 		<%= label_tag("measurement_" + measurement.id.to_s + "_amount", "Amount") %>
-		<%= number_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "e.g. 1, 2, 3, etc.") %>
+		<%= text_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "e.g. 1, 1/2, .5, etc.") %>
 	</div>
 	
 	<div class="col">

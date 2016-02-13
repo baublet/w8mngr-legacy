@@ -44,12 +44,22 @@ module ApplicationHelper
     end
 
     # Converts YYYYMMDD to a Date object
-    def convert_day_to_date(string)
+    def convert_day_to_date string
         return Date.strptime(string,"%Y%m%d")
     end
 
     # Converts YYYYMMDD into a nice looking date (Saturday, January 1, 2010)
-    def nice_day(string)
+    def nice_day string
         return convert_day_to_date(string).strftime('%A, %B %e, %Y')
+    end
+    
+    # Validates a YYYYMMDD string, returning current_day if it's false
+    def validate_day day_string
+        day_int = day_string.to_i
+        if day_int > 19850501 && day_int < 20850501
+            return day_string
+        else
+            return current_day
+        end
     end
 end

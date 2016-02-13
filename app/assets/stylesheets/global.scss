@@ -101,3 +101,13 @@ em {
         padding: .5rem 1rem;
     }
 }
+
+.pagination {
+    margin-top: 2rem;
+    .previous {
+        float:left;
+    }
+    .next {
+        float: right;
+    }
+}

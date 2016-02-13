@@ -14,42 +14,46 @@
 ActiveRecord::Schema.define(version: 20160211144205) do
 
   create_table "food_entries", force: :cascade do |t|
-    t.string   "description"
-    t.integer  "calories",    default: 0, null: false
-    t.integer  "fat"
-    t.integer  "carbs"
-    t.integer  "protein"
-    t.integer  "day",                     null: false
+    t.text     "description",                       null: false
+    t.integer  "calories",    limit: 5, default: 0, null: false
+    t.integer  "fat",         limit: 3
+    t.integer  "carbs",       limit: 3
+    t.integer  "protein",     limit: 3
+    t.integer  "day",                               null: false
     t.integer  "user_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at"
   add_index "food_entries", ["user_id"], name: "index_food_entries_on_user_id"
 
   create_table "foods", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "ndbno"
+    t.text     "name",        limit: 255,             null: false
+    t.text     "description"
+    t.text     "ndbno",       limit: 8
+    t.text     "upc",         limit: 12
+    t.integer  "popularity",              default: 0
+    t.integer  "likes",                   default: 0
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "foods", ["name"], name: "index_foods_on_name"
   add_index "foods", ["user_id"], name: "index_foods_on_user_id"
 
   create_table "measurements", force: :cascade do |t|
-    t.integer  "amount"
-    t.string   "unit"
-    t.integer  "calories"
-    t.integer  "fat"
-    t.integer  "carbs"
-    t.integer  "protein"
+    t.text     "amount",     limit: 5,              null: false
+    t.text     "unit",       limit: 96,             null: false
+    t.integer  "calories",   limit: 5,              null: false
+    t.integer  "fat",        limit: 4,              null: false
+    t.integer  "carbs",      limit: 4,              null: false
+    t.integer  "protein",    limit: 4,              null: false
+    t.integer  "popularity",            default: 0
     t.integer  "food_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "measurements", ["food_id"], name: "index_measurements_on_food_id"

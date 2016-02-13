@@ -1,9 +1,10 @@
-<% if results.size > 0
-    results.each do |result| %>
+<% if results.size > 0 %>
+    <% results.each do |result| %>
 
-<div class="search-result">
-    <%= link_to result['name'], food_pull_path(result["ndbno"]) %>
-</div>
+        <div class="search-result">
+            <h2><%= link_to result["name"], food_pull_path(result["ndbno"]) %></h2>
+            <p><%= result["group"].present? ? result["group"] : result["description"] %></p>
+        </div>
 
-<%    end
-end %>
+    <% end %>
+<% end %>

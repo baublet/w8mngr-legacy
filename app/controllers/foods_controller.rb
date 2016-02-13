@@ -13,6 +13,8 @@ class FoodsController < ApplicationController
 
   # GET /foods/1
   def show
+      # Validate the day
+      @day = params[:day].blank? ? current_day : validate_day(params[:day])
   end
 
   def search
@@ -21,18 +23,52 @@ class FoodsController < ApplicationController
   end
 
   def find
+      require 'uri'
 
-      @searchresults = []
+      if !params[:q].blank?
+          @searchresults = []
+          
+          # Prepare the pagination with 25 per page
+          page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
+          per_page = 25
 
-      #TODO: Search the wider database with a preference for the user's saved and liked foods
-      # TODO: Matches? Load up the first measurements of each
+          # Search the wider database with a preference for the user's saved and liked foods
+          #TODO: Implement a proper Solr search here
+          
+          # Break the search into its parts and search for each term
+          query = params[:q].split
+          results = Food.where("name LIKE ?", "%#{query.shift}%")
+                        .limit(per_page + 1)
+                        .offset((page - 1) * per_page)
+          query.each do |term|
+              results.where("name LIKE ?", term)
+          end
+          # We do +1 here because if, at the end, we have 26 entries, we know there's a next page
+          @searchresults = results
+          
+          # We need to ping the USDA for as many entries as we need to get to per_page
+          usda_entries = per_page + 1 - results.size
+          
+          #byebug
 
-      #TODO: then, search the USDA API
-      @searchresults = @searchresults + searchUSDA(params[:q])
+          # Then, search the USDA API if we have fewer than per_page + 1 results
+          if usda_entries > 0
+              @searchresults = @searchresults + search_usda(params[:q], usda_entries, (page - 1) * per_page)
+          end
 
-      #TODO: Matches? Show the search_results view template
+          # Matches? Show the search form
+          # Prepare simple pagination
+          @prev_page = page > 1 ? (page - 1).to_s : nil
+          @next_page = @searchresults.size > per_page ? (page + 1).to_s : nil
+          @base_url  = food_find_path + "?q=" + URI.encode(params[:q])
+          # Pop the end off the results array so we can stick to per_page items per page
+          @searchresults.pop
+          render "find"
 
-      #TODO: No matches at all? Tell them and display the new foods form
+          #TODO: No matches at all? Tell them and display the new foods form
+      else
+          render "search"
+      end
   end
 
   # This method downloads the params[:ndbno] from the USDA website if it doesn't already
@@ -42,7 +78,7 @@ class FoodsController < ApplicationController
       ndbno = params[:ndbno]
       @food = Food.find_by(ndbno: ndbno)
       if @food.nil?
-          @result = getUSDAEntry(ndbno)
+          @result = get_usda_entry(ndbno)
 
           ndbno = @result["ndbno"]
           name = @result["name"]
@@ -53,7 +89,7 @@ class FoodsController < ApplicationController
           @result["nutrients"][0]["measures"].each do |measure|
               measurements[measure["label"]] = {
                   "unit" => measure["label"],
-                  "amount" => 1,
+                  "amount" => measure["qty"],
                   "calories" => 0,
                   "fat" => 0,
                   "carbs" => 0,
@@ -90,11 +126,9 @@ class FoodsController < ApplicationController
               flash[:error] = "Unexpected error pulling the food from foreign source. Please contact the administrator."
               redirect_to food_search_path
           end
-
-          # TODO: If it didn't save, redirect to the food search page and throw an error
-          # TODO: If it saved, or we're already storing this item redirect them to the food entry with this item loaded
     end
-    redirect_to food_entry_add_path(current_day, @food.id)
+    # If it saved, or we're already storing this item redirect them to the food entry with this item loaded
+    redirect_to @food
   end
 
   # GET /foods/new

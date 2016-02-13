@@ -1,4 +1,8 @@
 class Food < ActiveRecord::Base
+	# So that they're always sorted by popularity
+    default_scope {
+                order("popularity DESC")
+            }
 
 	belongs_to	:user
 	validates	:user_id,	presence: true

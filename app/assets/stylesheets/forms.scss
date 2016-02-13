@@ -22,7 +22,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 }
 
 form {
-    input, label, textarea {
+    input, label, textarea, .label {
         display: block;
     }
     textarea {
@@ -31,7 +31,7 @@ form {
     input, textarea, select {
         margin-bottom:2rem;
     }
-    label {
+    label, .label {
         font-weight: 800;
         text-transform: uppercase;
         font-size: .8rem;
