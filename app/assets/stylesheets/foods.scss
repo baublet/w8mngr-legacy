@@ -1,34 +1,44 @@
 .foods-table {
 	width: 100%;
 	h2 {
-		margin: 0 0 .5rem;
-		font-size: 1.6rem;
+		padding-left: 1rem;
+		margin: 0;
+		font-size: 1rem;
+		position: relative;
 		.icon-pencil {
-			margin: .3rem .5rem 0;
+			position: absolute;
+			left: -.15rem;
+			top: .25rem;
 			font-size: .75rem;
 			opacity: .8;
 		}
+	}
+	.row {
+		display: block;
+		font-size: 0;
+		border-bottom: 1px solid rgba($black, .025);
+		border-top: 1px solid rgba($black, .05);
+	}
+	.col {
+		vertical-align: middle;
+		display: inline-block;
+		font-size: 1rem;
+		padding: 1rem .5rem;
+	}
+	.long {
+		text-align: left;
+		width: 90%;
+		max-width: 90%;
+	}
+	.meta {
+		text-align: right;
+		width: 10%;
+		max-width: 10%;
 	}
 	.long p {
 		margin: 0 0 0 2.5rem;
 		font-size: .8rem;
 		opacity: .75;
-	}
-	td {
-		padding: 1rem .5rem;
-		border-bottom: 1px solid #eee;
-	}
-
-	.long {
-		text-align: left;
-	}
-
-	.meta {
-		text-align: right;
-	}
-
-	tbody tr:nth-child(even) td {
-		border-bottom-color: #ccc;
 	}
 }
 

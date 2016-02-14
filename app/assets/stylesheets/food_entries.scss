@@ -1,57 +1,128 @@
 .foodlog-table {
 	width:100%;
-	.header.row {
-		font-weight:bold;
-		font-size: .8rem;
-		text-transform: uppercase;
-		margin-bottom: 1rem;
-		overflow: visible;
-		opacity:.25;
-		transition: opacity .15s ease-in-out;
-		.col {
-			transform: translate(.5rem, 0) rotate(-45deg);
+	.row.header {
+		display: none;
+		@include mqAfterSize(640px) {
+			display: block;
+			font-weight:bold;
+			font-size: .8rem;
+			text-transform: uppercase;
+			margin-bottom: 1rem;
 			overflow: visible;
-		}
-		&:hover {
-			opacity: 1;
+			opacity:.25;
+			transition: opacity .15s ease-in-out;
+			.col {
+				transform: translate(.5rem, 0) rotate(-45deg);
+				overflow: visible;
+			}
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 	.row {
 		display:block;
-		white-space:nowrap;
 		overflow:hidden;
+		font-size: 0;
 	}
 	.col {
+		font-size: 1rem;
 		display:inline-block;
-		width:10%;
-		max-width:10%;
+		width:25%;
+		max-width:25%;
 		overflow:hidden;
 		white-space:nowrap;
 		vertical-align: top;
+		@include mqAfterSize(640px) {
+			width:10%;
+			max-width:10%;
+		}
 	}
-	.long {
-		width:40%;
-		max-width:40%;
+	.entry {
+		position: relative;
+		padding-right: 3rem;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid rgba($black, .025);
+		border-top: 1px solid rgba($black, .05);
+		input:focus {
+			font-weight: bolder;
+		}
+		.long {
+			width:100%;
+			max-width:100%;
+			input[type=text] {
+				font-size: .9rem;
+				padding:0;
+				border-color: transparent;
+				&:hover {
+					border-color: rgba($black, .25);
+				}
+				&:focus {
+					border-bottom-width: 3px;
+					margin-bottom: 0;
+					border-color: $black;
+				}
+			}
+			@include mqAfterSize(640px) {
+				width:40%;
+				max-width:40%;
+				input[type=text] {
+					border-color: rgba($black, .1);
+				}
+			}
+		}
+		.col.short {
+			position: relative;
+			&::after {
+				font-size: .5rem;
+				content: attr(title);
+				text-transform: uppercase;
+				font-weight: 800;
+				color: rgba($black, .25);
+				position: absolute;
+				bottom: 3px;
+				left: 0;
+			}
+		}
+		.meta {
+			font-size: .6rem;
+			position: absolute;
+			top: 2rem;
+			right: 0;
+			width: 2rem;
+			height: 2rem;
+			opacity: .25;
+			transition: opacity .15s ease-in-out;
+			text-align: right;
+			width:20%;
+			max-width:20%;
+			.delete-btn {
+				font-size: .6rem;
+			}
+			.save {
+				display: none;
+			}
+		}
+		&:hover .meta {
+			opacity: 1;
+		}
+		input[type=text] {
+			padding-top: 0;
+			font-size: .7rem;
+			border-color: transparent;
+			@include mqAfterSize(640px) {
+				border-color: rgba($black, .1);
+			}
+		}
 	}
-	.meta {
-		width:20%;
-		max-width:20%;
-	}
-	.entry .meta {
-		opacity: .5;
-		transition: opacity .15s ease-in-out;
-	}
-	.entry:hover .meta {
-		opacity: 1;
-	}
-	input[type="text"] {
+	input[type=text] {
 		width:100%;
 		border-top: 0;
 		border-right: 0;
 		border-left: 0;
 		border-radius: 0;
 		border-bottom-width: 1px;
-		border-color: rgba($black, .1);
 		margin-bottom: 2px;
 		padding-left: 0;
 		padding-right: 0;
@@ -65,25 +136,35 @@
 		}
 	}
 	.totals.row {
+		font-weight: bold;
+		display:block;
 		text-align:center;
 		margin: 2rem -1rem;
 		padding: 1rem 0;
-		background-color: rgba(0,0,0,.05);
+		background-color: rgba($black,.025);
+		border-top:1px solid rgba($black, .03);
+		border-bottom:1px solid rgba($black, .03);
 		opacity: 1;
 		overflow:hidden;
 		.col {
 			transform: none;
+			font-size: .8rem;
+			width: 20%;
+			&::after {
+				display: block;
+				font-size: .5rem;
+				text-transform: uppercase;
+				font-weight: 800;
+				color: rgba($black, .75);
+				content: attr(title);
+				padding: .1rem 0;
+			}
 		}
 		.long {
 			text-align: right;
 		}
-		.calories span {
-			border-bottom:3px solid $black;
-			padding:.25rem 0;
-		}
 	}
 	.new {
-		text-align: center;
 		padding: .5rem;
 		margin: 2rem 0 0;
 		background: $color-primary;
@@ -122,8 +203,12 @@
 			margin-bottom: 1rem;
 		}
 		.col.short {
-			width: 24%;
-			max-width: 24%;
+			padding-left: 3px;
+			width: 25%;
+			max-width: 25%;
+			&:first-child {
+				padding-left: 0;
+			}
 			input {
 				font-size: 1.2rem;
 				text-align: center;

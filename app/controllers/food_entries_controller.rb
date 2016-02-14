@@ -35,10 +35,10 @@ class FoodEntriesController < ApplicationController
 		show_list
 	end
 	
-	# Adds a food to the user's selected log (or the current day) based on measurement (its id) and the amount as a multiplier to the measurement
+	# Adds a food to the user's last-viewed day (or the current day) based on measurement (its id) and the amount as a multiplier to the measurement
 	def add_food
 		# Validate the day
-		@day = params[:day].blank? ? current_day : validate_day(params[:day])
+		@day = !cookies[:last_day].present? ? current_day : validate_day(cookies[:last_day])
 		# Validate the measurement amount ("1" if empty/blank)
 		amount = params[:amount].blank? ? 1 : validate_measurement(params[:amount])
 		# Load up the food
@@ -88,6 +88,8 @@ class FoodEntriesController < ApplicationController
 	end
 
 	def show_list
+		# Saves the last viewed day in a cookie
+		cookies[:last_day] = current_day
 		@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
 		@total_calories = @foodentries.map{|f| f['calories']}.compact.reduce(0, :+)
 		@total_fat = @foodentries.map{|f| f['fat']}.compact.reduce(0, :+)

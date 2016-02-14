@@ -102,13 +102,17 @@
     }
 }
 
-.welcome.index .content {
+.welcome.index main {
     padding: 0;
 }
-.what-is-it {
+section.what-is-it, section.summary {
     position: relative;
     z-index:2;
     padding: 2rem 1rem;
-    margin-top: 100vh;
     background: $white;
+}
+section.summary {
+    margin-top: 100vh;
+    background: $color-primary;
+    color: rgba($white,.75);
 }

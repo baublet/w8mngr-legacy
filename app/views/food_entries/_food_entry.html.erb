@@ -12,19 +12,19 @@
 	    	<%= f.text_field :description, placeholder: :Description %>
 	    </div>
 
-	    <div class="col short">
+	    <div class="col short" title="Calories">
 	        <%= f.text_field :calories, placeholder: :Calories %>
 	    </div>
 
-	    <div class="col short">
+	    <div class="col short" title="Fat">
 	            <%= f.text_field :fat, placeholder: :Fat %>
 	    </div>
 
-	    <div class="col short">
+	    <div class="col short" title="Carbs">
 	            <%= f.text_field :carbs, placeholder: :Carbs %>
 	    </div>
 
-	    <div class="col short">
+	    <div class="col short" title="Protein">
 	            <%= f.text_field :protein, placeholder: :Protein %>
 	    </div>
 
@@ -34,7 +34,7 @@
 					<span class="icon-barcode"></span>
 					<span class="screen-reader-text">Scan Barcode</span>
 				<% end %>
-				<%= link_to food_search_path(current_day), { class: "btn search-btn", alt: "Search for Foods", title: "Search for Foods" } do %>
+				<%= link_to food_search_path, { class: "btn search-btn", alt: "Search for Foods", title: "Search for Foods" } do %>
 					<span class="icon-search"></span>
 					<span class="screen-reader-text">Search for Foods</span>
 				<% end %>
@@ -43,7 +43,7 @@
 					<strong>New Entry</strong>
 				<% end %>
 	        <% else %>
-				<%= button_tag(type: 'submit', class: 'meta-btn', title: 'Save Entry') do %>
+				<%= button_tag(type: 'submit', class: 'meta-btn save', title: 'Save Entry') do %>
 					<span class="screen-reader-text">Save Entry</span>
 					<span class="icon-floppy-disk"></span>
 				<% end %>

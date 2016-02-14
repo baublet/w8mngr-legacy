@@ -90,7 +90,7 @@
 .food-log-new-btn {
     margin-top: 1rem;
     width: auto;
-    padding: 1rem;
+    padding: .5rem;
     background-color: $color-primary-light;
     color: rgba($white, .75);
     line-height: 1rem;
@@ -111,17 +111,19 @@
         font-weight: bold;
         font-size: .8rem;
         text-transform: uppercase;
-        vertical-align: middle;
+        vertical-align: top;
+        line-height: 1.5rem;
     }
 }
 
-.search-btn, .barecode-btn {
+.search-btn, .barcode-btn {
     border: none;
     margin: 0;
     overflow:hidden;
     padding: 0;
     &:hover {
         border: none;
+        box-shadow:none;
     }
     &:active {
         box-shadow:none;

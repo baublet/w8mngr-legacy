@@ -1,19 +1,18 @@
-input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea, select{
+input[type=text], input[type=email], input[type=password], input[type=number], textarea, select{
     padding: .4rem;
     color: $black;
     background: $white;
     border: 1px solid lighten($black, 60%);
     font-family: $font-stack;
     border-radius: 2px;
-    outline: none;
     width:100%;
     &:hover {
         border-color: lighten($black, 30%);
     }
     &:focus {
-        background: #fff;
         color: #000;
         border-color: $black;
+        outline: none;
     }
     .large & {
         font-size: 2rem;
@@ -45,7 +44,7 @@ form {
 }
 
 .radio {
-    label, input[type="radio"] {
+    label, input[type=radio] {
         display: inline-block;
     }
 }

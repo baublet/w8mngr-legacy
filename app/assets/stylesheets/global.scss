@@ -13,7 +13,8 @@ html {
 }
 
 .screen-reader-text {
-    display:none;
+    display: none;
+    visibility: hidden;
 }
 
 p {
@@ -29,7 +30,7 @@ a {
     }
 }
 
-.content p a, .content li a {
+main p a, main li a {
     border-bottom: 1px dashed rgba($black, .25);
     &:hover {
         text-decoration: none;
@@ -38,7 +39,7 @@ a {
 }
 
 h1, h2, h3, h4 {
-    margin: 2rem 0;
+    margin: 1rem 0;
     a {
         color: $black;
         &:hover{
@@ -52,16 +53,16 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     font-weight: 300;
     color: lighten($black, 15%);
 }
 h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
 }
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 ul, ol {
@@ -78,7 +79,7 @@ ul {
     list-style-type: disc;
 }
 
-section {
+section, main {
     padding: 0 1rem;
 }
 
@@ -100,7 +101,6 @@ em {
 }
 
 .page-meta {
-    text-align: right;
     margin: 1rem 0 2rem;
     .btn {
         font-size: 1rem;

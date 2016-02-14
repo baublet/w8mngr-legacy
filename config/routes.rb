@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get     '/foods/delete/:id' =>
                                 'foods#destroy',
                                 as: :food_delete
-    get     '/foods/search(/:day)' => 'foods#search',
+    get     '/foods/search/' => 'foods#search',
                                 as: :food_search
     get     '/foods/q/' => 'foods#find',
                                 as: :food_find

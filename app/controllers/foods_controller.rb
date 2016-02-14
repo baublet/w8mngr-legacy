@@ -18,8 +18,6 @@ class FoodsController < ApplicationController
   end
 
   def search
-      #TODO: save the date they pass in a cookie, if it's passed
-      #
   end
 
   def find
@@ -72,7 +70,7 @@ class FoodsController < ApplicationController
   end
 
   # This method downloads the params[:ndbno] from the USDA website if it doesn't already
-  # exist and adds it to the database as belonging to our unspecified superuser (id=0).
+  # exist and adds it to the database as belonging to our superuser (id=1).
   # It then redirects the user to the food log page with the entry filled out
   def pull
       ndbno = params[:ndbno]
@@ -157,18 +155,6 @@ class FoodsController < ApplicationController
         @newmeasurement = @measurement
         render :new
     end
-  end
-
-  # Adds :ndbno from the USDA's database if it isn't already in our database
-  def add
-    # TODO: Make sure this NDB number isn't already in the database (if it is, just skip the next steps)
-
-    # TODO: Query the NDB api
-    # TODO: Build the new food and all of its measurements and save it
-    # TODO: If it worked, redirect them to the food log using the cookie they stored, or the current day if it's not there, with the new food's ID
-    # TODO: If, for some reason, it failed, we want to notify the admin and throw a pretty fatal error. something went pretty wrong here
-
-    # TODO: If the NDB number is already in the database, just find its id and redirect them as you did above
   end
 
   # PATCH/PUT /foods/1

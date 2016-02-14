@@ -114,7 +114,7 @@ nav .login {
     margin: 0 -1rem;
     a {
         display: inline-block;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: $white;
         &:hover {
             color: $color-primary-light;
@@ -123,9 +123,11 @@ nav .login {
     }
 }
 .current-day {
-    font-size: 1.2rem;
+    font-size: .8rem;
     padding: 0 1rem;
-    line-height: 1.5rem;
+    line-height: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
     vertical-align: top;
-    color: lighten($color-primary-light, 25%);
+    color: $white;
 }
