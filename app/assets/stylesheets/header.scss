@@ -9,13 +9,13 @@ header brand, header nav {
     width:49%;
 }
 .site-title {
-    margin: 2rem 0 0;
+    margin: .5rem 0 0;
     a {
         display: block;
         color: $color-primary;
         text-indent: -999px;
-        width: 150px;
-        height: 73px;
+        width: 75px;
+        height: 37px;
         background: asset_url('logo.svg') top left no-repeat;
         background-size:contain;
         //-webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,.25));

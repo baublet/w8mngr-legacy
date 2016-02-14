@@ -1,5 +1,4 @@
 nav {
-    position: relative;
     .meta a {
         color: $color-primary-light;
         &:hover {
@@ -13,12 +12,14 @@ nav {
     display:none;
     & ~ .navigation-options {
         display: none;
+        opacity: 0.1;
     }
     &:checked ~ .navigation-options {
+        top: 3.5rem;
         display: block;
+        opacity: 1;
     }
     &:checked ~ .nav-toggle-btn {
-        background: rgba(0,0,0,.85);
         color: $white;
         &:after {
             content: "\e9c0";
@@ -34,6 +35,8 @@ nav {
     padding:.2rem .5rem;
     line-height:2.25rem;
     color: $white;
+    z-index: 17;
+    position: relative;
     &:hover {
         text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
     }
@@ -42,15 +45,15 @@ nav {
     }
 }
 .navigation-options {
-    background: rgba(0,0,0,.85);
+    background: $black;
     padding: 1rem;
-    margin-top: 2.65rem;
-    border-radius:5px;
     border-top-right-radius: 0;
-    min-width: 250px;
+    width: 100%;
     position: absolute;
     right: 0;
     z-index:99;
+    transition: opacity 2s ease-in-out;
+    box-shadow: 0 0 5px 3px rgba(black, .5);
 }
 .navigation-title {
     font-size: .9rem;

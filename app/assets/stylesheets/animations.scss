@@ -1,7 +1,7 @@
 // For the home page elements
 @keyframes slideInLeft {
     0% {
-        text-indent: -250px;
+        text-indent: -50%;
         opacity: 0;
     }
     100% {
@@ -12,7 +12,7 @@
 
 @keyframes slideInRight {
     0% {
-        text-indent: 250px;
+        text-indent: 50%;
         opacity: 0;
     }
     100% {

@@ -2,11 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .call-to-action {
-    position: relative;
-    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
     background: $black;
     overflow: hidden;
     padding: 150px 0 0;
+    height: 100vh;
+    min-height: 480px;
+    .actions {
+        position: absolute;
+        bottom: 1rem;
+        width: 100%;
+        text-align: center;
+    }
     .suggestion {
         position: relative;
         z-index: 10;
@@ -14,7 +25,7 @@
         font-size:2rem;
         color: $white;
         margin: 0;
-        padding: 6.5rem .5rem 0;
+        padding: 0;
         text-align: center;
         text-shadow: 1px 1px 2px #000,
                      1px 1px 2px #000,
@@ -32,12 +43,23 @@
         position: relative;
         z-index: 10;
         text-align: center;
-        margin: 2rem auto 2rem;
+        margin: 1rem auto 0;
+        p {
+            margin: .5rem 0 0;
+            font-size: .75rem;
+            color: $white;
+            a {
+                color: $white;
+                text-decoration: underline;
+                font-weight: bold;
+            }
+        }
     }
     .banner {
     }
     .banner-img {
         max-width: 100%;
+        width: 100%;
         height: auto;
         position: absolute;
         top: 0;
@@ -46,18 +68,47 @@
     }
 }
 
-.welcome.index header {
-    position: absolute;
-    top: 0;
-    z-index: 15;
-    width: 100%;
-    background: transparent;
-    padding: 0;
+.welcome.index {
+    header {
+        position: absolute;
+        top: 0;
+        z-index: 15;
+        width: 100%;
+        background: transparent;
+        padding: 0;
+    }
+    .site-title {
+        z-index: 16;
+        position: absolute;
+        top: 2rem;
+        width: 100%;
+        a {
+            margin: 0 auto;
+            width: 225px;
+            height: 111px;
+        }
+    }
+    .nav-toggle:checked ~ .nav-toggle-btn {
+        background: $black;
+    }
+    .nav-toggle:checked ~ .navigation-options {
+        top: 2.6rem;
+    }
+    footer {
+        position: relative;
+        z-index: 2;
+        margin-top: 100vh;
+        opacity: 1;
+    }
 }
 
 .welcome.index .content {
     padding: 0;
 }
 .what-is-it {
-    padding: 0 1rem;
+    position: relative;
+    z-index:2;
+    padding: 2rem 1rem;
+    margin-top: 100vh;
+    background: $white;
 }
