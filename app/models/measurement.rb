@@ -7,7 +7,7 @@ class Measurement < ActiveRecord::Base
     
     belongs_to  :food
 
-    validates	:amount,  presence: true
+    validates	:amount,  presence: true, length: { minimum: 1,  maximum: 10 }
     validates	:unit,    presence: true
     validates	:calories,presence: true
     validates	:fat,     presence: true

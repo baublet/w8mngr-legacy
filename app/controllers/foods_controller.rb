@@ -18,9 +18,6 @@ class FoodsController < ApplicationController
   end
 
   def search
-  end
-
-  def find
       require 'uri'
 
       if !params[:q].blank?
@@ -58,7 +55,7 @@ class FoodsController < ApplicationController
           # Prepare simple pagination
           @prev_page = page > 1 ? (page - 1).to_s : nil
           @next_page = @searchresults.size > per_page ? (page + 1).to_s : nil
-          @base_url  = food_find_path + "?q=" + URI.encode(params[:q])
+          @base_url  = food_search_path + "?q=" + URI.encode(params[:q])
           # Pop the end off the results array so we can stick to per_page items per page
           @searchresults.pop
           render "find"

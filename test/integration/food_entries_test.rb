@@ -9,7 +9,8 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
                          calories: 200,
                          fat: 10,
                          carbs: 45,
-                         protein: 10}
+                         protein: 10
+                     }
         log_in_as(@user)
         assert logged_in?
     end

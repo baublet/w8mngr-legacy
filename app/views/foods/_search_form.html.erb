@@ -1,5 +1,5 @@
 <div class="food-search-form">
-	<%= form_tag food_find_path, method: :get do %>
+	<%= form_tag food_search_path, method: :get do %>
 		<%= text_field_tag 'q', params[:q], placeholder: 'E.g., butter, cheese, etc...' %>
 		<%= button_tag(type: 'submit', class: 'btn search-btn') do %>
 			<span class="icon-search"></span>

@@ -34,7 +34,7 @@ class FoodTest < ActiveSupport::TestCase
         assert_not @measurement.valid?
         @measurement.amount = ""
         assert_not @measurement.valid?
-        @measurement.amount = " " * 6
+        @measurement.amount = "a" * 11
         assert_not @measurement.valid?
     end
     
@@ -58,7 +58,46 @@ class FoodTest < ActiveSupport::TestCase
         assert @measurement.valid?
     end
     
+    test "measurement fat must be valid" do
+        @measurement.fat = nil
+        assert_not @measurement.valid?
+        @measurement.fat = ""
+        assert_not @measurement.valid?
+        @measurement.fat = 0
+        assert @measurement.valid?
+        @measurement.fat = 99999
+        assert @measurement.valid?
+    end
+    
+    test "measurement carbs must be valid" do
+        @measurement.carbs = nil
+        assert_not @measurement.valid?
+        @measurement.carbs = ""
+        assert_not @measurement.valid?
+        @measurement.carbs = 0
+        assert @measurement.valid?
+        @measurement.carbs = 99999
+        assert @measurement.valid?
+    end
+    
+    test "measurement protein must be valid" do
+        @measurement.protein = nil
+        assert_not @measurement.valid?
+        @measurement.protein = ""
+        assert_not @measurement.valid?
+        @measurement.protein = 0
+        assert @measurement.valid?
+        @measurement.protein = 99999
+        assert @measurement.valid?
+    end
+    
     test "food should have a measurement" do
-        
+        @food = @user.foods.build(  name:        "Test Food",
+                                    description: "Test description.")
+        assert_not @food.valid?
+    end
+    
+    test "cannot delete last measurement of a food" do
+        assert_not @measurement.destroy.nil?
     end
 end
