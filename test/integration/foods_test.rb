@@ -98,16 +98,16 @@ class FoodsTest < ActionDispatch::IntegrationTest
 	test "user can search foods and add them to their log" do
 		create_valid_food
 		get food_search_path
-		byebug
 		get food_search_path, q: "Food"
 		assert_template "foods/find"
 		results = css_select ".search-result h2 a"
-		byebug
 		get results[0]["href"]
+		follow_redirect!
 		assert_template "foods/show"
 		results = css_select "main form"
 		measurement_box = css_select ".measurement-box"
 		post results[0]['action'], measurement: measurement_box[0]['data-measurement-id']
+		follow_redirect!
 		assert_template "food_entries/index"
 	end
 	
