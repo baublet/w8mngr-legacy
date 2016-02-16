@@ -2,6 +2,7 @@
     <% if !food.is_a?(Hash)  %>
         <%= link_to edit_food_path(food) do %>
             <span class="icon-pencil"></span>
+            <span class="screen-reader-text">Edit Entry</span>
         <% end %>
         <%= link_to food.name, food_path(food) %>
     <% else %>
