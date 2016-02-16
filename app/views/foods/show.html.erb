@@ -7,7 +7,7 @@
 <% @food.measurements.each do |measurement| %>
     <%= form_tag food_entry_log_food_path(@day, @food.id.to_s) do %>
     <%= hidden_field_tag 'measurement', measurement.id.to_s %>
-    <div class="measurement-box in-transition">
+    <div class="measurement-box in-transition"<%= measurement.id != 0 ? "data-measurement-id=" + measurement.id.to_s : '' %>>
         <div class="col unit">
             <span>Serving Size:</span> <%= measurement.amount %> <%= measurement.unit %>
         </div>

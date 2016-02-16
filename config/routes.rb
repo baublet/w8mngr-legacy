@@ -41,9 +41,7 @@ Rails.application.routes.draw do
                                 as: :food_delete
     get     '/foods/search/' => 'foods#search',
                                 as: :food_search
-    get     '/foods/q/' => 'foods#find',
-                                as: :food_find
-    get     '/foods/pull/:ndbno' => 'foods#pull',
+    get     '/foods/pull/(:ndbno)' => 'foods#pull',
                                 as: :food_pull
     resources :foods,
                             only: [:new, :edit, :index, :show, :create, :update, :destroy]

@@ -39,47 +39,26 @@ class FoodEntriesController < ApplicationController
 	def add_food
 		# Validate the day
 		@day = !cookies[:last_day].present? ? current_day : validate_day(cookies[:last_day])
-		# Validate the measurement amount ("1" if empty/blank)
-		amount = params[:amount].blank? ? 1 : validate_measurement(params[:amount])
-		# Load up the food
-		@food = Food.find(params[:food_id].to_i)
-		# Did they pass a valid measurement?
-		measurement = @food.measurements.find(params[:measurement].to_i)
-		if !measurement.nil?
-			# Multiply the values properly
-			calories = measurement.calories * amount
-			fat = measurement.fat * amount
-			carbs = measurement.carbs * amount
-			protein = measurement.protein * amount
-			# Add the entry to their food log
-			@food_entry = current_user.foodentries.build(
-				day: @day,
-				description: "(#{amount} #{measurement.unit}) " + @food.name,
-				calories: calories.to_i,
-				fat: fat.to_i,
-				carbs: carbs.to_i,
-				protein: protein.to_i
-			)
-			
-			if @food_entry.save
-				# Redirect them back to that day
-				flash[:success] = "Added food to your log!"
-				increment_popularity params[:food_id].to_i, params[:measurement].to_i
-			else
-				# TODO: Log this behavior
-				flash[:error] = "Error adding the food to your log!"
-			end
-			redirect_to food_log_day_path(@day)
+		# Load up the food in this entry
+		@food_entry = current_user.foodentries
+								  .build(day: @day)
+								  .populate_with_food(params[:measurement].to_i, params[:amount])
+		if @food_entry.save
+			# Redirect them back to that day
+			flash[:success] = "Added food to your log!"
+			increment_popularity params[:food_id].to_i, params[:measurement].to_i
 		else
-			render "foods/show"
+			# TODO: Log this behavior
+			flash[:error] = "Error adding the food to your log!"
 		end
+		redirect_to food_log_day_path(@day)
 	end
 
 	private
 
 	def food_entry_params
 		params.require(:food_entry)
-			  .permit(:description, :calories, :fat, :carbs, :protein, :day, :user_id)
+			  .permit(:description, :calories, :fat, :carbs, :protein, :day)
 	end
 
 	def correct_user

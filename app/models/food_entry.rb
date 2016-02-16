@@ -11,4 +11,31 @@ class FoodEntry < ActiveRecord::Base
 							numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
 
 	validates :user_id,		presence: true
+	
+	# Pass a measurement ID and multiplier to this object and it populates this food entry with the food's data, multiplied by the multiplier, for adding foods to users' food logs
+	# Example useage:
+	# 	@food_entry = current_user.foodentries.build(day: @day).populate_with_food(measurement_id, multiplier)
+	def populate_with_food measurement_id, multiplier
+		measurement = Measurement.find(measurement_id.to_i)
+		if !measurement.nil?
+			# This should never fail given how we structured our models
+			food = Food.find(measurement.food_id)
+			begin
+				multiplier = multiplier.to_r.to_f
+			rescue ZeroDivisionError => msg
+				multiplier = 1
+			end
+			description = "(#{(multiplier * measurement.amount.to_i).to_s} #{measurement.unit}) " + food.name
+			calories = measurement.calories * multiplier
+			fat = measurement.fat * multiplier
+			carbs = measurement.carbs * multiplier
+			protein = measurement.protein * multiplier
+			self.description = description
+			self.calories = calories.to_i
+			self.fat = fat.to_i
+			self.carbs = carbs.to_i
+			self.protein = protein.to_i
+		end
+		return self
+	end
 end

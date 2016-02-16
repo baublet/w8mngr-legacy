@@ -39,12 +39,6 @@ module FoodsHelper
         return ActiveSupport::JSON.decode(response)
     end
     
-    # Validates a measurement string and returns an integer representation of the amount for the purposes of mutliplication. Returns 1 if the amount is invalid
-    def validate_measurement amount
-        #TODO: catch zero-division errors
-        amount.to_r.to_f
-    end
-    
     # Increments the popularity of food_id and measurement_id by 1
     # Fails silently if one or the other can't be found
     def increment_popularity food_id, measurement_id
