@@ -1,4 +1,4 @@
-<h1><span class="icon-list2"></span> Your Foods</h1>
+<h1><span class="icon-spoon-knife"></span> Your Foods</h1>
 
 <div class="page-meta">
     <%= link_to new_food_path, :class => 'btn' do %>
@@ -7,19 +7,13 @@
     <% end %>
 </div>
 
-<% if @foods.size > 0 %>
+<% if !@foods.nil? && @foods.size > 0 %>
 
 <div class="foods-table">
 <% @foods.each do |food| %>
     <div class="row">
         <div class="col long">
-            <h2>
-                <%= link_to edit_food_path(food) do %>
-                    <span class="icon-pencil"></span>
-                    <%= food.name %>
-                <% end %>
-            </h2>
-            <p><%= food.description %></p>
+            <%= render food %>
         </div>
         <div class="col meta">
             <%= link_to food_delete_path(food), :class => 'btn delete-btn' do %>

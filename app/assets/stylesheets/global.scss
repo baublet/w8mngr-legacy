@@ -101,10 +101,30 @@ em {
 }
 
 .page-meta {
+    font-size: .8rem;
     margin: 1rem 0 2rem;
+    a {
+        margin: 0 1rem 0 0;
+        padding-bottom: .1rem;
+        color: rgba($black, .5);
+        border-bottom: 3px solid transparent;
+        &:hover {
+            color: $black;
+            border-color: $black;
+        }
+    }
     .btn {
-        font-size: 1rem;
-        padding: .5rem 1rem;
+        font-size: .75rem;
+        padding: .75rem .5rem .5rem;
+        color: rgba($white, .75);
+        background: rgba($black, .35);
+        margin: 0;
+        &:hover {
+            background: $color-primary;
+            color: $white;
+            border-color: darken($color-primary, 10%);
+            margin: 0;
+        }
     }
 }
 

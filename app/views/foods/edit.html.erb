@@ -1,6 +1,14 @@
 <h1>Editing Food</h1>
 
-<%= render 'form' %>
+<div class="page-meta">
+    <%= link_to @food do %>
+        <span class="icon-eye"></span>
+        View Food
+    <% end %>
+    <%= link_to foods_path do %>
+        <span class="icon-spoon-knife"></span>
+        My Foods
+    <% end %>
+</div>
 
-<%= link_to 'Show', @food %> |
-<%= link_to 'Back', foods_path %>
+<%= render 'form' %>

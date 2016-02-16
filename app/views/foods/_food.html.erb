@@ -1,0 +1,23 @@
+<h2>
+    <% if !food.is_a?(Hash)  %>
+        <%= link_to edit_food_path(food) do %>
+            <span class="icon-pencil"></span>
+        <% end %>
+        <%= link_to food.name, food_path(food) %>
+    <% else %>
+        <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
+    <% end %>
+</h2>
+<%= !food.is_a?(Hash) && !food.description.blank? ? "<p class=\"description\">" + food.description + "</p>" : '' %>
+<%  if !food.is_a?(Hash) && food.measurements.present?
+    measurement = food.measurements.first %>
+    <p class="measurement">
+        <strong>Calories:</strong> <%= measurement.calories %>
+        <strong>Fat:</strong> <%= measurement.fat %>
+        <strong>Carbs:</strong> <%= measurement.carbs %>
+        <strong>Protein:</strong> <%= measurement.protein %>
+        (per
+        <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
+                      verbose_measurement_unit(measurement.unit) %>)
+    </p>
+<% end %>

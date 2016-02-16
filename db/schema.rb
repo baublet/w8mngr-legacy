@@ -46,10 +46,10 @@ ActiveRecord::Schema.define(version: 20160211144205) do
   create_table "measurements", force: :cascade do |t|
     t.text     "amount",     limit: 5,              null: false
     t.text     "unit",       limit: 96,             null: false
-    t.integer  "calories",   limit: 5,              null: false
-    t.integer  "fat",        limit: 4,              null: false
-    t.integer  "carbs",      limit: 4,              null: false
-    t.integer  "protein",    limit: 4,              null: false
+    t.integer  "calories",                          null: false
+    t.integer  "fat",                               null: false
+    t.integer  "carbs",                             null: false
+    t.integer  "protein",                           null: false
     t.integer  "popularity",            default: 0
     t.integer  "food_id"
     t.datetime "created_at",                        null: false

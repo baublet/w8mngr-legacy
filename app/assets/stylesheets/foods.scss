@@ -147,7 +147,8 @@
 
 .measurement-box.in-transition {
 	position: relative;
-	margin: 4rem 0 0;
+	margin: 0 0 2rem;
+	padding-top: 2.5rem;
 	.label {
 		padding-top: 0;
 	}
@@ -155,27 +156,23 @@
 		padding: .5rem 0;
 	}
 	.unit {
-		width: auto;
-		max-width: none;
-		padding: .25rem .5rem 0;
-		font-weight: bold;
-		font-size: .8rem;
-		color: rgba($black, .5);
 		position: absolute;
-		top:-1.5rem;
-		left: 1rem;
-		height: 1.5rem;
-		z-index: 0;
-		border-radius: 5px;
-		border-bottom-right-radius: 0;
-		border-bottom-left-radius: 0;
-		span {
-			font-weight: normal;
-			color: rgba($black, .35);
-		}
+		left: 0;
+		top: .5rem;
+		width: 100%;
+		max-width: 100%;
+		font-weight: 200;
+		text-align: center;
+		font-size: 1.4rem;
 	}
 	@include mqAfterSize(540px) {
-		padding: .5rem 1rem;
+		padding: .5rem;
+		.unit {
+			position: static;
+			width: 16.667%;
+			text-align: left;
+			padding-top: 1.5rem;
+		}
 		.col, .label {
 			text-align: center;
 		}
@@ -188,7 +185,13 @@
 		position: absolute;
 		right: 1rem;
 		bottom: 1rem;
-		@include mqBetweenSizes(540px, 600px) {
+		@include mqBetweenSizes(540px, 788px) {
+			border-radius: 50%;
+			width: 2rem;
+			height: 2rem;
+			right: -.25rem;
+			bottom: -.25rem;
+			padding-top: .55rem;
 			span {
 				margin: 0;
 			}
@@ -223,6 +226,18 @@
 	}
 }
 
+.search-result, .foods-table {
+	.measurement {
+		margin: 0;
+		opacity: .75;
+		font-size: .6rem;
+		line-height: .75rem;
+	}
+}
+.foods-table p.measurement {
+	margin: .5rem 0 0 1rem;
+}
+
 .search-result {
 	margin:0;
 	padding: 1rem 1rem 1rem 3rem;
@@ -245,13 +260,11 @@
 		a:hover::before {
 			opacity: 1;
 		}
-	}
-	p {
-		font-size: .75rem;
-		font-style:italic;
-		margin: 0;
-		padding: 0;
-		opacity: .75;
+		span {
+			position: absolute;
+			left: -2rem;
+			top: 1.5rem;
+		}
 	}
 	&:nth-child(odd) {
 		background: rgba($black, .035);
