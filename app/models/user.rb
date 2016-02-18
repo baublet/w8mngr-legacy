@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 							# We want to keep all foods in the database whether the user exists anymore or not, so we can still search them
 
 	attr_accessor :remember_token, :reset_token
+
+	# Saves our options
+	before_save { save_options }
+
 	before_save { email.downcase! }
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -28,6 +32,69 @@ class User < ActiveRecord::Base
 	# Returns a random token
 	def User.new_token
 		SecureRandom.urlsafe_base64
+	end
+
+	def option
+		if !@options.is_a?(Hash)
+			options
+		end
+		@options
+	end
+
+	# Initializes user options
+	def options
+		# Populates the user options
+		if @options.present?
+			return @options
+		else
+			@options = {}
+		end
+		@option_values = OptionValue.where(user_id: self.id).all
+		@option_info = Option.all
+		@option_info.each do |info|
+			if !@option_values.nil?
+				#byebug
+				user_has_set = @option_values.find { |var| var.option_id == info.id }
+				if !user_has_set.nil?
+					@options[info.name] = user_has_set.value
+				else
+					@options[info.name] = info.default_value
+				end
+			else
+				@options[info.name] = info.default_value
+			end
+		end
+	end
+
+	def save_options
+		# Only call this function if there are options being used here
+		if !@options.present? || @options.blank?
+			return
+		end
+
+		# Loop through the options to add new values that differ from the default
+		@options.each do |key, value|
+			option = @option_info.find_by(name: key)
+			if option.is_a?(Option) && value != option.default_value
+				# If the user has not set this option yet
+				existing = @option_values.nil? ? nil : @option_values.find_by(option_id: option.id)
+				if existing.nil?
+					# Then build it
+					@option_values = @option_values.nil? ? [] : @option_values
+					@option_values.push(OptionValue.new( option_id:  option.id,
+													  user_id:	  self.id,
+													  value:	  value))
+				else
+					# Otherwise, just update it
+					existing.value = value
+				end
+			else
+				return false
+			end
+		end
+		@option_values.each do |value_row|
+			value_row.save
+		end
 	end
 
 	# Sets the password reset attributes
