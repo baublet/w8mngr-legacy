@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
 
 	attr_accessor :remember_token, :reset_token
 
-	# Saves our options
-	before_save { save_options }
-
-	before_save { email.downcase! }
+	before_save {
+		email.downcase!
+		save_options
+	}
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
@@ -32,6 +32,41 @@ class User < ActiveRecord::Base
 	# Returns a random token
 	def User.new_token
 		SecureRandom.urlsafe_base64
+	end
+
+	# Sets the password reset attributes
+	def create_reset_digest
+		self.reset_token = User.new_token
+		update_attribute(:reset_digest, User.digest(reset_token))
+		update_attribute(:reset_sent_at, Time.zone.now)
+	end
+
+	# Sends the actual password reset reminder
+	def send_password_reset_email
+		UserMailer.password_reset(self).deliver_now
+	end
+
+	# Remembers the user
+	def remember
+		self.remember_token = User.new_token
+		update_attribute(:remember_digest, User.digest(remember_token))
+	end
+
+	# Forgets a user (clears their cookies)
+	def forget
+		update_attribute(:remember_digest, nil)
+	end
+
+	# Returns true if the given token matches the digest
+	def authenticated?(attribute, token)
+		digest = self.send("#{attribute}_digest")
+		return false if digest.nil?
+		BCrypt::Password.new(digest).is_password?(token)
+	end
+
+	# Returns true if the user's password reset period has expired
+	def password_reset_expired?
+		return reset_sent_at < 2.hours.ago
 	end
 
 	def option
@@ -68,67 +103,48 @@ class User < ActiveRecord::Base
 
 	def save_options
 		# Only call this function if there are options being used here
-		if !@options.present? || @options.blank?
-			return
+		if !@options.is_a?(Hash)
+			return true
+		end
+
+		# We need to reload our options in a test environment to make sure
+		# our tests pasts. We don't do this in production because we won't be
+		# adding and removing options on the fly like we will in tests.
+		if Rails.env.test?
+			@option_info = Option.all
+			@option_values = OptionValue.where(user_id: self.id).all
 		end
 
 		# Loop through the options to add new values that differ from the default
 		@options.each do |key, value|
-			option = @option_info.find_by(name: key)
-			if option.is_a?(Option) && value != option.default_value
+			option = @option_info.find { |var| var.name == key }
+			# Prevents developers from using options they haven't yet defined
+			if !option.is_a?(Option)
+				return false
+			end
+			if value != option.default_value
 				# If the user has not set this option yet
-				existing = @option_values.nil? ? nil : @option_values.find_by(option_id: option.id)
-				if existing.nil?
+				current = @option_values.nil? ? nil : @option_values.find { |var| var.option_id == option.id }
+				if current.nil?
 					# Then build it
 					@option_values = @option_values.nil? ? [] : @option_values
 					@option_values.push(OptionValue.new( option_id:  option.id,
-													  user_id:	  self.id,
-													  value:	  value))
+													  	 user_id:	 self.id,
+													  	 value:		 value
+														)
+										)
 				else
 					# Otherwise, just update it
-					existing.value = value
+					current.value = value
 				end
-			else
-				return false
 			end
 		end
+		saved = true
 		@option_values.each do |value_row|
-			value_row.save
+			if !value_row.save
+				saved = false
+			end
 		end
-	end
-
-	# Sets the password reset attributes
-	def create_reset_digest
-		self.reset_token = User.new_token
-		update_attribute(:reset_digest, User.digest(reset_token))
-		update_attribute(:reset_sent_at, Time.zone.now)
-	end
-
-	# Sends the actual password reset reminder
-	def send_password_reset_email
-		UserMailer.password_reset(self).deliver_now
-	end
-
-	# Remembers the user
-	def remember
-		self.remember_token = User.new_token
-		update_attribute(:remember_digest, User.digest(remember_token))
-	end
-
-	# Forgets a user (clears their cookies)
-	def forget
-		update_attribute(:remember_digest, nil)
-	end
-
-	# Returns true if the given token matches the digest
-	def authenticated?(attribute, token)
-		digest = self.send("#{attribute}_digest")
-		return false if digest.nil?
-		BCrypt::Password.new(digest).is_password?(token)
-	end
-
-	# Returns true if the user's password reset period has expired
-	def password_reset_expired?
-		return reset_sent_at < 2.hours.ago
+		return saved
 	end
 end
