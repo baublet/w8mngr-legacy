@@ -54,11 +54,11 @@ class OptionTest < ActiveSupport::TestCase
     end
 
     test "options with specific values" do
-        options = " yellow : Bumblebee
-                    red : Apple
-                    blue : Water
-                    1 : Number
-                    7: Coconuts"
+        options = " yellow :: Bumblebee
+                    red :: Apple
+                    blue :: Water
+                    1 :: Number
+                    7:: Coconuts"
         Option.new(name: "select", kind: "o", values: options, default_value: "red").save
         assert_equal "red", @user.option["select"]
         @user.option["select"] = "blue"

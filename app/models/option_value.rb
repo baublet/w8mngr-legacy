@@ -29,7 +29,7 @@ class OptionValue < ActiveRecord::Base
             end
             allowed_values = option.values.split("\n")
             allowed_values.each do |allowed_value|
-                pairs = allowed_value.split(":")
+                pairs = allowed_value.split("::")
                 if pairs[0].squish == value.downcase.squish
                     return true
                 end
