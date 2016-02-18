@@ -38,4 +38,35 @@ class OptionTest < ActiveSupport::TestCase
         @user.option["height"] = "12"
         assert @user.save_options
     end
+
+    test "boolean options" do
+        Option.new(name: "toggle", kind:"b", default_value: "false").save
+        @user.option["toggle"] = "false"
+        assert @user.save
+        @user.option["toggle"] = "true"
+        assert @user.save
+        @user.option["toggle"] = "TrUe"
+        assert @user.save
+        @user.option["toggle"] = "FalSe"
+        assert @user.save
+        @user.option["toggle"] = "not boolean"
+        assert_not @user.save
+    end
+
+    test "options with specific values" do
+        options = " yellow : Bumblebee
+                    red : Apple
+                    blue : Water
+                    1 : Number
+                    7: Coconuts"
+        Option.new(name: "select", kind: "o", values: options, default_value: "red").save
+        assert_equal "red", @user.option["select"]
+        @user.option["select"] = "blue"
+        assert @user.save
+        assert_equal "blue", @user.option["select"]
+        @user.option["select"] = "green"
+        assert_not @user.save
+        @user.option["select"] = "yellow"
+        assert @user.save
+    end
 end

@@ -20,7 +20,7 @@ class OptionValue < ActiveRecord::Base
         when "s", "t"
             true
         # Number field, only numbers allowed
-        when "n"
+        when "n", "i", "f"
             true if Float(value) rescue false
         # Options with specific values
         when "o"
@@ -30,8 +30,11 @@ class OptionValue < ActiveRecord::Base
             allowed_values = option.values.split("\n")
             allowed_values.each do |allowed_value|
                 pairs = allowed_value.split(":")
-                return value.downcase == pairs[0].squish
+                if pairs[0].squish == value.downcase.squish
+                    return true
+                end
             end
+            return false
         else
             # Unknown type, raise an exception
             raise Exception.new("Unknown option type!")
