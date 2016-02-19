@@ -101,8 +101,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		get food_search_path, q: "Food"
 		assert_template "foods/find"
 		results = css_select ".search-result h2 a"
-		get results[0]["href"]
-		#follow_redirect!
+		get results[1]["href"]
 		assert_template "foods/show"
 		results = css_select "main form"
 		measurement_box = css_select ".measurement-box"

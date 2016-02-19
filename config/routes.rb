@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     
     # Users and sessions
     resources :users
+    post   '/users/:id'     => 'users#update'
     get    'signup'         => 'users#new'
     get    'login'          => 'sessions#new'
     post   'login'          => 'sessions#create'

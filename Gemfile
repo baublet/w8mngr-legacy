@@ -32,6 +32,9 @@ gem 'sqlite3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# For our unit conversions and displays
+gem 'ruby-units'
+
 group :development, :test do
     gem 'byebug'
     gem 'web-console', '~> 2.0'

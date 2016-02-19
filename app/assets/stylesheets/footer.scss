@@ -2,21 +2,17 @@ footer {
     padding: 1rem;
     margin-top: 10rem;
     width: 100%;
-    background: lighten($black, 60%);
+    background: $black;
     color: rgba($black, .5);
     min-height: 10rem;
-    opacity: .75;
-    transition: opacity .5s ease-in-out;
-    &:hover {
-        opacity: 1;
-    }
+    color: rgba($white, .75);
     a {
-        color: rgba($black, .75);
-        border-bottom: 1px solid rgba($black,.05);
+        color: rgba($white, .5);
+        border-bottom: 1px solid rgba($white,.05);
         &:hover {
             text-decoration: none;
-            color: $black;
-            border-color: $black;
+            color: $white;
+            border-color: $white
         }
     }
 }

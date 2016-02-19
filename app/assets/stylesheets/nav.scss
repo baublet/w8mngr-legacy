@@ -11,15 +11,13 @@ nav {
 .nav-toggle {
     display:none;
     & ~ .navigation-options {
-        display: none;
-        opacity: 0.1;
+
     }
     &:checked ~ .navigation-options {
-        top: 3.5rem;
-        display: block;
-        opacity: 1;
+        right: 0;
     }
     &:checked ~ .nav-toggle-btn {
+        position: fixed;
         color: $white;
         &:after {
             content: "\e9c0";
@@ -28,15 +26,14 @@ nav {
 }
 
 .nav-toggle-btn {
+    z-index: 100;
     font-family: 'icomoon';
     cursor: pointer;
     font-size:2rem;
-    float: right;
     padding:.2rem .5rem;
-    line-height:2.25rem;
     color: $white;
-    z-index: 17;
-    position: relative;
+    position: absolute;
+    right: 1rem;
     &:hover {
         text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
     }
@@ -45,15 +42,18 @@ nav {
     }
 }
 .navigation-options {
-    background: $black;
+    background: darken($color-primary, 15);
     padding: 1rem;
     border-top-right-radius: 0;
-    width: 100%;
-    position: absolute;
-    right: 0;
-    z-index:99;
-    transition: opacity 2s ease-in-out;
-    box-shadow: 0 0 5px 3px rgba(black, .5);
+    width: 90%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index:90;
+    transition: right .2s ease-in-out;
+    box-shadow: inset 0 0 5px 3px rgba(black, .25);
+    height: 100vh;
+    overflow-y: auto;
 }
 .navigation-title {
     font-size: .9rem;

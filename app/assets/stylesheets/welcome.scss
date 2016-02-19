@@ -88,12 +88,7 @@
             height: 111px;
         }
     }
-    .nav-toggle:checked ~ .nav-toggle-btn {
-        background: $black;
-    }
-    .nav-toggle:checked ~ .navigation-options {
-        top: 2.6rem;
-    }
+
     footer {
         position: relative;
         z-index: 2;

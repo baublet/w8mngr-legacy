@@ -71,11 +71,11 @@ ActiveRecord::Schema.define(version: 20160217180630) do
 
   create_table "options", force: :cascade do |t|
     t.string   "name",          limit: 32
-    t.string   "kind",          limit: 1
+    t.string   "kind",          limit: 1,  default: "s"
     t.text     "values"
     t.text     "default_value"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "users", force: :cascade do |t|

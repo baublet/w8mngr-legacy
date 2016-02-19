@@ -1,0 +1,25 @@
+<% provide(:title, "Edit Profile") %>
+<h1>Edit Profile</h1>
+
+<p>Tell us a little bit about yourself. It helps our algorithm better understand you when you get around to setting some goals.</p>
+
+<%= form_tag user_path(@user.id) do |form| %>
+
+	<% if @user.errors.any? %>
+		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
+	<% end %>
+	
+	<%= label_tag "user.timezone", "Timezone" %>
+	<%= select_tag "user.timezone",
+			options_for_select(
+				time_zone_options_for_select(@user.option["user.timezone"], nil, ActiveSupport::TimeZone)
+			), prompt: "Detect Automatically"
+	%>
+	
+	<%= label_tag "user.height_display", "Height" %>
+	<%= text_field_tag "user.height_display", @user.option["user.height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+
+	<%= button_tag(type: 'submit', class: 'btn') do %>
+		Save
+	<% end %>
+<% end %>

@@ -91,6 +91,7 @@ GEM
     rake (10.5.0)
     rdoc (4.2.1)
       json (~> 1.4)
+    ruby-units (2.0.0)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -133,6 +134,7 @@ DEPENDENCIES
   pg
   puma
   rails (= 4.2.5)
+  ruby-units
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
