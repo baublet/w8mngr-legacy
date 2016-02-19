@@ -20,7 +20,7 @@ module ApplicationHelper
             passed_day = ((params[:food_entry].nil?)? nil : params[:food_entry][:day]) ||
                          params[:day]
             if passed_day.nil? || passed_day.to_i < 19850501 || passed_day.to_i > 20850501
-                passed_day = Date.today.strftime('%Y%m%d')
+                passed_day = Time.current.strftime('%Y%m%d')
             end
             @current_day = passed_day
         end
@@ -52,7 +52,7 @@ module ApplicationHelper
     def nice_day string
         return convert_day_to_date(string).strftime('%A, %B %e, %Y')
     end
-    
+
     # Validates a YYYYMMDD string, returning current_day if it's false
     def validate_day day_string
         day_int = day_string.to_i

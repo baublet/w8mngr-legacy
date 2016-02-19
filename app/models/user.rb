@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
 							# We want to keep all foods in the database whether the user exists anymore or not, so we can still search them
 
 	attr_accessor :remember_token, :reset_token
-	before_save { email.downcase! }
+
+	before_save {
+		email.downcase!
+		save_options
+	}
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
@@ -63,5 +67,84 @@ class User < ActiveRecord::Base
 	# Returns true if the user's password reset period has expired
 	def password_reset_expired?
 		return reset_sent_at < 2.hours.ago
+	end
+
+	def option
+		if !@options.is_a?(Hash)
+			options
+		end
+		@options
+	end
+
+	# Initializes user options
+	def options
+		# Populates the user options
+		if @options.present?
+			return @options
+		else
+			@options = {}
+		end
+		@option_values = OptionValue.where(user_id: self.id).all
+		@option_info = Option.all
+		@option_info.each do |info|
+			if !@option_values.nil?
+				#byebug
+				user_has_set = @option_values.find { |var| var.option_id == info.id }
+				if !user_has_set.nil?
+					@options[info.name] = user_has_set.value
+				else
+					@options[info.name] = info.default_value
+				end
+			else
+				@options[info.name] = info.default_value
+			end
+		end
+	end
+
+	def save_options
+		# Only call this function if there are options being used here
+		if !@options.is_a?(Hash)
+			return true
+		end
+
+		# We need to reload our options in a test environment to make sure
+		# our tests pasts. We don't do this in production because we won't be
+		# adding and removing options on the fly like we will in tests.
+		if Rails.env.test?
+			@option_info = Option.all
+			@option_values = OptionValue.where(user_id: self.id).all
+		end
+
+		# Loop through the options to add new values that differ from the default
+		@options.each do |key, value|
+			option = @option_info.find { |var| var.name == key }
+			# Prevents developers from using options they haven't yet defined
+			if !option.is_a?(Option)
+				return false
+			end
+			if value != option.default_value
+				# If the user has not set this option yet
+				current = @option_values.nil? ? nil : @option_values.find { |var| var.option_id == option.id }
+				if current.nil?
+					# Then build it
+					@option_values = @option_values.nil? ? [] : @option_values
+					@option_values.push(OptionValue.new( option_id:  option.id,
+													  	 user_id:	 self.id,
+													  	 value:		 value
+														)
+										)
+				else
+					# Otherwise, just update it
+					current.value = value
+				end
+			end
+		end
+		saved = true
+		@option_values.each do |value_row|
+			if !value_row.save
+				saved = false
+			end
+		end
+		return saved
 	end
 end

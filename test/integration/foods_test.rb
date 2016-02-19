@@ -6,11 +6,11 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		log_in_as(@user)
 		assert logged_in?
 	end
-	
+
 	test "user can create valid food with measurement" do
 		create_valid_food
 	end
-	
+
 	test "user can edit food and measurements, add measurements, and delete them" do
 		create_valid_food
 		forms = css_select("form.food-form")
@@ -36,7 +36,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		assert_equal "7", measurement_inputs[3]['value']
 		assert_equal "8", measurement_inputs[4]['value']
 		assert_equal "9", measurement_inputs[5]['value']
-		
+
 		# Add new measurement
 		patch forms[0]['action'], {
 									:food => { name: "Updated name",
@@ -49,7 +49,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		assert_template "foods/edit"
 		assert_select ".error-explanation", false
 		assert_select ".measurement-box", count: 3
-		
+
 		# Delete measurement
 		patch forms[0]['action'], {
 									:food => { name: "Updated name",
@@ -65,13 +65,13 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		assert_select ".error-explanation", false
 		assert_select ".measurement-box", count: 2
 	end
-	
+
 	test "user cannot delete last measurement of a food" do
 		create_valid_food
 		forms = css_select("form.food-form")
 		measurement_box = css_select ".measurement-box"
 		measurement_id = measurement_box[0]['data-measurement-id']
-		
+
 		# Try to delete measurement
 		patch forms[0]['action'], {
 									:food => { name: "Updated name",
@@ -86,7 +86,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		assert_template "foods/edit"
 		assert_select ".alert.error", true
 	end
-	
+
 	test "user can delete food" do
 		create_valid_food
 		get foods_path
@@ -94,7 +94,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
         get delete_link[0]["href"]
         assert_select "form.edit_food_entry", count: 0
 	end
-	
+
 	test "user can search foods and add them to their log" do
 		create_valid_food
 		get food_search_path
@@ -102,7 +102,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		assert_template "foods/find"
 		results = css_select ".search-result h2 a"
 		get results[0]["href"]
-		follow_redirect!
+		#follow_redirect!
 		assert_template "foods/show"
 		results = css_select "main form"
 		measurement_box = css_select ".measurement-box"
@@ -110,9 +110,9 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		follow_redirect!
 		assert_template "food_entries/index"
 	end
-	
+
 	private
-	
+
 	def create_valid_food
 		get new_food_path
 		assert_template "foods/new"
