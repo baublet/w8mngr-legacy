@@ -7,7 +7,7 @@
 development:
     adapter: postgresql
     encoding: unicode
-    database: postgres
+    database: w8mngr
     username: postgres
     password: 123
     host: localhost

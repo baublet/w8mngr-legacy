@@ -3,33 +3,33 @@
 
 <p>Tell us a little bit about yourself. It helps our algorithm better understand you when you get around to setting some goals.</p>
 
-<%= form_tag user_path(@user.id) do |form| %>
+<%= form_tag user_path(current_user.id) do |form| %>
 
-	<% if @user.errors.any? %>
-		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
+	<% if current_user.errors.any? %>
+		<%= render partial: "shared/error_messages", locals: {errors: current_user.errors} %>
 	<% end %>
 
-	<%= label_tag "user.timezone", "Timezone" %>
-	<%= select_tag "user.timezone",
+	<%= label_tag "timezone", "Timezone" %>
+	<%= select_tag "timezone",
 			options_for_select(
-				time_zone_options_for_select(@user.option["user.timezone"], nil, ActiveSupport::TimeZone)
+				time_zone_options_for_select(current_user.preferences[:timezone], nil, ActiveSupport::TimeZone)
 			), prompt: "Detect Automatically"
 	%>
 
-	<%= label_tag "user.height_display", "Height" %>
-	<%= text_field_tag "user.height_display", @user.option["user.height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+	<%= label_tag "height_display", "Height" %>
+	<%= text_field_tag "height_display", current_user.preferences[:height_display], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
 
 	<div class="radio-list">
 		<span class="header">Sex</span>
 
-		<%= radio_button_tag 'user.sex', 'f', @user.option["user.sex"] == "f" ? true : false, :id => "user.sex.f" %>
-		<%= label_tag "user.sex.f", "Female" %>
+		<%= radio_button_tag 'sex', 'f', current_user.preferences[:sex] == "f" ? true : false, :id => "sex.f" %>
+		<%= label_tag "sex.f", "Female" %>
 
-		<%= radio_button_tag 'user.sex', 'm', @user.option["user.sex"] == "m" ? true : false, :id => "user.sex.m" %>
-		<%= label_tag "user.sex.m", "Male" %>
+		<%= radio_button_tag 'sex', 'm', current_user.preferences[:sex] == "m" ? true : false, :id => "sex.m" %>
+		<%= label_tag "sex.m", "Male" %>
 
-		<%= radio_button_tag 'user.sex', 'na', @user.option["user.sex"] == "na" ? true : false, :id => "user.sex.na" %>
-		<%= label_tag "user.sex.na", "Other / Prefer Not to Disclose" %>
+		<%= radio_button_tag 'sex', 'na', current_user.preferences[:sex] == "na" ? true : false, :id => "sex.na" %>
+		<%= label_tag "sex.na", "Other / Prefer Not to Disclose" %>
 	</div>
 
 	<%= button_tag(type: 'submit', class: 'btn') do %>

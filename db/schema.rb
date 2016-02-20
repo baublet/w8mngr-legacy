@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217180630) do
+ActiveRecord::Schema.define(version: 20160220005654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "food_entries", force: :cascade do |t|
     t.text     "description",                       null: false
@@ -61,40 +62,19 @@ ActiveRecord::Schema.define(version: 20160217180630) do
 
   add_index "measurements", ["food_id"], name: "index_measurements_on_food_id", using: :btree
 
-  create_table "option_values", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "option_id"
-    t.text     "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "option_values", ["option_id"], name: "index_option_values_on_option_id", using: :btree
-  add_index "option_values", ["user_id"], name: "index_option_values_on_user_id", using: :btree
-
-  create_table "options", force: :cascade do |t|
-    t.string   "name",          limit: 32
-    t.string   "kind",          limit: 1,  default: "s"
-    t.text     "values"
-    t.text     "default_value"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.integer  "role",            default: 0
+    t.hstore   "preferences",     default: {}, null: false
   end
 
   add_foreign_key "food_entries", "users"
   add_foreign_key "foods", "users"
   add_foreign_key "measurements", "foods"
-  add_foreign_key "option_values", "options"
-  add_foreign_key "option_values", "users"
 end
