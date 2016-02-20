@@ -34,6 +34,7 @@ gem 'sqlite3'
 
 # For our unit conversions and displays
 gem 'ruby-units'
+gem 'pg'
 
 group :development, :test do
     gem 'byebug'
@@ -46,4 +47,3 @@ group :production do
     gem 'puma'
     gem 'pg'
 end
-

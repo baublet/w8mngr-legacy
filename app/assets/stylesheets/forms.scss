@@ -48,3 +48,38 @@ form {
         display: inline-block;
     }
 }
+
+.radio-list {
+    position: relative;
+    padding: 1rem;
+    border: 1px solid rgba($black, .25);
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    input[type=radio] {
+        display: none;
+    }
+    label {
+        padding:1rem 0 .5rem;
+        display: inline-block;
+        border-bottom: 3px solid #eee;
+        cursor: pointer;
+        color: #999;
+        transition: border-color, color .15s ease-in-out;
+        margin-right: .5rem;
+    }
+    input[type=radio]:checked + label {
+        color: $black;
+        border-color: $black;
+    }
+    .header {
+        cursor: arrow;
+        position: absolute;
+        left: 1rem;
+        top: -1.5rem;;
+        background: $white;
+        padding: 1rem;
+        font-size: 1.4rem;
+        font-weight: 200;
+        border-color: transparent;
+    }
+}

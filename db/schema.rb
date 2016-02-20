@@ -13,50 +13,53 @@
 
 ActiveRecord::Schema.define(version: 20160217180630) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "food_entries", force: :cascade do |t|
     t.text     "description",                       null: false
-    t.integer  "calories",    limit: 5, default: 0, null: false
-    t.integer  "fat",         limit: 3
-    t.integer  "carbs",       limit: 3
-    t.integer  "protein",     limit: 3
+    t.integer  "calories",    limit: 8, default: 0, null: false
+    t.integer  "fat"
+    t.integer  "carbs"
+    t.integer  "protein"
     t.integer  "day",                               null: false
     t.integer  "user_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
 
-  add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at"
-  add_index "food_entries", ["user_id"], name: "index_food_entries_on_user_id"
+  add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at", using: :btree
+  add_index "food_entries", ["user_id"], name: "index_food_entries_on_user_id", using: :btree
 
   create_table "foods", force: :cascade do |t|
-    t.text     "name",        limit: 255,             null: false
+    t.text     "name",                    null: false
     t.text     "description"
-    t.text     "ndbno",       limit: 8
-    t.text     "upc",         limit: 12
-    t.integer  "popularity",              default: 0
-    t.integer  "likes",                   default: 0
+    t.text     "ndbno"
+    t.text     "upc"
+    t.integer  "popularity",  default: 0
+    t.integer  "likes",       default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  add_index "foods", ["name"], name: "index_foods_on_name"
-  add_index "foods", ["user_id"], name: "index_foods_on_user_id"
+  add_index "foods", ["name"], name: "index_foods_on_name", using: :btree
+  add_index "foods", ["user_id"], name: "index_foods_on_user_id", using: :btree
 
   create_table "measurements", force: :cascade do |t|
-    t.text     "amount",     limit: 5,              null: false
-    t.text     "unit",       limit: 96,             null: false
-    t.integer  "calories",                          null: false
-    t.integer  "fat",                               null: false
-    t.integer  "carbs",                             null: false
-    t.integer  "protein",                           null: false
-    t.integer  "popularity",            default: 0
+    t.text     "amount",                 null: false
+    t.text     "unit",                   null: false
+    t.integer  "calories",               null: false
+    t.integer  "fat",                    null: false
+    t.integer  "carbs",                  null: false
+    t.integer  "protein",                null: false
+    t.integer  "popularity", default: 0
     t.integer  "food_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "measurements", ["food_id"], name: "index_measurements_on_food_id"
+  add_index "measurements", ["food_id"], name: "index_measurements_on_food_id", using: :btree
 
   create_table "option_values", force: :cascade do |t|
     t.integer  "user_id"
@@ -66,8 +69,8 @@ ActiveRecord::Schema.define(version: 20160217180630) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "option_values", ["option_id"], name: "index_option_values_on_option_id"
-  add_index "option_values", ["user_id"], name: "index_option_values_on_user_id"
+  add_index "option_values", ["option_id"], name: "index_option_values_on_option_id", using: :btree
+  add_index "option_values", ["user_id"], name: "index_option_values_on_user_id", using: :btree
 
   create_table "options", force: :cascade do |t|
     t.string   "name",          limit: 32
@@ -89,4 +92,9 @@ ActiveRecord::Schema.define(version: 20160217180630) do
     t.integer  "role",            default: 0
   end
 
+  add_foreign_key "food_entries", "users"
+  add_foreign_key "foods", "users"
+  add_foreign_key "measurements", "foods"
+  add_foreign_key "option_values", "options"
+  add_foreign_key "option_values", "users"
 end

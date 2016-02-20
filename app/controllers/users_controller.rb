@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :logged_in_user, only: [:destroy, :update]
     before_action :correct_user, only: [:show, :edit, :update, :destroy]
-    
+
     def show
         @user = User.find(params[:id])
     end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
             render 'new'
         end
     end
-    
+
     def update
         @user = current_user
         @user.option["user.timezone"] = params["user.timezone"]
@@ -30,11 +30,12 @@ class UsersController < ApplicationController
             @user.option["user.height_display"] = params["user.height_display"]
             @user.option["user.height"] = height_cm.to_s
         end
-        
+        @user.options["user.sex"] = params["user.sex"]
+
         @user.save_options
         render 'edit'
     end
-    
+
     def edit
         @user = current_user
     end
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 		params.require(:user)
 			  .permit(:email, :password, :password_confirmation)
 	end
-    
+
     def correct_user
 		redirect_to root_url if current_user.id != params[:id].to_i
 	end

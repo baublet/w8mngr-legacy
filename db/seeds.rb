@@ -20,7 +20,7 @@ Option.create([
 	{ name: "user.height", kind: "i" },
 	{ name: "user.height_display" },
 	{ name: "user.sex", kind: "i", default_value: "na",
-		values: "	na :: Prefer not to designate
+		values: "	na :: Prefer not to disclose
 					 f :: Female
 					 m :: Male" },
 	{ name: "user.bmr", kind: "i" },

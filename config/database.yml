@@ -4,12 +4,20 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-
 development:
-    adapter: sqlite3
-    database: db/development.sqlite3
-    pool: 5
-    timeout: 5000
+    adapter: postgresql
+    encoding: unicode
+    database: postgres
+    username: postgres
+    password: 123
+    host: localhost
+    port: 5432
+
+#development:
+#    adapter: sqlite3
+#    database: db/development.sqlite3
+#    pool: 5
+#    timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,7 +27,7 @@ test:
     database: db/test.sqlite3
     pool: 5
     timeout: 5000
-    
+
 # From Amazon's recommended settings
 # http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Ruby.rds.html#create_deploy_Ruby.rds.newDB
 production:

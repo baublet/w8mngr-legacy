@@ -8,16 +8,29 @@
 	<% if @user.errors.any? %>
 		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
 	<% end %>
-	
+
 	<%= label_tag "user.timezone", "Timezone" %>
 	<%= select_tag "user.timezone",
 			options_for_select(
 				time_zone_options_for_select(@user.option["user.timezone"], nil, ActiveSupport::TimeZone)
 			), prompt: "Detect Automatically"
 	%>
-	
+
 	<%= label_tag "user.height_display", "Height" %>
 	<%= text_field_tag "user.height_display", @user.option["user.height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+
+	<div class="radio-list">
+		<span class="header">Sex</span>
+
+		<%= radio_button_tag 'user.sex', 'f', @user.option["user.sex"] == "f" ? true : false, :id => "user.sex.f" %>
+		<%= label_tag "user.sex.f", "Female" %>
+
+		<%= radio_button_tag 'user.sex', 'm', @user.option["user.sex"] == "m" ? true : false, :id => "user.sex.m" %>
+		<%= label_tag "user.sex.m", "Male" %>
+
+		<%= radio_button_tag 'user.sex', 'na', @user.option["user.sex"] == "na" ? true : false, :id => "user.sex.na" %>
+		<%= label_tag "user.sex.na", "Other / Prefer Not to Disclose" %>
+	</div>
 
 	<%= button_tag(type: 'submit', class: 'btn') do %>
 		Save
