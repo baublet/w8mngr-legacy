@@ -66,10 +66,27 @@ form {
         color: #999;
         transition: border-color, color .15s ease-in-out;
         margin-right: .5rem;
+        margin-left: 1.5rem;
+        position: relative;
+        &:hover {
+            color: $black;
+            border-color: $black;
+        }
+        &::before {
+            position: absolute;
+            left: -1.5rem;
+            top: 1rem;
+            font-family: icomoon;
+            font-size: 1rem;
+            content: '\ea56'
+        }
     }
     input[type=radio]:checked + label {
-        color: $black;
-        border-color: $black;
+        color: $color-primary;
+        border-color: $color-primary;
+        &::before {
+            content: '\ea54'
+        }
     }
     .header {
         cursor: arrow;

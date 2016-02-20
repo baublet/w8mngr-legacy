@@ -3,33 +3,50 @@
 
 <p>Tell us a little bit about yourself. It helps our algorithm better understand you when you get around to setting some goals.</p>
 
-<%= form_tag user_path(current_user.id) do |form| %>
+<%= form_for @user do |form| %>
 
-	<% if current_user.errors.any? %>
-		<%= render partial: "shared/error_messages", locals: {errors: current_user.errors} %>
+	<% if @user.errors.any? %>
+		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
 	<% end %>
-
-	<%= label_tag "timezone", "Timezone" %>
-	<%= select_tag "timezone",
-			options_for_select(
-				time_zone_options_for_select(current_user.preferences[:timezone], nil, ActiveSupport::TimeZone)
-			), prompt: "Detect Automatically"
-	%>
+	
+	<h2>Personal</h2>
 
 	<%= label_tag "height_display", "Height" %>
-	<%= text_field_tag "height_display", current_user.preferences[:height_display], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
 
 	<div class="radio-list">
 		<span class="header">Sex</span>
 
-		<%= radio_button_tag 'sex', 'f', current_user.preferences[:sex] == "f" ? true : false, :id => "sex.f" %>
+		<%= radio_button_tag 'sex', 'f', @user.preferences["sex"] == "f" ? true : false, :id => "sex.f" %>
 		<%= label_tag "sex.f", "Female" %>
 
-		<%= radio_button_tag 'sex', 'm', current_user.preferences[:sex] == "m" ? true : false, :id => "sex.m" %>
+		<%= radio_button_tag 'sex', 'm', @user.preferences["sex"] == "m" ? true : false, :id => "sex.m" %>
 		<%= label_tag "sex.m", "Male" %>
 
-		<%= radio_button_tag 'sex', 'na', current_user.preferences[:sex] == "na" ? true : false, :id => "sex.na" %>
+		<%= radio_button_tag 'sex', 'na', @user.preferences["sex"].blank? || @user.preferences["sex"] == "na" ? true : false, :id => "sex.na" %>
 		<%= label_tag "sex.na", "Other / Prefer Not to Disclose" %>
+	</div>
+	
+	<%= label_tag "birthday", "Birthday" %>
+	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year, e.g., 1982, 05/01/1977, 1/7/88, etc." %>
+	
+	<h2>Settings</h2>
+
+	<%= label_tag "timezone", "Timezone" %>
+	<%= select_tag "timezone",
+			options_for_select(
+				time_zone_options_for_select(@user.preferences["timezone"], nil, ActiveSupport::TimeZone)
+			), prompt: "Detect Automatically"
+	%>
+	
+	<div class="radio-list">
+		<span class="header">Units</span>
+
+		<%= radio_button_tag 'units', 'i', @user.preferences["units"].blank? || @user.preferences["units"] == "i" ? true : false, :id => "units.i" %>
+		<%= label_tag "units.i", "Imperial" %>
+
+		<%= radio_button_tag 'units', 'm', @user.preferences["units"] == "m" ? true : false, :id => "units.m" %>
+		<%= label_tag "units.m", "Metric" %>
 	</div>
 
 	<%= button_tag(type: 'submit', class: 'btn') do %>

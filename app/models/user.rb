@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
 							# dependent: :destroy
 							# We want to keep all foods in the database whether the user exists anymore or not, so we can still search them
 
-	attr_accessor :remember_token, :reset_token
+	attr_accessor  :remember_token, :reset_token
+	
 	store_accessor :preferences
+	validates_with UserPreferencesValidator
 
 	before_save { email.downcase! }
 
@@ -18,7 +20,7 @@ class User < ActiveRecord::Base
 					  uniqueness: { case_sensitive: false }
 
 	has_secure_password
-	validates :password, presence: true, length: { minimum: 6 }
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
 	# Returns a hash digest of the given string
 	def User.digest(string)

@@ -25,5 +25,7 @@ module W8mngr
 
     # Adds the fonts to the assets pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    # Our validators
+    config.autoload_paths << Rails.root.join("lib", "validators")
   end
 end
