@@ -64,14 +64,14 @@ ActiveRecord::Schema.define(version: 20160220005654) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.integer  "role",            default: 0
-    t.hstore   "preferences",     default: {}, null: false
+    t.hstore   "preferences",     default: {"sex"=>"na"}, null: false
   end
 
   add_foreign_key "food_entries", "users"

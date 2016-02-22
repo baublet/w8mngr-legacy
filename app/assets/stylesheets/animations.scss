@@ -33,19 +33,23 @@
 
 // Best for about 3-4 seconds of animation
 @keyframes blinkFadeOut {
-    2.5% {
+    5% {
         opacity: 1;
     }
-    5% {
+    10% {
         opacity: 0;
     }
-    7% {
+    15% {
         opacity: 1;
     }
-    80% {
+    60% {
         opacity: 1;
+    }
+    99% {
+        opacity: 0;
     }
     100% {
-        opacity: 0;
+        display: none;
+        visibility: hidden;
     }
 }
