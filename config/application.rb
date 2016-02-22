@@ -27,5 +27,7 @@ module W8mngr
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     # Our validators
     config.autoload_paths << Rails.root.join("lib", "validators")
+    # My custom modules
+    config.autoload_paths << Rails.root.join("lib", "modules")
   end
 end

@@ -32,9 +32,9 @@ class UsersController < ApplicationController
         end
         @user.preferences["height"] = height_cm.to_s
         @user.preferences["sex"] = params["sex"]
-        
+
         @user.preferences["birthday"] = params["birthday"]
-        
+
         @user.preferences["timezone"] = params["timezone"]
         @user.preferences["units"] = params["units"]
 

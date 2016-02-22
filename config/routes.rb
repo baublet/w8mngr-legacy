@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :weight_entries
     # Static pages
     root   'welcome#index'
     get    'privacy'        => 'welcome#privacy_policy'

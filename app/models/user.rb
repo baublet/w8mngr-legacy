@@ -1,14 +1,16 @@
 class User < ActiveRecord::Base
-	has_many :foodentries,	class_name: 'FoodEntry',
-							foreign_key: 'user_id',
+	has_many :foodentries,	class_name: "FoodEntry",
+							foreign_key: "user_id",
 							dependent: :destroy
-	has_many :foods,		class_name: 'Food',
-							foreign_key: 'user_id'
+	has_many :foods,		class_name: "Food",
+							foreign_key: "user_id"
 							# dependent: :destroy
 							# We want to keep all foods in the database whether the user exists anymore or not, so we can still search them
+	has_many :weightentries,class_name: "WeightEntry",
+							dependent: :destroy
 
 	attr_accessor  :remember_token, :reset_token
-	
+
 	store_accessor :preferences
 	validates_with UserPreferencesValidator
 

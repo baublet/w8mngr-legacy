@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220005654) do
+ActiveRecord::Schema.define(version: 20160222173623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,18 @@ ActiveRecord::Schema.define(version: 20160220005654) do
     t.hstore   "preferences",     default: {"sex"=>"na"}, null: false
   end
 
+  create_table "weight_entries", force: :cascade do |t|
+    t.integer  "value"
+    t.integer  "day"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "weight_entries", ["user_id"], name: "index_weight_entries_on_user_id", using: :btree
+
   add_foreign_key "food_entries", "users"
   add_foreign_key "foods", "users"
   add_foreign_key "measurements", "foods"
+  add_foreign_key "weight_entries", "users"
 end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 1500
+  day: 19850502
+  user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>
+
+two:
+  value: 999999
+  day: 20000101
+  user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>
