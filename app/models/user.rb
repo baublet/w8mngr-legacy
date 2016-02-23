@@ -24,6 +24,24 @@ class User < ActiveRecord::Base
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+	# Returns a string representation of their sex
+	def sex
+		if preferences["sex"] == "m"
+			"Male"
+		elsif preferences["sex"] == "f"
+			"Female"
+		else
+			"Other / Prefer not to disclose"
+		end
+	end
+
+	# Returns the user's age
+	def age
+		dob = Chronic.parse(preferences["birthday"])
+		now = Time.now.utc.to_date
+  		now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+	end
+
 	# Returns a hash digest of the given string
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

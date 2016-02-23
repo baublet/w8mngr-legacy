@@ -1,6 +1,6 @@
 <%= render partial: "shared/day_navigator" %>
 
-<h1><span class="icon-book"></span> Food Log</h1>
+<h1><i class="fa fa-cutlery"></i> Food Log</h1>
 
 <% if !@foodentry.nil? && @foodentry.errors.any? %>
 	<%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>

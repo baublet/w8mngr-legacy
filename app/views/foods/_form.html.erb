@@ -11,15 +11,15 @@
         <%= f.label :description %>
         <%= f.text_area :description, placeholder: "Description" %>
     </div>
-    
-    <h2>Measurements</h2>
-    
+
+    <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
+
     <% if @food.id.nil? %>
         <p>Each food requires at least one measurement, be it by cups, weight, cookie, slice, or whatever. Because foods can come in many different variations, weights, shapes, and sizes, you can add multiple measurements to allow for easier tracking.</p>
     <% end %>
-    
+
     <%= render @food.measurements %>
-    
+
     <%= render @newmeasurement %>
 
     <%= f.submit (@food.id.nil?) ? "Create Food" : "Save Food", class: "btn" %>

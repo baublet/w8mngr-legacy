@@ -1,8 +1,8 @@
-<h1><span class="icon-spoon-knife"></span> Your Foods</h1>
+<h1><i class="fa fa-cutlery"></i> Your Foods</h1>
 
 <div class="page-meta">
     <%= link_to new_food_path, :class => 'btn' do %>
-        <span class="icon-plus"></span>
+        <i class="fa fa-plus"></i>
         New Food
     <% end %>
 </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="col meta">
             <%= link_to food_delete_path(food), :class => 'btn delete-btn' do %>
-                <span class="icon-cross"></span>
+                <i class="fa fa-cross"></i>
                 <span class="screen-reader-text">Delete</span>
             <% end %>
         </div>

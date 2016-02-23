@@ -3,17 +3,20 @@ class UserPreferencesValidator < ActiveModel::Validator
     validate_date record, "birthday", record.preferences["birthday"]
 	validate_height record, "height_display", record.preferences["height_display"]
   end
-  
+
   def validate_date record, attribute, date
 	  if !date.blank?
 		  begin
-			  Chronic.parse(date)
+			  parsed_date = Chronic.parse(date)
 		  rescue
 			  record.errors[attribute] << (options[:message] || "is not a valid date")
 		  end
+          if !parsed_date.is_a?(Time)
+              record.errors[attribute] << (options[:message] || "is not a valid date")
+          end
 	  end
   end
-  
+
   def validate_height record, attribute, unit
 	  if !unit.blank?
 		  begin

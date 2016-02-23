@@ -1,11 +1,11 @@
 <% if !previous_page.nil? || !next_page.nil? %>
 <div class="pagination">
 	<% if !previous_page.nil? %>
-		<a href="<%= base_url %>&p=<%= previous_page %>" class="btn prev-btn previous"><span class="icon-circle-left"></span> Previous</a>
+		<a href="<%= base_url %>&p=<%= previous_page %>" class="btn prev-btn previous"><i class="fa fa-chevron-circle-left"></i> Back</a>
 	<% end %>
-	
+
 	<% if !next_page.nil? %>
-		<a href="<%= base_url %>&p=<%= next_page %>" class="btn next-btn next">Next <span class="icon-circle-right"></span></a>
+		<a href="<%= base_url %>&p=<%= next_page %>" class="btn next-btn next">Next <i class="fa fa-chevron-circle-right"></i></a>
 	<% end %>
 </div>
 <% end %>

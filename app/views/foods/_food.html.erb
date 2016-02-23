@@ -1,7 +1,7 @@
 <h2>
     <% if !food.is_a?(Hash)  %>
         <%= link_to edit_food_path(food) do %>
-            <span class="icon-pencil"></span>
+            <i class="fa fa-pencil"></i>
             <span class="screen-reader-text">Edit Entry</span>
         <% end %>
         <%= link_to food.name, food_path(food) %>

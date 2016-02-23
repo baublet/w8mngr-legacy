@@ -1,5 +1,5 @@
 <% provide(:title, "Edit Profile") %>
-<h1>Edit Profile</h1>
+<h1><i class="fa fa-user"></i> Edit Profile</h1>
 
 <p>Tell us a little bit about yourself. It helps our algorithm better understand you when you get around to setting some goals.</p>
 
@@ -8,8 +8,11 @@
 	<% if @user.errors.any? %>
 		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
 	<% end %>
-	
+
 	<h2>Personal</h2>
+
+	<%= label_tag "name", "Name" %>
+	<%= text_field_tag "name", @user.preferences["name"], placeholder: "What do you go by?" %>
 
 	<%= label_tag "height_display", "Height" %>
 	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
@@ -26,10 +29,10 @@
 		<%= radio_button_tag 'sex', 'na', @user.preferences["sex"].blank? || @user.preferences["sex"] == "na" ? true : false, :id => "sex.na" %>
 		<%= label_tag "sex.na", "Other / Prefer Not to Disclose" %>
 	</div>
-	
+
 	<%= label_tag "birthday", "Birthday" %>
 	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year, e.g., 1982, 05/01/1977, 1/7/88, etc." %>
-	
+
 	<h2>Settings</h2>
 
 	<%= label_tag "timezone", "Timezone" %>
@@ -38,7 +41,7 @@
 				time_zone_options_for_select(@user.preferences["timezone"], nil, ActiveSupport::TimeZone)
 			), prompt: "Detect Automatically"
 	%>
-	
+
 	<div class="radio-list">
 		<span class="header">Units</span>
 

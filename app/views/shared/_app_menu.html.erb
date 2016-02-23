@@ -1,0 +1,24 @@
+<% if logged_in? %>
+<div class="app-menu-box">
+    <ul class="app-menu-base">
+        <li>
+            <%= link_to user_profile_path(current_user) do %>
+                <i class="fa fa-meter"></i>
+                Dashboard
+            <% end %>
+        </li>
+        <li>
+            <%= link_to foodlog_path do %>
+                <i class="fa fa-cutlery"></i>
+                Food
+            <% end %>
+        </li>
+        <li>
+            <%= link_to foodlog_path do %>
+
+                Training Log
+            <% end %>
+        </li>
+    </ul>
+</div>
+<% end %>

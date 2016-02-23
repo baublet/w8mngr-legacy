@@ -1,4 +1,4 @@
-input[type=text], input[type=email], input[type=password], input[type=number], textarea, select{
+input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
     padding: .4rem;
     color: $black;
     background: $white;
@@ -61,31 +61,28 @@ form {
     label {
         padding:1rem 0 .5rem;
         display: inline-block;
-        border-bottom: 3px solid #eee;
         cursor: pointer;
         color: #999;
-        transition: border-color, color .15s ease-in-out;
+        transition: color .15s ease-in-out;
         margin-right: .5rem;
         margin-left: 1.5rem;
         position: relative;
         &:hover {
             color: $black;
-            border-color: $black;
         }
         &::before {
             position: absolute;
             left: -1.5rem;
-            top: 1rem;
-            font-family: icomoon;
+            top: .9rem;
+            font-family: "FontAwesome";
             font-size: 1rem;
-            content: '\ea56'
+            content: "\f10c";
         }
     }
     input[type=radio]:checked + label {
         color: $color-primary;
-        border-color: $color-primary;
         &::before {
-            content: '\ea54'
+            content: "\f192";
         }
     }
     .header {
