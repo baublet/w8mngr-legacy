@@ -8,7 +8,7 @@ class WeightEntry < ActiveRecord::Base
 
     validates  :user_id,presence: true
 
-    include DayNavigator
+    extend DayNavigator
 
     def update_value new_value, default = "i"
         begin

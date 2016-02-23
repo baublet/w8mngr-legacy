@@ -12,7 +12,8 @@ class FoodEntry < ActiveRecord::Base
 
 	validates :user_id,		presence: true
 
-	include DayNavigator
+	#require "modules/weight_manager/day_navigator"
+	extend WeightManager::DayNavigator
 
 	# Pass a measurement ID and multiplier to this object and it populates this food entry with the food's data, multiplied by the multiplier, for adding foods to users' food logs
 	# Example useage:
@@ -24,7 +25,7 @@ class FoodEntry < ActiveRecord::Base
 			food = Food.find(measurement.food_id)
 			begin
 				multiplier = multiplier.to_r.to_f
-			rescue ZeroDivisionError => msg
+			rescue
 				multiplier = 1
 			end
 			description = "(#{(multiplier * measurement.amount.to_i).to_s} #{measurement.unit}) " + food.name
