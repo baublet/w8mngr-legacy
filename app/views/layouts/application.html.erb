@@ -28,19 +28,15 @@
             <ul class="navigation-list">
                 <li><%= link_to "Home", root_path %></li>
                 <li><%= link_to "Getting Started", getting_started_path %></li>
-                <li><a href="">Meals Database</a></li>
             <% if logged_in? %>
-                <li class="welcome-back sep">Welcome back, <%= current_user.email %>!</li>
+                <li class="sep"></li>
                 <li><%= link_to "Food Log", food_entries_path %></li>
                 <li><%= link_to "Profile", current_user %></li>
-                <li class="sep"></li>
-                <li><%= link_to "Food Database", foods_path %></li>
                 <li class="sep"></li>
             	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
             <% else %>
                 <li><%= link_to "Sign Up", signup_path %></li>
             	<li class="sep"><%= render 'sessions/login_form' %></li>
-                <li></li>
             <% end %>
             </ul>
         </div>

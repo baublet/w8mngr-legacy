@@ -3,7 +3,9 @@ class WeightEntriesController < ApplicationController
 
   # GET /weight_entries
   def index
-    @weight_entries = WeightEntry.all
+    @weightentries = current_user.weightentries_from(current_day).all
+    @weight_average = current_user.weight_average(current_day)
+    @newweightentry = current_user.weightentries.build(day: current_day)
   end
 
   # GET /weight_entries/1
@@ -12,7 +14,7 @@ class WeightEntriesController < ApplicationController
 
   # GET /weight_entries/new
   def new
-    @weight_entry = WeightEntry.new
+    @weightentry = WeightEntry.new
   end
 
   # GET /weight_entries/1/edit

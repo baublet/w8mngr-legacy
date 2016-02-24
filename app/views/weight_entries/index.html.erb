@@ -1,31 +1,21 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "Weight Log") %>
 
-<h1>Listing Weight Entries</h1>
+<%= render partial: "shared/app_menu" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Value</th>
-      <th>Day</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h1><i class="fa fa-balance-scale"></i> Weight Log</h1>
 
-  <tbody>
-    <% @weight_entries.each do |weight_entry| %>
-      <tr>
-        <td><%= weight_entry.value %></td>
-        <td><%= weight_entry.day %></td>
-        <td><%= weight_entry.user %></td>
-        <td><%= link_to 'Show', weight_entry %></td>
-        <td><%= link_to 'Edit', edit_weight_entry_path(weight_entry) %></td>
-        <td><%= link_to 'Destroy', weight_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Weight entry', new_weight_entry_path %>
+<div class="weightlog-table">
+    <%= render @weightentries %>
+    <% if @weightentries.size > 0 %>
+	<%= render @weightentries %>
+	<div class="row header totals">
+		<div class="col full">
+            Today's Average:
+            <span><%= @weightentries_average %></span>
+        </div>
+	</div>
+	<% else %>
+		<p>You haven't entered any entries yet today. Add some using the form below!</p>
+	<% end %>
+	<%= render @newweightentry %>
+</div>

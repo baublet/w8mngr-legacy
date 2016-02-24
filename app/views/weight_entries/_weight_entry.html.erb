@@ -1,0 +1,39 @@
+<div class="row <%= (weight_entry[:id].nil?) ? "new" : "entry" %>">
+
+	<%= form_for weight_entry do |f| %>
+
+	    <%= f.hidden_field :day %>
+
+	    <% if weight_entry.errors.any? %>
+	        <%= render partial: "shared/error_messages", locals: {errors: weight_entry.errors} %>
+	    <% end %>
+
+	    <div class="col value">
+	    	<%= f.text_field :value, placeholder: "e.g., 165 lbs, 83.9kg, 12 stone, etc." %>
+	    </div>
+
+	    <div class="col time">
+	        <%= f.text_field :time, placeholder: "e.g., now, two hours ago, at 9:30 this morning, etc." %>
+	    </div>
+
+		<div class="col meta">
+	        <% if weight_entry[:id].nil? %>
+				<%= button_tag(type: 'submit', class: 'btn food-log-new-btn') do %>
+					<i class="fa fa-plus"></i>
+					<strong>New Entry</strong>
+				<% end %>
+	        <% else %>
+				<%= button_tag(type: 'submit', class: 'meta-btn save', title: 'Save Entry') do %>
+					<span class="screen-reader-text">Save Entry</span>
+					<i class="fa fa-floppy-o"></i>
+				<% end %>
+	            <%= link_to weight_entry_delete_path(weight_entry),
+							class: 'delete-btn',
+							title: 'Delete Entry' do %>
+					<i class="fa fa-times"></i>
+				<% end %>
+	        <% end %>
+		</div>
+
+	<% end %>
+</div>

@@ -9,7 +9,11 @@
         <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
     <% end %>
 </h2>
-<%= !food.is_a?(Hash) && !food.description.blank? ? "<p class=\"description\">" + food.description + "</p>" : '' %>
+<% if !food.is_a?(Hash) && !food.description.blank? %>
+    <p class="description">
+        <%= food.description %>
+    </p>
+<% end %>
 <%  if !food.is_a?(Hash) && food.measurements.present?
     measurement = food.measurements.first %>
     <p class="measurement">

@@ -2,7 +2,7 @@
 
 <%= render partial: "shared/app_menu" %>
 
-<h1><i class="fa fa-user"></i> <%= @user.preferences['name'] || @user.email %></h1>
+<h1><i class="fa fa-user"></i> <%= @user.name %></h1>
 
 <div class="page-meta">
     <%= link_to edit_user_path(@user) do %>

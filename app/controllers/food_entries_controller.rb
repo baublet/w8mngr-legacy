@@ -69,12 +69,8 @@ class FoodEntriesController < ApplicationController
 	def show_list
 		# Saves the last viewed day in a cookie
 		cookies[:last_day] = current_day
-		@foodentries = current_user.foodentries.where(day: current_day) || current_user.foodentries.none
-		@total_calories = @foodentries.map{|f| f['calories']}.compact.reduce(0, :+)
-		@total_fat = @foodentries.map{|f| f['fat']}.compact.reduce(0, :+)
-		@total_carbs = @foodentries.map{|f| f['carbs']}.compact.reduce(0, :+)
-		@total_protein = @foodentries.map{|f| f['protein']}.compact.reduce(0, :+)
-
+		@foodentries = current_user.foodentries_from(current_day)
+		@totals = current_user.food_totals(current_day)
 		@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
 		render 'index'
 	end

@@ -5,10 +5,12 @@ class WeightEntry < ActiveRecord::Base
     validates  :value,  presence: true, numericality: { only_integer: true, greater_than: 1359, less_than: 680389 }
     validates  :day,    presence: true,
                         numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
+    # Kept in seconds beginning at midnight. So 3,600 = 1am, up to 86,400
+    validates  :time_added,   numericality: { only_integer: true, greater_than: 0, less_than: 86400 }
 
     validates  :user_id,presence: true
 
-    extend DayNavigator
+    extend WeightManager::DayNavigator
 
     def update_value new_value, default = "i"
         begin

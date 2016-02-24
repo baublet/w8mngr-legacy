@@ -22,10 +22,10 @@
 	<%= render @foodentries %>
 	<div class="row header totals">
 		<div class="col long">Totals:</div>
-		<div class="col" title="Calories"><%= number_with_delimiter(@total_calories) %></div>
-		<div class="col" title="Fat"><%= @total_fat %></div>
-		<div class="col" title="Carbs"><%= @total_carbs %></div>
-		<div class="col" title="Protein"><%= @total_protein %></div>
+		<div class="col" title="Calories"><%= number_with_delimiter(@totals["calories"]) %></div>
+		<div class="col" title="Fat"><%= @totals["fat"] %></div>
+		<div class="col" title="Carbs"><%= @totals["carbs"] %></div>
+		<div class="col" title="Protein"><%= @totals["protein"] %></div>
 		<div class="col meta"></div>
 	</div>
 	<% else %>
