@@ -1,4 +1,7 @@
 <% provide(:title, "Profile") %>
+
+<%= render partial: "shared/app_menu" %>
+
 <h1><i class="fa fa-user"></i> <%= @user.preferences['name'] || @user.email %></h1>
 
 <div class="page-meta">

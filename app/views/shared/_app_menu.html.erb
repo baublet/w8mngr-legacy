@@ -2,22 +2,91 @@
 <div class="app-menu-box">
     <ul class="app-menu-base">
         <li>
-            <%= link_to user_profile_path(current_user) do %>
-                <i class="fa fa-meter"></i>
-                Dashboard
-            <% end %>
+            <input type="radio" class="app-menu-top-option" id="app-menu-dashboard" name="nav-radio" checked="checked">
+            <label for="app-menu-dashboard">
+                <i class="fa fa-home"></i>
+                <span class="screen-reader-text">Dashboard</span>
+            </label>
+            <ul class="app-menu-sub">
+                <li>
+                    <%= link_to user_path(current_user) do %>
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to user_path(current_user) do %>
+                        <i class="fa fa-line-chart"></i>
+                        <span>Progress</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to user_path(current_user) do %>
+                        <i class="fa fa-user"></i>
+                        <span>Profile</span>
+                    <% end %>
+                </li>
+            </ul>
         </li>
         <li>
-            <%= link_to foodlog_path do %>
+            <input type="radio" class="app-menu-top-option" id="app-menu-food" name="nav-radio">
+            <label for="app-menu-food">
                 <i class="fa fa-cutlery"></i>
-                Food
-            <% end %>
+                <span class="screen-reader-text">Food</span>
+            </label>
+            <ul class="app-menu-sub">
+                <li>
+                    <%= link_to foodlog_path do %>
+                        <i class="fa fa-list-alt"></i>
+                        <span>Food Log</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to foods_path do %>
+                        <i class="fa fa-user"></i>
+                        <span>My Foods</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to food_search_path do %>
+                        <i class="fa fa-search"></i>
+                        <span>Search</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to food_search_path do %>
+                        <i class="fa fa-shopping-basket"></i>
+                        <span>Recipes</span>
+                    <% end %>
+                </li>
+            </ul>
         </li>
         <li>
-            <%= link_to foodlog_path do %>
-
-                Training Log
-            <% end %>
+            <input type="radio" class="app-menu-top-option" id="app-menu-health" name="nav-radio">
+            <label for="app-menu-health">
+                <i class="fa fa-heartbeat"></i>
+                <span class="screen-reader-text">Health & Training</span>
+            </label>
+            <ul class="app-menu-sub">
+                <li>
+                    <%= link_to food_search_path do %>
+                        <i class="fa fa-bolt"></i>
+                        <span>Activities</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to food_search_path do %>
+                        <i class="fa fa-retweet"></i>
+                        <span>Routines</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to food_search_path do %>
+                        <i class="fa fa-balance-scale"></i>
+                        <span>Weight Log</span>
+                    <% end %>
+                </li>
+            </ul>
         </li>
     </ul>
 </div>

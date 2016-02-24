@@ -1,3 +1,7 @@
+<% provide(:title, @food.name) %>
+
+<%= render partial: "shared/app_menu" %>
+
 <h1><i class="fa fa-cutlery"></i> <%= @food.name %></h1>
 
 <% if @food.user_id == current_user.id %>
