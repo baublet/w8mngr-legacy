@@ -1,4 +1,5 @@
 .btn {
+    float:right;
     border: 0;
     font-family: $font-stack;
     cursor: pointer;
@@ -8,14 +9,15 @@
     color: rgba(255,255,255,.75);
     outline: none;
     margin-bottom: 0;
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding:1.5rem;
     text-transform: uppercase;
-    font-weight: 700;
-    width: 100%;
+    font-weight: 400;
     text-align:center;
-    span {
+    min-width: 7.5rem;
+    .fa {
         margin-right: .75rem;
+        line-height: 1em;
     }
     &:hover {
         margin-bottom:-5px;
@@ -33,6 +35,7 @@
 }
 
 .banner-btn {
+    float: none;
     border-radius: 5px;
     padding: 1rem 1rem;
     margin-top: 2rem;
@@ -55,16 +58,8 @@
     }
 }
 
-.large-btn {
-    font-size: 1.5rem;
-    padding:1.5rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    width: 100%;
-    text-align:center;
-}
-
 .meta-btn, .delete-btn {
+    float: none;
     padding: .75rem 0;
     font-size: 1rem;
     background: none;
@@ -88,6 +83,7 @@
 }
 
 .food-log-new-btn {
+    float: none;
     margin-top: 1rem;
     width: auto;
     padding: .5rem;
@@ -95,8 +91,6 @@
     color: rgba($white, .75);
     line-height: 1rem;
     box-shadow:  none;
-    position: relative;
-    z-index: 98;
     &:hover {
         border: none;
         margin-bottom: 0;
@@ -111,12 +105,15 @@
         font-weight: bold;
         font-size: .8rem;
         text-transform: uppercase;
-        vertical-align: top;
-        line-height: 1.5rem;
+    }
+    i {
+        margin-top: .2rem;
     }
 }
 
 .search-btn, .barcode-btn {
+    float: none;
+    min-width: 0;
     border: none;
     margin: 0;
     overflow:hidden;
@@ -131,14 +128,15 @@
 }
 
 .prev-btn, .next-btn {
+    min-width: 0;
+    float: none;
     font-size:.9rem;
     padding: .75rem;
-    width: auto;
     text-align: left;
 }
 .next-btn {
     text-align: right;
-    span {
+    .fa {
         margin: 0 0 0 .75rem;
     }
 }

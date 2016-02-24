@@ -55,19 +55,17 @@
 				padding:0;
 				border-color: transparent;
 				&:hover {
-					border-color: rgba($black, .25);
+					border-bottom-color: rgba($black, .25);
 				}
 				&:focus {
-					border-bottom-width: 3px;
-					margin-bottom: 0;
-					border-color: $black;
+					border-bottom-color: $black;
 				}
 			}
 			@include mqAfterSize(640px) {
 				width:40%;
 				max-width:40%;
 				input[type=text] {
-					border-color: rgba($black, .1);
+					border-bottom-color: rgba($black, .1);
 				}
 			}
 		}
@@ -77,15 +75,16 @@
 				background: transparent;
 				position: relative;
 				z-index: 2;
+				padding-bottom: .75rem;
 			}
 			&::after {
-				font-size: .5rem;
+				font-size: .6rem;
 				content: attr(title);
 				text-transform: uppercase;
 				font-weight: 800;
 				color: rgba($black, .25);
 				position: absolute;
-				bottom: 3px;
+				bottom: 7px;
 				left: 0;
 				z-index: 1;
 			}
@@ -103,7 +102,7 @@
 			width:20%;
 			max-width:20%;
 			.delete-btn {
-				font-size: .6rem;
+				font-size: .9rem;
 			}
 			.save {
 				display: none;
@@ -114,30 +113,28 @@
 		}
 		input[type=text] {
 			padding-top: 0;
-			font-size: .7rem;
+			font-size: .8rem;
 			border-color: transparent;
 			@include mqAfterSize(640px) {
-				border-color: rgba($black, .1);
+				border-bottom-color: rgba($black, .1);
 			}
 		}
 	}
 	input[type=text] {
+		margin-bottom: .25rem;
 		width:100%;
-		border-top: 0;
+		border-top: 2px solid transparent;
 		border-right: 0;
 		border-left: 0;
 		border-radius: 0;
-		border-bottom-width: 1px;
-		margin-bottom: 2px;
 		padding-left: 0;
 		padding-right: 0;
 		&:hover {
-			border-color: rgba($black, .25);
+			border-bottom-color: rgba($black, .25);
 		}
 		&:focus {
-			border-bottom-width: 3px;
-			margin-bottom: 0;
-			border-color: $black;
+			border-bottom: 3px solid $black;
+			border-top: 0;
 		}
 	}
 	.totals.row {
@@ -185,17 +182,16 @@
 		}
 		input {
 			background: transparent;
-			border-color: rgba($white, .25);
+			border-bottom-color: rgba($white, .25);
 			color: $white;
 			&:-ms-input-placeholder,&:-moz-placeholder{
 				color: rgba($white, .75);
 			}
 			&:hover {
-				border-color: rgba($white, .5);
+				border-bottom-color: rgba($white, .5);
 			}
 			&:focus {
-				border-color: rgba($white, .75);
-				margin-bottom: 0;
+				border-bottom-color: rgba($white, .75);
 			}
 		}
 		.col.long {

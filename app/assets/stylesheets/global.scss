@@ -46,7 +46,7 @@ h1, h2, h3, h4 {
             color: $color-secondary;
         }
     }
-    span {
+    .fa {
         font-size:.75em;
         opacity: .25;
     }
@@ -114,6 +114,7 @@ em {
         }
     }
     .btn {
+        float: none;
         font-size: .75rem;
         padding: .75rem .5rem .5rem;
         color: rgba($white, .75);

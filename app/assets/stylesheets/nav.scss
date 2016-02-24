@@ -20,14 +20,14 @@ nav {
         position: fixed;
         color: $white;
         &:after {
-            content: "\e9c0";
+            content: "\f0da";
         }
     }
 }
 
 .nav-toggle-btn {
     z-index: 100;
-    font-family: 'icomoon';
+    font-family: "FontAwesome";
     cursor: pointer;
     font-size:2rem;
     padding:.2rem .5rem;
@@ -38,7 +38,7 @@ nav {
         text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
     }
     &:after {
-        content: "\e9bf";
+        content: "\f085";
     }
 }
 .navigation-options {
@@ -50,7 +50,7 @@ nav {
     top: 0;
     right: -100%;
     z-index:90;
-    transition: right .2s ease-in-out;
+    transition: right .5s cubic-bezier(0,.98,.8,.99);
     box-shadow: inset 0 0 5px 3px rgba(black, .25);
     height: 100vh;
     overflow-y: auto;

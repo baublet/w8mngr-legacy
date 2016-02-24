@@ -3,7 +3,7 @@
 end %>
 
 <% if !@food.id.nil? && measurement.id == 0 %>
-<h2>New Measurement</h2>
+<h2><i class="fa fa-pie-chart"></i> New Measurement</h2>
 <% end %>
 
 <% if measurement.errors.any? %>
@@ -11,12 +11,10 @@ end %>
 <% end %>
 
 <% if measurement.id != 0 %>
-	<div class="foods-measurement-delete">
-		<%= check_box("measurement[" + measurement.id.to_s + "]", "delete", {}, "yes", "no") %>
-		<%= label_tag "measurement_" + measurement.id.to_s + "_delete" do %>
+		<%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "foods-measurement-delete-box" }, "yes", "no") %>
+		<%= label_tag "measurement_" + measurement.id.to_s + "_delete", { class: "foods-measurement-delete-button" } do %>
 			<span class="screen-reader-text">Delete the following measurement?</span>
 		<% end %>
-	</div>
 <% end %>
 
 <div class="<%= measurement.id == 0 ? 'new ' : '' %>measurement-box"<%= measurement.id != 0 ? "data-measurement-id=" + measurement.id.to_s : '' %>>
@@ -24,27 +22,27 @@ end %>
 		<%= label_tag("measurement_" + measurement.id.to_s + "_amount", "Amount") %>
 		<%= text_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "e.g. 1, 1/2, .5, etc.") %>
 	</div>
-	
+
 	<div class="col">
 		<%= label_tag("measurement_" + measurement.id.to_s + "_unit", "Unit") %>
 		<%= text_field_tag("measurement[" + measurement.id.to_s + "][unit]", measurement.unit, placeholder: "Slice, OZ, Grams, etc.") %>
 	</div>
-	
+
 	<div class="col">
 		<%= label_tag("measurement_" + measurement.id.to_s + "_calories", "Calories") %>
 		<%= number_field_tag("measurement[" + measurement.id.to_s + "][calories]", measurement.calories) %>
 	</div>
-	
+
 	<div class="col">
 		<%= label_tag("measurement_" + measurement.id.to_s + "_fat", "Fat") %>
 		<%= number_field_tag("measurement[" + measurement.id.to_s + "][fat]", measurement.fat) %>
 	</div>
-	
+
 	<div class="col">
 		<%= label_tag("measurement_" + measurement.id.to_s + "_carbs", "Carbs") %>
 		<%= number_field_tag("measurement[" + measurement.id.to_s + "][carbs]", measurement.carbs) %>
 	</div>
-	
+
 	<div class="col">
 		<%= label_tag("measurement_" + measurement.id.to_s + "_protein", "Protein") %>
 		<%= number_field_tag("measurement[" + measurement.id.to_s + "][protein]", measurement.protein) %>

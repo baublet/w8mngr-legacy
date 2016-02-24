@@ -24,23 +24,24 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
 
-        @user.preferences["height_display"] = params["height_display"]
         begin
             height_cm = params["height_display"].to_unit.convert_to("cm").scalar.to_i
+            @user.preferences["height_display"] = params["height_display"]
+            @user.preferences["height"] = height_cm.to_s
         rescue
-            height_cm = 177
         end
-        @user.preferences["height"] = height_cm.to_s
+
         @user.preferences["sex"] = params["sex"]
-
         @user.preferences["birthday"] = params["birthday"]
-
         @user.preferences["timezone"] = params["timezone"]
         @user.preferences["units"] = params["units"]
+        @user.preferences["name"] = params["name"]
 
-        @user.save
-        @user.reload
-        render 'edit'
+        if @user.save
+            redirect_to user_path(@user)
+        else
+            render 'edit'
+        end
     end
 
     def edit
