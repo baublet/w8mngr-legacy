@@ -1,29 +1,16 @@
-<%= form_for(@weight_entry) do |f| %>
-  <% if @weight_entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@weight_entry.errors.count, "error") %> prohibited this weight_entry from being saved:</h2>
 
-      <ul>
-      <% @weight_entry.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="weight-entry-new">
+<%= form_for @newweightentry do |f| %>
+    <%= f.hidden_field :day %>
 
-  <div class="field">
-    <%= f.label :value %><br>
-    <%= f.number_field :value %>
-  </div>
-  <div class="field">
-    <%= f.label :day %><br>
-    <%= f.number_field :day %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <% if @newweightentry.errors.any? %>
+        <%= render partial: "shared/error_messages", locals: {errors: @newweightentry.errors} %>
+    <% end %>
+
+    <%= f.text_field :value, placeholder: "e.g., 165 lbs, 83.9kg, 12 stone, etc.", value: @newweightentry.display_value %>
+    <%= button_tag(type: 'submit', class: 'btn food-log-new-btn') do %>
+        <i class="fa fa-plus"></i>
+        <strong>New Entry</strong>
+    <% end %>
 <% end %>
+</div>
