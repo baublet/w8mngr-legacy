@@ -8,7 +8,7 @@
     .weight {
         font-size: 5rem;
         font-weight: 900;
-        letter-spacing: -.5rem;
+        letter-spacing: -.25rem;
         color: lighten($black, 15);
     }
     .unit {
@@ -28,7 +28,6 @@
         opacity: 1;
     }
     .meta {
-        padding-left: 1rem;
         font-size: .75rem;
         color: rgba($black, .5);
         span {
