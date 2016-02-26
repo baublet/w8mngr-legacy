@@ -42,7 +42,6 @@ class WeightEntriesController < ApplicationController
         @weightentries = current_user.weightentries_from(current_day).all
         @weight_average = current_user.weight_average(current_day)
         @newweightentry ||= current_user.weightentries.build(day: current_day)
-        byebug
         render :index
     end
 

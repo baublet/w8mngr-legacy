@@ -18,6 +18,7 @@ module ApplicationHelper
             # Here, I want a date range between 1985 and 2085. If I get to be
             # 100 years old, surely someone can change this line for me...
             passed_day = ((params[:food_entry].nil?)? nil : params[:food_entry][:day]) ||
+                         ((params[:weight_entry].nil?)? nil : params[:weight_entry][:day]) ||
                          params[:day]
             if passed_day.nil? || passed_day.to_i < 19850501 || passed_day.to_i > 20850501
                 passed_day = Time.current.strftime('%Y%m%d')
