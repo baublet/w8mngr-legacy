@@ -1,16 +1,19 @@
 
-<div class="weight-entry-new">
+<div class="weight-entry-new app-form">
 <%= form_for @newweightentry do |f| %>
     <%= f.hidden_field :day %>
 
     <% if @newweightentry.errors.any? %>
         <%= render partial: "shared/error_messages", locals: {errors: @newweightentry.errors} %>
     <% end %>
-
-    <%= f.text_field :value, placeholder: "e.g., 165 lbs, 83.9kg, 12 stone, etc.", value: @newweightentry.display_value %>
-    <%= button_tag(type: 'submit', class: 'btn food-log-new-btn') do %>
-        <i class="fa fa-plus"></i>
-        <strong>New Entry</strong>
-    <% end %>
+    <div>
+        <%= f.text_field :value, placeholder: "e.g., 165 lbs, 83.9kg, 12 stone, etc.", class: "large" %>
+    </div>
+    <div class="meta">
+        <%= button_tag(type: 'submit', class: 'btn food-log-new-btn') do %>
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+        <% end %>
+    </div>
 <% end %>
 </div>

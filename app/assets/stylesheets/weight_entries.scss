@@ -1,0 +1,42 @@
+.weight-entry {
+    position: relative;
+    padding-top: 1rem;
+    + .weight-entry {
+        border-top: 1px solid rgba($black, .15);
+        margin-top: 1rem;
+    }
+    .weight {
+        font-size: 5rem;
+        font-weight: 900;
+        letter-spacing: -.5rem;
+        color: lighten($black, 15);
+    }
+    .unit {
+        margin-left: 1rem;
+        letter-spacing: 0;
+        font-size: .7rem;
+        color: rgba($black, .5);
+        text-transform:uppercase;
+    }
+    .delete-btn {
+        position: absolute;
+        right: 0;
+        top: 25%;
+        opacity: .5;
+    }
+    &:hover .delete-btn {
+        opacity: 1;
+    }
+    .meta {
+        padding-left: 1rem;
+        font-size: .75rem;
+        color: rgba($black, .5);
+        span {
+            text-transform: lowercase;
+        }
+    }
+}
+
+.weight-entry-new {
+
+}

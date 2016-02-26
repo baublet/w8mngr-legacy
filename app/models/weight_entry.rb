@@ -20,8 +20,9 @@ class WeightEntry < ActiveRecord::Base
         self.value = new_weight
     end
 
-    def display_value
+    def display_value before = ' ', after = ''
         unit = self.user.preferences["units"].blank? ? "lb" : self.user.preferences["units"]
-        Unit.new(value.to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit
+        unit_display = before + unit + after
+        Unit.new(value.to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit_display
     end
 end

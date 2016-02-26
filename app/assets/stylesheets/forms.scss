@@ -97,3 +97,48 @@ form {
         border-color: transparent;
     }
 }
+
+.app-form {
+    background: $color-primary;
+    box-shadow: 0 0 3px 3px rgba($black, .15);
+    color: $white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 2rem 0 0;
+    div {
+        margin-bottom: 1rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    input {
+        margin-bottom: 0;
+        &.large {
+            font-size: 1.5rem;
+        }
+        &:-moz-placeholder {color: rgba($white, .5); font-size: 80%; padding-bottom: 20%; }
+        &:-ms-input-placeholder {color: rgba($white, .5); font-size: 80%; padding-bottom: 20%; }
+        &::placeholder {color: rgba($white, .5); font-size: 80%; padding-bottom: 20%; }
+        &::-moz-placeholder {color: rgba($white, .5); font-size: 80%; padding-bottom: 20%; }
+        &::-webkit-input-placeholder {color: rgba($white, .5); font-size: 50%; padding-bottom: 40%; }
+    }
+    input[type=text], input[type=number] {
+        color: rgba($white, .5);
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid rgba($white, .25);
+        border-radius: 0;
+        &:hover {
+            color: rgba($white, .75);
+            border-bottom: 1px solid rgba($white, .5);
+        }
+        &:focus {
+            color: rgba($white, .85);
+            border-bottom: 3px solid $white;
+            margin-bottom: -2px;
+        }
+    }
+    .meta {
+        text-align: right;
+    }
+}
