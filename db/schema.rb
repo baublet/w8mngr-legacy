@@ -77,10 +77,9 @@ ActiveRecord::Schema.define(version: 20160222173623) do
   create_table "weight_entries", force: :cascade do |t|
     t.integer  "value"
     t.integer  "day"
-    t.integer  "time",       default: 0
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "weight_entries", ["user_id"], name: "index_weight_entries_on_user_id", using: :btree

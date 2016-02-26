@@ -6,7 +6,7 @@ class WeightEntryTest < ActiveSupport::TestCase
         # This is require for us to work with any food entries since they belong to valid users
         @user.save
 
-        @weight = @user.weightentries.build(value: 83914, day: 19850502)
+        @weight = @user.weightentries.build(value: 83914, day: 19850502, time: 3600)
     end
 
     test "weight should be valid" do

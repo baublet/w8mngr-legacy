@@ -1,13 +1,14 @@
 class User < ActiveRecord::Base
 	has_many :foodentries,	class_name: "FoodEntry",
 							foreign_key: "user_id",
-							dependent: :destroy
+							dependent: :destroy,
+							inverse_of: :user
 	has_many :foods,		class_name: "Food",
-							foreign_key: "user_id"
-							# dependent: :destroy
-							# We want to keep all foods in the database whether the user exists anymore or not, so we can still search them
+							foreign_key: "user_id",
+							inverse_of: :user
 	has_many :weightentries,class_name: "WeightEntry",
-							dependent: :destroy
+							dependent: :destroy,
+							inverse_of: :user
 
 	attr_accessor  :remember_token, :reset_token
 
@@ -23,7 +24,7 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-	
+
 	def food_totals day = nil
 		day = day.nil? ? current_day : day
 		entries = foodentries_from(day)
@@ -34,11 +35,11 @@ class User < ActiveRecord::Base
 		totals["protein"] = entries.map{|f| f["protein"]}.compact.reduce(0, :+)
 		return totals
 	end
-	
+
 	def foodentries_from day
 		foodentries.where(day: day) || foodentries.none
 	end
-	
+
 	def weight_average day = nil
 		day = day.nil? ? current_day : day
 		entries = weightentries_from day
@@ -49,7 +50,7 @@ class User < ActiveRecord::Base
 		end
 		average
 	end
-	
+
 	def weightentries_from day
 		weightentries.where(day: day) || weightentries.none
 	end
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
 		now = Time.now.utc.to_date
   		now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
 	end
-	
+
 	# Returns the user's name if it's set, or the email if it isn't
 	def name
 		preferences["name"].blank? ? email : preferences["name"]

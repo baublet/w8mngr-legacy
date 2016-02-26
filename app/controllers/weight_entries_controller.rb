@@ -3,58 +3,56 @@ class WeightEntriesController < ApplicationController
 
   # GET /weight_entries
   def index
-    @weightentries = current_user.weightentries_from(current_day).all
-    @weight_average = current_user.weight_average(current_day)
-    @newweightentry = current_user.weightentries.build(day: current_day)
-  end
-
-  # GET /weight_entries/1
-  def show
-  end
-
-  # GET /weight_entries/new
-  def new
-    @weightentry = WeightEntry.new
-  end
-
-  # GET /weight_entries/1/edit
-  def edit
+    show_list
   end
 
   # POST /weight_entries
   def create
-    @weight_entry = WeightEntry.new(weight_entry_params)
+    @weightentry = current_user.weightentries.build(weight_entry_params)
+    @weightentry.update_value params[:weight_entry][:value]
 
-    if @weight_entry.save
-      redirect_to @weight_entry, notice: 'Weight entry was successfully created.'
+    if @weightentry.save
+        @newweightentry = current_user.weightentries.build(day: current_day)
+        flash.now[:success] = "Weight entry added"
     else
-      render :new
+        @newweightentry = @weightentry
+        @newweightentry.value = params[:weight_entry][:value]
+        flash.now[:error] = "Failed to add weight entry"
     end
+    show_list
   end
 
   # PATCH/PUT /weight_entries/1
   def update
-    if @weight_entry.update(weight_entry_params)
-      redirect_to @weight_entry, notice: 'Weight entry was successfully updated.'
-    else
-      render :edit
+    if @weightentry.update(weight_entry_params)
+      @newweightentry = current_user.weightentries.build(day: current_day)
     end
+    show_list
   end
 
   # DELETE /weight_entries/1
   def destroy
-    @weight_entry.destroy
-    redirect_to weight_entries_url, notice: 'Weight entry was successfully destroyed.'
+    @weightentry.destroy
+    show_list
   end
 
   private
+    # Renders the list of weight entries for this day
+    def show_list
+        @weightentries = current_user.weightentries_from(current_day).all
+        @weight_average = current_user.weight_average(current_day)
+        @newweightentry ||= current_user.weightentries.build(day: current_day)
+        byebug
+        render :index
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_weight_entry
-      @weight_entry = WeightEntry.find(params[:id])
+      @weightentry = current_user.weightentries.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def weight_entry_params
-      params.require(:weight_entry).permit(:value, :day, :user_id)
+      params.require(:weight_entry).permit(:day, :user_id)
     end
 end

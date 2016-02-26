@@ -1,18 +1,17 @@
 class WeightEntry < ActiveRecord::Base
-    belongs_to :user
+    belongs_to :user,   inverse_of: :weightentries
                         # We store weights in grams, since they're super granular
                         # These numbers are between 3lbs and about 1,500 lbs
     validates  :value,  presence: true, numericality: { only_integer: true, greater_than: 1359, less_than: 680389 }
     validates  :day,    presence: true,
                         numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
-    # Kept in seconds beginning at midnight. So 3,600 = 1am, up to 86,400
-    validates  :time_added,   numericality: { only_integer: true, greater_than: 0, less_than: 86400 }
 
     validates  :user_id,presence: true
 
     extend WeightManager::DayNavigator
 
-    def update_value new_value, default = "i"
+    def update_value new_value
+        default = self.user.preferences["units"].blank? ? "lb" : self.user.preferences["units"]
         begin
             new_weight = new_value.to_unit.convert_to("g").scalar.to_i
         rescue
@@ -21,7 +20,8 @@ class WeightEntry < ActiveRecord::Base
         self.value = new_weight
     end
 
-    def display
-
+    def display_value
+        unit = self.user.preferences["units"].blank? ? "lb" : self.user.preferences["units"]
+        Unit.new(value.to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit
     end
 end

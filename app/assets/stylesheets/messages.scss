@@ -29,7 +29,7 @@
     padding: 1rem;
     position: fixed;
     z-index: 99;
-    bottom: 0;
+    top: 0;
     opacity: 0;
     animation: blinkFadeOut 5s 0s 1 forwards normal;
     &.error {

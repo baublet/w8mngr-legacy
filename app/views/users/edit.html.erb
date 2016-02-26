@@ -48,10 +48,10 @@
 	<div class="radio-list">
 		<span class="header">Units</span>
 
-		<%= radio_button_tag 'units', 'i', @user.preferences["units"].blank? || @user.preferences["units"] == "i" ? true : false, :id => "units.i" %>
+		<%= radio_button_tag 'units', 'lb', @user.preferences["units"].blank? || @user.preferences["units"] == "lb" ? true : false, :id => "units.i" %>
 		<%= label_tag "units.i", "Imperial" %>
 
-		<%= radio_button_tag 'units', 'm', @user.preferences["units"] == "m" ? true : false, :id => "units.m" %>
+		<%= radio_button_tag 'units', 'kg', @user.preferences["units"] == "kg" ? true : false, :id => "units.m" %>
 		<%= label_tag "units.m", "Metric" %>
 	</div>
 

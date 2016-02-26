@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  resources :weight_entries
     # Static pages
     root   'welcome#index'
     get    'privacy'        => 'welcome#privacy_policy'
     get    'contact'        => 'welcome#contact_form'
     get    'getting_started'=> 'welcome#getting_started'
     get    'terms_of_service'=> 'welcome#terms_of_service'
-    
+
     # Users and sessions
     resources :users
     post   '/users/:id'     => 'users#update'
@@ -15,8 +14,7 @@ Rails.application.routes.draw do
     post   'login'          => 'sessions#create'
     delete 'logout'         => 'sessions#destroy'
     get    'logout'         => 'sessions#destroy'
-    resources :password_resets,
-                            only: [:new, :create, :edit, :update]
+    resources :password_resets,only: [:new, :create, :edit, :update]
     #get 'password_resets/new'
     #get 'password_resets/edit'
 
@@ -24,8 +22,7 @@ Rails.application.routes.draw do
     get    'foodlog'        => 'food_entries#index'
     get    '/foodlog/:day'  => 'food_entries#index',
                                 as: :food_log_day
-    resources :food_entries,
-                            only: [:index, :create, :update, :destroy]
+    resources :food_entries,    only: [:index, :create, :update, :destroy]
     get     '/food_entries/delete/:id' =>
                                 'food_entries#destroy',
                                 as: :food_entry_delete
@@ -36,7 +33,6 @@ Rails.application.routes.draw do
                                 'food_entries#add_food',
                                 as: :food_entry_add_food
 
-
     # Foods
     get     '/foods/delete/:id' =>
                                 'foods#destroy',
@@ -45,6 +41,13 @@ Rails.application.routes.draw do
                                 as: :food_search
     get     '/foods/pull/(:ndbno)' => 'foods#pull',
                                 as: :food_pull
-    resources :foods,
-                            only: [:new, :edit, :index, :show, :create, :update, :destroy]
+    resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
+
+    resources :weight_entries,  only: [:index, :create, :update, :destroy]
+    get     '/weightlog/'    => 'weight_entries#index'
+    get     '/weightlog/:day'=> 'weight_entries#index',
+                                as: :weight_log_day
+    get     '/weightlog/delete/:id' => 'weight_entries#destroy',
+                                as: :weight_entry_delete
+
 end

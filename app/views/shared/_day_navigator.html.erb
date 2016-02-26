@@ -1,13 +1,7 @@
 <% if logged_in? %>
 <div class="day-navigator">
-    <%= link_to controller: 'food_entries', day: previous_day do %>
-        <i class="fa fa-chevron-circle-left"></i>
-    <% end %>
-
+    <a href="<%= base_url + "/" + previous_day %>"><i class="fa fa-chevron-circle-left"></i></a>
     <span class="current-day"><%= nice_day(current_day) %></span>
-
-    <%= link_to controller: 'food_entries', day: next_day do %>
-        <i class="fa fa-chevron-circle-right"></i>
-    <% end %>
+    <a href="<%= base_url + "/" + next_day %>"><i class="fa fa-chevron-circle-right"></i></a>
 </div>
 <% end %>

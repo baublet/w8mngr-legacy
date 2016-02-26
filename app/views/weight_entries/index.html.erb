@@ -1,19 +1,19 @@
 <% provide(:title, "Weight Log") %>
 
 <%= render partial: "shared/app_menu" %>
+<%= render partial: "shared/day_navigator", :locals => {base_url: weightlog_path}  %>
 
 <h1><i class="fa fa-balance-scale"></i> Weight Log</h1>
 
 <div class="weightlog-table">
-    <%= render @weightentries %>
-    <% if @weightentries.size > 0 %>
-	<%= render @weightentries %>
-	<div class="row header totals">
-		<div class="col full">
-            Today's Average:
-            <span><%= @weightentries_average %></span>
-        </div>
-	</div>
+    <% if !@weightentries.nil? %>
+        <%= render @weightentries %>
+        <!-- <div class="row header totals">
+    		<div class="col full">
+                Today's Average:
+                <span><%= @weightentries_average %></span>
+            </div>
+    	</div> -->
 	<% else %>
 		<p>You haven't entered any entries yet today. Add some using the form below!</p>
 	<% end %>
