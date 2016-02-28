@@ -30,7 +30,7 @@ class FoodEntriesController < ApplicationController
 
 	def destroy
 		@foodentry = current_user.foodentries.find(params[:id])
-		day = @foodentry[:day]
+		@current_day = @foodentry.day
 		@foodentry.destroy
 		show_list
 	end

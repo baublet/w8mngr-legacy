@@ -13,4 +13,7 @@ class WelcomeController < ApplicationController
 
   def contact_form
   end
+  
+  def beta
+  end
 end

@@ -3,7 +3,7 @@
         <%= link_to edit_food_path(food) do %>
             <i class="fa fa-pencil"></i>
             <span class="screen-reader-text">Edit Entry</span>
-        <% end %>
+        <% end if food.user_id == current_user.id %>
         <%= link_to food.name, food_path(food) %>
     <% else %>
         <%= link_to food["name"], food_pull_path(food["ndbno"]) %>

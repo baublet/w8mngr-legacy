@@ -170,7 +170,7 @@ nav .login {
                 background: lighten($black, 5);
                 color: $white;
                 + .app-menu-sub {
-                    bottom:4rem;
+                    bottom:2rem;
                 }
             }
         }
@@ -180,11 +180,11 @@ nav .login {
         position: relative;
         z-index: 110;
         color: rgba($white, .5);
-        font-size: 1.2rem;
+        font-size: .8rem;
         display: block;
         width: 100%;
-        height: 4rem;
-        line-height: 4rem;
+        height: 2rem;
+        line-height: 2rem;
         vertical-align: middle;
         cursor: pointer;
         &:hover {
@@ -197,7 +197,7 @@ nav .login {
     position: fixed;
     z-index: 100;
     left: 0;
-    bottom: 0;
+    bottom: -2rem;
     transition: bottom .5s cubic-bezier(0,.98,.8,.99);
     display: flex;
     flex-direction: row;

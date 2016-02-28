@@ -15,11 +15,14 @@ module ApplicationHelper
     # Returns the current day in our DB's day storage format (YYYYMMDD)
     def current_day
         if @current_day.nil?
+            passed_day =    params.try(:[], :food_entry).try(:[], :day) ||
+                            params.try(:[], :weight_entry).try(:[], :day) ||
+                            params.try(:[], :day)
+            #passed_day = ((params[:food_entry].nil?)? nil : params[:food_entry][:day]) ||
+            #             ((params[:weight_entry].nil?)? nil : params[:weight_entry][:day]) ||
+            #             params[:day]
             # Here, I want a date range between 1985 and 2085. If I get to be
             # 100 years old, surely someone can change this line for me...
-            passed_day = ((params[:food_entry].nil?)? nil : params[:food_entry][:day]) ||
-                         ((params[:weight_entry].nil?)? nil : params[:weight_entry][:day]) ||
-                         params[:day]
             if passed_day.nil? || passed_day.to_i < 19850501 || passed_day.to_i > 20850501
                 passed_day = Time.current.strftime('%Y%m%d')
             end
@@ -41,17 +44,17 @@ module ApplicationHelper
         if @next_day.nil?
             @next_day = convert_day_to_date(current_day).tomorrow.strftime('%Y%m%d')
         end
-        return @next_day
+        @next_day
     end
 
     # Converts YYYYMMDD to a Date object
     def convert_day_to_date string
-        return Date.strptime(string,"%Y%m%d")
+        Date.strptime(string.to_s,"%Y%m%d")
     end
 
     # Converts YYYYMMDD into a nice looking date (Saturday, January 1, 2010)
     def nice_day string
-        return convert_day_to_date(string).strftime('%A, %B %e, %Y')
+        convert_day_to_date(string).strftime('%A, %B %e, %Y')
     end
 
     # Validates a YYYYMMDD string, returning current_day if it's false

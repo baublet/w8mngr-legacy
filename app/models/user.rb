@@ -51,6 +51,12 @@ class User < ActiveRecord::Base
 		end
 		average
 	end
+	
+	def weight_average_display day = nil, before = ' ', after = ''
+		unit = preferences["units"].blank? ? "lb" : preferences["units"]
+        unit_display = before + unit + after
+        Unit.new(weight_average(day).to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit_display
+	end
 
 	def weightentries_from day
 		weightentries.where(day: day) || weightentries.none

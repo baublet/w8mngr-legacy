@@ -1,0 +1,42 @@
+<% provide(:title, "We're in Beta") %>
+
+<h1><i class="fa fa-exclamation-triangle"></i> We're in Beta!</h1>
+
+<p>You are currently viewing the beta version of w8mngr. If you use this version, please keep in mind that:</p>
+
+<ul>
+	<li><strong>None of your data will be saved.</strong> New versions of the beta may break things you have entered here, so I will be cleaning the database from time to time to ensure compatibility with new versions.</li>
+	
+	<li><strong>Your old data isn't here, yet.</strong> Your old accounts and food/health data is not over here. That's coming later.</li>
+	
+	<li><strong>Things may not work like they're expected to.</strong> That's the nature of a beta, unfortunately. If you find a bug, please let me know via the <%= link_to "contact page", contact_path %>.</li>
+</ul>
+
+<h2>Change Log</h2>
+
+<h3>Version 0.1, <em>Sunday, March 1, 2016</em></h3>
+
+<p>Initial deployment! Welcome aboard. There is much to do, but I wanted to be able to test this on mobile devices as soon as possible. We are migrating to Amazon Web Services, as you may have noticed, so we are currently deployed there. Our backend has migrated to Ruby on Rails and PostreSQL. Although I'm much more familiar with LESS, I chose to stick with Rails' default preprocessor, SCSS. I'm loving it so far!</p>
+
+<p>Things that are currently working:</p>
+
+<ul>
+	<li><strong><%= link_to "User profiles.", profile_path %></strong> Users can make changes to their profiles, which is, at the moment, bare bones. More customization in the future, which will use your profile data (like height, sex, etc.) to help you generate basal metabolic rates and set goals.</li>
+	
+	<li><strong><%= link_to "Food logs.", foodlog_path %></strong> Get to logging your calories today!</li>
+		
+	<li><strong><%= link_to "Custom foods.", foods_path %></strong> Add, edit, or remove custom foods that you can later <%= link_to "search and add directly to", food_search_path %> your food logs.</li>
+	
+	<li><strong>Integration with the <a href="https://ndb.nal.usda.gov/ndb/foods">USDA's food database</a>.</strong> Over 8,000 foods complete with nutritional info and popular measurements at your finger tips.
+	
+	<li><strong><%= link_to "Log your weights.", weight_entries_path %></strong> Add weight entries throughout the day and get an average so you can get a feel for how your weight naturally fluctuates.
+</ul>
+
+<p>Planned for version 0.2:</p>
+
+<ul>
+	<li><strong>Javascript interactivity.</strong> Use Vue.js to make small applications out of the food log, food search, and weight log. This includes creating an auto-complete feature of sorts like on the existing w8mngr website. Vue.js is planned as the only external library we will use. The rest will be vanilla Javascript.</li>
+	<li><strong>Various refactors of CSS.</strong> For speed of development, I rushed a few CSS components that, at the moment, suffer from being in a state of disunity that leads to inconsisties, code duplication, and in a few cases, small performance problems.</li>
+	<li><strong>Recipes!</strong> The main undertaking of this version will be the recipe builder, which will allow users to combine foods (as ingredients) into full-featured recipes.</li>
+	<li><strong>Tagging.</strong> I also hope to develop or implement an existing tagging library in rails so that users can search foods and recipes by tag in the future.
+</ul>

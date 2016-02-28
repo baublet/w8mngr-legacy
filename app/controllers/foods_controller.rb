@@ -31,8 +31,8 @@ class FoodsController < ApplicationController
           #TODO: Implement a proper Solr search here
           
           # Break the search into its parts and search for each term
-          query = params[:q].squish.gsub(" ", "%")
-          results = Food.where("name LIKE ?", "#{query}")
+          query = params[:q].squish
+          results = Food.search_foods(query)
                         .limit(per_page + 1)
                         .offset((page - 1) * per_page)
           # We do +1 here because if, at the end, we have 26 entries, we know there's a next page

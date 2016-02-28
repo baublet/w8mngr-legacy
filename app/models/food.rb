@@ -23,10 +23,7 @@ class Food < ActiveRecord::Base
                             :tsearch => {
                                 :prefix => true,
                                 :negation => true,
-                                :dictionary => "english",
-                                :start_sel => '<span class="highlight">',
-                                :stop_sel => '</span>'
+                                :dictionary => "english"
                             }
-                        },
-                        :ignoring => :accents
+                        }
 end

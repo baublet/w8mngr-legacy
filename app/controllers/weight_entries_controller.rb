@@ -32,6 +32,7 @@ class WeightEntriesController < ApplicationController
 
   # DELETE /weight_entries/1
   def destroy
+    @current_day = @weightentry.day
     @weightentry.destroy
     show_list
   end
@@ -40,7 +41,7 @@ class WeightEntriesController < ApplicationController
     # Renders the list of weight entries for this day
     def show_list
         @weightentries = current_user.weightentries_from(current_day).all
-        @weight_average = current_user.weight_average(current_day)
+        @weight_average = current_user.weight_average_display(current_day, '<span class="unit">', '</span>')
         @newweightentry ||= current_user.weightentries.build(day: current_day)
         render :index
     end

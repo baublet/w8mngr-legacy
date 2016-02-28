@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
     # Static pages
     root   'welcome#index'
-    get    'privacy'        => 'welcome#privacy_policy'
-    get    'contact'        => 'welcome#contact_form'
-    get    'getting_started'=> 'welcome#getting_started'
+    get    'privacy'        =>  'welcome#privacy_policy'
+    get    'contact'        =>  'welcome#contact_form'
+    get    'getting_started'=>  'welcome#getting_started'
     get    'terms_of_service'=> 'welcome#terms_of_service'
+    get    'beta'           =>  'welcome#beta'
 
     # Users and sessions
     resources :users
     post   '/users/:id'     => 'users#update'
+    post   'profile'        => 'users#show'
     get    'signup'         => 'users#new'
     get    'login'          => 'sessions#new'
     post   'login'          => 'sessions#create'

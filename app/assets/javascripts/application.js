@@ -10,3 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require w8mngr
+//= require dom_ready
+//= require cookies
+//= require navigation

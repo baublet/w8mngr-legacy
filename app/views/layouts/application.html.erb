@@ -11,6 +11,13 @@
 </head>
 <body class="<%= controller.controller_name %> <%= controller.action_name %>">
 
+<div class="beta-notification">
+    <%= link_to beta_path do %>
+        <i class="fa fa-exclamation-triangle"></i>
+        Beta
+    <% end %>
+</div>
+
 <a href="#main" class="screen-reader-text">Skip to main content</a>
 
 <header>
