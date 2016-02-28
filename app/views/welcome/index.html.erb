@@ -8,11 +8,17 @@
         </div>
     </div>
     <div class="banner">
-        <img class="banner-img"
+        <picture>
+            <source media="(min-width: 1820px)" srcset="<%= image_path('banners/w8mngr-splash-01-large.jpg') %>">
+            <source media="(min-width: 900px)" srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %>">
+            <img src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>" alt="Get back in shape at your own pace." class="banner-img">
+        </picture>
+        <!--<img class="banner-img"
             src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>"
-            src-set="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %> 1000w,
+            srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %> 1000w,
                     <%= image_path('banners/w8mngr-splash-01-large.jpg') %> 1920w"
-            alt="Get back in shape at your own pace.">
+            sizes="100vw"
+            alt="Get back in shape at your own pace.">-->
     </div>
 </section>
 
