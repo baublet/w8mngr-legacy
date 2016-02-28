@@ -1,7 +1,31 @@
 class UserPreferencesValidator < ActiveModel::Validator
-  def validate(record)
+  def validate record
     validate_date record, "birthday", record.preferences["birthday"]
 	validate_height record, "height_display", record.preferences["height_display"]
+    validate_name record, "name", record.preferences["name"]
+    validate_name record, "height_display", record.preferences["height_display"]
+    validate_sex record, "sex", record.preferences["sex"]
+  end
+  
+  def validate_name record, attribute, name
+    return if name.try(:length).nil?
+    if name.length > 128
+        record.errors[attribute] << (options[:message] || "must be less than 128 characters")
+    end
+  end
+  
+  def validate_sex record, attribute, sex
+    record.errors[attribute] << (options[:message] || "is an invalid value") if !["m", "f", "na"].include?(sex)
+  end
+  
+  def validate_units record, attribute, unit
+    record.errors[attribute] << (options[:message] || "is an invalid value") if !["m", "i"].include?(unit)
+  end
+  
+  def validate_timezone record, attribute, timezone
+      if !ActiveSupport::TimeZone[timezone].present? && !timezone.blank?
+          record.errors[attribute] << (options[:message] || "is an invalid timezone")
+      end
   end
 
   def validate_date record, attribute, date

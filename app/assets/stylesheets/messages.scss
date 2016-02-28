@@ -25,13 +25,12 @@
     border: 1px solid rgba($black, .15);
     font-weight: 500;
     font-size: .8rem;
-    width: 100%;
+    width: 50%;
     padding: 1rem;
-    position: fixed;
-    z-index: 99;
-    top: 0;
     opacity: 0;
     animation: blinkFadeOut 5s 0s 1 forwards normal;
+    position: absolute;
+    right: 0;
     &.error {
         background: $red;
     }

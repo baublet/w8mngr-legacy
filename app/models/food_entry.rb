@@ -1,5 +1,5 @@
 class FoodEntry < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :user,		inverse_of: :foodentries
 
 	validates :description, presence: true,
 					 		length: { minimum: 2,  maximum: 155 }
@@ -22,17 +22,19 @@ class FoodEntry < ActiveRecord::Base
 		measurement = Measurement.find(measurement_id.to_i)
 		if !measurement.nil?
 			# This should never fail given how we structured our models
-			food = Food.find(measurement.food_id)
+			food = measurement.food
 			begin
 				multiplier = multiplier.to_r.to_f
 			rescue
 				multiplier = 1
 			end
+			multiplier = 1 if multiplier == 0
 			description = "(#{(multiplier * measurement.amount.to_i).to_s} #{measurement.unit}) " + food.name
 			calories = measurement.calories * multiplier
 			fat = measurement.fat * multiplier
 			carbs = measurement.carbs * multiplier
 			protein = measurement.protein * multiplier
+			
 			self.description = description
 			self.calories = calories.to_i
 			self.fat = fat.to_i

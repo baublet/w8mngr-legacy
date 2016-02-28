@@ -40,16 +40,19 @@ class FoodEntriesController < ApplicationController
 		# Validate the day
 		@day = !cookies[:last_day].present? ? current_day : validate_day(cookies[:last_day])
 		# Load up the food in this entry
-		@food_entry = current_user.foodentries
-								  .build(day: @day)
-								  .populate_with_food(params[:measurement].to_i, params[:amount])
+		@food_entry = current_user.foodentries.build(day: @day)
+		puts "DAY: " + @day
+		@food_entry.populate_with_food(params[:measurement].to_i, params[:amount])
+		puts "DESC: " + @food_entry.description
+		puts "CALS: " + @food_entry.calories.to_s
 		if @food_entry.save
 			# Redirect them back to that day
 			flash[:success] = "Added food to your log!"
 			increment_popularity params[:food_id].to_i, params[:measurement].to_i
 		else
 			# TODO: Log this behavior
-			flash[:error] = "Error adding the food to your log!"
+			flash[:error] = "Error adding the food to your log"
+			# puts YAML::dump(@food_entry)
 		end
 		redirect_to food_log_day_path(@day)
 	end

@@ -1,7 +1,7 @@
 <% provide(:title, "Food Log") %>
 
 <%= render partial: "shared/app_menu" %>
-<%= render partial: "shared/day_navigator" %>
+<%= render partial: "shared/day_navigator", :locals => {base_url: foodlog_path} %>
 
 <h1><i class="fa fa-cutlery"></i> Food Log</h1>
 

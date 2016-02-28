@@ -36,6 +36,7 @@ gem 'sqlite3'
 gem 'ruby-units'
 gem 'chronic'
 gem 'pg'
+gem 'pg_search'
 
 group :development, :test do
     gem 'byebug'

@@ -5,7 +5,7 @@ class Measurement < ActiveRecord::Base
                 order("popularity DESC")
             }
     
-    belongs_to  :food
+    belongs_to  :food,    inverse_of: :measurements
 
     validates	:amount,  presence: true, length: { minimum: 1,  maximum: 10 }
     validates	:unit,    presence: true

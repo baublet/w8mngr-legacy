@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 	validates_with UserPreferencesValidator
 
 	before_save { email.downcase! }
+	after_initialize { setup_preferences }
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
@@ -123,6 +124,23 @@ class User < ActiveRecord::Base
 	# Returns true if the user's password reset period has expired
 	def password_reset_expired?
 		return reset_sent_at < 2.hours.ago
+	end
+	
+	# Sets up the user preferences so that it doesn't blow up if they haven't yet set values
+	def setup_preferences
+		preferences ||= {}
+		default_preferences = {
+			"name": "",
+			"sex": "na",
+			"birthday": "",
+			"height": "",
+			"height_display": "",
+			"timezone": "",
+			"units": "m"
+		}
+		default_preferences.each do |pref, default|
+			preferences[pref] = default if preferences.try(:[], pref).nil?
+		end
 	end
 
 end

@@ -38,10 +38,9 @@ class UsersController < ApplicationController
         @user.preferences["name"] = params["name"]
 
         if @user.save
-            redirect_to user_path(@user)
-        else
-            render 'edit'
+            flash.now[:success] = "Preferences saved"
         end
+        render 'edit'
     end
 
     def edit

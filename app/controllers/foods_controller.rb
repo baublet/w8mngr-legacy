@@ -31,13 +31,10 @@ class FoodsController < ApplicationController
           #TODO: Implement a proper Solr search here
           
           # Break the search into its parts and search for each term
-          query = params[:q].split
-          results = Food.where("name LIKE ?", "%#{query.shift}%")
+          query = params[:q].squish.gsub(" ", "%")
+          results = Food.where("name LIKE ?", "#{query}")
                         .limit(per_page + 1)
                         .offset((page - 1) * per_page)
-          query.each do |term|
-              results.where("name LIKE ?", term)
-          end
           # We do +1 here because if, at the end, we have 26 entries, we know there's a next page
           @searchresults = results
           
@@ -225,7 +222,7 @@ class FoodsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_food
-      @food = current_user.foods.find(params[:id])
+      @food = Food.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
