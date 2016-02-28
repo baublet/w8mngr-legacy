@@ -22,7 +22,7 @@
         position: relative;
         z-index: 10;
         font-weight: 300;
-        font-size:2rem;
+        font-size:1.8rem;
         color: $white;
         margin: 0;
         padding: 0;
@@ -100,14 +100,57 @@
 .welcome.index main {
     padding: 0;
 }
-section.what-is-it, section.summary {
+.what-is-it, .summary {
     position: relative;
     z-index:2;
     padding: 2rem 1rem;
     background: $white;
 }
-section.summary {
+.summary {
     margin-top: 100vh;
     background: $color-primary;
     color: rgba($white,.75);
+}
+
+.summary-points {
+    padding: 0;
+    list-style-type: none;
+    li {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid $color-primary-light;
+        padding: 1rem 0 1rem 6rem;
+        position: relative;
+        overflow: hidden;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &:nth-child(even) {
+            padding: 1rem 6rem 1rem 0;
+            h2 {
+                margin: 0 -6rem 0 0;
+                .fa {
+                    left: auto;
+                    right: 0;
+                }
+            }
+        }
+    }
+    h2 {
+        padding: 0 0 1rem;
+        margin: 0 0 0 -6rem;
+        .fa {
+            color: $color-primary-light;
+            opacity: 1;
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            font-size: 5rem;
+        }
+    }
+    p {
+        padding: 0;
+        margin: 0;
+        font-size: .75rem;
+        line-height: 1rem;
+    }
 }
