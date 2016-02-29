@@ -23,3 +23,13 @@ When the demo is online, you can view it at [the AWS link](http://w8mngr.nq8c4qz
 ## Contributing
 
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
+
+# Todo
+
+## For Version 0.2
+
+- Fill out the integration tests and increase the testing coverage the rest of the site
+- Basic Vue.js interactivity
+- Refactor and make the CSS more consistent across elements (especially the forms)
+- Add recipes that we will want searchable and addable to food logs just like food items
+- Incoporate a universal tagging system so that foods (and later training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
