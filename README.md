@@ -12,6 +12,8 @@ The frontend is based on CSS and Javascript. Although the day of hardcore progre
 
 For example, the food log will incorporate its own recipe and food search, navigating across days, and so on. But I want to do this in a lightweight manner with a small footprint, rather than incorporate the behemoth JS frameworks like Angular or Express.
 
+In that vein, you might notice that this site is only optimized for mobile at the moment! That is intentional. I will add the appropriate CSS for desktop versions later, but since this application will mostly be used on cell phones, I wanted to fully optimize it and have a working version (from top to bottom) for mobile *before* any desktop enhancements.
+
 I settled on Vue.js because it's beautiful, and is easy to use with Rails. More on that in upcoming versions. React is great, so I will eventually use it on a project or two, but Vue.js struck me as the perfect tool for this job.
 
 ## Demo
