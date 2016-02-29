@@ -16,7 +16,7 @@ I settled on Vue.js because it's beautiful, and is easy to use with Rails. More 
 
 ## Demo
 
-When the demo is online, you can view it at (the AWS link)[http://w8mngr.nq8c4qzfar.us-east-1.elasticbeanstalk.com/].
+When the demo is online, you can view it at [the AWS link](http://w8mngr.nq8c4qzfar.us-east-1.elasticbeanstalk.com/).
 
 ## Contributing
 
