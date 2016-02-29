@@ -26,6 +26,13 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 
 # Todo
 
+## For Version 0.3
+
+- [ ] Barcode scanning
+  - [ ] Scanning element (incorporate existing JS libraries)
+  - [ ] Attaching scanned codes to existing foods/recipes
+  - [ ] Third-party API integration
+
 ## For Version 0.2
 
 - [ ] Fill out the integration tests and increase the testing coverage the rest of the site
