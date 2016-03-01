@@ -1,7 +1,7 @@
 class FoodEntriesController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy, :update]
 	before_action :correct_user, only: [:update, :destroy]
-	
+
 	include FoodsHelper
 
 	def index
@@ -34,17 +34,14 @@ class FoodEntriesController < ApplicationController
 		@foodentry.destroy
 		show_list
 	end
-	
+
 	# Adds a food to the user's last-viewed day (or the current day) based on measurement (its id) and the amount as a multiplier to the measurement
 	def add_food
 		# Validate the day
 		@day = !cookies[:last_day].present? ? current_day : validate_day(cookies[:last_day])
 		# Load up the food in this entry
 		@food_entry = current_user.foodentries.build(day: @day)
-		puts "DAY: " + @day
 		@food_entry.populate_with_food(params[:measurement].to_i, params[:amount])
-		puts "DESC: " + @food_entry.description
-		puts "CALS: " + @food_entry.calories.to_s
 		if @food_entry.save
 			# Redirect them back to that day
 			flash[:success] = "Added food to your log!"
