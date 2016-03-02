@@ -25,4 +25,8 @@ class ActiveSupport::TestCase
       defined?(post_via_redirect)
   end
 
+  # Generates a random number for testing
+  def generate_int start_num = 0, end_num = 3000000
+      rand(start_num...end_num)
+  end
 end

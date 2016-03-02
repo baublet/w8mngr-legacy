@@ -5,7 +5,11 @@ class FoodEntry < ActiveRecord::Base
 					 		length: { minimum: 2,  maximum: 155 }
 
 	validates :calories,	presence: true,
-							numericality: { only_integer: true, greater_than: 0 }
+							numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+	validates :fat,  		numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+	validates :carbs,  		numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+	validates :protein,  	numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
 	validates :day,			presence: true,
 							numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
@@ -34,7 +38,7 @@ class FoodEntry < ActiveRecord::Base
 			fat = measurement.fat * multiplier
 			carbs = measurement.carbs * multiplier
 			protein = measurement.protein * multiplier
-			
+
 			self.description = description
 			self.calories = calories.to_i
 			self.fat = fat.to_i

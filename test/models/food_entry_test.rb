@@ -18,6 +18,34 @@ class FoodEntryTest < ActiveSupport::TestCase
         assert @newfoodentry.valid?
     end
 
+    test "happy path generative tests" do
+        # This is the general range for which users would enter calories.
+        # I doubtanyone would ever enter anything with more than 30,000 calories
+        for i in 0...30000 do
+            @newfoodentry.calories = i
+            assert @newfoodentry.valid?, "Generative test failed for calories at " + i.to_s
+        end
+        # The same here for macros. I've never heard of any food or recipe
+        # calling for more than 10,000 of either fat, carbs or protein!
+        for i in 0...10000 do
+            @newfoodentry.fat = i
+            @newfoodentry.carbs = i
+            @newfoodentry.protein = i
+            assert @newfoodentry.valid?, "Generative test failed for macros at " + i.to_s
+        end
+        # Now do 500 tests for totally random numbers
+        for i in 0...500 do
+            @newfoodentry.calories = generate_int
+            assert @newfoodentry.valid?, "Generative test failed for calories at " + @newfoodentry.calories.to_s
+            @newfoodentry.fat = generate_int
+            assert @newfoodentry.valid?, "Generative test failed for fat at " + @newfoodentry.fat.to_s
+            @newfoodentry.carbs = generate_int
+            assert @newfoodentry.valid?, "Generative test failed for carbs at " + @newfoodentry.carbs.to_s
+            @newfoodentry.protein = generate_int
+            assert @newfoodentry.valid?, "Generative test failed for protein at " + @newfoodentry.protein.to_s
+        end
+    end
+
     test "food entry description should not be blank or too short" do
         @newfoodentry.description = " " * 6
         assert_not @newfoodentry.valid?
@@ -36,7 +64,7 @@ class FoodEntryTest < ActiveSupport::TestCase
 
     test "food entry calories should be greater than 0" do
         @newfoodentry.calories = 0
-        assert_not @newfoodentry.valid?
+        assert @newfoodentry.valid?
         @newfoodentry.calories = -1
         assert_not @newfoodentry.valid?
         @newfoodentry.calories = -9999999999
