@@ -53,6 +53,6 @@ class WeightEntriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def weight_entry_params
-      params.require(:weight_entry).permit(:day, :user_id)
+      params.require(:weight_entry).permit(:day)
     end
 end

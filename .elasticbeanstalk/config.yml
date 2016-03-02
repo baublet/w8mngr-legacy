@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: null
+    environment: w8mngr
     group_suffix: null
 global:
   application_name: w8mngr

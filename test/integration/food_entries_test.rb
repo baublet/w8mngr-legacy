@@ -82,7 +82,7 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
         assert_template 'food_entries/index'
         # Creates an item for January 1, 2000
         post food_entries_path, food_entry: @food_entry
-        assert_select(".edit_food_entry")
+        assert_select ".edit_food_entry"
     end
 
 end
