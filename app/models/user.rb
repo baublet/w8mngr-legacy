@@ -14,6 +14,16 @@ class User < ActiveRecord::Base
 
 	store_accessor :preferences
 	validates_with UserPreferencesValidator
+	def default_preferences
+		{   "name": "",
+			"sex": "na",
+			"birthday": "",
+			"height": "",
+			"height_display": "",
+			"timezone": "",
+			"units": "i"
+		}
+	end
 
 	before_save { email.downcase! }
 	after_initialize { setup_preferences }
@@ -51,9 +61,8 @@ class User < ActiveRecord::Base
 		end
 		average
 	end
-	
+
 	def weight_average_display day = nil, before = ' ', after = ''
-		unit = preferences["units"].blank? ? "lb" : preferences["units"]
         unit_display = before + unit + after
         Unit.new(weight_average(day).to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit_display
 	end
@@ -64,12 +73,20 @@ class User < ActiveRecord::Base
 
 	# Returns a string representation of their sex
 	def sex
-		if preferences["sex"] == "m"
+		if preferences[:sex] == "m"
 			"Male"
-		elsif preferences["sex"] == "f"
+		elsif preferences[:sex] == "f"
 			"Female"
 		else
 			"Other / Prefer not to disclose"
+		end
+	end
+
+	# Returns the default measurement for the user based on their preferences
+	def unit measurement = "human-mass"
+		case measurement
+		when "human-mass"
+			return (preferences["unit"] == "m")? "kg" : "lb"
 		end
 	end
 
@@ -82,7 +99,7 @@ class User < ActiveRecord::Base
 
 	# Returns the user's name if it's set, or the email if it isn't
 	def name
-		preferences["name"].blank? ? email : preferences["name"]
+		preferences[:name].blank? ? email : preferences[:name]
 	end
 
 	# Returns a hash digest of the given string
@@ -131,21 +148,14 @@ class User < ActiveRecord::Base
 	def password_reset_expired?
 		return reset_sent_at < 2.hours.ago
 	end
-	
+
 	# Sets up the user preferences so that it doesn't blow up if they haven't yet set values
 	def setup_preferences
-		preferences ||= {}
-		default_preferences = {
-			"name": "",
-			"sex": "na",
-			"birthday": "",
-			"height": "",
-			"height_display": "",
-			"timezone": "",
-			"units": "m"
-		}
-		default_preferences.each do |pref, default|
-			preferences[pref] = default if preferences.try(:[], pref).nil?
+		defaults = default_preferences
+		defaults.each do |pref, default|
+			if preferences.try(:[], pref).nil?
+				preferences[pref.to_s] = default
+			end
 		end
 	end
 

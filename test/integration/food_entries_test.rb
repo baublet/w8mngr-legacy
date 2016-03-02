@@ -61,7 +61,7 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
         }
         assert_template 'food_entries/index'
         assert_select '.error-explanation'
-        assert_select '.error-explanation li', count: 3
+        assert_select '.error-explanation li', count: 2
 
         create_food_entry
         # Edits the entry we create in the above test

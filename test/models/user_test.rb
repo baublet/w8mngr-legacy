@@ -58,4 +58,17 @@ class UserTest < ActiveSupport::TestCase
         @user.password = @user.password_confirmation = "a" * 5
         assert_not @user.valid?
     end
+
+    test "user preferences set the correct default values" do
+        @user.save
+        @user.reload
+        defaults = @user.default_preferences
+        assert defaults.size > 0, "Default preferences failed to load"
+        assert @user.preferences.size > 0, "User did not have default preferences set"
+        #puts "\n" + @user.preferences.inspect  + "\n"
+        assert_equal defaults.size, @user.preferences.size, "User preferences did not match default preferences"
+        defaults.each do |pref, default|
+            assert_equal default, @user.preferences[pref.to_s], "Failed to set proper default for " + pref.to_s
+        end
+    end
 end

@@ -7,10 +7,6 @@ class FoodEntry < ActiveRecord::Base
 	validates :calories,	presence: true,
 							numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-	validates :fat,  		numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-	validates :carbs,  		numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-	validates :protein,  	numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-
 	validates :day,			presence: true,
 							numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
 
