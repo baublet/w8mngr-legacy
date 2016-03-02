@@ -36,7 +36,15 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 ## For Version 0.2
 
 - [ ] Fill out the integration tests and increase the testing coverage the rest of the site
+  - [x] Weight entries integration test
+  - [ ] Generative tests for food and weight entries
+  - [ ] User profile -- preferences integration tests
+  - [ ] User profile -- preferences model tests
 - [ ] Basic Vue.js interactivity
 - [ ] Refactor and make the CSS more consistent across elements (especially the forms)
 - [ ] Add recipes that we will want searchable and addable to food logs just like food items
-- [ ] Incoporate a universal tagging system so that foods (and later training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
+  - [ ] First step: a basic model test
+  - [ ] Second step: build the model to fit the test
+  - [ ] Third step: basic integration test
+  - [ ] Fourth step: build the UI
+- [ ] Incoporate a universal tagging system so that foods (and later, recipes and training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
