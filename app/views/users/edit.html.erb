@@ -23,14 +23,14 @@
 	<div class="radio-list">
 		<span class="header">Sex</span>
 
-		<%= radio_button_tag 'sex', 'f', @user.preferences["sex"] == "f" ? true : false, :id => "sex.f" %>
-		<%= label_tag "sex.f", "Female" %>
+		<%= radio_button_tag 'sex', 'f', @user.preferences["sex"] == "f" ? true : false, :id => "sex-f" %>
+		<%= label_tag "sex-f", "Female" %>
 
-		<%= radio_button_tag 'sex', 'm', @user.preferences["sex"] == "m" ? true : false, :id => "sex.m" %>
-		<%= label_tag "sex.m", "Male" %>
+		<%= radio_button_tag 'sex', 'm', @user.preferences["sex"] == "m" ? true : false, :id => "sex-m" %>
+		<%= label_tag "sex-m", "Male" %>
 
-		<%= radio_button_tag 'sex', 'na', @user.preferences["sex"].blank? || @user.preferences["sex"] == "na" ? true : false, :id => "sex.na" %>
-		<%= label_tag "sex.na", "Other / Prefer Not to Disclose" %>
+		<%= radio_button_tag 'sex', 'na', @user.preferences["sex"].blank? || @user.preferences["sex"] == "na" ? true : false, :id => "sex-na" %>
+		<%= label_tag "sex-na", "Other / Prefer Not to Disclose" %>
 	</div>
 
 	<%= label_tag "birthday", "Birthday" %>
@@ -48,11 +48,11 @@
 	<div class="radio-list">
 		<span class="header">Units</span>
 
-		<%= radio_button_tag 'units', 'lb', @user.preferences["units"].blank? || @user.preferences["units"] == "lb" ? true : false, :id => "units.i" %>
-		<%= label_tag "units.i", "Imperial" %>
+		<%= radio_button_tag 'units', 'i', @user.preferences["units"] == "i" ? true : false, :id => "units-i" %>
+		<%= label_tag "units-i", "Imperial" %>
 
-		<%= radio_button_tag 'units', 'kg', @user.preferences["units"] == "kg" ? true : false, :id => "units.m" %>
-		<%= label_tag "units.m", "Metric" %>
+		<%= radio_button_tag 'units', 'm', @user.preferences["units"] == "m" ? true : false, :id => "units-m" %>
+		<%= label_tag "units-m", "Metric" %>
 	</div>
 
 	<%= button_tag(type: 'submit', class: 'btn') do %>
