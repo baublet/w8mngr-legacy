@@ -37,4 +37,12 @@ class WeightEntryTest < ActiveSupport::TestCase
         assert @user.weightentries.first.destroy
         assert @user.weightentries.size, 0
     end
+
+    test "happy path generative tests" do
+        # Test 1,000 random values between 1,360 and 680,390
+        for i in 1...1000 do
+            @weight.value = generate_int 1360, 680390
+            assert @weight.valid?, "Generative weight testing failed at " + @weight.value.to_s
+        end
+    end
 end

@@ -2,7 +2,7 @@ class WeightEntry < ActiveRecord::Base
     belongs_to :user,   inverse_of: :weightentries
                         # We store weights in grams, since they're super granular
                         # These numbers are between 3lbs and about 1,500 lbs
-    validates  :value,  presence: true, numericality: { only_integer: true, greater_than: 1359, less_than: 680389 }
+    validates  :value,  presence: true, numericality: { only_integer: true, greater_than: 1359, less_than: 680390 }
     validates  :day,    presence: true,
                         numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
 
