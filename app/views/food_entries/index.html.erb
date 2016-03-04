@@ -1,38 +1,51 @@
 <% provide(:title, "Food Log") %>
 
 <%= render partial: "shared/app_menu" %>
-<%= render partial: "shared/day_navigator", :locals => {base_url: foodlog_path} %>
 
-<h1><i class="fa fa-cutlery"></i> Food Log</h1>
-
-<% if !@foodentry.nil? && @foodentry.errors.any? %>
-	<%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
-<% end %>
-
-<div class="foodlog-table app-form transparent table">
-	<% if @foodentries.size > 0 %>
-	<div class="row header">
-		<div class="col long"></div>
-		<div class="col" title="Calories">Calories</div>
-		<div class="col" title="Fat">Fat</div>
-		<div class="col" title="Carbs">Carbs</div>
-		<div class="col" title="Protein">Protein</div>
-		<div class="col meta"></div>
+<div id="food-entries-app">
+	<div class="day-navigator">
+	    <a href="#"><i class="fa fa-chevron-circle-left"></i></a>
+	    <span class="current-day">{{ current_day }}</span>
+	    <a href="#"><i class="fa fa-chevron-circle-right"></i></a>
 	</div>
-	<%= render @foodentries %>
-	<div class="row header totals">
-		<div class="col long">Totals:</div>
-		<div class="col" title="Calories"><%= number_with_delimiter(@totals["calories"]) %></div>
-		<div class="col" title="Fat"><%= @totals["fat"] %></div>
-		<div class="col" title="Carbs"><%= @totals["carbs"] %></div>
-		<div class="col" title="Protein"><%= @totals["protein"] %></div>
-		<div class="col meta"></div>
-	</div>
-	<% else %>
-		<p>You haven't entered any entries yet today. Add some using the form below!</p>
-	<% end %>
 </div>
-<div class="app-form new table">
-	<% @foodentry = @newfoodentry %>
-	<%= render @foodentry %>
+
+<div class="nojs">
+
+	<%= render partial: "shared/day_navigator", :locals => {base_url: foodlog_path} %>
+
+	<h1><i class="fa fa-cutlery"></i> Food Log</h1>
+
+	<% if !@foodentry.nil? && @foodentry.errors.any? %>
+		<%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
+	<% end %>
+
+	<div class="foodlog-table app-form transparent table">
+		<% if @foodentries.size > 0 %>
+		<div class="row header">
+			<div class="col long"></div>
+			<div class="col" title="Calories">Calories</div>
+			<div class="col" title="Fat">Fat</div>
+			<div class="col" title="Carbs">Carbs</div>
+			<div class="col" title="Protein">Protein</div>
+			<div class="col meta"></div>
+		</div>
+		<%= render @foodentries %>
+		<div class="row header totals">
+			<div class="col long">Totals:</div>
+			<div class="col" title="Calories"><%= number_with_delimiter(@totals["calories"]) %></div>
+			<div class="col" title="Fat"><%= @totals["fat"] %></div>
+			<div class="col" title="Carbs"><%= @totals["carbs"] %></div>
+			<div class="col" title="Protein"><%= @totals["protein"] %></div>
+			<div class="col meta"></div>
+		</div>
+		<% else %>
+			<p>You haven't entered any entries yet today. Add some using the form below!</p>
+		<% end %>
+	</div>
+	<div class="app-form new table">
+		<% @foodentry = @newfoodentry %>
+		<%= render @foodentry %>
+	</div>
+
 </div>
