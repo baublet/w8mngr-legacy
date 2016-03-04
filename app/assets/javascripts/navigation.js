@@ -1,14 +1,12 @@
-w8mngr.ready(function() {
-	console.log("Loading the navigation...");
-	w8mngr.initializeNavigation();
-});
-
 w8mngr.initializeNavigation = function() {
+	console.log("Loading the navigation...");
 	// This function loads the cookies and sets the state of our navigation
 	if (w8mngr.Cookies.getItem("navPosition") === null) w8mngr.Cookies.setItem("navPosition", "#app-menu-dashboard");
 	console.log("Current item set at: " + w8mngr.Cookies.getItem("navPosition"));
 	// Checks our checkbox
-	document.querySelectorAll(w8mngr.Cookies.getItem("navPosition"))[0].checked = true;
+	var check_boxes = document.querySelectorAll(w8mngr.Cookies.getItem("navPosition"));
+	if(typeof check_boxes[0] === 'undefined') return;
+	check_boxes[0].checked = true;
 	// Attaches event listeners to the top-level items
 	var nav_boxes = document.querySelectorAll(".app-menu-top-option");
 	w8mngr.forEach(nav_boxes, function(el) {
@@ -18,4 +16,4 @@ w8mngr.initializeNavigation = function() {
 			console.log("Current item set at: " + w8mngr.Cookies.getItem("navPosition"));
 		});
 	});
-};
+}()

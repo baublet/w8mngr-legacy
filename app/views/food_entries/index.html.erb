@@ -2,15 +2,49 @@
 
 <%= render partial: "shared/app_menu" %>
 
-<div id="food-entries-app">
+<div id="food-entries-app" class="hide-if-no-js">
 	<div class="day-navigator">
 	    <a href="#"><i class="fa fa-chevron-circle-left"></i></a>
 	    <span class="current-day">{{ current_day }}</span>
 	    <a href="#"><i class="fa fa-chevron-circle-right"></i></a>
 	</div>
+	<h1><i class="fa fa-cutlery"></i> Food Log</h1>
+	<div class="foodlog-table app-form transparent table">
+		<div class="row header">
+			<div class="col long"></div>
+			<div class="col" title="Calories">Calories</div>
+			<div class="col" title="Fat">Fat</div>
+			<div class="col" title="Carbs">Carbs</div>
+			<div class="col" title="Protein">Protein</div>
+			<div class="col meta"></div>
+		</div>
+		<div class="row entry" v-for="entry in entries" transition="fade">
+			<div class="col long">
+				<input type="text" @keyup.enter="saveEntry" v-model="entry.description">
+			</div>
+			<div class="col short" title="Calories">
+				<input type="text" @keyup.enter="saveEntry" v-model="entry.calories">
+			</div>
+			<div class="col short" title="Fat">
+				<input type="text" @keyup.enter="saveEntry" v-model="entry.fat">
+			</div>
+			<div class="col short" title="Carbs">
+				<input type="text" @keyup.enter="saveEntry" v-model="entry.carbs">
+			</div>
+			<div class="col short" title="Protein">
+				<input type="text" @keyup.enter="saveEntry" v-model="entry.protein">
+			</div>
+			<div class="col meta">
+				<a href="#" class="btn delete-btn" title="Delete Entry"  @click="removeEntry($index)">
+					<i class="fa fa-times"></i>
+					<span class="screen-reader-text">Delete Entry</span>
+				</a>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="nojs">
+<noscript>
 
 	<%= render partial: "shared/day_navigator", :locals => {base_url: foodlog_path} %>
 
@@ -48,4 +82,4 @@
 		<%= render @foodentry %>
 	</div>
 
-</div>
+</noscript>

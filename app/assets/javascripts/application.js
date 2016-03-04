@@ -14,3 +14,4 @@
 //= require dom_ready
 //= require cookies
 //= require navigation
+//= require food_entries
