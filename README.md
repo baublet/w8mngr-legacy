@@ -35,12 +35,15 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 
 ## For Version 0.2
 
-- [ ] Fill out the integration tests and increase the testing coverage the rest of the site
+- [x] Fill out the integration tests and increase the testing coverage the rest of the site
   - [x] Weight entries integration test
   - [x] Generative tests for food and weight entries
-  - [ ] User profile -- preferences integration tests
+  - [x] User profile -- preferences integration tests
   - [x] User profile -- preferences model tests
 - [ ] Basic Vue.js interactivity
+  - [ ] API request integration from Rails
+  - [ ] Vue.js basic integration
+  - [ ] Connect frontend with backend
 - [ ] Refactor and make the CSS more consistent across elements (especially the forms)
 - [ ] Add recipes that we will want searchable and addable to food logs just like food items
   - [ ] First step: a basic model test
