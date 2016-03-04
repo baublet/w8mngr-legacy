@@ -86,7 +86,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert_equal "selected", selected_zone[0]["selected"]
       post user_path(@user), timezone: "Banana"
       assert_template "users/edit"
-      assert_select ".error-explanation"
+      assert_select ".error-explanation" 
     end
 
     private
