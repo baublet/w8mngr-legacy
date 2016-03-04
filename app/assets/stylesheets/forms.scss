@@ -1,46 +1,40 @@
 input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
-    padding: .4rem;
-    color: $black;
-    background: $white;
-    border: 1px solid lighten($black, 60%);
-    font-family: $font-stack;
-    border-radius: 2px;
-    width:100%;
-    &:hover {
-        border-color: lighten($black, 30%);
-    }
-    &:focus {
-        color: #000;
-        border-color: $black;
-        outline: none;
-    }
-    .large & {
-        font-size: 2rem;
-        font-weight: 300;
-    }
+  padding: .4rem;
+  color: $black;
+  background: $white;
+  border: 1px solid lighten($black, 60%);
+  font-family: $font-stack;
+  border-radius: 2px;
+  width:100%;
+  display: block;
+  margin-bottom: 2rem;
+  &:hover {
+    border-color: lighten($black, 30%);
+  }
+  &:focus {
+    color: #000;
+    border-color: $black;
+    outline: none;
+  }
+  .large & {
+    font-size: 2rem;
+    font-weight: 300;
+  }
 }
 
-form {
-    input, label, textarea, .label {
-        display: block;
-    }
-    textarea {
-        height: 20em;
-    }
-    input, textarea, select {
-        margin-bottom:2rem;
-    }
-    label, .label {
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: .8rem;
-        margin-bottom: .25rem;
-        &.req::after {
-            content: "*";
-            padding-left: .25rem;
-            color: $red;
-        }
-    }
+textarea {
+  height: 20em;
+}
+label, .label {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: .8rem;
+  margin-bottom: .25rem;
+  &.req::after {
+    content: "*";
+    padding-left: .25rem;
+    color: $red;
+  }
 }
 
 .radio {
@@ -105,6 +99,11 @@ form {
     border-radius: 5px;
     padding: 1rem;
     margin: 2rem 0 0;
+    &.transparent {
+      background: transparent;
+      box-shadow: none;
+      color: $black;
+    }
     div {
         margin-bottom: 1rem;
         &:last-child {
@@ -122,21 +121,42 @@ form {
         &::-moz-placeholder {color: rgba($white, .5); font-size: 80%; padding-bottom: 20%; }
         &::-webkit-input-placeholder {color: rgba($white, .5); font-size: 50%; padding-bottom: 40%; }
     }
+    &.transparent {
+      &:-moz-placeholder {color: rgba($black, .5); font-size: 80%; padding-bottom: 20%; }
+      &:-ms-input-placeholder {color: rgba($black, .5); font-size: 80%; padding-bottom: 20%; }
+      &::placeholder {color: rgba($black, .5); font-size: 80%; padding-bottom: 20%; }
+      &::-moz-placeholder {color: rgba($black, .5); font-size: 80%; padding-bottom: 20%; }
+      &::-webkit-input-placeholder {color: rgba($black, .5); font-size: 50%; padding-bottom: 40%; }
+    }
     input[type=text], input[type=number] {
         color: rgba($white, .5);
         background: transparent;
         border: 0;
         border-bottom: 1px solid rgba($white, .25);
         border-radius: 0;
+        padding: .25rem 0;
         &:hover {
-            color: rgba($white, .75);
-            border-bottom: 1px solid rgba($white, .5);
+          color: rgba($white, .75);
+          border-bottom: 1px solid rgba($white, .5);
         }
         &:focus {
-            color: rgba($white, .85);
-            border-bottom: 3px solid $white;
-            margin-bottom: -2px;
+          color: rgba($white, .85);
+          border-bottom: 3px solid $white;
+          margin-bottom: -2px;
         }
+    }
+    &.transparent input[type=text], &.transparent input[type=number] {
+      color: rgba($black, .5);
+      border-bottom: 1px solid rgba($black, .01);
+      &:hover {
+        color: rgba($black, .75);
+        border-bottom-color: rgba($black, .5);
+      }
+      &:focus {
+        color: rgba($black, .85);
+        border-bottom: 3px solid $black;
+        margin-bottom: -2px;
+      }
     }
     .meta {
         text-align: right;

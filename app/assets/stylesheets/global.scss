@@ -159,3 +159,18 @@ em {
         font-weight: 900;
     }
 }
+
+.table {
+  .row {
+    display:block;
+		overflow: visible;
+		font-size: 0;
+  }
+  .col {
+    font-size: 1rem;
+		display: inline-block;
+    overflow: visible;
+		white-space: nowrap;
+		vertical-align: top;
+  }
+}

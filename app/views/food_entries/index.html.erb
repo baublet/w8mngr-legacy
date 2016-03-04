@@ -9,7 +9,7 @@
 	<%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
 <% end %>
 
-<div class="foodlog-table">
+<div class="foodlog-table app-form transparent table">
 	<% if @foodentries.size > 0 %>
 	<div class="row header">
 		<div class="col long"></div>
@@ -31,6 +31,8 @@
 	<% else %>
 		<p>You haven't entered any entries yet today. Add some using the form below!</p>
 	<% end %>
+</div>
+<div class="app-form new table">
 	<% @foodentry = @newfoodentry %>
 	<%= render @foodentry %>
-</table>
+</div>
