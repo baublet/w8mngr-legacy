@@ -5,7 +5,10 @@ class FoodEntriesController < ApplicationController
 	include FoodsHelper
 
 	def index
-		show_list
+		respond_to do |format|
+      format.html { show_list }
+      format.json { show_list :json }
+    end
 	end
 
 	def create
@@ -66,12 +69,16 @@ class FoodEntriesController < ApplicationController
 		redirect_to root_url if @foodentry.nil?
 	end
 
-	def show_list
+	def show_list format = :html
 		# Saves the last viewed day in a cookie
 		cookies[:last_day] = current_day
 		@foodentries = current_user.foodentries_from(current_day)
-		@totals = current_user.food_totals(current_day)
-		@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
-		render 'index'
+		if format == :html
+			@totals = current_user.food_totals(current_day)
+			@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
+			render 'index'
+		else
+			render :json => @foodentries.to_json
+		end
 	end
 end
