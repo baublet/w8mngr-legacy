@@ -1,6 +1,7 @@
 .foodlog-table {
+	padding: 0;
 	width:100%;
-	.row.header {
+	.header {
 		display: none;
 		@include mqAfterSize(640px) {
 			display: block;
@@ -20,22 +21,13 @@
 			}
 		}
 	}
-	.row {
-		display:block;
-		overflow:hidden;
-		font-size: 0;
-	}
 	.col {
-		font-size: 1rem;
-		display:inline-block;
-		width:25%;
-		max-width:25%;
-		overflow:hidden;
-		white-space:nowrap;
-		vertical-align: top;
+		margin-bottom: 0;
+		width: 25%;
+		max-width: 25%;
 		@include mqAfterSize(640px) {
-			width:10%;
-			max-width:10%;
+			width: 10%;
+			max-width: 10%;
 		}
 	}
 	.entry {
@@ -54,26 +46,16 @@
 			input[type=text] {
 				font-size: .9rem;
 				padding:0;
-				border-color: transparent;
-				&:hover {
-					border-bottom-color: rgba($black, .25);
-				}
-				&:focus {
-					border-bottom-color: $black;
-				}
 			}
 			@include mqAfterSize(640px) {
 				width:40%;
 				max-width:40%;
-				input[type=text] {
-					border-bottom-color: rgba($black, .1);
-				}
 			}
 		}
 		.col.short {
+			margin-top: .5rem;
 			position: relative;
 			input[type=text] {
-				background: transparent;
 				position: relative;
 				z-index: 10;
 				padding-bottom: .75rem;
@@ -86,7 +68,7 @@
 				color: rgba($black, .25);
 				position: absolute;
 				z-index: 0;
-				bottom: 7px;
+				bottom: .15rem;
 				left: 0;
 			}
 		}
@@ -103,9 +85,6 @@
 			text-align: right;
 			width:20%;
 			max-width:20%;
-			.delete-btn {
-				font-size: .9rem;
-			}
 			.save {
 				display: none;
 			}
@@ -116,30 +95,12 @@
 		input[type=text] {
 			padding-top: 0;
 			font-size: .8rem;
-			border-color: transparent;
-			@include mqAfterSize(640px) {
-				border-bottom-color: rgba($black, .1);
-			}
 		}
 	}
-	input[type=text] {
-		margin-bottom: .25rem;
+	input[type=text], input[type=number] {
 		width:100%;
-		border-top: 2px solid transparent;
-		border-right: 0;
-		border-left: 0;
-		border-radius: 0;
-		padding-left: 0;
-		padding-right: 0;
-		&:hover {
-			border-bottom-color: rgba($black, .25);
-		}
-		&:focus {
-			border-bottom: 3px solid $black;
-			border-top: 0;
-		}
 	}
-	.totals.row {
+	.totals {
 		font-weight: bold;
 		display:block;
 		text-align:center;
@@ -168,61 +129,41 @@
 			text-align: right;
 		}
 	}
-	.new {
-		padding: .5rem;
-		margin: 2rem 0 0;
-		background: $color-primary;
-		color: $white;
-		border-radius: 5px;
-		box-shadow: 0 0 5px rgba(0,0,0,.5);
-		overflow:hidden;
-		::-webkit-input-placeholder {
-			color: rgba($white, .5);
-			font-size: .6em;
-			font-weight: 700;
-			text-transform: uppercase;
+}
+.app-form.new {
+	padding: .5rem;
+	margin: 2rem 0 0;
+	background: $color-primary;
+	color: $white;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0,0,0,.5);
+	overflow:hidden;
+	.col.long {
+		display:block;
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		input {
+			font-size: 1.6rem;
+		}
+	}
+	.col.short {
+		padding-left: 3px;
+		width: 25%;
+		max-width: 25%;
+		&:first-child {
+			padding-left: 0;
 		}
 		input {
-			background: transparent;
-			border-bottom-color: rgba($white, .25);
-			color: $white;
-			&:-ms-input-placeholder,&:-moz-placeholder{
-				color: rgba($white, .75);
-			}
-			&:hover {
-				border-bottom-color: rgba($white, .5);
-			}
-			&:focus {
-				border-bottom-color: rgba($white, .75);
-			}
+			font-size: 1.2rem;
+			text-align: center;
 		}
-		.col.long {
-			display:block;
-			width: 100%;
-			max-width: 100%;
-			input {
-				font-size: 1.6rem;
-			}
-			margin-bottom: 1rem;
-		}
-		.col.short {
-			padding-left: 3px;
-			width: 25%;
-			max-width: 25%;
-			&:first-child {
-				padding-left: 0;
-			}
-			input {
-				font-size: 1.2rem;
-				text-align: center;
-			}
-		}
-		.col.meta {
-			overflow: visible;
-			display:block;
-			width: 100%;
-			max-width: 100%;
-			text-align:right;
-		}
+	}
+	.col.meta {
+		overflow: visible;
+		display:block;
+		width: 100%;
+		max-width: 100%;
+		text-align:right;
 	}
 }
