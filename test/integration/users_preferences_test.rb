@@ -78,6 +78,17 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         end
     end
 
+    test "users can update their timezone and has to be valid" do
+      login
+      post user_path(@user), timezone: "Eastern Time (US & Canada)"
+      assert_template "users/edit"
+      selected_zone = css_select "#timezone option[value='Eastern Time (US & Canada)']"
+      assert_equal "selected", selected_zone[0]["selected"]
+      post user_path(@user), timezone: "Banana"
+      assert_template "users/edit"
+      assert_select ".error-explanation"
+    end
+
     private
 
     def login
