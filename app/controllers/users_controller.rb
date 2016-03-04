@@ -26,13 +26,18 @@ class UsersController < ApplicationController
 
         begin
             height_cm = params["height_display"].to_unit.convert_to("cm").scalar.to_i
-            @user.preferences["height_display"] = params["height_display"]
-            @user.preferences["height"] = height_cm.to_s
-        rescue
+          rescue
+            height_cm = nil
         end
 
+        date_time = Chronic.parse(params["birthday"])
+
+
+        @user.preferences["height_display"] = params["height_display"]
+        @user.preferences["height"] = height_cm.to_s
+
         @user.preferences["sex"] = params["sex"]
-        @user.preferences["birthday"] = params["birthday"]
+        @user.preferences["birthday"] = date_time.nil? ? params["birthday"] : date_time.strftime("%B %-d, %Y")
         @user.preferences["timezone"] = params["timezone"]
         @user.preferences["units"] = params["units"]
         @user.preferences["name"] = params["name"]

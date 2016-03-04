@@ -16,12 +16,12 @@ class User < ActiveRecord::Base
 	validates_with UserPreferencesValidator
 	def default_preferences
 		{   "name": "",
-			"sex": "na",
-			"birthday": "",
-			"height": "",
-			"height_display": "",
-			"timezone": "",
-			"units": "i"
+			  "sex": "na",
+				"birthday": "",
+				"height": "",
+				"height_display": "",
+				"timezone": "",
+				"units": "i"
 		}
 	end
 
