@@ -1,7 +1,18 @@
+w8mngr.parseTotals = function(array, element) {
+  var sum = 0
+  w8mngr.forEach(array, function(entry) {
+    sum = sum + parseInt(entry[element])
+  })
+  return sum
+}
+
 w8mngr.foodEntriesApp = new Vue({
   events: {
     'hook:created': function () {
       console.log('Loading food entries this...')
+    },
+    'hook:ready': function() {
+      this.calculateTotals()
     }
   },
   el: '#food-entries-app',
@@ -49,6 +60,7 @@ w8mngr.foodEntriesApp = new Vue({
       this.calculateTotals()
     },
     calculateTotals: function() {
+      console.log('Calculating totals...')
       this.totalCalories = w8mngr.parseTotals(this.entries, 'calories')
       this.totalFat = w8mngr.parseTotals(this.entries, 'fat')
       this.totalCarbs = w8mngr.parseTotals(this.entries, 'carbs')
@@ -56,11 +68,3 @@ w8mngr.foodEntriesApp = new Vue({
     }
   }
 })
-
-w8mngr.parseTotals = function(array, element) {
-  var sum = 0
-  w8mngr.forEach(array, function(entry) {
-    sum = sum + parseInt(entry[element])
-  })
-  return sum
-}
