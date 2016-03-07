@@ -35,11 +35,19 @@
 				<input type="text" @keyup.enter="saveEntry" v-model="entry.protein">
 			</div>
 			<div class="col meta">
-				<a href="#" class="btn delete-btn" title="Delete Entry"  @click="removeEntry($index)">
+				<a href="#" class="btn delete-btn" title="Delete Entry"  @click="removeEntry($index)" @click="calculateTotals">
 					<i class="fa fa-times"></i>
 					<span class="screen-reader-text">Delete Entry</span>
 				</a>
 			</div>
+		</div>
+		<div class="row header totals">
+			<div class="col long">Totals:</div>
+			<div class="col" title="Calories">{{ totalCalories }}</div>
+			<div class="col" title="Fat">{{ totalFat }}</div>
+			<div class="col" title="Carbs">{{ totalCarbs }}</div>
+			<div class="col" title="Protein">{{ totalProtein }}</div>
+			<div class="col meta"></div>
 		</div>
 	</div>
 </div>

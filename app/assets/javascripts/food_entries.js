@@ -1,8 +1,7 @@
 w8mngr.foodEntriesApp = new Vue({
   events: {
     'hook:created': function () {
-      console.log('Loading food entries app...')
-      w8mngr.loadFoodEntriesFunctions()
+      console.log('Loading food entries this...')
     }
   },
   el: '#food-entries-app',
@@ -36,6 +35,7 @@ w8mngr.foodEntriesApp = new Vue({
         this.newFat = ''
         this.newCarbs = ''
         this.newProtein = ''
+        console.log(this)
         this.calculateTotals(this)
       } else {
         alert("You need at least a description and calories!")
@@ -43,27 +43,23 @@ w8mngr.foodEntriesApp = new Vue({
     },
     removeEntry: function (index) {
       this.entries.splice(index, 1)
-      w8mngr.calculateTotals()
     },
     saveEntry: function() {
-      w8mngr.calculateTotals(this)
+      this.calculateTotals(this)
+    },
+    calculateTotals: function() {
+      this.totalCalories = w8mngr.parseTotals(this.entries, 'calories')
+      this.totalFat = w8mngr.parseTotals(this.entries, 'fat')
+      this.totalCarbs = w8mngr.parseTotals(this.entries, 'carbs')
+      this.totalProtein = w8mngr.parseTotals(this.entries, 'protein')
     }
   }
 })
 
-w8mngr.loadFoodEntriesFunctions = function(app) {
-  w8mngr.calculateTotals = function(app) {
-    app.totalCalories = app.parseTotals(app.entries, 'calories')
-    app.totalFat = app.parseTotals(app.entries, 'fat')
-    app.totalCarbs = app.parseTotals(app.entries, 'carbs')
-    app.totalProtein = app.parseTotals(app.entries, 'protein')
-  }
-
-  w8mngr.parseTotals = function(array, element) {
-    var sum = 0
-    w8mngr.forEach(function(entry) {
-      sum = sum + parseInt(entry[element])
-    }, sum, element)
-    return sum
-  }
-}(w8mngr)
+w8mngr.parseTotals = function(array, element) {
+  var sum = 0
+  w8mngr.forEach(function(entry) {
+    sum = sum + parseInt(entry[element])
+  }, sum, element)
+  return sum
+}
