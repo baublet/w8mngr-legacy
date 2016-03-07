@@ -43,9 +43,10 @@ w8mngr.foodEntriesApp = new Vue({
     },
     removeEntry: function (index) {
       this.entries.splice(index, 1)
+      this.calculateTotals()
     },
     saveEntry: function() {
-      this.calculateTotals(this)
+      this.calculateTotals()
     },
     calculateTotals: function() {
       this.totalCalories = w8mngr.parseTotals(this.entries, 'calories')
@@ -58,8 +59,8 @@ w8mngr.foodEntriesApp = new Vue({
 
 w8mngr.parseTotals = function(array, element) {
   var sum = 0
-  w8mngr.forEach(function(entry) {
+  w8mngr.forEach(array, function(entry) {
     sum = sum + parseInt(entry[element])
-  }, sum, element)
+  })
   return sum
 }
