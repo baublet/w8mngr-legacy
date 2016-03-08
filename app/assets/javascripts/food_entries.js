@@ -6,7 +6,7 @@ w8mngr.fn.parseTotals = function(array, element) {
   return sum
 }
 
-w8mngr.foodEntriesApp = new Vue({
+w8mngr.foodEntries.app = new Vue({
   events: {
     'hook:ready': function() {
       this.initializeData()
@@ -46,7 +46,9 @@ w8mngr.foodEntriesApp = new Vue({
         }
       })
     },
-    addEntry: function () {
+    addEntry: function (e) {
+      if(e) e.stopPropagation()
+      w8mngr.loading.on()
       var description = this.newDescription.trim()
       var calories = parseInt(this.newCalories.trim()) || 0
       var fat = parseInt(this.newFat.trim()) || 0
@@ -60,12 +62,15 @@ w8mngr.foodEntriesApp = new Vue({
         this.newCarbs = ''
         this.newProtein = ''
         console.log(this)
-        this.calculateTotals(this)
+        this.calculateTotals()
+        w8mngr.loading.off()
+        document.getElementById("description-input").focus()
       } else {
         alert("You need at least a description and calories!")
       }
     },
-    removeEntry: function (index) {
+    removeEntry: function (index, e) {
+      if(e) e.preventDefault()
       this.entries.splice(index, 1)
       this.calculateTotals()
     },
