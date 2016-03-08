@@ -39,12 +39,16 @@ w8mngr.foodEntries.app = new Vue({
           app.entries = response.entries
           app.currentDayNumber = response.current_day
           app.calculateTotals()
+          app.parseDays()
           w8mngr.loading.off()
         },
         onError: function() {
           alert("ERROR:" + response)
         }
       })
+    },
+    parseDays: function() {
+      this.currentDay = w8mngr.fn.numberToDay(this.currentDayNumber)
     },
     addEntry: function (e) {
       if(e) e.stopPropagation()
