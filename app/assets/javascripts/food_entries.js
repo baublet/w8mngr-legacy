@@ -1,6 +1,6 @@
-w8mngr.parseTotals = function(array, element) {
+w8mngr.fn.parseTotals = function(array, element) {
   var sum = 0
-  w8mngr.forEach(array, function(entry) {
+  w8mngr.fn.forEach(array, function(entry) {
     sum = sum + parseInt(entry[element])
   })
   return sum
@@ -29,6 +29,7 @@ w8mngr.foodEntriesApp = new Vue({
   },
   methods: {
     initializeData: function() {
+      w8mngr.loading.on()
       console.log("Fetching data from the API...")
       var app = this
       w8mngr.fetch({
@@ -38,7 +39,7 @@ w8mngr.foodEntriesApp = new Vue({
           app.entries = response.entries
           app.currentDayNumber = response.current_day
           app.calculateTotals()
-          console.log(response)
+          w8mngr.loading.off()
         },
         onError: function() {
           alert("ERROR:" + response)
@@ -73,10 +74,10 @@ w8mngr.foodEntriesApp = new Vue({
     },
     calculateTotals: function() {
       console.log('Calculating totals...')
-      this.totalCalories = w8mngr.parseTotals(this.entries, 'calories')
-      this.totalFat = w8mngr.parseTotals(this.entries, 'fat')
-      this.totalCarbs = w8mngr.parseTotals(this.entries, 'carbs')
-      this.totalProtein = w8mngr.parseTotals(this.entries, 'protein')
+      this.totalCalories = w8mngr.fn.parseTotals(this.entries, 'calories')
+      this.totalFat = w8mngr.fn.parseTotals(this.entries, 'fat')
+      this.totalCarbs = w8mngr.fn.parseTotals(this.entries, 'carbs')
+      this.totalProtein = w8mngr.fn.parseTotals(this.entries, 'protein')
     }
   }
 })

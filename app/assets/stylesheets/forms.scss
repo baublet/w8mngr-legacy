@@ -162,3 +162,23 @@ label, .label {
         text-align: right;
     }
 }
+
+.app-form {
+  position: relative;
+  .loading {
+    display: block;
+    z-index:0;
+    color: rgba($black, .5);
+    font-size: 10rem;
+    position: absolute;
+    right: -2rem;
+    top: 0;
+    opacity: 0;
+    transition: opacity .25s ease-in-out;
+  }
+  &.loading {
+    .loading {
+      opacity: 1;
+    }
+  }
+}

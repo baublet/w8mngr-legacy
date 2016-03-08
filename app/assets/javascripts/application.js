@@ -11,7 +11,11 @@
 // about supported directives.
 //
 //= require w8mngr
-//= require config
+//= require fn.util
+//= require fn.class
 //= require cookies
-//= require navigation
+//= require loading
+//= require fetch
+//= require init.navigation
 //= require food_entries
+w8mngr.init.run()
