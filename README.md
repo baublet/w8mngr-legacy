@@ -42,9 +42,11 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] User profile -- preferences model tests
 - [ ] Basic Vue.js interactivity
   - [ ] API request integration from Rails
-  - [ ] Vue.js basic integration
+  - [x] Vue.js basic integration
   - [ ] Connect frontend with backend
-- [ ] Refactor and make the CSS more consistent across elements (especially the forms)
+  - [ ] Add the ability to switch between days
+  - [ ] Add nice animations
+- [x] Refactor and make the CSS more consistent across elements (especially the forms)
 - [ ] Add recipes that we will want searchable and addable to food logs just like food items
   - [ ] First step: a basic model test
   - [ ] Second step: build the model to fit the test
