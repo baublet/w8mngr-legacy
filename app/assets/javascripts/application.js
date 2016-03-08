@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require w8mngr
-//= require dom_ready
+//= require config
 //= require cookies
 //= require navigation
 //= require food_entries

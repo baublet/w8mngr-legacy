@@ -8,15 +8,14 @@ w8mngr.parseTotals = function(array, element) {
 
 w8mngr.foodEntriesApp = new Vue({
   events: {
-    'hook:created': function () {
-      console.log('Loading food entries this...')
-    },
     'hook:ready': function() {
-      this.calculateTotals()
+      this.initializeData()
     }
   },
   el: '#food-entries-app',
   data: {
+    currentDayNumber: '',
+    currentDay: '',
     newDescription: '',
     newCalories: '',
     newFat: '',
@@ -26,13 +25,26 @@ w8mngr.foodEntriesApp = new Vue({
     totalFat: '',
     totalCarbs: '',
     totalProtein: '',
-    entries: [
-      { id: 3, description:'This is an item', calories: 223, fat: 12, carbs: 30, protein: 10 },
-      { id: 2, description:'This is also an item', calories: 50, fat: 1, carbs: 10, protein: 1 },
-      { id: 1, description:'Hey, me, too!', calories: 175, fat: 3, carbs: 15, protein: 8 }
-    ]
+    entries: []
   },
   methods: {
+    initializeData: function() {
+      console.log("Fetching data from the API...")
+      var app = this
+      w8mngr.fetch({
+        method: "GET",
+        url: w8mngr.config.resources.food_entries.index,
+        onSuccess: function(response) {
+          app.entries = response.entries
+          app.currentDayNumber = response.current_day
+          app.calculateTotals()
+          console.log(response)
+        },
+        onError: function() {
+          alert("ERROR:" + response)
+        }
+      })
+    },
     addEntry: function () {
       var description = this.newDescription.trim()
       var calories = parseInt(this.newCalories.trim()) || 0

@@ -174,3 +174,7 @@ em {
 		vertical-align: top;
   }
 }
+
+.nojs .hide-if-no-js {
+  display: none;
+}

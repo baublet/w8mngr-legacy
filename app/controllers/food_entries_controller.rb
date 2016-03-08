@@ -78,7 +78,7 @@ class FoodEntriesController < ApplicationController
 			@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
 			render 'index'
 		else
-			render :json => @foodentries.to_json
+			render json: {current_day: current_day, entries: @foodentries}
 		end
 	end
 end

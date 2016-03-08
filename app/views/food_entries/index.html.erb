@@ -5,7 +5,7 @@
 <div id="food-entries-app" class="hide-if-no-js">
 	<div class="day-navigator">
 	    <a href="#"><i class="fa fa-chevron-circle-left"></i></a>
-	    <span class="current-day">{{ current_day }}</span>
+	    <span class="current-day" v-text="currentDay"></span>
 	    <a href="#"><i class="fa fa-chevron-circle-right"></i></a>
 	</div>
 	<h1><i class="fa fa-cutlery"></i> Food Log</h1>
@@ -43,10 +43,10 @@
 		</div>
 		<div class="row header totals">
 			<div class="col long">Totals:</div>
-			<div class="col" title="Calories">{{ totalCalories }}</div>
-			<div class="col" title="Fat">{{ totalFat }}</div>
-			<div class="col" title="Carbs">{{ totalCarbs }}</div>
-			<div class="col" title="Protein">{{ totalProtein }}</div>
+			<div class="col" title="Calories" v-text="totalCalories"></div>
+			<div class="col" title="Fat" v-text="totalFat"></div>
+			<div class="col" title="Carbs" v-text="totalCarbs"></div>
+			<div class="col" title="Protein" v-text="totalProtein"></div>
 			<div class="col meta"></div>
 		</div>
 	</div>
