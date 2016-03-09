@@ -7,13 +7,24 @@ w8mngr.fn.numberToDate = function(num) {
   var month = num.substring(4,6)
   var day = num.substring(6, 8)
   var date = new Date(parseInt(year), parseInt(month)-1, parseInt(day));
-  console.log("Parsing date: " + year + month + day)
-  console.log("Date object: " + date)
   return date
 }
 
 w8mngr.fn.numberToDay = function(num, format = "%A, %B %e, %Y") {
   if(num.length < 8) console.log("Number passed to numberToDay isn't valid: " . num)
   var date = w8mngr.fn.numberToDate(num)
+  return date.strftime(format)
+}
+
+// Converts the current day number to the previous day number
+w8mngr.fn.yesterdayNumber = function(num, format = "%Y%m%d") {
+  var date = w8mngr.fn.numberToDate(num)
+  date.setDate(date.getDate() - 1)
+  return date.strftime(format)
+}
+
+w8mngr.fn.tomorrowNumber = function(num, format = "%Y%m%d") {
+  var date = w8mngr.fn.numberToDate(num)
+  date.setDate(date.getDate() + 1)
   return date.strftime(format)
 }

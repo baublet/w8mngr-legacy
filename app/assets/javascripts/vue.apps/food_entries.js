@@ -9,13 +9,15 @@ w8mngr.fn.parseTotals = function(array, element) {
 w8mngr.foodEntries.app = new Vue({
   events: {
     'hook:ready': function() {
-      this.initializeData()
+      this.initializeApp()
     }
   },
   el: '#food-entries-app',
   data: {
     currentDayNumber: '',
     currentDay: '',
+    prevDay: '',
+    nextDay: '',
     newDescription: '',
     newCalories: '',
     newFat: '',
@@ -28,30 +30,14 @@ w8mngr.foodEntries.app = new Vue({
     entries: []
   },
   methods: {
-    initializeData: function() {
-      w8mngr.loading.on()
-      console.log("Fetching data from the API...")
-      var app = this
-      w8mngr.fetch({
-        method: "GET",
-        url: w8mngr.config.resources.food_entries.index,
-        onSuccess: function(response) {
-          app.entries = response.entries
-          app.currentDayNumber = response.current_day
-          app.calculateTotals()
-          app.parseDays()
-          w8mngr.loading.off()
-        },
-        onError: function(response) {
-          alert("ERROR:" + response)
-        }
-      })
+    initializeApp: function() {
+      // Finds the current date based on the URL string
+      var find_day = w8mngr.config.regex.foodlog_day.exec(window.location.href)
+      var day = (find_day[1]) ? find_day[1] : ""
+      // Then, load the day if specified, otherwise it loads the current day
+      this.loadDay(day)
     },
-    parseDays: function() {
-      this.currentDay = w8mngr.fn.numberToDay(this.currentDayNumber)
-    },
-    addEntry: function (e) {
-      if(e) e.stopPropagation()
+    addEntry: function () {
       w8mngr.loading.on()
       var description = this.newDescription.trim()
       var calories = parseInt(this.newCalories.trim()) || 0
@@ -96,8 +82,7 @@ w8mngr.foodEntries.app = new Vue({
         document.getElementById("description-input").focus()
       }
     },
-    removeEntry: function (index, e) {
-      if(e) e.preventDefault()
+    removeEntry: function (index) {
       w8mngr.loading.on()
       var app = this
       w8mngr.fetch({
@@ -121,11 +106,43 @@ w8mngr.foodEntries.app = new Vue({
       this.calculateTotals()
     },
     calculateTotals: function() {
-      console.log('Calculating totals...')
       this.totalCalories = w8mngr.fn.parseTotals(this.entries, 'calories')
       this.totalFat = w8mngr.fn.parseTotals(this.entries, 'fat')
       this.totalCarbs = w8mngr.fn.parseTotals(this.entries, 'carbs')
       this.totalProtein = w8mngr.fn.parseTotals(this.entries, 'protein')
+    },
+    loadNextDay: function() {
+      this.loadDay(this.nextDay)
+    },
+    loadPrevDay: function() {
+      this.loadDay(this.prevDay)
+    },
+    loadDay: function(day = "") {
+      w8mngr.loading.on()
+      console.log("Fetching data from the API...")
+      var app = this
+      w8mngr.fetch({
+        method: "GET",
+        url: w8mngr.config.resources.food_entries.from_day(day),
+        onSuccess: function(response) {
+          app.entries = response.entries
+          app.currentDayNumber = response.current_day
+          app.calculateTotals()
+          app.parseDays()
+          w8mngr.loading.off()
+        },
+        onError: function(response) {
+          alert("ERROR:" + response)
+        }
+      })
+    },
+    // This function takes this.currentDayNum and renders a nice day display
+    // for the rest of the dates relative to the currently-showed date
+    parseDays: function() {
+      this.currentDay = w8mngr.fn.numberToDay(this.currentDayNumber)
+      this.prevDay = w8mngr.fn.yesterdayNumber(this.currentDayNumber)
+      this.nextDay = w8mngr.fn.tomorrowNumber(this.currentDayNumber)
+      console.log("Parsed previous day: " + this.prevDay + " -- And next day: " + this.nextDay)
     }
   }
 })

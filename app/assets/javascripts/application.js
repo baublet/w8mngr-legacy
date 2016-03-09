@@ -14,5 +14,6 @@
 //= require_directory ./fn
 //= require_directory ./utilities
 //= require_directory ./init
-//= require_directory ./apps
+//= require_directory ./vue.transitions
+//= require_directory ./vue.apps
 w8mngr.init.run()

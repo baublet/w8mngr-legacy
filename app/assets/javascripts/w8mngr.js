@@ -29,6 +29,9 @@ w8mngr.foodEntries = {}
 
 // The Configuration
 w8mngr.config = {
+  regex: {
+    foodlog_day: /foodlog\/(\d{8})/
+  },
   resources: {
     base: "/",
     food_entries: {
@@ -36,6 +39,10 @@ w8mngr.config = {
       add: "/food_entries/",
       delete: function(id) {
         return "/food_entries/" + id
+      },
+      from_day: function(day = "") {
+        console.log("From_day call: " + day)
+        return "/foodlog/" + day
       }
     }
   }
