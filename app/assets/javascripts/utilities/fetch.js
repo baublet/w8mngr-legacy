@@ -24,9 +24,10 @@ w8mngr.fetch = function(options) {
   }
   request.setRequestHeader("Accept", "application/json")
   if(method == "POST") {
-    var data = options.data;
+    var data = JSON.stringify(options.data);
+    console.log("Sending: " + data)
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    request.send(JSON.stringify(data));
+    request.send(data);
   } else {
     request.setRequestHeader("Content-Type", "application/json");
     request.send();

@@ -13,29 +13,42 @@ class FoodEntriesController < ApplicationController
 
 	def create
 		@newfoodentry = current_user.foodentries.build(food_entry_params)
+		success = false
 		if @newfoodentry.save
+			success = @newfoodentry.id
 			@newfoodentry = nil
 		end
-		show_list
+		respond_to do |format|
+			format.html { show_list }
+			format.json { render json: {success: success} }
+		end
 	end
 
 	def update
 		@foodentry = current_user.foodentries.find(params[:id])
+		success = false
 		if !@foodentry.nil?
 			if @foodentry.update(food_entry_params)
+				success = true
 				flash.now[:success] = "Entry successfully updated."
 			end
 		else
 			flash.now[:error] = "You cannot edit another user's entries!"
 		end
-		show_list
+		respond_to do |format|
+			format.html { show_list }
+			format.json { render json: {success: success} }
+		end
 	end
 
 	def destroy
 		@foodentry = current_user.foodentries.find(params[:id])
 		@current_day = @foodentry.day
 		@foodentry.destroy
-		show_list
+		respond_to do |format|
+			format.html { show_list }
+			format.json { render json: {success: true} }
+		end
 	end
 
 	# Adds a food to the user's last-viewed day (or the current day) based on measurement (its id) and the amount as a multiplier to the measurement

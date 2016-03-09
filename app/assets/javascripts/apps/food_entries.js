@@ -42,7 +42,7 @@ w8mngr.foodEntries.app = new Vue({
           app.parseDays()
           w8mngr.loading.off()
         },
-        onError: function() {
+        onError: function(response) {
           alert("ERROR:" + response)
         }
       })
@@ -58,25 +58,64 @@ w8mngr.foodEntries.app = new Vue({
       var fat = parseInt(this.newFat.trim()) || 0
       var carbs = parseInt(this.newCarbs.trim()) || 0
       var protein = parseInt(this.newProtein.trim()) || 0
-      if (description && calories) {
-        this.entries.push({ description: description, calories: calories, fat: fat, carbs: carbs, protein: protein })
+      var data = { description: description, calories: calories, fat: fat, carbs: carbs, protein: protein }
+      if (description) {
+        // We'll need this to update the item with the index the ruby app returns to us
+        var index = this.entries.push(data) - 1
+        // Reset our fields
         this.newDescription = ''
         this.newCalories = ''
         this.newFat = ''
         this.newCarbs = ''
         this.newProtein = ''
-        console.log(this)
+        // Keep our this reference in app so we can manipulate it in the fetch request
+        var app = this
+        // Format the data for posting
+        data = { food_entry: data }
+        data.food_entry.day = this.currentDayNumber
+        w8mngr.fetch({
+          method: "POST",
+          url: w8mngr.config.resources.food_entries.add,
+          data: data,
+          onSuccess: function(response) {
+            if(response.success === false) {
+              w8mngr.loading.off()
+              alert("Unknown error...")
+            } else {
+              app.entries[index].id = response.success
+              w8mngr.loading.off()
+            }
+          },
+          onError: function(response) {
+            alert("ERROR: " + response)
+          }
+        })
         this.calculateTotals()
-        w8mngr.loading.off()
         document.getElementById("description-input").focus()
       } else {
-        alert("You need at least a description and calories!")
+        document.getElementById("description-input").focus()
       }
     },
     removeEntry: function (index, e) {
       if(e) e.preventDefault()
-      this.entries.splice(index, 1)
-      this.calculateTotals()
+      w8mngr.loading.on()
+      var app = this
+      w8mngr.fetch({
+        method: "DELETE",
+        url: w8mngr.config.resources.food_entries.delete(app.entries[index].id),
+        onSuccess: function(response) {
+          if(response.success === true) {
+            app.entries.splice(index, 1)
+            app.calculateTotals()
+            w8mngr.loading.off()
+          } else {
+            alert("Unknown error...")
+          }
+        },
+        onError: function(response) {
+          alert("ERROR: " + response)
+        }
+      })
     },
     saveEntry: function() {
       this.calculateTotals()

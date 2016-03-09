@@ -32,7 +32,11 @@ w8mngr.config = {
   resources: {
     base: "/",
     food_entries: {
-      index: "/food_entries/"
+      index: "/food_entries/",
+      add: "/food_entries/",
+      delete: function(id) {
+        return "/food_entries/" + id
+      }
     }
   }
 }
