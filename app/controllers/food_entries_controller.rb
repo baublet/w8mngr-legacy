@@ -5,34 +5,50 @@ class FoodEntriesController < ApplicationController
 	include FoodsHelper
 
 	def index
-		show_list
+		respond_to do |format|
+      format.html { show_list }
+      format.json { show_list :json }
+    end
 	end
 
 	def create
 		@newfoodentry = current_user.foodentries.build(food_entry_params)
+		success = false
 		if @newfoodentry.save
+			success = @newfoodentry.id
 			@newfoodentry = nil
 		end
-		show_list
+		respond_to do |format|
+			format.html { show_list }
+			format.json { render json: {success: success} }
+		end
 	end
 
 	def update
 		@foodentry = current_user.foodentries.find(params[:id])
+		success = false
 		if !@foodentry.nil?
 			if @foodentry.update(food_entry_params)
+				success = true
 				flash.now[:success] = "Entry successfully updated."
 			end
 		else
 			flash.now[:error] = "You cannot edit another user's entries!"
 		end
-		show_list
+		respond_to do |format|
+			format.html { show_list }
+			format.json { render json: {success: success} }
+		end
 	end
 
 	def destroy
 		@foodentry = current_user.foodentries.find(params[:id])
 		@current_day = @foodentry.day
 		@foodentry.destroy
-		show_list
+		respond_to do |format|
+			format.html { show_list }
+			format.json { render json: {success: true} }
+		end
 	end
 
 	# Adds a food to the user's last-viewed day (or the current day) based on measurement (its id) and the amount as a multiplier to the measurement
@@ -66,12 +82,16 @@ class FoodEntriesController < ApplicationController
 		redirect_to root_url if @foodentry.nil?
 	end
 
-	def show_list
+	def show_list format = :html
 		# Saves the last viewed day in a cookie
 		cookies[:last_day] = current_day
 		@foodentries = current_user.foodentries_from(current_day)
-		@totals = current_user.food_totals(current_day)
-		@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
-		render 'index'
+		if format == :html
+			@totals = current_user.food_totals(current_day)
+			@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
+			render 'index'
+		else
+			render json: {current_day: current_day, entries: @foodentries}
+		end
 	end
 end

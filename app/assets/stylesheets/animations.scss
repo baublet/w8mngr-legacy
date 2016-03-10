@@ -1,3 +1,16 @@
+//  Vue animations
+.fade-transition {
+  transition: all .3s ease;
+  opacity: 1;
+  height: 6rem;
+  overflow:hidden;
+}
+
+.fade-enter, .fade-leave {
+  opacity: 0;
+  height: 2rem;
+}
+
 // For the home page elements
 @keyframes slideInLeft {
     0% {

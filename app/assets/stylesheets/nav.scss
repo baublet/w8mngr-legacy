@@ -43,6 +43,7 @@ nav {
 }
 .navigation-options {
     background: darken($color-primary, 15);
+    background: linear-gradient(-25deg, darken($color-primary, 15), $color-primary);
     padding: 1rem;
     border-top-right-radius: 0;
     width: 90%;

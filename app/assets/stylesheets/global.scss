@@ -12,6 +12,10 @@ html {
         -ms-text-size-adjust: none;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .screen-reader-text {
     display: none;
     visibility: hidden;
@@ -173,4 +177,8 @@ em {
 		white-space: nowrap;
 		vertical-align: top;
   }
+}
+
+.nojs .hide-if-no-js {
+  display: none;
 }

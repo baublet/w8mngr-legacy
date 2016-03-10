@@ -1,18 +1,56 @@
-var w8mngr = new Object();
+// Setup the app and its namespaces
+var w8mngr = w8mngr || {}
+// Commonly used functions
+w8mngr.fn = {}
+// Cookies
+w8mngr.cookies = {}
+// Loading toggle(s)
+w8mngr.loading = {}
+// Our fetcher
+w8mngr.fetch = {}
 
-// Our basic forEach() function
-w8mngr.forEach = function (array, fn) {
-  for (var i = 0; i < array.length; i++)
-    fn(array[i], i);
-}
-
-// Our basic event listener
-w8mngr.addEvent = function (el, eventName, handler) {
-  if (el.addEventListener) {
-    el.addEventListener(eventName, handler);
-  } else {
-    el.attachEvent('on' + eventName, function(){
-      handler.call(el);
-    });
+// The initialization array
+w8mngr.init = {
+  _toInit: [],
+  add: function(fn) {
+    if(fn instanceof Function) {
+      this._toInit = this._toInit.concat(fn);
+    }
+  },
+  run: function() {
+    w8mngr.fn.forEach(this._toInit, function(fn) {
+      fn()
+    })
   }
 }
+
+// Food entries app namespace
+w8mngr.foodEntries = {}
+
+// The Configuration
+w8mngr.config = {
+  regex: {
+    foodlog_day: /foodlog\/(\d{8})/
+  },
+  resources: {
+    base: "/",
+    food_entries: {
+      index: "/food_entries/",
+      add: "/food_entries/",
+      delete: function(id) {
+        return "/food_entries/" + id
+      },
+      from_day: function(day = "") {
+        return "/foodlog/" + day
+      },
+      update: function(id) {
+        return "/food_entry/" + id
+      }
+    }
+  }
+}
+
+// Initialize all of our apps by removing the nojs tag from the body
+w8mngr.init.add(function() {
+  w8mngr.fn.removeClass(document.querySelector('body'), 'nojs')
+})

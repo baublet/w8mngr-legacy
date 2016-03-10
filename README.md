@@ -40,11 +40,13 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Generative tests for food and weight entries
   - [x] User profile -- preferences integration tests
   - [x] User profile -- preferences model tests
-- [ ] Basic Vue.js interactivity
-  - [ ] API request integration from Rails
-  - [ ] Vue.js basic integration
-  - [ ] Connect frontend with backend
-- [ ] Refactor and make the CSS more consistent across elements (especially the forms)
+- [x] Basic Vue.js interactivity
+  - [x] API request integration from Rails
+  - [x] Vue.js basic integration
+  - [x] Connect frontend with backend
+  - [x] Add the ability to switch between days
+  - [x] Add nice animations
+- [x] Refactor and make the CSS more consistent across elements (especially the forms)
 - [ ] Add recipes that we will want searchable and addable to food logs just like food items
   - [ ] First step: a basic model test
   - [ ] Second step: build the model to fit the test

@@ -43,4 +43,8 @@ class FoodEntry < ActiveRecord::Base
 		end
 		return self
 	end
+
+	def as_json(options={})
+		super(:only => [:id, :description, :calories, :fat, :carbs, :protein])
+	end
 end
