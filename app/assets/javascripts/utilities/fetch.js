@@ -1,6 +1,6 @@
 w8mngr.fetch = function(options) {
   var method = options.method
-  var url = options.url
+  var url = options.url + "?async_seed=" + new Date() . getTime()
   var onSuccess = (options.onSuccess instanceof Function) ? options.onSuccess : null
   var onError = (options.onError instanceof Function) ? options.onError : null
 
@@ -23,7 +23,7 @@ w8mngr.fetch = function(options) {
     };
   }
   request.setRequestHeader("Accept", "application/json")
-  if(method == "POST") {
+  if(method == "POST" || method == "PUT" || method == "PATCH") {
     var data = JSON.stringify(options.data);
     console.log("Sending: " + data)
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");

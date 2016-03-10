@@ -41,8 +41,10 @@ w8mngr.config = {
         return "/food_entries/" + id
       },
       from_day: function(day = "") {
-        console.log("From_day call: " + day)
         return "/foodlog/" + day
+      },
+      update: function(id) {
+        return "/food_entry/" + id
       }
     }
   }

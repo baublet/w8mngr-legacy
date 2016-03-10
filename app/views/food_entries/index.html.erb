@@ -4,9 +4,9 @@
 
 <div id="food-entries-app" class="hide-if-no-js">
 	<div class="day-navigator">
-	    <a href="#" @click="loadPrevDay" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
+	    <a href="#" @click.stop.prevent="loadPrevDay" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
 	    <span class="current-day" v-text="currentDay"></span>
-	    <a href="#" @click="loadNextDay" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
+	    <a href="#" @click.stop.prevent="loadNextDay" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
 	</div>
 	<h1><i class="fa fa-cutlery"></i> Food Log</h1>
 	<div class="foodlog-table app-form transparent table loading">
@@ -21,19 +21,19 @@
 		</div>
 		<div class="row entry" v-for="entry in entries" transition="fade">
 			<div class="col long">
-				<input type="text" @keyup.enter="saveEntry" v-model="entry.description">
+				<input type="text" @keyup.enter="saveEntry($index)" v-model="entry.description">
 			</div>
 			<div class="col short" title="Calories">
-				<input type="text" @keyup.enter="saveEntry" v-model="entry.calories">
+				<input type="text" @keyup.enter="saveEntry($index)" v-model="entry.calories">
 			</div>
 			<div class="col short" title="Fat">
-				<input type="text" @keyup.enter="saveEntry" v-model="entry.fat">
+				<input type="text" @keyup.enter="saveEntry($index)" v-model="entry.fat">
 			</div>
 			<div class="col short" title="Carbs">
-				<input type="text" @keyup.enter="saveEntry" v-model="entry.carbs">
+				<input type="text" @keyup.enter="saveEntry($index)" v-model="entry.carbs">
 			</div>
 			<div class="col short" title="Protein">
-				<input type="text" @keyup.enter="saveEntry" v-model="entry.protein">
+				<input type="text" @keyup.enter="saveEntry($index)" v-model="entry.protein">
 			</div>
 			<div class="col meta">
 				<a href="#" class="btn delete-btn" title="Delete Entry"  @click.stop.prevent="removeEntry($index)">

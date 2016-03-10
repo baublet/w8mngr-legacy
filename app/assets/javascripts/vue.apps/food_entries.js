@@ -33,7 +33,8 @@ w8mngr.foodEntries.app = new Vue({
     initializeApp: function() {
       // Finds the current date based on the URL string
       var find_day = w8mngr.config.regex.foodlog_day.exec(window.location.href)
-      var day = (find_day[1]) ? find_day[1] : ""
+      var day = ""
+      try { day = find_day[1] } catch(e) {}
       // Then, load the day if specified, otherwise it loads the current day
       this.loadDay(day)
     },
@@ -102,8 +103,34 @@ w8mngr.foodEntries.app = new Vue({
         }
       })
     },
-    saveEntry: function() {
+    saveEntry: function(index) {
+      w8mngr.loading.on()
       this.calculateTotals()
+      var data = {
+        food_entry: {
+          description: this.entries[index].description,
+          calories: this.entries[index].calories,
+          fat: this.entries[index].fat,
+          carbs: this.entries[index].carbs,
+          protein: this.entries[index].protein
+        }
+      }
+      var app = this
+      w8mngr.fetch({
+        method: "POST",
+        url: w8mngr.config.resources.food_entries.update(app.entries[index].id),
+        data: data,
+        onSuccess: function(response) {
+          if(response.success == true) {
+            w8mngr.loading.off()
+          } else {
+            alert("Unknown error...")
+          }
+        },
+        onError: function(response) {
+          alert("ERROR:" + response)
+        }
+      })
     },
     calculateTotals: function() {
       this.totalCalories = w8mngr.fn.parseTotals(this.entries, 'calories')
@@ -120,6 +147,7 @@ w8mngr.foodEntries.app = new Vue({
     loadDay: function(day = "") {
       w8mngr.loading.on()
       console.log("Fetching data from the API...")
+      w8mngr.state.push({}, w8mngr.config.resources.food_entries.from_day(day))
       var app = this
       w8mngr.fetch({
         method: "GET",

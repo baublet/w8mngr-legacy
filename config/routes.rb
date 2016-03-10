@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     post    '/food_entries/:day/log/:food_id' =>
                                 'food_entries#add_food',
                                 as: :food_entry_add_food
+    post    '/food_entry/:id' => 'food_entries#update'
 
     # Foods
     get     '/foods/delete/:id' =>
