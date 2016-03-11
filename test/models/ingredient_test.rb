@@ -30,8 +30,24 @@ class IngredientTest < ActiveSupport::TestCase
     assert ingredient.valid?
   end
 
-  test "user cannot save invalid ingredients" do
-    ingredient = Ingredient.new(
+  test "ingredients automatically load ingredient measurement links" do
+    ingredient = @recipe.ingredients.build(
+      measurement_id: @measurement.id
+    )
+    assert ingredient.valid?
+    assert ingredient.save
+    assert_equal ingredient.measurement_id, @measurement.id
+    ingredient.reload
+    #puts YAML::dump(ingredient)
+    assert_equal "amt unit, A food name", ingredient.name
+    assert_equal 1, ingredient.calories
+    assert_equal 2, ingredient.fat
+    assert_equal 3, ingredient.carbs
+    assert_equal 4, ingredient.protein
+  end
+
+  test "user cannot create invalid ingredients" do
+    ingredient = @recipe.ingredients.build(
       measurement_id: nil,
       name: nil,
       calories: nil,
@@ -56,6 +72,12 @@ class IngredientTest < ActiveSupport::TestCase
     assert ingredient.valid?
     [-1, "twelve", "fart"].each do |value|
       ingredient.calories = value
+      assert_not ingredient.valid?
+      ingredient.fat = value
+      assert_not ingredient.valid?
+      ingredient.carbs = value
+      assert_not ingredient.valid?
+      ingredient.protein = value
       assert_not ingredient.valid?
     end
   end

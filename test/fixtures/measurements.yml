@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 measurementone:
-  amount: 1
-  unit: MyString
+  amount: amt
+  unit: unit
   calories: 1
-  fat: 1
-  carbs: 1
-  protein: 1
+  fat: 2
+  carbs: 3
+  protein: 4
   food_id: <%= ActiveRecord::FixtureSet.identify(:foodone) %>
 
 measurementtwo:

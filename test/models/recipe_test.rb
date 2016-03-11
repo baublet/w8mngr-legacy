@@ -12,7 +12,7 @@ class RecipeTest < ActiveSupport::TestCase
       )
   end
 
-  test "user can create a valid recipe" do
+  test "user can save a valid recipe" do
     assert @recipe.valid?
     @recipe.save
     assert_equal 1, @user.recipes.all.count
@@ -30,5 +30,30 @@ class RecipeTest < ActiveSupport::TestCase
 
     @recipe.description = nil
     assert_not @recipe.valid?
+  end
+
+  test "user can attach recipes to ingredients" do
+    @recipe = @user.recipes.first
+    assert @recipe.ingredients.build(
+      measurement_id: nil,
+      name: "My custom ingredient",
+      calories: 25,
+      fat: 10,
+      carbs: 12,
+      protein: 3).save
+    assert_equal 25, @recipe.calories
+    assert_equal 10, @recipe.fat
+    assert_equal 12, @recipe.carbs
+    assert_equal 3, @recipe.protein
+    # Make sure this also works for measurement IDs
+    ingredient = @recipe.ingredients.build(
+      measurement_id: measurements(:measurementone).id
+    )
+    assert ingredient.save
+    @recipe.reload
+    assert_equal 26, @recipe.calories
+    assert_equal 12, @recipe.fat
+    assert_equal 15, @recipe.carbs
+    assert_equal 7, @recipe.protein
   end
 end

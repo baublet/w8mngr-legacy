@@ -23,4 +23,31 @@ class Recipe < ActiveRecord::Base
                           }
                       }
 
+  def calories
+    get_total :calories
+  end
+
+  def fat
+    get_total :fat
+  end
+
+  def carbs
+    get_total :carbs
+  end
+
+  def protein
+    get_total :protein
+  end
+
+  private
+
+  def get_total macro
+    nil if ![:calories, :fat, :carbs, :protein].include?(macro)
+    sum = 0
+    ingredients.each do |ingredient|
+      sum = sum + ingredient.send(macro)
+    end
+    sum
+  end
+
 end

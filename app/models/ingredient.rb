@@ -1,6 +1,8 @@
 class Ingredient < ActiveRecord::Base
-  belongs_to :recipe,       inverse_of: :ingredients
-  validates    :name,       length: { minimum: 8,  maximum: 155 },
+  after_initialize :load_food_measurement_data
+
+  belongs_to  :recipe,       inverse_of: :ingredients
+  validates   :name,       length: { minimum: 8,  maximum: 155 },
                             if: "measurement_id.nil?"
   validates   :calories,    presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 },
                             if: "measurement_id.nil?"
@@ -17,6 +19,19 @@ class Ingredient < ActiveRecord::Base
   validate :measurement_must_be_valid_if_not_nil
 
   private
+
+  def load_food_measurement_data
+    # No need to do this if the food measurement_id is nil
+    if !measurement_id.nil?
+      measurement = Measurement.find(measurement_id)
+      self.name = measurement.amount + " " + measurement.unit + ","
+      self.name = name + " " + measurement.food.name
+      self.calories = measurement.calories
+      self.carbs = measurement.carbs
+      self.fat = measurement.fat
+      self.protein = measurement.protein
+    end
+  end
 
   def measurement_must_be_valid_if_not_nil
     if !measurement_id.nil?
