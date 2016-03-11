@@ -53,4 +53,5 @@ Rails.application.routes.draw do
     get     '/weightlog/delete/:id' => 'weight_entries#destroy',
                                 as: :weight_entry_delete
 
+    resources :recipes
 end
