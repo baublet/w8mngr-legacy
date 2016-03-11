@@ -32,6 +32,10 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] Scanning element (incorporate existing JS libraries)
   - [ ] Attaching scanned codes to existing foods/recipes
   - [ ] Third-party API integration
+- [ ] Queuing system for JS requests
+  - [ ] For processing normal requests
+  - [ ] For error handling
+  - [ ] For connectivity issues
 
 ## For Version 0.2
 
