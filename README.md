@@ -26,9 +26,6 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 
 # Todo
 
-## Version 0.4
-- [ ] Make Vue integration more sophisticated using [single-file components](http://vuejs.org/guide/application.html#Single_File_Components)
-
 ## For Version 0.3
 
 - [ ] Barcode scanning
@@ -40,6 +37,9 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] For error handling
   - [ ] For connectivity issues
 - [ ] Incorporate a universal tagging system so that foods (and later, recipes and training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
+
+## Version 0.2.1
+- [ ] Make Vue integration more sophisticated using [single-file components](http://vuejs.org/guide/application.html#Single_File_Components)
 
 ## For Version 0.2
 
