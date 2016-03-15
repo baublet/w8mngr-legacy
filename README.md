@@ -26,6 +26,10 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 
 # Todo
 
+## Version 0.4
+- [ ] Make Vue integration more sophisticated
+  - [ ] Using (single-file components)[http://vuejs.org/guide/application.html#Single_File_Components]
+
 ## For Version 0.3
 
 - [ ] Barcode scanning
