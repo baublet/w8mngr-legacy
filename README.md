@@ -36,6 +36,7 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] For processing normal requests
   - [ ] For error handling
   - [ ] For connectivity issues
+- [ ] Incorporate a universal tagging system so that foods (and later, recipes and training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
 
 ## For Version 0.2
 
@@ -52,8 +53,11 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Add nice animations
 - [x] Refactor and make the CSS more consistent across elements (especially the forms)
 - [ ] Add recipes that we will want searchable and addable to food logs just like food items
-  - [ ] First step: a basic model test
-  - [ ] Second step: build the model to fit the test
-  - [ ] Third step: basic integration test
-  - [ ] Fourth step: build the UI
-- [ ] Incoporate a universal tagging system so that foods (and later, recipes and training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
+  - [x] Basic model test
+  - [x] Build the model to fit the test
+  - [x] Basic integration test
+  - [x] Mock up a controller structure
+  - [ ] Build controller using custom ingredients
+  - [ ] Build the UI
+  - [ ] Update the foods API to allow users to add custom foods to recipes
+  - [ ] Update the recipes UI to compensate
