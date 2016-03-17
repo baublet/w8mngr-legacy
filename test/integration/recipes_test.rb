@@ -49,14 +49,13 @@ class FoodsTest < ActionDispatch::IntegrationTest
 						 :recipe =>
 						 		{
 									name: "Recipe name",
-									description: "This is a description",
-                  instructions: "These are the instructions"
+									description: "This is a description"
 								}
 						 }
 		assert_template "recipes/edit"
 		assert_select ".error-explanation", false
     hidden_fields = css_select ".recipe-form input[type=hidden]"
-    @recipe_id = hidden_fields[0].value.to_int
+    @recipe_id = hidden_fields[2]["value"].to_i
   end
 
 end

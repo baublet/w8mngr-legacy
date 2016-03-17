@@ -1,0 +1,23 @@
+<%= form_for(@recipe, :html => {:class => "recipe-form"}) do |f| %>
+
+  <% if @recipe.errors.any? %>
+      <%= render partial: "shared/error_messages", locals: {errors: @recipe.errors} %>
+  <% end %>
+
+  <% if !@recipe.id.nil? %>
+    <%= f.hidden_field :recipe_id, value: @recipe.id %>
+  <% end %>
+
+  <div class="info">
+    <%= f.label :name, :class => "req" %>
+    <%= f.text_field :name, placeholder: "Recipe Name", class: "name" %>
+
+    <%= f.label :description, :class => "req" %>
+    <%= f.text_area :description, placeholder: "Description of the dish. What is the end result?" %>
+  </div>
+
+  <p class="reminder">Once you fill in this form, and create your recipe, you will be able to add ingredients and provide preparation instructions for your dish.</p>
+
+  <%= f.submit (@recipe.id.nil?) ? "Create Recipe" : "Save Recipe", class: "btn" %>
+
+<% end %>

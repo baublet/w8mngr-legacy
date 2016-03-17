@@ -1,6 +1,12 @@
 class RecipesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy, :update]
-  before_action :correct_user, only: [:edit, :update, :destroy, :add_ingredient, :add_food]
+  before_action :correct_user, only: [:edit,
+                                      :update,
+                                      :destroy,
+                                      :add_ingredient,
+                                      :add_food,
+                                      :remove_ingredient
+                                    ]
 
   def index
   end
@@ -14,9 +20,11 @@ class RecipesController < ApplicationController
   end
 
   def new
+    @recipe = current_user.recipes.build()
   end
 
   def create
+    @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       flash.now[:success] = "Your recipe was successfully created"
       @newingredient = @recipe.ingredients.build()
