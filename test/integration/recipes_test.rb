@@ -16,7 +16,8 @@ class FoodsTest < ActionDispatch::IntegrationTest
   test "user can delete a recipe"  do
     create_valid_recipe
     delete_button = css_select ".recipe-form .delete-btn"
-    get delete_button[0].href
+    get delete_button[0]["href"]
+		follow_redirect!
     assert_template "recipes/index"
   end
 

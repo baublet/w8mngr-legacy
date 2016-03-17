@@ -9,6 +9,7 @@ class RecipesController < ApplicationController
                                     ]
 
   def index
+    @recipes = current_user.recipes.all
   end
 
   def show
@@ -55,8 +56,8 @@ class RecipesController < ApplicationController
 
   def destroy
     if @recipe.destroy
-      flash.now[:success] = "Recipe deleted"
-      render :index
+      flash[:success] = "Recipe deleted"
+      redirect_to recipes_path
     else
       flash.now[:error] = "Unknown error deleting recipe"
       render :edit

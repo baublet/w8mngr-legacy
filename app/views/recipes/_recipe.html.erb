@@ -1,0 +1,7 @@
+<h2>
+  <%= link_to edit_recipe_path(recipe) do %>
+    <i class="fa fa-pencil"></i>
+    <span class="screen-reader-text">Edit Entry</span>
+  <% end %>
+  <%= link_to recipe.name, recipe_path(recipe) %>
+</h2>

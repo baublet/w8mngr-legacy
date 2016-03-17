@@ -18,6 +18,10 @@
 
   <p class="reminder">Once you fill in this form, and create your recipe, you will be able to add ingredients and provide preparation instructions for your dish.</p>
 
+  <% if !@recipe.id.nil? %>
+    <%= link_to "Delete Recipe", recipe_delete_path(@recipe), class: "delete-btn" %>
+  <% end %>
+
   <%= f.submit (@recipe.id.nil?) ? "Create Recipe" : "Save Recipe", class: "btn" %>
 
 <% end %>

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
                                 as: :food_pull
     resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
 
+    # Weight entries
     resources :weight_entries,  only: [:index, :create, :update, :destroy]
     get     '/weightlog/'    => 'weight_entries#index'
     get     '/weightlog/:day'=> 'weight_entries#index',
@@ -53,5 +54,8 @@ Rails.application.routes.draw do
     get     '/weightlog/delete/:id' => 'weight_entries#destroy',
                                 as: :weight_entry_delete
 
+    # Recipes
     resources :recipes
+    get     '/recipes/delete/:id(.:format)' => 'recipes#destroy',
+                                as: :recipe_delete
 end
