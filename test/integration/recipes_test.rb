@@ -24,7 +24,13 @@ class FoodsTest < ActionDispatch::IntegrationTest
   test "user can add and remove a custom ingredient to a recipe" do
     create_valid_recipe
     post recipes_path, {
-						 :ingredient =>
+						:recipe =>
+						{
+							name: "My recipe Name",
+							description: "The description goes here!",
+							instructions: "And then, there are the instructions..."
+						},
+						:newingredient =>
 						 		{
 									name: "Custom ingredient name",
 									calories: 123,

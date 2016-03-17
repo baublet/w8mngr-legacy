@@ -42,7 +42,16 @@ class RecipesController < ApplicationController
     else
       flash.now[:error] = "Error updating the recipe"
     end
-    @newingredient = @render.ingredients.build()
+
+    if !newingredient_params.nil?
+      @newingredient = @recipe.ingredients.build(newingredient_params)
+      if @newingredient.save
+        @recipe.reload
+        @newingredient = @recipe.ingredients.build()
+      end
+    else
+      @newingredient = @render.ingredients.build()
+    end
     render :edit
   end
 
@@ -74,6 +83,11 @@ class RecipesController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def recipe_params
     params.require(:recipe).permit(:name, :description, :instructions)
+  end
+
+  # Same for the new ingredients
+  def newingredient_params
+    params.require(:newingredient).permit(:name, :calories, :fat, :carbs, :protein)
   end
 
 end
