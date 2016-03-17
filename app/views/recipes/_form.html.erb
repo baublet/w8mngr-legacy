@@ -4,9 +4,6 @@
       <%= render partial: "shared/error_messages", locals: {errors: @recipe.errors} %>
   <% end %>
 
-  <% if !@recipe.id.nil? %>
-    <%= f.hidden_field :recipe_id, value: @recipe.id %>
-  <% end %>
 
   <div class="info">
     <%= f.label :name, :class => "req" %>

@@ -43,6 +43,7 @@ class RecipesController < ApplicationController
       flash.now[:error] = "Error updating the recipe"
     end
 
+    # Add the new ingredient if the user passed anything
     if !newingredient_params.nil?
       @newingredient = @recipe.ingredients.build(newingredient_params)
       if @newingredient.save
@@ -52,15 +53,8 @@ class RecipesController < ApplicationController
     else
       @newingredient = @render.ingredients.build()
     end
+
     render :edit
-  end
-
-  def add_ingredient
-
-  end
-
-  def add_food
-
   end
 
   def delete_ingredient

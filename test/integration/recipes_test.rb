@@ -5,7 +5,6 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		@user = users(:test)
 		log_in_as(@user)
 		assert logged_in?
-    @recipe_id = 0
 	end
 
   # Happy path first
@@ -23,7 +22,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 
   test "user can add and remove a custom ingredient to a recipe" do
     create_valid_recipe
-    post recipes_path, {
+    patch recipe_path(@recipe), {
 						:recipe =>
 						{
 							name: "My recipe Name",
@@ -36,13 +35,14 @@ class FoodsTest < ActionDispatch::IntegrationTest
 									calories: 123,
                   fat: 234,
                   carbs: 345,
-                  protein: 456,
-                  recipe_id: @recipe_id
+                  protein: 456
 								}
 						 }
     assert_template "recipes/edit"
+		assert_select ".recipe-form .ingredient"
     ingredient_delete = css_select ".recipe-form .ingredient .delete-btn"
-    get ingredient_delete[0].href
+    get ingredient_delete[0]["href"]
+		follow_redirect!
     assert_template "recipes/edit"
     assert_select ".recipe-form .ingredient", count: 0
   end
@@ -61,8 +61,8 @@ class FoodsTest < ActionDispatch::IntegrationTest
 						 }
 		assert_template "recipes/edit"
 		assert_select ".error-explanation", false
-    hidden_fields = css_select ".recipe-form input[type=hidden]"
-    @recipe_id = hidden_fields[2]["value"].to_i
+    @recipe = @user.recipes.last
+		assert_not_nil @recipe
   end
 
 end
