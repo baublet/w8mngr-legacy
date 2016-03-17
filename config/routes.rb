@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     post    '/food_entry/:id' => 'food_entries#update'
 
     # Foods
-    get     '/foods/delete/:id' =>
+    get     '/foods/:id/delete/' =>
                                 'foods#destroy',
                                 as: :food_delete
     get     '/foods/search/' => 'foods#search',
@@ -51,11 +51,15 @@ Rails.application.routes.draw do
     get     '/weightlog/'    => 'weight_entries#index'
     get     '/weightlog/:day'=> 'weight_entries#index',
                                 as: :weight_log_day
-    get     '/weightlog/delete/:id' => 'weight_entries#destroy',
+    get     '/weightlog/:id/delete/' => 'weight_entries#destroy',
                                 as: :weight_entry_delete
 
-    # Recipes
-    resources :recipes
-    get     '/recipes/delete/:id(.:format)' => 'recipes#destroy',
-                                as: :recipe_delete
+    # Recipes and Ingredients
+    resources :recipes do
+      resources :ingredients, only: [:create, :update, :destroy]
+    end
+    get     '/recipes/:id/delete/(.:format)' => 'recipes#destroy',
+                                as: :delete_recipe
+    get     '/recipes/:recipe_id/ingredients/:id/delete(.:format)' => 'ingredients#destroy',
+                                as: :delete_recipe_ingredient
 end

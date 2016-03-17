@@ -19,7 +19,7 @@
   <% if !@recipe.id.nil? %>
     <% if @recipe.ingredients.count > 0 %>
       <h2><i class="fa fa-cutlery"></i> Ingredients</h2>
-      <% render @recipe.ingredients %>
+      <%= render @recipe.ingredients.all %>
     <% end %>
     <div class="new-ingredient app-form">
       <div class="row">
@@ -52,7 +52,7 @@
     <%= f.label :instructions %>
     <%= f.text_area :instructions, placeholder: "Preparation instructions. How do you make this dish?" %>
 
-    <%= link_to "Delete Recipe", recipe_delete_path(@recipe), class: "delete-btn" %>
+    <%= link_to "Delete Recipe", delete_recipe_path(@recipe), class: "delete-btn" %>
   <% else %>
     <p class="reminder">Once you fill in this form, and create your recipe, you will be able to add ingredients and provide preparation instructions for your dish.</p>
   <% end %>

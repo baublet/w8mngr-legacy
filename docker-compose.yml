@@ -9,3 +9,9 @@ web:
     - "3000:3000"
   links:
     - db
+  # The below allows us to attach byebug with docker
+  # To do so, use these commands to start the docker container:
+  # docker-compose up -d
+  # docker attach w8mngr_web_1
+  stdin_open: true
+  tty: true

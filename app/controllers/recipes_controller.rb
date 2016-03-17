@@ -63,6 +63,18 @@ class RecipesController < ApplicationController
 
   end
 
+  def delete_ingredient
+    @ingredient = Ingredient.find_by(id: params[:id])
+    @recipe = @ingredient.recipe
+    if !@recipe.nil?
+      @ingredient.delete
+      flash[:success] = "Ingredient removed from the recipe"
+      redirect_to edit_recipe_path(@recipe)
+    else
+      redirect_to recipes_path
+    end
+  end
+
   def destroy
     if @recipe.destroy
       flash[:success] = "Recipe deleted"
