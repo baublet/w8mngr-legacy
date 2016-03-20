@@ -1,0 +1,33 @@
+<% provide(:title, @recipe.name) %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="recipe">
+  <div class="recipe-header">
+    <h2><i class="fa fa-shopping-basket"></i> <%= @recipe.name %></h2>
+    <p class="serves">Serves 4</p>
+    <p class="description"><%= @recipe.description %></p>
+  </div>
+
+  <div class="info">
+    <h3><i class="fa fa-balance-scale"></i> Nutrition</h3>
+    <strong class="calories">Calories:</strong> <span class="calories-total"><%= @recipe.calories %></span>
+    <strong class="fat">Calories:</strong> <span class="fat-total"><%= @recipe.fat %></span>
+    <strong class="carbs">Carbs:</strong> <span class="carbs-total"><%= @recipe.carbs %></span>
+    <strong class="protein">Protein:</strong> <span class="protein-total"><%= @recipe.protein %></span>
+    <hr>
+  </div>
+
+  <div class="ingredients">
+    <h3><i class="fa fa-cutlery"></i> Ingredients</h3>
+    <%= render @recipe.ingredients %>
+  </div>
+
+  <div class="instructions">
+    <h3><i class="fa fa-flask"></i> Preparation Instructions</h3>
+    <div class="preparation">
+      <%= @recipe.instructions %>
+    </div>
+  </div>
+
+</div>

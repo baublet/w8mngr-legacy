@@ -20,7 +20,7 @@
             <%= render recipe %>
         </div>
         <div class="col meta">
-            <%= link_to recipe_delete_path(recipe), :class => 'btn delete-btn' do %>
+            <%= link_to delete_recipe_path(recipe), :class => 'btn delete-btn' do %>
                 <i class="fa fa-cross"></i>
                 <span class="screen-reader-text">Delete</span>
             <% end %>

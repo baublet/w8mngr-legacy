@@ -24,9 +24,9 @@ When the demo is online, you can view it at [the AWS link](http://w8mngr.nq8c4qz
 
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
 
-# Todo
+# Todo/Roadmap
 
-## For Version 0.3
+## Version 0.3
 
 - [ ] Barcode scanning
   - [ ] Scanning element (incorporate existing JS libraries)
@@ -42,7 +42,7 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 - [ ] Make Vue integration more sophisticated using [single-file components](http://vuejs.org/guide/application.html#Single_File_Components)
 - [ ] Create controller tests
 
-## For Version 0.2
+## Version 0.2
 
 - [x] Fill out the integration tests and increase the testing coverage the rest of the site
   - [x] Weight entries integration test
@@ -61,7 +61,9 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Build the model to fit the test
   - [x] Basic integration test
   - [x] Mock up a controller structure
-  - [ ] Build controller for using custom ingredients
-  - [ ] Build the UI
+  - [x] Build controller for using custom ingredients
+  - [x] Build the Basic UI
+  - [ ] Style the UI and polish UX
   - [ ] Update the foods API to allow users to add custom foods to recipes
   - [ ] Update the recipes UI to compensate
+  - [ ] Smooth out the UX
