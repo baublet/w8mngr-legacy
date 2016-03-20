@@ -27,7 +27,8 @@ class FoodsTest < ActionDispatch::IntegrationTest
 						{
 							name: "My recipe Name",
 							description: "The description goes here!",
-							instructions: "And then, there are the instructions..."
+							instructions: "And then, there are the instructions...",
+							servings: 1
 						},
 						:newingredient =>
 						 		{

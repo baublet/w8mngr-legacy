@@ -4,8 +4,10 @@ one:
   name: MyText
   description: MyText
   instructions: MyText
+  servings: 1
 
 two:
   name: MyText
   description: MyText
   instructions: MyText
+  servings: 3

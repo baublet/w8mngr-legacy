@@ -8,7 +8,8 @@ class RecipeTest < ActiveSupport::TestCase
       @recipe = @user.recipes.build(
         name: "This is a valid food name",
         description: "This is a description",
-        instructions: "And here are my instructions"
+        instructions: "And here are my instructions",
+        servings: 1
       )
   end
 
@@ -16,6 +17,11 @@ class RecipeTest < ActiveSupport::TestCase
     assert @recipe.valid?
     @recipe.save
     assert_equal 1, @user.recipes.all.count
+
+    for i in 1...50 do
+      @recipe.servings = i
+      assert @recipe.valid?, "Servings couldn't be saved at " + i.to_s
+    end
   end
 
   test "user cannot create invalid recipes" do
@@ -27,6 +33,11 @@ class RecipeTest < ActiveSupport::TestCase
     assert_not @recipe.valid?
     @recipe.name = "a" * 8
     assert @recipe.valid?
+
+    @recipe.servings = -1
+    assert_not @recipe.valid?
+    @recipe.servings = 51
+    assert_not @recipe.valid?
 
     @recipe.description = nil
     assert_not @recipe.valid?
