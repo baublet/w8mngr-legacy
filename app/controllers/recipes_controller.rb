@@ -44,7 +44,7 @@ class RecipesController < ApplicationController
     end
 
     # Add the new ingredient if the user passed anything
-    if !newingredient_params.nil?
+    if !newingredient_params.blank?
       @newingredient = @recipe.ingredients.build(newingredient_params)
       if @newingredient.save
         @recipe.reload
@@ -88,7 +88,7 @@ class RecipesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :instructions)
+    params.require(:recipe).permit(:name, :description, :instructions, :servings)
   end
 
   # Same for the new ingredients

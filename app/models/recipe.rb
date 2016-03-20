@@ -8,7 +8,7 @@ class Recipe < ActiveRecord::Base
 
   validates    :description,  presence: true
 
-  validates    :servings,     presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 51 }
+  validates    :servings,     numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 50 }
 
   include PgSearch
   pg_search_scope :search_recipes,

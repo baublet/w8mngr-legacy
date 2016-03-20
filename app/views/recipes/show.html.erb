@@ -5,7 +5,9 @@
 <div class="recipe">
   <div class="recipe-header">
     <h2><i class="fa fa-shopping-basket"></i> <%= @recipe.name %></h2>
-    <p class="serves">Serves 4</p>
+    <% if @recipe.servings > 0 %>
+      <p class="serves">Serves <%= @recipe.servings %></p>
+    <% end %>
     <p class="description"><%= @recipe.description %></p>
   </div>
 
@@ -15,7 +17,14 @@
     <strong class="fat">Calories:</strong> <span class="fat-total"><%= @recipe.fat %></span>
     <strong class="carbs">Carbs:</strong> <span class="carbs-total"><%= @recipe.carbs %></span>
     <strong class="protein">Protein:</strong> <span class="protein-total"><%= @recipe.protein %></span>
-    <hr>
+    <% if @recipe.servings > 0 %>
+      <hr>
+      <h3>Nutrition (per serving)</h3>
+      <strong class="calories">Calories:</strong> <span class="calories-per-serving"><%= @recipe.calories_per_serving %></span>
+      <strong class="fat">Calories:</strong> <span class="fat-per-serving"><%= @recipe.fat_per_serving %></span>
+      <strong class="carbs">Carbs:</strong> <span class="carbs-per-serving"><%= @recipe.carbs_per_serving %></span>
+      <strong class="protein">Protein:</strong> <span class="protein-per-serving"><%= @recipe.protein_per_serving %></span>
+    <% end %>
   </div>
 
   <div class="ingredients">
