@@ -1,0 +1,30 @@
+.recipe-header {
+  margin-bottom: 2rem;
+  p {
+    margin: 0 2rem;
+  }
+  .serves {
+    border-top: 1px solid rgba($black, .075);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-size: .75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+}
+
+.recipe .info {
+  font-size: 0;
+  strong, span {
+    font-size: 1rem;
+    display: inline-block;
+    width: 55%;
+  }
+  strong {
+    width: 45%;
+  }
+  div {
+    width: 50%;
+    display: inline-block;
+  }
+}
