@@ -19,7 +19,8 @@
   <% if !@recipe.id.nil? %>
     <% if @recipe.ingredients.count > 0 %>
       <h2><i class="fa fa-cutlery"></i> Ingredients</h2>
-      <%= render @recipe.ingredients.all %>
+      <%= render partial: "ingredients/ingredient", collection: @recipe.ingredients,
+                          as: :ingredient, locals: {view: "edit"} %>
     <% end %>
     <div class="new-ingredient app-form">
       <div class="row">

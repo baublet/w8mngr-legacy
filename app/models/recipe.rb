@@ -30,7 +30,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def calories_per_serving
-    (servings > 0) ? calories / servings : calories
+    (servings > 0) ? (calories / servings).to_i.round : calories
   end
 
   def fat
@@ -38,7 +38,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def fat_per_serving
-    (servings > 0) ? fat / servings : fat
+    (servings > 0) ? (fat / servings).to_i.round : fat
   end
 
   def carbs
@@ -46,7 +46,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def carbs_per_serving
-    (servings > 0) ? carbs / servings : carbs
+    (servings > 0) ? (carbs / servings).to_i.round : carbs
   end
 
   def protein
@@ -54,7 +54,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def protein_per_serving
-    (servings > 0) ? protein / servings : protein
+    (servings > 0) ? (protein / servings).to_i.round : protein
   end
 
   private

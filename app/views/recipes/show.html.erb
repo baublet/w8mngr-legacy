@@ -32,7 +32,8 @@
 
   <div class="ingredients">
     <h3><i class="fa fa-cutlery"></i> Ingredients</h3>
-    <%= render @recipe.ingredients %>
+    <%= render partial: "ingredients/ingredient", collection: @recipe.ingredients,
+                        as: :ingredient, locals: {view: "show"} %>
   </div>
 
   <div class="instructions">

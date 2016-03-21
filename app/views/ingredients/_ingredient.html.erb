@@ -1,11 +1,18 @@
-<div class="ingredient">
-  <h3><%= ingredient.name %></h3>
-  <div class="calories"><%= ingredient.calories %></div>
-  <div class="fat"><%= ingredient.fat %></div>
-  <div class="carbs"><%= ingredient.carbs %></div>
-  <div class="protein"><%= ingredient.protein %></div>
-  <%= link_to delete_recipe_ingredient_path(@recipe, ingredient), class: "delete-btn" do %>
-    <i class="fa fa-times"></i>
-    <span class="screen-reader-text">Delete Ingredient</span>
+<div class="ingredient <%= (view == "show") ? "list" : "card" %>">
+  <h3>
+    <% if view == "show" %>
+      <i class="fa fa-check"></i>
+    <% end %>
+    <%= ingredient.name %>
+  </h3>
+  <% if view == "edit" %>
+    <div class="calories"><%= ingredient.calories %></div>
+    <div class="fat"><%= ingredient.fat %></div>
+    <div class="carbs"><%= ingredient.carbs %></div>
+    <div class="protein"><%= ingredient.protein %></div>
+    <%= link_to delete_recipe_ingredient_path(@recipe, ingredient), class: "delete-btn" do %>
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Ingredient</span>
+    <% end %>
   <% end %>
 </div>
