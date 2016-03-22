@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @newingredient = @recipe.ingredients.build()
+    @newingredient = Ingredient.new(recipe_id: @recipe.id)
   end
 
   def new
@@ -27,9 +27,8 @@ class RecipesController < ApplicationController
   def create
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
-      flash.now[:success] = "Your recipe was successfully created"
-      @newingredient = @recipe.ingredients.build()
-      render :edit
+      flash[:success] = "Your recipe was successfully created"
+      render edit_recipe_path(@recipe)
     else
       @newrecipe = @recipe
       render :new
@@ -38,23 +37,29 @@ class RecipesController < ApplicationController
 
   def update
     if @recipe.update(recipe_params)
-      flash.now[:success] = "Recipe successfully updated"
+      flash[:success] = "Recipe successfully updated"
     else
-      flash.now[:error] = "Error updating the recipe"
+      flash[:error] = "Error updating the recipe"
     end
 
     # Add the new ingredient if the user passed anything
-    if !newingredient_params.blank?
-      @newingredient = @recipe.ingredients.build(newingredient_params)
-      if @newingredient.save
-        @recipe.reload
-        @newingredient = @recipe.ingredients.build()
-      end
-    else
-      @newingredient = @render.ingredients.build()
+    new_ingredient_save_attempt = false
+    if new_ingredient_info_passed?
+      new_ingredient_save_attempt = true
+      @newingredient = Ingredient.new(new_ingredient_params)
+      @newingredient.recipe_id = @recipe.id
     end
 
-    render :edit
+    # This block allows failed attempts at adding ingredients to fail explicitly
+    if new_ingredient_save_attempt
+      if !@newingredient.save
+        render :edit
+      else
+        redirect_to edit_recipe_path(@recipe)
+      end
+    else
+      redirect_to edit_recipe_path(@recipe)
+    end
   end
 
   def delete_ingredient
@@ -92,8 +97,16 @@ class RecipesController < ApplicationController
   end
 
   # Same for the new ingredients
-  def newingredient_params
+  def new_ingredient_params
     params.require(:newingredient).permit(:name, :calories, :fat, :carbs, :protein)
+  end
+
+  # Returns true if the user passed any new ingredient information
+  def new_ingredient_info_passed?
+    new_ingredient_params.each do |param|
+      return true if !param.blank?
+    end
+    return false
   end
 
 end

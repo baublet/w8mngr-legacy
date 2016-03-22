@@ -1,4 +1,5 @@
-<div class="ingredient <%= (view == "show") ? "list" : "card" %>">
+<% if !ingredient.id.nil? %>
+<div class="ingredient <%= (view == "show") ? "list" : "full" %>">
   <h3>
     <% if view == "show" %>
       <i class="fa fa-check"></i>
@@ -6,13 +7,14 @@
     <%= ingredient.name %>
   </h3>
   <% if view == "edit" %>
-    <div class="calories"><%= ingredient.calories %></div>
+    <div class="calories"><%= number_with_delimiter ingredient.calories %></div>
     <div class="fat"><%= ingredient.fat %></div>
     <div class="carbs"><%= ingredient.carbs %></div>
     <div class="protein"><%= ingredient.protein %></div>
-    <%= link_to delete_recipe_ingredient_path(@recipe, ingredient), class: "delete-btn" do %>
+    <%= link_to delete_recipe_ingredient_path(recipe, ingredient), class: "delete-btn", title: "Delete ingredient" do %>
       <i class="fa fa-times"></i>
       <span class="screen-reader-text">Delete Ingredient</span>
     <% end %>
   <% end %>
 </div>
+<% end %>

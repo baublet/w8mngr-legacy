@@ -10,6 +10,8 @@ class Recipe < ActiveRecord::Base
 
   validates    :servings,     numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 50 }
 
+  before_save  :remove_blank_ingredients
+
   include PgSearch
   pg_search_scope :search_recipes,
                       :against => {
@@ -57,6 +59,12 @@ class Recipe < ActiveRecord::Base
     (servings > 0) ? (protein / servings).to_i.round : protein
   end
 
+  def remove_blank_ingredientsaa
+    ingredients.each do |ingredient|
+      ingredient.destroy if ingredient.id.blank?
+    end
+  end
+
   private
 
   def get_total macro
@@ -66,6 +74,16 @@ class Recipe < ActiveRecord::Base
       sum = sum + ingredient.send(macro)
     end
     sum
+  end
+
+  # We need to call this method every time we want to save a recipe because we don't
+  # necessarily care if the ingredient input is invalid if all we're trying to do is
+  # save the text directly on the recipe. If we don't do this, we get a bunch of blank
+  # ingredients muddling up our ingredients.
+  def remove_blank_ingredients
+    ingredients.each do |ingredient|
+      ingredient.destroy if ingredient.id.blank?
+    end
   end
 
 end
