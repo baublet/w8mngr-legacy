@@ -35,10 +35,10 @@ nav {
     color: $white;
     right: 1rem;
     &:hover {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, .05);
     }
     &:after {
-        content: "\f085";
+        content: "\f0c9";
     }
 }
 .navigation-options {
