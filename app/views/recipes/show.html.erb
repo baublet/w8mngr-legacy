@@ -2,9 +2,24 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Recipes", recipes_path %></li>
+    <li><%= @recipe.name.truncate_words(10) %></li>
+  </ul>
+</div>
+
 <div class="recipe">
   <div class="recipe-header">
     <h1><i class="fa fa-shopping-basket"></i> <%= @recipe.name %></h1>
+    <% if @recipe.user.id == current_user.id %>
+      <div class="meta">
+        <%= link_to edit_recipe_path(@recipe), class: "meta", title: "Edit or Delete this recipe" do %>
+          <i class="fa fa-pencil"></i>
+          <span class="screen-reader-text">Edit Entry</span>
+        <% end %>
+      </div>
+    <% end %>
     <% if @recipe.servings > 0 %>
       <p class="serves">Serves <%= @recipe.servings %></p>
     <% end %>

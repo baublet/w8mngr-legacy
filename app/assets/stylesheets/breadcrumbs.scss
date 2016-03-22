@@ -1,0 +1,36 @@
+.breadcrumbs {
+  margin: 0 -2rem 2rem;
+  padding: .75rem 2rem;
+  background: rgba($black, .05);
+  box-shadow: inset 0 0 3px 3px rgba($black, .05);
+  line-height: .8rem;
+  text-transform: uppercase;
+  font-size: 0;
+  ul {
+    padding: .5rem 0 0;
+    margin: 0;
+    list-style-type: none;
+    vertical-align: middle;
+    line-height: 0;
+    opacity: .5;
+    transition: opacity .25s ease-in-out;
+    white-space: nowrap;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  li {
+    font-size: .65rem;
+    font-weight: 800;
+    display: inline-block;
+    + li:before {
+      font-family: "FontAwesome";
+      content: "\f0a9";
+      padding: 0 .25rem;
+    }
+    a {
+      border: 0;
+      color: $black;
+    }
+  }
+}

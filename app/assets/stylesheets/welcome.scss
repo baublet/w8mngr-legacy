@@ -78,14 +78,18 @@
         padding: 0;
     }
     .site-title {
+      padding: 0 1rem;
         z-index: 16;
         position: absolute;
         top: 2rem;
         width: 100%;
         a {
+            max-width: 100%;
+            background: asset_url('logo.svg') top left no-repeat;
+            background-size:contain;
             margin: 0 auto;
-            width: 225px;
-            height: 111px;
+            width: 400px;
+            height: 380px;
         }
     }
 

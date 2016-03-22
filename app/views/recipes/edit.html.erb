@@ -2,6 +2,14 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Recipes", recipes_path %></li>
+    <li><%= link_to @recipe.name.truncate_words(5), recipe_path(@recipe) %></li>
+    <li>Edit</li>
+  </ul>
+</div>
+
 <h1><i class="fa fa-shopping-basket"></i> Edit Recipe</h1>
 
 <%= render 'form' %>

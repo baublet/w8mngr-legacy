@@ -16,9 +16,9 @@ header .brand, header nav {
         display: block;
         color: $color-primary;
         text-indent: -999px;
-        width: 162px;
-        height: 67px;
-        background: asset_url('logo-long.svg') top left no-repeat;
+        width: 50%;
+        height: 50px;
+        background: asset_url('logo-heart.svg') top left no-repeat;
         background-size:contain;
         //-webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,.25));
     }
