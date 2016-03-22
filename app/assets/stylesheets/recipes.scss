@@ -128,12 +128,20 @@
       display: inline;
       width: auto;
     }
+    strong {
+      display: inline-block;
+      border-bottom: 1px solid rgba($black, .15);
+      padding-bottom: .25rem;
+      margin-right: .5rem;
+      margin-bottom: .5rem;
+    }
   }
   .ingredient {
     opacity: .75;
     font-size: .8rem;
     &:after {
-      content: ", ";
+      content: "\2022";
+      padding: 0 .15rem;
     }
     &:last-child:after {
       content: "";
