@@ -65,5 +65,10 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Build the Basic UI
   - [ ] Style the UI and polish UX
   - [ ] Update the foods API to allow users to add custom foods to recipes
+    - Make it cookie-based; a param from our food search controller tells if the
+      user is coming from a recipe page, if so, it removes the last_day cookie
+      and instead sets an add_to_recipe cookie to the recipe ID.
+    - Then we change the food show.html.erb to reflect which we're doing: adding
+      the food to a recipe, or to our food log.
   - [ ] Update the recipes UI to compensate
   - [ ] Smooth out the UX
