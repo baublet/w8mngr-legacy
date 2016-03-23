@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       flash[:success] = "Your recipe was successfully created"
-      render edit_recipe_path(@recipe)
+      redirect_to edit_recipe_path(@recipe)
     else
       @newrecipe = @recipe
       render :new

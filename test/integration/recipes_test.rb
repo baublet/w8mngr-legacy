@@ -20,7 +20,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
     assert_template "recipes/index"
   end
 
-  test "user can add and remove a custom ingredient to a recipe" do
+  test "user can add and remove a custom ingredient from a recipe" do
     create_valid_recipe
     patch recipe_path(@recipe), {
 						:recipe =>
@@ -39,6 +39,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
                   protein: 456
 								}
 						 }
+		follow_redirect!
     assert_template "recipes/edit"
 		assert_select ".recipe-form .ingredient"
     ingredient_delete = css_select ".recipe-form .ingredient .delete-btn"
@@ -60,6 +61,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
 									description: "This is a description"
 								}
 						 }
+		follow_redirect!
 		assert_template "recipes/edit"
 		assert_select ".error-explanation", false
     @recipe = @user.recipes.last
