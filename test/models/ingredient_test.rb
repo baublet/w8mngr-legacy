@@ -10,7 +10,11 @@ class IngredientTest < ActiveSupport::TestCase
         description: "This is a description",
         instructions: "And here are my instructions"
       )
+      assert @recipe.valid?
+      assert @recipe.save
       @measurement = measurements(:measurementone)
+      assert @measurement.valid?
+      assert @measurement.save
   end
 
   test "user can create a valid custom ingredient" do
@@ -38,7 +42,6 @@ class IngredientTest < ActiveSupport::TestCase
     assert ingredient.save
     assert_equal ingredient.measurement_id, @measurement.id
     ingredient.reload
-    #puts YAML::dump(ingredient)
     assert_equal "amt unit, A food name", ingredient.name
     assert_equal 1, ingredient.calories
     assert_equal 2, ingredient.fat
