@@ -31,6 +31,13 @@ $font-stack: "Roboto", "Helvetica", "Trebuchet MS", "Verdana";
     }
 }
 
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+
 @import "global",
         "header",
         "nav",

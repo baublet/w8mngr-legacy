@@ -149,10 +149,32 @@
   }
 }
 
-.recipe .meta {
-  text-align: right;
-  opacity: .5;
-  &:hover {
-    opacity: 1;
+.new-ingredient.app-form {
+  .row {
+    font-size: 0;
+    .col {
+      font-size: 1;
+      display: inline-block;
+      @include placeholder {
+        font-size: .8rem;
+      }
+    }
+    .long {
+      width: 100%;
+      input {
+        font-size: 1.2rem;
+      }
+      @include placeholder {
+        font-size: 1.2rem;
+      }
+    }
+    .short {
+      width: 25%;
+    }
   }
+}
+
+.recipe-form .delete-btn {
+  display:inline-block;
+  padding-top: 1rem;
 }
