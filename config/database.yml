@@ -10,8 +10,10 @@ development:
     database: w8mngr
     pool: 5
     username: postgres
-    password: postgres
-    host: localhost
+    password: 
+    #password: postgres
+    #host: localhost
+    host: db
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,8 +24,10 @@ test:
     database: w8mngr-test
     pool: 5
     username: postgres
-    password: postgres
-    host: localhost
+    password:
+    #password: postgres
+    #host: localhost
+    host: db
 
 # From Amazon's recommended settings
 # http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Ruby.rds.html#create_deploy_Ruby.rds.newDB

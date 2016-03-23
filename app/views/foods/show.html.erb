@@ -2,6 +2,13 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Foods", foods_path %></li>
+    <li><%= @food.name.truncate_words(10) %></li>
+  </ul>
+</div>
+
 <h1><i class="fa fa-cutlery"></i> <%= @food.name %></h1>
 
 <% if @food.user_id == current_user.id %>
