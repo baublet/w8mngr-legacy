@@ -13,10 +13,10 @@
   <div class="recipe-header">
     <h1><i class="fa fa-shopping-basket"></i> <%= @recipe.name %></h1>
     <% if @recipe.user.id == current_user.id %>
-      <div class="meta">
+      <div class="page-meta">
         <%= link_to edit_recipe_path(@recipe), class: "meta", title: "Edit or Delete this recipe" do %>
           <i class="fa fa-pencil"></i>
-          <span class="screen-reader-text">Edit Entry</span>
+          Edit Recipe
         <% end %>
       </div>
     <% end %>
