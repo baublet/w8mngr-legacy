@@ -26,7 +26,7 @@
 <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
 
 <% @food.measurements.each do |measurement| %>
-    <%= form_tag (cookies[:add_to_recipe].blank?) ? food_entry_log_food_path(@day, @food.id.to_s) : add_food_to_recipe(current_user.recipes.find_by(id: cookies[:add_to_recipe]), measurement) do %>
+    <%= form_tag (cookies[:add_to_recipe].blank?) ? food_entry_log_food_path(@day, @food.id.to_s) : add_food_to_recipe_path(current_user.recipes.find_by(id: cookies[:add_to_recipe]), measurement) do %>
     <%= hidden_field_tag 'measurement_id', measurement.id.to_s %>
     <div class="measurement-box in-transition"<%= measurement.id != 0 ? "data-measurement-id=" + measurement.id.to_s : '' %>>
         <div class="col unit">
