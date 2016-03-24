@@ -1,47 +1,3 @@
-.foods-table {
-	width: 100%;
-	h2 {
-		padding-left: 1rem;
-		margin: 0;
-		font-size: 1rem;
-		position: relative;
-		.icon-pencil {
-			position: absolute;
-			left: -.15rem;
-			top: .25rem;
-			font-size: .75rem;
-			opacity: .8;
-		}
-	}
-	.row {
-		display: block;
-		font-size: 0;
-		border-bottom: 1px solid rgba($black, .025);
-		border-top: 1px solid rgba($black, .05);
-	}
-	.col {
-		vertical-align: middle;
-		display: inline-block;
-		font-size: 1rem;
-		padding: 1rem .5rem;
-	}
-	.long {
-		text-align: left;
-		width: 90%;
-		max-width: 90%;
-	}
-	.meta {
-		text-align: right;
-		width: 10%;
-		max-width: 10%;
-	}
-	.long p {
-		margin: 0 0 0 2.5rem;
-		font-size: .8rem;
-		opacity: .75;
-	}
-}
-
 .foods-measurement-delete-box {
 	display: none;
 	+ .foods-measurement-delete-button:before {
@@ -231,53 +187,63 @@
 	}
 }
 
-.search-result, .foods-table {
-	.measurement {
-		margin: 0;
-		opacity: .75;
-		font-size: .6rem;
-		line-height: .75rem;
-	}
-}
-.foods-table p.measurement {
-	margin: .5rem 0 0 1rem;
-}
-
-.search-result {
+.food {
 	margin:0;
 	padding: 1rem 1rem 1rem 3rem;
-	border-bottom: 1px solid rgba($black, .1);
+	transition: all .15s ease-in-out;
+	.measurement {
+		margin: .5rem 0 0;
+		opacity: .5;
+		font-size: .85rem;
+		line-height: 1rem;
+		transition: opacity .15s ease-in-out;
+	}
+	.unit {
+		display: block;
+	}
 	h2 {
-		font-size: 1.2rem;
+		font-size: 1rem;
 		margin: 0;
 		padding: 0;
 		position: relative;
 		font-weight: 400;
-		a::before {
+		&:before {
 			top: .25rem;
 			font-size: .75rem;
 			font-family: "FontAwesome";
 			position: absolute;
 			left: -2rem;
 			content: "\f067";
-			opacity: .5;
+			opacity: .25;
 		}
-		a:hover::before {
+		&:hover:before {
 			opacity: 1;
 		}
-		.fa {
+		.edit, .delete {
 			position: absolute;
 			left: -2rem;
 			top: 1.5rem;
+			&:hover .fa {
+				opacity: 1;
+				color: $white;
+			}
+		}
+		.delete {
+			left: auto;
+			top: .25rem;
+			right: .5rem;
 		}
 	}
-	&:nth-child(odd) {
-		background: rgba($black, .035);
+	+ .food {
+		border-top: 1px solid rgba($black, .1);
 	}
 	&:hover {
 		background: $color-primary;
 		color: $white;
 		box-shadow: 0 0 5px rgba(0,0,0,.5);
+		.measurement {
+			opacity: 1;
+		}
 		h2 a {
 			color: $white;
 			&:hover {

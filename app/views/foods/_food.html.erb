@@ -1,28 +1,34 @@
-<h2>
-    <% if !food.is_a?(Hash)  %>
-        <%= link_to edit_food_path(food) do %>
-            <i class="fa fa-pencil"></i>
-            <span class="screen-reader-text">Edit Entry</span>
-        <% end if food.user_id == current_user.id %>
-        <%= link_to food.name, food_path(food) %>
-    <% else %>
-        <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
-    <% end %>
-</h2>
-<% if !food.is_a?(Hash) && !food.description.blank? %>
-    <p class="description">
-        <%= food.description %>
-    </p>
-<% end %>
-<%  if !food.is_a?(Hash) && food.measurements.present?
-    measurement = food.measurements.first %>
-    <p class="measurement">
-        <strong>Calories:</strong> <%= measurement.calories %>
-        <strong>Fat:</strong> <%= measurement.fat %>
-        <strong>Carbs:</strong> <%= measurement.carbs %>
-        <strong>Protein:</strong> <%= measurement.protein %>
-        (per
+<div class="food">
+  <h2>
+      <% if !food.is_a?(Hash)  %>
+          <%= link_to food.name, food_path(food) %>
+          <%= link_to edit_food_path(food), class: "edit", title: "Edit Entry" do %>
+              <i class="fa fa-pencil"></i>
+              <span class="screen-reader-text">Edit Entry</span>
+          <% end if food.user_id == current_user.id %>
+          <%= link_to food_delete_path(food), class: "delete",  title: "Delete Entry" do %>
+              <i class="fa fa-times"></i>
+              <span class="screen-reader-text">Delete Entry</span>
+          <% end if food.user_id == current_user.id %>
+      <% else %>
+          <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
+      <% end %>
+  </h2>
+  <% if !food.is_a?(Hash) && !food.description.blank? %>
+      <p class="description">
+          <%= food.description %>
+      </p>
+  <% end %>
+  <%  if !food.is_a?(Hash) && food.measurements.present?
+      measurement = food.measurements.first %>
+      <div class="measurement">
+        <span class="unit">per
         <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
-                      verbose_measurement_unit(measurement.unit) %>)
-    </p>
-<% end %>
+                      verbose_measurement_unit(measurement.unit) %></span>
+          <strong>Calories:</strong> <%= measurement.calories %>
+          <strong>Fat:</strong> <%= measurement.fat %>
+          <strong>Carbs:</strong> <%= measurement.carbs %>
+          <strong>Protein:</strong> <%= measurement.protein %>
+      </div>
+  <% end %>
+</div>

@@ -111,10 +111,11 @@ class RecipesController < ApplicationController
 
   # Returns true if the user passed any new ingredient information
   def new_ingredient_info_passed?
-    new_ingredient_params.each do |param|
-      return true if !param.blank?
+    passed = false
+    new_ingredient_params.each do |key, value|
+      passed = true if !value.blank?
     end
-    return false
+    passed
   end
 
 end

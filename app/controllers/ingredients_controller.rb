@@ -24,11 +24,14 @@ class IngredientsController < ApplicationController
     begin
       amount = params[:amount].to_r.to_f
     rescue
-      amount = 1
+      amount = false
     end
-    amount = 1 if amount == 0
+    amount = 1 if amount == 0 || amount == false
 
-    @ingredient = @recipe.ingredients.build(measurement_id: @measurement.id, amount: amount)
+    @ingredient = @recipe.ingredients.build(
+        measurement_id: @measurement.id,
+        amount: (amount == 1) ? amount : params[:amount]
+      )
     if @ingredient.save
       flash[:success] = "Food successfully added to recipe"
     else

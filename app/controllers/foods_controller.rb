@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
 
   # GET /foods
   def index
-    @foods = current_user.foods.all
+    @foods = current_user.foods.all.where(deleted: false)
   end
 
   # GET /foods/1
@@ -227,9 +227,9 @@ class FoodsController < ApplicationController
 
   # DELETE /foods/1
   def destroy
-    # TODO: Mark these as "deleted" in the database, because we don't want users to be able to delete
+    # Mark these as "deleted" in the database, because we don't want users to be able to delete
     # foods that are used in other users' recipes...
-    @food.destroy
+    @food.update(deleted: 1)
     flash[:success] = 'Food was successfully deleted.'
     redirect_to foods_url
   end
