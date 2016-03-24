@@ -56,19 +56,19 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Add the ability to switch between days
   - [x] Add nice animations
 - [x] Refactor and make the CSS more consistent across elements (especially the forms)
-- [ ] Add recipes that we will want searchable and addable to food logs just like food items
+- [x] Add recipes that we will want searchable and addable to food logs just like food items
   - [x] Basic model test
   - [x] Build the model to fit the test
   - [x] Basic integration test
   - [x] Mock up a controller structure
   - [x] Build controller for using custom ingredients
   - [x] Build the Basic UI
-  - [ ] Style the UI and polish UX
-  - [ ] Update the foods API to allow users to add custom foods to recipes
+  - [x] Style the UI and polish UX
+  - [x] Update the foods API to allow users to add custom foods to recipes
     - Make it cookie-based; a param from our food search controller tells if the
       user is coming from a recipe page, if so, it removes the last_day cookie
       and instead sets an add_to_recipe cookie to the recipe ID.
     - Then we change the food show.html.erb to reflect which we're doing: adding
       the food to a recipe, or to our food log.
-  - [ ] Update the recipes UI to compensate
-  - [ ] Smooth out the UX
+  - [x] Update the recipes UI to compensate
+  - [x] Smooth out the UX
