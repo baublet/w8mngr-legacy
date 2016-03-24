@@ -14,6 +14,14 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    html_renderer = Redcarpet::Render::HTML.new(
+      filter_html: true,
+      no_images: true,
+      no_links: true,
+      no_styles: true
+      )
+    markdown = Redcarpet::Markdown.new(html_renderer, extensions = {})
+    @preparation_instructions = markdown.render(@recipe.instructions)
   end
 
   def edit

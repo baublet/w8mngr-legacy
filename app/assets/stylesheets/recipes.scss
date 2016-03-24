@@ -97,6 +97,17 @@
       font-weight: 800;
     }
   }
+  .add-food {
+    text-align: right;
+    padding: .5rem .25rem 0;
+    a {
+      font-size: .8rem;
+      color: $black;
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
 }
 
 .ingredients h2 + .ingredient {

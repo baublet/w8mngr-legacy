@@ -24,12 +24,20 @@ class Ingredient < ActiveRecord::Base
     # No need to do this if the food measurement_id is nil
     if !measurement_id.nil?
       measurement = Measurement.find(measurement_id)
-      self.name = measurement.amount + " " + measurement.unit + ","
+      self.name = self.amount + " " + measurement.unit + ","
       self.name = name + " " + measurement.food.name
-      self.calories = measurement.calories
-      self.carbs = measurement.carbs
-      self.fat = measurement.fat
-      self.protein = measurement.protein
+
+      # Calculate the multiplier
+      begin
+				multiplier = self.amount.to_r.to_f
+			rescue
+				multiplier = 1
+			end
+      multipler = 1 if multiplier == 0
+      self.calories = measurement.calories * multiplier
+      self.carbs = measurement.carbs * multiplier
+      self.fat = measurement.fat * multiplier
+      self.protein = measurement.protein * multiplier
     end
   end
 

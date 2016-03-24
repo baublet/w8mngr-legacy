@@ -20,7 +20,15 @@ class IngredientsController < ApplicationController
     @measurement = Measurement.find_by(id: params[:measurement_id])
     redirect_to root_url if @measurement.nil?
 
-    @ingredient = @recipe.ingredients.build(measurement_id: @measurement.id)
+    amount = params[:amount].gsub(".0", "")
+    begin
+      amount = params[:amount].to_r.to_f
+    rescue
+      amount = 1
+    end
+    amount = 1 if amount == 0
+
+    @ingredient = @recipe.ingredients.build(measurement_id: @measurement.id, amount: amount)
     if @ingredient.save
       flash[:success] = "Food successfully added to recipe"
     else
