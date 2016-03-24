@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  description: MyText
+  instructions: MyText
+  servings: 1
+
+two:
+  name: MyText
+  description: MyText
+  instructions: MyText
+  servings: 3

@@ -2,6 +2,14 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Foods", foods_path %></li>
+    <li><%= link_to "Search", food_search_path %></li>
+    <li>Results</li>
+  </ul>
+</div>
+
 <h1><i class="fa fa-search"></i> Search Foods</h1>
 
 <%= render 'search_form' %>

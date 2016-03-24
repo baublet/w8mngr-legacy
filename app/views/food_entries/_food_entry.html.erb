@@ -34,7 +34,7 @@
 					<i class="fa fa-barcode"></i>
 					<span class="screen-reader-text">Scan Barcode</span>
 				<% end %>
-				<%= link_to food_search_path, { class: "btn search-btn", alt: "Search for Foods", title: "Search for Foods" } do %>
+				<%= link_to food_search_path(:food_log_referrer => "true"), { class: "btn search-btn", alt: "Search for Foods", title: "Search for Foods" } do %>
 					<i class="fa fa-search"></i>
 					<span class="screen-reader-text">Search for Foods</span>
 				<% end %>

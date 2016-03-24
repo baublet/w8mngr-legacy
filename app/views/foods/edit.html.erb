@@ -2,6 +2,14 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Foods", foods_path %></li>
+    <li><%= link_to @food.name.truncate_words(10), food_path(@food) %></li>
+    <li>Edit</li>
+  </ul>
+</div>
+
 <h1><i class="fa fa-cutlery"></i> Editing Food</h1>
 
 <div class="page-meta">

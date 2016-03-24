@@ -20,14 +20,14 @@ class FoodEntryTest < ActiveSupport::TestCase
 
     test "happy path generative tests" do
         # This is the general range for which users would enter calories.
-        # I doubtanyone would ever enter anything with more than 30,000 calories
-        for i in 0...30000 do
+        # I doubt anyone would ever enter anything with more than 10,000 calories
+        for i in 0...10000 do
             @newfoodentry.calories = i
             assert @newfoodentry.valid?, "Generative test failed for calories at " + i.to_s
         end
         # The same here for macros. I've never heard of any food or recipe
-        # calling for more than 10,000 of either fat, carbs or protein!
-        for i in 0...10000 do
+        # calling for more than 2,000 of either fat, carbs or protein!
+        for i in 0...2000 do
             @newfoodentry.fat = i
             @newfoodentry.carbs = i
             @newfoodentry.protein = i

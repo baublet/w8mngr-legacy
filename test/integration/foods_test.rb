@@ -100,9 +100,11 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		get food_search_path
 		get food_search_path, q: "Food"
 		assert_template "foods/find"
+		# Selects the first food found on the page
 		results = css_select ".search-result h2 a"
-		get results[1]["href"]
+		get results[2]["href"]
 		assert_template "foods/show"
+		# Find the first measurement and add it to the food log
 		results = css_select "main form"
 		measurement_box = css_select ".measurement-box"
 		post results[0]['action'], measurement: measurement_box[0]['data-measurement-id']
@@ -116,9 +118,23 @@ class FoodsTest < ActionDispatch::IntegrationTest
 		get new_food_path
 		assert_template "foods/new"
 		post foods_path, {
-						 :food => {name: "Food name", description: "This is a description"},
-						 :measurement => {'0' => {amount: "1", unit: "unit",
-							 				 calories: 1, fat: 2, carbs: 3, protein: 4}}
+						 :food =>
+						 		{
+									name: "Food name",
+									description: "This is a description"
+								},
+						 :measurement =>
+						 		{
+									'0' =>
+									  {
+											amount: "1",
+											unit: "unit",
+							 		  	calories: 1,
+											fat: 2,
+											carbs: 3,
+											protein: 4
+									 }
+							  }
 						 }
 		assert_template "foods/edit"
 		assert_select ".error-explanation", false

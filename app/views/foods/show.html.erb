@@ -2,6 +2,13 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Foods", foods_path %></li>
+    <li><%= @food.name.truncate_words(10) %></li>
+  </ul>
+</div>
+
 <h1><i class="fa fa-cutlery"></i> <%= @food.name %></h1>
 
 <% if @food.user_id == current_user.id %>
@@ -19,8 +26,8 @@
 <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
 
 <% @food.measurements.each do |measurement| %>
-    <%= form_tag food_entry_log_food_path(@day, @food.id.to_s) do %>
-    <%= hidden_field_tag 'measurement', measurement.id.to_s %>
+    <%= form_tag (cookies[:add_to_recipe].blank?) ? food_entry_log_food_path(@day, @food.id.to_s) : add_food_to_recipe_path(current_user.recipes.find_by(id: cookies[:add_to_recipe]), measurement) do %>
+    <%= hidden_field_tag 'measurement_id', measurement.id.to_s %>
     <div class="measurement-box in-transition"<%= measurement.id != 0 ? "data-measurement-id=" + measurement.id.to_s : '' %>>
         <div class="col unit">
             <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
@@ -52,10 +59,10 @@
             <span class="value"><%= measurement.protein %></span>
         </div>
 
-        <%= button_tag(type: 'submit', class: 'btn food-log-new-btn') do %>
-			<i class="fa fa-plus"></i>
-			<span class="btn-text">Add to Log</span>
-		<% end %>
+        <%= button_tag(type: 'submit', class: 'btn food-log-new-btn', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
+    			<i class="fa fa-plus"></i>
+    			<span class="btn-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
+    		<% end %>
     </div>
     <% end %>
 <% end %>

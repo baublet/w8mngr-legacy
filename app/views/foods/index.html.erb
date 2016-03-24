@@ -2,6 +2,13 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Foods", foods_path %></li>
+    <li>My Foods</li>
+  </ul>
+</div>
+
 <h1><i class="fa fa-cutlery"></i> Your Foods</h1>
 
 <div class="page-meta">
@@ -14,19 +21,7 @@
 <% if !@foods.nil? && @foods.size > 0 %>
 
 <div class="foods-table">
-<% @foods.each do |food| %>
-    <div class="row">
-        <div class="col long">
-            <%= render food %>
-        </div>
-        <div class="col meta">
-            <%= link_to food_delete_path(food), :class => 'btn delete-btn' do %>
-                <i class="fa fa-cross"></i>
-                <span class="screen-reader-text">Delete</span>
-            <% end %>
-        </div>
-  </div>
-<% end %>
+  <%= render @foods %>
 </div>
 
 <% else %>

@@ -2,21 +2,23 @@ header {
     background: $black;
     color: $white;
     padding: .5rem 1rem;
+    font-size: 0;
 }
 header .brand, header nav {
     display:inline-block;
     vertical-align: top;
-    width:49%;
+    width:50%;
+    font-size: 1;
 }
 .site-title {
-    margin: .5rem 0 0;
+    margin: .25rem 0 0;
     a {
         display: block;
         color: $color-primary;
         text-indent: -999px;
-        width: 75px;
-        height: 37px;
-        background: asset_url('logo.svg') top left no-repeat;
+        width: 50%;
+        height: 50px;
+        background: asset_url('logo-heart.svg') top left no-repeat;
         background-size:contain;
         //-webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,.25));
     }

@@ -97,6 +97,7 @@ GEM
     rake (10.5.0)
     rdoc (4.2.1)
       json (~> 1.4)
+    redcarpet (3.3.4)
     ref (2.0.0)
     ruby-units (2.0.0)
     sass (3.4.21)
@@ -146,6 +147,7 @@ DEPENDENCIES
   pg_search
   puma
   rails (= 4.2.5)
+  redcarpet
   ruby-units
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

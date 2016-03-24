@@ -57,11 +57,11 @@ class FoodEntriesController < ApplicationController
 		@day = !cookies[:last_day].present? ? current_day : validate_day(cookies[:last_day])
 		# Load up the food in this entry
 		@food_entry = current_user.foodentries.build(day: @day)
-		@food_entry.populate_with_food(params[:measurement].to_i, params[:amount])
+		@food_entry.populate_with_food(params[:measurement_id].to_i, params[:amount])
 		if @food_entry.save
 			# Redirect them back to that day
 			flash[:success] = "Added food to your log!"
-			increment_popularity params[:food_id].to_i, params[:measurement].to_i
+			increment_popularity params[:food_id].to_i, params[:measurement_id].to_i
 		else
 			# TODO: Log this behavior
 			flash[:error] = "Error adding the food to your log"

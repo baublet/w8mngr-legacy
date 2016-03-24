@@ -1,0 +1,4 @@
+foodone:
+    name: A food name
+    description: test
+    user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>

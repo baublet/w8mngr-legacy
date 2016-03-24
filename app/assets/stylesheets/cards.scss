@@ -1,0 +1,40 @@
+.card {
+  position: relative;
+  display:inline-block;
+  max-width: 100%;
+  width: 350px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: $white;
+  box-shadow: 1px 1px 3px 3px rgba($black, .05);
+  border-radius: 3px;
+  &:hover {
+    box-shadow: 1px 1px 3px 3px rgba($black, .1);
+  }
+  .meta {
+    position: absolute;
+    right: .25rem;
+    top: .15rem;
+  }
+  h2 {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: $color-primary;
+    color: $white;
+    margin: -1rem -1rem 1rem;
+    padding: 1.5rem 1rem;
+    a {
+      color: $white;
+      opacity: .75;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .description {
+    margin: -1rem -1rem 1rem;
+    padding: 1rem;
+    background: $color-primary;
+    color: $white;
+  }
+}

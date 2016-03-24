@@ -34,11 +34,12 @@ nav {
     padding:.2rem .5rem;
     color: $white;
     right: 1rem;
+    top: 1rem;
     &:hover {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, .05);
     }
     &:after {
-        content: "\f085";
+        content: "\f0c9";
     }
 }
 .navigation-options {
@@ -52,7 +53,7 @@ nav {
     top: 0;
     right: -100%;
     transition: right .5s cubic-bezier(0,.98,.8,.99);
-    box-shadow: inset 0 0 5px 3px rgba(black, .25);
+    box-shadow: 0 0 5px 3px rgba(black, .25);
     height: 100vh;
     overflow-y: auto;
 }

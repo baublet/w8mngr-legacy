@@ -1,12 +1,19 @@
 class User < ActiveRecord::Base
-	has_many :foodentries,	class_name: "FoodEntry",
+
+	has_many :foodentries, class_name: "FoodEntry",
 							foreign_key: "user_id",
 							dependent: :destroy,
 							inverse_of: :user
-	has_many :foods,		class_name: "Food",
+
+	has_many :foods, class_name: "Food",
 							foreign_key: "user_id",
 							inverse_of: :user
-	has_many :weightentries,class_name: "WeightEntry",
+
+	has_many :weightentries, class_name: "WeightEntry",
+							dependent: :destroy,
+							inverse_of: :user
+
+	has_many :recipes, class_name: "Recipe",
 							dependent: :destroy,
 							inverse_of: :user
 

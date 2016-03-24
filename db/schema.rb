@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222173623) do
+ActiveRecord::Schema.define(version: 20160324232302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,19 +33,33 @@ ActiveRecord::Schema.define(version: 20160222173623) do
   add_index "food_entries", ["user_id"], name: "index_food_entries_on_user_id", using: :btree
 
   create_table "foods", force: :cascade do |t|
-    t.text     "name",                    null: false
+    t.text     "name",                        null: false
     t.text     "description"
     t.text     "ndbno"
     t.text     "upc"
     t.integer  "popularity",  default: 0
     t.integer  "likes",       default: 0
     t.integer  "user_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "deleted",     default: false
   end
 
   add_index "foods", ["name"], name: "index_foods_on_name", using: :btree
   add_index "foods", ["user_id"], name: "index_foods_on_user_id", using: :btree
+
+  create_table "ingredients", force: :cascade do |t|
+    t.integer  "recipe_id"
+    t.integer  "measurement_id"
+    t.text     "name"
+    t.integer  "calories"
+    t.integer  "fat"
+    t.integer  "carbs"
+    t.integer  "protein"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "amount"
+  end
 
   create_table "measurements", force: :cascade do |t|
     t.text     "amount",                 null: false
@@ -61,6 +75,21 @@ ActiveRecord::Schema.define(version: 20160222173623) do
   end
 
   add_index "measurements", ["food_id"], name: "index_measurements_on_food_id", using: :btree
+
+  create_table "recipes", force: :cascade do |t|
+    t.text     "name",                     null: false
+    t.text     "description"
+    t.text     "instructions"
+    t.integer  "user_id"
+    t.integer  "popularity",   default: 0
+    t.integer  "likes",        default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "servings",     default: 1
+  end
+
+  add_index "recipes", ["name"], name: "index_recipes_on_name", using: :btree
+  add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -87,5 +116,6 @@ ActiveRecord::Schema.define(version: 20160222173623) do
   add_foreign_key "food_entries", "users"
   add_foreign_key "foods", "users"
   add_foreign_key "measurements", "foods"
+  add_foreign_key "recipes", "users"
   add_foreign_key "weight_entries", "users"
 end

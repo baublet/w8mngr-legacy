@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  amount: 1
-  unit: MyString
+measurementone:
+  amount: amt
+  unit: unit
   calories: 1
-  fat: 1
-  carbs: 1
-  protein: 1
-  food_id: 
+  fat: 2
+  carbs: 3
+  protein: 4
+  food_id: <%= ActiveRecord::FixtureSet.identify(:foodone) %>
 
-two:
+measurementtwo:
   amount: 1
   unit: MyString
   calories: 1
   fat: 1
   carbs: 1
   protein: 1
-  food_id: 
+  food_id: <%= ActiveRecord::FixtureSet.identify(:foodone) %>

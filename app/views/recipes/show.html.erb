@@ -1,0 +1,61 @@
+<% provide(:title, @recipe.name) %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <ul>
+    <li><%= link_to "Recipes", recipes_path %></li>
+    <li><%= @recipe.name.truncate_words(10) %></li>
+  </ul>
+</div>
+
+<div class="recipe">
+  <div class="recipe-header">
+    <h1><i class="fa fa-shopping-basket"></i> <%= @recipe.name %></h1>
+    <% if @recipe.user.id == current_user.id %>
+      <div class="page-meta">
+        <%= link_to edit_recipe_path(@recipe), class: "meta", title: "Edit or Delete this recipe" do %>
+          <i class="fa fa-pencil"></i>
+          Edit Recipe
+        <% end %>
+      </div>
+    <% end %>
+    <% if @recipe.servings > 0 %>
+      <p class="serves">Serves <%= @recipe.servings %></p>
+    <% end %>
+    <p class="description"><%= @recipe.description %></p>
+  </div>
+
+  <div class="info">
+    <div class="nutrition">
+      <h3><i class="fa fa-balance-scale"></i> Nutrition</h3>
+      <strong class="calories">Calories:</strong> <span class="calories-total"><%= number_with_delimiter @recipe.calories %></span>
+      <strong class="fat">Calories:</strong> <span class="fat-total"><%= @recipe.fat %></span>
+      <strong class="carbs">Carbs:</strong> <span class="carbs-total"><%= @recipe.carbs %></span>
+      <strong class="protein">Protein:</strong> <span class="protein-total"><%= @recipe.protein %></span>
+    </div>
+    <% if @recipe.servings > 0 %>
+      <div class="nutrition per-serving">
+        <h3>per serving (1/<%= @recipe.servings %>)</h3>
+        <strong class="calories">Calories:</strong> <span class="calories-per-serving"><%= number_with_delimiter @recipe.calories_per_serving %></span>
+        <strong class="fat">Calories:</strong> <span class="fat-per-serving"><%= @recipe.fat_per_serving %></span>
+        <strong class="carbs">Carbs:</strong> <span class="carbs-per-serving"><%= @recipe.carbs_per_serving %></span>
+        <strong class="protein">Protein:</strong> <span class="protein-per-serving"><%= @recipe.protein_per_serving %></span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="ingredients">
+    <h3><i class="fa fa-cutlery"></i> Ingredients</h3>
+    <%= render partial: "ingredients/ingredient", collection: @recipe.ingredients,
+                        as: :ingredient, locals: {view: "show"} %>
+  </div>
+
+  <div class="instructions">
+    <h3><i class="fa fa-flask"></i> Preparation Instructions</h3>
+    <div class="preparation">
+      <%= raw(@preparation_instructions) %>
+    </div>
+  </div>
+
+</div>

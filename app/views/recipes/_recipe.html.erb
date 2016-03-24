@@ -1,0 +1,22 @@
+<div class="recipe card">
+  <h2>
+    <%= link_to edit_recipe_path(recipe), class: "meta", title: "Edit or Delete this recipe" do %>
+      <i class="fa fa-pencil"></i>
+      <span class="screen-reader-text">Edit Entry</span>
+    <% end %>
+    <%= link_to recipe.name, recipe_path(recipe) %>
+  </h2>
+  <% if !recipe.description.blank? %>
+    <p class="description"><%= recipe.description.truncate_words(30) %></p>
+  <% end %>
+  <div class="info">
+    <strong>Calories: </strong><span class="calories-total"><%= number_with_delimiter recipe.calories %> </span>
+    <% if recipe.servings > 0 %>
+      <span class="calories-per-serving">(<%= number_with_delimiter recipe.calories_per_serving %> per serving)</span><br>
+    <% end %>
+    <%= recipe.ingredients.each do |ingredient| %>
+      <span class="ingredient"><%= ingredient.name %></span>
+    <% end %>
+    </strong>
+  </div>
+</div>
