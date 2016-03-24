@@ -62,4 +62,6 @@ Rails.application.routes.draw do
                                 as: :delete_recipe
     get     '/recipes/:recipe_id/ingredients/:id/delete(.:format)' => 'ingredients#destroy',
                                 as: :delete_recipe_ingredient
+    post    '/recipes/:recipe_id/ingredients/add_measurement/:measurement_id' => 'ingredients#create_from_food',
+                                as: :add_food_to_recipe
 end

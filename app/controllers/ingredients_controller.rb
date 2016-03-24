@@ -14,6 +14,22 @@ class IngredientsController < ApplicationController
     end
   end
 
+  def create_from_food
+    @recipe = current_user.recipes.find_by(id: params[:recipe_id])
+    redirect_to root_url if @recipe.nil?
+    @measurement = Measurement.find_by(id: params[:measurement_id])
+    redirect_to root_url if @measurement.nil?
+
+    @recipe.ingredients.build(measurement_id: @measurement.id)
+    if @recipe.save
+      flash[:success] = "Food successfully added to recipe"
+    else
+      flash[:error] = "Unknown error adding food to recipe"
+    end
+
+    redirect_to edit_recipe_path(@recipe)
+  end
+
   def update
   end
 

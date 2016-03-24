@@ -62,6 +62,11 @@
           </div>
         </div>
       </div>
+      <p class="add-food">
+        <%= link_to food_search_path(:recipe => @recipe.id) do %>
+          <i class="fa fa-search"></i> Add a Food
+        <% end %>
+      </p>
     </div>
 
     <%= f.label :instructions %>
