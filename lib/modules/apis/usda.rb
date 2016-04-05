@@ -22,9 +22,11 @@ module Apis
       end
     end
 
-    def get_food id = 0
-      id = id.to_i
-      response = self.class.get("/ndb/reports", { query: { ndbno: id, type:b } })
+    def get_food id = nil
+      return nil if id.nil?
+      response = self.class.get("/ndb/reports", { query: { ndbno: id, type: "b" } })
+      return nil if response.nil?
+      return nil if response["report"].nil?
       return response["report"]["food"]
     end
   end

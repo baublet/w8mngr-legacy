@@ -9,7 +9,8 @@ class UsdaController < ApplicationController
     ndbno = params[:ndbno]
     @food = Food.find_by(ndbno: ndbno)
     if @food.nil?
-      @result = get_usda_entry(ndbno)
+      usda = Apis::USDA.new
+      @result = usda.get_food(ndbno)
 
       ndbno = @result["ndbno"]
       name = @result["name"]
