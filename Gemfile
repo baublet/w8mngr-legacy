@@ -30,6 +30,9 @@ gem 'pg_search'
 # Markdown processor
 gem 'redcarpet'
 
+# For my custom API integrations
+gem 'httparty'
+
 group :development, :test do
     gem 'byebug'
     gem 'web-console', '~> 2.0'

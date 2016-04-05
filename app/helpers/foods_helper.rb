@@ -1,35 +1,5 @@
 module FoodsHelper
 
-    require 'uri'
-    require 'open-uri'
-
-    def search_usda query, limit = 25, offset = 0
-        api_key = 'yJ1LvSILRNHG5KiefXO6boHZqJOUkJ74bJNoNUz0'
-        query = URI.encode(query)
-        url = "http://api.nal.usda.gov/ndb/search/?format=json&q=#{query}&sort=n&max=#{limit.to_s}&offset=#{offset.to_s}&api_key=#{api_key}"
-
-        response = make_api_request(url)
-
-        if !response[0].present? && response["list"].present? && response["list"]["item"].present?
-            return response["list"]["item"]
-        else
-            return []
-        end
-    end
-
-    def get_usda_entry id
-        api_key = 'yJ1LvSILRNHG5KiefXO6boHZqJOUkJ74bJNoNUz0'
-        url = "http://api.nal.usda.gov/ndb/reports/?ndbno=#{id}&type=b&format=json&api_key=#{api_key}"
-
-        response = make_api_request(url)
-
-        if !response[0].present?
-            return response["report"]["food"]
-        else
-            return []
-        end
-    end
-
     def make_api_request url
         begin
             response = open(url, :read_timeout => 5).read
