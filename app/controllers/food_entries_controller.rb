@@ -28,10 +28,9 @@ class FoodEntriesController < ApplicationController
 		@foodentry = current_user.foodentries.find(params[:id])
 		success = false
 		if !@foodentry.nil?
-			if @foodentry.update(food_entry_params)
-				success = true
-				flash.now[:success] = "Entry successfully updated."
-			end
+			@foodentry.update(food_entry_params)
+			success = true
+			flash.now[:success] = "Entry successfully updated."
 		else
 			flash.now[:error] = "You cannot edit another user's entries!"
 		end
@@ -89,7 +88,7 @@ class FoodEntriesController < ApplicationController
 		if format == :html
 			@totals = current_user.food_totals(current_day)
 			@newfoodentry ||= current_user.foodentries.build(day: current_day, calories: nil)
-			render 'index'
+			render "index"
 		else
 			render json: {current_day: current_day, entries: @foodentries}
 		end

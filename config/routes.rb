@@ -28,10 +28,10 @@ Rails.application.routes.draw do
     get     '/food_entries/delete/:id' =>
                                 'food_entries#destroy',
                                 as: :food_entry_delete
-    get     '/food_entries/:day/log/:food_id' =>
+    get     '/food_entries/:day/log/:measurement_id' =>
                                 'food_entries#log_food',
                                 as: :food_entry_log_food
-    post    '/food_entries/:day/log/:food_id' =>
+    post    '/food_entries/:day/log/:measurement_id' =>
                                 'food_entries#add_food',
                                 as: :food_entry_add_food
     post    '/food_entry/:id' => 'food_entries#update'
