@@ -41,6 +41,17 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 ## Version 0.2.1
 - [ ] Make Vue integration more sophisticated using [single-file components](http://vuejs.org/guide/application.html#Single_File_Components)
 - [ ] Create controller tests
+  - [ ] Figure out what a controller test is! ;)
+  - [ ] Food entries
+  - [ ] Foods
+  - [ ] Ingredients
+  - [ ] Password resets
+  - [ ] Recipes
+  - [ ] Sessions
+  - [ ] USDA
+  - [ ] Users
+  - [ ] Weight entries
+  - [ ] Welcome
 
 ## Version 0.2
 
