@@ -21,6 +21,20 @@ When the demo is online, you can view it at [the AWS link](http://w8mngr.nq8c4qz
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
 
 # Todo/Roadmap
+## Version 0.4
+- [ ] Goals
+  - [ ] Create a barebones dashboard where goals will be seen
+  - [ ] Consider the types and build toward expanding the types in the future
+  - [ ] Schema tinkering
+    - id, user, begin_date, target_date, begin_value, target_value, type, target_id, expired, deleted
+
+  - [ ] Model tests
+  - [ ] Build the model
+  - [ ] Integration tests
+  - [ ] Build the controller
+  - [ ] Build the view
+  - [ ] User experience smoothing
+
 ## Version 0.3
 - [ ] Barcode scanning
   - [ ] Scanning element (incorporate existing JS libraries)
