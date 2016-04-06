@@ -60,7 +60,7 @@ class FoodEntriesController < ApplicationController
 		if @food_entry.save
 			# Redirect them back to that day
 			flash[:success] = "Added food to your log!"
-			increment_popularity params[:food_id].to_i, params[:measurement_id].to_i
+			increment_popularity @food_entry.id, params[:measurement_id].to_i
 		else
 			# TODO: Log this behavior
 			flash[:error] = "Error adding the food to your log"

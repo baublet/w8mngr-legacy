@@ -19,11 +19,13 @@ class IngredientTest < ActiveSupport::TestCase
 
   test "user can create a valid custom ingredient" do
     ingredient = @recipe.ingredients.build(
+      amount: "1",
       measurement_id: @measurement.id
     )
     assert ingredient.valid?
 
     ingredient = @recipe.ingredients.build(
+      amount: "1",
       measurement_id: nil,
       name: "My custom ingredient",
       calories: 25,
@@ -36,13 +38,14 @@ class IngredientTest < ActiveSupport::TestCase
 
   test "ingredients automatically load ingredient measurement links" do
     ingredient = @recipe.ingredients.build(
+      amount: "1",
       measurement_id: @measurement.id
     )
     assert ingredient.valid?
     assert ingredient.save
     assert_equal ingredient.measurement_id, @measurement.id
     ingredient.reload
-    assert_equal "amt unit, A food name", ingredient.name
+    assert_equal "1 unit, A food name", ingredient.name
     assert_equal 1, ingredient.calories
     assert_equal 2, ingredient.fat
     assert_equal 3, ingredient.carbs
@@ -51,6 +54,7 @@ class IngredientTest < ActiveSupport::TestCase
 
   test "user cannot create invalid ingredients" do
     ingredient = @recipe.ingredients.build(
+      amount: nil,
       measurement_id: nil,
       name: nil,
       calories: nil,

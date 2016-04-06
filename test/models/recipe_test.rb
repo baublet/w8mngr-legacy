@@ -46,6 +46,7 @@ class RecipeTest < ActiveSupport::TestCase
   test "user can attach recipes to ingredients" do
     @recipe = @user.recipes.first
     ingredient = @recipe.ingredients.build(
+      amount: "1",
       measurement_id: nil,
       name: "My custom ingredient",
       calories: 25,
@@ -60,6 +61,7 @@ class RecipeTest < ActiveSupport::TestCase
     assert_equal 3, @recipe.protein
     # Make sure this also works for measurement IDs
     ingredient = @recipe.ingredients.build(
+      amount: "1",
       measurement_id: measurements(:measurementone).id
     )
     assert ingredient.valid?
