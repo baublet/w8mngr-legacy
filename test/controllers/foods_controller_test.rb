@@ -110,8 +110,6 @@ class FoodsControllerTest < ActionController::TestCase
     assert_redirected_to foods_url
   end
 
-  # I don't know why this doesn't raise an exception while the edit
-  # route does...
   test "should not be able to delete another user's food" do
     food = foods(:foodone)
     get :destroy, id: food.id
