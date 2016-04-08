@@ -99,7 +99,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
     create_valid_food
     get food_search_path
     get food_search_path, q: "Food"
-    assert_template "foods/find"
+    assert_template "foods/search"
     # Selects the first food found on the page
     results = css_select ".food h2 a"
     get results[0]["href"]

@@ -7,3 +7,9 @@ foodtwo:
     name: A food name
     description: test
     user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>
+
+foodthree:
+    name: Another food here
+    description: test
+    deleted: true
+    user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>

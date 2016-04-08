@@ -67,9 +67,9 @@ class FoodEntriesControllerTest < ActionController::TestCase
   # This function ensures that the index is fully displayed, as is the case
   # whenever any action is take on the food log
   def should_get_index
-    assert_not_nil assigns(@foodentries)
-    assert_not_nil assigns(@total)
-    assert_not_nil assigns(@newfoodentry)
+    assert assigns.key?(:foodentries)
+    assert assigns.key?(:totals)
+    assert assigns.key?(:newfoodentry)
   end
 
 end

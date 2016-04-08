@@ -33,15 +33,19 @@ class FoodsController < ApplicationController
       cookies.delete :add_to_recipe
     end
 
+    # Set our templates' default variables
+    @searchresults = []
+    @prev_page = nil
+    @next_page = nil
+    @base_url  = food_search_path
+
     if !params[:q].blank?
-      @searchresults = []
 
       # Prepare the pagination with 25 per page
       page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
       per_page = 25
 
       # Search the wider database with a preference for the user's saved and liked foods
-      #TODO: Implement a proper Solr search here
 
       # Break the search into its parts and search for each term
       query = params[:q].squish
@@ -72,12 +76,8 @@ class FoodsController < ApplicationController
       @base_url  = food_search_path + "?q=" + URI.encode(params[:q])
       # Pop the end off the results array so we can stick to per_page items per page
       @searchresults.pop
-      render "find"
-
-      #TODO: No matches at all? Tell them and display the new foods form
-    else
-      render "search"
     end
+    render "search"
   end
 
   # GET /foods/new
@@ -193,7 +193,7 @@ class FoodsController < ApplicationController
     end
 
     def correct_user
-		@food = current_user.foods.find_by(id: params[:id])
-		redirect_to root_url if @food.nil?
-	end
+    @food = current_user.foods.find_by(id: params[:id])
+    redirect_to root_url if @food.nil?
+  end
 end
