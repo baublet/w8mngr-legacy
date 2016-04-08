@@ -27,45 +27,61 @@ w8mngr.foodEntries.app = new Vue({
     totalFat: '',
     totalCarbs: '',
     totalProtein: '',
-    entries: []
+    entries: [],
+    jsonResults: {},
+    autoCompleteItems: []
   },
   methods: {
     initializeApp: function() {
       // Finds the current date based on the URL string
       var find_day = w8mngr.config.regex.foodlog_day.exec(window.location.href)
       var day = ""
-      try { day = find_day[1] } catch(e) {}
+      try {
+        day = find_day[1]
+      } catch (e) {}
       // Then, load the day if specified, otherwise it loads the current day
       this.loadDay(day)
+        // Testing my autocomplete function...
+      this.$watch("newDescription", function(searchTerm) {
+        this.autoComplete(searchTerm)
+      })
     },
-    addEntry: function () {
+    addEntry: function() {
       w8mngr.loading.on()
       var description = this.newDescription.trim()
       var calories = parseInt(this.newCalories.trim()) || 0
       var fat = parseInt(this.newFat.trim()) || 0
       var carbs = parseInt(this.newCarbs.trim()) || 0
       var protein = parseInt(this.newProtein.trim()) || 0
-      var data = { description: description, calories: calories, fat: fat, carbs: carbs, protein: protein }
+      var data = {
+        description: description,
+        calories: calories,
+        fat: fat,
+        carbs: carbs,
+        protein: protein
+      }
       if (description) {
         // We'll need this to update the item with the index the ruby app returns to us
         var index = this.entries.push(data) - 1
-        // Reset our fields
+          // Reset our fields
         this.newDescription = ''
         this.newCalories = ''
         this.newFat = ''
         this.newCarbs = ''
         this.newProtein = ''
-        // Keep our this reference in app so we can manipulate it in the fetch request
+          // Keep our this reference in app so we can manipulate it in the fetch request
         var app = this
-        // Format the data for posting
-        data = { food_entry: data }
+          // Format the data for posting
+        data = {
+          food_entry: data
+        }
         data.food_entry.day = this.currentDayNumber
         w8mngr.fetch({
           method: "POST",
           url: w8mngr.config.resources.food_entries.add,
           data: data,
           onSuccess: function(response) {
-            if(response.success === false) {
+            if (response.success === false) {
               w8mngr.loading.off()
               alert("Unknown error...")
             } else {
@@ -78,19 +94,21 @@ w8mngr.foodEntries.app = new Vue({
           }
         })
         this.calculateTotals()
-        document.getElementById("description-input").focus()
+        document.getElementById("description-input")
+          .focus()
       } else {
-        document.getElementById("description-input").focus()
+        document.getElementById("description-input")
+          .focus()
       }
     },
-    removeEntry: function (index) {
+    removeEntry: function(index) {
       w8mngr.loading.on()
       var app = this
       w8mngr.fetch({
         method: "DELETE",
         url: w8mngr.config.resources.food_entries.delete(app.entries[index].id),
         onSuccess: function(response) {
-          if(response.success === true) {
+          if (response.success === true) {
             app.entries.splice(index, 1)
             app.calculateTotals()
             w8mngr.loading.off()
@@ -121,7 +139,7 @@ w8mngr.foodEntries.app = new Vue({
         url: w8mngr.config.resources.food_entries.update(app.entries[index].id),
         data: data,
         onSuccess: function(response) {
-          if(response.success == true) {
+          if (response.success == true) {
             w8mngr.loading.off()
           } else {
             alert("Unknown error...")
@@ -171,6 +189,41 @@ w8mngr.foodEntries.app = new Vue({
       this.prevDay = w8mngr.fn.yesterdayNumber(this.currentDayNumber)
       this.nextDay = w8mngr.fn.tomorrowNumber(this.currentDayNumber)
       console.log("Parsed previous day: " + this.prevDay + " -- And next day: " + this.nextDay)
+    },
+    // This function handles the autocomplete data
+    autoComplete: function(query) {
+      var app = this
+      w8mngr.fetch({
+        method: "get",
+        url: w8mngr.config.resources.search_foods(query),
+        onSuccess: function(response) {
+          if (response.success === false) {
+            alert("Unknown error...")
+          } else {
+            app.formatAutoCompleteResults(response)
+          }
+        },
+        onError: function(response) {
+          alert("ERROR: " + response)
+        }
+      })
+    },
+    // This function formats the autoComplete data, which will consist of USDA
+    // foods, our users' foods, and recipes, so we have to massage it!
+    formatAutoCompleteResults(response) {
+      console.log("Received the autoComplete response:")
+      console.log(response)
+      console.log("Parsing autocomplete items")
+      this.autoCompleteItems = []
+      if (response.results.length > 0) {
+        var app = this
+        w8mngr.fn.forEach(response.results, function(result) {
+          app.autoCompleteItems.push({
+            name: result.name
+          })
+        })
+        console.log(app.autoCompleteItems)
+      }
     }
   }
 })

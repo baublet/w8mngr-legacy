@@ -1,19 +1,19 @@
 // Setup the app and its namespaces
 var w8mngr = w8mngr || {}
-// Commonly used functions
+  // Commonly used functions
 w8mngr.fn = {}
-// Cookies
+  // Cookies
 w8mngr.cookies = {}
-// Loading toggle(s)
+  // Loading toggle(s)
 w8mngr.loading = {}
-// Our fetcher
+  // Our fetcher
 w8mngr.fetch = {}
 
 // The initialization array
 w8mngr.init = {
   _toInit: [],
   add: function(fn) {
-    if(fn instanceof Function) {
+    if (fn instanceof Function) {
       this._toInit = this._toInit.concat(fn);
     }
   },
@@ -34,6 +34,9 @@ w8mngr.config = {
   },
   resources: {
     base: "/",
+    search_foods: function(q) {
+      return "/search/foods/?q=" + q
+    },
     food_entries: {
       index: "/food_entries/",
       add: "/food_entries/",

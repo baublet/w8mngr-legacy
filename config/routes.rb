@@ -36,11 +36,13 @@ Rails.application.routes.draw do
     get     "/foods/:id/delete/" =>
                                 "foods#destroy",
                                 as: :food_delete
-    get     "/foods/search/" => "foods#search",
-                                as: :food_search
     get     "/foods/pull/(:ndbno)" => "usda#pull",
                                 as: :food_pull
     resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
+
+    # Foods search
+    get     "/search/foods(:format)" => "search_foods#index",
+                                as: :food_search
 
     # Weight entries
     resources :weight_entries,  only: [:index, :create, :update, :destroy]
@@ -54,7 +56,7 @@ Rails.application.routes.draw do
     resources :recipes do
       resources :ingredients, only: [:create, :update, :destroy]
     end
-    get     "/recipes/:id/delete/(.:format)" => "recipes#destroy",
+    get     "/recipes/:id/delete(.:format)" => "recipes#destroy",
                                 as: :delete_recipe
     get     "/recipes/:recipe_id/ingredients/:id/delete(.:format)" => "ingredients#destroy",
                                 as: :delete_recipe_ingredient

@@ -21,32 +21,32 @@ class FoodsControllerTest < ActionController::TestCase
     assert_not_nil assigns(@food)
   end
 
-  test "should get search" do
-    get :search
-    assert_response :success
-    assert_template "foods/search"
-  end
+  #test "should get search" do
+  #  get :search
+  #  assert_response :success
+  #  assert_template "foods/search"
+  #end
+#
+  #test "should be able to search own foods" do
+  #  get :search, q: "food"
+  #  assert_response :success
+  #  assert_template "foods/search"
+  #  assert assigns.key?(:searchresults)
+#    assert assigns.key?(:prev_page)
+#    assert assigns.key?(:next_page)
+#    assert assigns.key?(:base_url)
+#  end
 
-  test "should be able to search own foods" do
-    get :search, q: "food"
-    assert_response :success
-    assert_template "foods/search"
-    assert assigns.key?(:searchresults)
-    assert assigns.key?(:prev_page)
-    assert assigns.key?(:next_page)
-    assert assigns.key?(:base_url)
-  end
-
-  test "should not be able to search deleted foods" do
-    get :search, q: "Another"
-    assert_response :success
-    assert_template "foods/search"
-    assert assigns.key?(:searchresults)
-    assert assigns.key?(:prev_page)
-    assert assigns.key?(:next_page)
-    assert assigns.key?(:base_url)
-    assert_equal [], assigns(:searchresults)
-  end
+#  test "should not be able to search deleted foods" do
+  #  get :search, q: "Another"
+  #  assert_response :success
+  #  assert_template "foods/search"
+#    assert assigns.key?(:searchresults)
+  #  assert assigns.key?(:prev_page)
+  #  assert assigns.key?(:next_page)
+  #  assert assigns.key?(:base_url)
+  #  assert_equal [], assigns(:searchresults)
+#  end
 
   test "should be able to get new" do
     get :new

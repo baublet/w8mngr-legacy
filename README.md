@@ -63,7 +63,7 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] Welcome
 
 - [ ] Auto-complete form for food entries
-  - [ ] JSON search point
+  - [x] JSON search point
   - [ ] Add it to the Vue component
 
 ## Version 0.2
