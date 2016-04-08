@@ -33,6 +33,9 @@ gem 'redcarpet'
 # For my custom API integrations
 gem 'httparty'
 
+# For our tags!
+gem 'acts-as-taggable-on'
+
 group :development, :test do
     gem 'byebug'
     gem 'web-console', '~> 2.0'

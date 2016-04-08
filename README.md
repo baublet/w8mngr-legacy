@@ -62,6 +62,10 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] Weight entries
   - [ ] Welcome
 
+- [ ] Auto-complete form for food entries
+  - [ ] JSON search point
+  - [ ] Add it to the Vue component
+
 ## Version 0.2
 - [x] Fill out the integration tests and increase the testing coverage the rest of the site
   - [x] Weight entries integration test
