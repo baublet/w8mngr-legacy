@@ -17,3 +17,12 @@ measurementtwo:
   carbs: 1
   protein: 1
   food_id: <%= ActiveRecord::FixtureSet.identify(:foodone) %>
+
+measurementthree:
+  amount: 1
+  unit: MyString
+  calories: 1
+  fat: 1
+  carbs: 1
+  protein: 1
+  food_id: <%= ActiveRecord::FixtureSet.identify(:foodtwo) %>

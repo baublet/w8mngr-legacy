@@ -102,7 +102,7 @@ class FoodsTest < ActionDispatch::IntegrationTest
     assert_template "foods/find"
     # Selects the first food found on the page
     results = css_select ".food h2 a"
-    get results[2]["href"]
+    get results[0]["href"]
     assert_template "foods/show"
     # Find the first measurement and add it to the food log
     results = css_select "main form"
