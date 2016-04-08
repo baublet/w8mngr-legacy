@@ -1,6 +1,4 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :edit, :update, :destroy]
-
   before_action :logged_in_user, only: [:add, :new, :create, :destroy, :update]
   before_action :correct_user, only: [:update, :destroy]
 
@@ -13,6 +11,7 @@ class FoodsController < ApplicationController
 
   # GET /foods/1
   def show
+    @food = Food.find(params[:id])
     # Validate the day
     @day = params[:day].blank? ? current_day : validate_day(params[:day])
   end
@@ -110,6 +109,7 @@ class FoodsController < ApplicationController
 
   # PATCH/PUT /foods/1
     def update
+        @food = current_user.foods.find(params[:id])
         @newmeasurement = Measurement.new
         food_update_error = ''
         if @food.update(food_params)
@@ -169,6 +169,7 @@ class FoodsController < ApplicationController
 
   # DELETE /foods/1
   def destroy
+    @food = current_user.foods.find(params[:id])
     # Mark these as "deleted" in the database, because we don't want users to be able to delete
     # foods that are used in other users' recipes...
     @food.update(deleted: 1)
@@ -177,11 +178,6 @@ class FoodsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_food
-      @food = Food.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def food_params
       params.require(:food).permit(:name, :description)

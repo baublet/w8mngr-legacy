@@ -18,6 +18,7 @@ class FoodsControllerTest < ActionController::TestCase
     get :show, id: food.id
     assert_response :success
     assert_not_nil assigns(@day)
+    assert_not_nil assigns(@food)
   end
 
   test "should get search" do
@@ -45,5 +46,68 @@ class FoodsControllerTest < ActionController::TestCase
     assert assigns.key?(:next_page)
     assert assigns.key?(:base_url)
     assert_equal [], assigns(:searchresults)
+  end
+
+  test "should be able to get new" do
+    get :new
+    assert_response :success
+    assert_template "foods/new"
+  end
+
+  test "should be able to post new" do
+    assert_difference("Food.count") do
+      post :create, {
+               :food =>
+                   {
+                    name: "Food name",
+                    description: "This is a description"
+                  },
+               :measurement =>
+                   {
+                    '0' =>
+                      {
+                        amount: "1",
+                        unit: "unit",
+                        calories: 1,
+                        fat: 2,
+                        carbs: 3,
+                        protein: 4
+                     }
+                  }
+               }
+     end
+     assert_response :success
+     assert_template "foods/edit"
+     assert_not_nil assigns(:food)
+     assert_not_nil assigns(:newmeasurement)
+  end
+
+  test "should get edit" do
+    food = foods(:foodtwo)
+    get :edit, id: food.id
+    assert_response :success
+    assert_template "foods/edit"
+    assert_not_nil assigns(:food)
+    assert_not_nil assigns(:newmeasurement)
+  end
+
+  test "should not get edit another user's food" do
+    assert_raises(ActiveRecord::RecordNotFound) do
+      food = foods(:foodone)
+      get :edit, id: food.id
+    end
+  end
+
+  # We aren't testing the update function here because we do that in
+  # the integration test; and because controller-wise, if the user
+  # can't edit an entry not their own, they can't update it, either
+
+  test "should be able to delete own food" do
+    food = foods(:foodtwo)
+    assert_difference("Food.count", -1) do
+      get :destroy, id: food.id
+    end
+    assert_response :redirect
+    assert_redirected_to foods_url
   end
 end
