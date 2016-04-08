@@ -110,4 +110,11 @@ class FoodsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to foods_url
   end
+
+  test "should not be able to delete another user's food" do
+    assert_raises(ActiveRecord::RecordNotFound) do
+      food = foods(:foodone)
+      get :destroy, id: food.id
+    end
+  end
 end
