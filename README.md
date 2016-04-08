@@ -52,7 +52,7 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 - [ ] Create controller tests
   - [x] Figure out what a controller test is! ;)
   - [x] Food entries
-  - [ ] Foods
+  - [x] Foods
   - [ ] Ingredients
   - [ ] Password resets
   - [ ] Recipes
