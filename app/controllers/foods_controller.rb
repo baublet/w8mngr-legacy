@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   before_action :logged_in_user, only: [:add, :new, :create, :destroy, :update]
-  before_action :correct_user, only: [:update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   include FoodsHelper
 
@@ -87,7 +87,6 @@ class FoodsController < ApplicationController
 
   # GET /foods/1/edit
   def edit
-    @food = current_user.foods.find(params[:id])
     @newmeasurement = Measurement.new
   end
 
@@ -109,7 +108,6 @@ class FoodsController < ApplicationController
 
   # PATCH/PUT /foods/1
     def update
-        @food = current_user.foods.find(params[:id])
         @newmeasurement = Measurement.new
         food_update_error = ''
         if @food.update(food_params)
@@ -169,7 +167,6 @@ class FoodsController < ApplicationController
 
   # DELETE /foods/1
   def destroy
-    @food = current_user.foods.find(params[:id])
     # Mark these as "deleted" in the database, because we don't want users to be able to delete
     # foods that are used in other users' recipes...
     @food.update(deleted: 1)

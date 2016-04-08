@@ -92,10 +92,9 @@ class FoodsControllerTest < ActionController::TestCase
   end
 
   test "should not get edit another user's food" do
-    assert_raises(ActiveRecord::RecordNotFound) do
-      food = foods(:foodone)
-      get :edit, id: food.id
-    end
+    food = foods(:foodone)
+    get :edit, id: food.id
+    assert_redirected_to root_url
   end
 
   # We aren't testing the update function here because we do that in
@@ -111,10 +110,11 @@ class FoodsControllerTest < ActionController::TestCase
     assert_redirected_to foods_url
   end
 
+  # I don't know why this doesn't raise an exception while the edit
+  # route does...
   test "should not be able to delete another user's food" do
-    assert_raises(ActiveRecord::RecordNotFound) do
-      food = foods(:foodone)
-      get :destroy, id: food.id
-    end
+    food = foods(:foodone)
+    get :destroy, id: food.id
+    assert_redirected_to root_url
   end
 end
