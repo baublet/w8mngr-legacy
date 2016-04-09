@@ -54,11 +54,11 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Food entries
   - [x] Foods
   - [ ] Ingredients
-  - [ ] Password resets
+  - [x] Password resets
   - [ ] Recipes
-  - [ ] Sessions
+  - [x] Sessions
   - [ ] USDA
-  - [ ] Users
+  - [x] Users
   - [ ] Weight entries
   - [ ] Welcome
 
