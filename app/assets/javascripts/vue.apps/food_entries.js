@@ -32,6 +32,8 @@ w8mngr.foodEntries.app = new Vue({
     autoCompleteItems: []
   },
   methods: {
+    // Some basic initialization things that I put here because the Vue app
+    // needs to be loaded for many of these methods to work
     initializeApp: function() {
       // Finds the current date based on the URL string
       var find_day = w8mngr.config.regex.foodlog_day.exec(window.location.href)
@@ -46,6 +48,7 @@ w8mngr.foodEntries.app = new Vue({
         this.autoComplete(searchTerm)
       })
     },
+    // Send an entry to be added to the database
     addEntry: function() {
       w8mngr.loading.on()
       var description = this.newDescription.trim()
@@ -101,6 +104,7 @@ w8mngr.foodEntries.app = new Vue({
           .focus()
       }
     },
+    // Sends an entry to be removed from the database
     removeEntry: function(index) {
       w8mngr.loading.on()
       var app = this
@@ -121,6 +125,7 @@ w8mngr.foodEntries.app = new Vue({
         }
       })
     },
+    // Sends an entry to be saved to the database
     saveEntry: function(index) {
       w8mngr.loading.on()
       this.calculateTotals()
@@ -150,18 +155,22 @@ w8mngr.foodEntries.app = new Vue({
         }
       })
     },
+    // Update the macro totals using a useful custom function
     calculateTotals: function() {
       this.totalCalories = w8mngr.fn.parseTotals(this.entries, 'calories')
       this.totalFat = w8mngr.fn.parseTotals(this.entries, 'fat')
       this.totalCarbs = w8mngr.fn.parseTotals(this.entries, 'carbs')
       this.totalProtein = w8mngr.fn.parseTotals(this.entries, 'protein')
     },
+    // Loads the day after the currenct day
     loadNextDay: function() {
       this.loadDay(this.nextDay)
     },
+    // Loads the day before the current day
     loadPrevDay: function() {
       this.loadDay(this.prevDay)
     },
+    // Switches to a new day. If no argument is specified, it uses today
     loadDay: function(day = "") {
       w8mngr.loading.on()
       console.log("Fetching data from the API...")
