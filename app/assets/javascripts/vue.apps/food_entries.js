@@ -28,8 +28,8 @@ w8mngr.foodEntries.app = new Vue({
     totalCarbs: '',
     totalProtein: '',
     entries: [],
-    jsonResults: {},
-    autoCompleteItems: []
+    autoCompleteItems: [],
+    autoCompleteSelected: -1
   },
   methods: {
     // Some basic initialization things that I put here because the Vue app
@@ -220,19 +220,42 @@ w8mngr.foodEntries.app = new Vue({
     // This function formats the autoComplete data, which will consist of USDA
     // foods, our users' foods, and recipes, so we have to massage it!
     formatAutoCompleteResults(response) {
-      console.log("Received the autoComplete response:")
-      console.log(response)
       console.log("Parsing autocomplete items")
       this.autoCompleteItems = []
+      this.autoCompleteSelected = -1
       if (response.results.length > 0) {
         var app = this
-        w8mngr.fn.forEach(response.results, function(result) {
+        w8mngr.fn.forEach(response.results, function(result, i) {
           app.autoCompleteItems.push({
+            domId: "autocomplete-item-" + i,
             name: result.name
           })
         })
-        console.log(app.autoCompleteItems)
       }
+    },
+    // Handles our arrow key down
+    keyDown: function() {
+      // Don't do anything if there aren't any items or they can't go anywhere
+      if (this.autoCompleteItems.length < 1) return false;
+      if (this.autoCompleteSelected == this.autoCompleteItems.length - 1) return false
+      console.log("Down pressed")
+      var current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
+      w8mngr.fn.removeClass(current_el, "selected")
+      this.autoCompleteSelected++;
+      current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
+      w8mngr.fn.addClass(current_el, "selected")
+    },
+    // Handles our arrow key up
+    keyUp: function() {
+      // Don't do anything if there aren't any items or they can't go up
+      if (this.autoCompleteItems.length < 1) return false;
+      if (this.autoCompleteSelected > 0) return false
+      console.log("Up pressed")
+      var current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
+      w8mngr.fn.removeClass(current_el, "selected")
+      this.autoCompleteSelected--;
+      current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
+      w8mngr.fn.addClass(current_el, "selected")
     }
   }
 })

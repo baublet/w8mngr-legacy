@@ -56,6 +56,8 @@
       <div class="col long">
         <input type="text"
                 @keyup.enter="addEntry"
+                @keyup.up="keyUp"
+                @keyup.down="keyDown"
                 debounce="250"
                 v-model="newDescription"
                 placeholder="Description" autofocus="autofocus" id="description-input">
@@ -73,11 +75,11 @@
         <input type="text" @keyup.enter="addEntry" v-model="newProtein" placeholder="Protein">
       </div>
       <div class="col meta">
-        <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="/foods/search">
+        <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="<%= food_search_path %>">
           <i class="fa fa-barcode"></i>
           <span class="screen-reader-text">Scan Barcode</span>
         </a>
-        <a class="btn search-btn" alt="Search for Foods" title="Search for Foods" href="/foods/search?food_log_referrer=true">
+        <a class="btn search-btn" alt="Search for Foods" title="Search for Foods" href="<%= food_search_path :food_log_referrer => "true"%>">
           <i class="fa fa-search"></i>
           <span class="screen-reader-text">Search for Foods</span>
         </a>
@@ -88,8 +90,10 @@
       </div>
     </div>
   </div>
-  <div class="autocomplete-results" v-for="item in autoCompleteItems" transition="fade">
-    <div v-text="item.name"></div>
+  <div class="autocomplete-results">
+    <div class="autocomplete-item" v-for="item in autoCompleteItems" transition="fade" id="{{ item.domId }}">
+      <div v-text="item.name"></div>
+    </div>
   </div>
 </div>
 
