@@ -14,6 +14,18 @@ class FoodsController < ApplicationController
     @food = Food.find(params[:id])
     # Validate the day
     @day = params[:day].blank? ? current_day : validate_day(params[:day])
+    respond_to do |format|
+      format.html { render "show" }
+      format.json {
+        render json:
+          {
+            food:        @food.name,
+            id:          @food.id,
+            description: @food.description,
+            measurements:@food.measurements
+          }
+      }
+    end
   end
 
   # GET /foods/new

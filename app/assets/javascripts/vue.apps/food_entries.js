@@ -223,45 +223,138 @@ w8mngr.foodEntries.app = new Vue({
       console.log("Parsing autocomplete items")
       this.autoCompleteItems = []
       this.autoCompleteSelected = -1
+      console.log(response.results)
       if (response.results.length > 0) {
         var app = this
         w8mngr.fn.forEach(response.results, function(result, i) {
+          // This loads the resource we'll use to ping our db for measurement info
+          var resource = ("offset" in result && "group" in result) ?
+            w8mngr.config.resources.foods.pull(result.ndbno) :
+            w8mngr.config.resources.foods.show(result.id)
           app.autoCompleteItems.push({
             domId: "autocomplete-item-" + i,
-            name: result.name
+            name: result.name,
+            resource: resource,
+            measurements: [],
+            measurementsLoaded: 0
           })
         })
       }
     },
     // Handles our arrow key down
-    keyDown: function() {
+    nextAutoCompleteItem: function() {
       // Don't do anything if there aren't any items or they can't go anywhere
-      if (this.autoCompleteItems.length < 1) return false;
+      if (this.autoCompleteItems.length < 1) return false
       if (this.autoCompleteSelected == this.autoCompleteItems.length - 1) return false
-      console.log("Down pressed")
+
+      console.log("Down: " + (this.autoCompleteSelected + 1))
+
+      this.autoCompleteSelectItem(this.autoCompleteSelected + 1)
+    },
+    // Handles our arrow key up
+    previousAutoCompleteItem: function() {
+      // Don't do anything if there aren't any items or they can't go up
+      if (this.autoCompleteItems.length < 1) return false
+      if (this.autoCompleteSelected < 0) return false
+
+      console.log("Up: " + (this.autoCompleteSelected - 1))
+
+      if (this.autoCompleteSelected >= 0) {
+        // Go up one item if they're not at the top already
+        this.autoCompleteSelectItem(this.autoCompleteSelected - 1)
+
+      } else {
+        // If they're at the top and go one more up, don't reselect
+        this.autoCompleteSelectItem()
+      }
+    },
+    // Selects an autocomplete item, or none if id is null
+    autoCompleteSelectItem(id = null) {
+      // Deselect the previous item
       var current_el = null
-        // Only deselect the previous item if there's an item selected
+
+      // Only deselect the previous item if there's an item selected
       if (this.autoCompleteSelected >= 0) {
         current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
         w8mngr.fn.removeClass(current_el, "selected")
       }
-      this.autoCompleteSelected++;
-      current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
-      w8mngr.fn.addClass(current_el, "selected")
-    },
-    // Handles our arrow key up
-    keyUp: function() {
-      // Don't do anything if there aren't any items or they can't go up
-      if (this.autoCompleteItems.length < 1) return false;
-      console.log("Up pressed")
-      var current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
-      w8mngr.fn.removeClass(current_el, "selected")
-      this.autoCompleteSelected--;
-      // If they're at the top and go one more up, don't reselect
-      if (this.autoCompleteSelected == 0) {
+      // Now select the item that was passed to us
+      if (id !== null) {
+        // Set the internal counter to the new id
+        this.autoCompleteSelected = id
+
+        // If we're deselecting all items, just return here! We're done
+        if (id == -1) return false
+        this.loadAutoCompleteItemData()
         current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
         w8mngr.fn.addClass(current_el, "selected")
       }
+    },
+    // This loads an autocomplete item's data and attaches it to the object
+    loadAutoCompleteItemData(itemIndex = null) {
+
+      if (itemIndex == null) itemIndex = this.autoCompleteSelected
+
+      // Only continue if we haven't already loaded these measurements
+      if (this.autoCompleteItems[itemIndex].measurementsLoaded) return false
+
+      console.log("Loading item data for: " + itemIndex)
+
+      var item = this.autoCompleteItems[itemIndex]
+      var app = this
+
+      w8mngr.fetch({
+        method: "get",
+        url: item.resource,
+        onSuccess: function(response) {
+          if (response.success === false) {
+            alert("Unknown error...")
+          } else {
+            item.measurements = response.measurements
+            item.selectedMeasurement = 0
+            item.description = response.description
+            item.measurementsLoaded = 1
+            item.id = response.id
+
+            // Make sure we add a selected class to our measurement
+            app.selectMeasurement(0)
+          }
+        },
+        onError: function(response) {
+          alert("ERROR: " + response)
+        }
+      })
+
+    },
+
+    // Selects the next measurement
+    previousMeasurement: function() {
+
+    },
+
+    // Selects the previous measurement
+    nextMeasurement: function() {
+
+    },
+
+    selectMeasurement: function(index) {
+      // We have to defer this function so Vue can refresh the dom first, then
+      // we can getElementById and manipulate it
+      var app = this
+      setTimeout(function() {
+        // Deselect the last one
+        var item = app.autoCompleteItems[app.autoCompleteSelected]
+        var id = item.measurements[item.selectedMeasurement].id
+        var current_el = document.getElementById("measurement-" + app.autoCompleteSelected + "-" + id)
+        w8mngr.fn.removeClass(current_el, "selected")
+
+        // Select the new one
+        item.selectedMeasurement = index
+        id = item.measurements[item.selectedMeasurement].id
+        current_el = document.getElementById("measurement-" + app.autoCompleteSelected + "-" + id)
+        console.log(current_el)
+        w8mngr.fn.addClass(current_el, "selected")
+      }, 0)
     }
   }
 })

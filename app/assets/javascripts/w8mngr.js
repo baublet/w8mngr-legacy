@@ -37,6 +37,14 @@ w8mngr.config = {
     search_foods: function(q) {
       return "/search/foods/?q=" + q
     },
+    foods: {
+      pull: function(ndbno) {
+        return "/foods/pull/" + ndbno
+      },
+      show: function(id) {
+        return "/foods/" + id
+      }
+    },
     food_entries: {
       index: "/food_entries/",
       add: "/food_entries/",

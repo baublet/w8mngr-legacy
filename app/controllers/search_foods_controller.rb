@@ -25,6 +25,7 @@ class SearchFoodsController < ApplicationController
     if !params[:q].blank?
       search_foods
     end
+
     respond_to do |format|
       format.html { render "search" }
       format.json {
@@ -62,7 +63,6 @@ class SearchFoodsController < ApplicationController
 
     # Then, search the USDA API if we have fewer than per_page + 1 results
     if usda_entries > 0
-      #@searchresults = @searchresults + search_usda(params[:q], usda_entries, (page - 1) * per_page)
       usda = Apis::USDA.new
       @searchresults = @searchresults + usda.search({
         q:      params[:q],

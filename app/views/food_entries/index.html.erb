@@ -56,9 +56,9 @@
       <div class="col long">
         <input type="text"
                 @keyup.enter="addEntry"
-                @keyup.up="keyUp"
-                @keyup.down="keyDown"
-                debounce="250"
+                @keyup.up="previousAutoCompleteItem"
+                @keyup.down="nextAutoCompleteItem"
+                debounce="500"
                 v-model="newDescription"
                 placeholder="Description" autofocus="autofocus" id="description-input">
       </div>
@@ -91,8 +91,24 @@
     </div>
   </div>
   <div class="autocomplete-results">
-    <div class="autocomplete-item" v-for="item in autoCompleteItems" transition="fade" id="{{ item.domId }}">
+    <div class="autocomplete-item"
+         v-for="item in autoCompleteItems"
+         id="{{ item.domId }}"
+         @click="autoCompleteSelectItem($index)">
       <h3 v-text="item.name" class="name"></h3>
+      <p v-text="item.description" class="description"></p>
+      <div class="measurements">
+        <div class="measurement"
+             v-for="measurement in item.measurements"
+             id="measurement-{{ $parent.$index }}-{{ measurement.id }}">
+          <input type="text" name="amount" v-model="measurement.amount" class="amount">
+          <div class="unit" alt="Unit" v-text="measurement.unit"></div>
+          <div class="calories" alt="Calories" v-text="measurement.calories"></div>
+          <div class="fat" alt="Fat" v-text="measurement.fat"></div>
+          <div class="carbs" alt="Carbs" v-text="measurement.carbs"></div>
+          <div class="protein" alt="Protein" v-text="measurement.protein"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

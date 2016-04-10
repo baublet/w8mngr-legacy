@@ -8,24 +8,37 @@ class UsdaController < ApplicationController
   def pull
     ndbno = params[:ndbno]
     @food = Food.find_by(ndbno: ndbno)
+
     if @food.nil?
+
       usda = Apis::USDA.new
-      @result = usda.get_food(ndbno)
+      result = usda.get_food(ndbno)
 
-      ndbno = @result["ndbno"]
-      name = @result["name"]
+      ndbno = result["ndbno"]
+      name = result["name"]
+
       @food = Food.new(user_id: 1, name: name, ndbno: ndbno)
+      @food.populate_from_usda result
+      @food.save
 
-      @food.populate_from_usda @result
-
-      if !@food.save
-          # TODO: Log this behavior
-          flash[:error] = "Unexpected error pulling the food from foreign source. Please contact the administrator."
-          redirect_to food_search_path
-      end
     end
-    # If it saved, or we're already storing this item redirect them to the food entry with this item loaded
-    redirect_to @food
+
+    respond_to do |format|
+      format.html {
+        # If it saved, or we're already storing this item redirect them to the food entry with this item loaded
+        redirect_to @food
+      }
+      format.json {
+        render json:
+          {
+            food:         @food.name,
+            id:           @food.id,
+            ndbno:        @food.ndbno,
+            description:  @food.description,
+            measurements: @food.measurements
+          }
+      }
+    end
   end
 
 end
