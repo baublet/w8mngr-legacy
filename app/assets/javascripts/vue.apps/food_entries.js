@@ -239,8 +239,12 @@ w8mngr.foodEntries.app = new Vue({
       if (this.autoCompleteItems.length < 1) return false;
       if (this.autoCompleteSelected == this.autoCompleteItems.length - 1) return false
       console.log("Down pressed")
-      var current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
-      w8mngr.fn.removeClass(current_el, "selected")
+      var current_el = null
+        // Only deselect the previous item if there's an item selected
+      if (this.autoCompleteSelected >= 0) {
+        current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
+        w8mngr.fn.removeClass(current_el, "selected")
+      }
       this.autoCompleteSelected++;
       current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
       w8mngr.fn.addClass(current_el, "selected")
@@ -249,13 +253,15 @@ w8mngr.foodEntries.app = new Vue({
     keyUp: function() {
       // Don't do anything if there aren't any items or they can't go up
       if (this.autoCompleteItems.length < 1) return false;
-      if (this.autoCompleteSelected > 0) return false
       console.log("Up pressed")
       var current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
       w8mngr.fn.removeClass(current_el, "selected")
       this.autoCompleteSelected--;
-      current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
-      w8mngr.fn.addClass(current_el, "selected")
+      // If they're at the top and go one more up, don't reselect
+      if (this.autoCompleteSelected == 0) {
+        current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
+        w8mngr.fn.addClass(current_el, "selected")
+      }
     }
   }
 })
