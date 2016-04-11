@@ -58,6 +58,8 @@
                 @keyup.enter="addEntry"
                 @keyup.up="previousAutoCompleteItem"
                 @keyup.down="nextAutoCompleteItem"
+                @keyup.right="nextMeasurement($event)"
+                @keyup.left="previousMeasurement($event)"
                 debounce="500"
                 v-model="newDescription"
                 placeholder="Description" autofocus="autofocus" id="description-input">

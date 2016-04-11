@@ -328,13 +328,35 @@ w8mngr.foodEntries.app = new Vue({
     },
 
     // Selects the next measurement
-    previousMeasurement: function() {
+    nextMeasurement: function(e) {
+      // Do nothing if there's no item selected
+      if (this.autoCompleteSelected == -1) return false
 
+      // Find our item
+      var item = this.autoCompleteItems[this.autoCompleteSelected]
+
+      // Do nothing if we're already at the end of the line
+      if (item.selectedMeasurement == (item.measurements.length - 1)) return false
+
+      // Increment our selected measurement counter and call the appropriate function
+      this.selectMeasurement(item.selectedMeasurement + 1)
+      console.log("Selected next item: " + item.selectedMeasurement)
     },
 
     // Selects the previous measurement
-    nextMeasurement: function() {
+    previousMeasurement: function(e) {
+      // Do nothing if there's no item selected
+      if (this.autoCompleteSelected == -1) return false
 
+      // Find our item
+      var item = this.autoCompleteItems[this.autoCompleteSelected]
+
+      // Do nothing if we're already on the first measurement
+      if (item.selectedMeasurement == 0) return false
+
+      // Decrement our selected measurement and call the appropo function
+      this.selectMeasurement(item.selectedMeasurement - 1)
+      console.log("Selected previous item: " + item.selectedMeasurement)
     },
 
     selectMeasurement: function(index) {
