@@ -61,7 +61,8 @@ w8mngr.config = {
   }
 }
 
-// Initialize all of our apps by removing the nojs tag from the body
+// We want to remove the "nojs" tag, which hides all of our javascript
+// only divs. Also, removing this element hides our HTML fallbacks
 w8mngr.init.add(function() {
   w8mngr.fn.removeClass(document.querySelector('body'), 'nojs')
 })
