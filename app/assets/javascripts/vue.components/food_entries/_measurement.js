@@ -20,10 +20,26 @@ w8mngr.foodEntries.components.measurementItem = Vue.extend({
       this.newAmount = this.amount
     }
   },
-  methods: {},
+  methods: {
+    dispatchMeasurementInfo: function() {
+      var data = {
+        description: this.amount + " " + this.unit + " " + this.$parent.name,
+        calories: this.cCalories,
+        fat: this.cFat,
+        carbs: this.cCarbs,
+        protein: this.cProtein,
+      }
+      this.$dispatch('fillin-form', data)
+    }
+  },
   computed: {
     selected: function() {
-      return this.selectedMeasurement == this.index
+      if (this.selectedMeasurement == this.index) {
+        // Send an event up the chain telling it to update the field
+        this.dispatchMeasurementInfo()
+        return true
+      }
+      return false
     },
     cAmount: function() {
       var multiplier = parseFloat(this.newAmount / this.amount)

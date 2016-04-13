@@ -17,6 +17,13 @@ w8mngr.fn.initIf("food-entries-app", function() {
     events: {
       'hook:ready': function() {
         this.initializeApp()
+      },
+      'fillin-form': function(data) {
+        //this.newDescription = data.newDescription
+        this.newCalories = data.calories
+        this.newFat = data.fat
+        this.newCarbs = data.carbs
+        this.newProtein = data.protein
       }
     },
     data: {
