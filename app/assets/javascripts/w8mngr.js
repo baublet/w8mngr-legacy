@@ -57,7 +57,7 @@ w8mngr.config = {
         return "/foodlog/" + day
       },
       update: function(id) {
-        return "/food_entry/" + id
+        return "/food_entries/" + id
       }
     }
   }

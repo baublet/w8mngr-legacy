@@ -24,7 +24,8 @@ w8mngr.foodEntries.templates.root = `
                 :fat="entry.fat"
                 :carbs="entry.carbs"
                 :protein="entry.protein"></food-entry>
-    <div class="row header totals">
+    <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
+    <div class="row header totals" v-if="totalCalories > 0">
       <div class="col long">Totals:</div>
       <div class="col" title="Calories" v-text="totalCalories"></div>
       <div class="col" title="Fat" v-text="totalFat"></div>
@@ -74,26 +75,15 @@ w8mngr.foodEntries.templates.root = `
       </div>
     </div>
   </div>
-  <div class="autocomplete-results">
-    <div class="autocomplete-item"
-         v-for="item in autoCompleteItems"
-         id="{{ item.domId }}"
-         @click="autoCompleteSelectItem($index)">
-      <h3 v-text="item.name" class="name"></h3>
-      <p v-text="item.description" class="description"></p>
-      <div class="measurements">
-        <div class="measurement"
-             v-for="measurement in item.measurements"
-             id="measurement-{{ $parent.$index }}-{{ measurement.id }}">
-          <input type="text" name="amount" v-model="measurement.amount" class="amount">
-          <div class="unit" alt="Unit" v-text="measurement.unit"></div>
-          <div class="calories" alt="Calories" v-text="measurement.calories"></div>
-          <div class="fat" alt="Fat" v-text="measurement.fat"></div>
-          <div class="carbs" alt="Carbs" v-text="measurement.carbs"></div>
-          <div class="protein" alt="Protein" v-text="measurement.protein"></div>
-        </div>
-      </div>
-    </div>
+  <div class="autocomplete-results" v-if="autoCompleteItems.length">
+    <autocomplete-item v-for="item in autoCompleteItems"
+                       :index="$index"
+                       :name="item.name"
+                       :description.sync="item.description"
+                       :resource="item.resource"
+                       :measurements-loaded.sync="item.measurementsLoaded"
+                       :selected-measurement.sync="item.selectedMeasurement"
+                       :measurements.sync="item.measurements"></autocomplete-item>
   </div>
 </div>
 `

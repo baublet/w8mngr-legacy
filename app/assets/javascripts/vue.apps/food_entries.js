@@ -38,7 +38,8 @@ w8mngr.fn.initIf("food-entries-app", function() {
       autoCompleteSelected: -1,
     },
     components: {
-      'food-entry': w8mngr.foodEntries.components.foodEntry,
+      "food-entry": w8mngr.foodEntries.components.foodEntry,
+      "autocomplete-item": w8mngr.foodEntries.components.autoCompleteItem,
     },
     methods: {
       // Some basic initialization things that I put here because the Vue app
@@ -53,7 +54,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
         // Then, load the day if specified, otherwise it loads the current day
         this.loadDay(day)
 
-        // Testing my autocomplete function...
+        // Watch for autocomplete results
         this.$watch("newDescription", function(searchTerm) {
           this.autoComplete(searchTerm)
         })
@@ -135,36 +136,6 @@ w8mngr.fn.initIf("food-entries-app", function() {
             .focus()
         }
       },
-      // Sends an entry to be saved to the database
-      saveEntry: function(index) {
-        w8mngr.loading.on()
-        this.calculateTotals()
-        var data = {
-          food_entry: {
-            description: this.entries[index].description,
-            calories: this.entries[index].calories,
-            fat: this.entries[index].fat,
-            carbs: this.entries[index].carbs,
-            protein: this.entries[index].protein
-          }
-        }
-        var app = this
-        w8mngr.fetch({
-          method: "POST",
-          url: w8mngr.config.resources.food_entries.update(app.entries[index].id),
-          data: data,
-          onSuccess: function(response) {
-            if (response.success == true) {
-              w8mngr.loading.off()
-            } else {
-              alert("Unknown error...")
-            }
-          },
-          onError: function(response) {
-            alert("ERROR:" + response)
-          }
-        })
-      },
       // Update the macro totals using a useful custom function
       calculateTotals: function() {
         this.totalCalories = w8mngr.fn.parseTotals(this.entries, 'calories')
@@ -209,7 +180,8 @@ w8mngr.fn.initIf("food-entries-app", function() {
         this.nextDay = w8mngr.fn.tomorrowNumber(this.currentDayNumber)
         console.log("Parsed previous day: " + this.prevDay + " -- And next day: " + this.nextDay)
       },
-      // This function handles the autocomplete data
+      // This function handles the autocomplete data, which Vue handles with
+      // sub-components of this app
       autoComplete: function(query) {
         var app = this
         w8mngr.fetch({
@@ -235,18 +207,18 @@ w8mngr.fn.initIf("food-entries-app", function() {
         this.autoCompleteSelected = -1
         console.log(response.results)
         if (response.results.length > 0) {
-          var app = this
+          var self = this
           w8mngr.fn.forEach(response.results, function(result, i) {
             // This loads the resource we'll use to ping our db for measurement info
             var resource = ("offset" in result && "group" in result) ?
               w8mngr.config.resources.foods.pull(result.ndbno) :
               w8mngr.config.resources.foods.show(result.id)
-            app.autoCompleteItems.push({
-              domId: "autocomplete-item-" + i,
+            self.autoCompleteItems.push({
               name: result.name,
               resource: resource,
               measurements: [],
-              measurementsLoaded: 0
+              measurementsLoaded: 0,
+              selectedMeasurement: 0,
             })
           })
         }
@@ -259,7 +231,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
 
         console.log("Down: " + (this.autoCompleteSelected + 1))
 
-        this.autoCompleteSelectItem(this.autoCompleteSelected + 1)
+        this.autoCompleteSelected = this.autoCompleteSelected + 1
       },
       // Handles our arrow key up
       previousAutoCompleteItem: function() {
@@ -271,74 +243,13 @@ w8mngr.fn.initIf("food-entries-app", function() {
 
         if (this.autoCompleteSelected >= 0) {
           // Go up one item if they're not at the top already
-          this.autoCompleteSelectItem(this.autoCompleteSelected - 1)
-
-        } else {
-          // If they're at the top and go one more up, don't reselect
-          this.autoCompleteSelectItem()
+          this.autoCompleteSelected = this.autoCompleteSelected - 1
         }
-      },
-      // Selects an autocomplete item, or none if id is null
-      autoCompleteSelectItem(id = null) {
-        // Deselect the previous item
-        var current_el = null
-
-        // Only deselect the previous item if there's an item selected
-        if (this.autoCompleteSelected >= 0) {
-          current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
-          w8mngr.fn.removeClass(current_el, "selected")
-        }
-        // Now select the item that was passed to us
-        if (id !== null) {
-          // Set the internal counter to the new id
-          this.autoCompleteSelected = id
-
-          // If we're deselecting all items, just return here! We're done
-          if (id == -1) return false
-          this.loadAutoCompleteItemData()
-          current_el = document.getElementById(this.autoCompleteItems[this.autoCompleteSelected].domId)
-          w8mngr.fn.addClass(current_el, "selected")
-        }
-      },
-      // This loads an autocomplete item's data and attaches it to the object
-      loadAutoCompleteItemData(itemIndex = null) {
-
-        if (itemIndex == null) itemIndex = this.autoCompleteSelected
-
-        // Only continue if we haven't already loaded these measurements
-        if (this.autoCompleteItems[itemIndex].measurementsLoaded) return false
-
-        console.log("Loading item data for: " + itemIndex)
-
-        var item = this.autoCompleteItems[itemIndex]
-        var app = this
-
-        w8mngr.fetch({
-          method: "get",
-          url: item.resource,
-          onSuccess: function(response) {
-            if (response.success === false) {
-              alert("Unknown error...")
-            } else {
-              item.measurements = response.measurements
-              item.selectedMeasurement = 0
-              item.description = response.description
-              item.measurementsLoaded = 1
-              item.id = response.id
-
-              // Make sure we add a selected class to our measurement
-              app.selectMeasurement(0)
-            }
-          },
-          onError: function(response) {
-            alert("ERROR: " + response)
-          }
-        })
-
       },
 
       // Selects the next measurement
       nextMeasurement: function(e) {
+
         // Do nothing if there's no item selected
         if (this.autoCompleteSelected == -1) return false
 
@@ -349,7 +260,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
         if (item.selectedMeasurement == (item.measurements.length - 1)) return false
 
         // Increment our selected measurement counter and call the appropriate function
-        this.selectMeasurement(item.selectedMeasurement + 1)
+        item.selectedMeasurement = item.selectedMeasurement + 1
         console.log("Selected next item: " + item.selectedMeasurement)
       },
 
@@ -365,29 +276,9 @@ w8mngr.fn.initIf("food-entries-app", function() {
         if (item.selectedMeasurement == 0) return false
 
         // Decrement our selected measurement and call the appropo function
-        this.selectMeasurement(item.selectedMeasurement - 1)
+        item.selectedMeasurement = item.selectedMeasurement - 1
         console.log("Selected previous item: " + item.selectedMeasurement)
       },
-
-      selectMeasurement: function(index) {
-        // We have to defer this function so Vue can refresh the dom first, then
-        // we can getElementById and manipulate it
-        var app = this
-        setTimeout(function() {
-          // Deselect the last one
-          var item = app.autoCompleteItems[app.autoCompleteSelected]
-          var id = item.measurements[item.selectedMeasurement].id
-          var current_el = document.getElementById("measurement-" + app.autoCompleteSelected + "-" + id)
-          w8mngr.fn.removeClass(current_el, "selected")
-
-          // Select the new one
-          item.selectedMeasurement = index
-          id = item.measurements[item.selectedMeasurement].id
-          current_el = document.getElementById("measurement-" + app.autoCompleteSelected + "-" + id)
-          console.log(current_el)
-          w8mngr.fn.addClass(current_el, "selected")
-        }, 0)
-      }
-    }
+    },
   })
 })
