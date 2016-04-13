@@ -12,7 +12,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
 
   // This is our overarching food entries instance
   w8mngr.foodEntries.app = new Vue({
-    template: w8mngr.foodEntries.templates.main,
+    template: w8mngr.foodEntries.templates.root,
     el: "#food-entries-app",
     events: {
       'hook:ready': function() {
@@ -37,6 +37,9 @@ w8mngr.fn.initIf("food-entries-app", function() {
       autoCompleteItems: [],
       autoCompleteSelected: -1,
     },
+    components: {
+      'food-entry': w8mngr.foodEntries.components.foodEntry,
+    },
     methods: {
       // Some basic initialization things that I put here because the Vue app
       // needs to be loaded for many of these methods to work
@@ -49,52 +52,74 @@ w8mngr.fn.initIf("food-entries-app", function() {
         } catch (e) {}
         // Then, load the day if specified, otherwise it loads the current day
         this.loadDay(day)
-          // Testing my autocomplete function...
+
+        // Testing my autocomplete function...
         this.$watch("newDescription", function(searchTerm) {
           this.autoComplete(searchTerm)
         })
       },
       // Send an entry to be added to the database
       addEntry: function() {
+
         w8mngr.loading.on()
+
         var description = this.newDescription.trim()
         var calories = parseInt(this.newCalories.trim()) || 0
         var fat = parseInt(this.newFat.trim()) || 0
         var carbs = parseInt(this.newCarbs.trim()) || 0
         var protein = parseInt(this.newProtein.trim()) || 0
+
         var data = {
           description: description,
           calories: calories,
           fat: fat,
           carbs: carbs,
-          protein: protein
+          protein: protein,
         }
+
         if (description) {
-          // We'll need this to update the item with the index the ruby app returns to us
-          var index = this.entries.push(data) - 1
-            // Reset our fields
+
+          // Reset our fields
           this.newDescription = ''
           this.newCalories = ''
           this.newFat = ''
           this.newCarbs = ''
           this.newProtein = ''
-            // Keep our this reference in app so we can manipulate it in the fetch request
+
+          // Add the entry to the model
+          // We'll need this to update the item with the index the ruby app returns to us
+          // NOTE: Small workaround here. If we don't set a data element on this
+          // initial push, Vue doesn't model the reactive getters and setters,
+          // which makes it so that when we return an ID from the JSON request,
+          // the component never gets the notification to update (because Vue
+          // attaches its update chain to its dynamically-generated getters and
+          // setters). So we just duplicate the data hash: one for sending, one
+          // for populating our Vue properties
+          var data_to_send = data
+          data.id = null
+          var index = this.entries.push(data) - 1
+
+          // Keep our this reference in app so we can manipulate it in the fetch request
           var app = this
-            // Format the data for posting
-          data = {
-            food_entry: data
+
+          // Format the data for posting to our JSON end point
+          data_to_send = {
+            food_entry: data_to_send
           }
-          data.food_entry.day = this.currentDayNumber
+          data_to_send.food_entry.day = this.currentDayNumber
+
+          // Make the request
           w8mngr.fetch({
             method: "POST",
             url: w8mngr.config.resources.food_entries.add,
-            data: data,
+            data: data_to_send,
             onSuccess: function(response) {
               if (response.success === false) {
                 w8mngr.loading.off()
                 alert("Unknown error...")
               } else {
-                app.entries[index].id = response.success
+                // Update our ID with the returned response so it can be deleted
+                app.entries[index].id = parseInt(response.success)
                 w8mngr.loading.off()
               }
             },
@@ -109,27 +134,6 @@ w8mngr.fn.initIf("food-entries-app", function() {
           document.getElementById("description-input")
             .focus()
         }
-      },
-      // Sends an entry to be removed from the database
-      removeEntry: function(index) {
-        w8mngr.loading.on()
-        var app = this
-        w8mngr.fetch({
-          method: "DELETE",
-          url: w8mngr.config.resources.food_entries.delete(app.entries[index].id),
-          onSuccess: function(response) {
-            if (response.success === true) {
-              app.entries.splice(index, 1)
-              app.calculateTotals()
-              w8mngr.loading.off()
-            } else {
-              alert("Unknown error...")
-            }
-          },
-          onError: function(response) {
-            alert("ERROR: " + response)
-          }
-        })
       },
       // Sends an entry to be saved to the database
       saveEntry: function(index) {

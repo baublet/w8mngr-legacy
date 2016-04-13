@@ -22,7 +22,7 @@ w8mngr.fn.addEvent = function(el, eventName, handler) {
 // el on the Vue instance
 w8mngr.fn.initIf = function(my_app, fn) {
   // We attach this to our basic init function so this only loads once
-  // the DOM is known
+  // the DOM is known and all of our JS is loaded
   w8mngr.init.add(function() {
     if (document.getElementById(my_app) !== null) {
       fn()

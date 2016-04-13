@@ -26,6 +26,8 @@ w8mngr.init = {
 
 // Food entries app namespace
 w8mngr.foodEntries = {}
+w8mngr.foodEntries.components = {}
+w8mngr.foodEntries.templates = {}
 
 // The Configuration
 w8mngr.config = {

@@ -11,6 +11,13 @@
 // about supported directives.
 //
 //= require w8mngr
+//
+//  We need to require this first so our components don't load blank templates
+//= require_tree ./vue.templates/
+//
+//  Now, the rest of our application can load just fine
 //= require_tree .
+//
+//  Require this file now so our application can begin running
 //= require_self
 w8mngr.init.run()
