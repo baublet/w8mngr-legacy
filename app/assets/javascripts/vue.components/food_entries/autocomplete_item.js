@@ -19,6 +19,9 @@ w8mngr.foodEntries.components.autoCompleteItem = Vue.extend({
     },
   },
   methods: {
+    addEntry() {
+      this.$dispatch('add-entry')
+    },
     initializeComponent() {
       // Watch for this item to be selected
       this.$watch("$parent.autoCompleteSelected", function(index) {

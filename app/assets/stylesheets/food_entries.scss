@@ -193,6 +193,18 @@
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
   }
+  .add-food {
+    color: $color-primary;
+    opacity: 0;
+    margin-right: .25rem;
+    .fa {
+      opacity: 1;
+      font-size: 1rem;
+    }
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
   &.selected {
     margin: 0 -1.25rem;
     padding: 1rem 3rem;
@@ -200,6 +212,9 @@
     background: rgba($color-primary, .1);
     border-color: rgba($color-primary, .75);
     box-shadow:inset 0 0 3px 5px rgba($black, .05);
+    .add-food {
+      opacity: 1;
+    }
     .name {
       white-space: normal;
       font-size: .8rem;
