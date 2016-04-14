@@ -10,6 +10,10 @@ w8mngr.foodEntries.templates.autoCompleteItem = `
     {{ name }}
   </h3>
   <p v-text="description" class="description" v-if="description"></p>
+  <div class="small-loader" v-if="autoCompleteLoading">
+    <i class="fa fa-cog fa-spin"></i>
+    <span class="screen-reader-text">Loading...</span>
+  </div>
   <div class="measurements">
     <measurement-item v-for="measurement in measurements"
                  :index="$index"

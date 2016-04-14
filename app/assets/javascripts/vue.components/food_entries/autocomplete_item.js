@@ -12,6 +12,7 @@ w8mngr.foodEntries.components.autoCompleteItem = Vue.extend({
     "measurementsLoaded",
     "measurements",
     "selectedMeasurement",
+    "autoCompleteLoading",
   ],
   events: {
     'hook:ready': function() {
@@ -23,7 +24,8 @@ w8mngr.foodEntries.components.autoCompleteItem = Vue.extend({
       this.$dispatch('add-entry')
     },
     initializeComponent() {
-      // Watch for this item to be selected
+      this.autoCompleteLoading = 0
+        // Watch for this item to be selected
       this.$watch("$parent.autoCompleteSelected", function(index) {
         if (index == this.index) this.loadItemData()
       })
@@ -34,12 +36,15 @@ w8mngr.foodEntries.components.autoCompleteItem = Vue.extend({
       // Only continue if we haven't already loaded these measurements
       if (this.measurementsLoaded) return false
 
+      this.autoCompleteLoading = 1
+
       var in_cache = w8mngr.cache.get("food", this.resource)
-      console.log(in_cache)
+
       if (in_cache !== null) {
         console.log("Item found in the cache for " + this.name + ". Loading it into Vue.")
         this.measurements = in_cache.measurements
         this.measurementsLoaded = 1
+        this.autoCompleteLoading = 0
         return true
       }
 
@@ -51,6 +56,7 @@ w8mngr.foodEntries.components.autoCompleteItem = Vue.extend({
         method: "get",
         url: self.resource,
         onSuccess: function(response) {
+          self.autoCompleteLoading = 0
           if (response.success === false) {
             alert("Unknown error...")
           } else {

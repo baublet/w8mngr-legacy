@@ -56,6 +56,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
       entries: [],
       autoCompleteItems: [],
       autoCompleteSelected: -1,
+      autoCompleteLoading: 0,
     },
     components: {
       "food-entry": w8mngr.foodEntries.components.foodEntry,
@@ -107,6 +108,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
           this.newFat = ''
           this.newCarbs = ''
           this.newProtein = ''
+          this.autoCompleteItems = []
 
           // Add the entry to the model
           // We'll need this to update the item with the index the ruby app returns to us
@@ -204,6 +206,10 @@ w8mngr.fn.initIf("food-entries-app", function() {
       // This function handles the autocomplete data, which Vue handles with
       // sub-components of this app
       autoComplete: function(query) {
+        // Only do anything if the entered input is > 3 letters
+        if (query.length <= 3) return false
+
+        this.autoCompleteLoading = 1
         var app = this
         w8mngr.fetch({
           method: "get",
@@ -211,12 +217,15 @@ w8mngr.fn.initIf("food-entries-app", function() {
           onSuccess: function(response) {
             if (response.success === false) {
               alert("Unknown error...")
+              app.autoCompleteLoading = 0
             } else {
               app.formatAutoCompleteResults(response)
+              app.autoCompleteLoading = 0
             }
           },
           onError: function(response) {
             alert("ERROR: " + response)
+            app.autoCompleteLoading = 0
           }
         })
       },
