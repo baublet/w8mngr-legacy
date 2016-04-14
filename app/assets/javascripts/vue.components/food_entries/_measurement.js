@@ -29,6 +29,12 @@ w8mngr.foodEntries.components.measurementItem = Vue.extend({
     previousMeasurement: function() {
       this.$dispatch('previous-measurement')
     },
+
+    // Pushes a notification up the chain to add the current entry
+    addEntry: function() {
+      this.$dispatch('add-entry')
+    },
+
     // This function sends the measurement info up the chain so that our main
     // app can fill it into the food log form
     dispatchMeasurementInfo: function() {

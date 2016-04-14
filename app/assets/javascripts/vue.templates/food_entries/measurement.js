@@ -4,7 +4,11 @@ w8mngr.foodEntries.templates.measurementItem = `
     <i class="fa fa-arrow-left" aria-hidden="true"></i>
     <span class="screen-reader-text">Previous Measurement</span>
   </div>
-  <input type="text" name="amount" v-model="newAmount" class="amount">
+  <input type="text" name="amount" class="amount"
+    v-model="newAmount"
+    @keyup.enter="addEntry()"
+    @keyup.left.stop.prevent="previousMeasurement()"
+    @keyup.right.stop.prevent="nextMeasurement()">
   <div class="unit" alt="Unit" v-text="unit"></div>
   <div class="calories" alt="Calories" v-text="cCalories"></div>
   <div class="fat" alt="Fat" v-text="cFat"></div>

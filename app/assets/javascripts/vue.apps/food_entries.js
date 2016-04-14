@@ -19,7 +19,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
         this.initializeApp()
       },
       'fillin-form': function(data) {
-        //this.newDescription = data.newDescription
+        this.newDescriptionTemp = data.description
         this.newCalories = data.calories
         this.newFat = data.fat
         this.newCarbs = data.carbs
@@ -31,6 +31,9 @@ w8mngr.fn.initIf("food-entries-app", function() {
       'previous-measurement': function() {
         this.previousMeasurement()
       },
+      'add-entry': function() {
+        this.addEntry()
+      },
     },
     data: {
       currentDayNumber: '',
@@ -38,6 +41,10 @@ w8mngr.fn.initIf("food-entries-app", function() {
       prevDay: '',
       nextDay: '',
       newDescription: '',
+      // We store the measurement name here to add when the user triggers our
+      // addEntry method. This is so that the user looping through measurements
+      // doesn't mess with the autocomplete
+      newDescriptionTemp: null,
       newCalories: '',
       newFat: '',
       newCarbs: '',
@@ -77,7 +84,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
 
         w8mngr.loading.on()
 
-        var description = this.newDescription.trim()
+        var description = this.newDescriptionTemp || this.newDescription.trim()
         var calories = parseInt(this.newCalories) || 0
         var fat = parseInt(this.newFat) || 0
         var carbs = parseInt(this.newCarbs) || 0
@@ -95,6 +102,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
 
           // Reset our fields
           this.newDescription = ''
+          this.newDescriptionTemp = null
           this.newCalories = ''
           this.newFat = ''
           this.newCarbs = ''
