@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//  We need to require this first so it sets all of our variables
 //= require w8mngr
 //
 //  We need to require this first so our components don't load blank templates
