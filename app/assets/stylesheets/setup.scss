@@ -9,6 +9,8 @@ $color-secondary: #F63700;
 
 $font-stack: "Roboto", "Helvetica", "Trebuchet MS", "Verdana";
 
+$easing-1: cubic-bezier(0,.95,0,1);
+
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,400,400italic,700,700italic,900);
 
 // Ryan's favorite mediaquery mixins!

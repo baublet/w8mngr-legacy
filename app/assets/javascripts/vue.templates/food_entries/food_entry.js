@@ -1,5 +1,5 @@
 w8mngr.foodEntries.templates.foodEntry = `
-  <div class="row entry" transition="fade">
+  <div class="row entry" transition="fl-fade">
     <div class="col long">
       <input type="text" @keyup.enter="saveEntry(index)" v-model="description">
     </div>

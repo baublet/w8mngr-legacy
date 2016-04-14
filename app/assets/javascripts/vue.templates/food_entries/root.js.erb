@@ -83,7 +83,8 @@ w8mngr.foodEntries.templates.root = `
                        :resource="item.resource"
                        :measurements-loaded.sync="item.measurementsLoaded"
                        :selected-measurement.sync="item.selectedMeasurement"
-                       :measurements.sync="item.measurements"></autocomplete-item>
+                       :measurements.sync="item.measurements"
+                       transition="ac-fade" stagger="25"></autocomplete-item>
   </div>
 </div>
 `
