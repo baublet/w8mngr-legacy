@@ -24,7 +24,13 @@ w8mngr.fn.initIf("food-entries-app", function() {
         this.newFat = data.fat
         this.newCarbs = data.carbs
         this.newProtein = data.protein
-      }
+      },
+      'next-measurement': function() {
+        this.nextMeasurement()
+      },
+      'previous-measurement': function() {
+        this.previousMeasurement()
+      },
     },
     data: {
       currentDayNumber: '',
@@ -72,10 +78,10 @@ w8mngr.fn.initIf("food-entries-app", function() {
         w8mngr.loading.on()
 
         var description = this.newDescription.trim()
-        var calories = parseInt(this.newCalories.trim()) || 0
-        var fat = parseInt(this.newFat.trim()) || 0
-        var carbs = parseInt(this.newCarbs.trim()) || 0
-        var protein = parseInt(this.newProtein.trim()) || 0
+        var calories = parseInt(this.newCalories) || 0
+        var fat = parseInt(this.newFat) || 0
+        var carbs = parseInt(this.newCarbs) || 0
+        var protein = parseInt(this.newProtein) || 0
 
         var data = {
           description: description,
@@ -272,7 +278,7 @@ w8mngr.fn.initIf("food-entries-app", function() {
       },
 
       // Selects the previous measurement
-      previousMeasurement: function(e) {
+      previousMeasurement: function() {
         // Do nothing if there's no item selected
         if (this.autoCompleteSelected == -1) return false
 

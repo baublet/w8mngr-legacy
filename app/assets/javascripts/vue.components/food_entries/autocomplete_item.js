@@ -16,7 +16,7 @@ w8mngr.foodEntries.components.autoCompleteItem = Vue.extend({
   events: {
     'hook:ready': function() {
       this.initializeComponent()
-    }
+    },
   },
   methods: {
     initializeComponent() {
