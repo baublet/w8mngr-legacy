@@ -8,6 +8,9 @@
 # environment I'm using)
 git ignore config/database.yml
 
+# Ignore Cloud9 settings
+git ignore /.c9
+
 # Ignore bundler config.
 /.bundle
 

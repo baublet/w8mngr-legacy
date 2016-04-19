@@ -1,0 +1,102 @@
+<div class="food-entries-app-div">
+  <div class="day-navigator">
+      <a href="#" @click.stop.prevent="loadPrevDay" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
+      <span class="current-day" v-text="currentDay"></span>
+      <a href="#" @click.stop.prevent="loadNextDay" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
+  </div>
+  <h1><i class="fa fa-cutlery"></i> Food Log</h1>
+  <div class="foodlog-table app-form transparent table loading">
+    <i class="fa fa-cog fa-spin loading"></i>
+    <div class="row header">
+      <div class="col long"></div>
+      <div class="col" title="Calories">Calories</div>
+      <div class="col" title="Fat">Fat</div>
+      <div class="col" title="Carbs">Carbs</div>
+      <div class="col" title="Protein">Protein</div>
+      <div class="col meta"></div>
+    </div>
+    <food-entry v-for="entry in entries"
+                :id="entry.id"
+                :index="$index"
+                :description="entry.description"
+                :calories="entry.calories"
+                :fat="entry.fat"
+                :carbs="entry.carbs"
+                :protein="entry.protein"></food-entry>
+    <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
+    <div class="row header totals" v-if="totalCalories > 0">
+      <div class="col long">Totals:</div>
+      <div class="col" title="Calories" v-text="totalCalories"></div>
+      <div class="col" title="Fat" v-text="totalFat"></div>
+      <div class="col" title="Carbs" v-text="totalCarbs"></div>
+      <div class="col" title="Protein" v-text="totalProtein"></div>
+      <div class="col meta"></div>
+    </div>
+  </div>
+  <div class="app-form new table">
+    <div class="row new">
+      <div class="col long">
+        <input type="text"
+                @keyup.enter="addEntry"
+                @keyup.up="previousAutoCompleteItem"
+                @keyup.down="nextAutoCompleteItem"
+                @keyup.right="nextMeasurement($event)"
+                @keyup.left="previousMeasurement($event)"
+                debounce="500"
+                v-model="newDescription"
+                placeholder="Description" autofocus="autofocus" id="description-input">
+      </div>
+      <div class="col short" title="Calories">
+        <input type="text" @keyup.enter="addEntry" v-model="newCalories" placeholder="Calories">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" @keyup.enter="addEntry" v-model="newFat" placeholder="Fat">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" @keyup.enter="addEntry" v-model="newCarbs" placeholder="Carbs">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" @keyup.enter="addEntry" v-model="newProtein" placeholder="Protein">
+      </div>
+      <div class="col meta">
+        <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="<%= Rails.application.routes.url_helpers.food_search_path %>">
+          <i class="fa fa-barcode"></i>
+          <span class="screen-reader-text">Scan Barcode</span>
+        </a>
+        <a class="btn search-btn" alt="Search for Foods" title="Search for Foods" href="<%= Rails.application.routes.url_helpers.food_search_path :food_log_referrer => "true"%>">
+          <i class="fa fa-search"></i>
+          <span class="screen-reader-text">Search for Foods</span>
+        </a>
+        <button name="button" type="submit" class="btn food-log-new-btn" @click.stop.prevent="addEntry">
+          <i class="fa fa-plus"></i>
+          <strong>New Entry</strong>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="autocomplete-results">
+    <div class="auto-complete-loading">
+      <div class="small-loader" v-if="autoCompleteLoading">
+        <i class="fa fa-cog fa-spin"></i>
+        <span class="screen-reader-text">Loading...</span>
+      </div>
+      <div class="message" v-if="!autoCompleteLoading && newDescription.length > 3 && autoCompleteItems.length < 1">
+        <p>No items were found matching <em>{{ newDescription }}</em></p>
+      </div>
+      <div class="message" v-if="!autoCompleteLoading && newDescription.length <= 3">
+        <p> Enter text in the description fied to load items here that you can easily
+            add to your log! Once there is a list of foods here, use either your
+            mouse or the arrow keys to navigate the items.</p>
+      </div>
+    </div>
+    <autocomplete-item v-for="item in autoCompleteItems"
+                       :index="$index"
+                       :name="item.name"
+                       :description.sync="item.description"
+                       :resource="item.resource"
+                       :measurements-loaded.sync="item.measurementsLoaded"
+                       :selected-measurement.sync="item.selectedMeasurement"
+                       :measurements.sync="item.measurements"
+                       transition="ac-fade" stagger="25"></autocomplete-item>
+  </div>
+</div>
