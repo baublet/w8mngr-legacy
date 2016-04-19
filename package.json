@@ -11,6 +11,7 @@
     "css-loader": "^0.23.1",
     "exports-loader": "~0.6.2",
     "expose-loader": "~0.6.0",
+    "html-loader": "^0.4.3",
     "imports-loader": "~0.6.3",
     "lodash": "~2.4.1",
     "vue-hot-reload-api": "^1.3.2",
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.8.0",
+    "html-loader": "^0.4.3",
     "vue": "^1.0.21"
   }
 }

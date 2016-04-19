@@ -1,5 +1,4 @@
-/* global w8mngr */
-
+var w8mngr = require("w8mngr")
 var forEach = require("../fn/forEach.js")
 var addEvent = require("../fn/addEvent.js")
 

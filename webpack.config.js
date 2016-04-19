@@ -9,13 +9,17 @@ var config = module.exports = {
 
   // Our Vue configuration
   module: {
-    // `loaders` is an array of loaders to use.
-    // here we are only configuring vue-loader
+    // `loaders` is an array of loaders to use
     loaders: [
       {
         test: /\.vue$/, // a regex for matching all files that end in `.vue`
         loader: 'vue'   // loader to use for matched files
-      }
+      },
+      // We need an HTML loader to load our Vue templates
+      {
+        test: /\.html$/,
+        loader: "html"
+      },
     ]
   }
 };
