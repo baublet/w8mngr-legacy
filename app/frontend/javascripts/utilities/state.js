@@ -1,5 +1,7 @@
+/* global history */
+
 // A very simple wrapper for the PushState API
-w8mngr.state = {
+module.exports = {
   current: function() {
     if(history.state) return history.state
   },
