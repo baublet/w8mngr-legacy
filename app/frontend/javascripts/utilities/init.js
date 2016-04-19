@@ -17,7 +17,7 @@ module.exports = {
   // This is a special utility class I use to only declare certan JS functions if
   // the DOM finds my_app (which should be an ID that corresponds to the app's
   // el on the Vue instance
-  initIf: function(my_app, fn) {
+  addIf: function(my_app, fn) {
     // We attach this to our basic init function so this only loads once
     // the DOM is known and all of our JS is loaded
     this.add(function() {

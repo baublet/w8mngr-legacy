@@ -1,4 +1,4 @@
-<div class="food-entries-app-div">
+<template>
   <div class="day-navigator">
       <a href="#" @click.stop.prevent="loadPrevDay" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
       <span class="current-day" v-text="currentDay"></span>
@@ -99,4 +99,4 @@
                        :measurements.sync="item.measurements"
                        transition="ac-fade" stagger="25"></autocomplete-item>
   </div>
-</div>
+</template>

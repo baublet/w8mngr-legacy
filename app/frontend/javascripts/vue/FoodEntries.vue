@@ -1,2 +1,2 @@
-<template="FoodEntries/FoodEntries.html"></template>
-<script="FoodEntries/FoodEntries.js"></script>
+<template src="./FoodEntries/FoodEntries.html"></template>
+<script src="./FoodEntries/FoodEntries.js"></script>

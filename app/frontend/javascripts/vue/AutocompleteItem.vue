@@ -1,2 +1,2 @@
-<template="AutocompleteItem/AutocompleteItem.html"></template>
-<script="AutocompleteItem/AutocompleteItem.js"></script>
+<template src="./AutocompleteItem/AutocompleteItem.html"></template>
+<script src="./AutocompleteItem/AutocompleteItem.js"></script>

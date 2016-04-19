@@ -3,8 +3,9 @@ var parseTotals = require("../../fn/parseTotals.js")
 import AutocompleteItem from '../AutocompleteItem.vue'
 import FoodEntry from '../FoodEntry.vue'
 
-// This is our overarching food entries instance
+// This is our overarching food entries component
 export default {
+  el: "#food-entries-app",
   events: {
     'hook:ready': function() {
       this.initializeApp()
@@ -57,6 +58,7 @@ export default {
     // Some basic initialization things that I put here because the Vue app
     // needs to be loaded for many of these methods to work
     initializeApp: function() {
+      console.log("Initializing the FoodEntries app...")
       // Finds the current date based on the URL string
       var find_day = w8mngr.config.regex.foodlog_day.exec(window.location.href)
       var day = ""

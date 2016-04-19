@@ -102,22 +102,11 @@
 	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
 	console.log("w8mngr configuration loaded...")
 	
-	// Load Vue
-	var Vue = __webpack_require__(/*! vue */ 6)
-	console.log("Vue loaded...")
-	
-	// Attach our Fetch and Cache plugins to Vue
-	var fetchPlugin = __webpack_require__(/*! vue/plugins/fetch.js */ 8)
-	var cachePlugin = __webpack_require__(/*! vue/plugins/cache.js */ 9)
-	Vue.use(fetchPlugin, {resources: w8mngr.config.resources})
-	Vue.use(cachePlugin)
-	console.log("Vue plugins loaded...")
-	
 	// This includes every file in our init directory
 	console.log("Loading initialization files...")
-	__webpack_require__(/*! ./init/init.noJS.js */ 10)
-	__webpack_require__(/*! ./init/init.navigation.js */ 13)
-	__webpack_require__(/*! ./init/init.foodEntries.js */ 15)
+	__webpack_require__(/*! ./init/init.noJS.js */ 6)
+	__webpack_require__(/*! ./init/init.navigation.js */ 9)
+	__webpack_require__(/*! ./init/init.foodEntries.js */ 11)
 	
 	// Run our initializations
 	console.log("Initializing w8mngr...")
@@ -245,7 +234,7 @@
 	  // This is a special utility class I use to only declare certan JS functions if
 	  // the DOM finds my_app (which should be an ID that corresponds to the app's
 	  // el on the Vue instance
-	  initIf: function(my_app, fn) {
+	  addIf: function(my_app, fn) {
 	    // We attach this to our basic init function so this only loads once
 	    // the DOM is known and all of our JS is loaded
 	    this.add(function() {
@@ -313,6 +302,155 @@
 
 /***/ },
 /* 6 */
+/*!****************************************************!*\
+  !*** ./app/frontend/javascripts/init/init.noJS.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
+	var removeClass = __webpack_require__(/*! ../fn/removeClass.js */ 7)
+	
+	// Initialize all of our apps by removing the nojs tag from the body
+	w8mngr.init.add(function() {
+	  console.log("Removing the nojs class from the body...")
+	  removeClass(document.querySelector('body'), 'nojs')
+	})
+
+/***/ },
+/* 7 */
+/*!****************************************************!*\
+  !*** ./app/frontend/javascripts/fn/removeClass.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Basic class manipulation function to remove a class from an element
+	
+	var hasClass = __webpack_require__(/*! ./hasClass.js */ 8)
+	
+	module.exports = function(el, className) {
+	  if (hasClass(el, className)) {
+	    if (el.classList) {
+	      el.classList.remove(className)
+	    } else {
+	      el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ')
+	        .join('|') + '(\\b|$)', 'gi'), ' ');
+	    }
+	  }
+	}
+
+/***/ },
+/* 8 */
+/*!*************************************************!*\
+  !*** ./app/frontend/javascripts/fn/hasClass.js ***!
+  \*************************************************/
+/***/ function(module, exports) {
+
+	// Basic class manipulation function for telling if an element has a class
+	
+	module.exports = function(el, className) {
+	  if (el.classList) {
+	    return el.classList.contains(className);
+	  } else {
+	    return new RegExp('(^| )' + className + '( |$)', 'gi')
+	      .test(el.className);
+	  }
+	}
+
+/***/ },
+/* 9 */
+/*!**********************************************************!*\
+  !*** ./app/frontend/javascripts/init/init.navigation.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
+	var forEach = __webpack_require__(/*! ../fn/forEach.js */ 4)
+	var addEvent = __webpack_require__(/*! ../fn/addEvent.js */ 10)
+	
+	w8mngr.init.add(function() {
+	
+		console.log("Loading the navigation...")
+	
+		// This function loads the cookies and sets the state of our navigation
+		// Dashboard is set as the default menu
+		if (w8mngr.cookies.getItem("nav_position") === null) w8mngr.cookies.setItem("nav_position", "#app-menu-dashboard")
+		console.log("Current item set at: " + w8mngr.cookies.getItem("nav_position"))
+	
+		// Checks our checkbox
+		var check_boxes = document.querySelectorAll(w8mngr.cookies.getItem("nav_position"))
+	
+		// No checkbox found? Then just bail out of this function
+		if(typeof check_boxes[0] === 'undefined') return
+	
+		check_boxes[0].checked = true
+	
+		// Attaches event listeners to the top-level items
+		var nav_boxes = document.querySelectorAll(".app-menu-top-option")
+		forEach(nav_boxes, function(el) {
+			addEvent(el, "click", function() {
+				console.log("Navigation item changed to: " + this.getAttribute("id") + ". Updating cookie.")
+				w8mngr.cookies.removeItem("nav_position")
+				w8mngr.cookies.setItem("nav_position", "#" + this.getAttribute("id"))
+				console.log("Current item set at: " + w8mngr.cookies.getItem("nav_position"))
+			})
+		})
+	})
+
+
+/***/ },
+/* 10 */
+/*!*************************************************!*\
+  !*** ./app/frontend/javascripts/fn/addEvent.js ***!
+  \*************************************************/
+/***/ function(module, exports) {
+
+	// Simple event attacher I like to use
+	
+	module.exports = function(el, eventName, handler) {
+	  if (el.addEventListener) {
+	    el.addEventListener(eventName, handler);
+	  } else {
+	    el.attachEvent("on" + eventName, function() {
+	      handler.call(el);
+	    });
+	  }
+	}
+
+/***/ },
+/* 11 */
+/*!***********************************************************!*\
+  !*** ./app/frontend/javascripts/init/init.foodEntries.js ***!
+  \***********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
+	var Vue = __webpack_require__(/*! vue */ 12)
+	
+	w8mngr.init.addIf("food-entries-app", function() {
+	  // mount our Vue instance
+	  console.log("Loading food-entries-app dependencies...")
+	
+	  // Load the following asyncronously
+	  __webpack_require__.e/* nsure */(1/*! food-entries-chunk */, function(require) {
+	
+	    console.log("Mounting food-entries-app...")
+	    var FoodEntriesApp = __webpack_require__(/*! ../vue/FoodEntries.vue */ 14)
+	    w8mngr.foodEntries = new Vue(FoodEntriesApp)
+	    console.log(FoodEntriesApp)
+	    console.log(w8mngr.foodEntries)
+	
+	    // Attach our Fetch and Cache plugins to Vue
+	    var fetchPlugin = __webpack_require__(/*! ../vue/plugins/fetch.js */ 24)
+	    var cachePlugin = __webpack_require__(/*! ../vue/plugins/cache.js */ 25)
+	    Vue.use(fetchPlugin, {resources: w8mngr.config.resources})
+	    Vue.use(cachePlugin)
+	    console.log("Vue plugins loaded...")
+	
+	  })
+	})
+
+/***/ },
+/* 12 */
 /*!**********************************!*\
   !*** ./~/vue/dist/vue.common.js ***!
   \**********************************/
@@ -10241,10 +10379,10 @@
 	}, 0);
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 13)))
 
 /***/ },
-/* 7 */
+/* 13 */
 /*!**********************************************************!*\
   !*** (webpack)/~/node-libs-browser/~/process/browser.js ***!
   \**********************************************************/
@@ -10342,262 +10480,6 @@
 	};
 	process.umask = function() { return 0; };
 
-
-/***/ },
-/* 8 */
-/*!*******************************************************!*\
-  !*** ./app/frontend/javascripts/vue/plugins/fetch.js ***!
-  \*******************************************************/
-/***/ function(module, exports) {
-
-	var w8mngrFetch = {}
-	
-	w8mngrFetch.fetch = function(options) {
-	  var method = options.method
-	    // This makes sure the async_seed adds an additional variable if there are
-	    // already variables in the URL, or as the only variable if there aren't
-	    // And we add the async_seed to prevent caching
-	  var sep = (options.url.indexOf("?") == -1) ? "?" : "&"
-	  var url = options.url + sep + "async_seed=" + new Date()
-	    .getTime()
-	  var onSuccess = (options.onSuccess instanceof Function) ? options.onSuccess : null
-	  var onError = (options.onError instanceof Function) ? options.onError : null
-	
-	  var request = new XMLHttpRequest();
-	  console.log("Launching " + method + " request to " + url)
-	  request.open(method, url, true);
-	  if (onSuccess !== null || onError !== null) {
-	    console.log("Attaching callback  to the " + method + " request...")
-	    request.onreadystatechange = function() {
-	      if (this.readyState === 4) {
-	        console.log(method + " request returned " + this.readyState + "...")
-	        if (this.status >= 200 && this.status < 400) {
-	          // Success!
-	          if (onSuccess !== null) onSuccess(JSON.parse(this.responseText));
-	        } else {
-	          // Error :(
-	          if (onError !== null) onError(this.status, this.error, this.responseText);
-	        }
-	      }
-	    };
-	  }
-	  request.setRequestHeader("Accept", "application/json")
-	  if (method == "POST" || method == "PUT" || method == "PATCH") {
-	    var data = JSON.stringify(options.data);
-	    console.log("Sending: " + data)
-	    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	    request.send(data);
-	  } else {
-	    request.setRequestHeader("Content-Type", "application/json");
-	    request.send();
-	  }
-	  request = null;
-	}
-	
-	w8mngrFetch.install = function(externalVue, options) {
-	  externalVue.fetch = this.fetch
-	  externalVue.fetchResources = options.resources
-	}
-	
-	module.exports = w8mngrFetch
-
-/***/ },
-/* 9 */
-/*!*******************************************************!*\
-  !*** ./app/frontend/javascripts/vue/plugins/cache.js ***!
-  \*******************************************************/
-/***/ function(module, exports) {
-
-	// Cache so we don't have to load up certain things that don't really change
-	// often every single time we want it
-	var w8mngrCache = {}
-	
-	// We store these in the following format:
-	/* {
-	      id: Number,
-	      name: String,
-	      description: String,
-	      measurements: [
-	        {
-	          id: Number,
-	          description: String,
-	          calories: Number,
-	          fat: Number,
-	          carbs: Number,
-	          protein: Number
-	        }
-	      ]
-	    }
-	*/
-	w8mngrCache.foods = {}
-	
-	/* This function sets a cache type by the key. If the item is already in the
-	 * cache, it doesn't re-add it.
-	 *
-	 * The type needs to correspond to an object in the w8mngr.cache hash
-	 */
-	w8mngrCache.set = function(type, key, data) {
-	  var item = null
-	  if (type == "food") item = this.foods
-	  if (item == null) return false
-	  if (item[key] !== undefined) return false
-	  item[key] = data
-	  return true
-	}
-	
-	w8mngrCache.get = function(type, key) {
-	  var item = null
-	  if (type == "food") item = this.foods
-	  if (item == null) return null
-	  if (item[key] == undefined) return null
-	  return item[key]
-	}
-	
-	w8mngrCache.install = function(externalVue) {
-	  externalVue.cache = this
-	}
-	
-	module.exports = w8mngrCache
-
-/***/ },
-/* 10 */
-/*!****************************************************!*\
-  !*** ./app/frontend/javascripts/init/init.noJS.js ***!
-  \****************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
-	var removeClass = __webpack_require__(/*! ../fn/removeClass.js */ 11)
-	
-	// Initialize all of our apps by removing the nojs tag from the body
-	w8mngr.init.add(function() {
-	  removeClass(document.querySelector('body'), 'nojs')
-	})
-
-/***/ },
-/* 11 */
-/*!****************************************************!*\
-  !*** ./app/frontend/javascripts/fn/removeClass.js ***!
-  \****************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	// Basic class manipulation function to remove a class from an element
-	
-	var hasClass = __webpack_require__(/*! ./hasClass.js */ 12)
-	
-	module.exports = function(el, className) {
-	  if (hasClass(el, className)) {
-	    if (el.classList) {
-	      el.classList.remove(className)
-	    } else {
-	      el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ')
-	        .join('|') + '(\\b|$)', 'gi'), ' ');
-	    }
-	  }
-	}
-
-/***/ },
-/* 12 */
-/*!*************************************************!*\
-  !*** ./app/frontend/javascripts/fn/hasClass.js ***!
-  \*************************************************/
-/***/ function(module, exports) {
-
-	// Basic class manipulation function for telling if an element has a class
-	
-	module.exports = function(el, className) {
-	  if (el.classList) {
-	    return el.classList.contains(className);
-	  } else {
-	    return new RegExp('(^| )' + className + '( |$)', 'gi')
-	      .test(el.className);
-	  }
-	}
-
-/***/ },
-/* 13 */
-/*!**********************************************************!*\
-  !*** ./app/frontend/javascripts/init/init.navigation.js ***!
-  \**********************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
-	var forEach = __webpack_require__(/*! ../fn/forEach.js */ 4)
-	var addEvent = __webpack_require__(/*! ../fn/addEvent.js */ 14)
-	
-	w8mngr.init.add(function() {
-	
-		console.log("Loading the navigation...")
-	
-		// This function loads the cookies and sets the state of our navigation
-		// Dashboard is set as the default menu
-		if (w8mngr.cookies.getItem("nav_position") === null) w8mngr.cookies.setItem("nav_position", "#app-menu-dashboard")
-		console.log("Current item set at: " + w8mngr.cookies.getItem("nav_position"))
-	
-		// Checks our checkbox
-		var check_boxes = document.querySelectorAll(w8mngr.cookies.getItem("nav_position"))
-	
-		// No checkbox found? Then just bail out of this function
-		if(typeof check_boxes[0] === 'undefined') return
-	
-		check_boxes[0].checked = true
-	
-		// Attaches event listeners to the top-level items
-		var nav_boxes = document.querySelectorAll(".app-menu-top-option")
-		forEach(nav_boxes, function(el) {
-			addEvent(el, "click", function() {
-				console.log("Navigation item changed to: " + this.getAttribute("id") + ". Updating cookie.")
-				w8mngr.cookies.removeItem("nav_position")
-				w8mngr.cookies.setItem("nav_position", "#" + this.getAttribute("id"))
-				console.log("Current item set at: " + w8mngr.cookies.getItem("nav_position"))
-			})
-		})
-	})
-
-
-/***/ },
-/* 14 */
-/*!*************************************************!*\
-  !*** ./app/frontend/javascripts/fn/addEvent.js ***!
-  \*************************************************/
-/***/ function(module, exports) {
-
-	// Simple event attacher I like to use
-	
-	module.exports = function(el, eventName, handler) {
-	  if (el.addEventListener) {
-	    el.addEventListener(eventName, handler);
-	  } else {
-	    el.attachEvent("on" + eventName, function() {
-	      handler.call(el);
-	    });
-	  }
-	}
-
-/***/ },
-/* 15 */
-/*!***********************************************************!*\
-  !*** ./app/frontend/javascripts/init/init.foodEntries.js ***!
-  \***********************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
-	var Vue = __webpack_require__(/*! vue */ 6)
-	
-	w8mngr.init.initIf("food-entries-app", function() {
-	  // mount our Vue instance
-	  console.log("Loading food-entries-app dependencies...")
-	  __webpack_require__.e/* nsure */(1/*! food-entries-chunk */, function(require) {
-	    console.log("Mounting food-entries-app...")
-	    var FoodEntriesApp = __webpack_require__(/*! ../vue/FoodEntries.vue */ 16)
-	    new Vue({
-	      el: "#food-entries-app",
-	      components: {
-	        "food-entries": FoodEntriesApp
-	      }
-	    })
-	  })
-	})
 
 /***/ }
 /******/ ]);

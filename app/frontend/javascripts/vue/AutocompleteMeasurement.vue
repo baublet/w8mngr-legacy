@@ -1,2 +1,2 @@
-<template="AutocompleteMeasurement/AutocompleteMeasurement.html"></template>
-<script="AutocompleteMeasurement/AutocompleteMeasurement.js"></script>
+<template src="./AutocompleteMeasurement/AutocompleteMeasurement.html"></template>
+<script src="./AutocompleteMeasurement/AutocompleteMeasurement.js"></script>
