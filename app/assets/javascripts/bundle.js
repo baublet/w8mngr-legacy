@@ -440,8 +440,8 @@
 	    console.log(w8mngr.foodEntries)
 	
 	    // Attach our Fetch and Cache plugins to Vue
-	    var fetchPlugin = __webpack_require__(/*! ../vue/plugins/fetch.js */ 24)
-	    var cachePlugin = __webpack_require__(/*! ../vue/plugins/cache.js */ 25)
+	    var fetchPlugin = __webpack_require__(/*! ../vue/plugins/fetch.js */ 27)
+	    var cachePlugin = __webpack_require__(/*! ../vue/plugins/cache.js */ 28)
 	    Vue.use(fetchPlugin, {resources: w8mngr.config.resources})
 	    Vue.use(cachePlugin)
 	    console.log("Vue plugins loaded...")

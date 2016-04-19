@@ -25,7 +25,7 @@ webpackJsonp([1],[
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app/frontend/javascripts/vue/FoodEntries.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(/*! !vue-html-loader!./FoodEntries/FoodEntries.html */ 23)
+	__vue_template__ = __webpack_require__(/*! !vue-html-loader!./FoodEntries/FoodEntries.html */ 26)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -60,13 +60,13 @@ webpackJsonp([1],[
 	
 	var _AutocompleteItem2 = _interopRequireDefault(_AutocompleteItem);
 	
-	var _FoodEntry = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../FoodEntry.vue\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _FoodEntry = __webpack_require__(/*! ../FoodEntry.vue */ 22);
 	
 	var _FoodEntry2 = _interopRequireDefault(_FoodEntry);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var parseTotals = __webpack_require__(/*! ../../fn/parseTotals.js */ 22);
+	var parseTotals = __webpack_require__(/*! ../../fn/parseTotals.js */ 25);
 	
 	exports.default = {
 	  el: "#food-entries-app",
@@ -113,7 +113,7 @@ webpackJsonp([1],[
 	    autoCompleteLoading: 0
 	  },
 	  components: {
-	    AutoCompleteItem: AutoCompleteItem,
+	    AutocompleteItem: _AutocompleteItem2.default,
 	    FoodEntry: _FoodEntry2.default
 	  },
 	  methods: {
@@ -575,6 +575,116 @@ webpackJsonp([1],[
 /***/ },
 /* 22 */
 /*!****************************************************!*\
+  !*** ./app/frontend/javascripts/vue/FoodEntry.vue ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(/*! !babel-loader?presets[]=es2015&plugins[]=transform-runtime&comments=false!./FoodEntry/FoodEntry.js */ 23)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] app/frontend/javascripts/vue/FoodEntry.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(/*! !vue-html-loader!./FoodEntry/FoodEntry.html */ 24)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/ubuntu/workspace/app/frontend/javascripts/vue/FoodEntry.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 23 */
+/*!******************************************************************************************************************************************!*\
+  !*** ./~/babel-loader?presets[]=es2015&plugins[]=transform-runtime&comments=false!./app/frontend/javascripts/vue/FoodEntry/FoodEntry.js ***!
+  \******************************************************************************************************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  props: ["id", "index", "description", "calories", "fat", "carbs", "protein"],
+	  methods: {
+	    removeEntry: function removeEntry(index) {
+	      w8mngr.loading.on();
+	      var self = this;
+	      w8mngr.fetch({
+	        method: "DELETE",
+	        url: w8mngr.config.resources.food_entries.delete(self.id),
+	        onSuccess: function onSuccess(response) {
+	          if (response.success === true) {
+	            self.$parent.entries.splice(self.index, 1);
+	            self.$parent.calculateTotals();
+	            w8mngr.loading.off();
+	          } else {
+	            alert("Unknown error...");
+	          }
+	        },
+	        onError: function onError(response) {
+	          alert("ERROR: " + response);
+	        }
+	      });
+	    },
+	
+	    saveEntry: function saveEntry(index) {
+	      w8mngr.loading.on();
+	      this.$parent.calculateTotals();
+	
+	      var data = {
+	        food_entry: {
+	          description: this.description,
+	          calories: this.calories,
+	          fat: this.fat,
+	          carbs: this.carbs,
+	          protein: this.protein
+	        }
+	      };
+	
+	      var self = this;
+	      w8mngr.fetch({
+	        method: "PATCH",
+	        url: w8mngr.config.resources.food_entries.update(self.id),
+	        data: data,
+	        onSuccess: function onSuccess(response) {
+	          if (response.success == true) {
+	            w8mngr.loading.off();
+	          } else {
+	            alert("Unknown error...");
+	          }
+	        },
+	        onError: function onError(response) {
+	          alert("ERROR:" + response);
+	        }
+	      });
+	    }
+	  }
+	};
+
+/***/ },
+/* 24 */
+/*!***********************************************************************************!*\
+  !*** ./~/vue-html-loader!./app/frontend/javascripts/vue/FoodEntry/FoodEntry.html ***!
+  \***********************************************************************************/
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"row entry\" transition=\"fl-fade\">\n  <div class=\"col long\">\n    <input type=\"text\" @keyup.enter=\"saveEntry(index)\" v-model=\"description\">\n  </div>\n  <div class=\"col short\" title=\"Calories\">\n    <input type=\"text\" @keyup.enter=\"saveEntry(index)\" v-model=\"calories\">\n  </div>\n  <div class=\"col short\" title=\"Fat\">\n    <input type=\"text\" @keyup.enter=\"saveEntry(index)\" v-model=\"fat\">\n  </div>\n  <div class=\"col short\" title=\"Carbs\">\n    <input type=\"text\" @keyup.enter=\"saveEntry(index)\" v-model=\"carbs\">\n  </div>\n  <div class=\"col short\" title=\"Protein\">\n    <input type=\"text\" @keyup.enter=\"saveEntry(index)\" v-model=\"protein\">\n  </div>\n  <div class=\"col meta\">\n    <a href=\"#\" class=\"btn delete-btn\" title=\"Delete Entry\"\n      @click.stop.prevent=\"removeEntry(index)\"\n      v-if=\"id\">\n      <i class=\"fa fa-times\"></i>\n      <span class=\"screen-reader-text\">Delete Entry</span>\n    </a>\n  </div>\n</div>";
+
+/***/ },
+/* 25 */
+/*!****************************************************!*\
   !*** ./app/frontend/javascripts/fn/parseTotals.js ***!
   \****************************************************/
 /***/ function(module, exports, __webpack_require__) {
@@ -592,7 +702,7 @@ webpackJsonp([1],[
 	}
 
 /***/ },
-/* 23 */
+/* 26 */
 /*!***************************************************************************************!*\
   !*** ./~/vue-html-loader!./app/frontend/javascripts/vue/FoodEntries/FoodEntries.html ***!
   \***************************************************************************************/
@@ -601,7 +711,7 @@ webpackJsonp([1],[
 	module.exports = "<template>\n  <div class=\"day-navigator\">\n      <a href=\"#\" @click.stop.prevent=\"loadPrevDay\" title=\"Previous Day\"><i class=\"fa fa-chevron-circle-left\"></i></a>\n      <span class=\"current-day\" v-text=\"currentDay\"></span>\n      <a href=\"#\" @click.stop.prevent=\"loadNextDay\" title=\"Next Day\"><i class=\"fa fa-chevron-circle-right\"></i></a>\n  </div>\n  <h1><i class=\"fa fa-cutlery\"></i> Food Log</h1>\n  <div class=\"foodlog-table app-form transparent table loading\">\n    <i class=\"fa fa-cog fa-spin loading\"></i>\n    <div class=\"row header\">\n      <div class=\"col long\"></div>\n      <div class=\"col\" title=\"Calories\">Calories</div>\n      <div class=\"col\" title=\"Fat\">Fat</div>\n      <div class=\"col\" title=\"Carbs\">Carbs</div>\n      <div class=\"col\" title=\"Protein\">Protein</div>\n      <div class=\"col meta\"></div>\n    </div>\n    <food-entry v-for=\"entry in entries\"\n                :id=\"entry.id\"\n                :index=\"$index\"\n                :description=\"entry.description\"\n                :calories=\"entry.calories\"\n                :fat=\"entry.fat\"\n                :carbs=\"entry.carbs\"\n                :protein=\"entry.protein\"></food-entry>\n    <p v-if=\"entries.length < 1\">You have not logged any entries today. Add some via the form below!</p>\n    <div class=\"row header totals\" v-if=\"totalCalories > 0\">\n      <div class=\"col long\">Totals:</div>\n      <div class=\"col\" title=\"Calories\" v-text=\"totalCalories\"></div>\n      <div class=\"col\" title=\"Fat\" v-text=\"totalFat\"></div>\n      <div class=\"col\" title=\"Carbs\" v-text=\"totalCarbs\"></div>\n      <div class=\"col\" title=\"Protein\" v-text=\"totalProtein\"></div>\n      <div class=\"col meta\"></div>\n    </div>\n  </div>\n  <div class=\"app-form new table\">\n    <div class=\"row new\">\n      <div class=\"col long\">\n        <input type=\"text\"\n                @keyup.enter=\"addEntry\"\n                @keyup.up=\"previousAutoCompleteItem\"\n                @keyup.down=\"nextAutoCompleteItem\"\n                @keyup.right=\"nextMeasurement($event)\"\n                @keyup.left=\"previousMeasurement($event)\"\n                debounce=\"500\"\n                v-model=\"newDescription\"\n                placeholder=\"Description\" autofocus=\"autofocus\" id=\"description-input\">\n      </div>\n      <div class=\"col short\" title=\"Calories\">\n        <input type=\"text\" @keyup.enter=\"addEntry\" v-model=\"newCalories\" placeholder=\"Calories\">\n      </div>\n      <div class=\"col short\" title=\"Fat\">\n        <input type=\"text\" @keyup.enter=\"addEntry\" v-model=\"newFat\" placeholder=\"Fat\">\n      </div>\n      <div class=\"col short\" title=\"Carbs\">\n        <input type=\"text\" @keyup.enter=\"addEntry\" v-model=\"newCarbs\" placeholder=\"Carbs\">\n      </div>\n      <div class=\"col short\" title=\"Protein\">\n        <input type=\"text\" @keyup.enter=\"addEntry\" v-model=\"newProtein\" placeholder=\"Protein\">\n      </div>\n      <div class=\"col meta\">\n        <a class=\"btn barcode-btn\" alt=\"Scan Barcode\" title=\"Scan Barcode\" href=\"<%= Rails.application.routes.url_helpers.food_search_path %>\">\n          <i class=\"fa fa-barcode\"></i>\n          <span class=\"screen-reader-text\">Scan Barcode</span>\n        </a>\n        <a class=\"btn search-btn\" alt=\"Search for Foods\" title=\"Search for Foods\" href=\"<%= Rails.application.routes.url_helpers.food_search_path :food_log_referrer => \"true\"%>\">\n          <i class=\"fa fa-search\"></i>\n          <span class=\"screen-reader-text\">Search for Foods</span>\n        </a>\n        <button name=\"button\" type=\"submit\" class=\"btn food-log-new-btn\" @click.stop.prevent=\"addEntry\">\n          <i class=\"fa fa-plus\"></i>\n          <strong>New Entry</strong>\n        </button>\n      </div>\n    </div>\n  </div>\n  <div class=\"autocomplete-results\">\n    <div class=\"auto-complete-loading\">\n      <div class=\"small-loader\" v-if=\"autoCompleteLoading\">\n        <i class=\"fa fa-cog fa-spin\"></i>\n        <span class=\"screen-reader-text\">Loading...</span>\n      </div>\n      <div class=\"message\" v-if=\"!autoCompleteLoading && newDescription.length > 3 && autoCompleteItems.length < 1\">\n        <p>No items were found matching <em>{{ newDescription }}</em></p>\n      </div>\n      <div class=\"message\" v-if=\"!autoCompleteLoading && newDescription.length <= 3\">\n        <p> Enter text in the description fied to load items here that you can easily\n            add to your log! Once there is a list of foods here, use either your\n            mouse or the arrow keys to navigate the items.</p>\n      </div>\n    </div>\n    <autocomplete-item v-for=\"item in autoCompleteItems\"\n                       :index=\"$index\"\n                       :name=\"item.name\"\n                       :description.sync=\"item.description\"\n                       :resource=\"item.resource\"\n                       :measurements-loaded.sync=\"item.measurementsLoaded\"\n                       :selected-measurement.sync=\"item.selectedMeasurement\"\n                       :measurements.sync=\"item.measurements\"\n                       transition=\"ac-fade\" stagger=\"25\"></autocomplete-item>\n  </div>\n</template>";
 
 /***/ },
-/* 24 */
+/* 27 */
 /*!*******************************************************!*\
   !*** ./app/frontend/javascripts/vue/plugins/fetch.js ***!
   \*******************************************************/
@@ -659,7 +769,7 @@ webpackJsonp([1],[
 	module.exports = w8mngrFetch
 
 /***/ },
-/* 25 */
+/* 28 */
 /*!*******************************************************!*\
   !*** ./app/frontend/javascripts/vue/plugins/cache.js ***!
   \*******************************************************/

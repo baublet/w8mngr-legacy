@@ -51,7 +51,7 @@ export default {
     autoCompleteLoading: 0,
   },
   components: {
-    AutoCompleteItem,
+    AutocompleteItem,
     FoodEntry,
   },
   methods: {
