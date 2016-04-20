@@ -24,9 +24,9 @@ class IngredientsController < ApplicationController
     begin
       amount = params[:amount].to_r.to_f
     rescue
-      amount = false
+      amount = 0
     end
-    amount = 1 if amount == 0 || amount == false
+    amount = 1 if amount == 0
 
     @ingredient = @recipe.ingredients.build(
         measurement_id: @measurement.id,
@@ -39,9 +39,6 @@ class IngredientsController < ApplicationController
     end
 
     redirect_to edit_recipe_path(@recipe)
-  end
-
-  def update
   end
 
   def destroy
