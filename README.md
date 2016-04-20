@@ -49,11 +49,11 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 - [ ] Incorporate a universal tagging system so that foods (and later, recipes and training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
 
 ## Version 0.2.1
-- [ ] Create controller tests
+- [x] Create controller tests
   - [x] Figure out what a controller test is! ;)
   - [x] Food entries
   - [x] Foods
-  - [ ] Ingredients
+  - [x] Ingredients
   - [x] Password resets
   - [x] Recipes
   - [x] Sessions
