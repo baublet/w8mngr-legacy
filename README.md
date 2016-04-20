@@ -55,9 +55,9 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Foods
   - [ ] Ingredients
   - [x] Password resets
-  - [ ] Recipes
+  - [x] Recipes
   - [x] Sessions
-  - [ ] USDA
+  - [x] USDA
   - [x] Users
   - [x] Weight entries
   - [x] Welcome
