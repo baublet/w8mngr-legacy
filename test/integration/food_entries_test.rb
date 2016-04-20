@@ -43,7 +43,7 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
     end
 
     test "user can delete food entry" do
-        create_food_entry
+        create_food_entry 20020501
         # Find the delete link in the foodlog-table row
         delete_link = css_select ".foodlog-table .row.entry a"
         get delete_link[0]["href"]
@@ -77,7 +77,8 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
 
     private
 
-    def create_food_entry
+    def create_food_entry (day = 20000101)
+        @food_entry[:day] = day
         get foodlog_path
         assert_template 'food_entries/index'
         # Creates an item for January 1, 2000
