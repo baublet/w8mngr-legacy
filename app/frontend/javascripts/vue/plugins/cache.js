@@ -44,7 +44,7 @@ w8mngrCache.get = function(type, key) {
 }
 
 w8mngrCache.install = function(externalVue) {
-  externalVue.cache = this
+  externalVue.prototype.$cache = this
 }
 
 module.exports = w8mngrCache

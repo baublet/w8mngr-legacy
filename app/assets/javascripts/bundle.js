@@ -432,14 +432,14 @@
 	  // Load the following asyncronously
 	  __webpack_require__.e/* nsure */(1/*! food-entries-chunk */, function(require) {
 	
-	    var Vue = __webpack_require__(/*! vue */ 12)
-	    var pluginLoader = __webpack_require__(/*! ../vue/init.js */ 14)
-	
 	    console.log("Mounting food-entries-app...")
-	    var FoodEntriesApp = __webpack_require__(/*! ../vue/FoodEntries.vue */ 17)
-	    w8mngr.foodEntries = new Vue(FoodEntriesApp)
-	    pluginLoader(w8mngr.foodEntries)
-	    console.log(FoodEntriesApp)
+	
+	    var Vue = __webpack_require__(/*! vue */ 12)
+	    Vue.use(__webpack_require__(/*! ../vue/init.js */ 14))
+	
+	    w8mngr.foodEntries = new Vue(__webpack_require__(/*! ../vue/FoodEntries.vue */ 17))
+	
+	    console.log("Vue instance for FoodEntries:")
 	    console.log(w8mngr.foodEntries)
 	
 	  })

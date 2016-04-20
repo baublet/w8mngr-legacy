@@ -7,14 +7,15 @@ w8mngr.init.addIf("food-entries-app", function() {
   // Load the following asyncronously
   require.ensure(["vue", "../vue/init.js", "../vue/FoodEntries.vue"], function(require) {
 
-    var Vue = require("vue")
-    var pluginLoader = require("../vue/init.js")
-
     console.log("Mounting food-entries-app...")
-    var FoodEntriesApp = require("../vue/FoodEntries.vue")
-    w8mngr.foodEntries = new Vue(FoodEntriesApp)
 
-    pluginLoader(w8mngr.foodEntries)
+    var Vue = require("vue")
+    Vue.use(require("../vue/init.js"))
+
+    w8mngr.foodEntries = new Vue(require("../vue/FoodEntries.vue"))
+
+    console.log("Vue instance for FoodEntries:")
+    console.log(w8mngr.foodEntries)
 
   }, "food-entries-chunk")
 })

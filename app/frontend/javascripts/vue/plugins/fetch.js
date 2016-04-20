@@ -43,9 +43,8 @@ w8mngrFetch.fetch = function(options) {
 }
 
 w8mngrFetch.install = function(externalVue, options) {
-  externalVue.fetch = this.fetch
-  externalVue.fetchURI = options.resources
-  console.log(externalVue.fetchResources)
+  externalVue.prototype.$fetch = this.fetch
+  externalVue.prototype.$fetchURI = options.resources
 }
 
 module.exports = w8mngrFetch

@@ -1,8 +1,13 @@
 var parseTotals = require("../../fn/parseTotals.js")
+var numberToDay = require("../../fn/numberToDay.js")
+var tomorrowNumber = require("../../fn/tomorrowNumber.js")
+var yesterdayNumber = require("../../fn/yesterdayNumber.js")
+var forEach = require("../../fn/forEach.js")
+
+var state = require("../../utilities/state.js")
 
 import AutocompleteItem from '../AutocompleteItem.vue'
 import FoodEntry from '../FoodEntry.vue'
-var state = require("../../utilities/state.js")
 
 // This is our overarching food entries component
 export default {
@@ -128,9 +133,9 @@ export default {
         data_to_send.food_entry.day = this.currentDayNumber
 
         // Make the request
-        this.fetch({
+        this.$fetch({
           method: "POST",
-          url: this.fetchURI.food_entries.add,
+          url: this.$fetchURI.food_entries.add,
           data: data_to_send,
           onSuccess: function(response) {
             if (response.success === false) {
@@ -156,10 +161,10 @@ export default {
     },
     // Update the macro totals using a useful custom function
     calculateTotals: function() {
-      this.totalCalories = this.fn.parseTotals(this.entries, 'calories')
-      this.totalFat = this.fn.parseTotals(this.entries, 'fat')
-      this.totalCarbs = this.fn.parseTotals(this.entries, 'carbs')
-      this.totalProtein = this.fn.parseTotals(this.entries, 'protein')
+      this.totalCalories = parseTotals(this.entries, 'calories')
+      this.totalFat = parseTotals(this.entries, 'fat')
+      this.totalCarbs = parseTotals(this.entries, 'carbs')
+      this.totalProtein = parseTotals(this.entries, 'protein')
     },
     // Loads the day after the currenct day
     loadNextDay: function() {
@@ -173,11 +178,11 @@ export default {
     loadDay: function(day = "") {
       this.loading = 1
       console.log("Fetching data from the API...")
-      state.push({}, this.fetchURI.food_entries.from_day(day))
+      state.push({}, this.$fetchURI.food_entries.from_day(day))
       var app = this
-      this.fetch({
+      this.$fetch({
         method: "GET",
-        url: this.fetchURI.food_entries.from_day(day),
+        url: this.$fetchURI.food_entries.from_day(day),
         onSuccess: function(response) {
           app.entries = response.entries
           app.currentDayNumber = response.current_day
@@ -193,9 +198,9 @@ export default {
     // This function takes this.currentDayNum and renders a nice day display
     // for the rest of the dates relative to the currently-showed date
     parseDays: function() {
-      this.currentDay = this.fn.numberToDay(this.currentDayNumber)
-      this.prevDay = this.fn.yesterdayNumber(this.currentDayNumber)
-      this.nextDay = this.fn.tomorrowNumber(this.currentDayNumber)
+      this.currentDay = numberToDay(this.currentDayNumber)
+      this.prevDay = yesterdayNumber(this.currentDayNumber)
+      this.nextDay = tomorrowNumber(this.currentDayNumber)
       console.log("Parsed previous day: " + this.prevDay + " -- And next day: " + this.nextDay)
     },
     // This function handles the autocomplete data, which Vue handles with
@@ -206,9 +211,9 @@ export default {
 
       this.autoCompleteLoading = 1
       var app = this
-      this.fetch({
+      this.$fetch({
         method: "get",
-        url: this.fetchURI.search_foods(query),
+        url: this.$fetchURI.search_foods(query),
         onSuccess: function(response) {
           if (response.success === false) {
             alert("Unknown error...")
@@ -233,11 +238,11 @@ export default {
       console.log(response.results)
       if (response.results.length > 0) {
         var self = this
-        this.fn.forEach(response.results, function(result, i) {
+        forEach(response.results, function(result, i) {
           // This loads the resource we'll use to ping our db for measurement info
           var resource = ("offset" in result && "group" in result) ?
-            this.fetchURI.foods.pull(result.ndbno) :
-            this.fetchURI.foods.show(result.id)
+            this.$fetchURI.foods.pull(result.ndbno) :
+            this.$fetchURI.foods.show(result.id)
           self.autoCompleteItems.push({
             name: result.name,
             resource: resource,
