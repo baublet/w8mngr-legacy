@@ -1,0 +1,13 @@
+ingredientone:
+  name: This ingredient
+  amount: 1
+  calories: 5
+  fat: 4
+  carbs: 3
+  protein: 2
+  recipe_id: <%= ActiveRecord::FixtureSet.identify(:recipefour) %>
+
+ingredienttwo:
+  measurement_id: <%= ActiveRecord::FixtureSet.identify(:measurementtwo) %>
+  amount: 2
+  recipe_id: <%= ActiveRecord::FixtureSet.identify(:recipefour) %>

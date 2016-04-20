@@ -4,6 +4,13 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ignore my database configs (they will differ depending on which development
+# environment I'm using)
+git ignore config/database.yml
+
+# Ignore Cloud9 settings
+git ignore /.c9
+
 # Ignore bundler config.
 /.bundle
 
@@ -18,8 +25,6 @@
 
 # Ignore the byebug history
 /.byebug_history
-# Ignore my large assets (for now)/asset-sources/*
-# Elastic Beanstalk Files.ebextentions/*
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+
+# Ignore my large assets (for now)
+/asset-sources/*

@@ -11,3 +11,17 @@ two:
   description: MyText
   instructions: MyText
   servings: 3
+
+three:
+  name: MyText
+  description: MyText
+  instructions: MyText
+  servings: 1
+  user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>
+
+recipefour:
+  name: MyText
+  description: MyText
+  instructions: MyText
+  servings: 1
+  user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>

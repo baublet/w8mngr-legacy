@@ -70,18 +70,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  def delete_ingredient
-    @ingredient = Ingredient.find_by(id: params[:id])
-    @recipe = @ingredient.recipe
-    if !@recipe.nil?
-      @ingredient.delete
-      flash[:success] = "Ingredient removed from the recipe"
-      redirect_to edit_recipe_path(@recipe)
-    else
-      redirect_to recipes_path
-    end
-  end
-
   def destroy
     if @recipe.destroy
       flash[:success] = "Recipe deleted"
@@ -105,6 +93,8 @@ class RecipesController < ApplicationController
   end
 
   # Same for the new ingredients
+  # NOTE: We use the raw values here rather than relational links to food measurements
+  # because we have another controller that deals specifically with adding food links
   def new_ingredient_params
     params.require(:newingredient).permit(:name, :calories, :fat, :carbs, :protein)
   end

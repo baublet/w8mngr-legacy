@@ -21,7 +21,8 @@ class Ingredient < ActiveRecord::Base
   private
 
   def load_food_measurement_data
-    # No need to do this if the food measurement_id is nil
+    # No need to do this if the food measurement_id is nil because the data
+    # is already stored in the entry
     if !measurement_id.nil?
       measurement = Measurement.find(measurement_id)
       self.name = self.amount + " " + measurement.unit + ","
@@ -29,10 +30,10 @@ class Ingredient < ActiveRecord::Base
 
       # Calculate the multiplier
       begin
-				multiplier = self.amount.to_r.to_f
-			rescue
-				multiplier = 1
-			end
+        multiplier = self.amount.to_r.to_f
+      rescue
+        multiplier = 1
+      end
       multipler = 1 if multiplier == 0
       self.calories = measurement.calories * multiplier
       self.carbs = measurement.carbs * multiplier

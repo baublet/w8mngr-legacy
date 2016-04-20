@@ -25,7 +25,7 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
         assert_select "form.edit_food_entry"
         forms = css_select("form.edit_food_entry")
         patch forms[0]['action'], food_entry: {
-            day: 20000101,
+            day: 20000102,
             description: "Changed food entry",
             calories: 201,
             fat: 11,
@@ -36,14 +36,14 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
         # Now check if all of the info has been updated
         inputs = css_select "form.edit_food_entry input[type='text']"
         assert_equal "Changed food entry", inputs[0]['value']
-        assert_equal 201, inputs[1]['value'].to_i
-        assert_equal 11, inputs[2]['value'].to_i
-        assert_equal 46, inputs[3]['value'].to_i
-        assert_equal 11, inputs[4]['value'].to_i
+        assert_equal 201,                  inputs[1]['value'].to_i
+        assert_equal 11,                   inputs[2]['value'].to_i
+        assert_equal 46,                   inputs[3]['value'].to_i
+        assert_equal 11,                   inputs[4]['value'].to_i
     end
 
     test "user can delete food entry" do
-        create_food_entry
+        create_food_entry 20020501
         # Find the delete link in the foodlog-table row
         delete_link = css_select ".foodlog-table .row.entry a"
         get delete_link[0]["href"]
@@ -77,7 +77,8 @@ class FoodEntriesTest < ActionDispatch::IntegrationTest
 
     private
 
-    def create_food_entry
+    def create_food_entry (day = 20000101)
+        @food_entry[:day] = day
         get foodlog_path
         assert_template 'food_entries/index'
         # Creates an item for January 1, 2000

@@ -54,12 +54,12 @@ class UsersController < ApplicationController
 
     private
 
-	def user_params
-		params.require(:user)
-			  .permit(:email, :password, :password_confirmation)
-	end
+  def user_params
+    params.require(:user)
+        .permit(:email, :password, :password_confirmation)
+  end
 
     def correct_user
-		redirect_to root_url if current_user.id != params[:id].to_i
-	end
+    redirect_to root_url if current_user.id != params[:id].to_i
+  end
 end

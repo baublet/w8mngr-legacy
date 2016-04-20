@@ -1,169 +1,297 @@
 .foodlog-table {
-	padding: 0;
-	width:100%;
-	.header {
-		display: none;
-		@include mqAfterSize(640px) {
-			display: block;
-			font-weight:bold;
-			font-size: .8rem;
-			text-transform: uppercase;
-			margin-bottom: 1rem;
-			overflow: visible;
-			opacity:.25;
-			transition: opacity .15s ease-in-out;
-			.col {
-				transform: translate(.5rem, 0) rotate(-45deg);
-				overflow: visible;
-			}
-			&:hover {
-				opacity: 1;
-			}
-		}
-	}
-	.col {
-		margin-bottom: 0;
-		width: 25%;
-		max-width: 25%;
-		@include mqAfterSize(640px) {
-			width: 10%;
-			max-width: 10%;
-		}
-	}
-	.entry {
-		position: relative;
-		z-index: 0;
-		padding-right: 3rem;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-		border-bottom: 1px solid rgba($black, .1);
-		input:focus {
-			font-weight: bolder;
-		}
-		.long {
-			width:100%;
-			max-width:100%;
-			input[type=text] {
-				font-size: .9rem;
-				padding:0;
-			}
-			@include mqAfterSize(640px) {
-				width:40%;
-				max-width:40%;
-			}
-		}
-		.col.short {
-			margin-top: .5rem;
-			position: relative;
-			input[type=text] {
-				position: relative;
-				z-index: 10;
-				padding-bottom: .75rem;
-			}
-			&::after {
-				font-size: .6rem;
-				content: attr(title);
-				text-transform: uppercase;
-				font-weight: 800;
-				color: rgba($black, .25);
-				position: absolute;
-				z-index: 0;
-				bottom: .15rem;
-				left: 0;
-			}
-		}
-		.meta {
-			font-size: .6rem;
-			position: absolute;
-			z-index: 0;
-			top: 2rem;
-			right: 0;
-			width: 2rem;
-			height: 2rem;
-			opacity: .25;
-			transition: opacity .15s ease-in-out;
-			text-align: right;
-			width:20%;
-			max-width:20%;
-			.save {
-				display: none;
-			}
-		}
-		&:hover .meta {
-			opacity: 1;
-		}
-		input[type=text] {
-			padding-top: 0;
-			font-size: .8rem;
-		}
-	}
-	input[type=text], input[type=number] {
-		width:100%;
-	}
-	.totals {
-		font-weight: bold;
-		display:block;
-		text-align:center;
-		margin: 2rem -1rem;
-		padding: 1rem 0;
-		background-color: rgba($black,.025);
-		border-top:1px solid rgba($black, .03);
-		border-bottom:1px solid rgba($black, .03);
-		opacity: 1;
-		overflow:hidden;
-		.col {
-			transform: none;
-			font-size: .8rem;
-			width: 20%;
-			&::after {
-				display: block;
-				font-size: .5rem;
-				text-transform: uppercase;
-				font-weight: 800;
-				color: rgba($black, .75);
-				content: attr(title);
-				padding: .1rem 0;
-			}
-		}
-		.long {
-			text-align: right;
-		}
-	}
+  padding: 0;
+  width:100%;
+  .header {
+    display: none;
+    @include mqAfterSize(640px) {
+      display: block;
+      font-weight:bold;
+      font-size: .8rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      overflow: visible;
+      opacity:.25;
+      transition: opacity .15s ease-in-out;
+      .col {
+        transform: translate(.5rem, 0) rotate(-45deg);
+        overflow: visible;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .col {
+    margin-bottom: 0;
+    width: 25%;
+    max-width: 25%;
+    @include mqAfterSize(640px) {
+      width: 10%;
+      max-width: 10%;
+    }
+  }
+  .entry {
+    position: relative;
+    z-index: 0;
+    padding-right: 3rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid rgba($black, .1);
+    input:focus {
+      font-weight: bolder;
+    }
+    .long {
+      width:100%;
+      max-width:100%;
+      input[type=text] {
+        font-size: .9rem;
+        padding:0;
+        color: rgba($black, .75);
+      }
+      @include mqAfterSize(640px) {
+        width:40%;
+        max-width:40%;
+      }
+    }
+    .col.short {
+      margin-top: .5rem;
+      position: relative;
+      input[type=text] {
+        position: relative;
+        z-index: 10;
+        padding-bottom: .75rem;
+      }
+      &::after {
+        font-size: .6rem;
+        content: attr(title);
+        text-transform: uppercase;
+        font-weight: 800;
+        color: rgba($black, .25);
+        position: absolute;
+        z-index: 0;
+        bottom: .15rem;
+        left: 0;
+      }
+    }
+    .meta {
+      font-size: .6rem;
+      position: absolute;
+      z-index: 0;
+      top: 2rem;
+      right: 0;
+      width: 2rem;
+      height: 2rem;
+      opacity: .25;
+      transition: opacity .15s ease-in-out;
+      text-align: right;
+      width:20%;
+      max-width:20%;
+      .save {
+        display: none;
+      }
+    }
+    &:hover .meta {
+      opacity: 1;
+    }
+    input[type=text] {
+      padding-top: 0;
+      font-size: .8rem;
+    }
+  }
+  input[type=text], input[type=number] {
+    width:100%;
+  }
+  .totals {
+    font-weight: bold;
+    display:block;
+    text-align:center;
+    margin: 2rem -1rem;
+    padding: 1rem 0;
+    background-color: rgba($black,.025);
+    border-top:1px solid rgba($black, .03);
+    border-bottom:1px solid rgba($black, .03);
+    opacity: 1;
+    overflow:hidden;
+    .col {
+      transform: none;
+      font-size: .8rem;
+      width: 20%;
+      &::after {
+        display: block;
+        font-size: .5rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: rgba($black, .75);
+        content: attr(title);
+        padding: .1rem 0;
+      }
+    }
+    .long {
+      text-align: right;
+    }
+  }
 }
 .app-form.new {
-	padding: .5rem;
-	margin: 2rem 0 0;
-	background: $color-primary;
-	color: $white;
-	border-radius: 5px;
-	box-shadow: 0 0 5px rgba(0,0,0,.5);
-	overflow:hidden;
-	.col.long {
-		display:block;
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		input {
-			font-size: 1.6rem;
-		}
-	}
-	.col.short {
-		padding-left: 3px;
-		width: 25%;
-		max-width: 25%;
-		&:first-child {
-			padding-left: 0;
-		}
-		input {
-			font-size: 1.2rem;
-			text-align: center;
-		}
-	}
-	.col.meta {
-		overflow: visible;
-		display:block;
-		width: 100%;
-		max-width: 100%;
-		text-align:right;
-	}
+  padding: .5rem;
+  margin: 2rem 0 0;
+  background: $color-primary;
+  color: $white;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,.5);
+  overflow:hidden;
+  .col.long {
+    display:block;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    input {
+      font-size: 1.6rem;
+    }
+  }
+  .col.short {
+    padding-left: 3px;
+    width: 25%;
+    max-width: 25%;
+    &:first-child {
+      padding-left: 0;
+    }
+    input {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  }
+  .col.meta {
+    overflow: visible;
+    display:block;
+    width: 100%;
+    max-width: 100%;
+    text-align:right;
+  }
+}
+
+.autocomplete-results {
+  margin: 1rem -1rem 0;
+  overflow: hidden;
+  padding: 0 1rem;
+}
+
+.autocomplete-item {
+  max-height: 2rem;
+  padding: .25rem .5rem;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  &:nth-child(odd) {
+    background: rgba($black, .01);
+  }
+  .name {
+    margin: 0 0 1rem;
+    padding:  0;
+    font-size: .7rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+  .add-food {
+    color: $color-primary;
+    opacity: 0;
+    margin-right: .25rem;
+    .fa {
+      opacity: 1;
+      font-size: 1rem;
+    }
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
+  &.selected {
+    margin: 0 -1.25rem;
+    padding: 1rem 3rem;
+    max-height: 15rem;
+    background: rgba($color-primary, .1);
+    border-color: rgba($color-primary, .75);
+    box-shadow:inset 0 0 3px 5px rgba($black, .05);
+    .add-food {
+      opacity: 1;
+    }
+    .name {
+      white-space: normal;
+      font-size: .8rem;
+      font-weight: bold;
+    }
+  }
+  .measurement {
+    position: relative;
+    z-index: 0;
+    padding:0;
+    margin:0;
+    opacity: 0;
+    max-height: 0;
+    display: flex;
+    align-items: flex-end;
+    .previous-measurement, .next-measurement {
+      position: absolute;
+      left: -2.75rem;
+      top: 0;
+      bottom: -1rem;
+      background: $color-primary;
+      color: $white;
+      padding: .25rem .5rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+    }
+    .next-measurement {
+      left: auto;
+      right: -2.75rem;
+    }
+  }
+  .measurement.selected  {
+    transition: opacity .25s ease-in-out;
+    opacity: 1;
+    max-height: 15rem;
+    .amount {
+      z-index: 10;
+      position: relative;
+    }
+    .previous-measurement, .next-measurement {
+      display: flex;
+    }
+    &:first-child .previous-measurement, &:last-child .next-measurement {
+      display: none;
+    }
+  }
+  .amount, .unit, .calories, .fat, .carbs, .protein {
+    text-align: center;
+    font-size: .8rem;
+  }
+  .amount {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    width: 10%;
+  }
+  .unit {
+    width: 30%;
+    padding: 0 .75rem 0;
+  }
+  .calories, .fat, .carbs, .protein {
+    padding-top: .75rem;
+    width: 15%;
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      content: attr(alt);
+      display: block;
+      font-size: .6rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: rgba($black, .5);
+    }
+  }
 }

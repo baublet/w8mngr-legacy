@@ -1,8 +1,6 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :edit, :update, :destroy]
-
   before_action :logged_in_user, only: [:add, :new, :create, :destroy, :update]
-  before_action :correct_user, only: [:update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   include FoodsHelper
 
@@ -13,129 +11,21 @@ class FoodsController < ApplicationController
 
   # GET /foods/1
   def show
+    @food = Food.find(params[:id])
     # Validate the day
     @day = params[:day].blank? ? current_day : validate_day(params[:day])
-  end
-
-  def search
-    # If the user is coming from a recipe, make sure the recipe exists and
-    # belongs to the user. If it does, save that recipe ID to a cookie so that
-    # they can add the food directly to a recipe...
-    if !params[:recipe].blank?
-      recipe = current_user.recipes.find_by(id: params[:recipe])
-      if !recipe.nil?
-        cookies[:add_to_recipe] = recipe.id
-      end
+    respond_to do |format|
+      format.html { render "show" }
+      format.json {
+        render json:
+          {
+            food:        @food.name,
+            id:          @food.id,
+            description: @food.description,
+            measurements:@food.measurements
+          }
+      }
     end
-    # If they're coming from the food log, destroy the add_to_recipe cookie so
-    # the user can add entries to their food log
-    if !params[:food_log_referrer].blank?
-      cookies.delete :add_to_recipe
-    end
-
-    require 'uri'
-
-    if !params[:q].blank?
-      @searchresults = []
-
-      # Prepare the pagination with 25 per page
-      page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
-      per_page = 25
-
-      # Search the wider database with a preference for the user's saved and liked foods
-      #TODO: Implement a proper Solr search here
-
-      # Break the search into its parts and search for each term
-      query = params[:q].squish
-      results = Food.search_foods(query)
-                    .limit(per_page + 1)
-                    .offset((page - 1) * per_page)
-      # We do +1 here because if, at the end, we have 26 entries, we know there's a next page
-      @searchresults = results
-
-      # We need to ping the USDA for as many entries as we need to get to per_page
-      usda_entries = per_page + 1 - results.size
-
-      #byebug
-
-      # Then, search the USDA API if we have fewer than per_page + 1 results
-      if usda_entries > 0
-        @searchresults = @searchresults + search_usda(params[:q], usda_entries, (page - 1) * per_page)
-      end
-
-      # Matches? Show the search form
-      # Prepare simple pagination
-      @prev_page = page > 1 ? (page - 1).to_s : nil
-      @next_page = @searchresults.size > per_page ? (page + 1).to_s : nil
-      @base_url  = food_search_path + "?q=" + URI.encode(params[:q])
-      # Pop the end off the results array so we can stick to per_page items per page
-      @searchresults.pop
-      render "find"
-
-      #TODO: No matches at all? Tell them and display the new foods form
-    else
-      render "search"
-    end
-  end
-
-  # This method downloads the params[:ndbno] from the USDA website if it doesn't already
-  # exist and adds it to the database as belonging to our superuser (id=1).
-  # It then redirects the user to the food log page with the entry filled out
-  def pull
-      ndbno = params[:ndbno]
-      @food = Food.find_by(ndbno: ndbno)
-      if @food.nil?
-          @result = get_usda_entry(ndbno)
-
-          ndbno = @result["ndbno"]
-          name = @result["name"]
-          @food = Food.new(user_id: 1, name: name, ndbno: ndbno)
-
-          # Loop through the nutrients and build our measurements
-          measurements = {}
-          @result["nutrients"][0]["measures"].each do |measure|
-              measurements[measure["label"]] = {
-                  "unit" => measure["label"],
-                  "amount" => measure["qty"],
-                  "calories" => 0,
-                  "fat" => 0,
-                  "carbs" => 0,
-                  "protein" => 0
-              }
-          end
-
-          # Calories (always [1])
-          @result["nutrients"][1]["measures"].each do |measure|
-              measurements[measure["label"]]["calories"] += measure["value"].to_i
-          end
-
-          # Fat (always [3])
-          @result["nutrients"][3]["measures"].each do |measure|
-              measurements[measure["label"]]["fat"] += measure["value"].to_i
-          end
-
-          # Carbs (always [4])
-          @result["nutrients"][4]["measures"].each do |measure|
-              measurements[measure["label"]]["carbs"] += measure["value"].to_i
-          end
-
-          # Protein (always [2])
-          @result["nutrients"][2]["measures"].each do |measure|
-              measurements[measure["label"]]["protein"] += measure["value"].to_i
-          end
-
-          measurements.each do |measurement|
-              @food.measurements.new(measurement.second)
-          end
-
-          if !@food.save
-              # TODO: Log this behavior
-              flash[:error] = "Unexpected error pulling the food from foreign source. Please contact the administrator."
-              redirect_to food_search_path
-          end
-    end
-    # If it saved, or we're already storing this item redirect them to the food entry with this item loaded
-    redirect_to @food
   end
 
   # GET /foods/new
@@ -146,7 +36,6 @@ class FoodsController < ApplicationController
 
   # GET /foods/1/edit
   def edit
-    @food = current_user.foods.find(params[:id])
     @newmeasurement = Measurement.new
   end
 
@@ -235,11 +124,6 @@ class FoodsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_food
-      @food = Food.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def food_params
       params.require(:food).permit(:name, :description)
@@ -251,7 +135,7 @@ class FoodsController < ApplicationController
     end
 
     def correct_user
-		@food = current_user.foods.find_by(id: params[:id])
-		redirect_to root_url if @food.nil?
-	end
+    @food = current_user.foods.find_by(id: params[:id])
+    redirect_to root_url if @food.nil?
+  end
 end

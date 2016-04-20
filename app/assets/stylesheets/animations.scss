@@ -1,17 +1,37 @@
 //  Vue animations
-.fade-transition {
-  transition: all .3s ease;
+
+// For our food-log items
+.fl-fade-transition {
+  transition: all .15s ease;
   opacity: 1;
-  height: 6rem;
+  max-height: 10rem;
   overflow:hidden;
 }
 
-.fade-enter, .fade-leave {
+.fl-fade-enter, .fl-fade-leave {
   opacity: 0;
-  height: 2rem;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 0;
+}
+
+.ac-fade-transition {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform .15s ease-in-out,
+              opacity .15s ease-in-out;
+}
+
+.ac-fade-enter, .ac-fade-leave {
+  opacity: 0;
+  transform: translateY(-7rem);
 }
 
 // For the home page elements
+
 @keyframes slideInLeft {
     0% {
         text-indent: -50%;
