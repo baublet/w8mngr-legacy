@@ -6,52 +6,58 @@ var forEach = require("../../fn/forEach.js")
 
 var state = require("../../utilities/state.js")
 
-import AutocompleteItem from '../AutocompleteItem.vue'
-import FoodEntry from '../FoodEntry.vue'
+import AutocompleteItem from "../AutocompleteItem.vue"
+import FoodEntry from "../FoodEntry.vue"
 
 // This is our overarching food entries component
 export default {
   el: "#food-entries-app",
   events: {
-    'hook:ready': function() {
+    "hook:ready": function() {
       this.initializeApp()
     },
-    'fillin-form': function(data) {
+    "fillin-form": function(data) {
       this.newDescriptionTemp = data.description
       this.newCalories = data.calories
       this.newFat = data.fat
       this.newCarbs = data.carbs
       this.newProtein = data.protein
     },
-    'next-measurement': function() {
+    "next-measurement": function() {
       this.nextMeasurement()
     },
-    'previous-measurement': function() {
+    "previous-measurement": function() {
       this.previousMeasurement()
     },
-    'add-entry': function() {
+    "next-autocomplete-item": function() {
+      this.nextAutoCompleteItem()
+    },
+    "previous-autocomplete-item": function() {
+      this.previousAutoCompleteItem()
+    },
+    "add-entry": function() {
       this.addEntry()
     },
   },
   data: {
     loading: 0,
-    currentDayNumber: '',
-    currentDay: '',
-    prevDay: '',
-    nextDay: '',
-    newDescription: '',
+    currentDayNumber: "",
+    currentDay: "",
+    prevDay: "",
+    nextDay: "",
+    newDescription: "",
     // We store the measurement name here to add when the user triggers our
     // addEntry method. This is so that the user looping through measurements
-    // doesn't mess with the autocomplete
+    // doesn"t mess with the autocomplete
     newDescriptionTemp: null,
-    newCalories: '',
-    newFat: '',
-    newCarbs: '',
-    newProtein: '',
-    totalCalories: '',
-    totalFat: '',
-    totalCarbs: '',
-    totalProtein: '',
+    newCalories: "",
+    newFat: "",
+    newCarbs: "",
+    newProtein: "",
+    totalCalories: "",
+    totalFat: "",
+    totalCarbs: "",
+    totalProtein: "",
     entries: [],
     autoCompleteItems: [],
     autoCompleteSelected: -1,
@@ -102,18 +108,18 @@ export default {
       if (description) {
 
         // Reset our fields
-        this.newDescription = ''
+        this.newDescription = ""
         this.newDescriptionTemp = null
-        this.newCalories = ''
-        this.newFat = ''
-        this.newCarbs = ''
-        this.newProtein = ''
+        this.newCalories = ""
+        this.newFat = ""
+        this.newCarbs = ""
+        this.newProtein = ""
         this.autoCompleteItems = []
 
         // Add the entry to the model
-        // We'll need this to update the item with the index the ruby app returns to us
-        // NOTE: Small workaround here. If we don't set a data element on this
-        // initial push, Vue doesn't model the reactive getters and setters,
+        // We"ll need this to update the item with the index the ruby app returns to us
+        // NOTE: Small workaround here. If we don"t set a data element on this
+        // initial push, Vue doesn"t model the reactive getters and setters,
         // which makes it so that when we return an ID from the JSON request,
         // the component never gets the notification to update (because Vue
         // attaches its update chain to its dynamically-generated getters and
@@ -139,12 +145,12 @@ export default {
           data: data_to_send,
           onSuccess: function(response) {
             if (response.success === false) {
-              this.loading = 0
+              app.loading = 0
               alert("Unknown error...")
             } else {
               // Update our ID with the returned response so it can be deleted
               app.entries[index].id = parseInt(response.success)
-              this.loading = 0
+              app.loading = 0
             }
           },
           onError: function(response) {
@@ -161,10 +167,10 @@ export default {
     },
     // Update the macro totals using a useful custom function
     calculateTotals: function() {
-      this.totalCalories = parseTotals(this.entries, 'calories')
-      this.totalFat = parseTotals(this.entries, 'fat')
-      this.totalCarbs = parseTotals(this.entries, 'carbs')
-      this.totalProtein = parseTotals(this.entries, 'protein')
+      this.totalCalories = parseTotals(this.entries, "calories")
+      this.totalFat = parseTotals(this.entries, "fat")
+      this.totalCarbs = parseTotals(this.entries, "carbs")
+      this.totalProtein = parseTotals(this.entries, "protein")
     },
     // Loads the day after the currenct day
     loadNextDay: function() {
@@ -230,7 +236,7 @@ export default {
       })
     },
     // This function formats the autoComplete data, which will consist of USDA
-    // foods, our users' foods, and recipes, so we have to massage it!
+    // foods, our users" foods, and recipes, so we have to massage it!
     formatAutoCompleteResults(response) {
       console.log("Parsing autocomplete items")
       this.autoCompleteItems = []
@@ -239,10 +245,10 @@ export default {
       if (response.results.length > 0) {
         var self = this
         forEach(response.results, function(result, i) {
-          // This loads the resource we'll use to ping our db for measurement info
+          // This loads the resource we"ll use to ping our db for measurement info
           var resource = ("offset" in result && "group" in result) ?
-            this.$fetchURI.foods.pull(result.ndbno) :
-            this.$fetchURI.foods.show(result.id)
+            self.$fetchURI.foods.pull(result.ndbno) :
+            self.$fetchURI.foods.show(result.id)
           self.autoCompleteItems.push({
             name: result.name,
             resource: resource,
@@ -255,7 +261,7 @@ export default {
     },
     // Handles our arrow key down
     nextAutoCompleteItem: function() {
-      // Don't do anything if there aren't any items or they can't go anywhere
+      // Don"t do anything if there aren"t any items or they can"t go anywhere
       if (this.autoCompleteItems.length < 1) return false
       if (this.autoCompleteSelected == this.autoCompleteItems.length - 1) return false
 
@@ -265,14 +271,14 @@ export default {
     },
     // Handles our arrow key up
     previousAutoCompleteItem: function() {
-      // Don't do anything if there aren't any items or they can't go up
+      // Don"t do anything if there aren"t any items or they can"t go up
       if (this.autoCompleteItems.length < 1) return false
       if (this.autoCompleteSelected < 0) return false
 
       console.log("Up: " + (this.autoCompleteSelected - 1))
 
       if (this.autoCompleteSelected >= 0) {
-        // Go up one item if they're not at the top already
+        // Go up one item if they"re not at the top already
         this.autoCompleteSelected = this.autoCompleteSelected - 1
       }
     },
@@ -280,13 +286,13 @@ export default {
     // Selects the next measurement
     nextMeasurement: function(e) {
 
-      // Do nothing if there's no item selected
+      // Do nothing if there"s no item selected
       if (this.autoCompleteSelected == -1) return false
 
       // Find our item
       var item = this.autoCompleteItems[this.autoCompleteSelected]
 
-      // Do nothing if we're already at the end of the line
+      // Do nothing if we"re already at the end of the line
       if (item.selectedMeasurement == (item.measurements.length - 1)) return false
 
       // Increment our selected measurement counter and call the appropriate function
@@ -296,13 +302,13 @@ export default {
 
     // Selects the previous measurement
     previousMeasurement: function() {
-      // Do nothing if there's no item selected
+      // Do nothing if there"s no item selected
       if (this.autoCompleteSelected == -1) return false
 
       // Find our item
       var item = this.autoCompleteItems[this.autoCompleteSelected]
 
-      // Do nothing if we're already on the first measurement
+      // Do nothing if we"re already on the first measurement
       if (item.selectedMeasurement == 0) return false
 
       // Decrement our selected measurement and call the appropo function

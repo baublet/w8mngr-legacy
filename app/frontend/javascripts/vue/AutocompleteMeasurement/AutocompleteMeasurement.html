@@ -6,8 +6,10 @@
   <input type="text" name="amount" class="amount"
     v-model="newAmount"
     @keyup.enter="addEntry()"
-    @keyup.left.stop.prevent="previousMeasurement()"
-    @keyup.right.stop.prevent="nextMeasurement()">
+    @keyup.left="previousMeasurement()"
+    @keyup.right="nextMeasurement()"
+    @keyup.up="previousAutoCompleteItem()"
+    @keyup.down="nextAutoCompleteItem()">
   <div class="unit" alt="Unit" v-text="unit"></div>
   <div class="calories" alt="Calories" v-text="cCalories"></div>
   <div class="fat" alt="Fat" v-text="cFat"></div>

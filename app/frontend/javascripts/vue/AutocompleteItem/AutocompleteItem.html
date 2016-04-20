@@ -14,7 +14,7 @@
     <span class="screen-reader-text">Loading...</span>
   </div>
   <div class="measurements">
-    <measurement-item v-for="measurement in measurements"
+    <autocomplete-measurement v-for="measurement in measurements"
                  :index="$index"
                  :amount="measurement.amount"
                  :unit="measurement.unit"
@@ -22,6 +22,6 @@
                  :fat="measurement.fat"
                  :carbs="measurement.carbs"
                  :protein="measurement.protein"
-                 :selected-measurement="selectedMeasurement"></measurement-item>
+                 :selected-measurement="selectedMeasurement"></autocomplete-measurement>
   </div>
 </div>

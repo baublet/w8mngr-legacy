@@ -229,7 +229,7 @@
     opacity: 0;
     max-height: 0;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     .previous-measurement, .next-measurement {
       position: absolute;
       left: -2.75rem;
@@ -248,9 +248,9 @@
     }
   }
   .measurement.selected  {
+    transition: opacity .25s ease-in-out;
     opacity: 1;
-    max-height: 5rem;
-    animation: .25s measurementBlink;
+    max-height: 15rem;
     .amount {
       z-index: 10;
       position: relative;
@@ -271,11 +271,10 @@
     padding: 0;
     width: 100%;
     width: 10%;
-    margin-top: .75rem;
   }
   .unit {
     width: 30%;
-    padding: .75rem .75rem 0;
+    padding: 0 .75rem 0;
   }
   .calories, .fat, .carbs, .protein {
     padding-top: .75rem;

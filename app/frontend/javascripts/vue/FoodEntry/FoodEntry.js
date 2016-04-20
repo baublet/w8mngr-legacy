@@ -1,6 +1,7 @@
 // This is our food-entry item component, slim and easy to understand
 export default {
   props: [
+    "loading",
     "id",
     "index",
     "description",
@@ -12,16 +13,16 @@ export default {
   methods: {
     // Sends an entry to be removed from the database
     removeEntry: function(index) {
-      w8mngr.loading.on()
+      this.loading = 1
       var self = this
-      w8mngr.fetch({
+      this.$fetch({
         method: "DELETE",
-        url: w8mngr.config.resources.food_entries.delete(self.id),
+        url: self.$fetchURI.food_entries.delete(self.id),
         onSuccess: function(response) {
           if (response.success === true) {
             self.$parent.entries.splice(self.index, 1)
             self.$parent.calculateTotals()
-            w8mngr.loading.off()
+            self.loading = 0
           } else {
             alert("Unknown error...")
           }
@@ -33,7 +34,7 @@ export default {
     },
     // Sends an entry to be saved to the database
     saveEntry: function(index) {
-      w8mngr.loading.on()
+      this.loading = 1
       this.$parent.calculateTotals()
 
       // Prepare our data to be sent
@@ -49,13 +50,13 @@ export default {
 
       // Make our request
       var self = this
-      w8mngr.fetch({
+      this.$fetch({
         method: "PATCH",
-        url: w8mngr.config.resources.food_entries.update(self.id),
+        url: this.$fetchURI.food_entries.update(self.id),
         data: data,
         onSuccess: function(response) {
           if (response.success == true) {
-            w8mngr.loading.off()
+            self.loading = 0
           } else {
             alert("Unknown error...")
           }

@@ -1,4 +1,4 @@
-<template>
+<div class="food-entries-wrapper">
   <div class="day-navigator">
       <a href="#" @click.stop.prevent="loadPrevDay" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
       <span class="current-day" v-text="currentDay"></span>
@@ -16,6 +16,7 @@
       <div class="col meta"></div>
     </div>
     <food-entry v-for="entry in entries"
+                :loading.sync="loading"
                 :id="entry.id"
                 :index="$index"
                 :description="entry.description"
@@ -59,11 +60,11 @@
         <input type="text" @keyup.enter="addEntry" v-model="newProtein" placeholder="Protein">
       </div>
       <div class="col meta">
-        <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="<%= Rails.application.routes.url_helpers.food_search_path %>">
+        <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
           <i class="fa fa-barcode"></i>
           <span class="screen-reader-text">Scan Barcode</span>
         </a>
-        <a class="btn search-btn" alt="Search for Foods" title="Search for Foods" href="<%= Rails.application.routes.url_helpers.food_search_path :food_log_referrer => "true"%>">
+        <a class="btn search-btn" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
           <i class="fa fa-search"></i>
           <span class="screen-reader-text">Search for Foods</span>
         </a>
@@ -99,4 +100,4 @@
                        :measurements.sync="item.measurements"
                        transition="ac-fade" stagger="25"></autocomplete-item>
   </div>
-</template>
+</div>

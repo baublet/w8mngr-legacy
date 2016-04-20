@@ -30,16 +30,6 @@
   transform: translateY(-7rem);
 }
 
-// So our measurements pop out when they load
-@keyframes measurementBlink {
-  0% {
-    transform: translateY(300px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
 // For the home page elements
 
 @keyframes slideInLeft {

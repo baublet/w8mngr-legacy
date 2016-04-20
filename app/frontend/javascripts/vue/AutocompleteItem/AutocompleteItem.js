@@ -40,7 +40,7 @@ export default {
 
       this.autoCompleteLoading = 1
 
-      var in_cache = this.cache.get("food", this.resource)
+      var in_cache = this.$cache.get("food", this.resource)
 
       if (in_cache !== null) {
         console.log("Item found in the cache for " + this.name + ". Loading it into Vue.")
@@ -54,7 +54,7 @@ export default {
 
       var self = this
 
-      this.fetch({
+      this.$fetch({
         method: "get",
         url: self.resource,
         onSuccess: function(response) {
@@ -65,7 +65,7 @@ export default {
             self.measurements = response.measurements
             self.description = response.description
             self.measurementsLoaded = 1
-            this.cache.set("food", self.resource, {
+            self.$cache.set("food", self.resource, {
               id: self.id,
               name: self.name,
               description: self.description,
@@ -85,7 +85,10 @@ export default {
   },
   computed: {
     selected: function() {
-      if (this.$parent.autoCompleteSelected == this.index) return true
+      if (this.$parent.autoCompleteSelected == this.index) {
+        this.$broadcast("selected")
+        return true
+      }
       return false
     }
   },

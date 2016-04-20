@@ -17,50 +17,50 @@
 /******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules);
 /******/ 		while(callbacks.length)
 /******/ 			callbacks.shift().call(null, __webpack_require__);
-/******/
+
 /******/ 	};
-/******/
+
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// object to store loaded and loading chunks
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
 /******/ 		0:0
 /******/ 	};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+
 /******/ 	// This file contains only the entry chunk.
 /******/ 	// The chunk loading function for additional chunks
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId, callback) {
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] === 0)
 /******/ 			return callback.call(null, __webpack_require__);
-/******/
+
 /******/ 		// an array means "currently loading".
 /******/ 		if(installedChunks[chunkId] !== undefined) {
 /******/ 			installedChunks[chunkId].push(callback);
@@ -72,75 +72,66 @@
 /******/ 			script.type = 'text/javascript';
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
-/******/
+
 /******/ 			script.src = __webpack_require__.p + "" + chunkId + ".bundle.js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/assets";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!*******************************************!*\
-  !*** ./app/frontend/javascripts/entry.js ***!
-  \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// Our App entry point
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
+	var w8mngr = __webpack_require__(1)
 	console.log("w8mngr configuration loaded...")
-	
+
 	// This includes every file in our init directory
 	console.log("Loading initialization files...")
-	__webpack_require__(/*! ./init/init.noJS.js */ 6)
-	__webpack_require__(/*! ./init/init.navigation.js */ 9)
-	__webpack_require__(/*! ./init/init.foodEntries.js */ 11)
-	
+	__webpack_require__(6)
+	__webpack_require__(9)
+	__webpack_require__(11)
+
 	// Run our initializations
 	console.log("Initializing w8mngr...")
 	w8mngr.init.run()
 
 /***/ },
 /* 1 */
-/*!********************************************!*\
-  !*** ./app/frontend/javascripts/w8mngr.js ***!
-  \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// Setup the app and its namespaces
 	var w8mngr = w8mngr || {}
-	
+
 	// Cookies
-	w8mngr.cookies = __webpack_require__(/*! utilities/cookies.js */ 2)
-	
+	w8mngr.cookies = __webpack_require__(2)
+
 	// Loading toggle(s)
 	w8mngr.loading = {}
-	
+
 	// The initialization array
-	w8mngr.init = __webpack_require__(/*! utilities/init.js */ 3)
-	
+	w8mngr.init = __webpack_require__(3)
+
 	// The Configuration
-	w8mngr.config = __webpack_require__(/*! config.js */ 5)
-	
+	w8mngr.config = __webpack_require__(5)
+
 	module.exports = w8mngr
 
 /***/ },
 /* 2 */
-/*!*******************************************************!*\
-  !*** ./app/frontend/javascripts/utilities/cookies.js ***!
-  \*******************************************************/
 /***/ function(module, exports) {
 
 	/*\
@@ -166,7 +157,7 @@
 	|*|  * docCookies.keys()
 	|*|
 	\*/
-	
+
 	module.exports = {
 	  getItem: function (sKey) {
 	    if (!sKey) { return null; }
@@ -210,15 +201,12 @@
 
 /***/ },
 /* 3 */
-/*!****************************************************!*\
-  !*** ./app/frontend/javascripts/utilities/init.js ***!
-  \****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var forEach = __webpack_require__(/*! fn/forEach.js */ 4)
-	
+	var forEach = __webpack_require__(4)
+
 	// Our initialization functions
-	
+
 	module.exports = {
 	  _toInit: [],
 	  add: function(fn) {
@@ -247,9 +235,6 @@
 
 /***/ },
 /* 4 */
-/*!************************************************!*\
-  !*** ./app/frontend/javascripts/fn/forEach.js ***!
-  \************************************************/
 /***/ function(module, exports) {
 
 	// Very simple looping class I like to use
@@ -260,13 +245,10 @@
 
 /***/ },
 /* 5 */
-/*!********************************************!*\
-  !*** ./app/frontend/javascripts/config.js ***!
-  \********************************************/
 /***/ function(module, exports) {
 
 	// Our application configuration
-	
+
 	module.exports = {
 	  regex: {
 	    foodlog_day: /foodlog\/(\d{8})/
@@ -302,14 +284,11 @@
 
 /***/ },
 /* 6 */
-/*!****************************************************!*\
-  !*** ./app/frontend/javascripts/init/init.noJS.js ***!
-  \****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
-	var removeClass = __webpack_require__(/*! ../fn/removeClass.js */ 7)
-	
+	var w8mngr = __webpack_require__(1)
+	var removeClass = __webpack_require__(7)
+
 	// Initialize all of our apps by removing the nojs tag from the body
 	w8mngr.init.add(function() {
 	  console.log("Removing the nojs class from the body...")
@@ -318,15 +297,12 @@
 
 /***/ },
 /* 7 */
-/*!****************************************************!*\
-  !*** ./app/frontend/javascripts/fn/removeClass.js ***!
-  \****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// Basic class manipulation function to remove a class from an element
-	
-	var hasClass = __webpack_require__(/*! ./hasClass.js */ 8)
-	
+
+	var hasClass = __webpack_require__(8)
+
 	module.exports = function(el, className) {
 	  if (hasClass(el, className)) {
 	    if (el.classList) {
@@ -340,13 +316,10 @@
 
 /***/ },
 /* 8 */
-/*!*************************************************!*\
-  !*** ./app/frontend/javascripts/fn/hasClass.js ***!
-  \*************************************************/
 /***/ function(module, exports) {
 
 	// Basic class manipulation function for telling if an element has a class
-	
+
 	module.exports = function(el, className) {
 	  if (el.classList) {
 	    return el.classList.contains(className);
@@ -358,32 +331,29 @@
 
 /***/ },
 /* 9 */
-/*!**********************************************************!*\
-  !*** ./app/frontend/javascripts/init/init.navigation.js ***!
-  \**********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
-	var forEach = __webpack_require__(/*! ../fn/forEach.js */ 4)
-	var addEvent = __webpack_require__(/*! ../fn/addEvent.js */ 10)
-	
+	var w8mngr = __webpack_require__(1)
+	var forEach = __webpack_require__(4)
+	var addEvent = __webpack_require__(10)
+
 	w8mngr.init.add(function() {
-	
+
 		console.log("Loading the navigation...")
-	
+
 		// This function loads the cookies and sets the state of our navigation
 		// Dashboard is set as the default menu
 		if (w8mngr.cookies.getItem("nav_position") === null) w8mngr.cookies.setItem("nav_position", "#app-menu-dashboard")
 		console.log("Current item set at: " + w8mngr.cookies.getItem("nav_position"))
-	
+
 		// Checks our checkbox
 		var check_boxes = document.querySelectorAll(w8mngr.cookies.getItem("nav_position"))
-	
+
 		// No checkbox found? Then just bail out of this function
 		if(typeof check_boxes[0] === 'undefined') return
-	
+
 		check_boxes[0].checked = true
-	
+
 		// Attaches event listeners to the top-level items
 		var nav_boxes = document.querySelectorAll(".app-menu-top-option")
 		forEach(nav_boxes, function(el) {
@@ -399,13 +369,10 @@
 
 /***/ },
 /* 10 */
-/*!*************************************************!*\
-  !*** ./app/frontend/javascripts/fn/addEvent.js ***!
-  \*************************************************/
 /***/ function(module, exports) {
 
 	// Simple event attacher I like to use
-	
+
 	module.exports = function(el, eventName, handler) {
 	  if (el.addEventListener) {
 	    el.addEventListener(eventName, handler);
@@ -418,33 +385,29 @@
 
 /***/ },
 /* 11 */
-/*!***********************************************************!*\
-  !*** ./app/frontend/javascripts/init/init.foodEntries.js ***!
-  \***********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var w8mngr = __webpack_require__(/*! w8mngr */ 1)
-	
+	var w8mngr = __webpack_require__(1)
+
 	w8mngr.init.addIf("food-entries-app", function() {
 	  // mount our Vue instance
 	  console.log("Loading food-entries-app dependencies...")
-	
+
 	  // Load the following asyncronously
-	  __webpack_require__.e/* nsure */(1/*! food-entries-chunk */, function(require) {
-	
+	  __webpack_require__.e/* nsure */(1, function(require) {
+
 	    console.log("Mounting food-entries-app...")
-	
-	    var Vue = __webpack_require__(/*! vue */ 12)
-	    Vue.use(__webpack_require__(/*! ../vue/init.js */ 14))
-	
-	    w8mngr.foodEntries = new Vue(__webpack_require__(/*! ../vue/FoodEntries.vue */ 17))
-	
+
+	    var Vue = __webpack_require__(12)
+	    Vue.use(__webpack_require__(14))
+
+	    w8mngr.foodEntries = new Vue(__webpack_require__(17))
+
 	    console.log("Vue instance for FoodEntries:")
 	    console.log(w8mngr.foodEntries)
-	
+
 	  })
 	})
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle.js.map
