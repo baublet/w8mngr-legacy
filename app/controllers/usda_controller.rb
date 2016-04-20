@@ -17,7 +17,9 @@ class UsdaController < ApplicationController
       ndbno = result["ndbno"]
       name = result["name"]
 
-      @food = Food.new(user_id: 1, name: name, ndbno: ndbno)
+      @user = User.first
+
+      @food = Food.new(user_id: @user.id, name: name, ndbno: ndbno)
       @food.populate_from_usda result
       @food.save
 
