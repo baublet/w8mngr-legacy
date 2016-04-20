@@ -59,8 +59,8 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [x] Sessions
   - [ ] USDA
   - [x] Users
-  - [ ] Weight entries
-  - [ ] Welcome
+  - [x] Weight entries
+  - [x] Welcome
 
 - [x] Auto-complete form for food entries
   - [x] JSON search point

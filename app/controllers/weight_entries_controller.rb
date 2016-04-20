@@ -22,14 +22,6 @@ class WeightEntriesController < ApplicationController
     show_list
   end
 
-  # PATCH/PUT /weight_entries/1
-  def update
-    if @weightentry.update(weight_entry_params)
-      @newweightentry = current_user.weightentries.build(day: current_day)
-    end
-    show_list
-  end
-
   # DELETE /weight_entries/1
   def destroy
     @current_day = @weightentry.day
