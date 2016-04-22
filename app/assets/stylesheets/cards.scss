@@ -6,10 +6,10 @@
   margin-bottom: 1rem;
   padding: 1rem;
   background: $white;
-  box-shadow: 1px 1px 3px 3px rgba($black, .05);
+  @include height(1);
   border-radius: 3px;
   &:hover {
-    box-shadow: 1px 1px 3px 3px rgba($black, .1);
+    @include height(2);
   }
   .meta {
     position: absolute;

@@ -1,6 +1,9 @@
 .foodlog-table {
   padding: 0;
   width:100%;
+  background: $white;
+  border-radius: 5px;
+  @include height(1);
   .header {
     display: none;
     @include mqAfterSize(640px) {
@@ -36,7 +39,10 @@
     padding-right: 3rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
-    border-bottom: 1px solid rgba($black, .1);
+    padding-left: .5rem;
+    + .entry {
+      border-top: 1px solid rgba($black, .1);
+    }
     input:focus {
       font-weight: bolder;
     }
@@ -101,43 +107,49 @@
   input[type=text], input[type=number] {
     width:100%;
   }
-  .totals {
-    font-weight: bold;
-    display:block;
-    text-align:center;
-    margin: 2rem -1rem;
-    padding: 1rem 0;
-    background-color: rgba($black,.025);
-    border-top:1px solid rgba($black, .03);
-    border-bottom:1px solid rgba($black, .03);
-    opacity: 1;
-    overflow:hidden;
-    .col {
-      transform: none;
-      font-size: .8rem;
-      width: 20%;
-      &::after {
-        display: block;
-        font-size: .5rem;
-        text-transform: uppercase;
-        font-weight: 800;
-        color: rgba($black, .75);
-        content: attr(title);
-        padding: .1rem 0;
-      }
-    }
-    .long {
-      text-align: right;
-    }
+  div {
+    margin-bottom: 0;
+  }
+  p {
+    padding: 1rem;
   }
 }
+
+.food-entries-wrapper .totals {
+  font-weight: bold;
+  text-align: center;
+  display:flex;
+  margin: 0 -1rem;
+  margin-top: 2rem;
+  padding: 0 3rem;
+  opacity: 1;
+  overflow:hidden;
+  .col {
+    transform: none;
+    font-size: .8rem;
+    width: 25%;
+    &::after {
+      display: block;
+      font-size: .5rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: rgba($black, .75);
+      content: attr(title);
+      padding: .1rem 0;
+    }
+  }
+  .long {
+    display: none;
+  }
+}
+
 .app-form.new {
   padding: .5rem;
   margin: 2rem 0 0;
   background: $color-primary;
   color: $white;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0,0,0,.5);
+  @include height(1);
   overflow:hidden;
   .col.long {
     display:block;
@@ -177,6 +189,7 @@
 
 .autocomplete-item {
   max-height: 2rem;
+  margin: 0 -1rem;
   padding: .25rem .5rem;
   overflow: hidden;
   cursor: pointer;
@@ -206,16 +219,18 @@
     }
   }
   &.selected {
-    margin: 0 -1.25rem;
+    overflow: auto;
+    margin: 0;
     padding: 1rem 3rem;
     max-height: 15rem;
-    background: rgba($color-primary, .1);
-    border-color: rgba($color-primary, .75);
-    box-shadow:inset 0 0 3px 5px rgba($black, .05);
+    background: $white;
+    border-color: rgba($black, .75);
+    @include height(2);
     .add-food {
       opacity: 1;
     }
     .name {
+      margin: 0 -2rem 1rem;
       white-space: normal;
       font-size: .8rem;
       font-weight: bold;
@@ -232,7 +247,7 @@
     align-items: flex-end;
     .previous-measurement, .next-measurement {
       position: absolute;
-      left: -2.75rem;
+      left: -3rem;
       top: 0;
       bottom: -1rem;
       background: $color-primary;
@@ -244,7 +259,7 @@
     }
     .next-measurement {
       left: auto;
-      right: -2.75rem;
+      right: -3rem;
     }
   }
   .measurement.selected  {
@@ -259,7 +274,7 @@
       display: flex;
     }
     &:first-child .previous-measurement, &:last-child .next-measurement {
-      display: none;
+      opacity: .25;
     }
   }
   .amount, .unit, .calories, .fat, .carbs, .protein {

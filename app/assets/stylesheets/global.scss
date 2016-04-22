@@ -1,6 +1,7 @@
 html {
     font: 16px $font-stack;
     background: $white;
+    background: rgba($black, .05);
     color: $black;
     margin: 0;
     padding: 0;
@@ -35,10 +36,10 @@ a {
 }
 
 main p a, main li a {
-    border-bottom: 1px dashed rgba($black, .25);
+    background: linear-gradient(0deg, rgba($color-primary, .15) 1px, rgba($black, 0) 1px);
     &:hover {
         text-decoration: none;
-        border-bottom: 1px solid darken($color-primary,10%);
+        background: linear-gradient(0deg, rgba($color-primary, .15) 80%, rgba($black, 0) 80%);
     }
 }
 
