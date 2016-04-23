@@ -7,7 +7,6 @@
   padding: 1rem;
   background: $white;
   @include height(1);
-  border-radius: 3px;
   &:hover {
     @include height(2);
   }
@@ -16,25 +15,26 @@
     right: .25rem;
     top: .15rem;
   }
-  h2 {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    background: $color-primary;
-    color: $white;
+  .header {
+    background: linear-gradient(25deg, darken($color-primary, 7.5), $color-primary);
     margin: -1rem -1rem 1rem;
     padding: 1.5rem 1rem;
-    a {
+    color: $white;
+    h2 {
+      margin: 0 0 1rem;
+      padding: 0;
       color: $white;
-      opacity: .75;
-      &:hover {
-        opacity: 1;
+      a {
+        color: $white;
+        opacity: .75;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
-  }
-  .description {
-    margin: -1rem -1rem 1rem;
-    padding: 1rem;
-    background: $color-primary;
-    color: $white;
+    p:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
   }
 }

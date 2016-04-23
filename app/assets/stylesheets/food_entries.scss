@@ -2,8 +2,11 @@
   padding: 0;
   width:100%;
   background: $white;
-  border-radius: 5px;
   @include height(1);
+  transition: box-shadow .15s ease-in-out;
+  &:hover {
+    @include height(3);
+  }
   .header {
     display: none;
     @include mqAfterSize(640px) {
@@ -44,7 +47,7 @@
       border-top: 1px solid rgba($black, .1);
     }
     input:focus {
-      font-weight: bolder;
+      font-weight: bold;
     }
     .long {
       width:100%;
@@ -53,6 +56,7 @@
         font-size: .9rem;
         padding:0;
         color: rgba($black, .75);
+        font-weight: bold;
       }
       @include mqAfterSize(640px) {
         width:40%;
@@ -148,9 +152,6 @@
   margin: 2rem 0 0;
   background: $color-primary;
   color: $white;
-  border-radius: 5px;
-  @include height(1);
-  overflow:hidden;
   .col.long {
     display:block;
     width: 100%;
@@ -183,7 +184,6 @@
 
 .autocomplete-results {
   margin: 1rem -1rem 0;
-  overflow: hidden;
   padding: 0 1rem;
 }
 
@@ -194,6 +194,7 @@
   overflow: hidden;
   cursor: pointer;
   position: relative;
+  transition: transform .25s $easing-1;
   &:nth-child(odd) {
     background: rgba($black, .01);
   }
@@ -205,6 +206,7 @@
     text-overflow: ellipsis;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
+    overflow: hidden;
   }
   .add-food {
     color: $color-primary;
@@ -224,8 +226,8 @@
     padding: 1rem 3rem;
     max-height: 15rem;
     background: $white;
-    border-color: rgba($black, .75);
-    @include height(2);
+    @include height(3);
+    transform: translateY(-1rem);
     .add-food {
       opacity: 1;
     }
@@ -239,8 +241,8 @@
   .measurement {
     position: relative;
     z-index: 0;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     opacity: 0;
     max-height: 0;
     display: flex;

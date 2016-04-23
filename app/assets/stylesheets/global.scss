@@ -1,7 +1,7 @@
 html {
     font: 16px $font-stack;
     background: $white;
-    background: rgba($black, .05);
+    background: rgba($black, .075);
     color: $black;
     margin: 0;
     padding: 0;
@@ -117,20 +117,6 @@ em {
         &:hover {
             color: $black;
             border-color: $black;
-        }
-    }
-    .btn {
-        float: none;
-        font-size: .75rem;
-        padding: .75rem .5rem .5rem;
-        color: rgba($white, .75);
-        background: rgba($black, .35);
-        margin: 0;
-        &:hover {
-            background: $color-primary;
-            color: $white;
-            border-color: darken($color-primary, 10%);
-            margin: 0;
         }
     }
 }
