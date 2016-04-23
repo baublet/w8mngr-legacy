@@ -166,4 +166,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Returns the user's avatar image
+  def avatar
+    false
+  end
+
 end

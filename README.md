@@ -36,7 +36,7 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] User experience smoothing
 
 ## Version 0.3
-- [ ] Keep on top of the design
+- [ ] Keep on top of the design via polishing the UI
 
 - [ ] Barcode scanning
   - [ ] Scanning element (incorporate existing JS libraries)

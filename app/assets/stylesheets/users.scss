@@ -1,0 +1,45 @@
+.profile-header {
+  margin: 0 -1rem 0;
+  background: darken($color-secondary, 10);
+  background: linear-gradient(25deg, darken($color-secondary, 15), $color-secondary);
+  color: $white;
+  height: 25vh;
+  min-height: 200px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 100px;
+  p {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .user-profile-image {
+    padding: .5rem;
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -30px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 5px $black;
+    background: $black;
+    transition: bottom 2s $easing-1;
+    img {
+      width: 100%;
+      height: auto;
+      opacity: .5;
+      transition: opacity .5s ease-in-out;
+    }
+    &:hover {
+      bottom: -15px;
+      img {
+        opacity: 1;
+      }
+    }
+  }
+}
