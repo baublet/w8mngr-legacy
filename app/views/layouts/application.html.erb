@@ -84,7 +84,10 @@
     </div>
 </footer>
 
-<%= javascript_include_tag 'bundle', 'data-turbolinks-track' => true %>
+<%= webpack_manifest_script %>
+<%= webpack_bundle_tag 'common' %>
+<%= webpack_bundle_tag 'public' %>
+
 <script type="text/javascript">
   WebFontConfig = {
     google: { families: [ 'Roboto:400,100,400italic,700,900:latin' ] }
