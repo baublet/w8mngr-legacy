@@ -81,4 +81,9 @@ module ApplicationHelper
 
       javascript_include_tag(src)
     end
+
+    def webpack_manifest_script
+      return '' unless Rails.configuration.webpack[:use_manifest]
+      javascript_tag "window.webpackManifest = #{Rails.configuration.webpack[:common_manifest]}"
+    end
 end
