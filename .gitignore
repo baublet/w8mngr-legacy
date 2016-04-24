@@ -6,10 +6,10 @@
 
 # Ignore my database configs (they will differ depending on which development
 # environment I'm using)
-git ignore config/database.yml
+/config/database.yml
 
 # Ignore Cloud9 settings
-git ignore /.c9
+/.c9
 
 # Ignore bundler config.
 /.bundle
@@ -24,7 +24,7 @@ git ignore /.c9
 /tmp
 
 # Ignore the byebug history
-/.byebug_history
+.byebug_history
 
 # Ignore my large assets (for now)
 /asset-sources/*
