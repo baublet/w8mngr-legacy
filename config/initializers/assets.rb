@@ -12,4 +12,3 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompiles our bundle.js
 Rails.application.config.assets.precompile += %w(bundle.js)
-Rails.application.config.assets.precompile += %w(1.bundle.js)
