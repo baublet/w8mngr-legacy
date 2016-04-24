@@ -15,7 +15,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'sqlite3'
 
 # For our unit conversions and displays
 gem 'ruby-units'
@@ -37,6 +36,7 @@ gem 'httparty'
 gem 'acts-as-taggable-on'
 
 group :development, :test do
+    gem 'sqlite3'
     gem 'byebug'
     gem 'web-console', '~> 2.0'
     gem 'spring'
@@ -45,5 +45,7 @@ end
 
 
 group :production do
+    # Required gems for Heroku
     gem 'puma'
+    gem 'rails_12factor'
 end
