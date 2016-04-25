@@ -5,7 +5,7 @@ var config = module.exports = {
   // the base path which will be used to resolve entry points
   context: __dirname,
   // the main entry point for our application's frontend JS
-  entry: "app/frontend/javascripts/entry.js",
+  entry: path.join(__dirname, "frontend", "javascripts", "entry.js"),
 
   // No plugins by default
   plugins: [],
@@ -41,5 +41,7 @@ config.resolve = {
   // you"ll be able to do `require("./utils")` instead of `require("./utils.js")`
   extensions: ["", ".js"],
   // by default, webpack will search in `web_modules` and `node_modules`
-  modulesDirectories: ["node_modules", "app/frontend/javascripts"],
+  modulesDirectories: [ "node_modules",
+                        path.join(__dirname, "frontend", "javascripts")
+                      ],
 };
