@@ -22,7 +22,6 @@
     "vue-loader": "^8.2.3",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.0",
-  "scripts": {
-    "postinstall": "webpack --config config/webpack/production.config.js --json > webpack-build.json 2<&1 && rake webpack:compile"
+    "webpack-dev-server": "^1.14.1"
   }
 }
