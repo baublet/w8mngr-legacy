@@ -1,6 +1,7 @@
 // A very tiny function for parallel/async function calls with the ability to
 // exec functions after a delay
-module.exports = function(fn, delay = 0, args = {}) {
+module.exports = function(fn, delay, args) {
+  delay = delay ? delay : 0
   if (fn instanceof Function) {
     window.setTimeout(function() {
       fn(args)
