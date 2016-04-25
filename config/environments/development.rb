@@ -45,5 +45,4 @@ Rails.application.configure do
   config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
   config.webpack.dev_server.port = "8081"
 
-  Rails.configuration.webpack.output_dir = "public/webpack"
 end
