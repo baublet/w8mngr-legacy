@@ -40,4 +40,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Make our webpack dev server be on c9
+  config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
+  config.webpack.dev_server.port = "8081"
 end
