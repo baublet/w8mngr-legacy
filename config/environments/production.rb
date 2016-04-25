@@ -77,6 +77,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # This instructs our webpack loader to make a manifest of all the appropriate files to bundle
-  config.webpack[:use_manifest] = true
 end

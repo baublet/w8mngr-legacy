@@ -34,12 +34,16 @@ gem 'httparty'
 # For our tags!
 gem 'acts-as-taggable-on'
 
+# Webpack for rails
+gem "webpack-rails"
+
 group :development, :test do
     gem 'sqlite3'
     gem 'byebug'
     gem 'web-console', '~> 2.0'
     gem 'spring'
     gem 'therubyracer', platforms: :ruby
+    gem 'foreman'
 end
 
 

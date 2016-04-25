@@ -84,9 +84,7 @@
     </div>
 </footer>
 
-<%= webpack_manifest_script %>
-<%= webpack_bundle_tag 'common' %>
-<%= webpack_bundle_tag 'public' %>
+<%= javascript_include_tag *webpack_asset_paths("application") %>
 
 <script type="text/javascript">
   WebFontConfig = {
