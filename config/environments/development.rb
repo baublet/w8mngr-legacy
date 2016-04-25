@@ -44,4 +44,6 @@ Rails.application.configure do
   # Make our webpack dev server be on c9
   config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
   config.webpack.dev_server.port = "8081"
+
+  config.webpack.output_dir = Rails.root.join("public", "webpack").to_s
 end
