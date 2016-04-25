@@ -45,5 +45,5 @@ Rails.application.configure do
   config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
   config.webpack.dev_server.port = "8081"
 
-  config.webpack.output_dir = Rails.root.join("public", "webpack").to_s
+  config.webpack.output_dir = Rails.root.join("..", "public", "webpack").to_s
 end
