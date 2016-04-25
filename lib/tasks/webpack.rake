@@ -1,4 +1,4 @@
-namespace :webpack do
+task :webpack do
   desc 'compile bundles using webpack'
   task :compile do
     cmd = 'webpack --config config/webpack/production.config.js --json'
