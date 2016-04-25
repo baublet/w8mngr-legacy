@@ -25,4 +25,7 @@
     "webpack-dev-server": "^1.14.1"
 
   }
+  "scripts": {
+    "postinstall": "webpack --config config/webpack/production.config.js --json > webpack-build.json 2<&1 && rake webpack:compile"
+  }
 }
