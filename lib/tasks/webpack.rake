@@ -1,11 +1,10 @@
 namespace :webpack do
   desc 'compile bundles using webpack'
   task :compile do
-    build = File.open("./webpack-build.json", "rb")
-    contents = build.read
-    build.close
+    cmd = 'bin/webpack --config config/webpack/production.config.js --json'
+    output = `#{cmd}`
 
-    stats = JSON.parse(contents)
+    stats = JSON.parse(output)
 
     File.open('./public/assets/webpack-asset-manifest.json', 'w') do |f|
       f.write stats['assetsByChunkName'].to_json
