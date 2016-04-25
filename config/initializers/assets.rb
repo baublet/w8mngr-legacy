@@ -11,4 +11,4 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 # Precompiles our bundles
-Rails.application.config.assets.precompile += ["*.js"]
+# Rails.application.config.assets.precompile += ["*.js"]
