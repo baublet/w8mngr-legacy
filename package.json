@@ -2,7 +2,7 @@
   "name": "w8mngr",
   "description": "The Lifestyle Tracker",
   "version": "0.1.0",
-  "dependencies": {
+  "devDependencies": {
     "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.7.5",
@@ -28,7 +28,4 @@
   "scripts": {
     "postinstall": "webpack --config config/webpack/production.config.js --json > webpack-build.json 2<&1 && rake webpack:compile"
   }
-}
-"scripts": {
-  "postinstall": "webpack --config config/webpack/production.config.js --json > webpack-build.json 2<&1 && rake webpack:compile"
 }
