@@ -35,5 +35,6 @@ module W8mngr
       :asset_manifest => {},
       :common_manifest => {},
     }
+
   end
 end
