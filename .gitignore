@@ -22,7 +22,4 @@
 # Ignore my large assets (for now)
 /asset-sources
 
-# Ignore my public folder
-/public# Added by webpack-rails
 /node_modules
-/public/webpack
