@@ -77,5 +77,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  ::Rails.configuration.webpack.output_dir = "app/public/webpack"
+  ::Rails.configuration.webpack.output_dir = "public/webpack"
 end
