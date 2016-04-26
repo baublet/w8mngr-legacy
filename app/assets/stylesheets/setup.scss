@@ -48,9 +48,9 @@ $easing-1: cubic-bezier(0,.95,0,1);
     &:-ms-input-placeholder {
         @content;
     }
- }
+}
 
- @mixin height($height) {
+@mixin height($height) {
     $inset: null;
     $depth: 0;
     @if $height < 0 {
@@ -61,7 +61,7 @@ $easing-1: cubic-bezier(0,.95,0,1);
     $y: ($height * 2) + px;
     $depth: ($height * 5) + px;
     box-shadow: $inset $x $y $depth 0 rgba(black, .15);
-}
+  }
 
 @import "global",
         "header",
