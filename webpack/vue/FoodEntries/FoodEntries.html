@@ -25,13 +25,7 @@
                 :carbs="entry.carbs"
                 :protein="entry.protein"></food-entry>
   </div>
-  <div class="totals" v-if="totalCalories > 0">
-    <div class="col long">Totals:</div>
-    <div class="col" title="Calories" v-text="totalCalories"></div>
-    <div class="col" title="Fat" v-text="totalFat"></div>
-    <div class="col" title="Carbs" v-text="totalCarbs"></div>
-    <div class="col" title="Protein" v-text="totalProtein"></div>
-  </div>
+
   <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
   <div class="app-form new table">
     <div class="row new">
