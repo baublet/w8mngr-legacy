@@ -37,8 +37,12 @@
 	margin-bottom: 2rem;
 	padding-left: 6rem;
 	position: relative;
-	box-shadow: 0 0 5px rgba(0,0,0,.5);
 	color: $white;
+	@include height(1);
+	transition: box-shadow .15s ease-in-out;
+	&:hover {
+		@include height(3);
+	}
 	label, .label {
 		display: block;
 		color: $white;

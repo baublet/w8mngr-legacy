@@ -5,16 +5,8 @@
       <a href="#" @click.stop.prevent="loadNextDay" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
   </div>
   <h1><i class="fa fa-cutlery"></i> Food Log</h1>
-  <div class="foodlog-table app-form transparent table loading">
+  <div class="foodlog-table app-form transparent table loading" v-if="entries.length > 0">
     <i class="fa fa-cog fa-spin loading" v-if="loading"></i>
-    <div class="row header">
-      <div class="col long"></div>
-      <div class="col" title="Calories">Calories</div>
-      <div class="col" title="Fat">Fat</div>
-      <div class="col" title="Carbs">Carbs</div>
-      <div class="col" title="Protein">Protein</div>
-      <div class="col meta"></div>
-    </div>
     <food-entry v-for="entry in entries"
                 :loading.sync="loading"
                 :id="entry.id"
@@ -24,20 +16,22 @@
                 :fat="entry.fat"
                 :carbs="entry.carbs"
                 :protein="entry.protein"></food-entry>
-    <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
-    <div class="row header totals" v-if="totalCalories > 0">
+  </div>
+
+  <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
+
+  <div class="row header totals" v-if="entries.length > 1">
       <div class="col long">Totals:</div>
       <div class="col" title="Calories" v-text="totalCalories"></div>
       <div class="col" title="Fat" v-text="totalFat"></div>
       <div class="col" title="Carbs" v-text="totalCarbs"></div>
       <div class="col" title="Protein" v-text="totalProtein"></div>
-      <div class="col meta"></div>
     </div>
-  </div>
+
   <div class="app-form new table">
     <div class="row new">
       <div class="col long">
-        <input type="text"
+        <input  type="text"
                 @keyup.enter="addEntry"
                 @keyup.up="previousAutoCompleteItem"
                 @keyup.down="nextAutoCompleteItem"

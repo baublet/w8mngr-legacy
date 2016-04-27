@@ -1,3 +1,5 @@
+var smoothScroll  = require("../../fn/smoothScroll.js")
+
 import AutocompleteMeasurement from '../AutocompleteMeasurement.vue'
 
 // This is our overarching food entries instance
@@ -26,10 +28,17 @@ export default {
       this.$dispatch('add-entry')
     },
     initializeComponent() {
+      // Set a random ID on this measurement (because never use these IDs in the CSS,
+      // or anywhere else in the JS but here)
+      this.$el.id = "ac-item-" + Math.random().toString(36).substring(7)
       this.autoCompleteLoading = 0
         // Watch for this item to be selected
       this.$watch("$parent.autoCompleteSelected", function(index) {
-        if (index == this.index) this.loadItemData()
+        if (index == this.index) {
+          this.loadItemData()
+          // Scroll to this item
+          smoothScroll.scrollVerticalToElementById(this.$el.id, 50)
+        }
       })
     },
     // This loads an autocomplete item's data and attaches it to the parent component

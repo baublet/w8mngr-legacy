@@ -33,38 +33,43 @@ class Food < ActiveRecord::Base
     # Loop through the nutrients and build our measurements
     new_measurements = {}
     result["nutrients"][0]["measures"].each do |measure|
-        new_measurements[measure["label"]] = {
-            "unit" => measure["label"],
-            "amount" => measure["qty"],
-            "calories" => 0,
-            "fat" => 0,
-            "carbs" => 0,
-            "protein" => 0
-        }
+      next if measure.nil?
+      new_measurements[measure["label"]] = {
+          "unit" => measure["label"],
+          "amount" => measure["qty"],
+          "calories" => 0,
+          "fat" => 0,
+          "carbs" => 0,
+          "protein" => 0
+      }
     end
 
     # Calories (always [1])
     result["nutrients"][1]["measures"].each do |measure|
-        new_measurements[measure["label"]]["calories"] += measure["value"].to_i
+      next if measure.nil?
+      new_measurements[measure["label"]]["calories"] += measure["value"].to_i
     end
 
     # Fat (always [3])
     result["nutrients"][3]["measures"].each do |measure|
-        new_measurements[measure["label"]]["fat"] += measure["value"].to_i
+      next if measure.nil?
+      new_measurements[measure["label"]]["fat"] += measure["value"].to_i
     end
 
     # Carbs (always [4])
     result["nutrients"][4]["measures"].each do |measure|
-        new_measurements[measure["label"]]["carbs"] += measure["value"].to_i
+      next if measure.nil?
+      new_measurements[measure["label"]]["carbs"] += measure["value"].to_i
     end
 
     # Protein (always [2])
     result["nutrients"][2]["measures"].each do |measure|
-        new_measurements[measure["label"]]["protein"] += measure["value"].to_i
+      next if measure.nil?
+      new_measurements[measure["label"]]["protein"] += measure["value"].to_i
     end
 
     new_measurements.each do |measurement|
-        self.measurements.new(measurement.second)
+      self.measurements.new(measurement.second)
     end
   end
 

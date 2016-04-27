@@ -1,6 +1,9 @@
 <div class="row entry" transition="fl-fade">
   <div class="col long">
-    <input type="text" @keyup.enter="saveEntry(index)" v-model="description">
+    <input  type="text"
+            @keyup.enter="saveEntry(index)"
+            v-model="description"
+            debounce="250">
   </div>
   <div class="col short" title="Calories">
     <input type="text" @keyup.enter="saveEntry(index)" v-model="calories">

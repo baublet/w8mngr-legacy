@@ -3,6 +3,7 @@ var numberToDay = require("../../fn/numberToDay.js")
 var tomorrowNumber = require("../../fn/tomorrowNumber.js")
 var yesterdayNumber = require("../../fn/yesterdayNumber.js")
 var forEach = require("../../fn/forEach.js")
+var smoothScroll  = require("../../fn/smoothScroll.js")
 
 var state = require("../../utilities/state.js")
 
@@ -84,6 +85,7 @@ export default {
       // Watch for autocomplete results
       this.$watch("newDescription", function(searchTerm) {
         this.autoComplete(searchTerm)
+        smoothScroll.scrollVerticalToElementById("description-input", 20)
       })
     },
     // Send an entry to be added to the database
@@ -160,7 +162,10 @@ export default {
         this.calculateTotals()
         document.getElementById("description-input")
           .focus()
+        // Scroll to our description input
+        smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
       } else {
+        // TODO: show a fancy error here
         document.getElementById("description-input")
           .focus()
       }

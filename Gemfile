@@ -44,6 +44,10 @@ group :development, :test do
     gem 'spring'
     gem 'therubyracer', platforms: :ruby
     gem 'foreman'
+<<<<<<< HEAD
+    gem "brakeman"
+=======
+>>>>>>> master
 end
 
 
