@@ -7,14 +7,6 @@
   <h1><i class="fa fa-cutlery"></i> Food Log</h1>
   <div class="foodlog-table app-form transparent table loading" v-if="entries.length > 0">
     <i class="fa fa-cog fa-spin loading" v-if="loading"></i>
-    <div class="row header">
-      <div class="col long"></div>
-      <div class="col" title="Calories">Calories</div>
-      <div class="col" title="Fat">Fat</div>
-      <div class="col" title="Carbs">Carbs</div>
-      <div class="col" title="Protein">Protein</div>
-      <div class="col meta"></div>
-    </div>
     <food-entry v-for="entry in entries"
                 :loading.sync="loading"
                 :id="entry.id"
@@ -30,7 +22,7 @@
   <div class="app-form new table">
     <div class="row new">
       <div class="col long">
-        <input type="text"
+        <input  type="text"
                 @keyup.enter="addEntry"
                 @keyup.up="previousAutoCompleteItem"
                 @keyup.down="nextAutoCompleteItem"

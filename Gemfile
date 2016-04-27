@@ -44,6 +44,7 @@ group :development, :test do
     gem 'spring'
     gem 'therubyracer', platforms: :ruby
     gem 'foreman'
+    gem "brakeman"
 end
 
 
