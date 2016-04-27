@@ -162,7 +162,10 @@ export default {
         this.calculateTotals()
         document.getElementById("description-input")
           .focus()
+        // Scroll to our description input
+        smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
       } else {
+        // TODO: show a fancy error here
         document.getElementById("description-input")
           .focus()
       }
