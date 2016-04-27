@@ -22,10 +22,10 @@ export default {
     "hook:ready": function() {
       // Initialize the number that users can play with as the passed amount
       this.newAmount = this.amount
-      console.log(this)
     },
     "selected": function() {
       if(this.selectedMeasurement !== this.index) return false
+
       // Focus on our measurements box and select the text
       var self = this
       _do(function() {
