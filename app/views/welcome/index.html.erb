@@ -1,62 +1,65 @@
 <section class="call-to-action">
-    <div class="actions">
-        <p class="suggestion">Take control of your life</p>
-        <p class="second suggestion">one day at a time</p>
-        <div class="sign-up">
-          <% if logged_in? %>
-            <a href="<%= foodlog_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Dashboard</a>
-            <p>Or, you can <%= link_to "Logout", logout_path %></p>
-          <% else %>
-            <a href="<%= signup_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Get Started</a>
-            <p>Have an account? <%= link_to "Login", login_path %></p>
-          <% end %>
-        </div>
+  <div class="actions">
+    <p class="suggestion">Take control of your life</p>
+    <p class="second suggestion">one day at a time</p>
+    <div class="sign-up">
+      <% if logged_in? %>
+      <a href="<%= foodlog_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Dashboard</a>
+      <p>Or, you can <%= link_to "Logout", logout_path %></p>
+      <% else %>
+      <a href="<%= signup_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Get Started</a>
+      <p>Have an account? <%= link_to "Login", login_path %></p>
+      <% end %>
     </div>
-    <div class="banner">
-        <picture>
-            <source media="(min-width: 1820px)" srcset="<%= image_path('banners/w8mngr-splash-01-large.jpg') %>">
-            <source media="(min-width: 900px)" srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %>">
-            <img src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>" alt="Get back in shape at your own pace." class="banner-img">
-        </picture>
-        <!--<img class="banner-img"
-            src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>"
-            srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %> 1000w,
-                    <%= image_path('banners/w8mngr-splash-01-large.jpg') %> 1920w"
-            sizes="100vw"
-            alt="Get back in shape at your own pace.">-->
-    </div>
+  </div>
+  <div class="banner">
+    <picture>
+      <source media="(min-width: 1820px)" srcset="<%= image_path('banners/w8mngr-splash-01-large.jpg') %>">
+      <source media="(min-width: 900px)" srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %>">
+      <img src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>" alt="Get back in shape at your own pace." class="banner-img">
+    </picture>
+    <!--<img class="banner-img"
+      src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>"
+      srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %> 1000w,
+          <%= image_path('banners/w8mngr-splash-01-large.jpg') %> 1920w"
+      sizes="100vw"
+      alt="Get back in shape at your own pace.">-->
+  </div>
 </section>
 
 <section class="summary">
+  <div class="section-inside">
     <ul class="summary-points">
-        <li class="track-food">
-            <h2><i class="fa fa-list-alt"></i> Track what you eat</h2>
-            <p>Our food log allows you to quickly and efficiently track your food intake on a daily basis.</p>
-        </li>
+      <li class="track-food">
+        <h2><i class="fa fa-list-alt"></i> Track Food</h2>
+        <p>Our food log allows you to quickly and efficiently track your food intake on a daily basis. Our food database, auto-complete functions, and smart item counting functions make it faster than ever to enter information.</p>
+      </li>
 
-        <li class="build-plan">
-            <h2><i class="fa fa-map-signs"></i> Build a plan that suits your pace</h2>
-            <p>Our plan wizard allows you to set the pace of your lifestyle adjustment to suit your pace and phsyiology. New users can easily create a plan that puts them on a course toward their ideal weight or lifestyle choices.</p>
-        </li>
+      <!-- <li class="build-plan">
+        <h2><i class="fa fa-map-signs"></i> Build a plan that suits your pace</h2>
+        <p>Our plan wizard allows you to set the pace of your lifestyle adjustment to suit your pace and phsyiology. New users can easily create a plan that puts them on a course toward their ideal weight or lifestyle choices.</p>
+      </li> -->
 
-        <li class="view-progress">
-            <h2><i class="fa fa-trophy"></i> View your progress over time</h2>
-            <p>Losing weight and maintaining one's fitness is hard. With our progress charts, you can visualize your progress over the weeks and months you have tracked your food and fitness.</p>
-        </li>
+      <li class="view-progress">
+        <h2><i class="fa fa-trophy"></i> View Progress</h2>
+        <p>Losing weight and maintaining one's fitness is hard. With our progress charts, you can visualize your progress over the weeks and months you have tracked your food and fitness.</p>
+      </li>
 
-        <li class="build-recipes">
-            <h2><i class="fa fa-cutlery"></i> Construct recipes that fit your meal plan</h2>
-            <p>Use our recipe builder to make and share healthy, delicious meals with the rest of w8mngr's users.</p>
-        </li>
+      <li class="build-recipes">
+        <h2><i class="fa fa-cutlery"></i> Construct Recipes</h2>
+        <p>Use our recipe builder to make and share healthy, delicious meals with the rest of w8mngr's users. Find tons of recipes ranging from post-workout fuel to healthy vegan meals, complete with full information on the items' calories, carbs, fat, and protein.</p>
+      </li>
 
-        <li class="scan-barcodes">
-            <h2><i class="fa fa-barcode"></i> Scan barcodes to quickly track your foods</h2>
-            <p>Thanks to the help of various partners, users can scan barcodes of foods they eat or plan to eat on the fly, logging the nutritional information quickly and efficiently.</p>
-        </li>
+      <li class="scan-barcodes">
+        <h2><i class="fa fa-barcode"></i> Scan Barcodes</h2>
+        <p>Thanks to the help of various partners, users can scan barcodes of foods they eat or plan to eat on the fly, logging the nutritional information quickly and efficiently.</p>
+      </li>
     </ul>
+  </div>
 </section>
 
 <section class="what-is-it">
+  <div class="section-inside">
     <h1>What is it?</h1>
 
     <p>w8mngr (wāt măn'ĭ-jər, or "weight manager") is a simple lifestyle and fitness tracker geared toward straightforward weight loss and health management.</p>
@@ -68,12 +71,13 @@
     <p>This is the philosophy by which W8mngr was created. What does that mean? Well, you can:</p>
 
     <ul>
-        <li>Keep detailed records of your daily food intake.</li>
-        <li>Track your glucose levels, blood pressure, weight, or whatever you wish with the custom entries dialogs.</li>
-        <li>Track your exercise habits to maintain a fit, sleek self.</li>
-        <li>Look back on the week's log, seeing averages and totals to see how much, how little, how high or how low the week has been.</li>
-        <li>Keep daily notebook records about how you are feeling, what techniques you have used lately, or whatever you want.</li>
+      <li>Keep detailed records of your daily food intake.</li>
+      <li>Track your glucose levels, blood pressure, weight, or whatever you wish with the custom entries dialogs.</li>
+      <li>Track your exercise habits to maintain a fit, sleek self.</li>
+      <li>Look back on the week's log, seeing averages and totals to see how much, how little, how high or how low the week has been.</li>
+      <li>Keep daily notebook records about how you are feeling, what techniques you have used lately, or whatever you want.</li>
     </ul>
 
     <p>So why not register today? It's free!</p>
+  </div>
 </section>

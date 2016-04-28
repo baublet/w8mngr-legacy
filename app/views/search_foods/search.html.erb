@@ -19,17 +19,18 @@
 
 <% if @searchresults.size > 0 %>
   <h1 class="search-results-information">
-    Results for
-    <%= params[:q] %>
+    Results for <em><%= params[:q] %></em>
   </h1>
 <% elsif @searchresults.size == 0 && !params[:q].blank? %>
   <h1 class="search-results-empty">
-    Nothing Found for
-    <em></em><%= params[:q] %></em>
+    Nothing Found for <em><%= params[:q] %></em>
   </h1>
-  <p>None of our databases can find information about
-    <em><%= params[:q] %></em>. If you have the information--or you can Google it--feel free to enter it into our database for easy access later, by
-    <%= link_to "adding a new food", new_food_path %>!</p>
+  <p>
+    None of our databases can find information about <em><%= params[:q] %></em>.
+    If you have the information--or you can Google it--feel free to enter it into
+    our database for easy access later, by
+    <%= link_to "adding a new food", new_food_path %>...
+  </p>
 <% end %>
 
 <%= render partial: "search_results", locals: {results: @searchresults} %>

@@ -21,6 +21,13 @@ When the demo is online, you can view it at [the Heroku link](https://w8mngr.her
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
 
 # Todo/Roadmap
+# Future
+
+- [ ] Barcode scanning
+  - [ ] Scanning element (incorporate existing JS libraries)
+  - [ ] Attaching scanned codes to existing foods/recipes
+  - [ ] Third-party API integration
+
 ## Version 0.4
 - [ ] Goals
   - [ ] Create a barebones dashboard where goals will be seen
@@ -37,18 +44,22 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 
 ## Version 0.3
 - [ ] Keep on top of the design via polishing the UI
-
-- [ ] Barcode scanning
-  - [ ] Scanning element (incorporate existing JS libraries)
-  - [ ] Attaching scanned codes to existing foods/recipes
-  - [ ] Third-party API integration
+  - [ ] Build out the responsive aspects of
+    - [ ] The landing page
+    - [ ] The app
 
 - [ ] Queuing system for JS requests
-  - [ ] For processing normal requests
+  - [x] For processing normal requests
   - [ ] For error handling
-  - [ ] For connectivity issues
 
-- [ ] Incorporate a universal tagging system so that foods (and later, recipes and training activities) can be searched by tags, e.g. "gluten free" "vegetarian", etc.
+- [ ] Incorporate a universal tagging system
+  - [ ] Add tags to foods
+  - [ ] Add tags to recipes
+
+- [ ] Improve searching
+  - [ ] Include recipes in autocomplete
+  - [ ] Add recipe searching
+  - [ ] Allow users to filter by tag
 
 ## Version 0.2.1
 - [x] Create controller tests
