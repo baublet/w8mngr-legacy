@@ -51,5 +51,5 @@ end
 group :production do
     gem 'rails_12factor'
     # Puma (our web server)
-gem 'puma'
+    gem 'puma'
 end
