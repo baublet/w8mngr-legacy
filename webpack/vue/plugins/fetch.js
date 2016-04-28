@@ -8,6 +8,8 @@ w8mngrFetch.fetch = function(index) {
   var options = this.$queue[parseInt(index, 10)]
   var method = options.method
 
+  console.log("Fetch options: ")
+
   // This makes sure the async_seed adds an additional variable if there are
   // already variables in the URL, or as the only variable if there aren't
   // And we add the async_seed to prevent caching
@@ -17,24 +19,18 @@ w8mngrFetch.fetch = function(index) {
   // Set our callback functions. If one is passed, the passed one takes precedence.
   // Otherwise, we use the default callback if one is set
 
-  var onSuccess = (options.onSuccess instanceof Function) ? options.onSuccess : null
-  onSuccess = (OnSuccess == null && this.$onSuccess !== null) ? this.$onSuccess : null
+  var onSuccess = (options.onSuccess instanceof Function) ? options.onSuccess : this.$onSuccess
+  var onError = (options.onError instanceof Function) ? options.onError : this.$onError
+  var onResponse = (options.onResponse instanceof Function) ? options.onResponse : this.$onResponse
 
-  var onError = (options.onError instanceof Function) ? options.onError : null
-  onError = (OnError == null && this.$onError !== null) ? this.$onError : null
+  var request = new XMLHttpRequest()
 
-  var onResponse = (options.onResponse instanceof Function) ? options.onResponse : null
-  onResponse = (OnResponse == null && this.$onResponse !== null) ? this.$onResponse : null
-
-  var request = new XMLHttpRequest();
-
-  console.log("Launching " + method + " request to " + url)
-
-  request.open(method, url, true);
+  request.open(method, url, true)
 
   // Only worry about callbacks if there's a callback to worry abut!
   var w8mngrFetchObject = this
   if (onSuccess !== null || onError !== null || onResponse !== null) {
+    console.log("Attaching callbacks to our response object...")
 
     request.onreadystatechange = function() {
 
@@ -75,9 +71,11 @@ w8mngrFetch.fetch = function(index) {
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     request.send(data);
   } else {
+    console.log("Sending GET request...")
     request.setRequestHeader("Content-Type", "application/json");
     request.send();
   }
+  console.log("Launching " + method + " request to " + url)
 
   request = null;
 }
@@ -171,8 +169,8 @@ w8mngrFetch.$onResponse = null
 w8mngrFetch.install = function(externalVue, options) {
 
   // Our full class installation and some basic wrappers
-  externalVue.prototype.$fetch_module = this
-  externalVue.prototype.$fetch = externalVue.prototype.$fetch_module.$
+  externalVue.prototype.$fetch_module = w8mngrFetch
+  externalVue.prototype.$fetch = function(options) { this.$fetch_module.$(options) }
 
   // w8mngr's custom resources I pass in at installation
   externalVue.prototype.$fetchURI = options.resources
