@@ -49,7 +49,7 @@ end
 
 
 group :production do
-    # Required gems for Heroku
-    gem 'puma'
     gem 'rails_12factor'
+    # Puma (our web server)
+gem 'puma'
 end
