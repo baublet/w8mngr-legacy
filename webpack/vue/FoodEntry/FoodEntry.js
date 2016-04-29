@@ -36,11 +36,17 @@ export default {
       })
 
       // Listen for events on all of our macros
-      var selectFunction = function() { this.select() }
-      addEvent(this.$el.children[1].children[0], "focus", selectFunction)
-      addEvent(this.$el.children[2].children[0], "focus", selectFunction)
-      addEvent(this.$el.children[3].children[0], "focus", selectFunction)
-      addEvent(this.$el.children[4].children[0], "focus", selectFunction)
+      var selectFunction = function() {
+        var el = this
+        setTimeout(function() {
+          el.selectionStart = 0
+          el.selectionEnd = 9
+        }, 100)
+      }
+      addEvent(this.$el.children[1].children[0], ["focus", "click"], selectFunction)
+      addEvent(this.$el.children[2].children[0], ["focus", "click"], selectFunction)
+      addEvent(this.$el.children[3].children[0], ["focus", "click"], selectFunction)
+      addEvent(this.$el.children[4].children[0], ["focus", "click"], selectFunction)
     },
     // This function watches for our description to change. When it does, we
     // call this function to see if the amount was altered, and if it was, update
@@ -60,14 +66,19 @@ export default {
   methods: {
     // Selects the first part of a food if that first part is a number
     selectDescription: function() {
-      var el = this.$el.children[0].children[0]
-      var chunks = this.description.split(" ")
-      var currentAmount = parseFloat(chunks[0])
-      if (!isNaN(currentAmount)) {
-        el.setSelectionRange(0, chunks[0].length)
-      } else {
-        el.select()
-      }
+      var app = this
+      setTimeout(function() {
+        var el = app.$el.children[0].children[0]
+        var chunks = app.description.split(" ")
+        var currentAmount = parseFloat(chunks[0])
+        if (!isNaN(currentAmount)) {
+          el.selectionStart = 0
+          el.selectionEnd = chunks[0].length
+        } else {
+          el.selectionStart = 0
+          el.selectionEnd = 999
+        }
+      }, 100)
     },
     // Sends an entry to be removed from the database
     removeEntry: function(index) {
