@@ -24,7 +24,7 @@ class PTFoodEntryLastEntryTest < ActiveSupport::TestCase
     assert_equal "You have not entered any foods into your food log in 2 days.", messages[0][:message]
   end
 
-  test "should be 12 hours" do
+  test "should be about 12 hours" do
     last_entry_date = DateTime.now - 12.hours
     bug_me_hours = 12
     messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)

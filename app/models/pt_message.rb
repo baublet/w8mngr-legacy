@@ -5,4 +5,5 @@
 class PtMessage < ActiveRecord::Base
   belongs_to :user, inverse_of: :pt_messages
 
+  # Because this is only used internally, we won't be using any validators
 end

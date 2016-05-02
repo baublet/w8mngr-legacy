@@ -8,7 +8,7 @@ module UserPtMessages
   #
   # Params:
   # +messages+:: An array of hashes with the sub-elements +type+, +uid+, and +message+
-  def self.save_messages messages
+  def save_pt_messages messages
     return false unless messages.count > 0
     # First, load all messages matching the type passed in messages
     types = []
@@ -17,12 +17,12 @@ module UserPtMessages
     end
 
     # Get the user's last message types that we need to update from the DB
-    user_messages = self.pt_messages.where(deleted: false, type: types)
+    user_messages = self.pt_messages.where(deleted: false, message_type: types)
 
     messages.each do |message|
       # First, find the messages[:type] that matches the message[:type]
       to_insert = user_messages.each do |msg|
-        return msg if msg[:type] = message[:type]
+        return msg if msg.message_type = message[:type]
       end
       # If they match UID's, don't do anything
       if defined? to_insert.uid
@@ -32,7 +32,7 @@ module UserPtMessages
         to_insert.update_attributes(uid: message[:uid], message: message[:message])
       else
         # The user doesn't have a message of this type, so let's create one
-        self.pt_messages.build(type: message[:type], uid: message[:uid], message: message[:message]).save
+        self.pt_messages.build(message_type: message[:type], uid: message[:uid], message: message[:message]).save
       end
     end
     return true
@@ -42,10 +42,10 @@ module UserPtMessages
   #
   # Params:
   # +type+:: Either a string or an array of types of messages to load
-  def pt_messages type
-    user_messages = self.pt_messages.where(deleted: false, seen: false, type: type)
+  def get_pt_messages type
+    user_messages = self.pt_messages.where(deleted: false, seen: false, message_type: type).to_a
     # Now mark them all as read
-    self.pt_messages.where(deleted: false, seen: false, type: type).update_all(seen: true)
+    self.pt_messages.where(deleted: false, seen: false, message_type: type).update_all(seen: true)
     return user_messages
   end
 end

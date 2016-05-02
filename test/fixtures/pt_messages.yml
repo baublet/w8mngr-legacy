@@ -1,16 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 
-  type: 1
+  user_id:
+  message_type: 1
   uid: MyString
   message: MyText
   seen: false
   deleted: false
 
 two:
-  user_id: 
-  type: 1
+  user_id:
+  message_type: 1
   uid: MyString
   message: MyText
   seen: false
