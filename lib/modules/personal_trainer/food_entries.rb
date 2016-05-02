@@ -23,7 +23,7 @@ module PersonalTrainer
       time_ago = time_ago_in_words(last_entry_date)
       message_text = "You have not entered any foods into your food log in " + time_ago + "."
       # Then return it!
-      return [{ text: message_text, type: type, uid: uid}]
+      return [{ message: message_text, type: type, uid: uid}]
     end
   end
 end

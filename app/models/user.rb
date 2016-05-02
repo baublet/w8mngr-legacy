@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
               dependent: :destroy,
               inverse_of: :user
 
+  has_many :pt_messages, class_name: "PtMessage",
+              dependent: :destroy,
+              inverse_of: :user
+
   attr_accessor  :remember_token, :reset_token
 
   store_accessor :preferences
@@ -42,6 +46,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  # Our Personal Trainer messages concern, located in ./concerns
+  include UserPtMessages
 
   def food_totals day = nil
     day = day.nil? ? current_day : day
