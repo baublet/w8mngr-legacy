@@ -32,7 +32,12 @@ class User < ActiveRecord::Base
         "height": "",
         "height_display": "",
         "timezone": "",
-        "units": "i"
+        "units": "i",
+
+        "activity_level": 1,
+        "target_calories": 0,
+
+        "pt_messages_food_log": true
     }
   end
 
