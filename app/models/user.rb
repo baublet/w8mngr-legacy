@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
 
   # Our Personal Trainer messages concern, located in ./concerns
   include UserPtMessages
+  # Our preferences concern
+  include UserPreferences
 
   def food_totals day = nil
     day = day.nil? ? current_day : day

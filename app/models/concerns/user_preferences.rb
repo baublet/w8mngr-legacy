@@ -1,9 +1,9 @@
 require 'active_support/concern'
 
-module UserPtMessages
+module UserPreferences
   extend ActiveSupport::Concern
 
-  include do
+  included do
     store_accessor :preferences
     validates_with UserPreferencesValidator
     after_initialize { setup_preferences }

@@ -12,7 +12,7 @@ module PersonalTrainer
     # +hours_til_bug+:: an integer of hours before we begin bugging the user (default: 24)
     def self.last_entry (last_entry_date, hours_til_bug = 24)
       # We can never bug people before 12 hours have passed
-      return [] unless hours_til_bug > 12
+      return [] unless hours_til_bug >= 12
 
       last_entry_date_s = last_entry_date.to_s
       current_time = DateTime.now
