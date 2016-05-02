@@ -38,11 +38,16 @@ module UserPtMessages
     return true
   end
 
-  # Loads messages of a single type into an array and marks them as read.
+  # Loads messages of a single type into an array and marks them as read. This method
+  # should only be used in controllers or views!
   #
   # Params:
   # +type+:: Either a string or an array of types of messages to load
   def get_pt_messages type
+    # We turn this into an array because otherwise it would return an ActiveRecord::AciveRelation
+    # that automagically updates the links that we're about to update, and since it maintains
+    # the relation of seen:false, when we change it to seen:true below, this would return an
+    # empty number of ActiveRelations!
     user_messages = self.pt_messages.where(deleted: false, seen: false, message_type: type).to_a
     # Now mark them all as read
     self.pt_messages.where(deleted: false, seen: false, message_type: type).update_all(seen: true)
