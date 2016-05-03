@@ -25,9 +25,9 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
 
         begin
-            height_cm = params["height_display"].to_unit.convert_to("cm").scalar.to_i
-          rescue
-            height_cm = nil
+          height_cm = params["height_display"].to_unit.convert_to("cm").scalar.to_i
+        rescue
+          height_cm = nil
         end
 
         date_time = Chronic.parse(params["birthday"])
@@ -41,6 +41,10 @@ class UsersController < ApplicationController
         @user.preferences["timezone"] = params["timezone"]
         @user.preferences["units"] = params["units"]
         @user.preferences["name"] = params["name"]
+
+        @user.preferences["target_calories"] = params["target_calories"].to_i
+        activity_level = params["activity_level"].to_i
+        @user.preferences["activiy_level"] = activity_level.between?(1,10) ? activity_level : 1
 
         if @user.save
             flash.now[:success] = "Preferences saved"
