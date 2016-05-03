@@ -2,6 +2,8 @@
 
 <% provide(:title, "Edit Profile") %>
 
+<div class="section-inside">
+
 <h1><i class="fa fa-user"></i> Edit Profile</h1>
 
 <p>Tell us a little bit about yourself. It helps our algorithm better understand you when you get around to setting some goals.</p>
@@ -36,16 +38,33 @@
 	<%= label_tag "birthday", "Birthday" %>
 	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year and a month, e.g., May 1982, 05/01/1977, 1/7/88, etc." %>
 
-	<h2>Targets</h2>
+	<h2>Health and Targets</h2>
+
+	<p><em>Note:</em> Before we can calculate your basal metabolic rate, we need your
+	    height<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">(which we need)</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">(which we have)</span></span>')  %>,
+	    age<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">(which we need)</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">(which we have)</span></span>') %>,
+	    and a recent weight-in.
+	    It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
+	</p>
+
+	<p>Calculated BMR: <%= @user.bmr %></p>
+
 	<%= label_tag "activity_level", "Activity Level" %>
 	<%= select_tag "activity_level", options_for_select([
 	                            ["Sedentary", 1],
 	                            ["Lightly Active", 2],
-	                            ["Moderately Active", 3],
+	                            ["Active", 3],
 	                            ["Highly Active", 4],
 	                            ["Intensely Active", 5],
 	                            ],
-	               2) %>
+	               @user.preferences["activity_level"]) %>
+
+	<%= label_tag "target_calories", "Target Calories" %>
+	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+
+  <h2>Faturday</h2>
+
+  <p>Faturdays are any day you don't feel like tracking. You can enter them manually or</p>
 
 	<h2>Settings</h2>
 
@@ -70,3 +89,5 @@
 		Save
 	<% end %>
 <% end %>
+
+</div>

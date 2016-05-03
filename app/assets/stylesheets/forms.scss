@@ -20,6 +20,9 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
     font-size: 2rem;
     font-weight: 300;
   }
+  @include placeholder() {
+    font-family: $font-stack;
+  }
 }
 
 textarea {

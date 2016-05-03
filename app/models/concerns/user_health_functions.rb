@@ -3,6 +3,42 @@ require 'active_support/concern'
 module UserHealthFunctions
   extend ActiveSupport::Concern
 
+  def recent_most_weight
+    weightentries.last
+  end
+
+  # Returns nil if there isn't enough information about the user to make a calculation
+  def bmr
+
+    # Convert the recent rate from G to LBs
+    recent_weight = self.recent_most_weight.value.to_s + "g"
+    recent_weight = recent_weight.to_unit.convert_to("lbs").scalar.to_i
+
+    user_age = self.age
+
+    # Require at least these parameters before being able to calculate BMR
+    return nil if preferences["height"].blank? || user_age.nil? || recent_weight.nil?
+
+    # If there's no sex stated, assume the person is female (because it estimates lower)
+    sex = preferences["sex"] == "m" ? "m" : "f"
+
+    # Our activity levels correspond to a percentage above
+    activity = preferences["activity_level"].blank? ? 2 : preferences["activity_level"]
+    activity_multiplier = 1 + (activity / 10)
+
+    # Calculate our height from CM to IN
+    height = preferences["height"] + "cm"
+    height = height.to_unit.convert_to("in").scalar.to_i
+
+    bmr = 0
+    if sex == "m"
+      bmr = 66 + (6.3 * recent_weight) + (12.9 * height) - (6.8 * user_age)
+    else
+      bmr = 655 + (4.3 * recent_weight) + (4.7 * height) - (4.7 * user_age)
+    end
+    return (bmr * activity_multiplier).ceil
+  end
+
   def food_totals day = nil
     day = day.nil? ? current_day : day
     entries = foodentries_from(day)

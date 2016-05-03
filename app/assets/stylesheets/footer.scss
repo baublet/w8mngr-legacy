@@ -1,10 +1,10 @@
 footer {
-    padding: 1rem 1rem 10rem;
+    min-height: 100vh;
+    padding: 1rem 1rem 20vh;
     margin-top: 15rem;
     width: 100%;
     background: $black;
     color: rgba($black, .5);
-    min-height: 10rem;
     color: rgba($white, .75);
     a {
         color: rgba($white, .5);

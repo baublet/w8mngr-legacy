@@ -37,17 +37,20 @@ class UsersController < ApplicationController
         @user.preferences["height"] = height_cm.to_s
 
         @user.preferences["sex"] = params["sex"]
-        @user.preferences["birthday"] = date_time.nil? ? params["birthday"] : date_time.strftime("%B %-d, %Y")
+        @user.preferences["birthday"] = date_time.nil? ? "" : date_time.strftime("%B %-d, %Y")
         @user.preferences["timezone"] = params["timezone"]
         @user.preferences["units"] = params["units"]
         @user.preferences["name"] = params["name"]
 
-        @user.preferences["target_calories"] = params["target_calories"].to_i
+        target_calories = params["target_calories"].to_i
+        @user.preferences["target_calories"] = target_calories > 300 ? target_calories : ""
         activity_level = params["activity_level"].to_i
-        @user.preferences["activiy_level"] = activity_level.between?(1,10) ? activity_level : 1
+        @user.preferences["activity_level"] = activity_level.between?(1,5) ? activity_level : 2
 
         if @user.save
-            flash.now[:success] = "Preferences saved"
+          flash.now[:success] = "Preferences saved"
+        else
+          flash.now[:error] = "Unknown error saving preferences..."
         end
         render 'edit'
     end

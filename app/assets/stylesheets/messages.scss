@@ -30,7 +30,7 @@
     opacity: 0;
     animation: blinkFadeOut 5s 0s 1 forwards normal;
     position: fixed;
-    bottom: 7rem;
+    bottom: 22vh;
     left: 0;
     margin: 0 auto;
     z-index: 100;
@@ -40,8 +40,4 @@
     &.success {
         background: $green;
     }
-}
-
-.loading {
-
 }

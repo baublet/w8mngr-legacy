@@ -41,7 +41,7 @@ export default {
     },
   },
   data: {
-    loading: 0,
+    loading: 1,
     currentDayNumber: "",
     currentDay: "",
     prevDay: "",
@@ -85,7 +85,8 @@ export default {
       // Watch for autocomplete results
       this.$watch("newDescription", function(searchTerm) {
         this.autoComplete(searchTerm)
-        smoothScroll.scrollVerticalToElementById("description-input", 20)
+        if(screen.width < 640)
+            smoothScroll.scrollVerticalToElementById("description-input", 20)
       })
     },
     // Send an entry to be added to the database
@@ -154,8 +155,9 @@ export default {
         this.calculateTotals()
         document.getElementById("description-input")
           .focus()
-        // Scroll to our description input
-        smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
+        // Scroll to our description input if we're on mobile
+        if(screen.width < 640)
+            smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
       } else {
         // TODO: show a fancy error here
         document.getElementById("description-input")
