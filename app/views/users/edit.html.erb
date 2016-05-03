@@ -36,6 +36,17 @@
 	<%= label_tag "birthday", "Birthday" %>
 	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year and a month, e.g., May 1982, 05/01/1977, 1/7/88, etc." %>
 
+	<h2>Targets</h2>
+	<%= label_tag "activity_level", "Activity Level" %>
+	<%= select_tag "activity_level", options_for_select([
+	                            ["Sedentary", 1],
+	                            ["Lightly Active", 2],
+	                            ["Moderately Active", 3],
+	                            ["Highly Active", 4],
+	                            ["Intensely Active", 5],
+	                            ],
+	               2) %>
+
 	<h2>Settings</h2>
 
 	<%= label_tag "timezone", "Timezone" %>
