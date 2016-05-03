@@ -57,8 +57,6 @@ GEM
     chronic (0.10.2)
     concurrent-ruby (1.0.0)
     debug_inspector (0.0.2)
-    domain_name (0.5.20160310)
-      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
     foreman (0.80.2)
@@ -68,8 +66,6 @@ GEM
     haml (4.0.7)
       tilt
     highline (1.7.8)
-    http-cookie (1.0.2)
-      domain_name (~> 0.5)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -80,24 +76,12 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mechanize (2.7.4)
-      domain_name (~> 0.5, >= 0.5.1)
-      http-cookie (~> 1.0)
-      mime-types (>= 1.17.2, < 3)
-      net-http-digest_auth (~> 1.1, >= 1.1.1)
-      net-http-persistent (~> 2.5, >= 2.5.2)
-      nokogiri (~> 1.6)
-      ntlm-http (~> 0.1, >= 0.1.1)
-      webrobots (>= 0.0.9, < 0.2)
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     multi_xml (0.5.5)
-    net-http-digest_auth (1.4)
-    net-http-persistent (2.9.4)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    ntlm-http (0.1.1)
     pg (0.17.1)
     pg_search (1.0.5)
       activerecord (>= 3.1)
@@ -184,9 +168,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.2)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -194,7 +175,6 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     webpack-rails (0.9.6)
       rails (>= 3.2.0)
-    webrobots (0.1.2)
 
 PLATFORMS
   ruby
@@ -207,7 +187,6 @@ DEPENDENCIES
   chronic
   foreman
   httparty
-  mechanize
   pg
   pg_search
   puma
