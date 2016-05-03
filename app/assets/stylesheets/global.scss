@@ -87,6 +87,7 @@ ul {
 
 section, main {
     padding: 0 1rem;
+    overflow-x: hidden;
 }
 
 blockquote {
@@ -169,4 +170,10 @@ em {
 
 .nojs .hide-if-no-js {
   display: none;
+}
+
+.section-inside {
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
 }

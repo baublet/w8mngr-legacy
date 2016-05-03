@@ -146,18 +146,10 @@ export default {
           url: this.$fetchURI.food_entries.add,
           data: data_to_send,
           onSuccess: function(response) {
-            if (response.success === false) {
-              app.loading = 0
-              alert("Unknown error...")
-            } else {
-              // Update our ID with the returned response so it can be deleted
-              app.entries[index].id = parseInt(response.success)
-              app.loading = 0
-            }
+            // Update our ID with the returned response so it can be deleted
+            app.entries[index].id = parseInt(response.success)
+            app.loading = 0
           },
-          onError: function(response) {
-            alert("ERROR: " + response)
-          }
         })
         this.calculateTotals()
         document.getElementById("description-input")
@@ -201,9 +193,6 @@ export default {
           app.parseDays()
           app.loading = 0
         },
-        onError: function(response) {
-          alert("ERROR:" + response)
-        }
       })
     },
     // This function takes this.currentDayNum and renders a nice day display
@@ -234,10 +223,6 @@ export default {
             app.autoCompleteLoading = 0
           }
         },
-        onError: function(response) {
-          alert("ERROR: " + response)
-          app.autoCompleteLoading = 0
-        }
       })
     },
     // This function formats the autoComplete data, which will consist of USDA
