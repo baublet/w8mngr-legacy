@@ -15,7 +15,8 @@ module PersonalTrainer
   # messages = [
   #              {  text: "Message",
   #                 type: "message-type-identifier",
-  #                 uid:  "message-unique-id"
+  #                 uid:  "message-unique-id",
+  #                 mood: int
   #              }
   # ]
   #
@@ -32,4 +33,7 @@ module PersonalTrainer
   # the next day, but the message would be different (saying, e.g., that they
   # haven't entered any information for two straight days), so we would nuke
   # the old message and insert this new one for the user.
+  #
+  # Moods indicate what type of message to show and are eludicated in depth
+  # in our PT_Messages model file
 end

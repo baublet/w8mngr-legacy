@@ -28,7 +28,7 @@ module PersonalTrainer
       message_text = "You have not entered any foods into your food log in " + time_ago + "."
 
       # Then return it!
-      return [{ message: message_text, type: type, uid: uid}]
+      return [{ message: message_text, type: type, uid: uid, mood: 0}]
     end
   end
 end

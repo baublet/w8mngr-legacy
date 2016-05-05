@@ -68,7 +68,7 @@ class UserTest < ActiveSupport::TestCase
         #puts "\n" + @user.preferences.inspect  + "\n"
         assert_equal defaults.size, @user.preferences.size, "User preferences did not match default preferences"
         defaults.each do |pref, default|
-            assert_equal default, @user.preferences[pref.to_s], "Failed to set proper default for " + pref.to_s
+            assert_equal default.to_s, @user.preferences[pref.to_s].to_s, "Failed to set proper default for " + pref.to_s
         end
     end
 end
