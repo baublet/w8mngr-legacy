@@ -37,8 +37,8 @@ gem "acts-as-taggable-on"
 # Webpack for rails
 gem "webpack-rails"
 
-# Sidekiq
-gem "sidekiq"
+# Resque, our queueing engine
+gem "resque"
 
 group :development, :test do
     gem "sqlite3"
