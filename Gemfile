@@ -37,6 +37,9 @@ gem "acts-as-taggable-on"
 # Webpack for rails
 gem "webpack-rails"
 
+# Sidekiq
+gem "sidekiq"
+
 group :development, :test do
     gem "sqlite3"
     gem "byebug"
