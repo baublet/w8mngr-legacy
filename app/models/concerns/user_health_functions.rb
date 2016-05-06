@@ -11,8 +11,9 @@ module UserHealthFunctions
   def bmr
 
     # Convert the recent rate from G to LBs
-    recent_weight = self.recent_most_weight.value.to_s + "g"
-    recent_weight = recent_weight.to_unit.convert_to("lbs").scalar.to_i
+    recent_weight = self.recent_most_weight
+    recent_weight = recent_weight.nil? ? nil : self.recent_most_weight.value.to_s + "g"
+    recent_weight = recent_weight.nil? ? nil : recent_weight.to_unit.convert_to("lbs").scalar.to_i
 
     user_age = self.age
 
@@ -23,12 +24,17 @@ module UserHealthFunctions
     sex = preferences["sex"] == "m" ? "m" : "f"
 
     # Our activity levels correspond to a percentage above
-    activity = preferences["activity_level"].blank? ? 2 : preferences["activity_level"]
+    activity = preferences["activity_level"].blank? ? 2 : preferences["activity_level"].to_i
     activity_multiplier = 1 + (activity / 10)
 
     # Calculate our height from CM to IN
     height = preferences["height"] + "cm"
     height = height.to_unit.convert_to("in").scalar.to_i
+
+    puts "Weight: " + recent_weight.to_s
+    puts "Age: " + user_age.to_s
+    puts "Height: " + height.to_s
+    puts "Activity: " + activity_multiplier.to_s
 
     bmr = 0
     if sex == "m"

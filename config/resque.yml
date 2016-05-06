@@ -1,0 +1,3 @@
+development: localhost:6379
+test: localhost:6379
+production: pub-redis-10718.us-east-1-2.2.ec2.garantiadata.com:10718

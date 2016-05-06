@@ -41,13 +41,14 @@
 	<h2>Health and Targets</h2>
 
 	<p><em>Note:</em> Before we can calculate your basal metabolic rate, we need your
-	    height<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">(which we need)</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">(which we have)</span></span>')  %>,
-	    age<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">(which we need)</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">(which we have)</span></span>') %>,
-	    and a recent weight-in.
+	    height (<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>')  %>),
+	    age (<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>),
+	    and a recent weigh-in (<%= raw(@user.recent_most_weight.nil? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>).
 	    It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
 	</p>
 
-	<p>Calculated BMR: <%= @user.bmr %></p>
+	<% bmr = @user.bmr %>
+	<%= bmr.nil? ? "" : raw("<p>Calculated BMR: #{@user.bmr}</p>") %>
 
 	<%= label_tag "activity_level", "Activity Level" %>
 	<%= select_tag "activity_level", options_for_select([
