@@ -1,11 +1,8 @@
-class TestJob
-  def self.queue
-    :default
-  end
+class TestJob < ActiveJob::Base
+  queue_as :default
 
-  def self.perform
+  def perform
     puts 'I like to sleep!'
     sleep 2
-    Resque.enqueue(TestJob)
   end
 end

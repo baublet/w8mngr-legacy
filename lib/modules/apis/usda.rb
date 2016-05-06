@@ -2,7 +2,7 @@ module Apis
   class USDA
     include HTTParty
     base_uri "api.nal.usda.gov"
-    default_params  api_key:  "yJ1LvSILRNHG5KiefXO6boHZqJOUkJ74bJNoNUz0",
+    default_params  api_key:  ENV["W8MNGR_API_KEY_USDA"],
                     format:   "json",
                     sort:     "n"
 

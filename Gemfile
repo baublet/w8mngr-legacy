@@ -40,6 +40,9 @@ gem "webpack-rails"
 # Resque, our queueing engine
 gem "resque"
 
+# Postmark, for sending our transactional emails postmarkapp.com
+gem "postmark"
+
 group :development, :test do
     gem "sqlite3"
     gem "byebug"

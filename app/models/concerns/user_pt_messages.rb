@@ -9,6 +9,7 @@ module UserPtMessages
   # Params:
   # +messages+:: An array of hashes with the sub-elements +type+, +uid+, and +message+
   def save_pt_messages messages
+    return false if messages.nil?
     return false unless messages.count > 0
     # First, load all messages matching the type passed in messages
     types = []
@@ -43,7 +44,7 @@ module UserPtMessages
   #
   # Params:
   # +type+:: Either a string or an array of types of messages to load
-  def get_pt_messages type
+  def get_pt_messages_of_type type
     # We turn this into an array because otherwise it would return an ActiveRecord::ActiveRelation
     # that automagically updates the links that we're about to update, and since it maintains
     # the relation of seen:false, when we change it to seen:true below, this would return an
@@ -55,7 +56,7 @@ module UserPtMessages
   end
 
   # Loads all of the user's PT messages into an array and marks them as read. Again,
-  # this message only should be used in views and controllers
+  # this method only should be used in views and controllers
   def get_pt_messages
     # We turn this into an array because otherwise it would return an ActiveRecord::ActiveRelation
     # that automagically updates the links that we're about to update, and since it maintains
@@ -65,5 +66,38 @@ module UserPtMessages
     # Now mark them all as read
     self.pt_messages.where(deleted: false, seen: false).update_all(seen: true)
     return user_messages
+  end
+
+  # Loads the most recent PT message for the user and marks it as read.
+  #
+  # Params:
+  # +for_sending+:: If true, this method will ignore messages that the user has
+  # marked to NOT receive updates for.
+  def get_latest_pt_message for_sending = false
+
+    # TODO: ignore those marked as to ignore if these are meant for sending
+
+    user_message = self.pt_messages.where(deleted: false, seen: false).last
+    return nil if user_message.nil?
+    # Mark it as read
+    self.pt_messages.where(deleted: false, seen: false).last.update_attribute(:seen, true)
+    return user_message
+  end
+
+  # Loads a random unseet PT message for the user and marks it as read
+  #
+  # Params:
+  # +for_sending+:: If true, this method will ignore messages that the user has
+  # marked to NOT receive updates for.
+  def get_random_pt_message for_sending = false
+
+    # TODO: ignore those marked as to ignore if these are meant for sending
+
+    user_message = self.pt_messages.where(deleted: false, seen: false).order("RANDOM()").first
+    return nil if user_message.nil?
+    # Mark it as read
+    user_message.seen = true
+    user_message.save
+    return user_message
   end
 end
