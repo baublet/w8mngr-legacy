@@ -1,7 +1,6 @@
 html {
     font: 16px $font-stack;
-    background: $white;
-    background: rgba($black, .075);
+    background: darken($white, 5%);
     color: $black;
     margin: 0;
     padding: 0;
@@ -67,8 +66,8 @@ h2 {
     font-weight: 300;
 }
 h3 {
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 900;
 }
 
 ul, ol {

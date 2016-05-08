@@ -23,9 +23,9 @@ task :deliver_pt_messages => :environment do
   # Cycle through all users and send the most recent message to them
   # This task is intended to be called every hour
   User.find_each.each do |user|
-    puts "Delivering messages for " + user.email
     message = user.get_random_pt_message true
     next if message.nil?
+    puts "Delivering messages for " + user.email
     SendPtMessageJob.perform_later message.id
   end
 

@@ -31,6 +31,16 @@ module ApplicationHelper
         return @current_day
     end
 
+    # Returns the day before the passed day string (YYYYMMDD)
+    def day_before day
+      return convert_day_to_date(day).yesterday.strftime('%Y%m%d')
+    end
+
+    # Returns the day after the passed day string (YYYYMMDD)
+    def day_after day
+      return convert_day_to_date(day).tomorrow.strftime('%Y%m%d')
+    end
+
     # Returns the previous day in our DB's day storage format
     def previous_day
         if @previous_day.nil?
