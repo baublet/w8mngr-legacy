@@ -22,7 +22,7 @@ module UserPreferences
       "activity_level": 2,
       "target_calories": "",
 
-      "faturdays": false,
+      "faturday_enabled": false,
       "auto_faturdays": {
         "mo": false,
         "tu": false,

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
     # Static pages
     root   "welcome#index"
     get    "privacy"        =>  "welcome#privacy_policy"
@@ -40,6 +41,10 @@ Rails.application.routes.draw do
                                 as: :food_pull
     resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
 
+    # Faturdays
+    get     "/faturday"         => "faturday#create"
+    post    "/faturday"         => "faturday#create"
+
     # Foods search
     get     "/search/foods(:format)" => "search_foods#index",
                                 as: :food_search
@@ -62,4 +67,6 @@ Rails.application.routes.draw do
                                 as: :delete_recipe_ingredient
     post    "/recipes/:recipe_id/ingredients/add_measurement/:measurement_id" => "ingredients#create_from_food",
                                 as: :add_food_to_recipe
+
+
 end
