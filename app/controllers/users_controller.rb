@@ -1,9 +1,24 @@
 class UsersController < ApplicationController
-    before_action :logged_in_user, only: [:destroy, :update]
-    before_action :correct_user, only: [:show, :edit, :update, :destroy]
+    before_action :logged_in_user, only: [:show, :destroy, :update]
+    before_action :correct_user, only: [:edit, :update, :destroy]
 
     def show
-        @user = User.find(params[:id])
+        respond_to do |format|
+            format.html {
+              @user = current_user
+              render :show
+            }
+            format.json {
+              id = current_user.id
+              email = current_user.email
+              preferences = current_user.preferences
+              render json: {
+                id: id,
+                email: email,
+                preferences: preferences
+              }
+            }
+        end
     end
 
     def new

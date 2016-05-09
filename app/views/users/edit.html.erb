@@ -64,8 +64,8 @@
   	    It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
   	</p>
 
-  	<% bmr = number_with_delimiter(@user.bmr) %>
-  	<%= bmr.nil? ? "" : raw("<p><label>Calculated BMR:</label> #{bmr}</p>") %>
+  	<% bmr = @user.bmr %>
+  	<%= bmr.nil? ? "" : raw("<p><label>Calculated BMR:</label> #{number_with_delimiter(bmr)}</p>") %>
 
   	<%= label_tag "activity_level", "Activity Level" %>
   	<%= select_tag "activity_level", options_for_select([
@@ -85,7 +85,7 @@
 
 	<div class="helper-panel">
 
-    <h2>Faturday</h2>
+    <h2><i class="fa fa-birthday-cake" aria-hidden="true"></i> Faturdays</h2>
 
     <p>Faturdays are any day you don't feel like tracking. You can enter them
        manually on the day you want to take a faturday, or you can set them
@@ -132,9 +132,12 @@
 
       <p>A day marked as a faturday automatically has the following values logged
          into your food log. <em>Note:</em> It's useful to make the calories
-         about 50% higher than your BMR on a cheat day. For you, that would be
-         about <strong><%= number_with_delimiter((@user.bmr * 1.5).ceil) %></strong>
-         calories.</p>
+         about 50% higher than your BMR on a cheat day.</p>
+      <% if !bmr.nil? %>
+        <p>For you, that would be
+        about <strong><%= number_with_delimiter((bmr * 1.5).ceil) %></strong>
+        calories.</p>
+      <% end %>
 
       <%= label_tag "faturday_calories", "Calories" %>
       <%= text_field_tag "faturday_calories", @user.preferences["faturday_calories"], placeholder: "Calories to log on faturdays" %>

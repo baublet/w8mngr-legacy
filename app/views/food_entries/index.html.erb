@@ -6,42 +6,37 @@
 
 <noscript>
 
-  <%= render partial: "shared/day_navigator", :locals => {base_url: foodlog_path} %>
+  <div class="food-entries-wrapper">
 
-  <div class="section-inside">
+    <%= render partial: "shared/day_navigator", :locals => {base_url: foodlog_path} %>
 
-    <h1><i class="fa fa-cutlery"></i> Food Log</h1>
+    <div class="section-inside">
 
-    <% if !@foodentry.nil? && @foodentry.errors.any? %>
-      <%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
-    <% end %>
+      <h1><i class="fa fa-cutlery"></i> Food Log</h1>
 
-    <div class="foodlog-table app-form transparent table">
+      <% if !@foodentry.nil? && @foodentry.errors.any? %>
+        <%= render partial: "shared/error_messages", locals: {errors: @foodentry.errors} %>
+      <% end %>
+
       <% if @foodentries.size > 0 %>
-      <div class="row header">
-        <div class="col long"></div>
-        <div class="col" title="Calories">Calories</div>
-        <div class="col" title="Fat">Fat</div>
-        <div class="col" title="Carbs">Carbs</div>
-        <div class="col" title="Protein">Protein</div>
-        <div class="col meta"></div>
-      </div>
-      <%= render @foodentries %>
-      <div class="row header totals">
-        <div class="col long">Totals:</div>
-        <div class="col" title="Calories"><%= number_with_delimiter(@totals["calories"]) %></div>
-        <div class="col" title="Fat"><%= @totals["fat"] %></div>
-        <div class="col" title="Carbs"><%= @totals["carbs"] %></div>
-        <div class="col" title="Protein"><%= @totals["protein"] %></div>
-        <div class="col meta"></div>
-      </div>
+        <div class="foodlog-table app-form transparent table">
+          <%= render @foodentries %>
+        </div>
+        <div class="row header totals">
+          <div class="col long">Totals:</div>
+          <div class="col" title="Calories"><%= number_with_delimiter(@totals["calories"]) %></div>
+          <div class="col" title="Fat"><%= @totals["fat"] %></div>
+          <div class="col" title="Carbs"><%= @totals["carbs"] %></div>
+          <div class="col" title="Protein"><%= @totals["protein"] %></div>
+        </div>
       <% else %>
         <p>You haven't entered any entries yet today. Add some using the form below!</p>
       <% end %>
-    </div>
-    <div class="app-form new table">
-      <% @foodentry = @newfoodentry %>
-      <%= render @foodentry %>
+      <div class="app-form new table">
+        <% @foodentry = @newfoodentry %>
+        <%= render @foodentry %>
+      </div>
+
     </div>
 
   </div>

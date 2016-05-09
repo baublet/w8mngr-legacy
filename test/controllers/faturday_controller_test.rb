@@ -23,7 +23,7 @@ class FaturdayControllerTest < ActionController::TestCase
       get :create
     end
     assert_response :redirect
-    assert_redirected_to food_log_day_path 19850502
+    assert_redirected_to food_log_day_path Time.current.strftime('%Y%m%d')
   end
 
   test "should create faturday for the day passed" do

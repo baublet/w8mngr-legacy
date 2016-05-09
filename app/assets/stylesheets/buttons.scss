@@ -74,8 +74,6 @@
 }
 
 .food-log-new-btn {
-    float: none;
-    width: auto;
     padding: .5rem;
     background-color: $color-primary-light;
     color: rgba($white, .75);
@@ -101,13 +99,13 @@
     }
 }
 
-.search-btn, .barcode-btn {
-    float: none;
+.search-btn, .barcode-btn, .faturday-btn {
     min-width: 0;
     border: none;
     margin: 0;
     overflow:hidden;
     padding: 0;
+    border-radius: 0;
     &:hover {
         border: none;
         box-shadow:none;
@@ -115,6 +113,22 @@
     &:active {
         box-shadow:none;
     }
+}
+.faturday-btn {
+  float: left;
+  .fa {
+    margin-right: .25rem;
+  }
+  .screen-reader-text {
+    display: inline-block;
+    visibility: visible;
+    color: rgba($white, .5);
+    text-transform: uppercase;
+    font-size: .7rem;
+  }
+  &:hover .screen-reader-text {
+    color: $white;
+  }
 }
 
 .prev-btn, .next-btn {
@@ -142,4 +156,12 @@
         background: $color-primary;
         color: $white;
     }
+}
+
+.btn.disabled {
+  cursor: default;
+  opacity: .5;
+  &:hover {
+    opacity: .75;
+  }
 }

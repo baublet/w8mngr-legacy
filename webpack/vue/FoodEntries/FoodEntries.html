@@ -22,12 +22,12 @@
     <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
 
     <div class="row header totals" v-if="entries.length > 1">
-        <div class="col long">Totals:</div>
-        <div class="col" title="Calories" v-text="totalCalories"></div>
-        <div class="col" title="Fat" v-text="totalFat"></div>
-        <div class="col" title="Carbs" v-text="totalCarbs"></div>
-        <div class="col" title="Protein" v-text="totalProtein"></div>
-      </div>
+      <div class="col long">Totals:</div>
+      <div class="col" title="Calories" v-text="totalCalories"></div>
+      <div class="col" title="Fat" v-text="totalFat"></div>
+      <div class="col" title="Carbs" v-text="totalCarbs"></div>
+      <div class="col" title="Protein" v-text="totalProtein"></div>
+    </div>
 
     <div class="app-form new table">
       <div class="row new">
@@ -55,6 +55,17 @@
           <input type="text" @keyup.enter="addEntry" v-model="newProtein" placeholder="Protein">
         </div>
         <div class="col meta">
+          <a class="btn faturday-btn" alt="Make this day a Faturday!"
+             title="Make this day a Faturday!" v-if="user.preferences.faturday_enabled == 'true'"
+             @click="faturday()">
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+            <span class="screen-reader-text">Faturday</span>
+          </a>
+          <a class="btn faturday-btn disabled" alt="Faturdays are disabled..."
+             title="Faturdays are disabled..." v-else>
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+            <span class="screen-reader-text">Faturday</span>
+          </a>
           <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
             <i class="fa fa-barcode"></i>
             <span class="screen-reader-text">Scan Barcode</span>
@@ -70,6 +81,7 @@
         </div>
       </div>
     </div>
+
     <div class="autocomplete-results">
       <div class="auto-complete-loading">
         <div class="small-loader" v-if="autoCompleteLoading">

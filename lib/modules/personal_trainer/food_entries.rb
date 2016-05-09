@@ -49,13 +49,12 @@ module PersonalTrainer
       return [] unless last_entries.kind_of?(Array) && target.kind_of?(Integer)
 
       over_under = 0
-      uid_string = ""
       valid_days = 0
       last_entries.each do |day|
         # Calories have to be over 0 for us to count them
-        next if day["calories"] == 0
+        next if day[:calories] == 0 || day[:calories].nil?
         valid_days += 1
-        over_under += day["calories"] - target
+        over_under += day[:calories] - target
       end
 
       # Only do any sort of message if the number is +/- 10% of the target and

@@ -55,7 +55,7 @@
 <% end %>
 
 <% current_user.nil? ? "" : current_user.get_pt_messages.each do |message| %>
-    <%= content_tag(:div, message.message, class: "alert mood-#{type}") %>
+    <%= content_tag(:div, message.message, class: "alert mood-#{mood}") %>
 <% end %>
 
 <main id="main" role="main">

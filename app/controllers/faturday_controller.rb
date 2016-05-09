@@ -13,18 +13,34 @@ class FaturdayController < ApplicationController
       new_entry.fat = current_user.preferences["faturday_fat"]
       new_entry.carbs = current_user.preferences["faturday_carbs"]
       new_entry.protein = current_user.preferences["faturday_protein"]
+
       if new_entry.save
-        flash[:success] = "Faturday saved. Enjoy your day off!"
-        redirect_to food_log_day_path day
+        respond_to do |format|
+          format.html {
+            flash[:success] = "Faturday saved. Enjoy your day off!"
+            redirect_to food_log_day_path day
+          }
+          format.json { render json: {success: true, entry: new_entry} }
+        end
       else
-        flash[:error] = "Unknown error adding Faturday..."
-        redirect_to foodlog_path
+        respond_to do |format|
+          format.html {
+            flash[:error] = "Unknown error adding Faturday..."
+            redirect_to foodlog_path
+          }
+          format.json { render json: {success: false, message: "Unknown error adding Faturday..."} }
+        end
       end
     else
       # If faturdays are off, or there isn't any option for faturdays set, do nothing
       # and show them an error
-      flash[:error] = "You haven't setup Faturdays properly yet..."
-      redirect_to edit_user_path current_user
+      respond_to do |format|
+          format.html {
+            flash[:error] = "You haven't setup Faturdays properly, yet..."
+            redirect_to edit_user_path current_user
+          }
+          format.json { render json: {success: false, message: "You haven't setup Faturdays properly, yet..." } }
+        end
     end
   end
 end

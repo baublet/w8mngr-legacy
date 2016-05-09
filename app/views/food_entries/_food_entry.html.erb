@@ -29,33 +29,44 @@
     </div>
 
     <div class="col meta">
-        <% if food_entry[:id].nil? %>
+    <% if food_entry[:id].nil? %>
+        <% if current_user.preferences["faturday_enabled"] %>
+          <%= link_to faturday_day_path(current_day), { class: "btn faturday-btn", alt: "Make this day a Faturday!", title: "Make this day a Faturday!" } do %>
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+            <span class="screen-reader-text">Faturday</span>
+          <% end %>
+        <% else %>
+          <%= link_to edit_user_path(current_user) + "#faturday", { class: "btn faturday-btn disabled", alt: "Toggle Faturday Settings", title: "Toggle Faturday Settings" } do %>
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+            <span class="screen-reader-text">Faturday</span>
+          <% end %>
+        <%  end %>
         <%= link_to food_search_path, { class: "btn barcode-btn", alt: "Scan Barcode", title: "Scan Barcode" } do %>
-        <i class="fa fa-barcode"></i>
-        <span class="screen-reader-text">Scan Barcode</span>
+          <i class="fa fa-barcode"></i>
+          <span class="screen-reader-text">Scan Barcode</span>
         <% end %>
         <%= link_to food_search_path(:food_log_referrer => "true"), { class: "btn search-btn", alt: "Search for Foods", title: "Search for Foods" } do %>
-        <i class="fa fa-search"></i>
-        <span class="screen-reader-text">Search for Foods</span>
+          <i class="fa fa-search"></i>
+          <span class="screen-reader-text">Search for Foods</span>
         <% end %>
         <%= button_tag(type: 'submit', class: 'btn food-log-new-btn') do %>
-        <i class="fa fa-plus"></i>
-        <strong>New Entry</strong>
+          <i class="fa fa-plus"></i>
+          <strong>New Entry</strong>
         <% end %>
     <% else %>
         <%= button_tag(type: 'submit', class: 'btn meta-btn save', title: 'Save Entry') do %>
-        <span class="screen-reader-text">Save Entry</span>
-        <i class="fa fa-floppy-o"></i>
+          <span class="screen-reader-text">Save Entry</span>
+          <i class="fa fa-floppy-o"></i>
         <% end %>
         <%= link_to food_entry_delete_path(food_entry),
                           #method: :delete,
                           #data: { confirm: 'Are you sure?' },
               class: 'btn delete-btn',
               title: 'Delete Entry' do %>
-        <i class="fa fa-times"></i>
-        <span class="screen-reader-text">Delete Entry</span>
+          <i class="fa fa-times"></i>
+          <span class="screen-reader-text">Delete Entry</span>
         <% end %>
-        <% end %>
+    <% end %>
     </div>
 
     <% end %>

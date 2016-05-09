@@ -63,6 +63,7 @@ export default {
     autoCompleteItems: [],
     autoCompleteSelected: -1,
     autoCompleteLoading: 0,
+    user: {},
   },
   components: {
     AutocompleteItem,
@@ -87,6 +88,32 @@ export default {
         this.autoComplete(searchTerm)
         if(screen.width < 640)
             smoothScroll.scrollVerticalToElementById("description-input", 20)
+      })
+
+      // Load the user information for preferences
+      var app = this
+      this.$fetch({
+        method: "GET",
+        url: this.$fetchURI.current_user,
+        onSuccess: function(response) {
+          // Add the user return data to our model
+          app.user = response
+        },
+      })
+    },
+    faturday: function() {
+      // Sets this day to Faturday
+      this.loading = 1
+      var app = this
+      this.$fetch({
+        method: "GET",
+        url: this.$fetchURI.faturday(app.currentDayNumber),
+        onSuccess: function(response) {
+          // Add the user return data to our model
+          app.entries.push(response.entry)
+          app.calculateTotals()
+          app.loading = 0
+        },
       })
     },
     // Send an entry to be added to the database
