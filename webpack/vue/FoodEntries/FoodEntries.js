@@ -39,6 +39,12 @@ export default {
     "add-entry": function() {
       this.addEntry()
     },
+    "loading": function() {
+      this.loading = 1
+    },
+    "notLoading": function() {
+      this.loading = 0
+    },
   },
   data: {
     loading: 1,
@@ -63,7 +69,13 @@ export default {
     autoCompleteItems: [],
     autoCompleteSelected: -1,
     autoCompleteLoading: 0,
-    user: {},
+    // We only need a few default values to ensure we don't have lots of errors
+    user: {
+      id: null,
+      preferences: {
+        faturday_enabled: false,
+      },
+    },
   },
   components: {
     AutocompleteItem,
@@ -103,7 +115,7 @@ export default {
     },
     faturday: function() {
       // Sets this day to Faturday
-      this.loading = 1
+      this.$emit("loading")
       var app = this
       this.$fetch({
         method: "GET",
@@ -112,14 +124,12 @@ export default {
           // Add the user return data to our model
           app.entries.push(response.entry)
           app.calculateTotals()
-          app.loading = 0
+          app.$emit("notLoading")
         },
       })
     },
     // Send an entry to be added to the database
     addEntry: function() {
-
-      this.loading = 1
 
       var description = this.newDescriptionTemp || this.newDescription.trim()
       var calories = parseInt(this.newCalories) || 0
@@ -137,6 +147,8 @@ export default {
 
       if (description) {
 
+        this.$emit("loading")
+
         // Reset our fields
         this.newDescription = ""
         this.newDescriptionTemp = null
@@ -147,7 +159,7 @@ export default {
         this.autoCompleteItems = []
 
         // Add the entry to the model
-        // We"ll need this to update the item with the index the ruby app returns to us
+        // We'll need this to update the item with the index the ruby app returns to us
         // NOTE: Small workaround here. If we don"t set a data element on this
         // initial push, Vue doesn"t model the reactive getters and setters,
         // which makes it so that when we return an ID from the JSON request,
@@ -176,7 +188,7 @@ export default {
           onSuccess: function(response) {
             // Update our ID with the returned response so it can be deleted
             app.entries[index].id = parseInt(response.success)
-            app.loading = 0
+            app.$emit("notLoading")
           },
         })
         this.calculateTotals()
@@ -208,7 +220,7 @@ export default {
     },
     // Switches to a new day. If no argument is specified, it uses today
     loadDay: function(day = "") {
-      this.loading = 1
+      this.$emit("loading")
       console.log("Fetching data from the API...")
       state.push({}, this.$fetchURI.food_entries.from_day(day))
       var app = this
@@ -216,11 +228,11 @@ export default {
         method: "GET",
         url: this.$fetchURI.food_entries.from_day(day),
         onSuccess: function(response) {
+          app.$emit("notLoading")
           app.entries = response.entries
           app.currentDayNumber = response.current_day
           app.calculateTotals()
           app.parseDays()
-          app.loading = 0
         },
       })
     },

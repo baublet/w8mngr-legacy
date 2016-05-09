@@ -49,12 +49,12 @@ var config = {
     loaders: [
       {
         test: /\.vue$/, // a regex for matching all files that end in `.vue`
-        loader: 'vue'   // loader to use for matched files
+        loader: 'vue',   // loader to use for matched files
       },
       // We need an HTML loader to load our Vue templates
       {
         test: /\.html$/,
-        loader: "html"
+        loader: "html",
       },
     ]
   }
