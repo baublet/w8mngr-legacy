@@ -200,11 +200,12 @@ label, .label {
 .helper-input:checked + label + .helper-panel {
   position: static;
   opacity: 1;
-  max-height: 999px;
+  max-height: 9999px;
   overflow: visible;
 }
 
 .helper-input-links {
+  margin: 2rem 0;
   ul {
     padding: 0 .25rem;
     margin: 0;
@@ -245,6 +246,7 @@ input[type=checkbox].toggle-switch {
     position: relative;
     padding-left: 4rem;
     cursor: pointer;
+    margin-bottom: 2rem;
     &:before {
       display: block;
       content: " ";
@@ -285,6 +287,7 @@ input[type=checkbox].toggle-switch {
 
 .check-list {
   @include height(1);
+  margin-bottom: 2rem;
   input {
     display: none;
   }

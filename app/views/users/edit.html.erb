@@ -91,7 +91,7 @@
        manually on the day you want to take a faturday, or you can set them
        to be entered for you automatically here!</p>
 
-    <input type="checkbox" class="helper-input toggle-switch" name="edit-profile-faturday" id="ep-faturday-enabled">
+    <%= check_box_tag 'faturday_enabled', 'true', @user.preferences["faturday_enabled"], :id => "ep-faturday-enabled", :class => "helper-input toggle-switch" %>
 
     <label for="ep-faturday-enabled">Toggle Faturdays</label>
 
@@ -105,25 +105,25 @@
 
   	  <div class="faturday-days check-list">
 
-        <%= check_box_tag 'faturday', 'mo', false, :id => "f-mo" %>
+        <%= check_box_tag 'faturday[]', 'mo', @user.preferences["auto_faturdays"]["mo"], :id => "f-mo" %>
         <%= label_tag "f-mo", "Monday" %>
 
-        <%= check_box_tag 'faturday', 'tu', false, :id => "f-tu" %>
+        <%= check_box_tag 'faturday[]', 'tu', @user.preferences["auto_faturdays"]["tu"], :id => "f-tu" %>
         <%= label_tag "f-tu", "Tuesday" %>
 
-        <%= check_box_tag 'faturday', 'we', false, :id => "f-we" %>
+        <%= check_box_tag 'faturday[]', 'we', @user.preferences["auto_faturdays"]["we"], :id => "f-we" %>
         <%= label_tag "f-we", "Wednesday" %>
 
-        <%= check_box_tag 'faturday', 'th', false, :id => "f-th" %>
+        <%= check_box_tag 'faturday[]', 'th', @user.preferences["auto_faturdays"]["th"], :id => "f-th" %>
         <%= label_tag "f-th", "Thursday" %>
 
-        <%= check_box_tag 'faturday', 'fr', false, :id => "f-fr" %>
+        <%= check_box_tag 'faturday[]', 'fr', @user.preferences["auto_faturdays"]["fr"], :id => "f-fr" %>
         <%= label_tag "f-fr", "Friday" %>
 
-        <%= check_box_tag 'faturday', 'sa', false, :id => "f-sa" %>
+        <%= check_box_tag 'faturday[]', 'sa', @user.preferences["auto_faturdays"]["sa"], :id => "f-sa" %>
         <%= label_tag "f-sa", "Saturday" %>
 
-        <%= check_box_tag 'faturday', 'su', false, :id => "f-su" %>
+        <%= check_box_tag 'faturday[]', 'su', @user.preferences["auto_faturdays"]["su"], :id => "f-su" %>
         <%= label_tag "f-su", "Sunday" %>
 
       </div>
@@ -131,14 +131,20 @@
       <h3>Faturday Placeholders</h3>
 
       <p>A day marked as a faturday automatically has the following values logged
-         into your food log:</p>
+         into your food log. <em>Note:</em> It's useful to make the calories
+         about 50% higher than your BMR on a cheat day. For you, that would be
+         about <strong><%= number_with_delimiter((@user.bmr * 1.5).ceil) %></strong>
+         calories.</p>
 
       <%= label_tag "faturday_calories", "Calories" %>
       <%= text_field_tag "faturday_calories", @user.preferences["faturday_calories"], placeholder: "Calories to log on faturdays" %>
+
       <%= label_tag "faturday_fat", "Fat" %>
       <%= text_field_tag "faturday_fat", @user.preferences["faturday_fat"], placeholder: "Fat grams to log on faturdays" %>
+
       <%= label_tag "faturday_carbs", "Carbs" %>
       <%= text_field_tag "faturday_carbs", @user.preferences["faturday_carbs"], placeholder: "Carbohydrates to log on faturdays" %>
+
       <%= label_tag "faturday_protein", "Protein" %>
       <%= text_field_tag "faturday_protein", @user.preferences["faturday_protein"], placeholder: "Protein to log on faturdays" %>
 
@@ -172,8 +178,9 @@
   </div>
 
 	<%= button_tag(type: 'submit', class: 'btn') do %>
-		Save
+		Save Settings
 	<% end %>
+
 <% end %>
 
 </div>

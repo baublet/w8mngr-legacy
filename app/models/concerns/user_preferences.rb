@@ -22,6 +22,21 @@ module UserPreferences
       "activity_level": 2,
       "target_calories": "",
 
+      "faturdays": false,
+      "auto_faturdays": {
+        "mo": false,
+        "tu": false,
+        "we": false,
+        "th": false,
+        "fr": false,
+        "sa": false,
+        "su": false
+      },
+      "faturday_calories": "",
+      "faturday_fat": "",
+      "faturday_carbs": "",
+      "faturday_protein": "",
+
       "pt_messages_food_log": true
     }
   end

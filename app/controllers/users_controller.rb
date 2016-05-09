@@ -47,6 +47,21 @@ class UsersController < ApplicationController
         activity_level = params["activity_level"].to_i
         @user.preferences["activity_level"] = activity_level.between?(1,5) ? activity_level : 2
 
+        @user.preferences["faturday_enabled"] = params["faturday_enabled"] ? true : false
+
+        # Empty the existing faturday array
+        @user.preferences["auto_faturdays"] = {}
+        if params.try(:[], "faturday")
+          params["faturday"].each do |day|
+            @user.preferences["auto_faturdays"][day] = true
+          end
+        end
+
+        @user.preferences["faturday_calories"] = params["faturday_calories"].to_i
+        @user.preferences["faturday_fat"] = params["faturday_fat"].to_i
+        @user.preferences["faturday_carbs"] = params["faturday_carbs"].to_i
+        @user.preferences["faturday_protein"] = params["faturday_protein"].to_i
+
         if @user.save
           flash.now[:success] = "Preferences saved"
         else
