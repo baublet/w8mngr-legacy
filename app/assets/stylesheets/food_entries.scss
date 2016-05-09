@@ -215,19 +215,25 @@
     overflow: hidden;
   }
   .add-food {
-    color: $color-primary;
-    margin-right: .25rem;
+    @include height(1);
+    float: right;
+    margin-top: -.5rem;
+    margin-right: -.5rem;
+    color: rgba($white, .75);
     display: none;
-    .fa {
-      opacity: 1;
-      font-size: 1rem;
-    }
+    padding: .5rem;
+    min-width: 0;
+    font-size: .7rem;
+    text-transform: uppercase;
+    font-weight: bold;
     &:hover {
-      color: $color-primary-light;
+      color: rgba($white, 1);
+      @include height(1);
     }
   }
   .measurements {
     display: none;
+
   }
   &.selected {
     overflow: auto;
@@ -245,6 +251,7 @@
       white-space: normal;
       font-size: .8rem;
       font-weight: bold;
+      overflow: visible;
     }
     .measurements {
       display: block;

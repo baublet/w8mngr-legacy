@@ -116,7 +116,7 @@ export default {
         url: this.$fetchURI.food_entries.update(self.id),
         data: data,
         onSuccess: function(response) {
-          self.dispatch("notLoading")
+          self.$dispatch("notLoading")
         },
       })
     },
