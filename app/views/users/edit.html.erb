@@ -57,12 +57,15 @@
 
   	<h2><i class="fa fa-medkit" aria-hidden="true"></i> Health Targets</h2>
 
+  	<%= label_tag "target_calories", "Target Calories" %>
+  	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+
   	<h3>Expended Energy</h3>
 
-  	<p>We offer two ways to calculate your basal metabolic rate, the number of
+  	<p>We offer two ways to calculate your Total Daily Expended Energy (TDEE), the number of
   	calories you burn every day.</p>
 
-  	<h4>Calculated</h4>
+  	<h4>Calculated TDEE</h4>
 
   	<p>The simplest way to begin is with a quick calculator based on your age,
   	height, weight, and estimated activity level.</p>
@@ -74,20 +77,6 @@
     It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
   	</p>
 
-  	<% bmr = @user.bmr %>
-  	<%= bmr.nil? ? "" : raw("<p><label>Calculated BMR:</label> #{number_with_delimiter(bmr)}</p>") %>
-
-  	<h4>Adaptive</h4>
-
-  	<p>Once we have enough information about your weight and the calories you eat,
-  	we can also adapt our system to generate a more precise basal metabolic rate. To
-  	begin doing this, we need at least two weeks of information.</p>
-
-  	<p><em>Note:</em> the more information we have, the more accurate this
-  	calculation becomes.</p>
-
-
-
   	<%= label_tag "activity_level", "Activity Level" %>
   	<%= select_tag "activity_level", options_for_select([
     	                            ["Sedentary", 1],
@@ -97,8 +86,22 @@
     	                            ["Intensely Active", 5],
   	                            ], @user.preferences["activity_level"]) %>
 
-  	<%= label_tag "target_calories", "Target Calories" %>
-  	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+  	<% bmr = @user.bmr %>
+  	<%= bmr.nil? ? "" : raw("<p><label>Calculated TDEE:</label> #{number_with_delimiter(bmr)}</p>") %>
+
+    <hr>
+
+  	<h4>Adaptive TDEE</h4>
+
+  	<p>Once we have enough information about your weight and the calories you eat,
+  	we can also adapt our system to generate a more precise basal metabolic rate. To
+  	begin doing this, we need at least two weeks of information.</p>
+
+  	<p><em>Note:</em> the more information we have, the more accurate this
+  	calculation becomes.</p>
+
+    <% tdee = @user.adaptive_tdee %>
+    <%= tdee.nil? ? "" : raw("<p><label>Adaptive TDEE:</label> " + tdee.to_s + "</p>") %>
 	</div>
 
 	<input type="radio" class="helper-input" name="edit-profile" id="ep-faturday" <%= params["p"] == "faturday" ? "checked='checked'" : "" %>>

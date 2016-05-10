@@ -46,34 +46,28 @@ module UserHealthFunctions
   # Returns a hash of the averages of weights, calories, fats, carbs, and proteins
   # of the week beginning on day (either a string or a date object).
   def week_average day = nil
-    date = Date.today if day == nil
-    date = convert_day_to_date day if day.is_a?(String)
-    days = ActionView::Helpers::ApplicationHelper.get_days_of_week date
-    week_entries = {
-      "weight": [],
-      "calories": [],
-      "fat": [],
-      "carbs": [],
-      "protein": []
-    }
-    days.each do |this_day|
-      day_totals = food_totals this_day
-      weight = weight_average this_day
-      week_entries["weight"] << weight if weight > 0
-      week_entries["calories"] << day_totals["calories"] if day_totals["calories"] > 0
-      # Right now, we don't do anything with this data, but we will in the future
-      week_entries["fat"] << day_totals["fat"] if day_totals["fat"] > 0
-      week_entries["carbs"] << day_totals["carbs"] if day_totals["carbs"] > 0
-      week_entries["protein"] << day_totals["protein"] if day_totals["protein"] > 0
-    end
+    day = Date.today if day == nil
+    day = ApplicationController.helpers.convert_day_to_date day if day.is_a?(String)
+    days = ApplicationController.helpers.get_days_of_week day
+
     averages = {}
-    averages["weight"] = week_entries[:weight].inject{ |sum, el| sum + el }.to_f / week_entries[:weight].size
-    averages["calories"] = week_entries[:calories].inject{ |sum, el| sum + el }.to_f / week_entries[:calories].size
-    # Right now, we don't do anything with this data, but we will in the future
-    averages["fat"] = week_entries[:fat].inject{ |sum, el| sum + el }.to_f / week_entries[:fat].size
-    averages["carbs"] = week_entries[:carbs].inject{ |sum, el| sum + el }.to_f / week_entries[:carbs].size
-    averages["protein"] = week_entries[:protein].inject{ |sum, el| sum + el }.to_f / week_entries[:protein].size
+    week = foodentries.where(:day => days)
+    # Days in this scope
+    days = week.distinct.count(:day)
+    days = days == 0 ? 1 : days
+    averages["calories"] = week.sum(:calories, {conditions: "calories > 0"}).to_i / days
+    averages["fat"] = week.sum(:fat, {conditions: "fat > 0"}).to_i / days
+    averages["carbs"] = week.sum(:carbs, {conditions: "carbs > 0"}).to_i / days
+    averages["protein"] = week.average(:protein, {conditions: "protein > 0"}).to_i / days
+
+    averages["weight"] = weightentries(day: days).average(:value).to_i / days
     return averages
+  end
+
+  def at_least_one number
+    number = number.to_i
+    return 1 if number == 0
+    return number
   end
 
   # Returns a calculated adaptive BMR based on weight entries and calories.
@@ -104,30 +98,45 @@ module UserHealthFunctions
     last_calories = 0
     last_weight = 0
     averages.each do |week|
+      # Do nothing if there's no weight or calorie average
+      next if !week["weight"].present? && week["weight"] == 0
+      next if !week["calories"].present? && week["calories"] == 0
       if tdee == 0
         tdee = week["calories"]
         last_weight = week["weight"]
         last_calories = week["calories"]
+        puts "Starting TDEE: " + tdee.to_i.to_s
         next
       end
-      weight_difference = (last_weight - week["weight"]) / last_weight
-      calorie_difference = (last_calories - week["calories"]) / last_calories
-      # Add the difference % in weight and calories to each other, and use that
-      # to adjust the TDEE
-      adjustment = 1 + (weight_difference + calorie_difference)
-      tdee = tdee * adjustment
+      weight_difference = last_weight / week["weight"]
+      calorie_difference = last_calories / week["calories"]
+      if weight_difference == 1
+        # If there's no weight difference, average the calories for the two weeks
+        # and set that as their TDEE
+        tdee = (tdee + week["calories"]) / 2
+        puts "No weight change, calories went from " + last_calories.to_i.to_s + " to " + week["calories"].to_i.to_s + ". TDEE adjusted to " + tdee.to_i.to_s
+      else
+        # Otherwise, average the differences
+        adjustment = (weight_difference + calorie_difference) / 2
+        puts "Weight diff: " + weight_difference.to_f.to_s
+        puts "Cal diff: " + calorie_difference.to_f.to_s
+        tdee = tdee * adjustment
+        puts "TDEE: " + tdee.to_i.to_s + " (adj: " + adjustment.to_f.to_s + ")"
+      end
+      last_weight = week["weight"]
+      last_calories = week["calories"]
     end
-    return tdee.ceil
+    return tdee.to_f.ceil
   end
 
   def food_totals day = nil
     day = day.nil? ? current_day : day
     entries = foodentries_from(day)
-    totals = {calories: 0, fat: 0, carbs: 0, protein: 0}
-    totals["calories"] = entries.map{|f| f["calories"]}.compact.reduce(0, :+)
-    totals["fat"] = entries.map{|f| f["fat"]}.compact.reduce(0, :+)
-    totals["carbs"] = entries.map{|f| f["carbs"]}.compact.reduce(0, :+)
-    totals["protein"] = entries.map{|f| f["protein"]}.compact.reduce(0, :+)
+    totals = {"calories": 0, "fat": 0, "carbs": 0, "protein": 0}
+    totals["calories"] = entries.map{|f| f[:calories]}.compact.reduce(0, :+)
+    totals["fat"] = entries.map{|f| f[:fat]}.compact.reduce(0, :+)
+    totals["carbs"] = entries.map{|f| f[:carbs]}.compact.reduce(0, :+)
+    totals["protein"] = entries.map{|f| f[:protein]}.compact.reduce(0, :+)
     return totals
   end
 
@@ -147,8 +156,8 @@ module UserHealthFunctions
   end
 
   def weight_average_display day = nil, before = ' ', after = ''
-        unit_display = before + unit + after
-        Unit.new(weight_average(day).to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit_display
+    unit_display = before + unit + after
+    Unit.new(weight_average(day).to_s + " g").convert_to(unit).scalar.ceil.to_i.to_s + unit_display
   end
 
   def weightentries_from day
