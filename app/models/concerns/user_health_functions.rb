@@ -48,7 +48,7 @@ module UserHealthFunctions
   def week_average day = nil
     date = Date.today if day == nil
     date = convert_day_to_date day if day.is_a?(String)
-    days = Helpers.get_days_of_week date
+    days = ActionView::Helpers::ApplicationHelper.get_days_of_week date
     week_entries = {
       "weight": [],
       "calories": [],
@@ -153,10 +153,6 @@ module UserHealthFunctions
 
   def weightentries_from day
     weightentries.where(day: day) || weightentries.none
-  end
-
-  module Helpers
-    extend ActionView::Helpers::ApplicationHelper
   end
 
 end

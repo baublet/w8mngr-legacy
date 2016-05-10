@@ -6,11 +6,13 @@ class SendPtMessageJob < ActiveJob::Base
     message = PtMessage.find(message_id)
     user = message.user
     puts "Sending PT message to " + user.email
-    client.deliver_with_template(from:"ryan@w8mngr.com",
-                                 to: user.email,
-                                 template_id: 614082,
-                                 template_model: {
-                                   message: message.message
-                                 })
+    client.deliver_with_template(
+      from:"ryan@w8mngr.com",
+      to: user.email,
+      template_id: 614082,
+      template_model: {
+        message: message.message
+      }
+    )
   end
 end
