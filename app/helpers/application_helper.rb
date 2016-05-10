@@ -77,4 +77,24 @@ module ApplicationHelper
         end
     end
 
+    # Returns an array of days (in strings) of the week of the passed date. It
+    # rewinds the week to Monday from the day passed
+    def get_days_of_week date = nil
+      # turn the date to a date object if it's a string
+      date = convert_day_to_date date if date.is_a?(String)
+      date = Date.today if date == nil
+      # Rewind to Monday
+      while !date.monday?
+        date = date.prev_day
+      end
+      # Build the array
+      days = [date.strftime('%Y%m%d')]
+      date = date.next_day
+      while !date.monday?
+        days << date.strftime('%Y%m%d')
+        date = date.next_day
+      end
+      return days
+    end
+
 end
