@@ -3,29 +3,35 @@
 <%= render partial: "shared/app_menu" %>
 
 <div class="breadcrumbs">
-  <ul>
-    <li><%= link_to "Foods", foods_path %></li>
-    <li>My Foods</li>
-  </ul>
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Foods", foods_path %></li>
+      <li>My Foods</li>
+    </ul>
+  </div>
 </div>
 
-<h1><i class="fa fa-cutlery"></i> Your Foods</h1>
+<div class="section-inside">
 
-<div class="page-meta">
-    <%= link_to new_food_path, :class => 'btn' do %>
-        <i class="fa fa-plus"></i>
-        New Food
-    <% end %>
+  <h1><i class="fa fa-cutlery"></i> Your Foods</h1>
+
+  <div class="page-meta">
+      <%= link_to new_food_path, :class => 'btn' do %>
+          <i class="fa fa-plus"></i>
+          New Food
+      <% end %>
+  </div>
+
+  <% if !@foods.nil? && @foods.size > 0 %>
+
+  <div class="foods-table">
+    <%= render @foods %>
+  </div>
+
+  <% else %>
+
+  <p>You don't have any saved foods. To add some, click the button above. You may also not need any. Our database is quite robust!</p>
+
+  <% end %>
+
 </div>
-
-<% if !@foods.nil? && @foods.size > 0 %>
-
-<div class="foods-table">
-  <%= render @foods %>
-</div>
-
-<% else %>
-
-<p>You don't have any saved foods. To add some, click the button above. You may also not need any. Our database is quite robust!</p>
-
-<% end %>

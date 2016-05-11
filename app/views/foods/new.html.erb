@@ -3,14 +3,20 @@
 <%= render partial: "shared/app_menu" %>
 
 <div class="breadcrumbs">
-  <ul>
-    <li><%= link_to "Foods", foods_path %></li>
-    <li>New</li>
-  </ul>
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Foods", foods_path %></li>
+      <li>New</li>
+    </ul>
+  </div>
 </div>
 
-<h1><i class="fa fa-cutlery"></i> New Food</h1>
+<div class="section-inside">
 
-<p>Add new foods and ingredients to add to your food log and to incorporate into your recipes.</p>
+  <h1><i class="fa fa-cutlery"></i> New Food</h1>
 
-<%= render 'form' %>
+  <p>Add new foods and ingredients to add to your food log and to incorporate into your recipes.</p>
+
+  <%= render 'form' %>
+
+</div>

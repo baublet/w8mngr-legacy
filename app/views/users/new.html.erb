@@ -1,21 +1,25 @@
 <% provide(:title, "Sign Up") %>
 
-<h1>Sign Up</h1>
+<div class="section-inside">
 
-<%= form_for(@user, :html => {:class => "large"}) do |f| %>
+  <h1>Sign Up</h1>
 
-	<% if @user.errors.any? %>
-		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
-	<% end %>
+  <%= form_for(@user, :html => {:class => "large"}) do |f| %>
 
-	<%= f.label :email %>
-	<%= f.email_field :email %>
+  	<% if @user.errors.any? %>
+  		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
+  	<% end %>
 
-	<%= f.label :password %>
-	<%= f.password_field :password %>
+  	<%= f.label :email %>
+  	<%= f.email_field :email %>
 
-	<%= f.label :password_confirmation, "Confirmation" %>
-	<%= f.password_field :password_confirmation %>
+  	<%= f.label :password %>
+  	<%= f.password_field :password %>
 
-	<%= f.submit "Sign Up", {class:"btn"} %>
-<% end %>
+  	<%= f.label :password_confirmation, "Confirmation" %>
+  	<%= f.password_field :password_confirmation %>
+
+  	<%= f.submit "Sign Up", {class:"btn"} %>
+  <% end %>
+
+</div>

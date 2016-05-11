@@ -158,6 +158,14 @@ label, .label {
     .meta {
         text-align: right;
     }
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
 }
 
 .app-wrapper {

@@ -174,26 +174,27 @@ nav .login {
                 background: lighten($black, 5);
                 color: $white;
                 + .app-menu-sub {
-                    bottom: 9.5vh;
+                    transform: translateY(-8vh);
                 }
             }
         }
     }
     label {
-        background: $black;
-        position: relative;
-        z-index: 110;
-        color: rgba($white, .5);
-        font-size: 4vh;
-        display: block;
-        width: 100%;
-        line-height: 10vh;
-        vertical-align: middle;
-        cursor: pointer;
-        margin: 0;
-        &:hover {
-            color: rgba($white, .75);
-        }
+      background: $black;
+      position: relative;
+      z-index: 110;
+      color: rgba($white, .5);
+      font-size: 4vh;
+      display: block;
+      height: 9vh;
+      line-height: 9vh;
+      width: 100%;
+      vertical-align: middle;
+      cursor: pointer;
+      margin: 0;
+      &:hover {
+        color: rgba($white, .75);
+      }
     }
 }
 
@@ -202,41 +203,48 @@ nav .login {
     z-index: 100;
     left: 0;
     right: 0;
-    bottom: -1rem;
-    transition: bottom .5s cubic-bezier(0,.98,.8,.99);
+    bottom: 0;
+    transition: transform .5s cubic-bezier(0,.98,.8,.99);
     display: flex;
     flex-direction: row;
+    max-height: 9vh;
+    overflow: hidden;
     li {
         flex-grow: 1;
         vertical-align: middle;
         text-align: center;
     }
     a {
-        position: relative;
-        z-index: 100;
-        text-decoration: none;
-        color: rgba($white, .5);
-        display: block;
+      position: relative;
+      z-index: 100;
+      text-decoration: none;
+      color: rgba($white, .5);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 10vh;
+      padding-bottom: 1vh;
+      width: 100%;
+      background: lighten($black, 5);
+      border-top: 5px solid transparent;
+      border-bottom-color: transparent !important;
+      span {
         width: 100%;
-        padding-top: 3vh;
-        padding-bottom: 3vh;
-        background: lighten($black, 5);
-        border-top: 5px solid transparent;
-        border-bottom-color: transparent !important;
-        span {
-            opacity: .5;
-            display: block;
-            font-size: 1.5vh;
-            text-transform: uppercase;
-            font-weight: 400;
-        }
-        &:hover {
-            color: rgba($white, .75);
-            border-color: $color-primary-light;
-            background: lighten($black, 5);
-        }
-        .fa {
-            font-size: 3vh;
-        }
+        opacity: .5;
+        display: block;
+        font-size: 1.5vh;
+        text-transform: uppercase;
+        font-weight: 400;
+        margin-top: -1rem;
+      }
+      &:hover {
+          color: rgba($white, .75);
+          border-color: $color-primary-light;
+          background: lighten($black, 5);
+      }
+      .fa {
+        width: 100%;
+        font-size: 3vh;
+      }
     }
 }

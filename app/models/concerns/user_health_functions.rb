@@ -53,14 +53,13 @@ module UserHealthFunctions
     averages = {}
     week = foodentries.where(:day => days)
     # Days in this scope
-    days = week.distinct.count(:day)
-    days = days == 0 ? 1 : days
-    averages["calories"] = week.sum(:calories, {conditions: "calories > 0"}).to_i / days
-    averages["fat"] = week.sum(:fat, {conditions: "fat > 0"}).to_i / days
-    averages["carbs"] = week.sum(:carbs, {conditions: "carbs > 0"}).to_i / days
-    averages["protein"] = week.average(:protein, {conditions: "protein > 0"}).to_i / days
-
-    averages["weight"] = weightentries(day: days).average(:value).to_i / days
+    num_days = week.distinct.count(:day)
+    num_days = num_days == 0 ? 1 : num_days
+    averages["calories"] = week.sum(:calories, {conditions: "calories > 0"}).to_i / num_days
+    averages["fat"] = week.sum(:fat, {conditions: "fat > 0"}).to_i / num_days
+    averages["carbs"] = week.sum(:carbs, {conditions: "carbs > 0"}).to_i / num_days
+    averages["protein"] = week.average(:protein, {conditions: "protein > 0"}).to_i / num_days
+    averages["weight"] = weightentries.where(:day => days).average(:value)
     return averages
   end
 
@@ -81,6 +80,7 @@ module UserHealthFunctions
       date = date - (x * 7)
       week_av = week_average(date)
       # Only add this week if we have both an average weight and calories
+      next if week_av["weight"].nil? || week_av["calories"].nil?
       averages << week_av if week_av["weight"] > 0 && week_av["calories"] > 0
     end
     return nil if averages.count < min_weeks
@@ -105,23 +105,18 @@ module UserHealthFunctions
         tdee = week["calories"]
         last_weight = week["weight"]
         last_calories = week["calories"]
-        puts "Starting TDEE: " + tdee.to_i.to_s
         next
       end
-      weight_difference = last_weight / week["weight"]
-      calorie_difference = last_calories / week["calories"]
+      weight_difference = week["weight"] / last_weight
+      calorie_difference = week["calories"] / last_calories
       if weight_difference == 1
         # If there's no weight difference, average the calories for the two weeks
         # and set that as their TDEE
         tdee = (tdee + week["calories"]) / 2
-        puts "No weight change, calories went from " + last_calories.to_i.to_s + " to " + week["calories"].to_i.to_s + ". TDEE adjusted to " + tdee.to_i.to_s
       else
         # Otherwise, average the differences
         adjustment = (weight_difference + calorie_difference) / 2
-        puts "Weight diff: " + weight_difference.to_f.to_s
-        puts "Cal diff: " + calorie_difference.to_f.to_s
         tdee = tdee * adjustment
-        puts "TDEE: " + tdee.to_i.to_s + " (adj: " + adjustment.to_f.to_s + ")"
       end
       last_weight = week["weight"]
       last_calories = week["calories"]

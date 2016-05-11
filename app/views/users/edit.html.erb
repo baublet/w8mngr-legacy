@@ -101,7 +101,7 @@
   	calculation becomes.</p>
 
     <% tdee = @user.adaptive_tdee %>
-    <%= tdee.nil? ? "" : raw("<p><label>Adaptive TDEE:</label> " + tdee.to_s + "</p>") %>
+    <%= tdee.nil? ? "" : raw("<p><label>Adaptive TDEE:</label> #{number_with_delimiter(tdee.to_s)}</p>") %>
 	</div>
 
 	<input type="radio" class="helper-input" name="edit-profile" id="ep-faturday" <%= params["p"] == "faturday" ? "checked='checked'" : "" %>>

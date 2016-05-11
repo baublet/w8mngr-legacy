@@ -11,33 +11,33 @@
 
 <div class="section-inside">
 
-<div class="page-meta">
-    <%= link_to edit_user_path(@user) do %>
-        <i class="fa fa-pencil"></i>
-        Edit Profile
-    <% end %>
-</div>
+  <div class="page-meta">
+      <%= link_to edit_user_path(@user) do %>
+          <i class="fa fa-pencil"></i>
+          Edit Profile
+      <% end %>
+  </div>
 
-<div class="user-profile">
-    <% if !@user.preferences["name"].blank? %>
-        <div class="email"><%= @user.email || @user.preferences['name'] %></div>
-    <% end %>
-    <% if !@user.preferences["height_display"].blank? %>
-        <div class="height">
-            <strong>Height:</strong> <%= @user.preferences["height_display"] %>
-        </div>
-    <% end %>
-    <% if !@user.preferences["sex"].blank? %>
-        <div class="sex">
-            <strong>Sex:</strong>
-            <%= @user.sex %>
-        </div>
-    <% end %>
-    <% if !@user.preferences["birthday"].blank? %>
-        <div class="age">
-            <strong>Age:</strong> <%= @user.age %></strong>
-        </div>
-    <% end %>
-</div>
+  <div class="user-profile">
+      <% if !@user.preferences["name"].blank? %>
+          <div class="email"><%= @user.email || @user.preferences['name'] %></div>
+      <% end %>
+      <% if !@user.preferences["height_display"].blank? %>
+          <div class="height">
+              <strong>Height:</strong> <%= @user.preferences["height_display"] %>
+          </div>
+      <% end %>
+      <% if !@user.preferences["sex"].blank? %>
+          <div class="sex">
+              <strong>Sex:</strong>
+              <%= @user.sex %>
+          </div>
+      <% end %>
+      <% if !@user.preferences["birthday"].blank? %>
+          <div class="age">
+              <strong>Age:</strong> <%= @user.age %></strong>
+          </div>
+      <% end %>
+  </div>
 
 </div>
