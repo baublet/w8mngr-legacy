@@ -28,7 +28,6 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] Attaching scanned codes to existing foods/recipes
   - [ ] Third-party API integration
 
-## Version 0.4
 - [ ] Goals
   - [ ] Create a barebones dashboard where goals will be seen
   - [ ] Consider the types and build toward expanding the types in the future
@@ -42,15 +41,7 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] Build the view
   - [ ] User experience smoothing
 
-## Version 0.3
-- [ ] Keep on top of the design via polishing the UI
-  - [ ] Build out the responsive aspects of
-    - [ ] The landing page
-    - [ ] The app
-
-- [ ] Queuing system for JS requests
-  - [x] For processing normal requests
-  - [ ] For error handling
+## Version 0.4
 
 - [ ] Incorporate a universal tagging system
   - [ ] Add tags to foods
@@ -60,6 +51,16 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
   - [ ] Include recipes in autocomplete
   - [ ] Add recipe searching
   - [ ] Allow users to filter by tag
+
+## Version 0.3
+- [x] Keep on top of the design via polishing the UI
+  - [x] Build out the responsive aspects of
+    - [x] The landing page
+    - [x] The app
+
+- [x] Queuing system for JS requests
+  - [x] For processing normal requests
+  - [x] For error handling
 
 ## Version 0.2.1
 - [x] Create controller tests
