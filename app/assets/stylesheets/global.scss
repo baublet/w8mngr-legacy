@@ -1,7 +1,6 @@
 html {
     font: 16px $font-stack;
-    background: $white;
-    background: rgba($black, .075);
+    background: darken($white, 5%);
     color: $black;
     margin: 0;
     padding: 0;
@@ -23,7 +22,7 @@ body {
 }
 
 p {
-    line-height:130%;
+    line-height:160%;
     margin: 1.5rem 0 2rem;
 }
 
@@ -67,8 +66,12 @@ h2 {
     font-weight: 300;
 }
 h3 {
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 900;
+}
+h4 {
+    font-weight: 900;
+    font-size: .8rem;
 }
 
 ul, ol {
@@ -84,10 +87,13 @@ ul, ol {
 ul {
     list-style-type: disc;
 }
+ol {
+  list-style-type: decimal;
+}
 
 section, main {
     padding: 0 1rem;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 blockquote {
@@ -173,7 +179,19 @@ em {
 }
 
 .section-inside {
-  max-width: 900px;
+  max-width: 640px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.got-it {
+  color: $green;
+}
+.dont-got-it {
+  color: $red;
+}
+
+.app-wrapper p {
+  line-height: 1rem;
+  font-size: .8rem;
 }

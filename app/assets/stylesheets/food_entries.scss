@@ -7,27 +7,8 @@
   &:hover {
     @include height(3);
   }
-  .header {
-    display: none;
-    @include mqAfterSize(640px) {
-      display: block;
-      font-weight:bold;
-      font-size: .8rem;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      overflow: visible;
-      opacity:.25;
-      transition: opacity .15s ease-in-out;
-      .col {
-        transform: translate(.5rem, 0) rotate(-45deg);
-        overflow: visible;
-      }
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
   .col {
+    vertical-align: bottom;
     margin-bottom: 0;
     width: 25%;
     max-width: 25%;
@@ -59,8 +40,15 @@
         font-weight: bold;
       }
       @include mqAfterSize(640px) {
-        width:40%;
-        max-width:40%;
+        width:60%;
+        max-width:60%;
+        padding: 0 1rem 0 0;
+        input[type=text] {
+          font-size: 1.3rem;
+          font-weight: 400;
+          height: 100%;
+          padding-bottom: .25rem;
+        }
       }
     }
     .col.short {
@@ -87,15 +75,14 @@
       font-size: .6rem;
       position: absolute;
       z-index: 0;
-      top: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
       right: 0;
-      width: 2rem;
-      height: 2rem;
       opacity: .25;
       transition: opacity .15s ease-in-out;
       text-align: right;
-      width:20%;
-      max-width:20%;
+      width:10%;
+      max-width:10%;
       .save {
         display: none;
       }
@@ -130,14 +117,14 @@
   overflow:hidden;
   .col {
     transform: none;
-    font-size: .8rem;
+    font-size: 5vw;
     width: 25%;
     &::after {
       display: block;
-      font-size: .5rem;
+      font-size: 2vw;
       text-transform: uppercase;
       font-weight: 800;
-      color: rgba($black, .75);
+      color: rgba($black, .5);
       content: attr(title);
       padding: .1rem 0;
     }
@@ -152,6 +139,13 @@
   margin: 2rem 0 0;
   background: $color-primary;
   color: $white;
+
+  @include mqAfterSize(640px) {
+    // Only adding this bottom margin so we can see dat sexy drop shadow :)
+    margin-bottom: 2rem;
+    width: 320px;
+    float: left;
+  }
 
   .col.long {
     display:block;
@@ -176,7 +170,9 @@
   }
   .col.meta {
     overflow: visible;
-    display:block;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
     width: 100%;
     max-width: 100%;
     text-align:right;
@@ -186,6 +182,12 @@
 .autocomplete-results {
   margin: 1rem -1rem 0;
   padding: 0 1rem;
+  @include mqAfterSize(640px) {
+    margin: 1rem 0 0 320px;
+    padding-left: 2rem;
+    padding-right: 0;
+    padding-top: 1rem;
+  }
 }
 
 .autocomplete-item {
@@ -196,6 +198,9 @@
   cursor: pointer;
   position: relative;
   transition: transform .25s $easing-1;
+  @include mqAfterSize(640px) {
+    margin: 0;
+  }
   &:nth-child(even) {
     background: rgba($black, .035);
   }
@@ -210,19 +215,25 @@
     overflow: hidden;
   }
   .add-food {
-    color: $color-primary;
-    margin-right: .25rem;
+    @include height(1);
+    float: right;
+    margin-top: -.5rem;
+    margin-right: -.5rem;
+    color: rgba($white, .75);
     display: none;
-    .fa {
-      opacity: 1;
-      font-size: 1rem;
-    }
+    padding: .5rem;
+    min-width: 0;
+    font-size: .7rem;
+    text-transform: uppercase;
+    font-weight: bold;
     &:hover {
-      color: $color-primary-light;
+      color: rgba($white, 1);
+      @include height(1);
     }
   }
   .measurements {
     display: none;
+
   }
   &.selected {
     overflow: auto;
@@ -240,6 +251,7 @@
       white-space: normal;
       font-size: .8rem;
       font-weight: bold;
+      overflow: visible;
     }
     .measurements {
       display: block;

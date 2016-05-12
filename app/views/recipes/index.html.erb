@@ -3,41 +3,47 @@
 <%= render partial: "shared/app_menu" %>
 
 <div class="breadcrumbs">
-  <ul>
-    <li><%= link_to "Recipes", recipes_path %></li>
-    <li>My recipes</li>
-  </ul>
-</div>
-
-<h1><i class="fa fa-shopping-basket"></i> Your Recipes</h1>
-
-<div class="page-meta">
-    <%= link_to new_recipe_path, :class => 'btn' do %>
-        <i class="fa fa-plus"></i>
-        New Recipe
-    <% end %>
-</div>
-
-<% if !@recipes.nil? && @recipes.size > 0 %>
-
-<div class="recipes-table">
-<% @recipes.each do |recipe| %>
-    <div class="row">
-        <div class="col long">
-            <%= render recipe %>
-        </div>
-        <div class="col meta">
-            <%= link_to delete_recipe_path(recipe), :class => 'btn delete-btn' do %>
-                <i class="fa fa-cross"></i>
-                <span class="screen-reader-text">Delete</span>
-            <% end %>
-        </div>
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Recipes", recipes_path %></li>
+      <li>My recipes</li>
+    </ul>
   </div>
-<% end %>
 </div>
 
-<% else %>
+<div class="section-inside">
 
-<p>You don't have any saved recipes. To add some, click the button above. You may also not need any. Our database is quite robust!</p>
+  <h1><i class="fa fa-shopping-basket"></i> Your Recipes</h1>
 
-<% end %>
+  <div class="page-meta">
+      <%= link_to new_recipe_path, :class => 'btn' do %>
+          <i class="fa fa-plus"></i>
+          New Recipe
+      <% end %>
+  </div>
+
+  <% if !@recipes.nil? && @recipes.size > 0 %>
+
+  <div class="recipes-table">
+  <% @recipes.each do |recipe| %>
+      <div class="row">
+          <div class="col long">
+              <%= render recipe %>
+          </div>
+          <div class="col meta">
+              <%= link_to delete_recipe_path(recipe), :class => 'btn delete-btn' do %>
+                  <i class="fa fa-cross"></i>
+                  <span class="screen-reader-text">Delete</span>
+              <% end %>
+          </div>
+    </div>
+  <% end %>
+  </div>
+
+  <% else %>
+
+  <p>You don't have any saved recipes. To add some, click the button above. You may also not need any. Our database is quite robust!</p>
+
+  <% end %>
+
+</div>

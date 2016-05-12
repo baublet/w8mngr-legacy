@@ -2,9 +2,18 @@
 
 <% provide(:title, "Edit Profile") %>
 
+<div class="section-inside app-wrapper">
+
 <h1><i class="fa fa-user"></i> Edit Profile</h1>
 
-<p>Tell us a little bit about yourself. It helps our algorithm better understand you when you get around to setting some goals.</p>
+<div class="helper-input-links">
+  <ul>
+    <li><label for="ep-personal">Personal</label></li>
+    <li><label for="ep-health">Health Targets</label></li>
+    <li><label for="ep-faturday">Faturday</label></li>
+    <li><label for="ep-settings">Settings</label></li>
+  </ul>
+</div>
 
 <%= form_for @user do |form| %>
 
@@ -12,61 +21,192 @@
 		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
 	<% end %>
 
-	<h2>Personal</h2>
+	<input type="radio" class="helper-input" name="edit-profile" id="ep-personal" <%= params["p"].present? ? "" : "checked='checked'" %>>
 
-	<%= label_tag "name", "Name" %>
-	<%= text_field_tag "name", @user.preferences["name"], placeholder: "What do you go by?" %>
+	<div class="helper-panel">
 
-	<%= label_tag "height_display", "Height" %>
-	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+  	<h2>Personal</h2>
 
-	<div class="radio-list">
-		<span class="header">Sex</span>
+  	<%= label_tag "name", "Name" %>
+  	<%= text_field_tag "name", @user.preferences["name"], placeholder: "What do you go by?" %>
 
-		<%= radio_button_tag 'sex', 'f', @user.preferences["sex"] == "f" ? true : false, :id => "sex-f" %>
-		<%= label_tag "sex-f", "Female" %>
+  	<%= label_tag "height_display", "Height" %>
+  	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
 
-		<%= radio_button_tag 'sex', 'm', @user.preferences["sex"] == "m" ? true : false, :id => "sex-m" %>
-		<%= label_tag "sex-m", "Male" %>
+  	<div class="radio-list">
+  		<span class="header">Sex</span>
 
-		<%= radio_button_tag 'sex', 'na', @user.preferences["sex"].blank? || @user.preferences["sex"] == "na" ? true : false, :id => "sex-na" %>
-		<%= label_tag "sex-na", "Other / Prefer Not to Disclose" %>
+  		<%= radio_button_tag 'sex', 'f', @user.preferences["sex"] == "f" ? true : false, :id => "sex-f" %>
+  		<%= label_tag "sex-f", "Female" %>
+
+  		<%= radio_button_tag 'sex', 'm', @user.preferences["sex"] == "m" ? true : false, :id => "sex-m" %>
+  		<%= label_tag "sex-m", "Male" %>
+
+  		<%= radio_button_tag 'sex', 'na', @user.preferences["sex"].blank? || @user.preferences["sex"] == "na" ? true : false, :id => "sex-na" %>
+  		<%= label_tag "sex-na", "Other / Prefer Not to Disclose" %>
+  	</div>
+
+  	<%= label_tag "birthday", "Birthday" %>
+  	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year and a month, e.g., May 1982, 05/01/1977, 1/7/88, etc." %>
+
 	</div>
 
-	<%= label_tag "birthday", "Birthday" %>
-	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year and a month, e.g., May 1982, 05/01/1977, 1/7/88, etc." %>
+	<input type="radio" class="helper-input" name="edit-profile" id="ep-health">
 
-	<h2>Targets</h2>
-	<%= label_tag "activity_level", "Activity Level" %>
-	<%= select_tag "activity_level", options_for_select([
-	                            ["Sedentary", 1],
-	                            ["Lightly Active", 2],
-	                            ["Moderately Active", 3],
-	                            ["Highly Active", 4],
-	                            ["Intensely Active", 5],
-	                            ],
-	               2) %>
+	<div class="helper-panel">
+
+  	<h2><i class="fa fa-medkit" aria-hidden="true"></i> Health Targets</h2>
+
+  	<%= label_tag "target_calories", "Target Calories" %>
+  	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+
+  	<h3>Expended Energy</h3>
+
+  	<p>We offer two ways to calculate your Total Daily Expended Energy (TDEE), the number of
+  	calories you burn every day.</p>
+
+  	<h4>Calculated TDEE</h4>
+
+  	<p>The simplest way to begin is with a quick calculator based on your age,
+  	height, weight, and estimated activity level.</p>
+
+  	<p>Before we can calculate your basal metabolic rate, we need your
+    height (<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>')  %>),
+    age (<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>),
+    and a recent weigh-in (<%= raw(@user.recent_most_weight.nil? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>).
+    It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
+  	</p>
+
+  	<%= label_tag "activity_level", "Activity Level" %>
+  	<%= select_tag "activity_level", options_for_select([
+    	                            ["Sedentary", 1],
+    	                            ["Lightly Active", 2],
+    	                            ["Active", 3],
+    	                            ["Highly Active", 4],
+    	                            ["Intensely Active", 5],
+  	                            ], @user.preferences["activity_level"]) %>
+
+  	<% bmr = @user.bmr %>
+  	<%= bmr.nil? ? "" : raw("<p><label>Calculated TDEE:</label> #{number_with_delimiter(bmr)}</p>") %>
+
+    <hr>
+
+  	<h4>Adaptive TDEE</h4>
+
+  	<p>Once we have enough information about your weight and the calories you eat,
+  	we can also adapt our system to generate a more precise basal metabolic rate. To
+  	begin doing this, we need at least two weeks of information.</p>
+
+  	<p><em>Note:</em> the more information we have, the more accurate this
+  	calculation becomes.</p>
+
+    <% tdee = @user.adaptive_tdee %>
+    <%= tdee.nil? ? "" : raw("<p><label>Adaptive TDEE:</label> #{number_with_delimiter(tdee.to_s)}</p>") %>
+	</div>
+
+	<input type="radio" class="helper-input" name="edit-profile" id="ep-faturday" <%= params["p"] == "faturday" ? "checked='checked'" : "" %>>
+
+	<div class="helper-panel">
+
+    <h2><i class="fa fa-birthday-cake" aria-hidden="true"></i> Faturdays</h2>
+
+    <p>Faturdays are any day you don't feel like tracking. You can enter them
+       manually on the day you want to take a faturday, or you can set them
+       to be entered for you automatically here!</p>
+
+    <%= check_box_tag 'faturday_enabled', 'true', @user.preferences["faturday_enabled"], :id => "ep-faturday-enabled", :class => "helper-input toggle-switch" %>
+
+    <label for="ep-faturday-enabled">Toggle Faturdays</label>
+
+  	<div class="helper-panel faturday-options">
+
+  	  <h3>Automatic Faturdays</h3>
+
+  	  <p>These days will automagically be considered faturdays if you don't log
+  	     calories by the end of the day. You can always go back and delete the
+  	     faturday and log calories if you'd rather be specific.</p>
+
+  	  <div class="faturday-days check-list">
+
+        <%= check_box_tag 'faturday[]', 'mo', @user.preferences["auto_faturdays"]["mo"], :id => "f-mo" %>
+        <%= label_tag "f-mo", "Monday" %>
+
+        <%= check_box_tag 'faturday[]', 'tu', @user.preferences["auto_faturdays"]["tu"], :id => "f-tu" %>
+        <%= label_tag "f-tu", "Tuesday" %>
+
+        <%= check_box_tag 'faturday[]', 'we', @user.preferences["auto_faturdays"]["we"], :id => "f-we" %>
+        <%= label_tag "f-we", "Wednesday" %>
+
+        <%= check_box_tag 'faturday[]', 'th', @user.preferences["auto_faturdays"]["th"], :id => "f-th" %>
+        <%= label_tag "f-th", "Thursday" %>
+
+        <%= check_box_tag 'faturday[]', 'fr', @user.preferences["auto_faturdays"]["fr"], :id => "f-fr" %>
+        <%= label_tag "f-fr", "Friday" %>
+
+        <%= check_box_tag 'faturday[]', 'sa', @user.preferences["auto_faturdays"]["sa"], :id => "f-sa" %>
+        <%= label_tag "f-sa", "Saturday" %>
+
+        <%= check_box_tag 'faturday[]', 'su', @user.preferences["auto_faturdays"]["su"], :id => "f-su" %>
+        <%= label_tag "f-su", "Sunday" %>
+
+      </div>
+
+      <h3>Faturday Placeholders</h3>
+
+      <p>A day marked as a faturday automatically has the following values logged
+         into your food log. <em>Note:</em> It's useful to make the calories
+         about 50% higher than your BMR on a cheat day.</p>
+      <% if !bmr.nil? %>
+        <p>For you, that would be
+        about <strong><%= number_with_delimiter((bmr * 1.5).ceil) %></strong>
+        calories.</p>
+      <% end %>
+
+      <%= label_tag "faturday_calories", "Calories" %>
+      <%= text_field_tag "faturday_calories", @user.preferences["faturday_calories"], placeholder: "Calories to log on faturdays" %>
+
+      <%= label_tag "faturday_fat", "Fat" %>
+      <%= text_field_tag "faturday_fat", @user.preferences["faturday_fat"], placeholder: "Fat grams to log on faturdays" %>
+
+      <%= label_tag "faturday_carbs", "Carbs" %>
+      <%= text_field_tag "faturday_carbs", @user.preferences["faturday_carbs"], placeholder: "Carbohydrates to log on faturdays" %>
+
+      <%= label_tag "faturday_protein", "Protein" %>
+      <%= text_field_tag "faturday_protein", @user.preferences["faturday_protein"], placeholder: "Protein to log on faturdays" %>
+
+    </div>
+
+  </div>
+
+  <input type="radio" class="helper-input" name="edit-profile" id="ep-settings">
+
+	<div class="helper-panel">
 
 	<h2>Settings</h2>
 
-	<%= label_tag "timezone", "Timezone" %>
-	<%= select_tag "timezone",
-			options_for_select(
-				time_zone_options_for_select(@user.preferences["timezone"], nil, ActiveSupport::TimeZone)
-			), prompt: "Detect Automatically"
-	%>
+  	<%= label_tag "timezone", "Timezone" %>
+  	<%= select_tag "timezone",
+  			options_for_select(
+  				time_zone_options_for_select(@user.preferences["timezone"], nil, ActiveSupport::TimeZone)
+  			), prompt: "Detect Automatically"
+  	%>
 
-	<div class="radio-list">
-		<span class="header">Units</span>
+  	<div class="radio-list">
+  		<span class="header">Units</span>
 
-		<%= radio_button_tag 'units', 'i', @user.preferences["units"] == "i" ? true : false, :id => "units-i" %>
-		<%= label_tag "units-i", "Imperial" %>
+  		<%= radio_button_tag 'units', 'i', @user.preferences["units"] == "i" ? true : false, :id => "units-i" %>
+  		<%= label_tag "units-i", "Imperial" %>
 
-		<%= radio_button_tag 'units', 'm', @user.preferences["units"] == "m" ? true : false, :id => "units-m" %>
-		<%= label_tag "units-m", "Metric" %>
-	</div>
+  		<%= radio_button_tag 'units', 'm', @user.preferences["units"] == "m" ? true : false, :id => "units-m" %>
+  		<%= label_tag "units-m", "Metric" %>
+  	</div>
+
+  </div>
 
 	<%= button_tag(type: 'submit', class: 'btn') do %>
-		Save
+		Save Settings
 	<% end %>
+
 <% end %>
+
+</div>

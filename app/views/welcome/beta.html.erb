@@ -6,13 +6,33 @@
 
 <ul>
 	<li><strong>None of your data will be saved.</strong> New versions of the beta may break things you have entered here, so I will be cleaning the database from time to time to ensure compatibility with new versions.</li>
-	
+
 	<li><strong>Your old data isn't here, yet.</strong> Your old accounts and food/health data is not over here. That's coming later.</li>
-	
+
 	<li><strong>Things may not work like they're expected to.</strong> That's the nature of a beta, unfortunately. If you find a bug, please let me know via the <%= link_to "contact page", contact_path %>.</li>
 </ul>
 
 <h2>Change Log</h2>
+
+<h3>Version 0.3, <em>Thursday, May 12, 2016</em></h3>
+
+<p>Very large updates. I added tons of functionality, including a Javascript implementation via Vue.js. I added a very extensive options page that I plan to smooth over with a few onboarding wizards in the future.</p>
+
+<h4>Major Changes</h4>
+
+<ul>
+
+  <li><strong><%= link_to "Recipes", recipes_path %>.</strong> Users can now add recipes, which allows servings, the ability to add either custom ingredients or other food items, and the ability to add preparation instructions.</li>
+
+  <li><strong>Messaging.</strong> The app now automatically tracks your progress and consistency, messaging you if you fall behind. This includes Postmark integration for all emailing, as it's much easier to send email via an API than handling it on our own. This was a much more monumental task than I thought. I'm glad it's done! In the future, I'm going to add support for SMSing folks rather than emailing them.</li>
+
+  <li><strong>Javascript AJAX System.</strong> A custom queueing system for our AJAX requests that lets users know about connectivity issues while queuing user actions until they are back online.</li>
+
+  <li><strong>UI Improvements.</strong> Many many UI improvements. Like, tons!</li>
+
+  <li><strong>Old data importing.</strong> The old data from w8mngr.com can now easily be imported into the new system via a rake task.</li>
+
+</ul>
 
 <h3>Version 0.1, <em>Sunday, March 1, 2016</em></h3>
 
@@ -22,21 +42,12 @@
 
 <ul>
 	<li><strong><%= link_to "User profiles.", profile_path %></strong> Users can make changes to their profiles, which is, at the moment, bare bones. More customization in the future, which will use your profile data (like height, sex, etc.) to help you generate basal metabolic rates and set goals.</li>
-	
+
 	<li><strong><%= link_to "Food logs.", foodlog_path %></strong> Get to logging your calories today!</li>
-		
+
 	<li><strong><%= link_to "Custom foods.", foods_path %></strong> Add, edit, or remove custom foods that you can later <%= link_to "search and add directly to", food_search_path %> your food logs.</li>
-	
+
 	<li><strong>Integration with the <a href="https://ndb.nal.usda.gov/ndb/foods">USDA's food database</a>.</strong> Over 8,000 foods complete with nutritional info and popular measurements at your finger tips.
-	
+
 	<li><strong><%= link_to "Log your weights.", weight_entries_path %></strong> Add weight entries throughout the day and get an average so you can get a feel for how your weight naturally fluctuates.
-</ul>
-
-<p>Planned for version 0.2:</p>
-
-<ul>
-	<li><strong>Javascript interactivity.</strong> Use Vue.js to make small applications out of the food log, food search, and weight log. This includes creating an auto-complete feature of sorts like on the existing w8mngr website. Vue.js is planned as the only external library we will use. The rest will be vanilla Javascript.</li>
-	<li><strong>Various refactors of CSS.</strong> For speed of development, I rushed a few CSS components that, at the moment, suffer from being in a state of disunity that leads to inconsisties, code duplication, and in a few cases, small performance problems.</li>
-	<li><strong>Recipes!</strong> The main undertaking of this version will be the recipe builder, which will allow users to combine foods (as ingredients) into full-featured recipes.</li>
-	<li><strong>Tagging.</strong> I also hope to develop or implement an existing tagging library in rails so that users can search foods and recipes by tag in the future.
 </ul>

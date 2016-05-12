@@ -1,9 +1,24 @@
 class UsersController < ApplicationController
-    before_action :logged_in_user, only: [:destroy, :update]
-    before_action :correct_user, only: [:show, :edit, :update, :destroy]
+    before_action :logged_in_user, only: [:show, :destroy, :update]
+    before_action :correct_user, only: [:edit, :update, :destroy]
 
     def show
-        @user = User.find(params[:id])
+        respond_to do |format|
+            format.html {
+              @user = current_user
+              render :show
+            }
+            format.json {
+              id = current_user.id
+              email = current_user.email
+              preferences = current_user.preferences
+              render json: {
+                id: id,
+                email: email,
+                preferences: preferences
+              }
+            }
+        end
     end
 
     def new
@@ -37,17 +52,35 @@ class UsersController < ApplicationController
         @user.preferences["height"] = height_cm.to_s
 
         @user.preferences["sex"] = params["sex"]
-        @user.preferences["birthday"] = date_time.nil? ? params["birthday"] : date_time.strftime("%B %-d, %Y")
+        @user.preferences["birthday"] = date_time.nil? ? "" : date_time.strftime("%B %-d, %Y")
         @user.preferences["timezone"] = params["timezone"]
         @user.preferences["units"] = params["units"]
         @user.preferences["name"] = params["name"]
 
-        @user.preferences["target_calories"] = params["target_calories"].to_i
+        target_calories = params["target_calories"].to_i
+        @user.preferences["target_calories"] = target_calories > 300 ? target_calories : ""
         activity_level = params["activity_level"].to_i
-        @user.preferences["activiy_level"] = activity_level.between?(1,10) ? activity_level : 1
+        @user.preferences["activity_level"] = activity_level.between?(1,5) ? activity_level : 2
+
+        @user.preferences["faturday_enabled"] = params["faturday_enabled"] ? true : false
+
+        # Empty the existing faturday array
+        @user.preferences["auto_faturdays"] = {}
+        if params.try(:[], "faturday")
+          params["faturday"].each do |day|
+            @user.preferences["auto_faturdays"][day] = true
+          end
+        end
+
+        @user.preferences["faturday_calories"] = params["faturday_calories"].to_i
+        @user.preferences["faturday_fat"] = params["faturday_fat"].to_i
+        @user.preferences["faturday_carbs"] = params["faturday_carbs"].to_i
+        @user.preferences["faturday_protein"] = params["faturday_protein"].to_i
 
         if @user.save
-            flash.now[:success] = "Preferences saved"
+          flash.now[:success] = "Preferences saved"
+        else
+          flash.now[:error] = "Unknown error saving preferences..."
         end
         render 'edit'
     end

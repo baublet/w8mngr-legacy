@@ -10,7 +10,7 @@ module UserPreferences
   end
 
   def default_preferences
-    return {
+    {
       "name": "",
       "sex": "na",
       "birthday": "",
@@ -19,28 +19,43 @@ module UserPreferences
       "timezone": "",
       "units": "i",
 
-      "activity_level": 1,
-      "target_calories": 0,
+      "activity_level": 2,
+      "target_calories": "",
+
+      "faturday_enabled": false,
+      "auto_faturdays": {
+        "mo": false,
+        "tu": false,
+        "we": false,
+        "th": false,
+        "fr": false,
+        "sa": false,
+        "su": false
+      },
+      "faturday_calories": "",
+      "faturday_fat": "",
+      "faturday_carbs": "",
+      "faturday_protein": "",
 
       "pt_messages_food_log": true
     }
   end
 
-  # Sets up the user preferences so that it doesn't blow up if they haven't yet set values
+  # Sets up the user preferences so various functions don't blow up if they haven't yet set values
   def setup_preferences
     defaults = default_preferences
     defaults.each do |pref, default|
-      if preferences.try(:[], pref).nil?
-        preferences[pref.to_s] = default
+      if self.preferences.try(:[], pref.to_s).nil?
+        self.preferences[pref.to_s] = default
       end
     end
   end
 
   # Returns a string representation of their sex
   def sex
-    if preferences[:sex] == "m"
+    if self.preferences["sex"] == "m"
       "Male"
-    elsif preferences[:sex] == "f"
+    elsif self.preferences["sex"] == "f"
       "Female"
     else
       "Other / Prefer not to disclose"
@@ -51,20 +66,24 @@ module UserPreferences
   def unit measurement = "human-mass"
     case measurement
     when "human-mass"
-      return (preferences["unit"] == "m")? "kg" : "lb"
+      return (self.preferences["unit"] == "m")? "kg" : "lb"
     end
   end
 
   # Returns the user's age
   def age
-    dob = Chronic.parse(preferences["birthday"])
-    now = Time.now.utc.to_date
-      now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    begin
+      dob = Chronic.parse(self.preferences["birthday"])
+      now = Time.now.utc.to_date
+      return now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    rescue
+      return nil
+    end
   end
 
   # Returns the user's name if it's set, or the email if it isn't
   def name
-    preferences[:name].blank? ? email : preferences[:name]
+    self.preferences["name"].blank? ? self.email : self.preferences["name"]
   end
 
 end

@@ -3,7 +3,6 @@ var addEvent = require("../../fn/addEvent.js")
 // This is our food-entry item component, slim and easy to understand
 export default {
   props: [
-    "loading",
     "id",
     "index",
     "description",
@@ -82,7 +81,7 @@ export default {
     },
     // Sends an entry to be removed from the database
     removeEntry: function(index) {
-      this.loading = 1
+      this.$dispatch("loading")
       var self = this
       this.$fetch({
         method: "DELETE",
@@ -90,13 +89,13 @@ export default {
         onSuccess: function(response) {
           self.$parent.entries.splice(self.index, 1)
           self.$parent.calculateTotals()
-          self.loading = 0
+          self.$dispatch("notLoading")
         },
       })
     },
     // Sends an entry to be saved to the database
     saveEntry: function(index) {
-      this.loading = 1
+      this.$dispatch("loading")
       this.$parent.calculateTotals()
 
       // Prepare our data to be sent
@@ -117,7 +116,7 @@ export default {
         url: this.$fetchURI.food_entries.update(self.id),
         data: data,
         onSuccess: function(response) {
-          self.loading = 0
+          self.$dispatch("notLoading")
         },
       })
     },

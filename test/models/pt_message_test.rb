@@ -18,15 +18,14 @@ class PtMessageTest < ActiveSupport::TestCase
     bug_me_hours = 24
     messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)
     assert_equal 1, messages.count
-    type = messages[0][:type]
     assert_difference("PtMessage.count") do
       @user.save_pt_messages messages
     end
 
-    messages = @user.get_pt_messages type
-    assert_equal 1, messages.count, "Unable to get messages of type [" + type + "] out of storage..."
+    messages = @user.get_pt_messages
+    assert_equal 1, messages.count
 
-    messages = @user.get_pt_messages type
+    messages = @user.get_pt_messages
     assert_equal 0, messages.count
   end
 
@@ -45,6 +44,30 @@ class PtMessageTest < ActiveSupport::TestCase
     assert_no_difference("PtMessage.count") do
       @user.save_pt_messages messages
     end
+  end
+
+  test "should save message, access the latest, and have none left" do
+    last_entry_date = DateTime.now - 36.hours
+    bug_me_hours = 24
+    messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)
+    assert_equal 1, messages.count
+    assert_difference("PtMessage.count") do
+      @user.save_pt_messages messages
+    end
+    assert @user.get_latest_pt_message
+    assert_nil @user.get_latest_pt_message
+  end
+
+  test "should save message, access random one, and have none left" do
+    last_entry_date = DateTime.now - 36.hours
+    bug_me_hours = 24
+    messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)
+    assert_equal 1, messages.count
+    assert_difference("PtMessage.count") do
+      @user.save_pt_messages messages
+    end
+    assert @user.get_random_pt_message
+    assert_nil @user.get_random_pt_message
   end
 
 end

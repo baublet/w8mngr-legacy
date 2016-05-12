@@ -3,36 +3,42 @@
 <%= render partial: "shared/app_menu" %>
 
 <div class="breadcrumbs">
-  <ul>
-    <li><%= link_to "Foods", foods_path %></li>
-    <li><%= link_to "Search", food_search_path %></li>
-    <li>Results</li>
-  </ul>
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Foods", foods_path %></li>
+      <li><%= link_to "Search", food_search_path %></li>
+      <%= raw("<li>Results</li>") if @searchresults.size > 0 && !params[:q].blank? %>
+    </ul>
+  </div>
 </div>
 
-<h1>
-  <i class="fa fa-search"></i>
-  Search Foods
-</h1>
+<div class="section-inside">
 
-<%= render 'search_form' %>
-
-<% if @searchresults.size > 0 %>
-  <h1 class="search-results-information">
-    Results for <em><%= params[:q] %></em>
+  <h1>
+    <i class="fa fa-search"></i>
+    Search Foods
   </h1>
-<% elsif @searchresults.size == 0 && !params[:q].blank? %>
-  <h1 class="search-results-empty">
-    Nothing Found for <em><%= params[:q] %></em>
-  </h1>
-  <p>
-    None of our databases can find information about <em><%= params[:q] %></em>.
-    If you have the information--or you can Google it--feel free to enter it into
-    our database for easy access later, by
-    <%= link_to "adding a new food", new_food_path %>...
-  </p>
-<% end %>
 
-<%= render partial: "search_results", locals: {results: @searchresults} %>
+  <%= render 'search_form' %>
 
-<%= render partial: "shared/simple_pagination", locals: {base_url: @base_url, previous_page: @prev_page, next_page: @next_page} %>
+  <% if @searchresults.size > 0 %>
+    <h1 class="search-results-information">
+      Results for <em><%= params[:q] %></em>
+    </h1>
+  <% elsif @searchresults.size == 0 && !params[:q].blank? %>
+    <h1 class="search-results-empty">
+      Nothing Found for <em><%= params[:q] %></em>
+    </h1>
+    <p>
+      None of our databases can find information about <em><%= params[:q] %></em>.
+      If you have the information--or you can Google it--feel free to enter it into
+      our database for easy access later, by
+      <%= link_to "adding a new food", new_food_path %>...
+    </p>
+  <% end %>
+
+  <%= render partial: "search_results", locals: {results: @searchresults} %>
+
+  <%= render partial: "shared/simple_pagination", locals: {base_url: @base_url, previous_page: @prev_page, next_page: @next_page} %>
+
+</div>

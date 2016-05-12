@@ -2,9 +2,8 @@
      v-bind:class="{ selected: selected }"
      @click="$parent.autoCompleteSelected = index">
   <h3 class="name">
-    <a class="add-food" @click.stop.prevent="addEntry()" v-if="measurements">
-      <i class="fa fa-plus-circle" aria-hidden="true"></i>
-      <span class="screen-reader-text">Add Entry</span>
+    <a class="add-food btn" @click.stop.prevent="addEntry()" v-if="measurements">
+      Add Entry
     </a>
     {{ name }}
   </h3>

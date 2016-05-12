@@ -21,6 +21,12 @@ That said, I'm being specific about what my certain tests cover.
 - Malicious inputs passed from users
 - JSON API requests
 
+Exceptions: when controllers are used to manipulate models that aren't directly
+associated with that controller. E.g., Faturdays manipulate the FoodEntry model,
+but don't have a model corresponding to them. In this case, the Faturday
+controller test would test to see if the FoodEntry model was manipulated
+properly.
+
 ## Integration Tests
 
 - Full tests of models, views, and controllers working together

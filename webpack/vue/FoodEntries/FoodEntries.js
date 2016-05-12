@@ -4,6 +4,7 @@ var tomorrowNumber = require("../../fn/tomorrowNumber.js")
 var yesterdayNumber = require("../../fn/yesterdayNumber.js")
 var forEach = require("../../fn/forEach.js")
 var smoothScroll  = require("../../fn/smoothScroll.js")
+var _do = require("../../fn/do.js")
 
 var state = require("../../utilities/state.js")
 
@@ -39,14 +40,26 @@ export default {
     "add-entry": function() {
       this.addEntry()
     },
+    "loading": function() {
+      this.loading = 1
+    },
+    "notLoading": function() {
+      this.loading = 0
+    },
   },
   data: {
-    loading: 0,
+    loading: 1,
     currentDayNumber: "",
     currentDay: "",
     prevDay: "",
     nextDay: "",
     newDescription: "",
+    // Our error messages
+    errors: [],
+    hostReachable: true,
+    connectionTimer: null,
+    connectionRetries: 0,
+    connectionRetryCountdown: 0,
     // We store the measurement name here to add when the user triggers our
     // addEntry method. This is so that the user looping through measurements
     // doesn"t mess with the autocomplete
@@ -63,6 +76,13 @@ export default {
     autoCompleteItems: [],
     autoCompleteSelected: -1,
     autoCompleteLoading: 0,
+    // We only need a few default values to ensure we don't have lots of errors
+    user: {
+      id: null,
+      preferences: {
+        faturday_enabled: false,
+      },
+    },
   },
   components: {
     AutocompleteItem,
@@ -73,6 +93,41 @@ export default {
     // needs to be loaded for many of these methods to work
     initializeApp: function() {
       console.log("Initializing the FoodEntries app...")
+      var app = this
+
+      // Setup our errors and watchers for the connection
+      this.$fetch_module.setDefault("onError", function(status, error, response) {
+        app.doErrors(status, error, response)
+      })
+      this.connectionTimer = setInterval( function() {
+        if (app.hostReachable) return false
+        // Only do anything if our retries ping is 0
+        if (app.connectionRetryCountdown > 1) {
+          app.connectionRetryCountdown--
+          return false
+        }
+        console.log("Uh oh! Not connected. Trying to reconnect...")
+        // So we're not reachable and it's time to retry? Launch the connection
+        // retry attempt
+        app.$fetch_module.hostReachable(function(reachable) {
+          if(reachable) {
+            // We're connected! Cool, let's reset the retry timers and start
+            // going through our queue
+            app.hostReachable = true
+            app.connectionRetries = 0
+            app.connectionRetryCountdown = 0
+            // We process the queue after 500 milliseconds to prevent having to
+            // do a rapid redraw
+            _do(function() { app.$fetch_module.processQueue() }, 500)
+          } else {
+            // Still not connected, boost our retries by 1
+            app.hostReachable = false
+            app.connectionRetries++
+            app.connectionRetryCountdown = app.connectionRetries * 3
+          }
+        })
+      }, 1000);
+
       // Finds the current date based on the URL string
       var find_day = /foodlog\/(\d{8})/.exec(window.location.href)
       var day = ""
@@ -85,13 +140,37 @@ export default {
       // Watch for autocomplete results
       this.$watch("newDescription", function(searchTerm) {
         this.autoComplete(searchTerm)
-        smoothScroll.scrollVerticalToElementById("description-input", 20)
+        if(screen.width < 640)
+            smoothScroll.scrollVerticalToElementById("description-input", 20)
+      })
+
+      // Load the user information for preferences
+      this.$fetch({
+        method: "GET",
+        url: this.$fetchURI.current_user,
+        onSuccess: function(response) {
+          // Add the user return data to our model
+          app.user = response
+        },
+      })
+    },
+    faturday: function() {
+      // Sets this day to Faturday
+      this.$emit("loading")
+      var app = this
+      this.$fetch({
+        method: "GET",
+        url: this.$fetchURI.faturday(app.currentDayNumber),
+        onSuccess: function(response) {
+          // Add the user return data to our model
+          app.entries.push(response.entry)
+          app.calculateTotals()
+          app.$emit("notLoading")
+        },
       })
     },
     // Send an entry to be added to the database
     addEntry: function() {
-
-      this.loading = 1
 
       var description = this.newDescriptionTemp || this.newDescription.trim()
       var calories = parseInt(this.newCalories) || 0
@@ -109,6 +188,8 @@ export default {
 
       if (description) {
 
+        this.$emit("loading")
+
         // Reset our fields
         this.newDescription = ""
         this.newDescriptionTemp = null
@@ -119,7 +200,7 @@ export default {
         this.autoCompleteItems = []
 
         // Add the entry to the model
-        // We"ll need this to update the item with the index the ruby app returns to us
+        // We'll need this to update the item with the index the ruby app returns to us
         // NOTE: Small workaround here. If we don"t set a data element on this
         // initial push, Vue doesn"t model the reactive getters and setters,
         // which makes it so that when we return an ID from the JSON request,
@@ -148,14 +229,15 @@ export default {
           onSuccess: function(response) {
             // Update our ID with the returned response so it can be deleted
             app.entries[index].id = parseInt(response.success)
-            app.loading = 0
+            app.$emit("notLoading")
           },
         })
         this.calculateTotals()
         document.getElementById("description-input")
           .focus()
-        // Scroll to our description input
-        smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
+        // Scroll to our description input if we're on mobile
+        if(screen.width < 640)
+            smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
       } else {
         // TODO: show a fancy error here
         document.getElementById("description-input")
@@ -179,7 +261,7 @@ export default {
     },
     // Switches to a new day. If no argument is specified, it uses today
     loadDay: function(day = "") {
-      this.loading = 1
+      this.$emit("loading")
       console.log("Fetching data from the API...")
       state.push({}, this.$fetchURI.food_entries.from_day(day))
       var app = this
@@ -187,11 +269,11 @@ export default {
         method: "GET",
         url: this.$fetchURI.food_entries.from_day(day),
         onSuccess: function(response) {
+          app.$emit("notLoading")
           app.entries = response.entries
           app.currentDayNumber = response.current_day
           app.calculateTotals()
           app.parseDays()
-          app.loading = 0
         },
       })
     },
@@ -304,6 +386,22 @@ export default {
       // Decrement our selected measurement and call the appropo function
       item.selectedMeasurement = item.selectedMeasurement - 1
       console.log("Selected previous item: " + item.selectedMeasurement)
+    },
+
+    // Handles our error messages
+    doErrors: function(status, error, response) {
+      if(error == undefined) return false
+      console.log("There was an error! Status: " + status + ". Error: " + error + ".")
+      if(error >= 400 && error <= 500) {
+        this.hostReachable = false
+      } else {
+        alert("Unknown error! Status: " + status + ". Error: " + error + ". Response: " + response + ".")
+      }
+    },
+    // Retries the connection if the user is disconnected
+    retryConnection: function() {
+      if(this.hostReachable) return false
+      this.connectionRetryCountdown = 0
     },
   },
 }

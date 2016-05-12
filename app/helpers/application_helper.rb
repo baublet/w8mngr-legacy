@@ -31,6 +31,16 @@ module ApplicationHelper
         return @current_day
     end
 
+    # Returns the day before the passed day string (YYYYMMDD)
+    def day_before day
+      return convert_day_to_date(day).yesterday.strftime('%Y%m%d')
+    end
+
+    # Returns the day after the passed day string (YYYYMMDD)
+    def day_after day
+      return convert_day_to_date(day).tomorrow.strftime('%Y%m%d')
+    end
+
     # Returns the previous day in our DB's day storage format
     def previous_day
         if @previous_day.nil?
@@ -65,6 +75,26 @@ module ApplicationHelper
         else
             return current_day
         end
+    end
+
+    # Returns an array of days (in strings) of the week of the passed date. It
+    # rewinds the week to Monday from the day passed
+    def get_days_of_week date = nil
+      # turn the date to a date object if it's a string
+      date = convert_day_to_date date if date.is_a?(String)
+      date = Date.today if date == nil
+      # Rewind to Monday
+      while !date.monday?
+        date = date.prev_day
+      end
+      # Build the array
+      days = [date.strftime('%Y%m%d')]
+      date = date.next_day
+      while !date.monday?
+        days << date.strftime('%Y%m%d')
+        date = date.next_day
+      end
+      return days
     end
 
 end

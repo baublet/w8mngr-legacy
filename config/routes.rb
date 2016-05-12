@@ -1,27 +1,29 @@
 Rails.application.routes.draw do
+
     # Static pages
     root   "welcome#index"
-    get    "privacy"        =>  "welcome#privacy_policy"
-    get    "contact"        =>  "welcome#contact_form"
-    get    "getting_started"=>  "welcome#getting_started"
-    get    "terms_of_service"=> "welcome#terms_of_service"
-    get    "beta"           =>  "welcome#beta"
+    get    "/privacy"        =>  "welcome#privacy_policy"
+    get    "/contact"        =>  "welcome#contact_form"
+    get    "/getting_started"=>  "welcome#getting_started"
+    get    "/terms_of_service"=> "welcome#terms_of_service"
+    get    "/beta"           =>  "welcome#beta"
 
     # Users and sessions
     resources :users
     post   "/users/:id"     => "users#update"
-    post   "profile"        => "users#show"
-    get    "signup"         => "users#new"
-    get    "login"          => "sessions#new"
-    post   "login"          => "sessions#create"
-    delete "logout"         => "sessions#destroy"
-    get    "logout"         => "sessions#destroy"
+    post   "/profile"        => "users#show"
+    get    "/user"           => "users#show", as: :current_user
+    get    "/signup"         => "users#new"
+    get    "/login"          => "sessions#new"
+    post   "/login"          => "sessions#create"
+    delete "/logout"         => "sessions#destroy"
+    get    "/logout"         => "sessions#destroy"
     resources :password_resets,only: [:new, :create, :edit, :update]
     #get "password_resets/new"
     #get "password_resets/edit"
 
     # Food log
-    get    "foodlog"        => "food_entries#index"
+    get    "/foodlog"        => "food_entries#index"
     get    "/foodlog/:day"  => "food_entries#index",
                                 as: :food_log_day
     resources :food_entries,    only: [:index, :create, :update, :destroy]
@@ -39,6 +41,11 @@ Rails.application.routes.draw do
     get     "/foods/pull/(:ndbno)" => "usda#pull",
                                 as: :food_pull
     resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
+
+    # Faturdays
+    get     "/faturday/:id(:format)"=>"faturday#create", as: :faturday_day
+    get     "/faturday(:format)"=> "faturday#create", as: :faturday
+    post    "/faturday(:format)"=> "faturday#create"
 
     # Foods search
     get     "/search/foods(:format)" => "search_foods#index",
@@ -62,4 +69,6 @@ Rails.application.routes.draw do
                                 as: :delete_recipe_ingredient
     post    "/recipes/:recipe_id/ingredients/add_measurement/:measurement_id" => "ingredients#create_from_food",
                                 as: :add_food_to_recipe
+
+
 end

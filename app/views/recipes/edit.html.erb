@@ -3,24 +3,30 @@
 <%= render partial: "shared/app_menu" %>
 
 <div class="breadcrumbs">
-  <ul>
-    <li><%= link_to "Recipes", recipes_path %></li>
-    <li><%= link_to @recipe.name.truncate_words(5), recipe_path(@recipe) %></li>
-    <li>Edit</li>
-  </ul>
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Recipes", recipes_path %></li>
+      <li><%= link_to @recipe.name.truncate_words(5), recipe_path(@recipe) %></li>
+      <li>Edit</li>
+    </ul>
+  </div>
 </div>
 
-<h1><i class="fa fa-shopping-basket"></i> Edit Recipe</h1>
+<div class="section-inside">
 
-<div class="page-meta">
-  <%= link_to @recipe do %>
-      <i class="fa fa-eye"></i>
-      View Recipe
-  <% end %>
-  <%= link_to recipes_path do %>
-      <i class="fa fa-cutlery"></i>
-      My Recipies
-  <% end %>
+  <h1><i class="fa fa-shopping-basket"></i> Edit Recipe</h1>
+
+  <div class="page-meta">
+    <%= link_to @recipe do %>
+        <i class="fa fa-eye"></i>
+        View Recipe
+    <% end %>
+    <%= link_to recipes_path do %>
+        <i class="fa fa-cutlery"></i>
+        My Recipies
+    <% end %>
+  </div>
+
+  <%= render 'form' %>
+
 </div>
-
-<%= render 'form' %>

@@ -17,6 +17,14 @@ module.exports = {
         return "/foods/" + id
       }
     },
+    faturday: function(id) {
+      id = (typeof id === "undefined") ? "" : parseInt(id, 10)
+      return "/faturday/" + id
+    },
+    current_user: "/user",
+    edit_profile: function(id) {
+      return "/users/" + id + "/edit"
+    },
     food_entries: {
       index: "/food_entries/",
       add: "/food_entries/",
