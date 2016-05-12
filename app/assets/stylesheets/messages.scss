@@ -43,3 +43,27 @@
         background: $green;
     }
 }
+
+.errors {
+  margin: 1rem auto;
+  width: 640px;
+  .error {
+    background: $red;
+    color: $white;
+    padding: .5rem;
+    border: 1px solid rgba($black, .25);
+    @include height(1);
+  }
+  .connectivity {
+    background: $yellow;
+    color: $black;
+    a {
+      color: $black;
+    }
+  }
+  a {
+    color: $white;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}

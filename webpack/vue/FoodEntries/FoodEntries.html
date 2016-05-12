@@ -6,7 +6,7 @@
   </div>
 
   <div class="errors" v-if="errors.length > 0 || !hostReachable">
-    <div class="connectivity" v-if="!hostReachable">
+    <div class="connectivity error" v-if="!hostReachable">
       Hmm... It looks like we're having trouble reaching w8mngr. Retrying in
       <span v-text="connectionRetryCountdown"></span> seconds.
       <a href="#" @click.stop.prevent="retryConnection">Try now</a>

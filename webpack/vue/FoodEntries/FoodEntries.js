@@ -4,6 +4,7 @@ var tomorrowNumber = require("../../fn/tomorrowNumber.js")
 var yesterdayNumber = require("../../fn/yesterdayNumber.js")
 var forEach = require("../../fn/forEach.js")
 var smoothScroll  = require("../../fn/smoothScroll.js")
+var _do = require("../../fn/do.js")
 
 var state = require("../../utilities/state.js")
 
@@ -101,7 +102,7 @@ export default {
       this.connectionTimer = setInterval( function() {
         if (app.hostReachable) return false
         // Only do anything if our retries ping is 0
-        if (app.connectionRetryCountdown > 0) {
+        if (app.connectionRetryCountdown > 1) {
           app.connectionRetryCountdown--
           return false
         }
@@ -115,7 +116,9 @@ export default {
             app.hostReachable = true
             app.connectionRetries = 0
             app.connectionRetryCountdown = 0
-            app.$fetch_module.processQueue()
+            // We process the queue after 500 milliseconds to prevent having to
+            // do a rapid redraw
+            _do(function() { app.$fetch_module.processQueue() }, 500)
           } else {
             // Still not connected, boost our retries by 1
             app.hostReachable = false
