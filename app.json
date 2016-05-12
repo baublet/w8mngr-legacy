@@ -1,0 +1,15 @@
+{
+  "name": "w8mngr",
+  "description": "The Lifestyle Tracker",
+  "keywords": [
+    "w8mngr",
+    "fitness",
+    "rails",
+    "health"
+  ],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}
