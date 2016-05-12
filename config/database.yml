@@ -1,11 +1,11 @@
 default: &default
-      adapter: postgresql
-      encoding: unicode
-      pool: 5
-      username: postgres
-      password: w8mngr
-      host:     localhost
-      template: template0
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: w8mngr
+  host:     localhost
+  template: template0
 
 development:
   <<: *default
@@ -19,6 +19,4 @@ production:
   <<: *default
   database: w8mngr
   adapter: postgresql
-  host: localhost
-  username: user
-  database: app-dev
+  url: <%= ENV['POSTGRESQL_URL'] %>
