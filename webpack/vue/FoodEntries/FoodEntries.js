@@ -53,6 +53,12 @@ export default {
     prevDay: "",
     nextDay: "",
     newDescription: "",
+    // Our error messages
+    errors: [],
+    hostReachable: true,
+    connectionTimer: null,
+    connectionRetries: 0,
+    connectionRetryCountdown: 0,
     // We store the measurement name here to add when the user triggers our
     // addEntry method. This is so that the user looping through measurements
     // doesn"t mess with the autocomplete
@@ -86,6 +92,39 @@ export default {
     // needs to be loaded for many of these methods to work
     initializeApp: function() {
       console.log("Initializing the FoodEntries app...")
+      var app = this
+
+      // Setup our errors and watchers for the connection
+      this.$fetch_module.setDefault("onError", function(status, error, response) {
+        app.doErrors(status, error, response)
+      })
+      this.connectionTimer = setInterval( function() {
+        if (app.hostReachable) return false
+        // Only do anything if our retries ping is 0
+        if (app.connectionRetryCountdown > 0) {
+          app.connectionRetryCountdown--
+          return false
+        }
+        console.log("Uh oh! Not connected. Trying to reconnect...")
+        // So we're not reachable and it's time to retry? Launch the connection
+        // retry attempt
+        app.$fetch_module.hostReachable(function(reachable) {
+          if(reachable) {
+            // We're connected! Cool, let's reset the retry timers and start
+            // going through our queue
+            app.hostReachable = true
+            app.connectionRetries = 0
+            app.connectionRetryCountdown = 0
+            app.$fetch_module.processQueue()
+          } else {
+            // Still not connected, boost our retries by 1
+            app.hostReachable = false
+            app.connectionRetries++
+            app.connectionRetryCountdown = app.connectionRetries * 3
+          }
+        })
+      }, 1000);
+
       // Finds the current date based on the URL string
       var find_day = /foodlog\/(\d{8})/.exec(window.location.href)
       var day = ""
@@ -103,7 +142,6 @@ export default {
       })
 
       // Load the user information for preferences
-      var app = this
       this.$fetch({
         method: "GET",
         url: this.$fetchURI.current_user,
@@ -345,6 +383,22 @@ export default {
       // Decrement our selected measurement and call the appropo function
       item.selectedMeasurement = item.selectedMeasurement - 1
       console.log("Selected previous item: " + item.selectedMeasurement)
+    },
+
+    // Handles our error messages
+    doErrors: function(status, error, response) {
+      if(error == undefined) return false
+      console.log("There was an error! Status: " + status + ". Error: " + error + ".")
+      if(error >= 400 && error <= 500) {
+        this.hostReachable = false
+      } else {
+        alert("Unknown error! Status: " + status + ". Error: " + error + ". Response: " + response + ".")
+      }
+    },
+    // Retries the connection if the user is disconnected
+    retryConnection: function() {
+      if(this.hostReachable) return false
+      this.connectionRetryCountdown = 0
     },
   },
 }

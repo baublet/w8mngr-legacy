@@ -1,7 +1,6 @@
-var w8mngrFetch = {}
+/* global navigator */
 
-// This is our basic fetch function. Don't call it with this function. Instead
-// use w8mngrFetch.fetch()!
+var w8mngrFetch = {}
 
 w8mngrFetch.fetch = function(index) {
   if (index == null) console.error("Cannot pass a null index to Fetch!")
@@ -23,7 +22,17 @@ w8mngrFetch.fetch = function(index) {
   var onError = (options.onError instanceof Function) ? options.onError : this.$onError
   var onResponse = (options.onResponse instanceof Function) ? options.onResponse : this.$onResponse
 
+  // The default timeout is 5 seconds
+  var timeout = (options.timeout) ? options.timeout : 5000
+
+  // Make sure the user is connected to the internet at all
+  if (navigator.onLine == false) {
+    onError(0, 408, "")
+    return false
+  }
+
   var request = new XMLHttpRequest()
+  request.timeout = timeout
 
   request.open(method, url, true)
 
@@ -31,6 +40,10 @@ w8mngrFetch.fetch = function(index) {
   var w8mngrFetchObject = this
   if (onSuccess !== null || onError !== null || onResponse !== null) {
     console.log("Attaching callbacks to our response object...")
+
+    request.onerror = function() {
+      if (onError !== null) onError(0, 408, "Connectivity issue")
+    }
 
     request.onreadystatechange = function() {
 
@@ -48,8 +61,7 @@ w8mngrFetch.fetch = function(index) {
         } else {
 
           // Error :(
-          if (onError !== null) onError(this.status, this.error, this.response);
-          w8mngrFetchObject.$failed.push(w8mngrFetchObject.$queue[index])
+          if (onError !== null) onError(this.status, this.error, this.response)
 
         }
 
@@ -69,11 +81,19 @@ w8mngrFetch.fetch = function(index) {
     var data = JSON.stringify(options.data);
     console.log("Sending: " + data)
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    request.send(data);
+    try {
+      request.send(data)
+    } catch(e) {
+      onError(e, e, e)
+    }
   } else {
     console.log("Sending GET request...")
     request.setRequestHeader("Content-Type", "application/json");
-    request.send();
+    try {
+      request.send()
+    } catch(e) {
+      onError(e, e, e)
+    }
   }
   console.log("Launching " + method + " request to " + url)
 
@@ -83,10 +103,8 @@ w8mngrFetch.fetch = function(index) {
 // Our queue is an array of option hashes that executes each of the fetch requests,
 // only removing them if they succeeded. If they succeed, the element is removed
 // from the queue and added to the completed pile. If they fail, they stay in the queue
-// and are added to the failed pile
 w8mngrFetch.$queue = []
 w8mngrFetch.$completed = []
-w8mngrFetch.$failed = []
 
 /*
   Processes our fetch queue
@@ -141,6 +159,37 @@ w8mngrFetch.$ = function(options) {
     // Process the queue if we're supposed to
     if(proc) w8mngrFetchObject.processQueue()
   }, delay)
+}
+
+/*
+ * Tests the connectivity of this app
+ * From: https://gist.github.com/jpsilvashy/5725579
+ * Takes a callback function with a single argument that tells the function
+ * whether the host is reachable or not
+ */
+w8mngrFetch.hostReachable = function(fn) {
+  if (typeof fn == "function") {
+    // Handle IE and more capable browsers
+    var request = new ( window.ActiveXObject || XMLHttpRequest )( "Microsoft.XMLHTTP" )
+
+    // Open new request as a HEAD to the root hostname with a random param to bust the cache
+    request.open("HEAD", "//" + window.location.hostname + "/?rand=" + Math.floor((1 + Math.random()) * 0x10000), true)
+    request.onreadystatechange = function() {
+      if(this.status >= 200 && this.status < 300 || this.status === 304) {
+        fn(true)
+      } else {
+        fn(false)
+      }
+    }
+
+    // Issue request
+    try {
+      request.send()
+    } catch(error) {
+      fn(false)
+    }
+    request = null
+  }
 }
 
 // Allows you to set a default OnError, OnSuccess, and OnResponse value to use

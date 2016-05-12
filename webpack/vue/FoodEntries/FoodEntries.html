@@ -4,6 +4,15 @@
       <span class="current-day" v-text="currentDay"></span>
       <a href="#" @click.stop.prevent="loadNextDay" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
   </div>
+
+  <div class="errors" v-if="errors.length > 0 || !hostReachable">
+    <div class="connectivity" v-if="!hostReachable">
+      Hmm... It looks like we're having trouble reaching w8mngr. Retrying in
+      <span v-text="connectionRetryCountdown"></span> seconds.
+      <a href="#" @click.stop.prevent="retryConnection">Try now</a>
+    </div>
+  </div>
+
   <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
   <div class="section-inside">
     <h1><i class="fa fa-cutlery"></i> Food Log</h1>
