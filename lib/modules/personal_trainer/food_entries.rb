@@ -15,7 +15,7 @@ module PersonalTrainer
       # We can never bug people before 12 hours have passed
       return [] unless hours_til_bug >= 12
 
-      last_entry_date_s = last_entry_date.to_s
+      last_entry_date_s = last_entry_date.nil? ? "1985" : last_entry_date.to_s
       current_time = DateTime.now
       last_entry_modified = DateTime.parse(last_entry_date_s) + hours_til_bug.hours
       return [] if current_time < last_entry_modified
