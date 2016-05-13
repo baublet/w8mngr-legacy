@@ -11,7 +11,9 @@ module PersonalTrainer
     # Params:
     # +last_entry_date+:: an SQL timestamp string of the last entered item
     # +hours_til_bug+:: an integer of hours before we begin bugging the user (default: 24)
-    def self.last_entry (last_entry_date, hours_til_bug = 24)
+    # +faturday_enabled+:: a boolean indicating whether the user has faturdays enabled or not (default: false)
+    def self.last_entry (last_entry_date, hours_til_bug = 24, faturday_enabled = false)
+      faturday_enabled = YAML.load faturday_enabled rescue false
       # We can never bug people before 12 hours have passed
       return [] unless hours_til_bug >= 12
 
@@ -29,10 +31,19 @@ module PersonalTrainer
       type = "food_log_reminder"
       uid = "flr-" + last_entry_date_s
       time_ago = time_ago_in_words(last_entry_date)
-      message_text = "You have not entered any foods into your food log in " + time_ago + "."
+      faturday_url = Rails.application.routes.url_helpers.faturday_url(host: Rails.configuration.x.host)
+      message_text = "You have not entered any foods into your food log in " + time_ago + ". Remember, consistency and discipline are the keys to success!"
+      message_html = "<p>" + message_text + "</p>"
+      message_text += "\n\nGet back on the wagon: " + Rails.application.routes.url_helpers.foodlog_url(host: Rails.configuration.x.host)
+      message_html += "<p>Get back on the wagon: <a href=\"" + Rails.application.routes.url_helpers.foodlog_url(host: Rails.configuration.x.host) + "\">Go to My Food Log</a></p>"
+      if faturday_enabled
+        message_text += "\n\nMake today Faturday? " + faturday_url
+        message_html += "<p>Make today <a href=\"" + faturday_url + "\">Faturday</a>?</p>"
+      end
+      subject = "Don't forget to update your foodlog!"
 
       # Then return it!
-      return [{ message: message_text, type: type, uid: uid, mood: 0}]
+      return [{ message: message_text, message_html: message_html, subject: subject, type: type, uid: uid, mood: 0}]
     end
 
     # This method takes an array of the past x number of days' calories with the
@@ -73,18 +84,20 @@ module PersonalTrainer
         message = "Uh oh! You have been over your target calories by "
         message += pretty + " calories"
         message += " over the last few days. Don't sweat it! Tomorrow is a new day."
+        subject = "Don't sweat it. Tomorrow's a new day!"
       else
         mood = 1
         message = "You're doing great! You have stayed under your target calories by "
         message += pretty + " calories"
         message += " over the last few. Keep up the good work!"
+        subject = "Fantastic work lately!"
       end
 
       type = "target_calories_reminder"
       uid = "tcr-" + pretty
 
       # Return our message string!
-      return [{ message: message, type: type, uid: uid, mood: mood}]
+      return [{ message: message, message_html: message, subject: subject, type: type, uid: uid, mood: mood}]
 
     end
   end

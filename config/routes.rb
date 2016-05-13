@@ -19,8 +19,6 @@ Rails.application.routes.draw do
     delete "/logout"         => "sessions#destroy"
     get    "/logout"         => "sessions#destroy"
     resources :password_resets,only: [:new, :create, :edit, :update]
-    #get "password_resets/new"
-    #get "password_resets/edit"
 
     # Food log
     get    "/foodlog"        => "food_entries#index"

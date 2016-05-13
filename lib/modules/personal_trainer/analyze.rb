@@ -11,7 +11,7 @@ module PersonalTrainer
       # Reminder to enter food entries
       last_entry = user.foodentries.order(day: :desc).limit(1).first
       last_entry_date = last_entry.nil? ? 0 : Date.strptime(last_entry.day.to_s,  "%Y%m%d")
-      messages.push(*PersonalTrainer::FoodEntries::last_entry(last_entry_date))
+      messages.push(*PersonalTrainer::FoodEntries::last_entry(last_entry_date, 24, user.preferences["faturday_enabled"]))
 
       # Only do this message on Wednesday and Saturday
       today = Date.today

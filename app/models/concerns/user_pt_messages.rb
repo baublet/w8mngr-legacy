@@ -30,10 +30,21 @@ module UserPtMessages
         next unless to_insert.uid != message[:uid]
         # The UID's don't match, but the user has this message type in their stack,
         # so let's update its values to be our new UID and message
-        to_insert.update_attributes(uid: message[:uid], message: message[:message])
+        to_insert.update_attributes(
+          uid: message[:uid],
+          subject: message[:subject],
+          message: message[:message],
+          message_html: message[:message_html],
+          mood: message[:mood])
       else
         # The user doesn't have a message of this type, so let's create one
-        self.pt_messages.build(message_type: message[:type], uid: message[:uid], message: message[:message]).save
+        self.pt_messages.build(
+          message_type: message[:type],
+          uid: message[:uid],
+          subject: message[:subject],
+          message: message[:message],
+          message_html: message[:message_html],
+          mood: message[:mood]).save
       end
     end
     return true

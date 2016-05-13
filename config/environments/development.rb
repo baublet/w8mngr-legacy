@@ -15,7 +15,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   config.action_mailer.raise_delivery_errors = true
-  host = '192.168.56.101:3000'
+  host = 'w8mngr-baublet.c9users.io'
+  config.x.host = host
   config.action_mailer.default_url_options = { :host => host }
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 

@@ -6,10 +6,10 @@ task :generate_pt_messages => :environment do
   # Cycle through all users and apply our Personal Trainer modules to each person
   # TODO: Query this based on activity, rather than just all of the users
   User.find_each.each do |user|
-    puts "Generating messages for " + user.email
     messages = PersonalTrainer::Analyze::user user
     # Add the messages to our database
     next if messages.count == 0
+    puts "Saving messages for " + user.name
     user.save_pt_messages messages
   end
 
