@@ -4,7 +4,7 @@
 
 <div class="section-inside app-wrapper">
 
-<h1><i class="fa fa-user"></i> Edit Profile</h1>
+<h1><i class="fa fa-user"></i> Profile & Settings</h1>
 
 <div class="helper-input-links">
   <ul>
@@ -12,6 +12,7 @@
     <li><label for="ep-health">Health Targets</label></li>
     <li><label for="ep-faturday">Faturday</label></li>
     <li><label for="ep-settings">Settings</label></li>
+    <li><label for="ep-alerts">Alerts</label></li>
   </ul>
 </div>
 
@@ -25,7 +26,7 @@
 
 	<div class="helper-panel">
 
-  	<h2>Personal</h2>
+  	<h2><i class="fa fa-info-circle" aria-hidden="true"></i> Personal</h2>
 
   	<%= label_tag "name", "Name" %>
   	<%= text_field_tag "name", @user.preferences["name"], placeholder: "What do you go by?" %>
@@ -178,11 +179,11 @@
 
   </div>
 
-  <input type="radio" class="helper-input" name="edit-profile" id="ep-settings">
+  <input type="radio" class="helper-input" name="edit-profile" id="ep-settings"  <%= params["p"] == "settings" ? "checked='checked'" : "" %>>
 
 	<div class="helper-panel">
 
-	<h2>Settings</h2>
+	<h2><i class="fa fa-cogs" aria-hidden="true"></i> Settings</h2>
 
   	<%= label_tag "timezone", "Timezone" %>
   	<%= select_tag "timezone",
@@ -200,6 +201,20 @@
   		<%= radio_button_tag 'units', 'm', @user.preferences["units"] == "m" ? true : false, :id => "units-m" %>
   		<%= label_tag "units-m", "Metric" %>
   	</div>
+
+  </div>
+
+  <input type="radio" class="helper-input" name="edit-profile" id="ep-alerts"  <%= params["p"] == "alerts" ? "checked='checked'" : "" %>>
+
+	<div class="helper-panel">
+
+	<h2><i class="fa fa-bell-o" aria-hidden="true"></i> Alerts</h2>
+
+    <h3>Personal Trainer Messages</h3>
+
+    <p>w8mngr will analyze your progress and consistency and send you reminders to log your calories,
+    your weights, and give you various summaries of your day/week/month. You can set the kind of messages
+    and frequency you wish to receive them here.</p>
 
   </div>
 

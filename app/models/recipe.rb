@@ -68,10 +68,10 @@ class Recipe < ActiveRecord::Base
   private
 
   def get_total macro
-    nil if ![:calories, :fat, :carbs, :protein].include?(macro)
+    0 if ![:calories, :fat, :carbs, :protein].include?(macro)
     sum = 0
     ingredients.each do |ingredient|
-      sum = sum + ingredient.send(macro)
+      sum = sum + ingredient.send(macro) if !ingredient.send(macro).nil?
     end
     sum
   end

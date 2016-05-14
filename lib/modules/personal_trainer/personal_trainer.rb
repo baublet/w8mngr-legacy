@@ -13,7 +13,9 @@ module PersonalTrainer
   # an array of messages (sometimes only one) in the following form:
   #
   # messages = [
-  #              {  text: "Message",
+  #              {  message: "Message",
+  #                 message_html: "HTML Version of the message",
+  #                 subject: "Subject of the email",
   #                 type: "message-type-identifier",
   #                 uid:  "message-unique-id",
   #                 mood: int

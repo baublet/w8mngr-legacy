@@ -37,7 +37,11 @@ module UserPreferences
       "faturday_carbs": "",
       "faturday_protein": "",
 
-      "pt_messages_food_log": true
+      "alerts": {
+        "food_log_reminder": true,
+        "food_log_reminder_hours": 36,
+        "target_calories_reminder": true
+      }
     }
   end
 

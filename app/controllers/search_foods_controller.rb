@@ -21,6 +21,7 @@ class SearchFoodsController < ApplicationController
     @prev_page = nil
     @next_page = nil
     @base_url  = food_search_path
+    @search_type = "Foods"
 
     if !params[:q].blank?
       search_foods
@@ -39,7 +40,56 @@ class SearchFoodsController < ApplicationController
     end
   end
 
+  def recipes
+    # Set our templates' default variables
+    @searchresults = []
+    @prev_page = nil
+    @next_page = nil
+    @base_url  = recipe_search_path
+    @search_type = "Recipes"
+
+    if !params[:q].blank?
+      search_recipes
+    end
+
+    respond_to do |format|
+      format.html { render "search" }
+      format.json {
+        render json:
+          {
+            prev_page: @prev_page,
+            next_page: @next_page,
+            results: @searchresults
+          }
+      }
+    end
+  end
+
   protected
+
+  # Abstracting this out to send back autocomplete results to the Javascript API
+  # on all autocomplete results
+  def search_recipes
+    # Prepare the pagination with 25 per page
+    page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
+    per_page = 25
+
+    # Break the search into its parts and search for each term
+    query = params[:q].squish
+    results = Recipe.search_recipes(query)
+                  .limit(per_page + 1)
+                  .offset((page - 1) * per_page)
+    # We do +1 here because if, at the end, we have 26 entries, we know there's a next page
+    @searchresults = results
+
+    # Matches? Show the search form
+    # Prepare simple pagination
+    @prev_page = page > 1 ? (page - 1).to_s : nil
+    @next_page = @searchresults.size > per_page ? (page + 1).to_s : nil
+    @base_url  = recipe_search_path + "?q=" + URI.encode(params[:q])
+    # Pop the end off the results array so we can stick to per_page items per page
+    @searchresults.try(:pop)
+  end
 
   # I'm abstracting this out because in a JSON end point, we're going to want
   # to return search results for both recipes and foods
@@ -68,7 +118,7 @@ class SearchFoodsController < ApplicationController
         q:      params[:q],
         max:    usda_entries,
         offset: (page - 1) * per_page
-        })
+      })
     end
 
     # Matches? Show the search form
@@ -77,7 +127,7 @@ class SearchFoodsController < ApplicationController
     @next_page = @searchresults.size > per_page ? (page + 1).to_s : nil
     @base_url  = food_search_path + "?q=" + URI.encode(params[:q])
     # Pop the end off the results array so we can stick to per_page items per page
-    @searchresults.pop
+    @searchresults.try(:pop)
   end
 
 end

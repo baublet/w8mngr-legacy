@@ -144,6 +144,19 @@ nav .login {
     right: 0;
     margin: 0;
     padding: 0;
+    @include mqAfterSize(1060px) {
+      position: absolute;
+      top: auto;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      width: 640px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0;
+      height: 0;
+      max-height: 0;
+    }
     ul {
         font-size: 0;
     }
@@ -162,6 +175,15 @@ nav .login {
     flex-direction: row;
     position: relative;
     z-index: 110;
+    @include mqAfterSize(1060px) {
+      top: 3rem;
+      display: block;
+      position: absolute;
+      left: -220px;
+      .users.show & {
+        top: 15.5rem;
+      }
+    }
     li {
         flex-grow: 1;
         vertical-align: middle;
@@ -171,11 +193,13 @@ nav .login {
         display: none;
         &:checked {
             + label {
+              @include mqBeforeSize(1060px) {
                 background: lighten($black, 5);
                 color: $white;
                 + .app-menu-sub {
                     transform: translateY(-8vh);
                 }
+              }
             }
         }
     }
@@ -195,6 +219,27 @@ nav .login {
       &:hover {
         color: rgba($white, .75);
       }
+      @include mqAfterSize(1060px) {
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1rem;
+        height: auto;
+        padding: 1rem 0;
+        background: transparent;
+        color: $black;
+        text-transform: none;
+        &:hover {
+          color: $color-primary;
+        }
+        .screen-reader-text {
+          display: inline;
+          visibility: visible;
+          font-size: .8rem;
+        }
+        .fa {
+          width: 1.5rem;
+        }
+      }
     }
 }
 
@@ -209,6 +254,11 @@ nav .login {
     flex-direction: row;
     max-height: 9vh;
     overflow: hidden;
+    @include mqAfterSize(1060px) {
+      position: static;
+      display: block;
+      max-height: none;
+    }
     li {
         flex-grow: 1;
         vertical-align: middle;
@@ -245,6 +295,27 @@ nav .login {
       .fa {
         width: 100%;
         font-size: 3vh;
+      }
+      @include mqAfterSize(1060px) {
+        height: auto;
+        border: 0;
+        background: transparent;
+        color: rgba($black, .75);
+        .fa, span {
+          width: auto;
+          margin: 0;
+          display: inline;
+          font-size: .8rem;
+          text-transform: none;
+          opacity: 1;
+        }
+        .fa {
+          width: 2rem;
+        }
+        &:hover {
+          background: transparent;
+          color: $black;
+        }
       }
     }
 }

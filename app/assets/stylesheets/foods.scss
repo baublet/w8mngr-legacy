@@ -1,267 +1,264 @@
 .foods-measurement-delete-box {
-	display: none;
-	+ .foods-measurement-delete-button:before {
-		content: "\f00d";
-	}
-	&:checked + .foods-measurement-delete-button {
-		background: $red;
-	}
-	&:checked + .foods-measurement-delete-button + .measurement-box {
-		opacity: .15;
-	}
+  display: none;
+  + .foods-measurement-delete-button:before {
+    content: "\f00d";
+  }
+  &:checked + .foods-measurement-delete-button {
+    background: $red;
+  }
+  &:checked + .foods-measurement-delete-button + .measurement-box {
+    opacity: .15;
+  }
 }
 .foods-measurement-delete-button {
-	position: relative;
-	margin-bottom: -2rem;
-	top: -.5rem;
-	float: right;
-	z-index: 10;
-	font-family: "FontAwesome";
-	cursor: pointer;
-	font-size:.6rem;
-	color: $white;
-	display:inline-block;
-	width: 1.5rem;
-	height: 1.5rem;
-	line-height: 1.5rem;
-	vertical-align: bottom;
-	border-radius: 50%;
-	background: $color-primary-light;
-	text-align: center;
+  position: relative;
+  margin-bottom: -2rem;
+  top: -.5rem;
+  float: right;
+  z-index: 10;
+  font-family: "FontAwesome";
+  cursor: pointer;
+  font-size:.6rem;
+  color: $white;
+  display:inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  vertical-align: bottom;
+  border-radius: 50%;
+  background: $color-primary-light;
+  text-align: center;
 }
 
 .measurement-box {
-	background: $color-primary;
-	padding: 1rem;
-	border-radius: 5px;
-	margin-bottom: 2rem;
-	padding-left: 6rem;
-	position: relative;
-	color: $white;
-	@include height(1);
-	transition: box-shadow .15s ease-in-out;
-	&:hover {
-		@include height(3);
-	}
-	label, .label {
-		display: block;
-		color: $white;
-		position: absolute;
-		left: .5rem;
-		padding-top: .75rem;
-		text-align: right;
-		width: 5rem;
-		&::after {
-			content: ": ";
-		}
-	}
-	::-webkit-input-placeholder {
-		color: rgba($white, .5);
-		font-size: .6em;
-		font-weight: 700;
-		text-transform: uppercase;
-	}
-	input {
-		color: $white;
-		background: transparent;
-		border: none;
-		border-bottom: 1px solid rgba($white, .25);
-		border-radius: 0;
-		&:last-child {
-			margin-bottom: 0;
-		}
-		&:-ms-input-placeholder,&:-moz-placeholder{
-			color: rgba($white, .75);
-			font-size: .6em;
-			font-weight: 700;
-			text-transform: uppercase;
-		}
-		&:hover {
-			border-color: rgba($white, .5);
-		}
-		&:focus {
-			background: transparent;
-			color: $white;
-			border-bottom: 3px solid rgba($white, .75);
-			margin-bottom: -2px;
-		}
-	}
-	@include mqAfterSize(540px) {
-		display: table;
-		vertical-align: bottom;
-		width: 100%;
-		padding-left: 1rem;
-		.col {
-			display: inline-block;
-			max-width: 16.666%;
-			vertical-align: middle;
-		}
-		label, .label {
-			display: block;
-			position: static;
-			padding: 0;
-			&::after {
-				content: "";
-			}
-		}
-	}
+  background: $color-primary;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  padding-left: 6rem;
+  position: relative;
+  color: $white;
+  @include height(1);
+  transition: box-shadow .15s ease-in-out;
+  &:hover {
+    @include height(3);
+  }
+  label, .label {
+    display: block;
+    color: $white;
+    position: absolute;
+    left: .5rem;
+    padding-top: .75rem;
+    text-align: right;
+    width: 5rem;
+    &::after {
+      content: ": ";
+    }
+  }
+  ::-webkit-input-placeholder {
+    color: rgba($white, .5);
+    font-size: .6em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  input {
+    color: $white;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba($white, .25);
+    border-radius: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:-ms-input-placeholder,&:-moz-placeholder{
+      color: rgba($white, .75);
+      font-size: .6em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    &:hover {
+      border-color: rgba($white, .5);
+    }
+    &:focus {
+      background: transparent;
+      color: $white;
+      border-bottom: 3px solid rgba($white, .75);
+      margin-bottom: -2px;
+    }
+  }
+  @include mqAfterSize(540px) {
+    display: table;
+    vertical-align: bottom;
+    width: 100%;
+    padding-left: 1rem;
+    .col {
+      display: inline-block;
+      max-width: 16.666%;
+      vertical-align: middle;
+    }
+    label, .label {
+      display: block;
+      position: static;
+      padding: 0;
+      &::after {
+        content: "";
+      }
+    }
+  }
 }
 
 .measurement-box.in-transition {
-	position: relative;
-	margin: 0 0 2rem;
-	padding-top: 2.5rem;
-	.label {
-		padding-top: 0;
-	}
-	.col {
-		padding: .5rem 0;
-	}
-	.unit {
-		position: absolute;
-		left: 0;
-		top: .5rem;
-		width: 100%;
-		max-width: 100%;
-		font-weight: 200;
-		text-align: center;
-		font-size: 1.4rem;
-	}
-	@include mqAfterSize(540px) {
-		padding: .5rem;
-		.col, .label {
-			text-align: center;
-		}
-		.col {
-			width: 15%;
-		}
-		.unit {
-			position: static;
-			width: 25%;
-			text-align: left;
-		}
-		.label {
-			margin: 0 auto 1rem;
-		}
-	}
-	.food-log-new-btn {
-		min-width: 0;
-		font-size: .75rem;
-		position: absolute;
-		right: 1rem;
-		bottom: 1rem;
-		@include mqAfterSize(540px) {
-			border-radius: 50%;
-			width: 2rem;
-			height: 2rem;
-			right: -.25rem;
-			bottom: -.25rem;
-			padding-top: .55rem;
-			.fa {
-				margin: 0;
-			}
-			.btn-text {
-				display: none;
-			}
-		}
-	}
+  position: relative;
+  margin: 0 0 2rem;
+  padding-top: 2.5rem;
+  .label {
+    padding-top: 0;
+  }
+  .col {
+    padding: .5rem 0;
+  }
+  .unit {
+    position: absolute;
+    left: 0;
+    top: .5rem;
+    width: 100%;
+    max-width: 100%;
+    font-weight: 200;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+  @include mqAfterSize(540px) {
+    padding: .5rem;
+    .col, .label {
+      text-align: center;
+    }
+    .col {
+      width: 15%;
+    }
+    .unit {
+      position: static;
+      width: 25%;
+      text-align: left;
+    }
+    .label {
+      margin: 0 auto 1rem;
+    }
+  }
+  .food-log-new-btn {
+    min-width: 0;
+    font-size: .75rem;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    @include mqAfterSize(540px) {
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      right: -.25rem;
+      bottom: -.25rem;
+      padding-top: .55rem;
+      .fa {
+        margin: 0;
+      }
+      .btn-text {
+        display: none;
+      }
+    }
+  }
 }
 
 .food-search-form {
     margin: 1rem 0;
     padding: 0;
-	position: relative;
-	input[type=text] {
-		font-size: 2rem;
-		padding-right: 3.25rem;
-		margin-bottom: 0;
-	}
-	.search-btn {
-		padding-right: .5rem;
-		position: absolute;
-		top: .5rem;
-		right: -.5rem;
-		font-size: 2.5rem;
-		width: auto;
-		background: transparent;
-		color: rgba($black, .25);
-		&:hover {
-			color: rgba($black, .75);
-		}
-	}
+  position: relative;
+  input[type=text] {
+    font-size: 2rem;
+    padding-right: 3.25rem;
+    margin-bottom: 0;
+  }
+  .search-btn {
+    padding-right: .5rem;
+    position: absolute;
+    top: .5rem;
+    right: -.5rem;
+    font-size: 2.5rem;
+    width: auto;
+    background: transparent;
+    color: rgba($black, .25);
+    &:hover {
+      color: rgba($black, .75);
+    }
+  }
+}
+
+.foods-table {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .food {
-	margin:0;
-	padding: 1rem 1rem 1rem 3rem;
-	transition: all .15s ease-in-out;
-	.measurement {
-		margin: .5rem 0 0;
-		opacity: .5;
-		font-size: .85rem;
-		line-height: 1rem;
-		transition: opacity .15s ease-in-out;
-	}
-	.unit {
-		display: block;
-	}
-	h2 {
-		font-size: 1rem;
-		margin: 0;
-		padding: 0;
-		position: relative;
-		font-weight: 400;
-		&:before {
-			top: .25rem;
-			font-size: .75rem;
-			font-family: "FontAwesome";
-			position: absolute;
-			left: -2rem;
-			content: "\f067";
-			opacity: .25;
-		}
-		&:hover:before {
-			opacity: 1;
-		}
-		.edit, .delete {
-			position: absolute;
-			left: -2rem;
-			top: 1.5rem;
-			&:hover .fa {
-				opacity: 1;
-				color: $white;
-			}
-		}
-		.delete {
-			left: auto;
-			top: .25rem;
-			right: .5rem;
-		}
-	}
-	+ .food {
-		border-top: 1px solid rgba($black, .1);
-	}
-	&:hover {
-		background: $color-primary;
-		color: $white;
-		box-shadow: 0 0 5px rgba(0,0,0,.5);
-		.measurement {
-			opacity: 1;
-		}
-		h2 a {
-			color: $white;
-			&:hover {
-				color: $white;
-			}
-		}
-	}
+  margin:0 1rem 1rem 0;
+  padding: 1rem 1rem 1rem 2rem;
+  transition: all .15s ease-in-out;
+  background: $white;
+  width: calc(320px - 1rem);
+  @include height(1);
+  .measurement {
+    margin: 1.5rem -1rem 0 -2rem;
+    padding: 1rem 1rem 0;
+    border-top: 1px solid rgba($black, .25);
+    opacity: .5;
+    font-size: .85rem;
+    line-height: 1rem;
+    transition: opacity .15s ease-in-out;
+  }
+  .unit {
+    display: block;
+  }
+  h2 {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-weight: 400;
+    &:hover:before {
+      opacity: 1;
+    }
+    .edit, .delete {
+      position: absolute;
+      left: -1rem;
+      top: 0rem;
+      &:hover .fa {
+        opacity: 1;
+      }
+    }
+    .delete {
+      left: auto;
+      top: -.5rem;
+      right: -.5rem;
+    }
+  }
+  &:hover {
+    @include height(2);
+    .measurement {
+      opacity: 1;
+    }
+  }
+  .description {
+    font-size: .8rem;
+    opacity: .75;
+    margin: 0;
+  }
 }
 
 .search-results-information {
-	font-size: .8rem;
-	color: rgba($black, .35);
-	font-weight: bold;
-	margin: 0 -1rem 2rem;
-	border-left: 1rem solid rgba($black, .05);
-	padding: 1rem 2rem 1rem 1rem
+  font-size: .8rem;
+  color: rgba($black, .35);
+  font-weight: bold;
+  margin: 0 -1rem 2rem;
+  border-left: 1rem solid rgba($black, .05);
+  padding: 1rem 2rem 1rem 1rem
 }

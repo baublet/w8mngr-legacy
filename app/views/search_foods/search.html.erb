@@ -16,8 +16,19 @@
 
   <h1>
     <i class="fa fa-search"></i>
-    Search Foods
+    Search <%= @search_type %>
   </h1>
+
+  <div class="page-meta">
+    <%= link_to food_search_path do %>
+        <i class="fa fa-cutlery"></i>
+        Search Foods
+    <% end if @search_type == "Recipes" %>
+    <%= link_to recipe_search_path do %>
+        <i class="fa fa-shopping-basket"></i>
+        Search Recipes
+    <% end if @search_type == "Foods" %>
+  </div>
 
   <%= render 'search_form' %>
 

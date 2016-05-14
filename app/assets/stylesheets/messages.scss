@@ -12,8 +12,6 @@
       margin: -1.05rem -1rem .995rem;
       background: darken($red, 10);
       border: none;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
       color: $white;
       text-align: left;
       padding-left: 0;
@@ -25,17 +23,18 @@
     border: 1px solid rgba($black, .15);
     font-weight: 500;
     font-size: .8rem;
-    width: 100%;
-    max-width: 640px;
+    max-width: 320px;
     padding: 1rem;
     opacity: 0;
     animation: blinkFadeOut 5s 0s 1 forwards normal;
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 5rem;
+    right: 0;
     margin: 0 auto;
     z-index: 1000;
     border: 1px solid rgba($black, .25);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     &.error {
         background: $red;
     }

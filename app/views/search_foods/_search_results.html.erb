@@ -1,5 +1,6 @@
 <% if results.size > 0 %>
   <% results.each do |food| %>
-    <%= render partial: "foods/food", object: food %>
+    <%= render partial: "foods/food", object: food if @search_type == "Foods" %>
+    <%= render partial: "recipes/recipe", object: food if @search_type == "Recipes" %>
   <% end %>
 <% end %>

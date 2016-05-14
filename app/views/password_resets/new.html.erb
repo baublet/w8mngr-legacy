@@ -1,14 +1,18 @@
 <% provide(:title, "Password Reset") %>
 
-<h1>Forgot Password</h1>
+<div class="section-inside">
 
-<%= form_for(:password_reset, url: password_resets_path, :html => {:class => "large"}) do |f| %>
+  <h1>Forgot Password</h1>
 
-	<%= f.label :email %>
-	<%= f.email_field :email, placeholder: 'Email Address' %>
+  <%= form_for(:password_reset, url: password_resets_path, :html => {:class => "large"}) do |f| %>
 
-    <%= f.submit "Reset Password", class: "btn" %>
+  	<%= f.label :email %>
+  	<%= f.email_field :email, placeholder: 'Email Address' %>
 
-<% end %>
+      <%= f.submit "Reset Password", class: "btn" %>
 
-<p>Don't have an account? <%= link_to 'Sign up.', signup_path %> It's free!</p>
+  <% end %>
+
+  <p>Don't have an account? <%= link_to 'Sign up.', signup_path %> It's free!</p>
+
+</div>

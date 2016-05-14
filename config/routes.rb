@@ -45,9 +45,11 @@ Rails.application.routes.draw do
     get     "/faturday(:format)"=> "faturday#create", as: :faturday
     post    "/faturday(:format)"=> "faturday#create"
 
-    # Foods search
+    # Foods and recipes search
     get     "/search/foods(:format)" => "search_foods#index",
                                 as: :food_search
+    get     "/search/recipes(:format)" => "search_foods#recipes",
+                                as: :recipe_search
 
     # Weight entries
     resources :weight_entries,  only: [:index, :create, :update, :destroy]

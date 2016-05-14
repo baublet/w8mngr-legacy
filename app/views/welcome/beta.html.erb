@@ -1,53 +1,57 @@
 <% provide(:title, "We're in Beta") %>
 
-<h1><i class="fa fa-exclamation-triangle"></i> We're in Beta!</h1>
+<div class="section-inside">
 
-<p>You are currently viewing the beta version of w8mngr. If you use this version, please keep in mind that:</p>
+  <h1><i class="fa fa-exclamation-triangle"></i> We're in Beta!</h1>
 
-<ul>
-	<li><strong>None of your data will be saved.</strong> New versions of the beta may break things you have entered here, so I will be cleaning the database from time to time to ensure compatibility with new versions.</li>
+  <p>You are currently viewing the beta version of w8mngr. If you use this version, please keep in mind that:</p>
 
-	<li><strong>Your old data isn't here, yet.</strong> Your old accounts and food/health data is not over here. That's coming later.</li>
+  <ul>
+  	<li><strong>None of your data will be saved.</strong> New versions of the beta may break things you have entered here, so I will be cleaning the database from time to time to ensure compatibility with new versions.</li>
 
-	<li><strong>Things may not work like they're expected to.</strong> That's the nature of a beta, unfortunately. If you find a bug, please let me know via the <%= link_to "contact page", contact_path %>.</li>
-</ul>
+  	<li><strong>Your old data isn't here, yet.</strong> Your old accounts and food/health data is not over here. That's coming later.</li>
 
-<h2>Change Log</h2>
+  	<li><strong>Things may not work like they're expected to.</strong> That's the nature of a beta, unfortunately. If you find a bug, please let me know via the <%= link_to "contact page", contact_path %>.</li>
+  </ul>
 
-<h3>Version 0.3, <em>Thursday, May 12, 2016</em></h3>
+  <h2>Change Log</h2>
 
-<p>Very large updates. I added tons of functionality, including a Javascript implementation via Vue.js. I added a very extensive options page that I plan to smooth over with a few onboarding wizards in the future.</p>
+  <h3>Version 0.3, <em>Thursday, May 12, 2016</em></h3>
 
-<h4>Major Changes</h4>
+  <p>Very large updates. I added tons of functionality, including a Javascript implementation via Vue.js. I added a very extensive options page that I plan to smooth over with a few onboarding wizards in the future.</p>
 
-<ul>
+  <h4>Major Changes</h4>
 
-  <li><strong><%= link_to "Recipes", recipes_path %>.</strong> Users can now add recipes, which allows servings, the ability to add either custom ingredients or other food items, and the ability to add preparation instructions.</li>
+  <ul>
 
-  <li><strong>Messaging.</strong> The app now automatically tracks your progress and consistency, messaging you if you fall behind. This includes Postmark integration for all emailing, as it's much easier to send email via an API than handling it on our own. This was a much more monumental task than I thought. I'm glad it's done! In the future, I'm going to add support for SMSing folks rather than emailing them.</li>
+    <li><strong><%= link_to "Recipes", recipes_path %>.</strong> Users can now add recipes, which allows servings, the ability to add either custom ingredients or other food items, and the ability to add preparation instructions.</li>
 
-  <li><strong>Javascript AJAX System.</strong> A custom queueing system for our AJAX requests that lets users know about connectivity issues while queuing user actions until they are back online.</li>
+    <li><strong>Messaging.</strong> The app now automatically tracks your progress and consistency, messaging you if you fall behind. This includes Postmark integration for all emailing, as it's much easier to send email via an API than handling it on our own. This was a much more monumental task than I thought. I'm glad it's done! In the future, I'm going to add support for SMSing folks rather than emailing them.</li>
 
-  <li><strong>UI Improvements.</strong> Many many UI improvements. Like, tons!</li>
+    <li><strong>Javascript AJAX System.</strong> A custom queueing system for our AJAX requests that lets users know about connectivity issues while queuing user actions until they are back online.</li>
 
-  <li><strong>Old data importing.</strong> The old data from w8mngr.com can now easily be imported into the new system via a rake task.</li>
+    <li><strong>UI Improvements.</strong> Many many UI improvements. Like, tons!</li>
 
-</ul>
+    <li><strong>Old data importing.</strong> The old data from w8mngr.com can now easily be imported into the new system via a rake task.</li>
 
-<h3>Version 0.1, <em>Sunday, March 1, 2016</em></h3>
+  </ul>
 
-<p>Initial deployment! Welcome aboard. There is much to do, but I wanted to be able to test this on mobile devices as soon as possible. We are migrating to Amazon Web Services, as you may have noticed, so we are currently deployed there. Our backend has migrated to Ruby on Rails and PostreSQL. Although I'm much more familiar with LESS, I chose to stick with Rails' default preprocessor, SCSS. I'm loving it so far!</p>
+  <h3>Version 0.1, <em>Sunday, March 1, 2016</em></h3>
 
-<p>Things that are currently working:</p>
+  <p>Initial deployment! Welcome aboard. There is much to do, but I wanted to be able to test this on mobile devices as soon as possible. We are migrating to Amazon Web Services, as you may have noticed, so we are currently deployed there. Our backend has migrated to Ruby on Rails and PostreSQL. Although I'm much more familiar with LESS, I chose to stick with Rails' default preprocessor, SCSS. I'm loving it so far!</p>
 
-<ul>
-	<li><strong><%= link_to "User profiles.", profile_path %></strong> Users can make changes to their profiles, which is, at the moment, bare bones. More customization in the future, which will use your profile data (like height, sex, etc.) to help you generate basal metabolic rates and set goals.</li>
+  <p>Things that are currently working:</p>
 
-	<li><strong><%= link_to "Food logs.", foodlog_path %></strong> Get to logging your calories today!</li>
+  <ul>
+  	<li><strong><%= link_to "User profiles.", profile_path %></strong> Users can make changes to their profiles, which is, at the moment, bare bones. More customization in the future, which will use your profile data (like height, sex, etc.) to help you generate basal metabolic rates and set goals.</li>
 
-	<li><strong><%= link_to "Custom foods.", foods_path %></strong> Add, edit, or remove custom foods that you can later <%= link_to "search and add directly to", food_search_path %> your food logs.</li>
+  	<li><strong><%= link_to "Food logs.", foodlog_path %></strong> Get to logging your calories today!</li>
 
-	<li><strong>Integration with the <a href="https://ndb.nal.usda.gov/ndb/foods">USDA's food database</a>.</strong> Over 8,000 foods complete with nutritional info and popular measurements at your finger tips.
+  	<li><strong><%= link_to "Custom foods.", foods_path %></strong> Add, edit, or remove custom foods that you can later <%= link_to "search and add directly to", food_search_path %> your food logs.</li>
 
-	<li><strong><%= link_to "Log your weights.", weight_entries_path %></strong> Add weight entries throughout the day and get an average so you can get a feel for how your weight naturally fluctuates.
-</ul>
+  	<li><strong>Integration with the <a href="https://ndb.nal.usda.gov/ndb/foods">USDA's food database</a>.</strong> Over 8,000 foods complete with nutritional info and popular measurements at your finger tips.
+
+  	<li><strong><%= link_to "Log your weights.", weight_entries_path %></strong> Add weight entries throughout the day and get an average so you can get a feel for how your weight naturally fluctuates.
+  </ul>
+
+</div>
