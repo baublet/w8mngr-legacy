@@ -117,6 +117,12 @@ em {
     font-style: italic;
 }
 
+hr {
+    margin: 3rem 1rem;
+    border: 0;
+    border-top: 1px dotted rgba($black, .25);
+}
+
 .page-meta {
     font-size: .8rem;
     margin: 1rem 0 2rem;

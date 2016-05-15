@@ -115,9 +115,32 @@
   padding: 0 3rem;
   opacity: 1;
   overflow:hidden;
+  position: relative;
+  .tooltip {
+    position: absolute;
+    background: $red;
+    border-radius: 3px;
+    padding: .25rem;
+    font-size: .6em;
+    font-weight: bold;
+    color: $white;
+    bottom: 0;
+    opacity: 0;
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+  &:hover .tooltip.show {
+    opacity: 1;
+  }
+  @include mqAfterSize(1060px) {
+    font-weight: 200;
+    opacity: .75;
+  }
   .col {
     transform: none;
-    font-size: 5vw;
+    font-size: 3vw;
     width: 25%;
     &::after {
       display: block;
@@ -127,7 +150,13 @@
       color: rgba($black, .5);
       content: attr(title);
       padding: .1rem 0;
+      @include mqAfterSize(1060px) {
+        font-size: 1vw;
+      }
     }
+  }
+  .over {
+    color: $red;
   }
   .long {
     display: none;

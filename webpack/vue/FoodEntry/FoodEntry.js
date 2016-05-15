@@ -56,10 +56,10 @@ export default {
       if(isNaN(newAmount) || newAmount == 0) return null
 
       // So we have a valid new amount, let's update it!
-      this.calories = Math.ceil(this.perOne.calories * newAmount)
-      this.fat = Math.ceil(this.perOne.fat * newAmount)
-      this.carbs = Math.ceil(this.perOne.carbs * newAmount)
-      this.protein = Math.ceil(this.perOne.protein * newAmount)
+        this.calories = Math.ceil(this.perOne.calories * newAmount)
+        this.fat = Math.ceil(this.perOne.fat * newAmount)
+        this.carbs = Math.ceil(this.perOne.carbs * newAmount)
+        this.protein = Math.ceil(this.perOne.protein * newAmount)
     },
   },
   methods: {
@@ -88,7 +88,6 @@ export default {
         url: self.$fetchURI.food_entries.delete(self.id),
         onSuccess: function(response) {
           self.$parent.entries.splice(self.index, 1)
-          self.$parent.calculateTotals()
           self.$dispatch("notLoading")
         },
       })
@@ -96,7 +95,6 @@ export default {
     // Sends an entry to be saved to the database
     saveEntry: function(index) {
       this.$dispatch("loading")
-      this.$parent.calculateTotals()
 
       // Prepare our data to be sent
       var data = {

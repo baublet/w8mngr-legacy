@@ -1,4 +1,3 @@
-var parseTotals = require("../../fn/parseTotals.js")
 var numberToDay = require("../../fn/numberToDay.js")
 var tomorrowNumber = require("../../fn/tomorrowNumber.js")
 var yesterdayNumber = require("../../fn/yesterdayNumber.js")
@@ -47,6 +46,41 @@ export default {
       this.loading = 0
     },
   },
+  computed: {
+    overTotalCalories: function() {
+      if (!this.user.preferences.target_calories) return false
+      if(this.totalCalories > parseInt(this.user.preferences.target_calories, 10)) return true
+      return false
+    },
+    totalCalories: function() {
+      var sum = 0
+      forEach(this.entries, function(entry) {
+        sum = sum + parseInt(entry["calories"], 10)
+      })
+      return sum
+    },
+    totalFat: function() {
+      var sum = 0
+      forEach(this.entries, function(entry) {
+        sum = sum + parseInt(entry["fat"], 10)
+      })
+      return sum
+    },
+    totalCarbs: function() {
+      var sum = 0
+      forEach(this.entries, function(entry) {
+        sum = sum + parseInt(entry["carbs"], 10)
+      })
+      return sum
+    },
+    totalProtein: function() {
+      var sum = 0
+      forEach(this.entries, function(entry) {
+        sum = sum + parseInt(entry["protein"], 10)
+      })
+      return sum
+    },
+  },
   data: {
     loading: 1,
     currentDayNumber: "",
@@ -68,10 +102,6 @@ export default {
     newFat: "",
     newCarbs: "",
     newProtein: "",
-    totalCalories: "",
-    totalFat: "",
-    totalCarbs: "",
-    totalProtein: "",
     entries: [],
     autoCompleteItems: [],
     autoCompleteSelected: -1,
@@ -164,7 +194,6 @@ export default {
         onSuccess: function(response) {
           // Add the user return data to our model
           app.entries.push(response.entry)
-          app.calculateTotals()
           app.$emit("notLoading")
         },
       })
@@ -232,7 +261,6 @@ export default {
             app.$emit("notLoading")
           },
         })
-        this.calculateTotals()
         document.getElementById("description-input")
           .focus()
         // Scroll to our description input if we're on mobile
@@ -243,13 +271,6 @@ export default {
         document.getElementById("description-input")
           .focus()
       }
-    },
-    // Update the macro totals using a useful custom function
-    calculateTotals: function() {
-      this.totalCalories = parseTotals(this.entries, "calories")
-      this.totalFat = parseTotals(this.entries, "fat")
-      this.totalCarbs = parseTotals(this.entries, "carbs")
-      this.totalProtein = parseTotals(this.entries, "protein")
     },
     // Loads the day after the currenct day
     loadNextDay: function() {
@@ -272,7 +293,6 @@ export default {
           app.$emit("notLoading")
           app.entries = response.entries
           app.currentDayNumber = response.current_day
-          app.calculateTotals()
           app.parseDays()
         },
       })
@@ -288,21 +308,23 @@ export default {
     // This function handles the autocomplete data, which Vue handles with
     // sub-components of this app
     autoComplete: function(query) {
-      // Only do anything if the entered input is > 3 letters
-      if (query.length <= 3) return false
+      if (this.autoCompleteLoading) return false
+      // Only do anything if the entered input is > 2 letters
+      if (query.length <= 2) return false
 
       this.autoCompleteLoading = 1
       var app = this
       this.$fetch({
         method: "get",
         url: this.$fetchURI.search_foods(query),
+        onResponse: function(response) {
+          app.autoCompleteLoading = 0
+        },
         onSuccess: function(response) {
           if (response.success === false) {
             alert("Unknown error...")
-            app.autoCompleteLoading = 0
           } else {
             app.formatAutoCompleteResults(response)
-            app.autoCompleteLoading = 0
           }
         },
       })
