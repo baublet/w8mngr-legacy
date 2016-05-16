@@ -19,7 +19,9 @@
   	<%= label_tag :password_confirmation, "Confirmation" %>
   	<%= password_field_tag :password_confirmation %>
 
-  	<%= submit_tag "Sign Up", {class:"btn"} %>
+  	<%= button_tag(type: 'submit', class: 'btn') do %>
+  		Step 2: Calculate Your TDEE
+  	<% end %>
   <% end %>
 
 </div>

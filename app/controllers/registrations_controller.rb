@@ -2,6 +2,7 @@ class RegistrationsController < ApplicationController
   before_action :logged_in_user, only: [:set_metrics, :save_metrics, :set_target, :save_target]
 
   def new
+    redirect_to get_started_calculate_path if logged_in?
     @user = User.new
   end
 
@@ -10,7 +11,8 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login @user
-      render "calculate"
+      @weightentry = @user.weightentries.build(day: current_day)
+      render "metrics"
     else
       render "new"
     end
@@ -19,12 +21,15 @@ class RegistrationsController < ApplicationController
   # Screen 2, allowing the user to submit their measurements to calculate their TDEE
   def set_metrics
     @user = current_user
-    render "set_metrics"
+    @weightentry = @user.weightentries.build(day: current_day)
+    render "metrics"
   end
 
   # Accepts a list of params that the user submits to calculate their TDEE
   def save_metrics
     @user = current_user
+
+    # Save their preferences
     begin
       height_cm = params["height_display"].to_unit.convert_to("cm").scalar.to_i
     rescue
@@ -38,7 +43,11 @@ class RegistrationsController < ApplicationController
     activity_level = params["activity_level"].to_i
     @user.preferences["activity_level"] = activity_level.between?(1,5) ? activity_level : 2
 
-    if @user.save
+    # Save their new weight
+    @weightentry = @user.weightentries.build(day: current_day)
+    @weightentry.update_value params[:weight]
+
+    if @user.save && @weightentry.save
       render "target"
     else
       render "metrics"
@@ -54,6 +63,7 @@ class RegistrationsController < ApplicationController
   # Sets the user's target weight based on the TDEE calculated above
   def save_target
     @user = current_user
+    target_calories = params[:target_calories].present? ? params[:target_calories].to_i : 0
     @user.preferences["target_calories"] = target_calories > 300 ? target_calories : ""
     if @user.save
       redirect_to foodlog_path

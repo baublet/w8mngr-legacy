@@ -1,0 +1,43 @@
+<% provide(:title, "Get Started: Step 3") %>
+
+<div class="section-inside">
+  <h1>Step 3: Set Your Target Calories</h1>
+
+  <%= form_tag(controller: "registrations", action: "save_target", method: "post") do %>
+
+    <% bmr = @user.bmr %>
+    <% if bmr.nil? %>
+
+      <p>Before we can calculate your total daily expended energy (TDEE), we need your
+      height (<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>')  %>),
+      age (<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>),
+      and a recent weigh-in (<%= raw(@user.recent_most_weight.nil? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>).
+      It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
+    	</p>
+
+    	<p>It looks like you didn't enter any information that might help us calculate
+      your TDEE. You can still enter a target! Try getting started with 2,000 calories.</p>
+
+    <% else %>
+
+      <p><label>Calculated TDEE:</label> <%= number_with_delimiter(bmr) %></p>
+
+      <p>We suggest gently ramping up or raising your intake so you feel as few adverse
+      effects as possible when changing your eating habbits. Try a number such as:</p>
+
+      <ul>
+        <li>+10%: <%= number_with_delimiter((bmr * 1.1).ceil) %></li>
+        <li>-10%: <%= number_with_delimiter((bmr * 0.9).ceil) %></li>
+      </ul>
+
+    <% end %>
+
+   	<%= label_tag "target_calories", "Target Calories" %>
+  	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+
+    <%= button_tag(type: 'submit', class: 'btn') do %>
+  		Start Logging!
+  	<% end %>
+
+	<% end %>
+</div>

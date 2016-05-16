@@ -17,9 +17,25 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:user)
   end
 
-  test "should post tdee" do
-    post :calculate, info: {
-      height: "6'1\"",
+  test "should redirect to step 2" do
+    login
+    get :new
+    assert_response :redirect
+  end
+
+  test "should get set_metrics" do
+    login
+    get :set_metrics
+    assert_response :success
+    assert_not_nil assigns(:user)
+    assert_not_nil assigns(:weightentry)
+    assert_template "metrics"
+  end
+
+  test "should post metrics" do
+    login
+    post :save_metrics, {
+      height_display: "6'1\"",
       weight: "199lbs",
       birthday: "05-01-1985",
       sex: "m",
@@ -27,12 +43,27 @@ class RegistrationsControllerTest < ActionController::TestCase
     }
     assert_response :success
     assert_not_nil assigns(:user)
+    assert_template "target"
+  end
+
+  test "should get target" do
+    login
+    get :set_target
+    assert_response :success
+    assert_template "target"
   end
 
   test "should post target" do
-    post :target, target: {
+    login
+    post :save_target, target: {
       calories: "2200"
     }
     assert_response :redirect
+  end
+
+  def login
+    @user = users(:test)
+    log_in_as(@user)
+    assert logged_in?
   end
 end
