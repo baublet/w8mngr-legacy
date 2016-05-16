@@ -1,0 +1,25 @@
+<% provide(:title, "Get Started: Step 1") %>
+
+<div class="section-inside">
+
+  <h1>Step 1: Make an Account</h1>
+
+  <%= form_tag(controller: "registrations", action: "create", method: "post") do %>
+
+  	<% if @user.errors.any? %>
+  		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
+  	<% end %>
+
+  	<%= label_tag :email %>
+  	<%= email_field_tag :email %>
+
+  	<%= label_tag :password %>
+  	<%= password_field_tag :password %>
+
+  	<%= label_tag :password_confirmation, "Confirmation" %>
+  	<%= password_field_tag :password_confirmation %>
+
+  	<%= submit_tag "Sign Up", {class:"btn"} %>
+  <% end %>
+
+</div>
