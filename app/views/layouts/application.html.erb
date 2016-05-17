@@ -42,8 +42,8 @@
                 <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
                 <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
                 <li class="sep"><h2>Log</h2></li>
-                <li><%= link_to "Food Log", weight_entries_path %></li>
-                <li><%= link_to "Weight Log", current_user %></li>
+                <li><%= link_to "Food Log", foodlog_path %></li>
+                <li><%= link_to "Weight Log", weight_entries_path %></li>
                 <li class="sep"></li>
             	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
             <% else %>
