@@ -1,7 +1,26 @@
 <% provide(:title, "Get Started: Step 2") %>
 
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Get Started", get_started_path %></li>
+      <li><%= link_to "Calculate TDEE", get_started_calculate_path %></li>
+    </ul>
+  </div>
+</div>
+
 <div class="section-inside">
   <h1>Step 2: Calculate Your Daily Expended Energy</h1>
+
+  <% if @user.errors.any? %>
+      <%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
+  <% end %>
+
+  <% if @weightentry.errors.any? %>
+      <%= render partial: "shared/error_messages", locals: {errors: @weightentry.errors} %>
+  <% end %>
 
   <p>Tell us a little bit about yourself so that we can calculate your TDEE, or
   your Total Daily Expended Energy. This number can help you calculate how much

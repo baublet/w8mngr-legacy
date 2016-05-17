@@ -1,5 +1,18 @@
 <% provide(:title, "Get Started: Step 3") %>
 
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Get Started", get_started_path %></li>
+      <li><%= link_to "Calculate TDEE", get_started_calculate_path %></li>
+      <li>Set Calorie Target</li>
+    </ul>
+  </div>
+</div>
+
 <div class="section-inside">
   <h1>Step 3: Set Your Target Calories</h1>
 
@@ -25,10 +38,12 @@
       <p>We suggest gently ramping up or raising your intake so you feel as few adverse
       effects as possible when changing your eating habbits. Try a number such as:</p>
 
-      <ul>
-        <li>+10%: <%= number_with_delimiter((bmr * 1.1).ceil) %></li>
-        <li>-10%: <%= number_with_delimiter((bmr * 0.9).ceil) %></li>
-      </ul>
+      <p>
+        <ul>
+          <li><strong style="display:inline-block;width:3rem">+10%:</strong> <%= number_with_delimiter((bmr * 1.1).ceil) %></li>
+          <li><strong style="display:inline-block;width:3rem">-10%:</strong> <%= number_with_delimiter((bmr * 0.9).ceil) %></li>
+        </ul>
+      </p>
 
     <% end %>
 

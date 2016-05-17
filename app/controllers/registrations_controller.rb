@@ -21,7 +21,8 @@ class RegistrationsController < ApplicationController
   # Screen 2, allowing the user to submit their measurements to calculate their TDEE
   def set_metrics
     @user = current_user
-    @weightentry = @user.weightentries.build(day: current_day)
+    recent = @user.recent_most_weight
+    @weightentry = recent.nil? ? @user.weightentries.build(day: current_day) : recent
     render "metrics"
   end
 
@@ -44,11 +45,21 @@ class RegistrationsController < ApplicationController
     @user.preferences["activity_level"] = activity_level.between?(1,5) ? activity_level : 2
 
     # Save their new weight
-    @weightentry = @user.weightentries.build(day: current_day)
-    @weightentry.update_value params[:weight]
+    if !params[:weight].blank?
+      @weightentry = @user.weightentries.build(day: current_day)
+      @weightentry.update_value params[:weight]
+    end
 
-    if @user.save && @weightentry.save
-      render "target"
+    if @user.save
+      if params[:weight].blank?
+        render "target"
+      else
+        if @weightentry.save
+          render "target"
+        else
+          render "metrics"
+        end
+      end
     else
       render "metrics"
     end
@@ -66,6 +77,7 @@ class RegistrationsController < ApplicationController
     target_calories = params[:target_calories].present? ? params[:target_calories].to_i : 0
     @user.preferences["target_calories"] = target_calories > 300 ? target_calories : ""
     if @user.save
+      flash[:success] = "Congrats! Now get started logging your calories."
       redirect_to foodlog_path
     else
       render "target"
@@ -75,7 +87,6 @@ class RegistrationsController < ApplicationController
   private
 
   def user_params
-    params.require(:user)
-        .permit(:email, :password, :password_confirmation)
+    params.permit(:email, :password, :password_confirmation)
   end
 end
