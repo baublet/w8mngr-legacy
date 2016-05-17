@@ -1,0 +1,36 @@
+<% provide(:title, "Get Started: Step 1") %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Register", get_started_path %></li>
+      <li>Create Account</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1>Step 1: Make an Account</h1>
+
+  <%= form_tag get_started_create_path, method: "post", class: "large" do %>
+
+  	<% if @user.errors.any? %>
+  		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>
+  	<% end %>
+
+  	<%= label_tag :email %>
+  	<%= email_field_tag :email %>
+
+  	<%= label_tag :password %>
+  	<%= password_field_tag :password %>
+
+  	<%= label_tag :password_confirmation, "Confirmation" %>
+  	<%= password_field_tag :password_confirmation %>
+
+  	<%= button_tag(type: 'submit', class: 'btn') do %>
+  		Step 2: Calculate Your TDEE
+  	<% end %>
+  <% end %>
+
+</div>

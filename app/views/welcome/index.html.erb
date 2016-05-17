@@ -7,7 +7,7 @@
       <a href="<%= foodlog_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Dashboard</a>
       <p>Or, you can <%= link_to "Logout", logout_path %></p>
       <% else %>
-      <a href="<%= signup_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Get Started</a>
+      <a href="<%= get_started_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Get Started</a>
       <p>Have an account? <%= link_to "Login", login_path %></p>
       <% end %>
     </div>
@@ -18,12 +18,6 @@
       <source media="(min-width: 900px)" srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %>">
       <img src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>" alt="Get back in shape at your own pace." class="banner-img">
     </picture>
-    <!--<img class="banner-img"
-      src="<%= image_path('banners/w8mngr-splash-01-small.jpg') %>"
-      srcset="<%= image_path('banners/w8mngr-splash-01-medium.jpg') %> 1000w,
-          <%= image_path('banners/w8mngr-splash-01-large.jpg') %> 1920w"
-      sizes="100vw"
-      alt="Get back in shape at your own pace.">-->
   </div>
 </section>
 

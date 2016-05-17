@@ -33,15 +33,21 @@
             <h2 class="navigation-title">Navigation</h2>
             <ul class="navigation-list">
                 <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "Getting Started", getting_started_path %></li>
+                <li><%= link_to "Get Started", get_started_path %></li>
             <% if logged_in? %>
-                <li class="sep"></li>
-                <li><%= link_to "Food Log", food_entries_path %></li>
-                <li><%= link_to "Profile", current_user %></li>
+                <li class="sep"><h2>Options</h2></li>
+                <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+                <li><%= link_to "Health Targets", edit_user_path(current_user, p: "health") %></li>
+                <li><%= link_to "Faturday", edit_user_path(current_user, p: "faturday") %></li>
+                <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
+                <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
+                <li class="sep"><h2>Log</h2></li>
+                <li><%= link_to "Food Log", weight_entries_path %></li>
+                <li><%= link_to "Weight Log", current_user %></li>
                 <li class="sep"></li>
             	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
             <% else %>
-                <li><%= link_to "Sign Up", signup_path %></li>
+                <li><li><%= link_to "Register", get_started_path %></li></li>
             	<li class="sep"><%= render 'sessions/login_form' %></li>
             <% end %>
             </ul>

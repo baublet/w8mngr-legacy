@@ -70,5 +70,12 @@ Rails.application.routes.draw do
     post    "/recipes/:recipe_id/ingredients/add_measurement/:measurement_id" => "ingredients#create_from_food",
                                 as: :add_food_to_recipe
 
+    # Onboarding routes for our get started wizard
+    get     "/getstarted/register"  =>  "registrations#new",          as: :get_started
+    post    "/getstarted/register"  =>  "registrations#create",       as: :get_started_create
+    get     "/getstarted/calculate/"=>  "registrations#set_metrics",  as: :get_started_calculate
+    post    "/getstarted/calculate" =>  "registrations#save_metrics", as: :get_started_calculate_save
+    get     "/getstarted/target"    =>  "registrations#set_target",   as: :get_started_target
+    post    "/getstarted/target"    =>  "registrations#save_target",   as: :get_started_target_save
 
 end

@@ -17,7 +17,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should post create" do
     post :create, user: {
-      email: "thisisatest@fart.com",
+      email: "thisisatest@w8mngr.com",
       password: "password",
       password_confirmation: "password"
     }
