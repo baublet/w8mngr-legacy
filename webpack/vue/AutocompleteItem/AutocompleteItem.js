@@ -36,8 +36,9 @@ export default {
       this.$watch("$parent.autoCompleteSelected", function(index) {
         if (index == this.index) {
           this.loadItemData()
-          // Scroll to this item
-          smoothScroll.scrollVerticalToElementById(this.$el.id, 50)
+          // Scroll to this item if we're on mobile
+          if (window.innerWidth < 640)
+            smoothScroll.scrollVerticalToElementById(this.$el.id, 50)
         }
       })
     },

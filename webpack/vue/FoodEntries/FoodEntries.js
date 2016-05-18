@@ -170,7 +170,7 @@ export default {
       // Watch for autocomplete results
       this.$watch("newDescription", function(searchTerm) {
         this.autoComplete(searchTerm)
-        if(screen.width < 640)
+        if (window.innerWidth < 640)
             smoothScroll.scrollVerticalToElementById("description-input", 20)
       })
 
@@ -264,7 +264,7 @@ export default {
         document.getElementById("description-input")
           .focus()
         // Scroll to our description input if we're on mobile
-        if(screen.width < 640)
+        if (window.innerWidth < 640)
             smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
       } else {
         // TODO: show a fancy error here

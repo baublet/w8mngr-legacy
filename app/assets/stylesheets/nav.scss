@@ -227,10 +227,11 @@ nav .login {
         height: auto;
         padding: 1rem 0;
         background: transparent;
-        color: $black;
+        color: rgba($black, .75);
         text-transform: none;
         &:hover {
-          color: $color-primary;
+          cursor: default;
+          color: rgba($black, .75);
         }
         .screen-reader-text {
           display: inline;
@@ -301,7 +302,7 @@ nav .login {
         height: auto;
         border: 0;
         background: transparent;
-        color: rgba($black, .75);
+        color: $black;
         .fa, span {
           width: auto;
           margin: 0;
@@ -315,7 +316,7 @@ nav .login {
         }
         &:hover {
           background: transparent;
-          color: $black;
+          color: $color-primary;
         }
       }
     }

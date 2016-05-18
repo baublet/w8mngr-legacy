@@ -13,8 +13,8 @@
     </div>
   </div>
 
-  <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
-  <div class="section-inside">
+  <div class="section-inside" style="position:relative;">
+    <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
     <h1><i class="fa fa-cutlery"></i> Food Log</h1>
     <div class="foodlog-table app-form transparent table" v-if="entries.length > 0">
       <food-entry v-for="entry in entries"
