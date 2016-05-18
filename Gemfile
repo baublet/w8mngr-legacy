@@ -43,6 +43,10 @@ gem "resque"
 # Postmark, for sending our transactional emails postmarkapp.com
 gem "postmark"
 
+# For our charting, groupdate and calculate_all makes things easier
+gem "groupdate"
+gem "calculate-all"
+
 group :development, :test do
     gem "sqlite3"
     gem "byebug"
