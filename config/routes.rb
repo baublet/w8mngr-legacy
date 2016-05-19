@@ -72,9 +72,8 @@ Rails.application.routes.draw do
 
     # FoodEntriesData routes (for charting)
     get     "/data/food_entries/:column/:length_scope/:length(.:format)" =>
-                                "food_entries_data_controller#index",
+                                "food_entries_data#index",
                                 as: :food_entries_data
-
 
     # Onboarding routes for our get started wizard
     get     "/getstarted/register"  =>  "registrations#new",          as: :get_started
@@ -82,6 +81,6 @@ Rails.application.routes.draw do
     get     "/getstarted/calculate/"=>  "registrations#set_metrics",  as: :get_started_calculate
     post    "/getstarted/calculate" =>  "registrations#save_metrics", as: :get_started_calculate_save
     get     "/getstarted/target"    =>  "registrations#set_target",   as: :get_started_target
-    post    "/getstarted/target"    =>  "registrations#save_target",   as: :get_started_target_save
+    post    "/getstarted/target"    =>  "registrations#save_target",  as: :get_started_target_save
 
 end
