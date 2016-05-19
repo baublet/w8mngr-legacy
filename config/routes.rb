@@ -70,6 +70,12 @@ Rails.application.routes.draw do
     post    "/recipes/:recipe_id/ingredients/add_measurement/:measurement_id" => "ingredients#create_from_food",
                                 as: :add_food_to_recipe
 
+    # FoodEntriesData routes (for charting)
+    get     "/data/food_entries/:column/:scope/:length(.:format)" =>
+                                "food_entries_data_controller#index",
+                                as: :food_entries_data
+
+
     # Onboarding routes for our get started wizard
     get     "/getstarted/register"  =>  "registrations#new",          as: :get_started
     post    "/getstarted/register"  =>  "registrations#create",       as: :get_started_create
