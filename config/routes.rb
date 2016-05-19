@@ -71,7 +71,7 @@ Rails.application.routes.draw do
                                 as: :add_food_to_recipe
 
     # FoodEntriesData routes (for charting)
-    get     "/data/food_entries/:column/:length_scope/:length(.:format)" =>
+    get     "/data/food_entries/:column/:length_scope/:num(.:format)" =>
                                 "food_entries_data#index",
                                 as: :food_entries_data
 
