@@ -4,11 +4,11 @@ class FoodEntryData
   attr_accessor(
     :user_id,
     :length_scope,
-    :length
+    :num
   )
 
   validates :user_id,       presence: true
-  validates :length,        presence: true,
+  validates :num,           presence: true,
                         numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :length_scope,  presence: true,
                            inclusion: { in: %w(day week month year),
@@ -26,17 +26,20 @@ class FoodEntryData
   # Params:
   # +column+:: column you wish to return data from. Values: +:calories, :fat,
   #            :carbs, :protein+. Default: +:calories+
-  def time_data column = :calories
-    {} if !valid?
-    {} if ![:calories, :fat, :carbs, :protein].include?(column)
+  def time_data column = "calories"
+    return {} if !valid?
+    return {} if !["calories", "fat", "carbs", "protein"].include?(column)
 
     scope_multiplier = 1
     scope_multiplier = length_scope == "week" ? 7 : scope_multiplier
     scope_multiplier = length_scope == "month" ? 30 : scope_multiplier
     scope_multiplier = length_scope == "year" ? 360 : scope_multiplier
 
+    length = num.to_i
+    last = length * scope_multiplier
+
     # First, we get the days
-    days = FoodEntry.where(user_id: user_id).group_by_day(:day_ts, default_value: nil, last: length * scope_multiplier).sum(column)
+    days = FoodEntry.where(user_id: user_id).group_by_day(:day_ts, default_value: nil, last: last).sum(column)
     days = days.select {|k,v| true if !v.nil?}
     return days if length_scope == "day"
 

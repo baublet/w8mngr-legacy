@@ -12,13 +12,10 @@ class FoodEntriesDataController < ApplicationController
 
   def process_data column
     id = current_user.id
-    data = FoodEntryData.new(food_entry_data_params)
-    data.id = id
+    length = params[:num].to_i
+    length_scope = params[:length_scope]
+    data = FoodEntryData.new(user_id: id, num: length, length_scope: length_scope)
     return data.time_data column
-  end
-
-  def food_entry_data_params
-    params.permit(:length, :length_scope)
   end
 
 end
