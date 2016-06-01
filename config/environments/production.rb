@@ -78,7 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Production host address
-  config.x.host = 'w8mngr-baublet.c9users.io'
+  config.x.host = 'w8mngr.com'
 
   ::Rails.configuration.webpack.output_dir = "public/webpack"
 end
