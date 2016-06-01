@@ -23,6 +23,3 @@
 /asset-sources
 
 /node_modules
-
-# CSV data to import
-/db/import/*
