@@ -16,6 +16,7 @@ export default {
   data: function() {
     return {
       newAmount: 1,
+      selected: false,
     }
   },
   events: {
@@ -25,7 +26,7 @@ export default {
     },
     "selected": function() {
       if(this.selectedMeasurement !== this.index) return false
-
+      this.selected = true
       // Focus on our measurements box and select the text
       var self = this
       _do(function() {
@@ -77,11 +78,14 @@ export default {
         this.dispatchMeasurementInfo()
         // Focus on our measurements box and select the text
         this.$emit("selected")
+        this.selected = true
         return true
       }
+      this.selected = false
       return false
     },
     cAmount: function() {
+      if(this.amount == 0 || isNaN(this.newAmount)) return 1
       var multiplier = parseFloat(this.newAmount / this.amount)
       if (!isNaN(multiplier)) return multiplier
       return this.amount
