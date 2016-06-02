@@ -201,9 +201,10 @@
 
 .food {
   margin:0 1rem 1rem 0;
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 1rem;
   transition: all .15s ease-in-out;
   background: $white;
+  border-bottom: 2px solid $color-usda;
   @include height(1);
   @include mqAfterSize(500px) {
     max-width: calc(334px - 2rem);
@@ -262,6 +263,13 @@
     font-size: .8rem;
     opacity: .75;
     margin: 0;
+  }
+  &.local {
+    border-color: $color-primary;
+  }
+  &.user-owned {
+    border-color: $color-primary-light;
+    padding-left: 2rem;
   }
 }
 
