@@ -25,9 +25,15 @@ ActiveRecord::Schema.define(version: 20160518174007) do
     t.integer  "protein"
     t.integer  "day",                                                   null: false
     t.integer  "user_id"
+<<<<<<< HEAD
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
     t.datetime "day_ts",                default: '2016-06-02 17:27:21', null: false
+=======
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.datetime "day_ts",                            null: false
+>>>>>>> 9be293f3831cfc9626a14848ee9e94c5d4b3ac57
   end
 
   add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at", using: :btree
