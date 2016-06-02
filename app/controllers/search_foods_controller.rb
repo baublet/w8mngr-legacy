@@ -96,7 +96,7 @@ class SearchFoodsController < ApplicationController
   def search_foods
     # Prepare the pagination with 25 per page
     page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
-    per_page = 25
+    per_page = 30
 
     # Search the wider database with a preference for the user's saved and liked foods
 
