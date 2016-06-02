@@ -39,7 +39,7 @@ class FoodEntryData
     last = length * scope_multiplier
 
     # First, we get the days
-    days = FoodEntry.where(user_id: user_id).group_by_day(:day_ts, default_value: nil, last: last).sum(column)
+    days = FoodEntry.where(user_id: user_id).group_by_day(:day_ts, default_value: 0, last: last).sum(column)
     days = days.select {|k,v| true if !v.nil?}
     return days if length_scope == "day"
 

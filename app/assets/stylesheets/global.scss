@@ -205,3 +205,20 @@ hr {
   line-height: 1rem;
   font-size: .8rem;
 }
+
+.data-table {
+  border: 1px solid rgba($black, .25);
+  thead th, tfoot th {
+    font-weight: bold;
+    color: $white;
+    background: rgba($black, .75);
+    text-transform: uppercase;
+    font-size: .75rem;
+  }
+  td,th {
+    padding: .75rem;
+  }
+  tr:hover td {
+    background: rgba($black, .05);
+  }
+}

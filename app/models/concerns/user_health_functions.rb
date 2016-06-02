@@ -89,7 +89,6 @@ module UserHealthFunctions
     last_weight = 0
     calories.each_with_index do |week, key|
       # Do nothing if there's no weight or calorie average
-      # byebug
       next if !week[1].present? || week[1].to_i == 0
       next if !weights[key][1].present? || weights[key][1].to_i == 0
       if tdee == 0

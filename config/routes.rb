@@ -83,4 +83,6 @@ Rails.application.routes.draw do
     get     "/getstarted/target"    =>  "registrations#set_target",   as: :get_started_target
     post    "/getstarted/target"    =>  "registrations#save_target",  as: :get_started_target_save
 
+    # Dashboard
+    get     "/dashboard"            => "dashboard#index",             as: :dashboard
 end

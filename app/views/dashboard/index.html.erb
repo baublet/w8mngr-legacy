@@ -1,0 +1,72 @@
+<% provide(:title, "Dashboard") %>
+
+<%= render partial: "shared/app_menu" %>
+
+
+<div id="dashboard-app" class="hide-if-no-js"></div>
+
+<noscript>
+</noscript>
+
+<div class="dashboard-wrapper app-wrapper">
+  <div class="section-inside">
+    <h1><i class="fa fa-tachometer"></i> Dashboard</h1>
+    <div class="dash">
+
+      <div class="weight-chart">
+
+      </div>
+
+      <div class="inset week-review">
+        <h2>Week in Review</h2></h2>
+        <table class="week-review-table data-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Carbs</th>
+              <th>Protein</th>
+              <th>Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% (0..6).each do |i| %>
+              <tr>
+                <td>
+                  <%= @week_calories[i][0].strftime('%A') %>
+                </td>
+                <td>
+                  <%= @week_calories[i][1] > 0 ? number_with_delimiter(@week_calories[i][1].to_i) : '-' %>
+                </td>
+                <td>
+                  <%= @week_fat[i][1] > 0 ? number_with_delimiter(@week_fat[i][1]) : '-' %>
+                </td>
+                <td>
+                  <%= @week_carbs[i][1] > 0 ? number_with_delimiter(@week_carbs[i][1]) : '-' %>
+                </td>
+                <td>
+                  <%= @week_protein[i][1] > 0 ? number_with_delimiter(@week_protein[i][1]) : '-' %>
+                </td>
+                <td>
+
+                </td>
+              </tr>
+            <% end  %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Average</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
