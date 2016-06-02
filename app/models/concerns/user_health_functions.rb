@@ -75,34 +75,42 @@ module UserHealthFunctions
     date = Date.today
 
     # Now, calculate their TDEE using the first week as our baseline
-    calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week").time_data("calories")
-
+    calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week")
+                            .time_data("calories")
+                            .to_a
+                            # We turn this into an array because otherwise the
+                            # hash keys make it impossible to navigate!
+    weights = WeightEntry.where(user_id: uid)
+                            .group_by_week(:day_ts, default_value: nil, last: 12)
+                            .average(:value)
+                            .to_a
     tdee = 0
     last_calories = 0
     last_weight = 0
-    averages.each do |week|
+    calories.each_with_index do |week, key|
       # Do nothing if there's no weight or calorie average
-      next if !week["weight"].present? && week["weight"] == 0
-      next if !week["calories"].present? && week["calories"] == 0
+      # byebug
+      next if !week[1].present? || week[1].to_i == 0
+      next if !weights[key][1].present? || weights[key][1].to_i == 0
       if tdee == 0
-        tdee = week["calories"]
-        last_weight = week["weight"]
-        last_calories = week["calories"]
+        tdee = week[1]
+        last_weight = weights[key][1]
+        last_calories = week[1]
         next
       end
-      weight_difference = week["weight"] / last_weight
-      calorie_difference = week["calories"] / last_calories
+      weight_difference = weights[key][1] / last_weight
+      calorie_difference = week[1] / last_calories
       if weight_difference == 1
         # If there's no weight difference, average the calories for the two weeks
         # and set that as their TDEE
-        tdee = (tdee + week["calories"]) / 2
+        tdee = (tdee + week[1]) / 2
       else
         # Otherwise, average the differences
         adjustment = (weight_difference + calorie_difference) / 2
         tdee = tdee * adjustment
       end
-      last_weight = week["weight"]
-      last_calories = week["calories"]
+      last_weight = weights[key][1]
+      last_calories = week[1]
     end
     return tdee.to_f.ceil
   end

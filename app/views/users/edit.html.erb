@@ -101,7 +101,7 @@
   	<p><em>Note:</em> the more information we have, the more accurate this
   	calculation becomes.</p>
 
-    <% tdee = @user.adaptive_tdee %>
+    <% tdee = @user.adaptive_tdee current_user.id %>
     <%= tdee.nil? ? "" : raw("<p><label>Adaptive TDEE:</label> #{number_with_delimiter(tdee.to_s)}</p>") %>
 	</div>
 
