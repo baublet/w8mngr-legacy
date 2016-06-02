@@ -71,29 +71,12 @@ module UserHealthFunctions
 
   # Returns a calculated adaptive BMR based on weight entries and calories.
   # Returns nil if there aren't enough data points.
-  def adaptive_tdee
-    max_weeks = 12
-    min_weeks = 2
+  def adaptive_tdee (uid, max_weeks = 12, min_weeks = 2)
     date = Date.today
-    averages = []
-    max_weeks.times do |x|
-      date = date - (x * 7)
-      week_av = week_average(date)
-      # Only add this week if we have both an average weight and calories
-      next if week_av["weight"].nil? || week_av["calories"].nil?
-      averages << week_av if week_av["weight"] > 0 && week_av["calories"] > 0
-    end
-    return nil if averages.count < min_weeks
-    # We also need at least two weeks that have both a weight and calories
-    weights = 0
-    calories = 0
-    averages.each do |week|
-      weights += 1 if week["weight"].present? && week["weight"] > 0
-      calories += 1 if week["calories"].present? && week["calories"] > 0
-      break if weights > 1 && calories > 1
-    end
-    return nil if weights < 2 || calories < 2
+
     # Now, calculate their TDEE using the first week as our baseline
+    calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week").time_data("calories")
+
     tdee = 0
     last_calories = 0
     last_weight = 0

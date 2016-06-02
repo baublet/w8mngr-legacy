@@ -24,8 +24,8 @@ class FoodEntryData
   # Returns a hash.
   #
   # Params:
-  # +column+:: column you wish to return data from. Values: +:calories, :fat,
-  #            :carbs, :protein+. Default: +:calories+
+  # +column+:: column you wish to return data from. Values: +calories+, +fat+,
+  #            +carbs+, +protein+. Default: +calories+
   def time_data column = "calories"
     return {} if !valid?
     return {} if !["calories", "fat", "carbs", "protein"].include?(column)
