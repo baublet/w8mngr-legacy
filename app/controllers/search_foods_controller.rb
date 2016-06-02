@@ -103,10 +103,9 @@ class SearchFoodsController < ApplicationController
     # Break the search into its parts and search for each term
     query = params[:q].squish
     results = Food.search_foods(query)
-                  .limit(per_page + 1)
+                  .limit(per_page + 1)                          # We do +1 here because if, at the end, we have per_page + 1 entries, we know there's a next page
                   .offset((page - 1) * per_page)
-    # We do +1 here because if, at the end, we have per_page + 1 entries, we know there's a next page
-    @searchresults = results
+    @searchresults = results.each { |x| x.data_source = "local" }
 
     # We need to ping the USDA for as many entries as we need to get to per_page
     usda_entries = per_page + 1 - results.size
@@ -114,11 +113,13 @@ class SearchFoodsController < ApplicationController
     # Then, search the USDA API if we have fewer than per_page + 1 results
     if usda_entries > 0
       usda = Apis::USDA.new
-      @searchresults = @searchresults + usda.search({
+      @searchresults += usda.search({
         q:      params[:q],
         max:    usda_entries,
         offset: (page - 1) * per_page
-      })
+      }).each { |x|
+        x["data_source"] = "usda"
+      }
     end
 
     # Matches? Show the search form

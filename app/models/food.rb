@@ -13,6 +13,10 @@ class Food < ActiveRecord::Base
   has_many     :measurements, dependent: :destroy, inverse_of: :food
   validates    :measurements, :presence => true
 
+  # The food search uses this attribute to tell the frontend how to render the
+  # food (it will vary by data source)
+  attr_accessor  :data_source
+
   include PgSearch
   pg_search_scope :search_foods,
                       :against => {
