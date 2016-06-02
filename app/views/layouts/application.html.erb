@@ -6,6 +6,18 @@
     <meta charset="UTF-8" />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track' => true %>
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Roboto:400,100,400italic,700,900:latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })(); </script>
     <%= csrf_meta_tags %>
 </head>
 <body class="nojs <%= controller.controller_name %> <%= controller.action_name %>">
@@ -96,17 +108,5 @@
 
 <%= javascript_include_tag *webpack_asset_paths("application") %>
 
-<script type="text/javascript">
-  WebFontConfig = {
-    google: { families: [ 'Roboto:400,100,400italic,700,900:latin' ] }
-  };
-  (function() {
-    var wf = document.createElement('script');
-    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })(); </script>
 </body>
 </html>

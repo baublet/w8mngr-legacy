@@ -9,5 +9,11 @@ class DashboardController < ApplicationController
     @week_fat = data.time_data("fat").to_a
     @week_carbs = data.time_data("carbs").to_a
     @week_protein = data.time_data("protein").to_a
+
+    @week_weights = WeightEntry.where(user_id: current_user.id)
+                                .group_by_day(:day_ts, default_value: 0, last: 8)
+                                .average(:value)
+                                .to_a
+
   end
 end

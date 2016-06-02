@@ -207,11 +207,11 @@ hr {
 }
 
 .data-table {
-  border: 1px solid rgba($black, .25);
   thead th, tfoot th {
     font-weight: bold;
-    color: $white;
-    background: rgba($black, .75);
+    color: rgba($black, .75);
+    border-bottom: 3px solid rgba($black, .75);
+    background: rgba($black, .025);
     text-transform: uppercase;
     font-size: .75rem;
   }
@@ -219,6 +219,12 @@ hr {
     padding: .75rem;
   }
   tr:hover td {
-    background: rgba($black, .05);
+    background: rgba($black, .025);
+  }
+  tbody td {
+    font-size: .75rem;
+  }
+  tfoot td {
+    font-weight: bold;
   }
 }

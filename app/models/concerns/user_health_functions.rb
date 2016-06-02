@@ -58,7 +58,7 @@ module UserHealthFunctions
     averages["calories"] = week.sum(:calories, {conditions: "calories > 0"}).to_i / num_days
     averages["fat"] = week.sum(:fat, {conditions: "fat > 0"}).to_i / num_days
     averages["carbs"] = week.sum(:carbs, {conditions: "carbs > 0"}).to_i / num_days
-    averages["protein"] = week.average(:protein, {conditions: "protein > 0"}).to_i / num_days
+    averages["protein"] = week.sum(:protein, {conditions: "protein > 0"}).to_i / num_days
     averages["weight"] = weightentries.where(:day => days).average(:value)
     return averages
   end
