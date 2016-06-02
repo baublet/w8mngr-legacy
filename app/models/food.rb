@@ -17,6 +17,11 @@ class Food < ActiveRecord::Base
   # food (it will vary by data source)
   attr_accessor  :data_source
 
+  # Sets the data_source default to be local
+  def data_source
+    @data_source || "local"
+  end
+
   include PgSearch
   pg_search_scope :search_foods,
                       :against => {
