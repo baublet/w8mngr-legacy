@@ -204,8 +204,13 @@
   padding: 1rem 1rem 1rem 2rem;
   transition: all .15s ease-in-out;
   background: $white;
-  width: calc(320px - 1rem);
   @include height(1);
+  @include mqAfterSize(500px) {
+    max-width: calc(334px - 2rem);
+    width: calc(50% - 1.2rem);
+    display: inline-block;
+    vertical-align: top;
+  }
   .measurement {
     margin: 1rem -1rem 0 -2rem;
     padding: .5rem 1rem 0;
