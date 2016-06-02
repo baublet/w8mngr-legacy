@@ -22,7 +22,7 @@ class FoodEntry < ActiveRecord::Base
 				multiplier = 1
 			end
 			multiplier = 1 if multiplier == 0
-			description = "(#{(multiplier * measurement.amount.to_i).to_s} #{measurement.unit}) " + food.name
+			description = "#{(multiplier * measurement.amount.to_i).to_s} #{measurement.unit} " + food.name
 			calories = measurement.calories * multiplier
 			fat = measurement.fat * multiplier
 			carbs = measurement.carbs * multiplier
