@@ -70,16 +70,16 @@ class SearchFoodsController < ApplicationController
   # Abstracting this out to send back autocomplete results to the Javascript API
   # on all autocomplete results
   def search_recipes
-    # Prepare the pagination with 25 per page
+    # Prepare the pagination with 30 per page
     page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
-    per_page = 25
+    per_page = 30
 
     # Break the search into its parts and search for each term
     query = params[:q].squish
     results = Recipe.search_recipes(query)
-                  .limit(per_page + 1)
-                  .offset((page - 1) * per_page)
-    # We do +1 here because if, at the end, we have 26 entries, we know there's a next page
+                    .limit(per_page + 1)
+                    .offset((page - 1) * per_page)
+    # We do +1 here because if, at the end, we have per_page + 1 entries, we know there's a next page
     @searchresults = results
 
     # Matches? Show the search form
@@ -94,7 +94,7 @@ class SearchFoodsController < ApplicationController
   # I'm abstracting this out because in a JSON end point, we're going to want
   # to return search results for both recipes and foods
   def search_foods
-    # Prepare the pagination with 25 per page
+    # Prepare the pagination with 30 per page
     page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
     per_page = 30
 
@@ -105,7 +105,7 @@ class SearchFoodsController < ApplicationController
     results = Food.search_foods(query)
                   .limit(per_page + 1)
                   .offset((page - 1) * per_page)
-    # We do +1 here because if, at the end, we have 26 entries, we know there's a next page
+    # We do +1 here because if, at the end, we have per_page + 1 entries, we know there's a next page
     @searchresults = results
 
     # We need to ping the USDA for as many entries as we need to get to per_page
