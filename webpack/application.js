@@ -7,6 +7,7 @@ console.log("Loading initialization files...")
 require("./init/init.noJS.js")
 require("./init/init.navigation.js")
 require("./init/init.foodEntries.js")
+require("./init/init.dashboard.js")
 
 // Run our initializations
 console.log("Initializing w8mngr...")

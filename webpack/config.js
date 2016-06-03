@@ -37,6 +37,9 @@ module.exports = {
       update: function(id) {
         return "/food_entries/" + id
       }
-    }
+    },
+    dashboard: {
+      quarter_calories: "/data/food_entries/calories/day/270",
+    },
   }
 }

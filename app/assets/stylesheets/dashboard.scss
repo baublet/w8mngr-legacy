@@ -1,0 +1,12 @@
+.week-review-table {
+  .day {
+    font-weight: bold;
+    a {
+      color: $black;
+      &:hover {
+        color: $color-primary;
+        text-decoration: underline;
+      }
+    }
+  }
+}
