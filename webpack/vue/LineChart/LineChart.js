@@ -1,4 +1,5 @@
 var Chart = require("chart.js")
+require("../../utilities/strftime.js")
 
 // This is our food-entry item component, slim and easy to understand
 export default {
@@ -10,7 +11,6 @@ export default {
       loadingData: 0,
       data: [],
       chartObject: null,
-      requestedData: [],
     }
   },
   events: {
@@ -38,7 +38,9 @@ export default {
           url: uris[i],
           onResponse: function(response) {
             // Add the user return data to our model
-            app.requestedData.push(response)
+            response = JSON.parse(response)
+            var cleaned = Object.keys(response).map(function (key) {return [key, response[key]]})
+            app.data.push(cleaned)
             app.loadingData--
             if(!app.loadingData) callback()
           },
@@ -47,10 +49,40 @@ export default {
     },
     loadQuarterCalories: function() {
       var app = this
-      this.loadData(this.$fetchURI.dashboard.quarter_calories, function() {
-        console.log("Oh my!")
-        console.log(app)
-        //app.chartObject = new Chart(app.$el)
+      uris = [
+        this.$fetchURI.dashboard.quarter_calories,
+        this.$fetchURI.dashboard.quarter_weights
+        ]
+      this.loadData(uris, function() {
+        console.log("MAKING CHART")
+        // Make our labels from the first data set (they will be matched on the
+        // backend by Postgres automatically)
+        var labels = app.data[0].map(function(a){return new Date(a[0]).strftime("%B %e")})
+        app.chartObject = new Chart(app.$el, {
+          type: 'bar',
+          options: {
+            legend: {
+              display: true,
+              position: "bottom",
+            },
+          },
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Calories",
+                borderColor: "rgba(0,0,0,1)",
+                data: app.data[0].map(function(a){
+                  if(!a[1]) return null
+                  return a[1]
+                }),
+                lineTension: .7,
+                pointRadius: 0,
+                fill: false,
+              }
+            ],
+          },
+        })
       })
     },
   },
