@@ -9,7 +9,7 @@ export default {
   data: function() {
     return {
       loadingData: 0,
-      data: [],
+      data: {},
       chartObject: null,
     }
   },
@@ -25,22 +25,23 @@ export default {
   methods: {
     loadData: function(uris, callback) {
       this.loadingData = 0
-      this.requestedData = []
-      if (typeof uris !== "array") uris = [uris]
+      this.data = {}
+      if (typeof uris !== "object") uris = [uris]
       console.log("Loading line chart data from URIs:")
       console.log(uris)
       var app = this
       for(var i = 0; i < uris.length; i++) {
+        let name = uris[i][0],
+            val  = uris[i][1]
         this.loadingData++
         // Load the chart data
         this.$fetch({
           method: "GET",
-          url: uris[i],
-          onResponse: function(response) {
+          url: val,
+          onSuccess: function(response) {
             // Add the user return data to our model
-            response = JSON.parse(response)
-            var cleaned = Object.keys(response).map(function (key) {return [key, response[key]]})
-            app.data.push(cleaned)
+            console.log(response)
+            app.data[name] = response
             app.loadingData--
             if(!app.loadingData) callback()
           },
@@ -49,18 +50,31 @@ export default {
     },
     loadQuarterCalories: function() {
       var app = this
-      uris = [
-        this.$fetchURI.dashboard.quarter_calories,
-        this.$fetchURI.dashboard.quarter_weights
-        ]
+      var uris = [
+                  ['calories', this.$fetchURI.dashboard.quarter_calories ],
+                  ['weights',  this.$fetchURI.dashboard.quarter_weights  ],
+                 ]
       this.loadData(uris, function() {
         console.log("MAKING CHART")
-        // Make our labels from the first data set (they will be matched on the
-        // backend by Postgres automatically)
-        var labels = app.data[0].map(function(a){return new Date(a[0]).strftime("%B %e")})
+        // Make our labels from our calories
+        var labels = app.data.calories.map(function(a){return new Date(a[0]).strftime("%B %e")})
         app.chartObject = new Chart(app.$el, {
           type: 'bar',
           options: {
+            scales: {
+              yAxes: [
+                {
+                  scaleType: 'linear',
+                  id: 'calories',
+                  position: 'right',
+                },
+                {
+                  scaleType: 'linear',
+                  id: 'weights',
+                  position: 'left',
+                },
+              ],
+            },
             legend: {
               display: true,
               position: "bottom",
@@ -71,14 +85,24 @@ export default {
             datasets: [
               {
                 label: "Calories",
+                data: app.data.calories.map(function(a){
+                  if(!a[1]) return null
+                  return a[1]
+                }),
+                yAxisID: 'calories',
+              },
+              {
+                label: "Weights",
                 borderColor: "rgba(0,0,0,1)",
-                data: app.data[0].map(function(a){
+                data: app.data.weights.map(function(a){
                   if(!a[1]) return null
                   return a[1]
                 }),
                 lineTension: .7,
                 pointRadius: 0,
                 fill: false,
+                type: 'line',
+                yAxisID: 'weights',
               }
             ],
           },

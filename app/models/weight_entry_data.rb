@@ -22,11 +22,11 @@ class WeightEntryData
     return [] if !valid?
 
     if length_scope == "day"
-      data = WeightEntry.where(user_id: user_id)
+      days = WeightEntry.where(user_id: user_id)
                         .group_by_day(:day_ts, default_value: 0, last: num)
                         .average(:value)
                         .to_a
-      returndays
+      return days
     end
 
     # Group by the weeks

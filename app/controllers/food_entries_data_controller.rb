@@ -10,7 +10,7 @@ class FoodEntriesDataController < ApplicationController
 
   private
 
-  def process_data column
+  def process_data
     id = current_user.id
     length = params[:num].to_i
     length_scope = params[:length_scope]
