@@ -77,13 +77,9 @@ module UserHealthFunctions
     # Now, calculate their TDEE using the first week as our baseline
     calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week")
                             .time_data("calories")
-                            .to_a
-                            # We turn this into an array because otherwise the
-                            # hash keys make it impossible to navigate!
-    weights = WeightEntry.where(user_id: uid)
-                            .group_by_week(:day_ts, default_value: nil, last: 12)
-                            .average(:value)
-                            .to_a
+    weights = WeightEntryData.new(user_id: uid, num: 12, length_scope: "week")
+                            .time_data
+
     tdee = 0
     last_calories = 0
     last_weight = 0

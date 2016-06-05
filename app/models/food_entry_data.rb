@@ -21,14 +21,14 @@ class FoodEntryData
   # days in the designated grouping (week, month, year) and returns
   # a much smaller hash.
   #
-  # Returns a hash.
+  # Returns an array in the form of [[DateString, ValueString], ...]
   #
   # Params:
   # +column+:: column you wish to return data from. Values: +calories+, +fat+,
   #            +carbs+, +protein+. Default: +calories+
   def time_data column = "calories"
-    return {} if !valid?
-    return {} if !["calories", "fat", "carbs", "protein"].include?(column)
+    return [] if !valid?
+    return [] if !["calories", "fat", "carbs", "protein"].include?(column)
 
     scope_multiplier = 1
     scope_multiplier = length_scope == "week" ? 7 : scope_multiplier
@@ -39,29 +39,46 @@ class FoodEntryData
     last = length * scope_multiplier
 
     # First, we get the days
-    days = FoodEntry.where(user_id: user_id).group_by_day(:day_ts, default_value: 0, last: last).sum(column)
-    days = days.select {|k,v| true if !v.nil?}
+    days = FoodEntry.where(user_id: user_id)
+                    .group_by_day(:day_ts, default_value: 0, last: last)
+                    .sum(column)
+                    .to_a
     return days if length_scope == "day"
 
     # Group by the weeks
     if length_scope == "week"
       weeks = days.group_by_week() { |d| d[0] }
-      return Hash[weeks.map { |k,v| [k, v.map(&:last).inject(:+) / v.size] rescue [k, 0] }]
+      return average_of weeks
     end
 
     # Group by months
     if length_scope == "month"
       months = days.group_by_month { |d| d[0] }
-      return Hash[months.map { |k,v| [k, v.map(&:last).inject(:+) / v.size] rescue [k, 0] }]
+      return average_of months
     end
 
     # Group by year
     if length_scope == "year"
       years = days.group_by_year { |d| d[0] }
-      return Hash[years.map { |k,v| [k, v.map(&:last).inject(:+) / v.size] rescue [k, 0] }]
+      return average_of years
     end
 
-    return {}
+    return []
+  end
+
+  def average_of data
+    return data.map { |k,v|
+      begin
+        # First, find out how many non-zero entries there are to we can get an
+        # accurate average
+        good_days = v.select { |e| e[1] > 0 }
+        total_days = good_days.count
+        [k, nil] if total_days < 1
+        [k, v.map(&:last).inject(:+) / total_days]
+      rescue
+        [k, nil]
+      end
+    }
   end
 
 end
