@@ -87,12 +87,14 @@ export default {
             max_weights_y =  parseInt(app.FindMax(app.data.weights) * 1.2, 10)
         app.chartObject = new Chart(app.$el, {
           type: 'bar',
+          defaultFontFamily: "'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
           options: {
+            showLines: true,
             scales: {
               xAxes: [
                 {
                   ticks: {
-                    maxTicksLimit: 5,
+                    maxTicksLimit: 7,
                     max: max_calories_y,
                   },
                   gridLines: {
@@ -102,14 +104,10 @@ export default {
               ],
               yAxes: [
                 {
+                  display: false,
                   scaleType: 'linear',
                   id: 'calories',
-                  position: 'right',
-                  gridLines: {
-                    display: false,
-                  },
                   ticks: {
-                    maxTicksLimit: 5,
                     max: max_calories_y,
                   }
                 },
@@ -121,7 +119,7 @@ export default {
                     display: false,
                   },
                   ticks: {
-                    maxTicksLimit: 5,
+                    maxTicksLimit: 4,
                     min: min_weights_y,
                     max: max_weights_y,
                   },
@@ -146,12 +144,12 @@ export default {
               },
               {
                 label: "Weights",
-                borderColor: "rgba(0,0,0,1)",
+                borderColor: "#007E80",
                 data: app.data.weights.map(function(a){return a.y}),
                 fill: false,
                 yAxisID: 'weights',
                 type: 'line',
-                lineTension: 0.4,
+                lineTension: 0,
                 spanGaps: true,
               },
             ],
