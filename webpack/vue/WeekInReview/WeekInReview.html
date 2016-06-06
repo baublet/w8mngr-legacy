@@ -1,5 +1,5 @@
 <div class="inset week-review">
-  <h2>Week in Review</h2></h2>
+  <h2><i class="fa fa-table" aria-hidden="true"></i> Week in Review</h2></h2>
   <table class="week-review-table data-table">
     <thead>
       <tr>
@@ -12,23 +12,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="day in week_days">
+      <tr v-for="day in weekDays">
         <td class="day"><a href="{{ day[0] }}" v-text="day[1]"></a></a></td>
-        <td v-text="week_calories[$index][1]"></td>
-        <td v-text="week_fat[$index][1]"></td>
-        <td v-text="week_carbs[$index][1]"></td>
-        <td v-text="week_protein[$index][1]"></td>
-        <td v-text="week_weights[$index][1]"></td>
+        <td v-text="weekCalories[$index][1]"></td>
+        <td v-text="weekFat[$index][1]"></td>
+        <td v-text="weekCarbs[$index][1]"></td>
+        <td v-text="weekProtein[$index][1]"></td>
+        <td v-text="weekWeights[$index][1]"></td>
       </tr>
     </tbody>
-    <tfoot>
+    <tfoot v-if="weekAverages">
       <tr>
         <th>Average</th>
-        <td v-text="week_averages.calories"></td>
-        <td v-text="week_averages.fat"></td>
-        <td v-text="week_averages.carbs"></td>
-        <td v-text="week_averages.protein"></td>
-        <td v-text="week_averages.weight"></td>
+        <td v-text="weekAverages.calories"></td>
+        <td v-text="weekAverages.fat"></td>
+        <td v-text="weekAverages.carbs"></td>
+        <td v-text="weekAverages.protein"></td>
+        <td v-text="weekAverages.weight"></td>
       </tr>
     </tfoot>
   </table>

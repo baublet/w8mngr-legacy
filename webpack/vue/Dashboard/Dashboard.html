@@ -3,6 +3,12 @@
   <line-chart chart="quarter-calories"></line-chart>
   <div class="stats-and-review">
     <user-stats></user-stats>
-    <week-in-review></week-in-review>
+    <week-in-review :week-averages="weekAverages"
+                    :week-days="weekDays"
+                    :week-calories="weekCalories"
+                    :week-fat="weekFat"
+                    :week-carbs="weekCarbs"
+                    :week-protein="weekProtein"
+                    :week-weights="weekWeights"></week-in-review>
   </div>
 </div>
