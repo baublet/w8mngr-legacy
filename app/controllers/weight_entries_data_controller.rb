@@ -15,7 +15,7 @@ class WeightEntriesDataController < ApplicationController
     length = params[:num].to_i
     length_scope = params[:length_scope]
     data = WeightEntryData.new(user_id: id, num: length, length_scope: length_scope)
-    return data.time_data
+    return data.time_data.map { |a| [a[0], WeightEntry.get_display_value(a[1], current_user.unit)] }
   end
 
 end

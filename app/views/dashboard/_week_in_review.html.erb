@@ -1,0 +1,50 @@
+<div class="inset week-review">
+  <h2>Week in Review</h2></h2>
+  <table class="week-review-table data-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Calories</th>
+        <th>Fat</th>
+        <th>Carbs</th>
+        <th>Protein</th>
+        <th>Weight</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (0..6).each do |i| %>
+        <tr>
+          <td class="day">
+            <%= link_to @week_calories[i][0].strftime('%A'),
+                         food_log_day_path(day: @week_calories[i][0].strftime('%Y%m%d')) %>
+          </td>
+          <td>
+            <%= @week_calories[i][1] > 0 ? number_with_delimiter(@week_calories[i][1].to_i) : '-' %>
+          </td>
+          <td>
+            <%= @week_fat[i][1] > 0 ? number_with_delimiter(@week_fat[i][1]) : '-' %>
+          </td>
+          <td>
+            <%= @week_carbs[i][1] > 0 ? number_with_delimiter(@week_carbs[i][1]) : '-' %>
+          </td>
+          <td>
+            <%= @week_protein[i][1] > 0 ? number_with_delimiter(@week_protein[i][1]) : '-' %>
+          </td>
+          <td>
+            <%= @week_weights[i][1] > 0 ? WeightEntry.get_display_value(@week_weights[i][1], current_user.unit).to_s + " " + current_user.unit : '-' %>
+          </td>
+        </tr>
+      <% end  %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Average</th>
+        <td><%= number_with_delimiter(@week_averages["calories"].to_i) %></td>
+        <td><%= number_with_delimiter(@week_averages["fat"].to_i) %></td>
+        <td><%= number_with_delimiter(@week_averages["carbs"].to_i) %></td>
+        <td><%= number_with_delimiter(@week_averages["protein"].to_i) %></td>
+        <td><%= number_with_delimiter(WeightEntry.get_display_value(@week_averages["weight"].to_i, current_user.unit).to_s + " " + current_user.unit) %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

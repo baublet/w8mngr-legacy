@@ -1,0 +1,35 @@
+<div class="inset week-review">
+  <h2>Week in Review</h2></h2>
+  <table class="week-review-table data-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Calories</th>
+        <th>Fat</th>
+        <th>Carbs</th>
+        <th>Protein</th>
+        <th>Weight</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="day in week_days">
+        <td class="day"><a href="{{ day[0] }}" v-text="day[1]"></a></a></td>
+        <td v-text="week_calories[$index][1]"></td>
+        <td v-text="week_fat[$index][1]"></td>
+        <td v-text="week_carbs[$index][1]"></td>
+        <td v-text="week_protein[$index][1]"></td>
+        <td v-text="week_weights[$index][1]"></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Average</th>
+        <td v-text="week_averages.calories"></td>
+        <td v-text="week_averages.fat"></td>
+        <td v-text="week_averages.carbs"></td>
+        <td v-text="week_averages.protein"></td>
+        <td v-text="week_averages.weight"></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

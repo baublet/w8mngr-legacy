@@ -1,4 +1,5 @@
 import LineChart from "../LineChart.vue"
+import WeekInReview from "../WeekInReview.vue"
 
 export default {
   el: "#dashboard-app",
@@ -13,6 +14,7 @@ export default {
   },
   components: {
     LineChart,
+    WeekInReview,
   },
   methods: {
   },

@@ -141,10 +141,12 @@ export default {
                 type: 'bar',
                 data: app.data.calories.map(function(a){return a.y}),
                 yAxisID: 'calories',
+                borderColor: "rgba(0,0,0,0)",
               },
               {
-                label: "Weights",
+                label: "Weight",
                 borderColor: "#007E80",
+                backgroundColor: "rgba(0,0,0,0)",
                 data: app.data.weights.map(function(a){return a.y}),
                 fill: false,
                 yAxisID: 'weights',
