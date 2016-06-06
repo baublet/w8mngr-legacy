@@ -23,8 +23,8 @@ w8mngrFetch.fetch = function(index) {
   var onError = (options.onError instanceof Function) ? options.onError : this.$onError
   var onResponse = (options.onResponse instanceof Function) ? options.onResponse : this.$onResponse
 
-  // The default timeout is 5 seconds
-  var timeout = (options.timeout) ? options.timeout : 5000
+  // The default timeout is 10 seconds
+  var timeout = (options.timeout) ? options.timeout : 10000
 
   // Make sure the user is connected to the internet at all
   if (navigator.onLine == false) {

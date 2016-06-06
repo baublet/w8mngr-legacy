@@ -3,9 +3,21 @@ class DashboardController < ApplicationController
 
   def index
     respond_to do |format|
-      format.json { render json: week_in_review }
+      format.json {
+        data = week_in_review
+        data = month_macros(data).merge(data)
+        render json: data
+      }
       format.html { render "index" }
     end
+  end
+
+  def month_macros data
+    return {
+      fat: data[:week_fat].map{ |a| a[1] }.inject(:+),
+      carbs: data[:week_calories].map{ |a| a[1] }.inject(:+),
+      protein: data[:week_protein].map{ |a| a[1] }.inject(:+),
+    }
   end
 
   def week_in_review

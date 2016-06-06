@@ -37,6 +37,9 @@
   }
   .week-review {
     width: 100%;
+    .data-table td, th {
+      padding: .5rem;
+    }
     @include mqBeforeSize(460px) {
       .data-table td, th {
         padding: .35rem;
@@ -53,6 +56,7 @@
     }
     .user-stats {
       width: 39%;
+      padding-left:2rem;
     }
   }
   @include mqAfterSize(1315px) {
@@ -63,6 +67,9 @@
     display: flex;
     .week-review, .user-stats {
       width: 50%;
+    }
+    .week-review .data-table td, th {
+      padding: .75rem;
     }
   }
 }

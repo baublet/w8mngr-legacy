@@ -2,7 +2,6 @@
   <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
   <line-chart chart="quarter-calories"></line-chart>
   <div class="stats-and-review">
-    <user-stats></user-stats>
     <week-in-review :week-averages="weekAverages"
                     :week-days="weekDays"
                     :week-calories="weekCalories"
@@ -10,5 +9,8 @@
                     :week-carbs="weekCarbs"
                     :week-protein="weekProtein"
                     :week-weights="weekWeights"></week-in-review>
+    <user-stats :macro-pie="macroPie"
+                :macro-pie-labels="macroPieLabels"
+                ></user-stats>
   </div>
 </div>

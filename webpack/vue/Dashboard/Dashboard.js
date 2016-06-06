@@ -28,8 +28,13 @@ export default {
             if(isNaN(app.weekAverages[key]) || !app.weekAverages[key]) app.weekAverages[key] = "-"
             else app.weekAverages[key] = parseInt(app.weekAverages[key], 10).toLocaleString()
           }
+          // Format our week's macros
+          app.macroPie = [parseInt(response.fat, 10),
+                          parseInt(response.carbs, 10),
+                          parseInt(response.protein, 10)]
+          app.macroPieLabels = ["Fat", "Carbohydrates", "Protein"]
           app.$dispatch('notLoading')
-          console.log(app)
+          app.$broadcast('dataLoaded')
         },
       })
     },
@@ -51,6 +56,8 @@ export default {
     weekCarbs: [],
     weekProtein: [],
     weekWeights: [],
+    macroPie: [],
+    macroPieLabels: [],
   },
   components: {
     LineChart,
