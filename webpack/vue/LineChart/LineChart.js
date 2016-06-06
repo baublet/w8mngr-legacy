@@ -17,61 +17,114 @@ export default {
     'hook:ready': function() {
       switch (this.chart) {
         case "quarter-calories":
-          this.loadQuarterCalories()
+          this.LoadQuarterCalories()
           break
       }
     },
   },
   methods: {
-    loadData: function(uris, callback) {
-      this.loadingData = 0
+    // Transforms our data from [[Date, Value], ...] to [{x: Date, y: Value}, ...]
+    MassageData: function(data) {
+      return data.map(function(a){
+        let y = !a[1] ? null : parseInt(a[1], 10)
+        return {x: a[0], y: y}
+      })
+    },
+    // Finds the min and max of the called functions (to be used AFTER data has
+    // been massaged)
+    FindMax: function(data) {
+      var max = 0
+      data.forEach(function(a){
+        if (a.y > max) max = a.y
+      })
+      return max
+    },
+    FindMin: function(data) {
+      var min = null
+      data.forEach(function(a){
+        if(a.y == null) return
+        if (min == null) min = a.y
+        else if (a.y < min) min = a.y
+      })
+      return min
+    },
+    LoadData: function(uris, callback) {
       this.data = {}
       if (typeof uris !== "object") uris = [uris]
-      console.log("Loading line chart data from URIs:")
+      this.loadingData = uris.length
+      console.log("Loading line chart data from " + uris.length + " URIs:")
       console.log(uris)
       var app = this
-      for(var i = 0; i < uris.length; i++) {
+      for(let i = 0; i < uris.length; i++) {
         let name = uris[i][0],
             val  = uris[i][1]
-        this.loadingData++
+        console.log("Loading line chart data from " + uris[i][1] + " (" + i + ")")
         // Load the chart data
         this.$fetch({
           method: "GET",
           url: val,
           onSuccess: function(response) {
-            // Add the user return data to our model
-            console.log(response)
-            app.data[name] = response
+            // Massage the data so it fits with our scatter chart & add it to our model
+            app.data[name] = app.MassageData(response)
             app.loadingData--
-            if(!app.loadingData) callback()
+            if(app.loadingData == 0) callback()
           },
         })
       }
     },
-    loadQuarterCalories: function() {
+    LoadQuarterCalories: function() {
       var app = this
       var uris = [
                   ['calories', this.$fetchURI.dashboard.quarter_calories ],
                   ['weights',  this.$fetchURI.dashboard.quarter_weights  ],
                  ]
-      this.loadData(uris, function() {
+      this.LoadData(uris, function() {
         console.log("MAKING CHART")
-        // Make our labels from our calories
-        var labels = app.data.calories.map(function(a){return new Date(a[0]).strftime("%B %e")})
+        console.log("Weights:")
+        console.log(app.data.calories)
+        let max_calories_y = parseInt(app.FindMax(app.data.calories) * 1.5, 10),
+            min_weights_y  = parseInt(app.FindMin(app.data.weights) * 0.7, 10),
+            max_weights_y =  parseInt(app.FindMax(app.data.weights) * 1.2, 10)
         app.chartObject = new Chart(app.$el, {
           type: 'bar',
           options: {
             scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    maxTicksLimit: 5,
+                    max: max_calories_y,
+                  },
+                  gridLines: {
+                    display: false,
+                  },
+                }
+              ],
               yAxes: [
                 {
                   scaleType: 'linear',
                   id: 'calories',
                   position: 'right',
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    maxTicksLimit: 5,
+                    max: max_calories_y,
+                  }
                 },
                 {
                   scaleType: 'linear',
                   id: 'weights',
                   position: 'left',
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    maxTicksLimit: 5,
+                    min: min_weights_y,
+                    max: max_weights_y,
+                  },
                 },
               ],
             },
@@ -81,29 +134,26 @@ export default {
             },
           },
           data: {
-            labels: labels,
+            labels: app.data.calories.map(function(a){
+              return new Date(a.x).strftime("%B")
+            }),
             datasets: [
               {
                 label: "Calories",
-                data: app.data.calories.map(function(a){
-                  if(!a[1]) return null
-                  return a[1]
-                }),
+                type: 'bar',
+                data: app.data.calories.map(function(a){return a.y}),
                 yAxisID: 'calories',
               },
               {
                 label: "Weights",
                 borderColor: "rgba(0,0,0,1)",
-                data: app.data.weights.map(function(a){
-                  if(!a[1]) return null
-                  return a[1]
-                }),
-                lineTension: .7,
-                pointRadius: 0,
+                data: app.data.weights.map(function(a){return a.y}),
                 fill: false,
-                type: 'line',
                 yAxisID: 'weights',
-              }
+                type: 'line',
+                lineTension: 0.4,
+                spanGaps: true,
+              },
             ],
           },
         })

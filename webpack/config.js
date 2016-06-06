@@ -39,8 +39,8 @@ module.exports = {
       }
     },
     dashboard: {
-      quarter_calories: "/data/food_entries/calories/day/90",
-      quarter_weights:  "/data/weight_entries/day/90",
+      quarter_calories: "/data/food_entries/calories/week/52",
+      quarter_weights:  "/data/weight_entries/week/52",
     },
   }
 }
