@@ -2,9 +2,27 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<div class="dashboard-app">
+  <div class="section-inside">
+    <h1><i class="fa fa-tachometer"></i> Dashboard</h1>
 
-<div id="dashboard-app" class="hide-if-no-js"></div>
+    <div class="page-meta">
+      <%= link_to foodlog_path, :class => 'btn' do %>
+          <i class="fa fa-plus"></i>
+          Log Foods
+      <% end %>
 
-<noscript>
-  <strong>You need Javascript enabled to see the dashboard.</strong>
-</noscript>
+      <%= link_to weightlog_path, :class => 'btn' do %>
+          <i class="fa fa-plus"></i>
+          Log Weights
+      <% end %>
+  </div>
+
+  <div id="dashboard-app" class="hide-if-no-js"></div>
+
+  <noscript>
+    <strong>You need Javascript enabled to see the dashboard.</strong>
+  </noscript>
+
+  </div>
+</div>

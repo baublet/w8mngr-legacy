@@ -19,6 +19,7 @@ export default {
     'hook:ready': function() {
       // Load our data from the rails app when the component is ready
       var app = this
+      this.$dispatch('loading')
       this.$fetch({
         method: "GET",
         url: this.$fetchURI.dashboard.week_in_review,
@@ -33,11 +34,10 @@ export default {
           // format. They often come as equations, so we need to compute them
           app.week_averages = response.week_averages
           for (var key in app.week_averages) {
-            console.log(app.week_averages[key])
             if(isNaN(app.week_averages[key]) || !app.week_averages[key]) app.week_averages[key] = "-"
             else app.week_averages[key] = parseInt(app.week_averages[key], 10).toLocaleString()
           }
-          console.log(app)
+          app.$dispatch('notLoading')
         },
       })
     },

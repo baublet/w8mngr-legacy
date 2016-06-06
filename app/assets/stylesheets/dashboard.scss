@@ -1,4 +1,5 @@
 .week-review-table {
+  width: 100%;
   .day {
     font-weight: bold;
     a {
@@ -7,6 +8,61 @@
         color: $color-primary;
         text-decoration: underline;
       }
+    }
+  }
+}
+
+.dashboard-wrapper .loading {
+  display:none;
+}
+.dashboard-wrapper.loading .loading {
+  display: block;
+}
+
+@include mqAfterSize(1315px) {
+  .dashboard #main .section-inside {
+    max-width: 940px;
+  }
+  .dashboard .app-menu-box{
+    width: 840px;
+  }
+}
+
+.dashboard .stats-and-review {
+  width: 100%;
+  max-width: 100%;
+  .week-review, .user-stats {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .week-review {
+    width: 100%;
+    @include mqBeforeSize(460px) {
+      .data-table td, th {
+        padding: .35rem;
+      }
+    }
+  }
+  .user-stats {
+    width: 100%;
+  }
+  @include mqAfterSize(690px) {
+    .week-review {
+      width: 60%;
+      margin: 0;
+    }
+    .user-stats {
+      width: 39%;
+    }
+  }
+  @include mqAfterSize(1315px) {
+    .week-review {
+      margin: 0;
+    }
+    align-content: stretch;
+    display: flex;
+    .week-review, .user-stats {
+      width: 50%;
     }
   }
 }

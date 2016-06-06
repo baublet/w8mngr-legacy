@@ -49,6 +49,7 @@ export default {
       return min
     },
     LoadData: function(uris, callback) {
+      this.$dispatch('loading')
       this.data = {}
       if (typeof uris !== "object") uris = [uris]
       this.loadingData = uris.length
@@ -79,12 +80,11 @@ export default {
                   ['weights',  this.$fetchURI.dashboard.quarter_weights  ],
                  ]
       this.LoadData(uris, function() {
-        console.log("MAKING CHART")
-        console.log("Weights:")
-        console.log(app.data.calories)
-        let max_calories_y = parseInt(app.FindMax(app.data.calories) * 1.5, 10),
-            min_weights_y  = parseInt(app.FindMin(app.data.weights) * 0.7, 10),
-            max_weights_y =  parseInt(app.FindMax(app.data.weights) * 1.2, 10)
+        app.$dispatch('loading')
+                             // Rounds the number we want to the nearest 5
+        let max_calories_y = Math.ceil(parseInt(app.FindMax(app.data.calories) * 1.5, 10) / 5) * 5,
+            min_weights_y  = Math.ceil(parseInt(app.FindMin(app.data.weights) * 0.7, 10) / 5) * 5,
+            max_weights_y =  Math.ceil(parseInt(app.FindMax(app.data.weights) * 1.2, 10) / 5) * 5
         app.chartObject = new Chart(app.$el, {
           type: 'bar',
           defaultFontFamily: "'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
@@ -157,6 +157,7 @@ export default {
             ],
           },
         })
+        app.$dispatch('notLoading')
       })
     },
   },

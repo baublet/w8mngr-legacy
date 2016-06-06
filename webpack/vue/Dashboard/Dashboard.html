@@ -1,7 +1,8 @@
-<div class="dashboard-app">
-  <div class="section-inside">
-    <h1><i class="fa fa-tachometer"></i> Dashboard</h1>
-    <line-chart chart="quarter-calories"></line-chart>
+<div class="dashboard-wrapper"  v-bind:class="{ loading: loading }">
+  <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
+  <line-chart chart="quarter-calories"></line-chart>
+  <div class="stats-and-review">
+    <user-stats></user-stats>
     <week-in-review></week-in-review>
   </div>
 </div>
