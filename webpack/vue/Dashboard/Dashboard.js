@@ -1,7 +1,7 @@
 import LineChart from "../LineChart.vue"
 import WeekInReview from "../WeekInReview.vue"
 import UserStats from "../UserStats.vue"
-require("../../utilities/strftime.js")
+var strftime = require("strftime")
 
 export default {
   el: "#dashboard-app",
@@ -95,8 +95,15 @@ export default {
     FormatDays: function(data) {
       var app = this
       return data.map(function(d) {
-        var display = new Date(d[0]).strftime('%A')
-        var url = app.$fetchURI.food_log_day(new Date(d[0]).strftime('%Y%m%d'))
+        var year, month, day, date, display, url
+        year = parseInt(d[0].substring(0, 4), 10)
+        month = parseInt(d[0].substring(5, 7), 10) - 1            // Because Javascript indexes months at 0...
+        day = parseInt(d[0].substring(8, 10), 10)
+        date = new Date(year, month, day)
+        display = strftime('%A', date)
+        //display = date.strftime('%A')
+        console.log(year + "/" + month + "/" + day)
+        url = app.$fetchURI.food_log_day(strftime('%Y%m%d', date))
         return [url, display]
       })
     },

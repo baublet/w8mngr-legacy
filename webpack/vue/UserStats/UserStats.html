@@ -5,7 +5,7 @@
   </div>
   <div class="tdee" v-if="userStats.tdee || userStats.atdee">
     <label><span v-if="userStats.atdee">Adaptive </span>TDEE:</label>
-    <span v-if="userStats.tdee" v-text="userStats.tdee"></span> <span v-else v-text="userStats.atdee"></span>
+    <span v-if="userStats.tdee" v-text="userStats.tdee.toLocaleString()"></span> <span v-else v-text="userStats.atdee.toLocaleString()"></span>
   </div>
   <div class="weight">
     <div v-if="userStats.lastWeight" class="current">
@@ -13,7 +13,7 @@
     </div>
     <div v-if="userStats.firstWeight" class="first">
       <label>First Weight: </label> <span v-text="userStats.firstWeight"></span>
-      <spanc class="time-ago" v-text="userStats.weightTimeDiff"></spanc>
+      <span class="time-ago" v-text="userStats.weightTimeDiff"></span>
     </div>
     <div v-if="userStats.maxWeight !== userStats.minWeight" class="min-max">
       At your heaviest, you weighed <span class="heaviest" v-text="userStats.maxWeight"></span>,

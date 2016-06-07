@@ -1,5 +1,4 @@
 // Converts a numeric string (e.g. 20160501) to a date object
-require("../utilities/strftime.js")
 
 module.exports = function(num) {
   if(num.length < 8) console.log("Number passed to numberToDay isn't valid: " . num)

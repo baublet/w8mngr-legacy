@@ -5,11 +5,11 @@ class DashboardController < ApplicationController
   def index
     respond_to do |format|
       format.json {
-        data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
+        #data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
           data = week_in_review
           data = week_macros(data).merge(data)
           data = user_stats.merge(data)
-        end
+        #end
         render json: data
       }
       format.html { render "index" }

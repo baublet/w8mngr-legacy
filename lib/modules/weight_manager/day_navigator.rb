@@ -21,7 +21,7 @@ module WeightManager
     end
 
     def set_day_ts
-      self.day_ts = Date.strptime(day.to_s,"%Y%m%d")
+      self.day_ts = DateTime.strptime(day.to_s,"%Y%m%d")
     end
   end
 end

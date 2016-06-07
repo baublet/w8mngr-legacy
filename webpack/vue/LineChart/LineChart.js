@@ -1,5 +1,5 @@
 var Chart = require("chart.js")
-require("../../utilities/strftime.js")
+var strftime = require("strftime")
 
 // This is our food-entry item component, slim and easy to understand
 export default {
@@ -142,7 +142,7 @@ export default {
           },
           data: {
             labels: app.data.calories.map(function(a){
-              return new Date(a.x).strftime("%B")
+              return strftime('%B', new Date(a.x))
             }),
             datasets: [
               {
