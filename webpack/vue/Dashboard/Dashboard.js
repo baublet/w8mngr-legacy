@@ -1,6 +1,7 @@
 import LineChart from "../LineChart.vue"
 import WeekInReview from "../WeekInReview.vue"
 import UserStats from "../UserStats.vue"
+import DonutChart from "../DonutChart.vue"
 var strftime = require("strftime")
 
 export default {
@@ -85,6 +86,7 @@ export default {
     LineChart,
     WeekInReview,
     UserStats,
+    DonutChart,
   },
   methods: {
     MassageData: function(data) {

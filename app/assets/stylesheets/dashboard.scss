@@ -32,7 +32,7 @@
   margin-top: 2rem;
   width: 100%;
   max-width: 100%;
-  .week-review, .user-stats {
+  .week-review, .macros {
     display: inline-block;
     vertical-align: top;
   }
@@ -47,7 +47,7 @@
       }
     }
   }
-  .user-stats {
+  .macros {
     width: 100%;
   }
   @include mqAfterSize(690px) {
@@ -55,7 +55,7 @@
       width: 60%;
       margin: 0;
     }
-    .user-stats {
+    .macros {
       width: 39%;
       padding-left:2rem;
     }
@@ -66,7 +66,8 @@
     }
     align-content: stretch;
     display: flex;
-    .week-review, .user-stats {
+    flex-wrap: wrap;
+    .week-review, .macros {
       width: 50%;
     }
     .week-review .data-table td, th {
@@ -76,14 +77,20 @@
 }
 
 .user-stats {
-  .card {
-    width: 100%;
-    max-width: none;
-    border-bottom: 2px solid $color-primary;
-    margin-bottom: 1rem;
-  }
-  .first, .min-max,  .tdee {
-    margin-top: .5rem;
+  width: 100%;
+  max-width: none;
+  border-bottom: 2px solid $color-primary;
+  margin-bottom: 1rem;
+  @include mqAfterSize(690px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .first {
+      text-align: center;
+    }
+    .tdee {
+      text-align: right;
+    }
   }
   .card-footer {
     margin-top: 1rem;
@@ -91,5 +98,8 @@
   .min-max, .time-ago {
     font-size: .8rem;
     color: rgba($black, .75);
+  }
+  .tdee {
+    text-align: right;
   }
 }

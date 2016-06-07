@@ -2,10 +2,11 @@
   <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
   <line-chart chart="quarter-calories"></line-chart>
   <div class="stats-and-review">
+    <user-stats :user-stats="userStats"></user-stats>
     <week-in-review :wir-data="weekInReview"></week-in-review>
-    <user-stats :macro-pie="macroPie"
-                :macro-pie-labels="macroPieLabels"
-                :user-stats="userStats"
-                ></user-stats>
+    <div class="macros">
+      <h2><i class="fa fa-pie-chart" aria-hidden="true"></i> Weekly Macros</h2>
+      <donut-chart :values="macroPie" :labels="macroPieLabels"></donut-chart>
+    </div>
   </div>
 </div>
