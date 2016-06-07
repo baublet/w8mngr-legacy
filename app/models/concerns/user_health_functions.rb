@@ -40,21 +40,28 @@ module UserHealthFunctions
     return (bmr * activity_multiplier).ceil
   end
 
-  # The following functions need to be better optimized to reduce the number of
-  # queries they perform. At the moment, I'm deeming them good enough!
-
   # Returns a hash of the averages of weights, calories, fats, carbs, and proteins
   # of the week
+  #
+  # Because groupdate starts weeks on arbitrary days, rather than working with the last
+  # 7 days, we have to just get the last 7 days and average them manually
   def week_average
     averages = {}
-    data_obj = FoodEntryData.new(user_id: id, num: 1, length_scope: "week")
-    averages["calories"] = data_obj.time_data("calories")[0][1]
-    averages["fat"] = data_obj.time_data("fat")[0][1]
-    averages["carbs"] = data_obj.time_data("carbs")[0][1]
-    averages["protein"] = data_obj.time_data("protein")[0][1]
-    averages["weights"] = WeightEntryData.new(user_id: id, num: 1, length_scope:"week")
-                                         .time_data()[0][1]
+    data_obj = FoodEntryData.new(user_id: id, num: 7, length_scope: "day")
+    averages["calories"] = average_of data_obj.time_data("calories")
+    averages["fat"] = average_of data_obj.time_data("fat")
+    averages["carbs"] = average_of data_obj.time_data("carbs")
+    averages["protein"] = average_of data_obj.time_data("protein")
+    averages["weights"] = average_of WeightEntryData.new(user_id: id, num: 7, length_scope:"day")
+                                         .time_data()
     return averages
+  end
+
+  def average_of data
+    values = data.map { |v| v[1] }
+    values = values.select { |v| true if v > 0 }
+    return nil if values.size < 1
+    return (values.inject(:+) / values.size).ceil
   end
 
   def at_least_one number
@@ -72,15 +79,17 @@ module UserHealthFunctions
     # Now, calculate their TDEE using the first week as our baseline
     calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week")
                             .time_data("calories")
-    weights = WeightEntryData.new(user_id: uid, num: 12, length_scope: "week")
-                            .time_data
+    weights =  WeightEntryData.new(user_id: uid, num: 12, length_scope: "week")
+                              .time_data()
 
     tdee = 0
     last_calories = 0
     last_weight = 0
     calories.each_with_index do |week, key|
+      # byebug
       # Do nothing if there's no weight or calorie average
       next if !week[1].present? || week[1].to_i == 0
+      next if !weights[key].present?
       next if !weights[key][1].present? || weights[key][1].to_i == 0
       if tdee == 0
         tdee = week[1]

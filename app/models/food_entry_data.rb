@@ -35,14 +35,14 @@ class FoodEntryData
     scope_multiplier = length_scope == "month" ? 30 : scope_multiplier
     scope_multiplier = length_scope == "year" ? 360 : scope_multiplier
 
-    length = num.to_i
-    last = (length * scope_multiplier) - 1
+    last = num.to_i * scope_multiplier
 
     # First, we get the days
     days = FoodEntry.where(user_id: user_id)
                     .group_by_day(:day_ts, default_value: 0, last: last)
                     .sum(column)
                     .to_a
+
     return days if length_scope == "day"
 
     # Group by the weeks
@@ -68,15 +68,14 @@ class FoodEntryData
 
   def average_of data
     return data.map { |k,v|
-      begin
-        # First, find out how many non-zero entries there are to we can get an
-        # accurate average
-        good_days = v.select { |e| e[1] > 0 }
-        total_days = good_days.count
-        [k, nil] if total_days < 1
-        [k, v.map(&:last).inject(:+) / total_days]
-      rescue
+      # First, find out how many non-zero entries there are to we can get an
+      # accurate average
+      good_days = v.select { |e| e[1] > 0 }
+      total_days = good_days.count
+      if total_days < 1
         [k, nil]
+      else
+        [k, v.map(&:last).inject(:+) / total_days]
       end
     }
   end

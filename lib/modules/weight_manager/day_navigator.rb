@@ -17,10 +17,11 @@ module WeightManager
     extend ActiveSupport::Concern
     included do
       before_save :set_day_ts
+      before_create :set_day_ts
     end
 
     def set_day_ts
-      self.day_ts = Date.strptime(self.day.to_s,"%Y%m%d")
+      self.day_ts = Date.strptime(day.to_s,"%Y%m%d")
     end
   end
 end

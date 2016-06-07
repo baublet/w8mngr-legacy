@@ -2,7 +2,10 @@ class WeightEntriesDataController < ApplicationController
   before_action :logged_in_user
 
   def index
-    data = process_data
+    key = "weight-entries-data-" + current_user.id.to_s + "-" + params[:num] + "-" + params[:length_scope]
+    data = Rails.cache.fetch(key, :expires_in => 24.hours) do
+      process_data
+    end
     respond_to do |format|
       format.json { render json: data }
     end

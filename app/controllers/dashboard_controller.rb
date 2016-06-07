@@ -5,9 +5,11 @@ class DashboardController < ApplicationController
   def index
     respond_to do |format|
       format.json {
-        data = week_in_review
-        data = week_macros(data).merge(data)
-        data = user_stats.merge(data)
+        data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
+          data = week_in_review
+          data = week_macros(data).merge(data)
+          data = user_stats.merge(data)
+        end
         render json: data
       }
       format.html { render "index" }
@@ -44,7 +46,7 @@ class DashboardController < ApplicationController
   def week_macros data
     return {
       fat: data[:week_fat].map{ |a| a[1] }.inject(:+),
-      carbs: data[:week_calories].map{ |a| a[1] }.inject(:+),
+      carbs: data[:week_carbs].map{ |a| a[1] }.inject(:+),
       protein: data[:week_protein].map{ |a| a[1] }.inject(:+),
     }
   end
@@ -52,14 +54,14 @@ class DashboardController < ApplicationController
   def week_in_review
     week_averages = current_user.week_average
 
-    data = FoodEntryData.new(user_id: current_user.id, num: 8, length_scope: "day")
+    data = FoodEntryData.new(user_id: current_user.id, num: 7, length_scope: "day")
     week_calories = data.time_data("calories").to_a
     week_fat = data.time_data("fat").to_a
     week_carbs = data.time_data("carbs").to_a
     week_protein = data.time_data("protein").to_a
 
     week_weights = WeightEntry.where(user_id: current_user.id)
-                                .group_by_day(:day_ts, default_value: 0, last: 8)
+                                .group_by_day(:day_ts, default_value: 0, last: 7)
                                 .average(:value)
                                 .to_a
     return {
