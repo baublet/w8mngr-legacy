@@ -37,4 +37,13 @@
       padding-bottom: 0;
     }
   }
+  hr {
+    border-style: solid;
+    margin: .75rem -1rem;
+  }
+  .card-footer {
+    margin: 0 -1rem;
+    border-top: 1px solid rgba($black, .25);
+    padding: 1rem 1rem .5rem;
+  }
 }

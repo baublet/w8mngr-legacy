@@ -1,23 +1,23 @@
 <div class="user-stats">
-  <h2><i class="fa fa-pie-chart" aria-hidden="true"></i> Statistics</h2>
-  <div class="macros">
-    <donut-chart :values="macroPie" :labels="macroPieLabels"></donut-chart>
-  </div>
-  <div class="tdee" v-if="userStats.tdee || userStats.atdee">
-    <label><span v-if="userStats.atdee">Adaptive </span>TDEE:</label>
-    <span v-if="userStats.tdee" v-text="userStats.tdee.toLocaleString()"></span> <span v-else v-text="userStats.atdee.toLocaleString()"></span>
-  </div>
-  <div class="weight">
+  <div class="weight card">
     <div v-if="userStats.lastWeight" class="current">
       <label>Current Weight: </label> <span v-text="userStats.lastWeight"></span>
     </div>
     <div v-if="userStats.firstWeight" class="first">
       <label>First Weight: </label> <span v-text="userStats.firstWeight"></span>
-      <span class="time-ago" v-text="userStats.weightTimeDiff"></span>
+      <span class="time-ago"> {{ userStats.weightTimeDiff }} ago</span>
     </div>
     <div v-if="userStats.maxWeight !== userStats.minWeight" class="min-max">
       At your heaviest, you weighed <span class="heaviest" v-text="userStats.maxWeight"></span>,
-      and at your lightest, you weighted <span class="lightest" v-text="userStats.minWeight"></span>.
+      and at your lightest, you weighed <span class="lightest" v-text="userStats.minWeight"></span>.
     </div>
+    <div class="tdee" v-if="userStats.tdee || userStats.atdee">
+      <label><span v-if="userStats.atdee">Adaptive </span>TDEE:</label>
+      <span v-if="userStats.tdee" v-text="userStats.tdee.toLocaleString()"></span> <span v-else v-text="userStats.atdee.toLocaleString()"></span>
+    </div>
+  </div>
+  <h2><i class="fa fa-pie-chart" aria-hidden="true"></i> Weekly Macros</h2>
+  <div class="macros">
+    <donut-chart :values="macroPie" :labels="macroPieLabels"></donut-chart>
   </div>
 </div>

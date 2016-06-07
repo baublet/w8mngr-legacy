@@ -29,6 +29,7 @@
 }
 
 .dashboard .stats-and-review {
+  margin-top: 2rem;
   width: 100%;
   max-width: 100%;
   .week-review, .user-stats {
@@ -71,5 +72,24 @@
     .week-review .data-table td, th {
       padding: .75rem;
     }
+  }
+}
+
+.user-stats {
+  .card {
+    width: 100%;
+    max-width: none;
+    border-bottom: 2px solid $color-primary;
+    margin-bottom: 1rem;
+  }
+  .first, .min-max,  .tdee {
+    margin-top: .5rem;
+  }
+  .card-footer {
+    margin-top: 1rem;
+  }
+  .min-max, .time-ago {
+    font-size: .8rem;
+    color: rgba($black, .75);
   }
 }
