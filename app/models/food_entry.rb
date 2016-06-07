@@ -3,10 +3,10 @@ class FoodEntry < ActiveRecord::Base
 
 	validates :description, presence: true, length: { minimum: 2,  maximum: 155 }
 	validates :calories,    presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-	validates :day,         presence: true,numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
+	validates :day,         presence: true, numericality: { only_integer: true, greater_than: 19850501, less_than: 20850501 }
 	validates :user_id,     presence: true
 
-	extend WeightManager::DayNavigator
+	include WeightManager::DayNavigator
 
 	# Pass a measurement ID and multiplier to this object and it populates this food entry with the food's data, multiplied by the multiplier, for adding foods to users' food logs
 	# Example useage:

@@ -40,27 +40,32 @@ module UserHealthFunctions
     return (bmr * activity_multiplier).ceil
   end
 
-  # The following functions need to be better optimized to reduce the number of
-  # queries they perform. At the moment, I'm deeming them good enough!
-
   # Returns a hash of the averages of weights, calories, fats, carbs, and proteins
-  # of the week beginning on day (either a string or a date object).
-  def week_average day = nil
-    day = Date.today if day == nil
-    day = ApplicationController.helpers.convert_day_to_date day if day.is_a?(String)
-    days = ApplicationController.helpers.get_days_of_week day
-
+  # of the week
+  #
+  # Because groupdate starts weeks on arbitrary days, rather than working with the last
+  # 7 days, we have to just get the last 7 days and average them manually
+  def week_average
     averages = {}
-    week = foodentries.where(:day => days)
-    # Days in this scope
-    num_days = week.distinct.count(:day)
-    num_days = num_days == 0 ? 1 : num_days
-    averages["calories"] = week.sum(:calories, {conditions: "calories > 0"}).to_i / num_days
-    averages["fat"] = week.sum(:fat, {conditions: "fat > 0"}).to_i / num_days
-    averages["carbs"] = week.sum(:carbs, {conditions: "carbs > 0"}).to_i / num_days
-    averages["protein"] = week.average(:protein, {conditions: "protein > 0"}).to_i / num_days
-    averages["weight"] = weightentries.where(:day => days).average(:value)
+    # We want 8 of these here so we don't include the current day in the average,
+    # which might not be fully filled out
+    data_obj = FoodEntryData.new(user_id: id, num: 8, length_scope: "day")
+    averages["calories"] = average_of data_obj.time_data("calories")
+    averages["fat"] = average_of data_obj.time_data("fat")
+    averages["carbs"] = average_of data_obj.time_data("carbs")
+    averages["protein"] = average_of data_obj.time_data("protein")
+    averages["weights"] = average_of WeightEntryData.new(user_id: id, num: 8, length_scope:"day")
+                                         .time_data()
     return averages
+  end
+
+  def average_of data
+    values = data.map { |v| v[1] }
+    # Pop the last value (the current day)
+    values.pop
+    values = values.select { |v| true if v > 0 }
+    return nil if values.size < 1
+    return (values.inject(:+) / values.size).ceil
   end
 
   def at_least_one number
@@ -71,55 +76,44 @@ module UserHealthFunctions
 
   # Returns a calculated adaptive BMR based on weight entries and calories.
   # Returns nil if there aren't enough data points.
-  def adaptive_tdee
-    max_weeks = 12
-    min_weeks = 2
-    date = Date.today
-    averages = []
-    max_weeks.times do |x|
-      date = date - (x * 7)
-      week_av = week_average(date)
-      # Only add this week if we have both an average weight and calories
-      next if week_av["weight"].nil? || week_av["calories"].nil?
-      averages << week_av if week_av["weight"] > 0 && week_av["calories"] > 0
-    end
-    return nil if averages.count < min_weeks
-    # We also need at least two weeks that have both a weight and calories
-    weights = 0
-    calories = 0
-    averages.each do |week|
-      weights += 1 if week["weight"].present? && week["weight"] > 0
-      calories += 1 if week["calories"].present? && week["calories"] > 0
-      break if weights > 1 && calories > 1
-    end
-    return nil if weights < 2 || calories < 2
+  def adaptive_tdee (uid = nil, max_weeks = 12, min_weeks = 2)
+
+    uid = id if uid.nil?
+
     # Now, calculate their TDEE using the first week as our baseline
+    calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week")
+                            .time_data("calories")
+    weights =  WeightEntryData.new(user_id: uid, num: 12, length_scope: "week")
+                              .time_data()
+
     tdee = 0
     last_calories = 0
     last_weight = 0
-    averages.each do |week|
+    calories.each_with_index do |week, key|
+      # byebug
       # Do nothing if there's no weight or calorie average
-      next if !week["weight"].present? && week["weight"] == 0
-      next if !week["calories"].present? && week["calories"] == 0
+      next if !week[1].present? || week[1].to_i == 0
+      next if !weights[key].present?
+      next if !weights[key][1].present? || weights[key][1].to_i == 0
       if tdee == 0
-        tdee = week["calories"]
-        last_weight = week["weight"]
-        last_calories = week["calories"]
+        tdee = week[1]
+        last_weight = weights[key][1]
+        last_calories = week[1]
         next
       end
-      weight_difference = week["weight"] / last_weight
-      calorie_difference = week["calories"] / last_calories
+      weight_difference = weights[key][1] / last_weight
+      calorie_difference = week[1] / last_calories
       if weight_difference == 1
         # If there's no weight difference, average the calories for the two weeks
         # and set that as their TDEE
-        tdee = (tdee + week["calories"]) / 2
+        tdee = (tdee + week[1]) / 2
       else
         # Otherwise, average the differences
         adjustment = (weight_difference + calorie_difference) / 2
         tdee = tdee * adjustment
       end
-      last_weight = week["weight"]
-      last_calories = week["calories"]
+      last_weight = weights[key][1]
+      last_calories = week[1]
     end
     return tdee.to_f.ceil
   end

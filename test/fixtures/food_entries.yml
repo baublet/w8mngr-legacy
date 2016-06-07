@@ -3,10 +3,12 @@ test:
   description: test
   calories: 111
   day: 20000101
+  day_ts: 2016-05-19 19:28:55
   user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>
 
 test2:
   description: test2
   calories: 222
   day: 20000101
+  day_ts: 2016-05-19 19:28:55
   user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>

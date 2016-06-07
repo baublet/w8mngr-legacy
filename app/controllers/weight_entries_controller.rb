@@ -1,5 +1,6 @@
 class WeightEntriesController < ApplicationController
   before_action :set_weight_entry, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user
 
   # GET /weight_entries
   def index

@@ -11,22 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513203327) do
+ActiveRecord::Schema.define(version: 20160518174007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
   create_table "food_entries", force: :cascade do |t|
-    t.text     "description",                       null: false
-    t.integer  "calories",    limit: 8, default: 0, null: false
+    t.text     "description",                                           null: false
+    t.integer  "calories",    limit: 8, default: 0,                     null: false
     t.integer  "fat"
     t.integer  "carbs"
     t.integer  "protein"
-    t.integer  "day",                               null: false
+    t.integer  "day",                                                   null: false
     t.integer  "user_id"
+<<<<<<< HEAD
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.datetime "day_ts",                default: '2016-06-02 17:27:21', null: false
+=======
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.datetime "day_ts",                            null: false
+>>>>>>> 9be293f3831cfc9626a14848ee9e94c5d4b3ac57
   end
 
   add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at", using: :btree
@@ -143,8 +150,9 @@ ActiveRecord::Schema.define(version: 20160513203327) do
     t.integer  "value"
     t.integer  "day"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.datetime "day_ts",     default: '2016-06-02 17:27:21', null: false
   end
 
   add_index "weight_entries", ["user_id"], name: "index_weight_entries_on_user_id", using: :btree

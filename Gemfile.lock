@@ -63,6 +63,8 @@ GEM
       thor (~> 0.19.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    groupdate (2.5.3)
+      activesupport (>= 3)
     haml (4.0.7)
       tilt
     highline (1.7.8)
@@ -208,6 +210,7 @@ DEPENDENCIES
   byebug
   chronic
   foreman
+  groupdate
   httparty
   pg
   pg_search

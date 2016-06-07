@@ -37,6 +37,14 @@ module.exports = {
       update: function(id) {
         return "/food_entries/" + id
       }
-    }
+    },
+    food_log_day: function(day) {
+      return "/foodlog/" + day
+    },
+    dashboard: {
+      week_in_review: "/dashboard",
+      quarter_calories: "/data/food_entries/calories/week/52",
+      quarter_weights:  "/data/weight_entries/week/52",
+    },
   }
 }

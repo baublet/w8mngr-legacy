@@ -5,9 +5,10 @@ var w8mngrFetch = {}
 w8mngrFetch.fetch = function(index) {
   if (index == null) console.error("Cannot pass a null index to Fetch!")
   var options = this.$queue[parseInt(index, 10)]
-  var method = options.method
+  // Immediately remove this one from the stack
+  this.$queue.splice(index, 1)
 
-  console.log("Fetch options: ")
+  var method = options.method
 
   // This makes sure the async_seed adds an additional variable if there are
   // already variables in the URL, or as the only variable if there aren't
@@ -22,8 +23,8 @@ w8mngrFetch.fetch = function(index) {
   var onError = (options.onError instanceof Function) ? options.onError : this.$onError
   var onResponse = (options.onResponse instanceof Function) ? options.onResponse : this.$onResponse
 
-  // The default timeout is 5 seconds
-  var timeout = (options.timeout) ? options.timeout : 5000
+  // The default timeout is 10 seconds
+  var timeout = (options.timeout) ? options.timeout : 10000
 
   // Make sure the user is connected to the internet at all
   if (navigator.onLine == false) {
@@ -42,36 +43,32 @@ w8mngrFetch.fetch = function(index) {
     console.log("Attaching callbacks to our response object...")
 
     request.onerror = function() {
-      if (onError !== null) onError(0, 408, "Connectivity issue")
+      if (onError !== null) {
+          onError(0, 408, "Connectivity issue")
+          // Add it back to the end of the queue
+          w8mngrFetchObject.$queue.push(options)
+      }
     }
 
     request.onreadystatechange = function() {
-
       if (this.readyState === 4) {
-
         if(onResponse !== null) onResponse(this.response)
-
         if (this.status >= 200 && this.status < 400) {
-
           // Success! Remove this from the queue and add it to the completed pile
           if (onSuccess !== null) onSuccess(JSON.parse(this.response));
-          w8mngrFetchObject.$completed.push(w8mngrFetchObject.$queue[index])
-          w8mngrFetchObject.$queue.splice(index, 1)
-
+          w8mngrFetchObject.$completed.push(options)
         } else {
-
           // Error :(
-          if (onError !== null) onError(this.status, this.error, this.response)
-
+          if (onError !== null) {
+              onError(this.status, this.error, this.response)
+              // Add it back to the end of the queue
+              w8mngrFetchObject.$queue.push(options)
+          }
         }
-
         // Do we move on to the next item (indicating that this is a syncronous request)?
         if (w8mngrFetchObject.$sync) w8mngrFetchObject.processQueue(true)
-
       }
-
     }
-
   }
 
   // Send the request!
@@ -110,8 +107,9 @@ w8mngrFetch.$completed = []
   Processes our fetch queue
 */
 w8mngrFetch.processQueue = function(sync) {
+  console.log("Queue: ")
+  console.log(this.$queue)
   var length = this.$queue.length
-  if(length < 1) return null
   sync = sync == null ? false : Boolean(sync)
 
   // If it's an async call, do them all at once
@@ -144,21 +142,29 @@ w8mngrFetch.processQueue = function(sync) {
             request will be appended to the queue and wait its turn)
             Default: false
  */
-w8mngrFetch.$ = function(options) {
+w8mngrFetch.$ = function $(options) {
+  console.log("Fetch Function Called: " + options.url)
   // Figure out how we're going to add this to the queue
   var delay = options.delay == null ? 0 : parseInt(options.delay, 10)
+  if(delay > 0) {
+    options.delay = 0
+    window.setTimeout(function() {
+      $(options)
+    }, delay)
+    return null
+  }
+
   var proc = options.proc == null ? true : Boolean(options.proc)
   var priority = options.priority == null ? false : Boolean(options.priority)
 
-  var w8mngrFetchObject = this
-  window.setTimeout(function() {
     // Put it at the beginning if it's high priority
-    if(priority) w8mngrFetchObject.$queue.unshift(options)
+    if(priority) this.$queue.unshift(options)
     // Otherwise, put it at the end of the queue
-    else w8mngrFetchObject.$queue.push(options)
+    else this.$queue.push(options)
     // Process the queue if we're supposed to
-    if(proc) w8mngrFetchObject.processQueue()
-  }, delay)
+    if(proc) {
+        this.processQueue()
+    }
 }
 
 /*

@@ -3,14 +3,17 @@
 one:
   value: 1500
   day: 19850502
+  day_ts: 2016-05-19 19:28:55
   user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>
 
 two:
   value: 999999
   day: 20000101
+  day_ts: 2016-05-19 19:28:55
   user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>
 
 three:
   value: 150
   day: 20000201
+  day_ts: 2016-05-19 19:28:55
   user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>
