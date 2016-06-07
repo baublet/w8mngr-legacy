@@ -15,6 +15,7 @@ export default {
         method: "GET",
         url: this.$fetchURI.dashboard.week_in_review,
         onSuccess: function(response) {
+          // Set the week in review  values
           var wir = {}
           wir.weekCalories = app.MassageData(response.week_calories)
           wir.weekDays = app.FormatDays(wir.weekCalories)
@@ -30,6 +31,7 @@ export default {
             else wir.weekAverages[key] = parseInt(wir.weekAverages[key], 10).toLocaleString()
           }
           app.$set('weekInReview', wir)
+
           // Format our week's macros
           app.macroPieLabels.$set(0, "Fat")
           app.macroPie.$set(0, parseInt(response.fat, 10))
@@ -37,11 +39,29 @@ export default {
           app.macroPie.$set(1, parseInt(response.carbs, 10))
           app.macroPieLabels.$set(2, "Protein")
           app.macroPie.$set(2, parseInt(response.protein, 10))
+
+          // Setup our UserStats object
+          var userStats = {}
+          userStats.tdee = response.tdee
+          userStats.atdee = response.atdee
+          userStats.firstWeight = response.first_weight
+          userStats.firstWeightDate = response.first_weight_date
+          userStats.lastWeight = response.last_weight
+          userStats.lastWeightDate = response.last_weight_date
+          userStats.minWeight = response.min_weight
+          userStats.maxWeight = response.max_weight
+          userStats.weightTimeDiff = response.first_last_difference
+          app.$set('userStats', userStats)
+
+          // Tell the rest of our elements that our data is now loaded
+          app.$broadcast('dataLoaded')
+
+
           console.log("----------------------------Dashboard Data Loaded")
           app.$log()
+          console.log(response)
           console.log("----------------------------\n\n")
           app.$dispatch('notLoading')
-          app.$broadcast('dataLoaded')
         },
       })
     },
@@ -59,6 +79,7 @@ export default {
     weekInReview: {},
     macroPie: [],
     macroPieLabels: [],
+    userStats: {},
   },
   components: {
     LineChart,

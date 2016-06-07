@@ -24,7 +24,7 @@ class WeightEntry < ActiveRecord::Base
     end
 
     def display_value
-      self.get_display_value value, user.unit
+      WeightEntry.get_display_value value, user.unit
     end
 
     def self.get_display_value number, unit

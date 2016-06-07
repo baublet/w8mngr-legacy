@@ -82,7 +82,7 @@ export default {
       this.LoadData(uris, function() {
         app.$dispatch('loading')
                              // Rounds the number we want to the nearest 5
-        let max_calories_y = Math.ceil(parseInt(app.FindMax(app.data.calories) * 1.5, 10) / 5) * 5,
+        let max_calories_y = Math.ceil(parseInt(app.FindMax(app.data.calories) * 1.2, 10) / 5) * 5,
             min_weights_y  = Math.ceil(parseInt(app.FindMin(app.data.weights) * 0.7, 10) / 5) * 5,
             max_weights_y =  Math.ceil(parseInt(app.FindMax(app.data.weights) * 1.2, 10) / 5) * 5
         app.chartObject = new Chart(app.$el, {
@@ -152,7 +152,7 @@ export default {
                 pointRadius: 0.5,
                 label: "Weight",
                 borderColor: "#007E80",
-                borderWidth: 1,
+                borderWidth: 2,
                 backgroundColor: "#007E80",
                 data: app.data.weights.map(function(a){return a.y}),
                 fill: false,

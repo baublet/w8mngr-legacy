@@ -59,6 +59,9 @@ export default {
     }
   },
   events:{
+    // We need events to call this so that we only initiate the chart when
+    // whatever our main component is has loaded the data that it will pass
+    // to us.
     'dataLoaded': function() {
       console.log("-------------------------DataLoaded Donut Chart")
       this.$log()

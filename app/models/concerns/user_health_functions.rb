@@ -71,8 +71,9 @@ module UserHealthFunctions
 
   # Returns a calculated adaptive BMR based on weight entries and calories.
   # Returns nil if there aren't enough data points.
-  def adaptive_tdee (uid, max_weeks = 12, min_weeks = 2)
-    date = Date.today
+  def adaptive_tdee (uid = nil, max_weeks = 12, min_weeks = 2)
+
+    uid = id if uid.nil?
 
     # Now, calculate their TDEE using the first week as our baseline
     calories = FoodEntryData.new(user_id: uid, num: 12, length_scope: "week")

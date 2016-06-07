@@ -3,10 +3,21 @@
   <div class="macros">
     <donut-chart :values="macroPie" :labels="macroPieLabels"></donut-chart>
   </div>
-  <div class="tdee">
-    TDEE
+  <div class="tdee" v-if="userStats.tdee || userStats.atdee">
+    <label><span v-if="userStats.atdee">Adaptive </span>TDEE:</label>
+    <span v-if="userStats.tdee" v-text="userStats.tdee"></span> <span v-else v-text="userStats.atdee"></span>
   </div>
-  <div class="progress">
-    <h3>Progress</h3>
+  <div class="weight">
+    <div v-if="userStats.lastWeight" class="current">
+      <label>Current Weight: </label> <span v-text="userStats.lastWeight"></span>
+    </div>
+    <div v-if="userStats.firstWeight" class="first">
+      <label>First Weight: </label> <span v-text="userStats.firstWeight"></span>
+      <spanc class="time-ago" v-text="userStats.weightTimeDiff"></spanc>
+    </div>
+    <div v-if="userStats.maxWeight !== userStats.minWeight" class="min-max">
+      At your heaviest, you weighed <span class="heaviest" v-text="userStats.maxWeight"></span>,
+      and at your lightest, you weighted <span class="lightest" v-text="userStats.minWeight"></span>.
+    </div>
   </div>
 </div>
