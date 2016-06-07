@@ -90,6 +90,15 @@ export default {
           defaultFontFamily: "'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
           options: {
             showLines: true,
+            tooltips: {
+              mode: 'label',
+              callbacks: {
+                label: function(a, b) {
+                  if(isNaN(a.yLabel)) return b.datasets[a.datasetIndex].label + ": n/a"
+                  else return b.datasets[a.datasetIndex].label + ": " + (a.yLabel).toLocaleString()
+                }
+              }
+            },
             scales: {
               xAxes: [
                 {
@@ -137,22 +146,30 @@ export default {
             }),
             datasets: [
               {
-                label: "Calories",
-                type: 'bar',
-                data: app.data.calories.map(function(a){return a.y}),
-                yAxisID: 'calories',
-                borderColor: "rgba(0,0,0,0)",
-              },
-              {
+                pointBackgroundColor: 'rgba(0,0,0,0)',
+                pointBorderColor: 'rgba(0,0,0,0)',
+                pointHoverBackgroundColor: '#007E80',
+                pointRadius: 0.5,
                 label: "Weight",
                 borderColor: "#007E80",
-                backgroundColor: "rgba(0,0,0,0)",
+                borderWidth: 1,
+                backgroundColor: "#007E80",
                 data: app.data.weights.map(function(a){return a.y}),
                 fill: false,
                 yAxisID: 'weights',
                 type: 'line',
                 lineTension: 0,
                 spanGaps: true,
+              },
+              {
+                label: "Calories",
+                type: 'bar',
+                data: app.data.calories.map(function(a){return a.y}),
+                yAxisID: 'calories',
+                borderColor: "#ccc",
+                backgroundColor: "#ccc",
+                hoverBackgroundColor: "#aaa",
+                hoverBorderColor: '#333',
               },
             ],
           },

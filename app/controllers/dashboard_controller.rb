@@ -5,14 +5,30 @@ class DashboardController < ApplicationController
     respond_to do |format|
       format.json {
         data = week_in_review
-        data = month_macros(data).merge(data)
+        data = week_macros(data).merge(data)
         render json: data
       }
       format.html { render "index" }
     end
   end
 
-  def month_macros data
+  def user_stats
+    # Get their TDEE and Adaptive TDEE
+
+    # Get their first weight-in and most recent
+
+    return {
+      tdee: tdee,
+      atdee: atdee,
+      first_weight: first_weight,
+      last_weight: last_weight,
+      first_weight_date: first_weight_date,
+      last_weight_date: last_weight_date,
+    }
+
+  end
+
+  def week_macros data
     return {
       fat: data[:week_fat].map{ |a| a[1] }.inject(:+),
       carbs: data[:week_calories].map{ |a| a[1] }.inject(:+),

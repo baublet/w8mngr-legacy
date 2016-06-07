@@ -12,23 +12,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="day in weekDays">
+      <tr v-for="day in wirData.weekDays">
         <td class="day"><a href="{{ day[0] }}" v-text="day[1]"></a></a></td>
-        <td v-text="weekCalories[$index][1]"></td>
-        <td v-text="weekFat[$index][1]"></td>
-        <td v-text="weekCarbs[$index][1]"></td>
-        <td v-text="weekProtein[$index][1]"></td>
-        <td v-text="weekWeights[$index][1]"></td>
+        <td v-text="wirData.weekCalories[$index][1]"></td>
+        <td v-text="wirData.weekFat[$index][1]"></td>
+        <td v-text="wirData.weekCarbs[$index][1]"></td>
+        <td v-text="wirData.weekProtein[$index][1]"></td>
+        <td v-text="wirData.weekWeights[$index][1]"></td>
       </tr>
     </tbody>
-    <tfoot v-if="weekAverages">
+    <tfoot v-if="wirData.weekAverages">
       <tr>
         <th>Average</th>
-        <td v-text="weekAverages.calories"></td>
-        <td v-text="weekAverages.fat"></td>
-        <td v-text="weekAverages.carbs"></td>
-        <td v-text="weekAverages.protein"></td>
-        <td v-text="weekAverages.weight"></td>
+        <td v-text="wirData.weekAverages.calories"></td>
+        <td v-text="wirData.weekAverages.fat"></td>
+        <td v-text="wirData.weekAverages.carbs"></td>
+        <td v-text="wirData.weekAverages.protein"></td>
+        <td v-text="wirData.weekAverages.weight"></td>
       </tr>
     </tfoot>
   </table>

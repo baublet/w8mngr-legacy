@@ -15,24 +15,31 @@ export default {
         method: "GET",
         url: this.$fetchURI.dashboard.week_in_review,
         onSuccess: function(response) {
-          app.weekCalories = app.MassageData(response.week_calories)
-          app.weekDays = app.FormatDays(app.weekCalories)
-          app.weekFat = app.MassageData(response.week_fat)
-          app.weekCarbs = app.MassageData(response.week_carbs)
-          app.weekProtein = app.MassageData(response.week_protein)
-          app.weekWeights = app.MassageData(response.week_weights)
+          var wir = {}
+          wir.weekCalories = app.MassageData(response.week_calories)
+          wir.weekDays = app.FormatDays(wir.weekCalories)
+          wir.weekFat = app.MassageData(response.week_fat)
+          wir.weekCarbs = app.MassageData(response.week_carbs)
+          wir.weekProtein = app.MassageData(response.week_protein)
+          wir.weekWeights = app.MassageData(response.week_weights)
           // Iterate through the week averages and convert them to the desired
           // format. They often come as equations, so we need to compute them
-          app.weekAverages = response.week_averages
-          for (var key in app.weekAverages) {
-            if(isNaN(app.weekAverages[key]) || !app.weekAverages[key]) app.weekAverages[key] = "-"
-            else app.weekAverages[key] = parseInt(app.weekAverages[key], 10).toLocaleString()
+          wir.weekAverages = response.week_averages
+          for (var key in wir.weekAverages) {
+            if(isNaN(wir.weekAverages[key]) || !wir.weekAverages[key]) wir.weekAverages[key] = "-"
+            else wir.weekAverages[key] = parseInt(wir.weekAverages[key], 10).toLocaleString()
           }
+          app.$set('weekInReview', wir)
           // Format our week's macros
-          app.macroPie = [parseInt(response.fat, 10),
-                          parseInt(response.carbs, 10),
-                          parseInt(response.protein, 10)]
-          app.macroPieLabels = ["Fat", "Carbohydrates", "Protein"]
+          app.macroPieLabels.$set(0, "Fat")
+          app.macroPie.$set(0, parseInt(response.fat, 10))
+          app.macroPieLabels.$set(1, "Carbs")
+          app.macroPie.$set(1, parseInt(response.carbs, 10))
+          app.macroPieLabels.$set(2, "Protein")
+          app.macroPie.$set(2, parseInt(response.protein, 10))
+          console.log("----------------------------Dashboard Data Loaded")
+          app.$log()
+          console.log("----------------------------\n\n")
           app.$dispatch('notLoading')
           app.$broadcast('dataLoaded')
         },
@@ -49,13 +56,7 @@ export default {
   },
   data: {
     loading: 1,
-    weekAverages: {},
-    weekDays: [],
-    weekCalories: [],
-    weekFat: [],
-    weekCarbs: [],
-    weekProtein: [],
-    weekWeights: [],
+    weekInReview: {},
     macroPie: [],
     macroPieLabels: [],
   },

@@ -7,5 +7,18 @@ export default {
   },
   components: {
     DonutChart,
+  },
+  events: {
+    'dataLoaded': function() {
+      console.log("-----------DataLoaded on UserStats")
+      this.$log()
+      console.log("-----------\n\n")
+      var mp, mpl
+      mp = this.macroPie
+      mpl = this.macroPieLabels
+      this.$set('macroPie', mp)
+      this.$set('macroPieLabels', mpl)
+      return true
+    }
   }
 }
