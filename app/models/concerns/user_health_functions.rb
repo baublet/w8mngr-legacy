@@ -47,18 +47,22 @@ module UserHealthFunctions
   # 7 days, we have to just get the last 7 days and average them manually
   def week_average
     averages = {}
-    data_obj = FoodEntryData.new(user_id: id, num: 7, length_scope: "day")
+    # We want 8 of these here so we don't include the current day in the average,
+    # which might not be fully filled out
+    data_obj = FoodEntryData.new(user_id: id, num: 8, length_scope: "day")
     averages["calories"] = average_of data_obj.time_data("calories")
     averages["fat"] = average_of data_obj.time_data("fat")
     averages["carbs"] = average_of data_obj.time_data("carbs")
     averages["protein"] = average_of data_obj.time_data("protein")
-    averages["weights"] = average_of WeightEntryData.new(user_id: id, num: 7, length_scope:"day")
+    averages["weights"] = average_of WeightEntryData.new(user_id: id, num: 8, length_scope:"day")
                                          .time_data()
     return averages
   end
 
   def average_of data
     values = data.map { |v| v[1] }
+    # Pop the last value (the current day)
+    values.pop
     values = values.select { |v| true if v > 0 }
     return nil if values.size < 1
     return (values.inject(:+) / values.size).ceil

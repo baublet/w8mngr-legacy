@@ -54,16 +54,27 @@ class DashboardController < ApplicationController
   def week_in_review
     week_averages = current_user.week_average
 
-    data = FoodEntryData.new(user_id: current_user.id, num: 7, length_scope: "day")
+    # For FoodEntries and Weight, we grab the last 8 so we can exclude the
+    # current day, which might not be filled out
+
+    data = FoodEntryData.new(user_id: current_user.id, num: 8, length_scope: "day")
     week_calories = data.time_data("calories").to_a
     week_fat = data.time_data("fat").to_a
     week_carbs = data.time_data("carbs").to_a
     week_protein = data.time_data("protein").to_a
 
     week_weights = WeightEntry.where(user_id: current_user.id)
-                                .group_by_day(:day_ts, default_value: 0, last: 7)
+                                .group_by_day(:day_ts, default_value: 0, last: 8)
                                 .average(:value)
                                 .to_a
+
+    # Pop the last item from each
+    week_calories.pop
+    week_fat.pop
+    week_carbs.pop
+    week_protein.pop
+    week_weights.pop
+
     return {
       week_averages: week_averages,
       week_calories: week_calories,
