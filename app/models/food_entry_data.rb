@@ -36,7 +36,7 @@ class FoodEntryData
     scope_multiplier = length_scope == "year" ? 360 : scope_multiplier
 
     length = num.to_i
-    last = length * scope_multiplier
+    last = (length * scope_multiplier) - 1
 
     # First, we get the days
     days = FoodEntry.where(user_id: user_id)

@@ -44,22 +44,16 @@ module UserHealthFunctions
   # queries they perform. At the moment, I'm deeming them good enough!
 
   # Returns a hash of the averages of weights, calories, fats, carbs, and proteins
-  # of the week beginning on day (either a string or a date object).
-  def week_average day = nil
-    day = Date.today if day == nil
-    day = ApplicationController.helpers.convert_day_to_date day if day.is_a?(String)
-    days = ApplicationController.helpers.get_days_of_week day
-
+  # of the week
+  def week_average
     averages = {}
-    week = foodentries.where(:day => days)
-    # Days in this scope
-    num_days = week.distinct.count(:day)
-    num_days = num_days == 0 ? 1 : num_days
-    averages["calories"] = week.sum(:calories, {conditions: "calories > 0"}).to_i / num_days
-    averages["fat"] = week.sum(:fat, {conditions: "fat > 0"}).to_i / num_days
-    averages["carbs"] = week.sum(:carbs, {conditions: "carbs > 0"}).to_i / num_days
-    averages["protein"] = week.sum(:protein, {conditions: "protein > 0"}).to_i / num_days
-    averages["weight"] = weightentries.where(:day => days).average(:value)
+    data_obj = FoodEntryData.new(user_id: id, num: 1, length_scope: "week")
+    averages["calories"] = data_obj.time_data("calories")[0][1]
+    averages["fat"] = data_obj.time_data("fat")[0][1]
+    averages["carbs"] = data_obj.time_data("carbs")[0][1]
+    averages["protein"] = data_obj.time_data("protein")[0][1]
+    averages["weights"] = WeightEntryData.new(user_id: id, num: 1, length_scope:"week")
+                                         .time_data()[0][1]
     return averages
   end
 
