@@ -1,10 +1,17 @@
 class Ingredient < ActiveRecord::Base
   after_initialize :load_food_measurement_data
 
-  belongs_to  :recipe,       inverse_of: :ingredients
-  validates   :name,       length: { minimum: 4,  maximum: 155 },
-                            if: "measurement_id.nil?"
-
+  belongs_to  :recipe,      inverse_of: :ingredients
+  validates   :name,        length: { minimum: 4,  maximum: 155 },
+                              if: "measurement_id.nil?"
+  validates   :calories,    numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+                              if: "measurement_id.nil? && calories.present?"
+  validates   :fat,         numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+                              if: "measurement_id.nil? && fat.present?"
+  validates   :carbs,       numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+                              if: "measurement_id.nil? && carbs.present?"
+  validates   :fat,         numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+                              if: "measurement_id.nil? && carbs.present?"
   # This validation first looks if the ingredient itself has fields,
   # if it doesn't, it looks fora measurement ID to be valid. If it's not,
   # it then tells them to enter the proper fields
