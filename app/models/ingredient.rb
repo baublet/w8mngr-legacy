@@ -4,8 +4,6 @@ class Ingredient < ActiveRecord::Base
   belongs_to  :recipe,       inverse_of: :ingredients
   validates   :name,       length: { minimum: 4,  maximum: 155 },
                             if: "measurement_id.nil?"
-  validates   :calories,    presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 },
-                            if: "measurement_id.nil?"
 
   # This validation first looks if the ingredient itself has fields,
   # if it doesn't, it looks fora measurement ID to be valid. If it's not,
