@@ -13,7 +13,7 @@ class PTFoodEntryLastEntryTest < ActiveSupport::TestCase
     bug_me_hours = 24
     messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)
     assert_equal 1, messages.count
-    assert_equal "You have not entered any foods into your food log in 1 day.", messages[0][:message]
+    assert messages[0][:message].include?("1 day")
   end
 
   test "should be 2 days" do
@@ -21,7 +21,7 @@ class PTFoodEntryLastEntryTest < ActiveSupport::TestCase
     bug_me_hours = 24
     messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)
     assert_equal 1, messages.count
-    assert_equal "You have not entered any foods into your food log in 2 days.", messages[0][:message]
+    assert messages[0][:message].include?("2 days")
   end
 
   test "should be about 12 hours" do
@@ -29,7 +29,7 @@ class PTFoodEntryLastEntryTest < ActiveSupport::TestCase
     bug_me_hours = 12
     messages = PersonalTrainer::FoodEntries::last_entry(last_entry_date, bug_me_hours)
     assert_equal 1, messages.count
-    assert_equal "You have not entered any foods into your food log in about 12 hours.", messages[0][:message]
+    assert messages[0][:message].include?("12 hours")
   end
 
 end

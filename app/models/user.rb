@@ -59,10 +59,13 @@ class User < ActiveRecord::Base
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
-  # Queues up the password reset job, which resets the digest token and sends the
-  # user their email
+  # Queues up the password reset job to send the user their email
   def reset_password
-    SendPasswordResetMessageJob.perform_now self.id
+    # We do this in here, rather than in the job so we can test both this
+    # and the jobs in integration tests. If the job does it, the token gets
+    # discarded and we can't do functional testing with it
+    create_reset_digest
+    SendPasswordResetMessageJob.perform_now self.id, self.reset_token
   end
 
   # Remembers the user

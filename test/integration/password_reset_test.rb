@@ -2,7 +2,6 @@ require 'test_helper'
 
 class PasswordResetTest < ActionDispatch::IntegrationTest
     def setup
-        ActionMailer::Base.deliveries.clear
         @user = users(:test)
     end
 
@@ -18,11 +17,9 @@ class PasswordResetTest < ActionDispatch::IntegrationTest
         # Valid email!
         post password_resets_path, password_reset: { email: @user.email }
 
-        # Not sure what this does
+        # Make sure our reset_digest has changed
         assert_not_equal @user.reset_digest, @user.reload.reset_digest
 
-        # Did it queue an email to send?
-        assert_equal 1, ActionMailer::Base.deliveries.size
         assert_not flash.empty?
         assert_redirected_to root_url
 
@@ -30,7 +27,7 @@ class PasswordResetTest < ActionDispatch::IntegrationTest
         user = assigns(:user)
 
         # Test for entering the wrong email (basically, an exploit attempt)
-        get edit_password_reset_path(user.reset_token, email: '')
+        get edit_password_reset_path(user.reset_token, email:'this.is.obviously.not.the.right@email.address.com')
         assert_redirected_to root_url
 
         # Test for the right email, wrong token
@@ -66,6 +63,7 @@ class PasswordResetTest < ActionDispatch::IntegrationTest
 
         @user = assigns(:user)
         @user.update_attribute(:reset_sent_at, 3.hours.ago)
+
         patch password_reset_path(@user.reset_token),
                 email: @user.email,
                 user: { password:               '123456',
