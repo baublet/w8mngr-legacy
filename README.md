@@ -15,7 +15,7 @@ In that vein, you might notice that this site is only optimized for mobile at th
 I settled on Vue.js because it's beautiful, and is easy to use with Rails. More on that in upcoming versions. React is great, so I will eventually use it on a project or two, but Vue.js struck me as the perfect tool for this job.
 
 ## Demo
-When the demo is online, you can view it at [the Heroku link](https://w8mngr.herokuapp.com/).
+The site is now live! Check it out at [w8mngr.com](https://w8mngr.com/).
 
 ## Contributing
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
