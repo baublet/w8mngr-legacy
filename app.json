@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dokku": {
-      "postdeploy": "bundle exec rake db:migrate && bundle exec rake touch_old_entries"
+      "postdeploy": "bundle exec rake db:migrate"
     }
   }
 }

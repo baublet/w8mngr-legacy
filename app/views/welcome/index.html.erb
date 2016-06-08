@@ -4,7 +4,7 @@
     <p class="second suggestion">one day at a time</p>
     <div class="sign-up">
       <% if logged_in? %>
-      <a href="<%= foodlog_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Dashboard</a>
+      <a href="<%= dashboard_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Dashboard</a>
       <p>Or, you can <%= link_to "Logout", logout_path %></p>
       <% else %>
       <a href="<%= get_started_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Get Started</a>
