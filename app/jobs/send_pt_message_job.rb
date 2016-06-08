@@ -2,6 +2,10 @@ class SendPtMessageJob < ActiveJob::Base
   queue_as :default
 
   def perform message_id
+
+    # DO NOT send emails if we're running tests
+    return if Rails.env.test?
+
     client = Postmark::ApiClient.new(ENV["W8MNGR_API_KEY_POSTMARK"])
     message = PtMessage.find(message_id)
     user = message.user
