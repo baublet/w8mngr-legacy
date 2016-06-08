@@ -4,7 +4,7 @@
 				title: 'Delete Entry' do %>
 		<i class="fa fa-times"></i>
 	<% end %>
-	<div class="weight"><%= raw weight_entry.display_value '<span class="unit">', '</span>' %></div>
+	<div class="weight"><%= raw weight_entry.display_value %><span class="unit"><%= current_user.unit %></span></div>
 	<div class="meta">
 		Added <%= time_ago_in_words(weight_entry.created_at) %> ago
 	</div>

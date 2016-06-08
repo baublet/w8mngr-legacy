@@ -67,17 +67,19 @@ class IngredientTest < ActiveSupport::TestCase
     assert_not ingredient.valid?
     ingredient.measurement_id = nil
     assert_not ingredient.valid?
-    ingredient.name = "My custom ingredient"
-    assert_not ingredient.valid?
-    ingredient.calories = 25
-    assert_not ingredient.valid?
-    ingredient.fat = 10
-    assert_not ingredient.valid?
-    ingredient.carbs = 12
-    assert_not ingredient.valid?
-    ingredient.protein = 3
+    # We let users now enter ingredients without this to take into account things
+    # like spices, salt, pepper, and things without calories/macros
+    # ingredient.name = "My custom ingredient"
+    # assert_not ingredient.valid?
+    # ingredient.calories = 25
+    # assert_not ingredient.valid?
+    # ingredient.fat = 10
+    # assert_not ingredient.valid?
+    # ingredient.carbs = 12
+    # assert_not ingredient.valid?
+    # ingredient.protein = 3
     assert ingredient.valid?
-    [-1, "twelve", "fart"].each do |value|
+    [-1, "twelve", "what?"].each do |value|
       ingredient.calories = value
       assert_not ingredient.valid?
       ingredient.fat = value

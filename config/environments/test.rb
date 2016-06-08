@@ -43,7 +43,8 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :test
-  host = '192.168.56.101:3000'
+  host = 'w8mngr-baublet.c9users.io'
+  config.x.host = host
   config.action_mailer.default_url_options = { :host => host }
 
   # Make our webpack dev server be on c9
