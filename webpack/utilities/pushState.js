@@ -3,14 +3,13 @@
 // A very simple wrapper for the PushState API.
 
 module.exports = {
-  current: function() {
+  current: function current() {
     if(!history) return false
     if(history.state) return history.state
     return false
   },
   push: function(stateObject, url) {
     try {
-      if(history.state == url) return true
       history.pushState(stateObject, "", url)
       return true
     } catch(e) { return false }
@@ -20,5 +19,5 @@ module.exports = {
       history.replaceState(stateObject, "", url)
       return true
     } catch(e) { return false }
-  }
+  },
 }

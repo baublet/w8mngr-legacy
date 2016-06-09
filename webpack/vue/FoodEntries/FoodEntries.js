@@ -165,7 +165,7 @@ export default {
         day = find_day[1]
       } catch (e) {}
       // Then, load the day if specified, otherwise it loads the current day
-      this.loadDay(day)
+      app.loadDay(day)
 
       // Watch for autocomplete results
       this.$watch("newDescription", function(searchTerm) {
@@ -284,7 +284,7 @@ export default {
     loadDay: function(day = "") {
       this.$emit("loading")
       console.log("Fetching data from the API...")
-      state.push({}, this.$fetchURI.food_entries.from_day(day))
+      if(day !== this.currentDay) state.replace({}, this.$fetchURI.food_entries.from_day(day))
       var app = this
       this.$fetch({
         method: "GET",
