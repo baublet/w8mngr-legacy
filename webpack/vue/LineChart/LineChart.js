@@ -121,6 +121,7 @@ export default {
                   }
                 },
                 {
+                  display: false,
                   scaleType: 'linear',
                   id: 'weights',
                   position: 'left',
