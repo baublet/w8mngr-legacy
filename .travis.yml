@@ -1,8 +1,13 @@
 language: ruby
 rvm:
  - 2.2
+node_js:
+  - "4.2"
 services:
  - postgresql
 before_install:
+ - npm install
  - cp config/database.yml.travis config/database.yml
+ - cp config/webpack.config.js.travis config/webpack.config.js
+ - cp config/environments/test.rb.travis config/environments/test.rb
  - psql -c 'create database travis_ci_test;' -U postgres
