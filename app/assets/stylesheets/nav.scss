@@ -14,7 +14,7 @@ nav {
 
     }
     &:checked ~ .navigation-options {
-      transform: translateX(-320px);
+      transform: translateX(-330px);
     }
     &:checked ~ .nav-toggle-btn {
         position: fixed;
@@ -51,7 +51,7 @@ nav {
     position: fixed;
     z-index: 200;
     top: 0;
-    right: -320px;
+    right: -330px;
     transition: transform .5s $easing-1;
     box-shadow: 0 0 15px 0 rgba(black, .75);
     height: 100vh;
