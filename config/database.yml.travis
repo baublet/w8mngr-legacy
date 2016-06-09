@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: w8mngr
+  host:     localhost
+  template: template0
+
+development:
+  <<: *default
+  database: w8mngr_development
+
+test:
+  adapter: postgresql
+  database: travis_ci_test
+
+production:
+  <<: *default
+  database: w8mngr
+  adapter: postgresql
+  url: <%= ENV['POSTGRESQL_URL'] %>
