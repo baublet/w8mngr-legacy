@@ -10,8 +10,7 @@ export default {
     "fat",
     "carbs",
     "protein",
-    // We have to pass this down so we know when we should select ourselves
-    "selectedMeasurement",
+    "id",
   ],
   data: function() {
     return {
@@ -23,9 +22,22 @@ export default {
     "hook:ready": function() {
       // Initialize the number that users can play with as the passed amount
       this.newAmount = this.amount
+      // Watch the new amount form  for changes
+      var self = this
+      this.$watch('newAmount', function() {
+        self.dispatchMeasurementInfo()
+      })
     },
-    "selected": function() {
-      if(this.selectedMeasurement !== this.index) return false
+    "measurementSelected": function(id) {
+      this.selected = false
+      if(id == this.id) {
+        this.selectMe()
+      }
+      return true
+    },
+  },
+  methods: {
+    selectMe: function() {
       this.selected = true
       // Focus on our measurements box and select the text
       var self = this
@@ -33,9 +45,8 @@ export default {
         self.$el.children[1].focus()
         self.$el.children[1].select()
       }, 100)
+      this.dispatchMeasurementInfo()
     },
-  },
-  methods: {
     // Our functions that we listen to for sending events up the chain
     nextMeasurement: function() {
       this.$dispatch("next-measurement")
@@ -56,13 +67,20 @@ export default {
     // Pushes a notification up the chain to add the current entry
     addEntry: function() {
       this.$dispatch("add-entry")
+      // Pings the server telling it to update this entry's popularity
+      // Doesn't return anything because this is totally non-critical
+      var self = this
+      this.$fetch({
+        method: "get",
+        url: self.$fetchURI.measurements.increment_popularty(self.id),
+      })
     },
 
     // This function sends the measurement info up the chain so that our main
     // app can fill it into the food log form
     dispatchMeasurementInfo: function() {
       var data = {
-        description: this.cAmount + " " + this.unit + " " + this.$parent.name,
+        description: this.newAmount + " " + this.unit + " " + this.$parent.name,
         calories: this.cCalories,
         fat: this.cFat,
         carbs: this.cCarbs,
@@ -72,18 +90,6 @@ export default {
     }
   },
   computed: {
-    selected: function() {
-      if (this.selectedMeasurement == this.index) {
-        // Send an event up the chain telling it to update the field
-        this.dispatchMeasurementInfo()
-        // Focus on our measurements box and select the text
-        this.$emit("selected")
-        this.selected = true
-        return true
-      }
-      this.selected = false
-      return false
-    },
     cAmount: function() {
       if(this.amount == 0 || isNaN(this.newAmount)) return 1
       var multiplier = parseFloat(this.newAmount / this.amount)

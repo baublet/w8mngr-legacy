@@ -43,10 +43,10 @@
         <div class="col long">
           <input  type="text"
                   @keyup.enter="addEntry"
-                  @keyup.up="previousAutoCompleteItem"
-                  @keyup.down="nextAutoCompleteItem"
-                  @keyup.right="nextMeasurement($event)"
-                  @keyup.left="previousMeasurement($event)"
+                  @keyup.up="previousAutocompleteItem"
+                  @keyup.down="nextAutocompleteItem"
+                  @keyup.right="nextMeasurement()"
+                  @keyup.left="previousMeasurement()"
                   debounce="500"
                   v-model="newDescription"
                   placeholder="Description" autofocus="autofocus" id="description-input">
@@ -93,27 +93,23 @@
 
     <div class="autocomplete-results">
       <div class="auto-complete-loading">
-        <div class="small-loader" v-if="autoCompleteLoading">
+        <div class="small-loader" v-if="autocompleteLoading">
           <i class="fa fa-cog fa-spin"></i>
           <span class="screen-reader-text">Loading...</span>
         </div>
-        <div class="message" v-if="!autoCompleteLoading && newDescription.length > 3 && autoCompleteItems.length < 1">
+        <div class="message" v-if="!autocompleteLoading && newDescription.length > 3 && autocompleteItems.length < 1">
           <p>No items were found matching <em>{{ newDescription }}</em></p>
         </div>
-        <div class="message" v-if="!autoCompleteLoading && newDescription.length <= 3">
+        <div class="message" v-if="!autocompleteLoading && newDescription.length <= 3">
           <p> Enter text in the description fied to load items here that you can easily
               add to your log! Once there is a list of foods here, use the screen, a
               mouse, or the keyboard arrow keys to navigate the items.</p>
         </div>
       </div>
-      <autocomplete-item v-for="item in autoCompleteItems"
+      <autocomplete-item v-for="item in autocompleteItems"
                          :index="$index"
                          :name="item.name"
-                         :description.sync="item.description"
                          :resource="item.resource"
-                         :measurements-loaded.sync="item.measurementsLoaded"
-                         :selected-measurement.sync="item.selectedMeasurement"
-                         :measurements.sync="item.measurements"
                          transition="ac-fade" stagger="25"></autocomplete-item>
     </div>
   </div>

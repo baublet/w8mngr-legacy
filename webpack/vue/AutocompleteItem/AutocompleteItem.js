@@ -1,4 +1,5 @@
 var smoothScroll  = require("../../fn/smoothScroll.js")
+var _do = require("../../fn/do.js")
 
 import AutocompleteMeasurement from '../AutocompleteMeasurement.vue'
 
@@ -12,52 +13,101 @@ export default {
     "index",
     "name",
     "resource",
-    "description",
-    "measurementsLoaded",
-    "measurements",
-    "selectedMeasurement",
-    "autoCompleteLoading",
   ],
+  data: function() {
+    return {
+      selectedMeasurement: 0,
+      measurementsLoaded: 0,
+      selected: false,
+      loading: 1,
+      measurements: [],
+    }
+  },
   events: {
     'hook:ready': function() {
       this.initializeComponent()
     },
+    'autocompleteItemSelected': function(index) {
+      this.selected = false
+      if (index == this.index) {
+        this.selected = true
+        // Load measurements
+        this.loadItemData()
+        // Scroll to this item if we're on mobile
+        if (window.innerWidth < 640)
+          smoothScroll.scrollVerticalToElementById(this.$el.id, 150)
+      }
+      return true
+    },
+    'nextMeasurement': function() {
+      if(!this.selected) return true
+      this.nextMeasurement()
+      return false
+    },
+    'prevMeasurement': function() {
+      if(!this.selected) return true
+      this.prevMeasurement()
+      return false
+    }
   },
   methods: {
-    addEntry() {
-      this.$dispatch('add-entry')
+    selectItem: function() {
+      // We send this up, which then sends it back down to the children
+      // This is for clicking on items, rather than using keyboard navigation
+      this.$dispatch("autocompleteItemSelected", this.index)
     },
-    initializeComponent() {
-      // Set a random ID on this measurement (because never use these IDs in the CSS,
-      // or anywhere else in the JS but here)
-      this.$el.id = "ac-item-" + Math.random().toString(36).substring(7)
-      this.autoCompleteLoading = 0
-        // Watch for this item to be selected
-      this.$watch("$parent.autoCompleteSelected", function(index) {
-        if (index == this.index) {
-          this.loadItemData()
-          // Scroll to this item if we're on mobile
-          if (window.innerWidth < 640)
-            smoothScroll.scrollVerticalToElementById(this.$el.id, 50)
-        }
+    selectMeasurement: function() {
+      // If we don't do this asyncronously, Vue won't have time to update the
+      // the DOM. This will defer the ping until Vue has time to update
+      var self = this
+      _do(function() {
+        self.$broadcast("measurementSelected", self.measurements[self.selectedMeasurement].id)
       })
     },
+    firstMeasurement: function() {
+      this.selectedMeasurement =  0
+      this.selectMeasurement()
+    },
+    nextMeasurement: function() {
+      if(this.selectedMeasurement + 1 > this.measurements.length - 1) return false
+      this.selectedMeasurement++
+      this.selectMeasurement()
+    },
+    prevMeasurement: function() {
+      if(this.selectedMeasurement) this.selectedMeasurement--
+      this.selectMeasurement()
+    },
+    addEntry: function() {
+      this.$dispatch('add-entry')
+    },
+    initializeComponent: function() {
+      // Set a random ID on this measurement (because we never use these IDs in the CSS,
+      // or anywhere else in the JS but here)
+      this.$el.id = "ac-item-" + Math.random().toString(36).substring(7)
+      this.loading = 0
+    },
     // This loads an autocomplete item's data and attaches it to the parent component
-    loadItemData() {
+    loadItemData: function() {
 
       // Only continue if we haven't already loaded these measurements
-      if (this.measurementsLoaded) return false
+      if (this.measurementsLoaded || this.loading) {
+        this.firstMeasurement()
+        return false
+      }
 
-      this.autoCompleteLoading = 1
+      this.loading = 1
 
       var in_cache = this.$cache.get("food", this.resource)
 
       if (in_cache !== null) {
         console.log("Item found in the cache for " + this.name + ". Loading it into Vue.")
-        this.measurements = in_cache.measurements
+        this.$set('measurements', in_cache.measurements)
+        //this.measurements = in_cache.measurements
         this.measurementsLoaded = 1
-        this.autoCompleteLoading = 0
-        return true
+        this.loading = 0
+        // Make sure we select our first measurement
+        this.firstMeasurement()
+        return null
       }
 
       console.log("Loading item data for: " + this.index)
@@ -68,22 +118,21 @@ export default {
         method: "get",
         url: self.resource,
         onSuccess: function(response) {
-          self.autoCompleteLoading = 0
+          self.loading = 0
           if (response.success === false) {
             alert("Unknown error...")
           } else {
-            self.measurements = response.measurements
-            self.description = response.description
+            self.$set('measurements', response.measurements)
             self.measurementsLoaded = 1
+
             self.$cache.set("food", self.resource, {
               id: self.id,
               name: self.name,
-              description: self.description,
-              measurements: self.measurements,
+              measurements: response.measurements,
             })
 
-            // Make sure we add a selected class to our measurement
-            self.selectedMeasurement = 0
+            // Make sure we select our first measurement
+            self.firstMeasurement()
           }
         },
         onError: function(response) {
@@ -92,14 +141,5 @@ export default {
       })
 
     },
-  },
-  computed: {
-    selected: function() {
-      if (this.$parent.autoCompleteSelected == this.index) {
-        this.$broadcast("selected")
-        return true
-      }
-      return false
-    }
   },
 }

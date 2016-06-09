@@ -18,6 +18,7 @@ export default {
       this.initializeApp()
     },
     "fillin-form": function(data) {
+      console.log(data)
       this.newDescriptionTemp = data.description
       this.newCalories = data.calories
       this.newFat = data.fat
@@ -31,10 +32,14 @@ export default {
       this.previousMeasurement()
     },
     "next-autocomplete-item": function() {
-      this.nextAutoCompleteItem()
+      this.nextAutocompleteItem()
     },
     "previous-autocomplete-item": function() {
-      this.previousAutoCompleteItem()
+      this.previousAutocompleteItem()
+    },
+    "autocompleteItemSelected": function(index) {
+      this.autocompleteSelected = index
+      this.$broadcast("autocompleteItemSelected", this.autocompleteSelected)
     },
     "add-entry": function() {
       this.addEntry()
@@ -103,9 +108,9 @@ export default {
     newCarbs: "",
     newProtein: "",
     entries: [],
-    autoCompleteItems: [],
-    autoCompleteSelected: -1,
-    autoCompleteLoading: 0,
+    autocompleteItems: [],
+    autocompleteSelected: -1,
+    autocompleteLoading: 0,
     // We only need a few default values to ensure we don't have lots of errors
     user: {
       id: null,
@@ -161,15 +166,14 @@ export default {
       // Finds the current date based on the URL string
       var find_day = /foodlog\/(\d{8})/.exec(window.location.href)
       var day = ""
-      try {
-        day = find_day[1]
-      } catch (e) {}
+      if (find_day) day = find_day[1]
+      else day = null
       // Then, load the day if specified, otherwise it loads the current day
       app.loadDay(day)
 
       // Watch for autocomplete results
       this.$watch("newDescription", function(searchTerm) {
-        this.autoComplete(searchTerm)
+        this.autocomplete(searchTerm)
         if (window.innerWidth < 640)
             smoothScroll.scrollVerticalToElementById("description-input", 20)
       })
@@ -226,7 +230,7 @@ export default {
         this.newFat = ""
         this.newCarbs = ""
         this.newProtein = ""
-        this.autoCompleteItems = []
+        this.autocompleteItems = []
 
         // Add the entry to the model
         // We'll need this to update the item with the index the ruby app returns to us
@@ -308,34 +312,34 @@ export default {
     },
     // This function handles the autocomplete data, which Vue handles with
     // sub-components of this app
-    autoComplete: function(query) {
-      if (this.autoCompleteLoading) return false
+    autocomplete: function(query) {
+      if (this.autocompleteLoading) return false
       // Only do anything if the entered input is > 2 letters
       if (query.length <= 2) return false
 
-      this.autoCompleteLoading = 1
+      this.autocompleteLoading = 1
       var app = this
       this.$fetch({
         method: "get",
         url: this.$fetchURI.search_foods(query),
         onResponse: function(response) {
-          app.autoCompleteLoading = 0
+          app.autocompleteLoading = 0
         },
         onSuccess: function(response) {
           if (response.success === false) {
             alert("Unknown error...")
           } else {
-            app.formatAutoCompleteResults(response)
+            app.formatAutocompleteResults(response)
           }
         },
       })
     },
-    // This function formats the autoComplete data, which will consist of USDA
+    // This function formats the autocomplete data, which will consist of USDA
     // foods, our users" foods, and recipes, so we have to massage it!
-    formatAutoCompleteResults(response) {
+    formatAutocompleteResults: function(response) {
       console.log("Parsing autocomplete items")
-      this.autoCompleteItems = []
-      this.autoCompleteSelected = -1
+      this.autocompleteItems = []
+      this.autocompleteSelected = -1
       console.log(response.results)
       if (response.results.length > 0) {
         var self = this
@@ -344,7 +348,7 @@ export default {
           var resource = ("offset" in result && "group" in result) ?
             self.$fetchURI.foods.pull(result.ndbno) :
             self.$fetchURI.foods.show(result.id)
-          self.autoCompleteItems.push({
+          self.autocompleteItems.push({
             name: result.name,
             resource: resource,
             measurements: [],
@@ -355,60 +359,37 @@ export default {
       }
     },
     // Handles our arrow key down
-    nextAutoCompleteItem: function() {
-      // Don"t do anything if there aren"t any items or they can"t go anywhere
-      if (this.autoCompleteItems.length < 1) return false
-      if (this.autoCompleteSelected == this.autoCompleteItems.length - 1) return false
+    nextAutocompleteItem: function() {
+      // Don't do anything if there aren't any items or they can't go anywhere
+      if (this.autocompleteItems.length < 1) return false
+      if (this.autocompleteSelected == this.autocompleteItems.length - 1) return false
 
-      console.log("Down: " + (this.autoCompleteSelected + 1))
+      console.log("Down: " + (this.autocompleteSelected + 1))
 
-      this.autoCompleteSelected = this.autoCompleteSelected + 1
+      this.autocompleteSelected++
+      this.$broadcast("autocompleteItemSelected", this.autocompleteSelected)
     },
     // Handles our arrow key up
-    previousAutoCompleteItem: function() {
-      // Don"t do anything if there aren"t any items or they can"t go up
-      if (this.autoCompleteItems.length < 1) return false
-      if (this.autoCompleteSelected < 0) return false
+    previousAutocompleteItem: function() {
+      // Don't do anything if there aren't any items or they can't go up
+      if (this.autocompleteItems.length < 1) return false
+      if (this.autocompleteSelected < 0) return false
 
-      console.log("Up: " + (this.autoCompleteSelected - 1))
+      console.log("Up: " + (this.autocompleteSelected - 1))
 
-      if (this.autoCompleteSelected >= 0) {
-        // Go up one item if they"re not at the top already
-        this.autoCompleteSelected = this.autoCompleteSelected - 1
-      }
+      // Go up one item if they're not at the top already
+      this.autocompleteSelected--
+      this.$broadcast("autocompleteItemSelected", this.autocompleteSelected)
     },
 
     // Selects the next measurement
     nextMeasurement: function(e) {
-
-      // Do nothing if there"s no item selected
-      if (this.autoCompleteSelected == -1) return false
-
-      // Find our item
-      var item = this.autoCompleteItems[this.autoCompleteSelected]
-
-      // Do nothing if we"re already at the end of the line
-      if (item.selectedMeasurement == (item.measurements.length - 1)) return false
-
-      // Increment our selected measurement counter and call the appropriate function
-      item.selectedMeasurement = item.selectedMeasurement + 1
-      console.log("Selected next item: " + item.selectedMeasurement)
+      this.$broadcast('nextMeasurement')
     },
 
     // Selects the previous measurement
     previousMeasurement: function() {
-      // Do nothing if there"s no item selected
-      if (this.autoCompleteSelected == -1) return false
-
-      // Find our item
-      var item = this.autoCompleteItems[this.autoCompleteSelected]
-
-      // Do nothing if we"re already on the first measurement
-      if (item.selectedMeasurement == 0) return false
-
-      // Decrement our selected measurement and call the appropo function
-      item.selectedMeasurement = item.selectedMeasurement - 1
-      console.log("Selected previous item: " + item.selectedMeasurement)
+      this.$broadcast('prevMeasurement')
     },
 
     // Handles our error messages

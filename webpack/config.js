@@ -38,6 +38,11 @@ module.exports = {
         return "/food_entries/" + id
       }
     },
+    measurements: {
+      increment_popularty: function(id) {
+        return "/measurements/" + id + "/chosen"
+      }
+    },
     food_log_day: function(day) {
       return "/foodlog/" + day
     },

@@ -20,7 +20,7 @@ class FoodEntriesController < ApplicationController
 		end
 		respond_to do |format|
 			format.html { show_list }
-			format.json { render json: {success: success} }
+			format.json { render json: {success: true} }
 		end
 	end
 
@@ -36,7 +36,7 @@ class FoodEntriesController < ApplicationController
 		end
 		respond_to do |format|
 			format.html { show_list }
-			format.json { render json: {success: success} }
+			format.json { render json: {success: true} }
 		end
 	end
 
