@@ -5,7 +5,7 @@ var forEach = require("../../fn/forEach.js")
 var smoothScroll  = require("../../fn/smoothScroll.js")
 var _do = require("../../fn/do.js")
 
-var state = require("../../utilities/state.js")
+var state = require("../../utilities/pushState.js")
 
 import AutocompleteItem from "../AutocompleteItem.vue"
 import FoodEntry from "../FoodEntry.vue"
