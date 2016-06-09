@@ -47,9 +47,8 @@ Rails.application.configure do
   config.x.host = host
   config.action_mailer.default_url_options = { :host => host }
 
-  # Make our webpack dev server be on c9
+  # Open our dev server testable
   config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
   config.webpack.dev_server.port = "8081"
-
-  config.webpack.output_dir = Rails.root.join("public", "webpack").to_s
+  ::Rails.configuration.webpack.output_dir = "public/webpack"
 end
