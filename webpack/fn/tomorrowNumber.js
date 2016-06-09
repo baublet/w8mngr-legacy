@@ -1,5 +1,5 @@
 // Converts the current day number to the next day number
-
+var strftime = require("strftime")
 var numberToDate = require("./numberToDate.js")
 
 module.exports = function(num, format) {
