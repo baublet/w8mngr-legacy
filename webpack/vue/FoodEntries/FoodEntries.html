@@ -110,7 +110,15 @@
                          :index="$index"
                          :name="item.name"
                          :resource="item.resource"
-                         transition="ac-fade" stagger="25"></autocomplete-item>
+                         transition="ac-fade" stagger="20"></autocomplete-item>
+      <div class="pagination">
+        <a class="btn next-btn previous" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage">
+          <i class="fa fa-chevron-circle-left"></i> Back
+        </a>
+        <a class="btn next-btn next" href="#" @click.prevent="autocompletePage(nextPage)" v-if="nextPage">
+          More <i class="fa fa-chevron-circle-right"></i>
+        </a>
+      </div>
     </div>
   </div>
 </div>

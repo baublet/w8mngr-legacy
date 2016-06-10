@@ -13,14 +13,14 @@ class FoodEntriesController < ApplicationController
 
 	def create
 		@newfoodentry = current_user.foodentries.build(food_entry_params)
-		success = false
+		new_id = false
 		if @newfoodentry.save
-			success = @newfoodentry.id
+			new_id = @newfoodentry.id
 			@newfoodentry = nil
 		end
 		respond_to do |format|
 			format.html { show_list }
-			format.json { render json: {success: true} }
+			format.json { render json: {success: true, id: new_id} }
 		end
 	end
 

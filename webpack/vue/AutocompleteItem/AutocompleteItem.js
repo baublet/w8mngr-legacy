@@ -61,8 +61,13 @@ export default {
       // the DOM. This will defer the ping until Vue has time to update
       var self = this
       _do(function() {
-        self.$broadcast("measurementSelected", self.measurements[self.selectedMeasurement].id)
-      })
+        // But we only want to do it a certain number of times to not fully stuff
+        // up the app if something goes wrong
+        let i = 0
+        while(!self.measurements[self.selectedMeasurement] && i < 1000) {i++}
+        if(self.measurements[self.selectedMeasurement])
+          self.$broadcast("measurementSelected", self.measurements[self.selectedMeasurement].id)
+      }, 50)
     },
     firstMeasurement: function() {
       this.selectedMeasurement =  0

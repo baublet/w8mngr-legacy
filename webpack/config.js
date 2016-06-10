@@ -6,8 +6,8 @@ module.exports = {
   },
   resources: {
     base: "/",
-    search_foods: function(q) {
-      return "/search/foods/?q=" + q
+    search_foods: function(q, page = 1) {
+      return "/search/foods/?per_page=10&q=" + q + "&p=" + page
     },
     foods: {
       pull: function(ndbno) {
