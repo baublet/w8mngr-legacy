@@ -1,5 +1,5 @@
 class FoodEntriesController < ApplicationController
-	before_action :logged_in_user, only: [:create, :destroy, :update]
+	before_action :logged_in_user
 	before_action :correct_user, only: [:update, :destroy]
 
 	include FoodsHelper

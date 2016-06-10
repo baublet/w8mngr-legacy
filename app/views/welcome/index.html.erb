@@ -25,7 +25,7 @@
   <div class="section-inside">
     <ul class="summary-points">
       <li class="track-food">
-        <h2><i class="fa fa-list-alt"></i> Track Food</h2>
+        <h2><%= link_to foodlog_path do %><i class="fa fa-list-alt"></i> Track Food<% end %></h2>
         <p>Our food log allows you to quickly and efficiently track your food intake on a daily basis. Our food database, auto-complete functions, and smart item counting functions make it faster than ever to enter information.</p>
       </li>
 
@@ -35,19 +35,24 @@
       </li> -->
 
       <li class="view-progress">
-        <h2><i class="fa fa-trophy"></i> View Progress</h2>
+        <h2><%= link_to dashboard_path do %><i class="fa fa-trophy"></i> View Progress<% end %></h2>
         <p>Losing weight and maintaining one's fitness is hard. With our progress charts, you can visualize your progress over the weeks and months you have tracked your food and fitness.</p>
       </li>
 
       <li class="build-recipes">
-        <h2><i class="fa fa-cutlery"></i> Construct Recipes</h2>
+        <h2><%= link_to recipes_path do %><i class="fa fa-cutlery"></i> Construct Recipes<% end %></h2>
         <p>Use our recipe builder to make and share healthy, delicious meals with the rest of w8mngr's users. Find tons of recipes ranging from post-workout fuel to healthy vegan meals, complete with full information on the items' calories, carbs, fat, and protein.</p>
       </li>
 
-      <li class="scan-barcodes">
+      <li class="log-weights">
+        <h2><%= link_to weight_entries_path do %><i class="fa fa-balance-scale"></i> Log Weights<% end %></h2>
+        <p>Log your weights and track your averages over time. Choose between several metrics, or enter any value you want and we'll try to convert it for you!</p>
+      </li>
+
+      <!-- <li class="scan-barcodes">
         <h2><i class="fa fa-barcode"></i> Scan Barcodes</h2>
         <p>Thanks to the help of various partners, users can scan barcodes of foods they eat or plan to eat on the fly, logging the nutritional information quickly and efficiently.</p>
-      </li>
+      </li> -->
     </ul>
   </div>
 </section>

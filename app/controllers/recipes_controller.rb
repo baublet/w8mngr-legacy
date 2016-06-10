@@ -1,12 +1,12 @@
 class RecipesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :destroy, :update]
+  before_action :logged_in_user
   before_action :correct_user, only: [:edit,
                                       :update,
                                       :destroy,
                                       :add_ingredient,
                                       :add_food,
                                       :remove_ingredient
-                                    ]
+                                     ]
 
   def index
     @recipes = current_user.recipes.all
