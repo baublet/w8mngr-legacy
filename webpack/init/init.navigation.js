@@ -9,7 +9,8 @@ w8mngr.init.add(function() {
 	// This function loads the cookies and sets the state of our navigation
 	// Dashboard is set as the default menu
 	if (w8mngr.cookies.getItem("nav_position") === null) w8mngr.cookies.setItem("nav_position", "#app-menu-dashboard")
-	console.log("Current item set at: " + w8mngr.cookies.getItem("nav_position"))
+	var current = w8mngr.cookies.getItem("nav_position")
+	console.log("Current item set at: " + current)
 
 	// Checks our checkbox
 	var check_boxes = document.querySelectorAll(w8mngr.cookies.getItem("nav_position"))
