@@ -84,21 +84,35 @@
 
 <footer role="contentinfo">
     <div class="footer-area-1">
+        <h2>About</h2>
         <p>Copyright 2009-<%= Time.now.year %>, Ryan Poe</p>
         <p>Built by hand on Rails, HTML, CSS, and JavaScript.</p>
     </div>
 
     <div class="footer-area-2">
+        <h2>Account</h2>
         <ul class="user-area">
-            <li>Nothing here, yet.</li>
+            <li><%= link_to "Get Started", get_started_path %></li>
+        <% if logged_in? %>
+            <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+            <li><%= link_to "Health Targets", edit_user_path(current_user, p: "health") %></li>
+            <li><%= link_to "Faturday", edit_user_path(current_user, p: "faturday") %></li>
+            <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
+            <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
+        	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
+        <% else %>
+            <li><li><%= link_to "Register", get_started_path %></li></li>
+        	<li class="sep"><%= render 'sessions/login_form' %></li>
+        <% end %>
         </ul>
     </div>
 
     <div class="footer-area-3">
+        <h2>Site Map</h2>
         <ul class="site-map">
             <li><%= link_to "Home", root_path %></li>
             <li><%= link_to "Getting Started", getting_started_path %></li>
-            <li><a href="">Meals Database</a></li>
+            <li><%= link_to "Search Foods", food_search_path %></li>
             <li><%= link_to "Privacy Policy", privacy_path %></li>
             <li><%= link_to "Terms of Service", terms_of_service_path %></li>
             <li><%= link_to "Contact Us", contact_path %></li>

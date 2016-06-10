@@ -1,11 +1,13 @@
 footer {
     min-height: 100vh;
-    padding: 1rem 1rem 20vh;
+    padding: 1rem 2rem 20vh;
     margin-top: 10rem;
     width: 100%;
     background: $black;
-    color: rgba($black, .5);
     color: rgba($white, .75);
+    div {
+      margin-top: 1rem;
+    }
     a {
         color: rgba($white, .5);
         border-bottom: 1px solid rgba($white,.05);
@@ -14,5 +16,20 @@ footer {
             color: $white;
             border-color: $white
         }
+    }
+    @include mqAfterSize(640px) {
+      display: flex;
+      align-content: flex-start;
+      align-items: center;
+      div {
+        width: 33%;
+        margin: 0;
+        padding-right: 1rem;
+        + div {
+          padding-right: 0;
+          padding-left: 1rem;
+          border-left: 1px solid rgba($white, .05);
+        }
+      }
     }
 }
