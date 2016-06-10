@@ -32,10 +32,10 @@
     <div class="row header totals" v-if="entries.length > 0">
       <div class="col long">Totals:</div>
       <a href="/users/{{ user.id }}/edit?p=health#target_calories" class="tooltip" v-bind:class="{ show: overTotalCalories }">Why is this red?</a>
-      <div class="col" title="Calories" v-text="totalCalories" v-bind:class="{ over: overTotalCalories }"></div>
-      <div class="col" title="Fat" v-text="totalFat"></div>
-      <div class="col" title="Carbs" v-text="totalCarbs"></div>
-      <div class="col" title="Protein" v-text="totalProtein"></div>
+      <div class="col" title="Calories" v-text="totalCalories.toLocaleString()" v-bind:class="{ over: overTotalCalories }"></div>
+      <div class="col" title="Fat" v-text="totalFat.toLocaleString()"></div>
+      <div class="col" title="Carbs" v-text="totalCarbs.toLocaleString()"></div>
+      <div class="col" title="Protein" v-text="totalProtein.toLocaleString()"></div>
     </div>
 
     <div class="app-form new table">
