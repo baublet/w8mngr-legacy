@@ -101,8 +101,7 @@
             <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
         	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
         <% else %>
-            <li><li><%= link_to "Register", get_started_path %></li></li>
-        	<li class="sep"><%= render 'sessions/login_form' %></li>
+        	<li><%= link_to "Login", login_path %></li>
         <% end %>
         </ul>
     </div>
