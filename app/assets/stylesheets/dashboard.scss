@@ -91,6 +91,9 @@
     .tdee {
       text-align: right;
     }
+    .first, .tdee {
+      margin-top: 0;
+    }
   }
   .card-footer {
     margin-top: 1rem;
@@ -98,5 +101,8 @@
   .min-max, .time-ago {
     font-size: .8rem;
     color: rgba($black, .75);
+  }
+  .first, .tdee {
+    margin-top: .5rem;
   }
 }
