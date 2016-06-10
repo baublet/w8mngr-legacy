@@ -1,5 +1,5 @@
 class FoodEntriesController < ApplicationController
-	before_action :logged_in_user, only: [:create, :destroy, :update]
+	before_action :logged_in_user
 	before_action :correct_user, only: [:update, :destroy]
 
 	include FoodsHelper
@@ -13,14 +13,14 @@ class FoodEntriesController < ApplicationController
 
 	def create
 		@newfoodentry = current_user.foodentries.build(food_entry_params)
-		success = false
+		new_id = false
 		if @newfoodentry.save
-			success = @newfoodentry.id
+			new_id = @newfoodentry.id
 			@newfoodentry = nil
 		end
 		respond_to do |format|
 			format.html { show_list }
-			format.json { render json: {success: success} }
+			format.json { render json: {success: true, id: new_id} }
 		end
 	end
 
@@ -36,7 +36,7 @@ class FoodEntriesController < ApplicationController
 		end
 		respond_to do |format|
 			format.html { show_list }
-			format.json { render json: {success: success} }
+			format.json { render json: {success: true} }
 		end
 	end
 

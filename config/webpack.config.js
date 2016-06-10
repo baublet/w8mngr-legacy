@@ -1,4 +1,3 @@
-// Example webpack configuration with asset fingerprinting in production.
 'use strict';
 
 var path = require('path');
@@ -48,8 +47,20 @@ var config = {
     // `loaders` is an array of loaders to use
     loaders: [
       {
-        test: /\.vue$/, // a regex for matching all files that end in `.vue`
+        test: /\.vue$/,  // a regex for matching all files that end in `.vue`
         loader: 'vue',   // loader to use for matched files
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel', // 'babel-loader' is also a legal name to reference
+        query: {
+          presets: ['es2015']
+        }
+      },
+      {
+        test: /\.js$/,
+        loader: "strip-loader?strip[]=debug,strip[]=console.log"
       },
       // We need an HTML loader to load our Vue templates
       {
@@ -62,7 +73,7 @@ var config = {
 
 if (production) {
   config.plugins.push(
-    new webpack.NoErrorsPlugin(),
+    //new webpack.NoErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compressor: { warnings: false },
       sourceMap: false

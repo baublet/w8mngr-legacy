@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     post    "/food_entries/:day/log/:measurement_id" =>
                                 "food_entries#add_food",
                                 as: :food_entry_add_food
+    get     "/measurements/:id/chosen" => "measurements#increment_popularity"
 
     # Foods
     get     "/foods/:id/delete/" =>

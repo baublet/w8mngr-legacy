@@ -21,7 +21,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
         end
         # Because after signup, we log the user in, then redirect them to their profile
         follow_redirect!
-        assert_template 'users/show'
+        assert_template 'dashboard/index'
         assert logged_in?
     end
 end

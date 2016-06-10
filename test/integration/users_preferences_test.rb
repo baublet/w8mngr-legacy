@@ -86,7 +86,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert_equal "selected", selected_zone[0]["selected"]
       post user_path(@user), timezone: "Banana"
       assert_template "users/edit"
-      assert_select ".error-explanation" 
+      assert_select ".error-explanation"
     end
 
     private
@@ -96,9 +96,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         assert_template 'sessions/new'
         post login_path, session: {email: 'test@example.com', password: 'password'}
         assert logged_in?
-        assert_redirected_to @user
+        assert_redirected_to dashboard_path
         follow_redirect!
-        assert_template 'users/show'
+        assert_template 'dashboard/index'
         get edit_user_path @user
         assert_template "users/edit"
     end

@@ -1,9 +1,12 @@
 /* global history */
 
-// A very simple wrapper for the PushState API
+// A very simple wrapper for the PushState API.
+
 module.exports = {
-  current: function() {
+  current: function current() {
+    if(!history) return false
     if(history.state) return history.state
+    return false
   },
   push: function(stateObject, url) {
     try {
@@ -16,5 +19,5 @@ module.exports = {
       history.replaceState(stateObject, "", url)
       return true
     } catch(e) { return false }
-  }
+  },
 }

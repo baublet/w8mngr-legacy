@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         if @user.save
             flash[:success] = "Welcome to w8mngr!"
             login @user
-            redirect_to @user
+            redirect_to dashboard_path
         else
             render 'new'
         end

@@ -23,7 +23,7 @@ class SessionsControllerTest < ActionController::TestCase
     @user = users(:test)
     post :create, session: { email: @user.email, password: "password" }
     assert_response :redirect
-    assert_redirected_to @user
+    assert_redirected_to dashboard_path
   end
 
   test "should not log in if not a real user"  do

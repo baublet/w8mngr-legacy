@@ -1,6 +1,6 @@
 <div class="autocomplete-item"
      v-bind:class="{ selected: selected }"
-     @click="$parent.autoCompleteSelected = index">
+     @click="selectItem()">
   <h3 class="name">
     <a class="add-food btn" @click.stop.prevent="addEntry()" v-if="measurements">
       Add Entry
@@ -8,7 +8,7 @@
     {{ name }}
   </h3>
   <p v-text="description" class="description" v-if="description"></p>
-  <div class="small-loader" v-if="autoCompleteLoading">
+  <div class="small-loader" v-if="loading">
     <i class="fa fa-cog fa-spin"></i>
     <span class="screen-reader-text">Loading...</span>
   </div>
@@ -21,6 +21,6 @@
                  :fat="measurement.fat"
                  :carbs="measurement.carbs"
                  :protein="measurement.protein"
-                 :selected-measurement="selectedMeasurement"></autocomplete-measurement>
+                 :id="measurement.id"></autocomplete-measurement>
   </div>
 </div>

@@ -6,8 +6,9 @@ module.exports = {
   },
   resources: {
     base: "/",
-    search_foods: function(q) {
-      return "/search/foods/?q=" + q
+    search_foods: function(q, page) {
+      page = page ? page : 1
+      return "/search/foods/?per_page=10&q=" + q + "&p=" + page
     },
     foods: {
       pull: function(ndbno) {
@@ -36,6 +37,11 @@ module.exports = {
       },
       update: function(id) {
         return "/food_entries/" + id
+      }
+    },
+    measurements: {
+      increment_popularty: function(id) {
+        return "/measurements/" + id + "/chosen"
       }
     },
     food_log_day: function(day) {

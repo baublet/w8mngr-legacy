@@ -80,6 +80,9 @@ export default {
                   ['weights',  this.$fetchURI.dashboard.quarter_weights  ],
                  ]
       this.LoadData(uris, function() {
+        console.log(Chart.defaults.global)
+        Chart.defaults.global.defaultFontFamily = "Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+        Chart.defaults.global.defaultFontSize = 10
         app.$dispatch('loading')
                              // Rounds the number we want to the nearest 5
         let max_calories_y = Math.ceil(parseInt(app.FindMax(app.data.calories) * 1.2, 10) / 5) * 5,
@@ -87,7 +90,6 @@ export default {
             max_weights_y =  Math.ceil(parseInt(app.FindMax(app.data.weights) * 1.2, 10) / 5) * 5
         app.chartObject = new Chart(app.$el, {
           type: 'bar',
-          defaultFontFamily: "'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
           options: {
             showLines: true,
             tooltips: {
@@ -103,7 +105,7 @@ export default {
               xAxes: [
                 {
                   ticks: {
-                    maxTicksLimit: 7,
+                    maxTicksLimit: 5,
                     max: max_calories_y,
                   },
                   gridLines: {
@@ -143,7 +145,7 @@ export default {
           },
           data: {
             labels: app.data.calories.map(function(a){
-              return strftime('%B', new Date(a.x))
+              return strftime('%B', new Date(a.x)).substring(0,3)
             }),
             datasets: [
               {

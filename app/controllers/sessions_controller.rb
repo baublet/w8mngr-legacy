@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         if session[:forwarding_url]
             redirect_to session[:forwarding_url]
         else
-            redirect_to user
+            redirect_to dashboard_path
         end
     else
         flash.now[:error] = 'Invalid email/password combination'

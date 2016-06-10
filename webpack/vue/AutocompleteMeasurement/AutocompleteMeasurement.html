@@ -9,7 +9,8 @@
     @keyup.left="previousMeasurement()"
     @keyup.right="nextMeasurement()"
     @keyup.up="previousAutoCompleteItem()"
-    @keyup.down="nextAutoCompleteItem()">
+    @keyup.down="nextAutoCompleteItem()"
+    @click="selectMe()">
   <div class="unit" alt="Unit" v-text="unit"></div>
   <div class="calories" alt="Calories" v-text="cCalories"></div>
   <div class="fat" alt="Fat" v-text="cFat"></div>

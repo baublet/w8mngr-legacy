@@ -19,16 +19,8 @@
   border: 0;
 }
 
-.ac-fade-transition {
-  opacity: 1;
-  transform: translateY(0);
-  transition: transform .15s ease-in-out,
-              opacity .15s ease-in-out;
-}
-
 .ac-fade-enter, .ac-fade-leave {
-  opacity: 0;
-  transform: translateY(-7rem);
+  display: none;
 }
 
 // For the home page elements

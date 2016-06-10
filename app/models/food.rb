@@ -28,6 +28,7 @@ class Food < ActiveRecord::Base
                           :name => 'A',
                           :description => 'B'
                       },
+                      :ranked_by => "(popularity * 0.01) + :tsearch",
                       :using => {
                           :tsearch => {
                               :prefix => true,
@@ -35,6 +36,11 @@ class Food < ActiveRecord::Base
                               :dictionary => "english"
                           }
                       }
+
+  def increment_popularity
+    self.popularity = self.popularity + 1
+    save()
+  end
 
   # Load the results passed from the USDA API into this object
   def populate_from_usda result
