@@ -3,6 +3,8 @@ The source for my side project, a lifestyle and fitness tracker. I want users to
 
 It's my first Rails project, so be gentle on feedback!
 
+![Travis CI Build][https://travis-ci.org/baublet/w8mngr.svg?branch=master]
+
 ## Architecture
 I'm using PostgreSQL, Ruby on Rails, Javascript (vanilla), Vue.js (planned), and nginx. The entire stack is new to me, so I'm learning a ton. To further improve my devops in hopes of becoming a well-rounded full stack developer, I'm using Amazon Web Services.
 
