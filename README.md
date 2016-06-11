@@ -1,9 +1,7 @@
-# w8mngr | The Lifestyle Tracker
+# w8mngr | The Lifestyle Tracker ![Travis CI Build](https://travis-ci.org/baublet/w8mngr.svg?branch=master)
 The source for my side project, a lifestyle and fitness tracker. I want users to be able to track their calories, food intake, fitness, weight, and other variables that affect their health. The current version, [w8mngr.com](http://w8mngr.com) was originally coded in 2009. Back then, I was interested in super high-performance PHP. It is based on super simple architecture, raw queries, and PHP templates. As expected, it was quick to code but tough to maintain. So with this version I'm testing out Ruby on Rails.
 
 It's my first Rails project, so be gentle on feedback!
-
-![Travis CI Build][https://travis-ci.org/baublet/w8mngr.svg?branch=master]
 
 ## Architecture
 I'm using PostgreSQL, Ruby on Rails, Javascript (vanilla), Vue.js (planned), and nginx. The entire stack is new to me, so I'm learning a ton. To further improve my devops in hopes of becoming a well-rounded full stack developer, I'm using Amazon Web Services.
