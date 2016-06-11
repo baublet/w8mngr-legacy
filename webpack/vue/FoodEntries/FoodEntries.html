@@ -111,8 +111,8 @@
                          :name="item.name"
                          :resource="item.resource"
                          transition="ac-fade" stagger="20"></autocomplete-item>
-      <div class="pagination">
-        <a class="btn next-btn previous" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage">
+      <div class="pagination" v-if="(prevPage || nextPage) && !autocompleteLoading" transition="ac-pagination-fade">
+        <a class="btn prev-btn previous" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage">
           <i class="fa fa-chevron-circle-left"></i> Back
         </a>
         <a class="btn next-btn next" href="#" @click.prevent="autocompletePage(nextPage)" v-if="nextPage">

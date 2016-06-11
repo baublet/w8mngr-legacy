@@ -177,6 +177,8 @@
   margin: 2rem 0 0;
   background: $color-primary;
   color: $white;
+  position: relative;
+  z-index: 20;
 
   @include mqAfterSize(640px) {
     // Only adding this bottom margin so we can see dat sexy drop shadow :)
@@ -220,6 +222,8 @@
 .autocomplete-results {
   margin: 1rem -1rem 0;
   padding: 0 1rem;
+  position: relative;
+  z-index: 10;
   @include mqAfterSize(640px) {
     margin: 1rem 0 0 320px;
     padding-right: 0;
@@ -237,8 +241,6 @@
   padding: .5rem 1.5rem;
   overflow: hidden;
   cursor: pointer;
-  position: relative;
-  transition: transform .25s $easing-1;
   @include mqAfterSize(640px) {
     margin: 0;
   }
@@ -368,7 +370,7 @@
       text-align: center;
       content: attr(alt);
       display: block;
-      font-size: .6rem;
+      font-size: .45rem;
       font-weight: bold;
       text-transform: uppercase;
       color: rgba($black, .5);

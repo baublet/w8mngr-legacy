@@ -19,8 +19,31 @@
   border: 0;
 }
 
-.ac-fade-enter, .ac-fade-leave {
-  display: none;
+.ac-fade-transition {
+  transition: transform .25s $easing-1,
+              opacity .1s ease-in-out;
+  opacity: 1;
+  transform: translateX(0);
+}
+.ac-fade-enter {
+  opacity: 0;
+  transform: translateX(10rem);
+}
+
+.ac-fade-leave {
+  opacity: 0;
+  transform: translateX(-10rem);
+}
+
+.ac-pagination-fade-transition {
+  transition: all .15s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ac-pagination-fade-leave, .ac-pagination-fade-enter {
+  transform: translateY(5rem);
+  opacity: 0;
 }
 
 // For the home page elements

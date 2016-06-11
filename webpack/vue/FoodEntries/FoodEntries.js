@@ -319,6 +319,9 @@ export default {
     // This function handles the autocomplete data, which Vue handles with
     // sub-components of this app
     autocomplete: function(query) {
+      // Delete the current results
+      this.autocompleteItems = []
+
       if (this.autocompleteLoading) return false
       // Only do anything if the entered input is > 2 letters
       if (query.length <= 2) return false
@@ -350,7 +353,7 @@ export default {
         this.$log()
         var app = this
         forEach(response.results, function(result, i) {
-          // This loads the resource we"ll use to ping our db for measurement info
+          // This loads the resource we'll use to ping our db for measurement info
           var resource = ("offset" in result && "group" in result) ?
                          app.$fetchURI.foods.pull(result.ndbno) :
                          app.$fetchURI.foods.show(result.id)
@@ -367,7 +370,6 @@ export default {
     },
     // Handles prev/next for autocomplete
     autocompletePage: function(page) {
-      this.autocompleteItems = []
       this.page = page
       this.autocomplete(this.newDescription)
     },
