@@ -1,6 +1,7 @@
 // This loads our default Vue plugins and actions
 
 var w8mngr = require("w8mngr")
+var Vue = require("vue")
 
 module.exports = {
 

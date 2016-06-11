@@ -24,17 +24,19 @@ export default {
       this.newAmount = this.amount
       // Watch the new amount form  for changes
       var self = this
-      this.$watch('newAmount', function() {
+      this.$watch('new-amount', function() {
         self.dispatchMeasurementInfo()
       })
     },
-    "measurementSelected": function(id) {
+    "measurement-selected": function(id) {
       this.selected = false
       if(id == this.id) {
         this.selectMe()
       }
-      return true
     },
+    // Our next/prev measurement and autocomplete listeners are
+    // automatically passed up to the autocomplete item
+    // Our add-entry and fill-in-form events are passed up
   },
   methods: {
     selectMe: function() {
@@ -47,26 +49,10 @@ export default {
       }, 100)
       this.dispatchMeasurementInfo()
     },
-    // Our functions that we listen to for sending events up the chain
-    nextMeasurement: function() {
-      this.$dispatch("next-measurement")
-    },
-
-    previousMeasurement: function() {
-      this.$dispatch("previous-measurement")
-    },
-
-    nextAutoCompleteItem: function() {
-      this.$dispatch("next-autocomplete-item")
-    },
-
-    previousAutoCompleteItem: function() {
-      this.$dispatch("previous-autocomplete-item")
-    },
 
     // Pushes a notification up the chain to add the current entry
     addEntry: function() {
-      this.$dispatch("add-entry")
+      this.$emit('add-entry')
       // Pings the server telling it to update this entry's popularity
       // Doesn't return anything because this is totally non-critical
       var self = this
@@ -86,7 +72,7 @@ export default {
         carbs: this.cCarbs,
         protein: this.cProtein,
       }
-      this.$dispatch("fillin-form", data)
+      this.$emit('fill-in-form', data)
     }
   },
   computed: {

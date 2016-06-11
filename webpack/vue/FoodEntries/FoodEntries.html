@@ -92,6 +92,7 @@
     </div>
 
     <div class="autocomplete-results">
+      <h5><i class="fa fa-search" aria-hidden="true"></i> Search</h5>
       <div class="auto-complete-loading">
         <div class="small-loader" v-if="autocompleteLoading">
           <i class="fa fa-cog fa-spin"></i>
@@ -110,6 +111,11 @@
                          :index="$index"
                          :name="item.name"
                          :resource="item.resource"
+                         @click="selectAutocompleteItem($index)"
+                         @next-autocomplete-item="nextAutocompleteItem()"
+                         @prev-autocomplete-item="prevAutocompleteItem()"
+                         @add-entry="addEntry()"
+                         @fill-in-form="fillInForm($arguments[0])"
                          transition="ac-fade" stagger="20"></autocomplete-item>
       <div class="pagination" v-if="(prevPage || nextPage) && !autocompleteLoading" transition="ac-pagination-fade">
         <a class="btn prev-btn previous" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage">

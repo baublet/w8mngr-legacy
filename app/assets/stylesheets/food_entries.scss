@@ -20,10 +20,21 @@
   .entry {
     position: relative;
     z-index: 0;
-    padding-right: 3rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    padding-left: .5rem;
+    padding: .5rem 3rem .5rem .5rem;
+    &.loading:before {
+      display: block;
+      content: " ";
+      height: 3px;
+      background-color: $color-secondary;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: translateX(0);
+      animation-name: entryRowLoading;
+      animation-duration: 3s;
+      animation-timing-function: $easing-1;
+      animation-iteration-count: infinite;
+    }
     + .entry {
       border-top: 1px solid rgba($black, .1);
     }
@@ -110,8 +121,7 @@
   font-weight: 200;
   text-align: center;
   display:flex;
-  margin: 0 -1rem;
-  margin-top: 2rem;
+  margin: 2rem -1rem 1rem;
   padding: 0 1rem;
   opacity: 1;
   overflow:hidden;
@@ -174,7 +184,7 @@
 
 .app-form.new {
   padding: .5rem;
-  margin: 2rem 0 0;
+  margin: 0;
   background: $color-primary;
   color: $white;
   position: relative;
@@ -225,13 +235,18 @@
   position: relative;
   z-index: 10;
   @include mqAfterSize(640px) {
-    margin: 1rem 0 0 320px;
+    margin: 0 0 0 320px;
     padding-right: 0;
-    padding-top: 1rem;
   }
   p {
     padding: 0;
     margin: 0;
+  }
+  h5 {
+    margin-bottom: .5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .7rem;
   }
 }
 

@@ -32,7 +32,6 @@
 
 .ac-fade-leave {
   opacity: 0;
-  transform: translateX(-10rem);
 }
 
 .ac-pagination-fade-transition {
@@ -44,6 +43,35 @@
 .ac-pagination-fade-leave, .ac-pagination-fade-enter {
   transform: translateY(5rem);
   opacity: 0;
+}
+
+// Various animations
+
+@keyframes entryRowLoading {
+    0% {
+        left: 0;
+        right: 99%;
+    }
+
+    25% {
+        left: 0;
+        right: 0;
+    }
+
+    50% {
+        left: 99%;
+        right: 0;
+    }
+
+    75% {
+        left: 0;
+        right: 0;
+    }
+
+    100% {
+        left: 0;
+        right: 99%;
+    }
 }
 
 // For the home page elements

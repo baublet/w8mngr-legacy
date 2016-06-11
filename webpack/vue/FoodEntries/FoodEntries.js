@@ -17,37 +17,10 @@ export default {
     "hook:ready": function() {
       this.initializeApp()
     },
-    "fillin-form": function(data) {
-      console.log(data)
-      this.newDescriptionTemp = data.description
-      this.newCalories = data.calories
-      this.newFat = data.fat
-      this.newCarbs = data.carbs
-      this.newProtein = data.protein
-    },
-    "next-measurement": function() {
-      this.nextMeasurement()
-    },
-    "previous-measurement": function() {
-      this.previousMeasurement()
-    },
-    "next-autocomplete-item": function() {
-      this.nextAutocompleteItem()
-    },
-    "previous-autocomplete-item": function() {
-      this.previousAutocompleteItem()
-    },
-    "autocompleteItemSelected": function(index) {
-      this.autocompleteSelected = index
-      this.$broadcast("autocompleteItemSelected", this.autocompleteSelected)
-    },
-    "add-entry": function() {
-      this.addEntry()
-    },
     "loading": function() {
       this.loading = 1
     },
-    "notLoading": function() {
+    "not-loading": function() {
       this.loading = 0
     },
   },
@@ -204,7 +177,7 @@ export default {
         onSuccess: function(response) {
           // Add the user return data to our model
           app.entries.push(response.entry)
-          app.$emit("notLoading")
+          app.$emit("not-loading")
         },
       })
     },
@@ -237,6 +210,9 @@ export default {
         this.newCarbs = ""
         this.newProtein = ""
         this.autocompleteItems = []
+        this.page = 1
+        this.nextPage = null
+        this.prevPage = null
 
         // Add the entry to the model
         // We'll need this to update the item with the index the ruby app returns to us
@@ -268,7 +244,7 @@ export default {
           onSuccess: function(response) {
             // Update our ID with the returned response so it can be deleted
             app.entries[index].id = parseInt(response.id)
-            app.$emit("notLoading")
+            app.$emit("not-loading")
           },
         })
         document.getElementById("description-input")
@@ -282,6 +258,15 @@ export default {
         document.getElementById("description-input")
           .focus()
       }
+    },
+    // Fills in the form with pre-entered data
+    fillInForm: function(data) {
+      console.log(data)
+      this.newDescriptionTemp = data.description
+      this.newCalories = data.calories
+      this.newFat = data.fat
+      this.newCarbs = data.carbs
+      this.newProtein = data.protein
     },
     // Loads the day after the currenct day
     loadNextDay: function() {
@@ -301,7 +286,7 @@ export default {
         method: "GET",
         url: this.$fetchURI.food_entries.from_day(day),
         onSuccess: function(response) {
-          app.$emit("notLoading")
+          app.$emit("not-loading")
           app.entries = response.entries
           app.currentDayNumber = response.current_day
           app.parseDays()
@@ -373,38 +358,42 @@ export default {
       this.page = page
       this.autocomplete(this.newDescription)
     },
+    // Handles selecting an autocomplete item. If index is undefined, this function
+    // selects the currently-selected one
+    selectAutocompleteItem: function(index) {
+      index = index ? index : this.autocompleteSelected
+      this.$children.forEach(function(item) {
+        item.$emit('autocomplete-item-selected', index)
+      })
+    },
     // Handles our arrow key down
     nextAutocompleteItem: function() {
       // Don't do anything if there aren't any items or they can't go anywhere
       if (this.autocompleteItems.length < 1) return false
       if (this.autocompleteSelected == this.autocompleteItems.length - 1) return false
-
       console.log("Down: " + (this.autocompleteSelected + 1))
-
       this.autocompleteSelected++
-      this.$broadcast("autocompleteItemSelected", this.autocompleteSelected)
+      this.selectAutocompleteItem()
     },
     // Handles our arrow key up
-    previousAutocompleteItem: function() {
+    prevAutocompleteItem: function() {
       // Don't do anything if there aren't any items or they can't go up
       if (this.autocompleteItems.length < 1) return false
       if (this.autocompleteSelected < 0) return false
-
       console.log("Up: " + (this.autocompleteSelected - 1))
-
       // Go up one item if they're not at the top already
       this.autocompleteSelected--
-      this.$broadcast("autocompleteItemSelected", this.autocompleteSelected)
+      this.selectAutocompleteItem()
     },
 
     // Selects the next measurement
-    nextMeasurement: function(e) {
-      this.$broadcast('nextMeasurement')
+    nextMeasurement: function() {
+      this.$bus.$emit('next-measurement')
     },
 
     // Selects the previous measurement
     previousMeasurement: function() {
-      this.$broadcast('prevMeasurement')
+      this.$bus.$emit('prev-measurement')
     },
 
     // Handles our error messages

@@ -10,11 +10,19 @@ export default {
     "fat",
     "carbs",
     "protein",
-    // For calculating changes in our amounts on the fly
-    "perOne",
   ],
+  data: function() {
+    return {
+      loading: 0,
+      perOne: null,
+    }
+  },
   events: {
     'hook:ready': function() {
+      console.log("========================= Food entry: ")
+      console.log(this)
+      console.log("========================= Food entry")
+
       // First, find the number at the beginning
       var chunks = this.description.split(" ")
       var currentAmount = parseFloat(chunks[0])
@@ -31,7 +39,7 @@ export default {
       // Watch for our amount to change
       // Watch for autocomplete results
       this.$watch("description", function() {
-        this.$emit("amountAltered")
+        this.$emit("amount-altered")
       })
 
       // Listen for events on all of our macros
@@ -50,7 +58,7 @@ export default {
     // This function watches for our description to change. When it does, we
     // call this function to see if the amount was altered, and if it was, update
     // the item's macros according to the new amount
-    'amountAltered': function() {
+    'amount-altered': function() {
       var chunks = this.description.split(" ")
       var newAmount = parseFloat(chunks[0])
       if(isNaN(newAmount) || newAmount == 0) return null
@@ -81,20 +89,20 @@ export default {
     },
     // Sends an entry to be removed from the database
     removeEntry: function(index) {
-      this.$dispatch("loading")
+      this.loading = 1
       var self = this
       this.$fetch({
         method: "DELETE",
         url: self.$fetchURI.food_entries.delete(self.id),
         onSuccess: function(response) {
           self.$parent.entries.splice(self.index, 1)
-          self.$dispatch("notLoading")
+          self.loading = 0
         },
       })
     },
     // Sends an entry to be saved to the database
     saveEntry: function(index) {
-      this.$dispatch("loading")
+      this.loading = 1
 
       // Prepare our data to be sent
       var data = {
@@ -114,7 +122,7 @@ export default {
         url: this.$fetchURI.food_entries.update(self.id),
         data: data,
         onSuccess: function(response) {
-          self.$dispatch("notLoading")
+          self.loading = 0
         },
       })
     },

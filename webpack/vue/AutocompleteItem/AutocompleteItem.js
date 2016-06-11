@@ -24,39 +24,41 @@ export default {
     }
   },
   events: {
-    'hook:ready': function() {
+    'hook:attached': function() {
       this.initializeComponent()
     },
-    'autocompleteItemSelected': function(index) {
+    'autocomplete-item-selected': function(index) {
+      index = index > 0 ? index : 0
       this.selected = false
       if (index == this.index) {
-        this.selected = true
-        // Load measurements
-        this.loadItemData()
-        // Scroll to this item if we're on mobile
-        if (window.innerWidth < 640)
-          smoothScroll.scrollVerticalToElementById(this.$el.id, 150)
+        this.selectItem()
       }
-      return true
     },
-    'nextMeasurement': function() {
+    'next-measurement': function() {
       if(!this.selected) return true
       this.nextMeasurement()
-      return false
     },
-    'prevMeasurement': function() {
+    'prev-measurement': function() {
       if(!this.selected) return true
       this.prevMeasurement()
-      return false
-    }
+    },
+    // Our next/prev autocomplete events are passed up
+    // Our add-entry and fill-in-form events are passed up
   },
   methods: {
     selectItem: function() {
       // We send this up, which then sends it back down to the children
       // This is for clicking on items, rather than using keyboard navigation
-      this.$dispatch("autocompleteItemSelected", this.index)
+      console.log("Selecting item " + this.index)
+      this.selected = true
+      // Load measurements
+      this.loadItemData()
+      // Scroll to this item if we're on small screens
+      if (window.innerWidth < 640)
+        smoothScroll.scrollVerticalToElementById(this.$el.id, 150)
     },
     selectMeasurement: function() {
+      console.log("Selecting measurement...")
       // If we don't do this asyncronously, Vue won't have time to update the
       // the DOM. This will defer the ping until Vue has time to update
       var self = this
@@ -65,8 +67,10 @@ export default {
         // up the app if something goes wrong
         let i = 0
         while(!self.measurements[self.selectedMeasurement] && i < 1000) {i++}
-        if(self.measurements[self.selectedMeasurement])
-          self.$broadcast("measurementSelected", self.measurements[self.selectedMeasurement].id)
+        // Emit the event to our children
+        self.$children.forEach(function(m) {
+          m.$emit("measurement-selected", self.measurements[self.selectedMeasurement].id)
+        })
       }, 50)
     },
     firstMeasurement: function() {
@@ -82,9 +86,6 @@ export default {
       if(this.selectedMeasurement) this.selectedMeasurement--
       this.selectMeasurement()
     },
-    addEntry: function() {
-      this.$dispatch('add-entry')
-    },
     initializeComponent: function() {
       // Set a random ID on this measurement (because we never use these IDs in the CSS,
       // or anywhere else in the JS but here)
@@ -97,13 +98,12 @@ export default {
       // Only continue if we haven't already loaded these measurements
       if (this.measurementsLoaded || this.loading) {
         this.firstMeasurement()
-        return false
+        return 1
       }
 
       this.loading = 1
 
       var in_cache = this.$cache.get("food", this.resource)
-
       if (in_cache !== null) {
         console.log("Item found in the cache for " + this.name + ". Loading it into Vue.")
         this.$set('measurements', in_cache.measurements)
@@ -114,7 +114,6 @@ export default {
         this.firstMeasurement()
         return null
       }
-
       console.log("Loading item data for: " + this.index)
 
       var self = this

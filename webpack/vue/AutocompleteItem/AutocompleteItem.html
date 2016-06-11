@@ -1,8 +1,7 @@
 <div class="autocomplete-item"
-     v-bind:class="{ selected: selected }"
-     @click="selectItem()">
+     v-bind:class="{ selected: selected }">
   <h3 class="name">
-    <a class="add-food btn" @click.stop.prevent="addEntry()" v-if="measurements">
+    <a class="add-food btn" @click.stop.prevent="$emit('add-entry')" v-if="measurements">
       Add Entry
     </a>
     {{ name }}
@@ -21,6 +20,13 @@
                  :fat="measurement.fat"
                  :carbs="measurement.carbs"
                  :protein="measurement.protein"
-                 :id="measurement.id"></autocomplete-measurement>
+                 :id="measurement.id"
+                 @next-autocomplete-item="$emit('next-autocomplete-item')"
+                 @prev-autocomplete-item="$emit('prev-autocomplete-item')"
+                 @next-measurement="nextMeasurement()"
+                 @prev-measurement="prevMeasurement()"
+                 @add-entry="$emit('add-entry')"
+                 @fill-in-form="$emit('fill-in-form', $arguments[0])"
+                 ></autocomplete-measurement>
   </div>
 </div>

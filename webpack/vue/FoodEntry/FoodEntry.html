@@ -1,4 +1,4 @@
-<div class="row entry" transition="fl-fade">
+<div class="row entry" transition="fl-fade" v-bind:class="{ loading: loading }">
   <div class="col long">
     <input  type="text"
             @keyup.enter="saveEntry(index)"
