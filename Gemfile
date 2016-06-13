@@ -48,7 +48,13 @@ gem "groupdate"
 
 # Testing-related gems
 gem "codeclimate-test-reporter", group: :test, require: nil
-gem "selenium-webdriver", group: :test
+# Allows us to test JS in integration tests
+gem "capybara", group: :test
+# Required to runcapybaray webkit without a true display
+gem "headless", group: :test
+# Our driver that will be executing JS
+# Requires: sudo apt-get install libqt4-dev libqtwebkit-dev
+gem "capybara-webkit", group: :test
 
 group :development, :test do
     gem "sqlite3"
