@@ -9,7 +9,7 @@ class WeightEntryTest < ActiveSupport::TestCase
         @weight = @user.weightentries.build(value: 83914, day: 19850502)
     end
 
-    test "weight should be valid" do
+    test "weight entry food data should be valid" do
         @wed = WeightEntryData.new()
         assert_not @wed.valid?
         @wed.user_id = @user.id

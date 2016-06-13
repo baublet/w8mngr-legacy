@@ -46,6 +46,9 @@ gem "postmark"
 # For our charting, groupdate and calculate_all makes things easier
 gem "groupdate"
 
+# For approximating test coverage
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 group :development, :test do
     gem "sqlite3"
     gem "byebug"
