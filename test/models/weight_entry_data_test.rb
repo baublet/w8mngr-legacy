@@ -51,7 +51,7 @@ class WeightEntryTest < ActiveSupport::TestCase
                 # array out of incomplete data
                 assert_equal num,
                            data.length - (scope == 'day' ? 0 : 1),
-                           "Failed on scope: " + scope + "\nNum: " + num.to_s + "\n" + data.to_yaml
+                           "Failed on " + macro + "\nScope: " + scope + "\nNum: " + num.to_s + "\n" + data.to_yaml
             end
         end
     end
