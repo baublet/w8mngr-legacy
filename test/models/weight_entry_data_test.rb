@@ -45,12 +45,13 @@ class WeightEntryTest < ActiveSupport::TestCase
                 num = generate_int 1, 10
                 num = num * (scope == 'day' ? 7 : 1)
                 @wed.num = num
+                data = @wed.time_data
                 # puts "Worked: " + num.to_s + "; " + data.length.to_s + " (" + scope + ")"
                 # We vary it by day because if we're mid-week, mid-month, etc., it builds the
                 # array out of incomplete data
                 assert_equal num,
                            data.length - (scope == 'day' ? 0 : 1),
-                           "Failed on " + macro + "\nScope: " + scope + "\nNum: " + num.to_s + "\n" + data.to_yaml
+                           "Failed on scope: " + scope + "\nNum: " + num.to_s + "\n" + data.to_yaml
             end
         end
     end
