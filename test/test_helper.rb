@@ -10,6 +10,13 @@ class ActiveSupport::TestCase
   include SessionsHelper
   include ApplicationHelper
 
+  # Simple login
+  def log_in
+    @user = users(:test)
+    log_in_as(@user)
+    assert logged_in?
+  end
+
   # Logs in a test user
   def log_in_as(user, options = {})
       password      = options[:password]    || 'password'
