@@ -1,7 +1,6 @@
 var numberToDay = require("../../fn/numberToDay.js")
 var tomorrowNumber = require("../../fn/tomorrowNumber.js")
 var yesterdayNumber = require("../../fn/yesterdayNumber.js")
-var forEach = require("../../fn/forEach.js")
 var smoothScroll  = require("../../fn/smoothScroll.js")
 var _do = require("../../fn/do.js")
 
@@ -32,28 +31,28 @@ export default {
     },
     totalCalories: function() {
       var sum = 0
-      forEach(this.entries, function(entry) {
+      this.entries.forEach(function(entry) {
         sum = sum + parseInt(entry["calories"], 10)
       })
       return sum
     },
     totalFat: function() {
       var sum = 0
-      forEach(this.entries, function(entry) {
+      this.entries.forEach(function(entry) {
         sum = sum + parseInt(entry["fat"], 10)
       })
       return sum
     },
     totalCarbs: function() {
       var sum = 0
-      forEach(this.entries, function(entry) {
+      this.entries.forEach(function(entry) {
         sum = sum + parseInt(entry["carbs"], 10)
       })
       return sum
     },
     totalProtein: function() {
       var sum = 0
-      forEach(this.entries, function(entry) {
+      this.entries.forEach(function(entry) {
         sum = sum + parseInt(entry["protein"], 10)
       })
       return sum
@@ -337,7 +336,7 @@ export default {
         this.prevPage = this.page > 1 ? this.page - 1 : null
         this.$log()
         var app = this
-        forEach(response.results, function(result, i) {
+        response.results.forEach(function(result, i) {
           // This loads the resource we'll use to ping our db for measurement info
           var resource = ("offset" in result && "group" in result) ?
                          app.$fetchURI.foods.pull(result.ndbno) :
