@@ -27,9 +27,7 @@ module PersonalTrainer
       type = "weight_log_reminder"
       uid = "wlr-" + last_entry_date_s
       time_ago = time_ago_in_words(last_entry_date)
-      message_text = "You have not logged your weight in " + time_ago
-                     + ". With more entries, we can better track your progress, "
-                     + "and you can get a more firm sense of your weight fluctuations!"
+      message_text = "You have not logged your weight in " + time_ago + ". With more entries, we can better track your progress, and you can get a more firm sense of your weight fluctuations!"
       message_html = "<p>" + message_text + "</p>"
       message_text = message_text + "\n\n" + "Get back at it: " + Rails.application.routes.url_helpers.weightlog_url(host: Rails.configuration.x.host)
       message_html = "<p>Get back at it and <a href=\"" + Rails.application.routes.url_helpers.weightlog_url(host: Rails.configuration.x.host) + "\">log today's weight</a>!</p>"
