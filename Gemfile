@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "4.2.5"
+gem "rails", "4.2.6"
 
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
@@ -46,8 +46,9 @@ gem "postmark"
 # For our charting, groupdate and calculate_all makes things easier
 gem "groupdate"
 
-# For approximating test coverage
+# Testing-related gems
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem "selenium-webdriver", group: :test
 
 group :development, :test do
     gem "sqlite3"
