@@ -10,39 +10,48 @@ class WeightEntryTest < ActiveSupport::TestCase
     end
 
     test "weight should be valid" do
-        assert @weight.valid?
+        @wed = WeightEntryData.new()
+        assert_not @wed.valid?
+        @wed.user_id = @user.id
+        assert_not @wed.valid?
+        @wed.num = 1
+        assert_not @wed.valid?
+        @wed.length_scope = 'test'
+        assert_not @wed.valid?
+        @wed.length_scope = 'day'
+        assert @wed.valid?
+        @wed.length_scope = 'week'
+        assert @wed.valid?
+        @wed.length_scope = 'month'
+        assert @wed.valid?
+        @wed.length_scope = 'year'
+        assert @wed.valid?
+        @wed.length_scope = 'yurt'
+        assert_not @wed.valid?
     end
 
-    test "weight should not be valid" do
-        @weight.update_value "1 lbs"
-        assert_not @weight.valid?
-        @weight.update_value "3lbs"
-        assert @weight.valid?
-        @weight.update_value "2lbs"
-        assert_not @weight.valid?
-        @weight.update_value "1500lbs"
-        assert @weight.valid?
-        @weight.update_value "1501lbs"
-        assert_not @weight.valid?
+    test "should initialize properly" do
+        @wed = WeightEntryData.new(user_id: @user.id, num: 1, length_scope: 'day')
+        assert @wed.valid?
     end
 
-    test "user can add weight to day" do
-        assert @weight.save
-        assert @user.weightentries.size, 1
-    end
-
-    test "user can delete weight from day" do
-        assert @weight.save
-        @user.reload
-        assert @user.weightentries.first.destroy
-        assert @user.weightentries.size, 0
-    end
-
-    test "happy path generative tests" do
-        # Test 1,000 random values between 1,360 and 680,390
-        for i in 1...1000 do
-            @weight.value = generate_int 1360, 680390
-            assert @weight.valid?, "Generative weight testing failed at " + @weight.value.to_s
+    # This generates 5 tests per macro per length scope
+    test "should return proper data type" do
+        @wed = FoodEntryData.new(user_id: @user.id, num: 1, length_scope: 'week')
+        assert @wed.valid?
+        ["day", "week", "month", "year"].each do |scope|
+            @wed.length_scope = scope
+            5.times do
+                num = generate_int 1, 10
+                num = num * (scope == 'day' ? 7 : 1)
+                @wed.num = num
+                # puts "Worked: " + num.to_s + "; " + data.length.to_s + " (" + scope + ")"
+                # We vary it by day because if we're mid-week, mid-month, etc., it builds the
+                # array out of incomplete data
+                assert_equal num,
+                           data.length - (scope == 'day' ? 0 : 1),
+                           "Failed on " + macro + "\nScope: " + scope + "\nNum: " + num.to_s + "\n" + data.to_yaml
+            end
         end
     end
 end

@@ -51,7 +51,6 @@ class FoodEntryTest < ActiveSupport::TestCase
           num = generate_int 1, 10
           num = num * (scope == 'day' ? 7 : 1)
           @fed.num = num
-          data = @fed.time_data(macro).compact.reject(&:blank?)
           # puts "Worked: " + num.to_s + "; " + data.length.to_s + " (" + scope + ")"
           # We vary it by day because if we're mid-week, mid-month, etc., it builds the
           # array out of incomplete data
