@@ -1,5 +1,4 @@
 var w8mngr = require("w8mngr")
-var forEach = require("../fn/forEach.js")
 var addEvent = require("../fn/addEvent.js")
 
 w8mngr.init.add(function() {
@@ -22,7 +21,7 @@ w8mngr.init.add(function() {
 
 	// Attaches event listeners to the top-level items
 	var nav_boxes = document.querySelectorAll(".app-menu-top-option")
-	forEach(nav_boxes, function(el) {
+	nav_boxes.forEach(function(el) {
 		addEvent(el, "click", function() {
 			console.log("Navigation item changed to: " + this.getAttribute("id") + ". Updating cookie.")
 			w8mngr.cookies.removeItem("nav_position")

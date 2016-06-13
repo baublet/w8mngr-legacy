@@ -4,5 +4,10 @@ rvm:
 services:
  - postgresql
 before_install:
+ - sudo apt-get install xvfb
+ - sudo apt-get install libqt4-dev libqtwebkit-dev
  - cp config/database.yml.travis config/database.yml
  - psql -c 'create database travis_ci_test;' -U postgres
+addons:
+  code_climate:
+    repo_token: 8ba0c5b036a098c5d9e15d26093f531e977ae409bfa1004bcf12165a7a3688b2
