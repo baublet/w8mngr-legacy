@@ -2,6 +2,10 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
+# For approximating test coverage
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
@@ -9,6 +13,13 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include SessionsHelper
   include ApplicationHelper
+
+  # Simple login
+  def log_in
+    @user = users(:test)
+    log_in_as(@user)
+    assert logged_in?
+  end
 
   # Logs in a test user
   def log_in_as(user, options = {})

@@ -1,5 +1,3 @@
-var forEach = require("fn/forEach.js")
-
 // Our initialization functions
 
 module.exports = {
@@ -10,7 +8,7 @@ module.exports = {
     }
   },
   run: function() {
-    forEach(this._toInit, function(fn) {
+    this._toInit.forEach(function(fn) {
       fn()
     })
   },

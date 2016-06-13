@@ -13,7 +13,7 @@ module PersonalTrainer
     # +hours_til_bug+:: an integer of hours before we begin bugging the user (default: 24)
     # +faturday_enabled+:: a boolean indicating whether the user has faturdays enabled or not (default: false)
     def self.last_entry (last_entry_date, hours_til_bug = 24, faturday_enabled = false)
-      faturday_enabled = YAML.load faturday_enabled rescue false
+      faturday_enabled = YAML.load(faturday_enabled) rescue false
       # We can never bug people before 12 hours have passed
       return [] unless hours_til_bug >= 12
 
@@ -40,10 +40,17 @@ module PersonalTrainer
         message_text += "\n\nMake today Faturday? " + faturday_url
         message_html += "<p>Make today <a href=\"" + faturday_url + "\">Faturday</a>?</p>"
       end
-      subject = "Don't forget to update your foodlog!"
+      subject = "Reminder: " + time_ago + " since you last logged foods!"
 
       # Then return it!
-      return [{ message: message_text, message_html: message_html, subject: subject, type: type, uid: uid, mood: 0}]
+      return [{
+                subject: subject,
+                message: message_text,
+                message_html: message_html,
+                type: type,
+                uid: uid,
+                mood: 0
+      }]
     end
 
     # This method takes an array of the past x number of days' calories with the
@@ -97,7 +104,14 @@ module PersonalTrainer
       uid = "tcr-" + pretty
 
       # Return our message string!
-      return [{ message: message, message_html: message, subject: subject, type: type, uid: uid, mood: mood}]
+      return [{
+                message: message,
+                message_html: message,
+                subject: subject,
+                type: type,
+                uid: uid,
+                mood: mood
+      }]
 
     end
   end

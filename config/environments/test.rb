@@ -37,6 +37,8 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.allow_concurrency = false
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
@@ -52,4 +54,13 @@ Rails.application.configure do
   #config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
   #config.webpack.dev_server.port = "8081"
   config.webpack.output_dir = Rails.root.join("public", "webpack").to_s
+
+  # Capybara config
+  Capybara::Webkit.configure do |config|
+    config.debug = false
+    # Silently return an empty 200 response for any requests to unknown URLs.
+    config.block_unknown_urls = true
+    # Don't load images
+    config.skip_image_loading = true
+  end
 end

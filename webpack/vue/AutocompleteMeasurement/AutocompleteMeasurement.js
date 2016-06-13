@@ -24,7 +24,7 @@ export default {
       this.newAmount = this.amount
       // Watch the new amount form  for changes
       var self = this
-      this.$watch('new-amount', function() {
+      this.$watch('newAmount', function() {
         self.dispatchMeasurementInfo()
       })
     },
