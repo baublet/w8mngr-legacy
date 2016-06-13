@@ -18,13 +18,13 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "should redirect to step 2" do
-    login
+    log_in
     get :new
     assert_response :redirect
   end
 
   test "should get set_metrics" do
-    login
+    log_in
     get :set_metrics
     assert_response :success
     assert_not_nil assigns(:user)
@@ -33,7 +33,7 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "should post metrics" do
-    login
+    log_in
     post :save_metrics, {
       height_display: "6'1\"",
       weight: "199lbs",
@@ -47,23 +47,17 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "should get target" do
-    login
+    log_in
     get :set_target
     assert_response :success
     assert_template "target"
   end
 
   test "should post target" do
-    login
+    log_in
     post :save_target, target: {
       calories: "2200"
     }
     assert_response :redirect
-  end
-
-  def login
-    @user = users(:test)
-    log_in_as(@user)
-    assert logged_in?
   end
 end
