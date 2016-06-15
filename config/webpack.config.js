@@ -47,10 +47,6 @@ var config = {
     // `loaders` is an array of loaders to use
     loaders: [
       {
-        test: /\.vue$/,  // a regex for matching all files that end in `.vue`
-        loader: 'vue',   // loader to use for matched files
-      },
-      {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel', // 'babel-loader' is also a legal name to reference
@@ -61,6 +57,10 @@ var config = {
       {
         test: /\.js$/,
         loader: "strip-loader?strip[]=debug,strip[]=console.log"
+      },
+      {
+        test: /\.vue$/,  // a regex for matching all files that end in `.vue`
+        loader: 'vue',   // loader to use for matched files--bail --config
       },
       // We need an HTML loader to load our Vue templates
       {
