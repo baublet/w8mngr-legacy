@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "chart.js": "^2.1.4",
+    "foreach-shim": "^0.1.1",
     "strftime": "^0.9.2"
   }
 }
