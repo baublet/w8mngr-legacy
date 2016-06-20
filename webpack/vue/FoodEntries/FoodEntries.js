@@ -172,7 +172,7 @@ export default {
       var app = this
       this.$fetch({
         method: "GET",
-        url: this.$fetchURI.faturday(app.currentDayNumber),
+        url: this.$fetchURI.faturday(this.currentDayNumber),
         onSuccess: function(response) {
           // Add the user return data to our model
           app.entries.push(response.entry)
@@ -182,7 +182,6 @@ export default {
     },
     // Send an entry to be added to the database
     addEntry: function() {
-
       var description = this.newDescriptionTemp || this.newDescription.trim()
       var calories = parseInt(this.newCalories) || 0
       var fat = parseInt(this.newFat) || 0
@@ -235,6 +234,9 @@ export default {
         }
         data_to_send.food_entry.day = this.currentDayNumber
 
+        console.log("Sending...")
+        console.log(data_to_send)
+
         // Make the request
         this.$fetch({
           method: "POST",
@@ -242,7 +244,7 @@ export default {
           data: data_to_send,
           onSuccess: function(response) {
             // Update our ID with the returned response so it can be deleted
-            app.entries[index].id = parseInt(response.id)
+            app.entries[index].id = parseInt(response.id, 10)
             app.$emit("not-loading")
           },
         })
@@ -278,7 +280,7 @@ export default {
     // Switches to a new day. If no argument is specified, it uses today
     loadDay: function(day = "") {
       this.$emit("loading")
-      console.log("Fetching data from the API...")
+      console.log("Fetching data from the API for day " + day)
       if(day !== this.currentDay && day) state.replace({}, this.$fetchURI.food_entries.from_day(day))
       var app = this
       this.$fetch({

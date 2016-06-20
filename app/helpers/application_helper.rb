@@ -67,7 +67,7 @@ module ApplicationHelper
         convert_day_to_date(string).strftime('%A, %B %e, %Y')
     end
 
-    # Validates a YYYYMMDD string, returning current_day if it's false
+    # Validates a YYYYMMDD string, returning current_day if it's invalid
     def validate_day day_string
         day_int = day_string.to_i
         if day_int > 19850501 && day_int < 20850501

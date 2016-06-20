@@ -19,7 +19,7 @@ module.exports = {
       }
     },
     faturday: function(id) {
-      id = (typeof id === "undefined") ? "" : parseInt(id, 10)
+      id = (!id) ? "" : parseInt(id, 10)
       return "/faturday/" + id
     },
     current_user: "/user",

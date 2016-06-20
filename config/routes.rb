@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
 
     # Faturdays
-    get     "/faturday/:id(:format)"=>"faturday#create", as: :faturday_day
+    get     "/faturday/:day(:format)"=>"faturday#create", as: :faturday_day
     get     "/faturday(:format)"=> "faturday#create", as: :faturday
     post    "/faturday(:format)"=> "faturday#create"
 
