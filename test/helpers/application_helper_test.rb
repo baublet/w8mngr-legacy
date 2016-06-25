@@ -19,4 +19,40 @@ class ApplicationHelperTest < ActionView::TestCase
     assert today.to_i > 19850101 && today.to_i < 20850101
   end
 
+  test "convert_day_to_date should be correct" do
+    date = convert_day_to_date "20010101"
+    assert date.is_a?(Date)
+    assert_equal date, Date.new(2001, 1, 1)
+  end
+
+  test "day_before day should be correct" do
+    yesterday = day_before "20010102"
+    assert yesterday.is_a?(String)
+    assert_equal convert_day_to_date(yesterday), Date.new(2001, 1, 1)
+  end
+
+  test "day_after day should be correct" do
+    tomorrow = day_after "20010101"
+    assert tomorrow.is_a?(String)
+    assert_equal convert_day_to_date(tomorrow), Date.new(2001, 1, 2)
+  end
+
+  test "previous_day should be correct" do
+    cur_day = current_day
+    prev_day = previous_day
+    assert_not_empty prev_day
+    assert prev_day.is_a?(String)
+    assert prev_day.to_i > 19850101 && prev_day.to_i < 20850101
+    assert prev_day.to_i < cur_day.to_i
+  end
+
+  test "next_day should be correct" do
+    cur_day = current_day
+    nxt_day = next_day
+    assert_not_empty nxt_day
+    assert nxt_day.is_a?(String)
+    assert nxt_day.to_i > 19850101 && nxt_day.to_i < 20850101
+    assert nxt_day.to_i > cur_day.to_i
+  end
+
 end
