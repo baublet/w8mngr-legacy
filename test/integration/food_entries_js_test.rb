@@ -7,7 +7,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
   include Capybara::DSL
 
   def setup
-    @headless = Headless.new
+    @headless = Headless.new(reuse: true)
     @headless.start
     Capybara.javascript_driver = :webkit
     Capybara.current_driver = Capybara.javascript_driver
@@ -21,12 +21,33 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     assert_no_selector ("body.nojs")
   end
 
+  test "user can add entry to food log" do
+    log_in
+    visit foodlog_path
+    assert_equal foodlog_path, current_path
+    within(".app-form") do
+      original = FoodEntry.count
+      fill_in "Description", with: "Test Item"
+      click_button "New Entry"
+      # Why does this test only work reliably when we click this twice? o_O
+      click_button "New Entry"
+      # We check this 15 times after 1 second of waiting since we have to
+      # wait for the browser to send the information, the mocked server to
+      # receive it, and then for the FoodEntry count to be updated. It takes
+      # around 3 seconds...
+      5.times do
+        sleep 1
+        break unless original == FoodEntry.count
+      end
+      assert_not_equal original, FoodEntry.count
+    end
+  end
+
   # Reset sessions and driver between tests
   # Use super wherever this method is redefined in your individual test classes
   def teardown
     Capybara.reset_sessions!
     Capybara.use_default_driver
-    @headless.destroy
   end
 
   private
