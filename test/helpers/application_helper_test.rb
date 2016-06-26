@@ -55,4 +55,29 @@ class ApplicationHelperTest < ActionView::TestCase
     assert nxt_day.to_i > cur_day.to_i
   end
 
+  test "nice_day should be correct" do
+    nd = nice_day "20010101"
+    assert nd.is_a?(String)
+    assert_equal "Monday, January  1, 2001", nd
+  end
+
+  test "valid_day validates correctly" do
+    passed = "20010101"
+    validated = validate_day passed
+    assert validated.is_a?(String)
+    assert passed, validated
+    # Now pass it one above our range
+    passed = "30000101"
+    validated = validate_day passed
+    assert_not_equal passed, validated
+    # And one below our range
+    passed = "10000101"
+    validated = validate_day passed
+    assert_not_equal passed, validated
+    # And now send a valid int,which should be converted properly
+    passed = 20010101
+    validated = validate_day passed
+    assert_equal "20010101", validated
+  end
+
 end
