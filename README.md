@@ -20,6 +20,26 @@ The site is now live! Check it out at [w8mngr.com](https://w8mngr.com/).
 ## Contributing
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
 
-## Roadmap
+# Deploy and Development Aliases
 
-I moved my roadmap and todo list to a Trello board
+## Development
+
+```
+alias prep_dev="sudo service redis-server start && sudo service postgresql start"
+alias start_dev="prep_dev && foreman start -f Procfile.dev"
+```
+
+To start developing, add these two lines to your `.bash_aliases` file and start the appropriate services by running `start_dev`. It will start Redis, PostgreSQL, and run our development Procfile using Foreman.
+
+## Deployment
+
+```
+alias clear_assets="echo 'Clearing old assets...' && rm -f ~/workspace/public/webpack/* && rm -f -r ~/workspace/public/assets/*"
+alias deploy="echo 'Running deployment script...' && clear_assets && echo 'Precompiling rake assets...' && rake assets:precompile && echo 'Compiling webpack assets...' && rake webpack:compile && echo 'Adding compiled assets to the repo...' && git add . && git commit -a -m 'Precompile assets for deploy' && echo 'Pushing to Dokku...' && git push && git push dokku master"
+```
+
+These aliases clear the old assets out of our public folder, runs our Rake and webpack tasks to precompile new assets, adds them via git commit, and pushes it all up to our Github account and Dokku.
+
+*Note:* you must be on your `master` branch for this to work properly with Dokku. You may also need to change the path of your public folder so this script can properly clear your assets.
+
+To deploy, pull your changes to `master` and type `deploy`.
