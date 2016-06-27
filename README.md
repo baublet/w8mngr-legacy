@@ -49,4 +49,4 @@ These aliases clear the old assets out of our public folder, runs our Rake and w
 
 *Note:* you must be on your `master` branch for this to work properly with Dokku. You may also need to change the path of your public folder so this script can properly clear your assets.
 
-To deploy, pull your changes to `master` and type `deploy`.
+To deploy, pull your changes to `master` and run the `deploy` alias in your development terminal. It clears local assets, recompiles them, pushes them to master, and then pushes them to your Dokku server.
