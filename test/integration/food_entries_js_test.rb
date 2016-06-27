@@ -63,22 +63,20 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
   def add_food
     visit foodlog_path
     assert_equal foodlog_path, current_path
-    within(".row.new") do
-      original = FoodEntry.count
-      fill_in "Description", with: "Test Item"
-      click_button "New Entry"
-      # Why does this test only work reliably when we click this twice? o_O
-      click_button "New Entry"
-      # We check this 15 times after 1 second of waiting since we have to
-      # wait for the browser to send the information, the mocked server to
-      # receive it, and then for the FoodEntry count to be updated. It takes
-      # around 3 seconds...
-      5.times do
-        sleep 1
-        break unless original == FoodEntry.count
-      end
-      assert_not_equal original, FoodEntry.count
+    original = FoodEntry.count
+    fill_in "Description", with: "Test Item"
+    click_button "New Entry"
+    # Why does this test only work reliably when we click this twice? o_O
+    click_button "New Entry"
+    # We check this 15 times after 1 second of waiting since we have to
+    # wait for the browser to send the information, the mocked server to
+    # receive it, and then for the FoodEntry count to be updated. It takes
+    # around 3 seconds...
+    5.times do
+      sleep 1
+      break unless original == FoodEntry.count
     end
+    assert_not_equal original, FoodEntry.count
     # Make sure the new item shows
     # We have a minimum here of 1 because there are going to be a bunch of these
     # because each test here adds one...
