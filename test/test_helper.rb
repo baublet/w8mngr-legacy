@@ -53,10 +53,6 @@ end
 # With my own modifications for removing the messages I frequently receive.
 #
 
-Capybara::Webkit.configure do |config|
-  config.block_unknown_urls  # <--- this configuration would be lost if you didn't use .merge below
-end
-
 class WebkitStderrWithQtPluginMessagesSuppressed
   IGNOREABLE = Regexp.new( [
     'CoreText performance',
