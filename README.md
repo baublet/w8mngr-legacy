@@ -24,6 +24,11 @@ I'm not accepting contributions without very good reasoning at the moment. I'm u
 
 # Deploy and Development Aliases
 
+For testing and deployment, you need the following environment variables set:
+
+* `W8MNGR_API_KEY_POSTMARK` - API key for [Postmark](https://postmarkapp.com/), our email provider
+* `W8MNGR_API_KEY_USDA` - Our [USDA API key](https://ndb.nal.usda.gov/ndb/api/doc), for nutritional info
+
 ## Development
 
 ```
