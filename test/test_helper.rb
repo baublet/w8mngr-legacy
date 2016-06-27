@@ -41,3 +41,50 @@ class ActiveSupport::TestCase
       rand(start_num...end_num)
   end
 end
+
+
+# Custom output class to silence Qt warnings
+# NOTE: This may cause issuse in the future so look here first if js
+# tests fail
+#
+# Solution by jdguzman https://github.com/thoughtbot/capybara-webkit/issues/157#issuecomment-41619107
+# and Sproky023        https://github.com/thoughtbot/capybara-webkit/issues/157#issuecomment-115847034
+#
+# With my own modifications for removing the messages I frequently receive.
+#
+
+Capybara::Webkit.configure do |config|
+  config.block_unknown_urls  # <--- this configuration would be lost if you didn't use .merge below
+end
+
+class WebkitStderrWithQtPluginMessagesSuppressed
+  IGNOREABLE = Regexp.new( [
+    'CoreText performance',
+    'userSpaceScaleFactor',
+    'Internet Plug-Ins',
+    'is implemented in bo',
+    'will require at least version',
+    'Fontconfig'
+  ].join('|') )
+
+  def write(message)
+    if message =~ IGNOREABLE
+      0
+    else
+      puts(message)
+      1
+    end
+  end
+end
+
+Capybara.register_driver :webkit_with_qt_plugin_messages_suppressed do |app|
+  Capybara::Webkit::Driver.new(
+    app,
+    Capybara::Webkit::Configuration.to_hash.merge(  # <------ maintain configuration set in Capybara::Webkit.configure block
+      stderr: WebkitStderrWithQtPluginMessagesSuppressed.new
+    )
+  )
+end
+
+# To use:
+# Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed

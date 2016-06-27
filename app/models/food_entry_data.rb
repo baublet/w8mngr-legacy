@@ -9,10 +9,10 @@ class FoodEntryData
 
   validates :user_id,       presence: true
   validates :num,           presence: true,
-                        numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+                            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :length_scope,  presence: true,
-                           inclusion: { in: %w(day week month year),
-                             message: "%{value} is not a valid size" }
+                            inclusion: { in: %w(day week month year),
+                            message: "%{value} is not a valid size" }
 
   # Returns a series of data by either days, weeks, months, or years
   # depending on the key you pass. It then groups all of the user's
@@ -67,7 +67,7 @@ class FoodEntryData
   end
 
   def average_of data
-    return data.map { |k,v|
+    averages = data.map { |k,v|
       # First, find out how many non-zero entries there are to we can get an
       # accurate average
       good_days = v.select { |e| e[1] > 0 }
@@ -78,6 +78,11 @@ class FoodEntryData
         [k, v.map(&:last).inject(:+) / total_days]
       end
     }
+    # If there are more averaged days here (which happens when we request data
+    # mid-week or mid-month) than the model calls for, then pop the last element
+    # off the end of the averages.
+    averages.pop if averages.length > num
+    return averages
   end
 
 end

@@ -50,7 +50,7 @@ class WeightEntryTest < ActiveSupport::TestCase
                 # We vary it by day because if we're mid-week, mid-month, etc., it builds the
                 # array out of incomplete data
                 assert_equal num,
-                           data.length - (scope == 'day' ? 0 : 1),
+                           data.length,
                            "Failed on scope: " + scope + "\nNum: " + num.to_s + "\n" + data.to_yaml
             end
         end

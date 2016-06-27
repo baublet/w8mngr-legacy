@@ -9,7 +9,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
   def setup
     @headless = Headless.new(reuse: true)
     @headless.start
-    Capybara.javascript_driver = :webkit
+    Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed
     Capybara.current_driver = Capybara.javascript_driver
     Capybara.exact = true
   end
@@ -47,7 +47,6 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
   # Use super wherever this method is redefined in your individual test classes
   def teardown
     Capybara.reset_sessions!
-    Capybara.use_default_driver
   end
 
   private
