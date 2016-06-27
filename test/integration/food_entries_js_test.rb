@@ -63,7 +63,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
   def add_food
     visit foodlog_path
     assert_equal foodlog_path, current_path
-    within(".app-form.new") do
+    within(".app-form .new") do
       original = FoodEntry.count
       fill_in "Description", with: "Test Item"
       click_button "New Entry"
