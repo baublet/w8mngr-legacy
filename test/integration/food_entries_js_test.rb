@@ -11,7 +11,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     @headless.start
     Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed
     # We set this high for Travis CI
-    Capybara.default_max_wait_time = 60
+    Capybara.default_max_wait_time = 15
     Capybara.current_driver = Capybara.javascript_driver
     Capybara.exact = true
   end
