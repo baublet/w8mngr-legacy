@@ -66,7 +66,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     visit foodlog_path
     assert_equal foodlog_path, current_path
     original = FoodEntry.count
-    fill_in "Description", with: "Test Item"
+    find_field("description-input").set("Test Item")
     click_button "New Entry"
     # Why does this test only work reliably when we click this twice? o_O
     click_button "New Entry"
