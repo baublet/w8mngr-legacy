@@ -10,6 +10,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     @headless = Headless.new(reuse: true)
     @headless.start
     Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed
+    Capybara.default_wait_time = 15
     Capybara.current_driver = Capybara.javascript_driver
     Capybara.exact = true
   end
