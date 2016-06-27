@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'capybara/rails'
+require 'capybara/webkit'
 require 'headless'
 
 class FoodEntriesJSTest < ActionDispatch::IntegrationTest
@@ -10,17 +11,22 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     @headless = Headless.new(reuse: true)
     @headless.start
     Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed
-    # We set this high for Travis CI
-    Capybara.default_max_wait_time = 15
+    #Capybara.default_max_wait_time = 60
     Capybara.current_driver = Capybara.javascript_driver
     Capybara.exact = true
+  end
+
+  # Reset sessions and driver between tests
+  # Use super wherever this method is redefined in your individual test classes
+  def teardown
+    Capybara.reset_sessions!
   end
 
   test "foodlog initializes properly" do
     log_in
     visit foodlog_path
     assert_equal foodlog_path, current_path
-    assert_no_selector ("body.nojs")
+    assert_no_selector (".nojs")
   end
 
   test "user can add entry to food log" do
@@ -43,12 +49,6 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     assert_not_equal original_shown, find_all(".app-form .row.entry").count
   end
 
-  # Reset sessions and driver between tests
-  # Use super wherever this method is redefined in your individual test classes
-  def teardown
-    Capybara.reset_sessions!
-  end
-
   private
 
   def log_in
@@ -66,7 +66,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     visit foodlog_path
     assert_equal foodlog_path, current_path
     original = FoodEntry.count
-    find_field("description-input").set("Test Item")
+    fill_in "#description-input", with: "Test Item"
     click_button "New Entry"
     # Why does this test only work reliably when we click this twice? o_O
     click_button "New Entry"

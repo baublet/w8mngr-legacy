@@ -64,4 +64,5 @@ Rails.application.configure do
     config.skip_image_loading
     config.timeout = 15
   end
+
 end
