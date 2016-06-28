@@ -1,15 +1,43 @@
+.weightlog-table {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .weight-entry {
     position: relative;
     padding-top: 1rem;
-    + .weight-entry {
-        border-top: 1px solid rgba($black, .15);
-        margin-top: 1rem;
+    margin: 1rem 0;
+    @include mqBeforeSize(320px) {
+      + .weight-entry {
+          margin-top: 1rem;
+      }
+    }
+    @include mqAfterSize(640px) {
+      width: calc(50% - .5rem);
+      margin: 0 1rem 1rem 0;
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+    }
+    .weight-container {
+      display: flex;
+      align-items: center;
     }
     .weight {
         font-size: 5rem;
         font-weight: 900;
         letter-spacing: -.25rem;
         color: lighten($black, 15);
+        width: 50%;
+    }
+    .other-units {
+      width: 50%;
+      padding-left: 3rem;
+      font-size: .8rem;
+      opacity: .5;
+    }
+    &:hover .other-units {
+      opacity: .75;
     }
     .unit {
         margin-left: 1rem;
@@ -19,37 +47,43 @@
         text-transform:uppercase;
     }
     .delete-btn {
-        position: absolute;
-        right: 0;
-        top: 25%;
-        opacity: .5;
+        padding: 0;
+        top:.5rem;
+        right:.5rem;
     }
     &:hover .delete-btn {
         opacity: 1;
     }
-    .meta {
+    .added {
         font-size: .75rem;
         color: rgba($black, .5);
         span {
             text-transform: lowercase;
         }
     }
+    h5 {
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 0 0 .5rem;
+    }
 }
 
 .weightlog-table .average {
-    margin:2rem -1rem 1rem;
-    text-align:center;
+    width: 100%;
+    margin:2rem 0 1rem;
     text-transform: uppercase;
-    padding: 1rem;
-    background-color: rgba($black,.025);
-    border-top:1px solid rgba($black, .03);
-    border-bottom:1px solid rgba($black, .03);
     font-size: .6rem;
     .number {
         margin-top: .5rem;
         display: block;
-        font-size: 1.5rem;
-        font-weight: 900;
+        font-size: 10vw;
+        font-weight: 100;
+        @include mqAfterSize(750px) {
+          font-size: 7vw;
+        }
+        @include mqAfterSize(1060px) {
+          font-size: 4rem;
+        }
         .unit {
             font-weight: 600;
             font-size: .6rem;
@@ -59,6 +93,5 @@
 }
 
 .weight-entry-new {
-    max-width: 420px;
-    margin-bottom: 2rem;
+    max-width: 320px;
 }

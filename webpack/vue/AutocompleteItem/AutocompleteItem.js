@@ -60,7 +60,7 @@ export default {
     selectMeasurement: function() {
       console.log("Selecting measurement...")
       // If we don't do this asyncronously, Vue won't have time to update the
-      // the DOM. This will defer the ping until Vue has time to update
+      // the DOM. This will defer the selection until Vue has time to update
       var self = this
       _do(function() {
         // But we only want to do it a certain number of times to not fully stuff

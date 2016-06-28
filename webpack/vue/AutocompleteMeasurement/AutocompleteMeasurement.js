@@ -41,13 +41,14 @@ export default {
   methods: {
     selectMe: function() {
       this.selected = true
+      this.dispatchMeasurementInfo()
       // Focus on our measurements box and select the text
       var self = this
       _do(function() {
-        self.$el.children[1].focus()
         self.$el.children[1].select()
+        // FIXME: IOS Safari won't do this because you can't select one form
+        // element from another element unless the user directly calls for it
       }, 100)
-      this.dispatchMeasurementInfo()
     },
 
     // Pushes a notification up the chain to add the current entry

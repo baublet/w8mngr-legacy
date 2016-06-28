@@ -13,7 +13,6 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed
     Capybara.default_max_wait_time = 15
     Capybara.current_driver = Capybara.javascript_driver
-    Capybara.exact = true
   end
 
   # Reset sessions and driver between tests
