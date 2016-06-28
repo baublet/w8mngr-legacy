@@ -78,7 +78,11 @@
 
 @keyframes slideInLeft {
     0% {
-        text-indent: -50%;
+        text-indent: -10%;
+        opacity: 0;
+    }
+    50% {
+        text-indent: -10%;
         opacity: 0;
     }
     100% {
@@ -89,7 +93,11 @@
 
 @keyframes slideInRight {
     0% {
-        text-indent: 50%;
+        text-indent: 10%;
+        opacity: 0;
+    }
+    50% {
+        text-indent: 10%;
         opacity: 0;
     }
     100% {
