@@ -68,10 +68,11 @@ module ApplicationHelper
     end
 
     # Validates a YYYYMMDD string, returning current_day if it's invalid
+    # Takes either strings or ints and returns strings
     def validate_day day_string
         day_int = day_string.to_i
         if day_int > 19850501 && day_int < 20850501
-            return day_string
+            return day_string.to_s
         else
             return current_day
         end
