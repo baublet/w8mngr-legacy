@@ -1,11 +1,23 @@
-<div class="weight-entry">
+<div class="weight-entry card">
 	<%= link_to weight_entry_delete_path(weight_entry),
-				class: 'delete-btn',
+				class: 'delete-btn meta',
 				title: 'Delete Entry' do %>
 		<i class="fa fa-times"></i>
 	<% end %>
-	<div class="weight"><%= raw weight_entry.display_value %><span class="unit"><%= current_user.unit %></span></div>
-	<div class="meta">
+	<div class="weight-container">
+	  <div class="weight"><%= weight_entry.display_value %><span class="unit"><%= current_user.unit %></span></div>
+	  <div class="other-units" alt="Unit conversions">
+	    <h5>Other Units</h5>
+      <% if current_user.unit == "lb" %>
+        <%= WeightEntry.get_display_value weight_entry.value, "kg" %><span class="unit">kilograms</span>
+      <% end %>
+      <% if current_user.unit == "kg" %>
+        <%= WeightEntry.get_display_value weight_entry.value, "lb" %><span class="unit">pounds</span>
+      <% end %>
+      <%= number_with_delimiter(weight_entry.value) %><span class="unit">grams</span>
+	  </div>
+	</div>
+	<div class="added">
 		Added <%= time_ago_in_words(weight_entry.created_at) %> ago
 	</div>
 </div>
