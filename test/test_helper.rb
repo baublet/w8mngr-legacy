@@ -45,11 +45,11 @@ class ActiveSupport::TestCase
   def js_errors?
     errors = page.driver.error_messages
     return false unless errors.length > 0
-    message = "\n--------\nJS ERRORS\n--------\n\n"
+    message = "\n-----------\nJS ERRORS\n-----------\n\n"
     errors.each do |msg|
       message += msg[:source] + ": (" + msg[:line_number].to_s + ")  " + msg[:message] + "\n"
     end
-    #raise Exception.new(message)
+    raise Exception.new(message)
   end
 
   # We need this because the webkit driver doesn't reliably click things unless
