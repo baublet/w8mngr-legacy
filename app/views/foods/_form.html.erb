@@ -22,6 +22,6 @@
 
     <%= render @newmeasurement %>
 
-    <%= f.submit (@food.id.nil?) ? "Create Food" : "Save Food", class: "btn" %>
+    <%= f.button (@food.id.nil?) ? "Create Food" : "Save Food", class: "btn" %>
 
 <% end %>
