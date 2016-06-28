@@ -380,7 +380,7 @@ export default {
     prevAutocompleteItem: function() {
       // Don't do anything if there aren't any items or they can't go up
       if (this.autocompleteItems.length < 1) return false
-      if (this.autocompleteSelected < 0) return false
+      if (this.autocompleteSelected == 1) return false
       console.log("Up: " + (this.autocompleteSelected - 1))
       // Go up one item if they're not at the top already
       this.autocompleteSelected--

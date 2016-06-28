@@ -55,12 +55,8 @@ var config = {
         }
       },
       {
-        test: /\.js$/,
-        loader: "strip-loader?strip[]=debug,strip[]=console.log"
-      },
-      {
         test: /\.vue$/,  // a regex for matching all files that end in `.vue`
-        loader: 'vue',   // loader to use for matched files--bail --config
+        loader: 'vue',
       },
       // We need an HTML loader to load our Vue templates
       {
@@ -75,7 +71,7 @@ if (production) {
   config.plugins.push(
     //new webpack.NoErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compressor: { warnings: false },
+      compressor: { warnings: false, drop_console: true },
       sourceMap: false
     }),
     new webpack.DefinePlugin({
