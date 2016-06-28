@@ -40,6 +40,29 @@ class ActiveSupport::TestCase
   def generate_int start_num = 0, end_num = 3000000
       rand(start_num...end_num)
   end
+
+  # If there are javascript errors, this script raises an error
+  def js_errors?
+    errors = page.driver.error_messages
+    return false unless errors.length > 0
+    message = "\n--------\nJS ERRORS\n--------\n\n"
+    errors.each do |msg|
+      message += msg[:source] + ": (" + msg[:line_number].to_s + ")  " + msg[:message] + "\n"
+    end
+    raise Exception.new(message)
+  end
+
+  # We need this because the webkit driver doesn't reliably click things unless
+  # we do it twice... Moreover, it only works if we page.find() for the element
+  # twice.
+  #
+  # Params:
+  # +element+: a css selector to search for using page.find(selector)
+  #
+  def click element
+    page.find(element).click
+    page.find(element).click
+  end
 end
 
 
@@ -48,7 +71,7 @@ end
 # tests fail
 #
 # Solution by jdguzman https://github.com/thoughtbot/capybara-webkit/issues/157#issuecomment-41619107
-# and Sproky023        https://github.com/thoughtbot/capybara-webkit/issues/157#issuecomment-115847034
+# and Sporky023        https://github.com/thoughtbot/capybara-webkit/issues/157#issuecomment-115847034
 #
 # With my own modifications for removing the messages I frequently receive.
 #

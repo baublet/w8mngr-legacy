@@ -11,7 +11,7 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
     @headless = Headless.new(reuse: true)
     @headless.start
     Capybara.javascript_driver = :webkit_with_qt_plugin_messages_suppressed
-    #Capybara.default_max_wait_time = 60
+    Capybara.default_max_wait_time = 15
     Capybara.current_driver = Capybara.javascript_driver
     Capybara.exact = true
   end
@@ -65,23 +65,26 @@ class FoodEntriesJSTest < ActionDispatch::IntegrationTest
   def add_food
     visit foodlog_path
     assert_equal foodlog_path, current_path
+    assert_no_selector (".nojs")
+    js_errors?
     original = FoodEntry.count
-    fill_in "#description-input", with: "Test Item"
-    click_button "New Entry"
-    # Why does this test only work reliably when we click this twice? o_O
-    click_button "New Entry"
-    # We check this 15 times after 1 second of waiting since we have to
-    # wait for the browser to send the information, the mocked server to
-    # receive it, and then for the FoodEntry count to be updated. It takes
-    # around 3 seconds...
-    5.times do
-      sleep 1
-      break unless original == FoodEntry.count
-    end
-    assert_not_equal original, FoodEntry.count
+    page.find(".hide-if-no-js #description-input").set("Test item")
+    #fill_in "#description-input", with: "Test Item"
+    click ".hide-if-no-js .food-log-new-btn"
+    js_errors?
     # Make sure the new item shows
     # We have a minimum here of 1 because there are going to be a bunch of these
     # because each test here adds one...
     assert_selector ".app-form .row.entry", minimum: 1
+    # We check this 15 times after .5 seconds of waiting since we have to
+    # wait for the browser to send the information, the mocked server to
+    # receive it, and then for the FoodEntry count to be updated. It takes
+    # around 3 seconds...
+    js_errors?
+    15.times do
+      sleep 0.5
+      break unless original == FoodEntry.count
+    end
+    assert_not_equal original, FoodEntry.count
   end
 end

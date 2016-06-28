@@ -56,8 +56,6 @@ gem "headless", group: :test
 # Our driver that will be executing JS
 # Requires: sudo apt-get install libqt4-dev libqtwebkit-dev
 gem "capybara-webkit", group: :test
-gem "phantomjs", group: :test
-gem "poltergeist", group: :test
 
 group :development, :test do
     gem "sqlite3"
