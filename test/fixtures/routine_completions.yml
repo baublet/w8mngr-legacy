@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  routine_id: 
+  user: 
+  day: 1
+  notes: MyText
+
+two:
+  routine_id: 
+  user: 
+  day: 1
+  notes: MyText
