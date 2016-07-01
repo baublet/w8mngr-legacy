@@ -11,11 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518174007) do
+ActiveRecord::Schema.define(version: 20160629200219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.text     "description"
+    t.text     "exrx"
+    t.integer  "type",             limit: 2
+    t.integer  "muscle_groups"
+    t.integer  "calories_formula", limit: 2
+    t.integer  "popularity"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
+
+  create_table "activity_entries", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "user_id"
+    t.integer  "routine_id"
+    t.integer  "day",         limit: 8
+    t.integer  "reps"
+    t.integer  "weight"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "activity_entries", ["activity_id"], name: "index_activity_entries_on_activity_id", using: :btree
+  add_index "activity_entries", ["routine_id"], name: "index_activity_entries_on_routine_id", using: :btree
+  add_index "activity_entries", ["user_id"], name: "index_activity_entries_on_user_id", using: :btree
 
   create_table "food_entries", force: :cascade do |t|
     t.text     "description",                                           null: false
@@ -27,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160518174007) do
     t.integer  "user_id"
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
-    t.datetime "day_ts",                default: '2016-06-08 14:28:55', null: false
+    t.datetime "day_ts",                default: '2016-06-02 17:27:21', null: false
   end
 
   add_index "food_entries", ["user_id", "day", "created_at"], name: "index_food_entries_on_user_id_and_day_and_created_at", using: :btree
@@ -108,6 +138,30 @@ ActiveRecord::Schema.define(version: 20160518174007) do
   add_index "recipes", ["name"], name: "index_recipes_on_name", using: :btree
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
+  create_table "routine_completions", force: :cascade do |t|
+    t.integer  "routine_id"
+    t.integer  "user_id"
+    t.integer  "day",        limit: 8
+    t.text     "notes"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "routine_completions", ["routine_id"], name: "index_routine_completions_on_routine_id", using: :btree
+  add_index "routine_completions", ["user_id"], name: "index_routine_completions_on_user_id", using: :btree
+
+  create_table "routines", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.text     "description"
+    t.hstore   "activities"
+    t.integer  "last_completion", limit: 8
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "routines", ["user_id"], name: "index_routines_on_user_id", using: :btree
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -146,15 +200,22 @@ ActiveRecord::Schema.define(version: 20160518174007) do
     t.integer  "user_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.datetime "day_ts",     default: '2016-06-08 14:28:55', null: false
+    t.datetime "day_ts",     default: '2016-06-02 17:27:21', null: false
   end
 
   add_index "weight_entries", ["user_id"], name: "index_weight_entries_on_user_id", using: :btree
 
+  add_foreign_key "activities", "users"
+  add_foreign_key "activity_entries", "activities"
+  add_foreign_key "activity_entries", "routines"
+  add_foreign_key "activity_entries", "users"
   add_foreign_key "food_entries", "users"
   add_foreign_key "foods", "users"
   add_foreign_key "measurements", "foods"
   add_foreign_key "pt_messages", "users"
   add_foreign_key "recipes", "users"
+  add_foreign_key "routine_completions", "routines"
+  add_foreign_key "routine_completions", "users"
+  add_foreign_key "routines", "users"
   add_foreign_key "weight_entries", "users"
 end
