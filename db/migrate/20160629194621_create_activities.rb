@@ -7,6 +7,7 @@ class CreateActivities < ActiveRecord::Migration
       t.text :exrx
       t.integer :type, limit: 2
       t.integer :muscle_groups, limit: 3
+      t.integer :calories_formula, limit: 2
       t.integer :popularity
 
       t.timestamps null: false
