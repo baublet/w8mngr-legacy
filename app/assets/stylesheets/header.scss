@@ -3,6 +3,8 @@ header {
     color: $white;
     padding: .5rem 1rem;
     font-size: 0;
+    position: relative;
+    z-index: 200;
 }
 header .brand, header nav {
     display:inline-block;

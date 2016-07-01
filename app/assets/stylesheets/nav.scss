@@ -27,7 +27,7 @@ nav {
 
 .nav-toggle-btn {
     position: absolute;
-    z-index: 210;
+    z-index: 310;
     font-family: "FontAwesome";
     cursor: pointer;
     font-size:2rem;
@@ -49,7 +49,7 @@ nav {
     border-top-right-radius: 0;
     width: 320px;
     position: fixed;
-    z-index: 200;
+    z-index: 300;
     top: 0;
     right: -330px;
     transition: transform .5s $easing-1;
@@ -143,18 +143,14 @@ nav .login {
     right: 0;
     margin: 0;
     padding: 0;
-    @include mqAfterSize(1100px) {
+    @include mqAfterSize($desktop-breakpoint) {
       position: absolute;
-      top: auto;
-      bottom: auto;
-      left: auto;
       right: auto;
-      width: 640px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 0;
+      width: 200px;
       padding: 0;
-      height: 0;
-      max-height: 0;
+      background: $color-primary;
+      @include height(1);
     }
     ul {
         font-size: 0;
@@ -174,14 +170,8 @@ nav .login {
     flex-direction: row;
     position: relative;
     z-index: 110;
-    @include mqAfterSize(1060px) {
-      top: 3rem;
+    @include mqAfterSize($desktop-breakpoint) {
       display: block;
-      position: absolute;
-      left: -220px;
-      .users.show & {
-        top: 15.5rem;
-      }
     }
     li {
         flex-grow: 1;
@@ -192,7 +182,7 @@ nav .login {
         display: none;
         &:checked {
             + label {
-              @include mqBeforeSize(1060px) {
+              @include mqBeforeSize($desktop-breakpoint) {
                 background: lighten($black, 5);
                 color: $white;
                 + .app-menu-sub {
@@ -218,18 +208,20 @@ nav .login {
       &:hover {
         color: rgba($white, .75);
       }
-      @include mqAfterSize(1060px) {
+      @include mqAfterSize($desktop-breakpoint) {
         text-align: left;
-        font-size: 1rem;
+        font-size: 1.5rem;
         line-height: 1rem;
         height: auto;
-        padding: 1rem 0;
+        padding: .5rem;
         background: transparent;
-        color: rgba($black, .75);
+        color: rgba($white, .75);
         text-transform: none;
+        font-weight: 100;
+        border-top: 1px solid rgba($white, .25);
+        border-bottom: 1px solid rgba($black, .5);
         &:hover {
           cursor: default;
-          color: rgba($black, .75);
         }
         .screen-reader-text {
           display: inline;
@@ -253,15 +245,21 @@ nav .login {
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    @include mqAfterSize(1060px) {
+    @include mqAfterSize($desktop-breakpoint) {
       position: static;
       display: block;
       max-height: none;
+      background: $black;
     }
     li {
         flex-grow: 1;
         vertical-align: middle;
         text-align: center;
+        @include mqAfterSize($desktop-breakpoint) {
+          + li a {
+            border-top: 1px solid rgba($white, .05);
+          }
+        }
     }
     a {
       position: relative;
@@ -275,7 +273,7 @@ nav .login {
       width: 100%;
       background: lighten($black, 5);
       border-top: 5px solid transparent;
-      border-bottom-color: transparent !important;
+      border-bottom-color: transparent;
       span {
         width: 100%;
         opacity: .5;
@@ -287,18 +285,17 @@ nav .login {
       }
       &:hover {
           color: rgba($white, .75);
-          border-color: $color-primary-light;
           background: lighten($black, 5);
       }
       .fa {
         width: 100%;
         font-size: 1rem;
       }
-      @include mqAfterSize(1060px) {
+      @include mqAfterSize($desktop-breakpoint) {
         height: auto;
         border: 0;
         background: transparent;
-        color: $black;
+        padding: .25rem .5rem;
         .fa, span {
           width: auto;
           margin: 0;
@@ -311,8 +308,8 @@ nav .login {
           width: 2rem;
         }
         &:hover {
-          background: transparent;
-          color: $color-primary;
+          background: rgba($white, .01);
+          color: $white;
         }
       }
     }
