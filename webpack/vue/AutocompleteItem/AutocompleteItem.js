@@ -28,10 +28,11 @@ export default {
       this.initializeComponent()
     },
     'autocomplete-item-selected': function(index) {
-      index = index > 0 ? index : 0
-      this.selected = false
+      // Don't reselect this item if we're already selected
       if (index == this.index) {
-        this.selectItem()
+        if (this.selected == false) this.selectItem()
+      } else {
+        this.selected = false
       }
     },
     'next-measurement': function() {

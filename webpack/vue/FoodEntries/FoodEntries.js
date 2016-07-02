@@ -359,10 +359,9 @@ export default {
       this.page = page
       this.autocomplete(this.newDescription)
     },
-    // Handles selecting an autocomplete item. If index is undefined, this function
-    // selects the currently-selected one
+    // Handles selecting an autocomplete item
     selectAutocompleteItem: function(index) {
-      index = index ? index : this.autocompleteSelected
+      console.log("Selecting " + index)
       this.$children.forEach(function(item) {
         item.$emit('autocomplete-item-selected', index)
       })
@@ -374,27 +373,31 @@ export default {
       if (this.autocompleteSelected == this.autocompleteItems.length - 1) return false
       console.log("Down: " + (this.autocompleteSelected + 1))
       this.autocompleteSelected++
-      this.selectAutocompleteItem()
+      this.selectAutocompleteItem(this.autocompleteSelected)
     },
     // Handles our arrow key up
     prevAutocompleteItem: function() {
       // Don't do anything if there aren't any items or they can't go up
       if (this.autocompleteItems.length < 1) return false
-      if (this.autocompleteSelected == 1) return false
+      if (this.autocompleteSelected == -1) return false
       console.log("Up: " + (this.autocompleteSelected - 1))
       // Go up one item if they're not at the top already
       this.autocompleteSelected--
-      this.selectAutocompleteItem()
+      this.selectAutocompleteItem(this.autocompleteSelected)
     },
 
     // Selects the next measurement
     nextMeasurement: function() {
-      this.$bus.$emit('next-measurement')
+      this.$children.forEach(function(item) {
+        item.$emit('next-measurement')
+      })
     },
 
     // Selects the previous measurement
     previousMeasurement: function() {
-      this.$bus.$emit('prev-measurement')
+      this.$children.forEach(function(item) {
+        item.$emit('prev-measurement')
+      })
     },
 
     // Handles our error messages

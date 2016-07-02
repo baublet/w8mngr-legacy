@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     selectMe: function() {
+      if (this.selected = true) return true
       this.selected = true
       this.dispatchMeasurementInfo()
       // Focus on our measurements box and select the text
@@ -47,7 +48,8 @@ export default {
       _do(function() {
         self.$el.children[1].select()
         // FIXME: IOS Safari won't do this because you can't select one form
-        // element from another element unless the user directly calls for it
+        // element while another element is selected unless the user directly
+        // calls for it
       }, 100)
     },
 
