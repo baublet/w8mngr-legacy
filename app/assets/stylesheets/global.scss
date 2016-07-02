@@ -103,6 +103,7 @@ section, main {
 main {
   min-height: 100vh;
   position: relative;
+  padding-bottom: 2rem;
 }
 
 blockquote {
@@ -132,7 +133,7 @@ hr {
     font-size: .8rem;
     margin: 2rem 0 3rem;
     h1 + & {
-        margin-top: -2rem;
+        margin-top: -1rem;
     }
     a {
         margin: 0 1rem 0 0;

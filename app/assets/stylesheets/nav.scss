@@ -115,6 +115,12 @@ nav .login {
     text-align: center;
     background: $color-primary;
     margin: 0 -1rem;
+    @include mqAfterSize($desktop-breakpoint) {
+      max-width: none;
+      margin: 0;
+      margin-left: calc(200px - 1rem);
+      margin-right: -1rem;
+    }
     a {
         display: inline-block;
         font-size: 1.2rem;
@@ -149,7 +155,7 @@ nav .login {
       top: 0;
       width: 200px;
       padding: 0;
-      background: $color-primary;
+      background: $white;
       @include height(1);
     }
     ul {
@@ -214,7 +220,7 @@ nav .login {
         line-height: 1rem;
         height: auto;
         padding: .5rem;
-        background: transparent;
+        background: lighten($black, 15);
         color: rgba($white, .75);
         text-transform: none;
         font-weight: 100;
@@ -249,7 +255,6 @@ nav .login {
       position: static;
       display: block;
       max-height: none;
-      background: $black;
     }
     li {
         flex-grow: 1;
@@ -257,7 +262,7 @@ nav .login {
         text-align: center;
         @include mqAfterSize($desktop-breakpoint) {
           + li a {
-            border-top: 1px solid rgba($white, .05);
+            border-top: 1px solid rgba($black, .05);
           }
         }
     }
@@ -296,6 +301,7 @@ nav .login {
         border: 0;
         background: transparent;
         padding: .25rem .5rem;
+        color: rgba($black, .75);
         .fa, span {
           width: auto;
           margin: 0;
@@ -308,8 +314,8 @@ nav .login {
           width: 2rem;
         }
         &:hover {
-          background: rgba($white, .01);
-          color: $white;
+          background: rgba($color-primary, .1);
+          color: $black;
         }
       }
     }
