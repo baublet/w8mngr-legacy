@@ -61,6 +61,7 @@ nav {
     transition: transform .5s $easing-1;
     box-shadow: 0 0 15px 0 rgba(black, .75);
     height: 100vh;
+    overflow-y: auto;
     @include mqAfterSize($desktop-breakpoint) {
       width: calc(100vw - (200px + 3rem));
       position: static;
@@ -72,6 +73,7 @@ nav {
       height: auto;
       margin: 0;
       padding: 0;
+      overflow-y: visible;
     }
 }
 .navigation-title {
