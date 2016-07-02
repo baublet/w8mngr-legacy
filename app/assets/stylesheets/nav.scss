@@ -1,4 +1,5 @@
 nav {
+  vertical-align: middle;
     .meta a {
         color: $color-primary-light;
         &:hover {
@@ -10,18 +11,17 @@ nav {
 
 .nav-toggle {
     display:none;
-    & ~ .navigation-options {
-
-    }
-    &:checked ~ .navigation-options {
-      transform: translateX(-330px);
-    }
-    &:checked ~ .nav-toggle-btn {
-        position: fixed;
-        color: $white;
-        &:after {
-            content: "\f0da";
-        }
+    @include mqBeforeSize($desktop-breakpoint) {
+      &:checked ~ .navigation-options {
+        transform: translateX(-330px);
+      }
+      &:checked ~ .nav-toggle-btn {
+          position: fixed;
+          color: $white;
+          &:after {
+              content: "\f0da";
+          }
+      }
     }
 }
 
@@ -41,6 +41,9 @@ nav {
     &:after {
         content: "\f0c9";
     }
+    @include mqAfterSize($desktop-breakpoint) {
+      display: none;
+    }
 }
 .navigation-options {
     background: darken($color-primary, 15);
@@ -55,19 +58,48 @@ nav {
     transition: transform .5s $easing-1;
     box-shadow: 0 0 15px 0 rgba(black, .75);
     height: 100vh;
-    overflow-y: auto;
+    @include mqAfterSize($desktop-breakpoint) {
+      width: calc(100vw - (200px + 3rem));
+      position: static;
+      right: auto;
+      top: auto;
+      background: transparent;
+      float: right;
+      box-shadow: none;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
 }
 .navigation-title {
     font-size: .9rem;
     text-transform:uppercase;
     margin:0 0 1rem;
     font-weight: 800;
+    @include mqAfterSize($desktop-breakpoint) {
+      display: none;
+    }
 }
 .navigation-list {
     list-style-type: none;
     padding:0;
     font-weight:500;
     font-size: .7rem;
+    position: relative;
+    z-index: 300;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    @include mqAfterSize($desktop-breakpoint) {
+      display: flex;
+      justify-content: flex-end;
+      li {
+        margin: 0;
+        padding: 0;
+      }
+    }
     li > a {
         display: block;
         color: rgba($white, .75);
@@ -84,6 +116,70 @@ nav {
         margin-top: 1rem;
         padding-top: 1rem;
         border-top: 1px dashed rgba($white, .5);
+        @include mqAfterSize($desktop-breakpoint) {
+          cursor: pointer;
+          border: 0;
+          margin: 0;
+          padding: 0;
+          position: relative;
+          &.login ul {
+            padding: 1rem;
+          }
+          ul {
+            display: none;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            min-width: 200px;
+            li {
+              padding: 0;
+              margin: 0;
+              &:first-child a {
+                border-top-left-radius: 5px;
+              }
+              &:last-child a {
+                border-radius: 5px;
+                border-top-right-radius: 0;
+                border-top-left-radius: 0;
+              }
+            }
+            a {
+              background: $color-primary;
+              border-radius: 0;
+              &:hover {
+                background: lighten($color-primary, 15);
+              }
+            }
+          }
+          &:hover {
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            background: $color-primary;
+          }
+          &:hover ul {
+            border-radius: 5px;
+            border-top-right-radius: 0;
+            @include height(2);
+            position: absolute;
+            display: block;
+            right: 0;
+            top: 99%;
+            background: $color-primary;
+          }
+          h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            font-weight: 400;
+            padding: .5rem;
+            color: rgba($white, .75);
+            font-weight: bold;
+            .fa {
+              opacity: 1;
+              font-size: 100%;
+            }
+          }
+        }
     }
 }
 
@@ -233,6 +329,7 @@ nav .login {
           display: inline;
           visibility: visible;
           font-size: .8rem;
+          vertical-align: middle;
         }
         .fa {
           width: 1.5rem;

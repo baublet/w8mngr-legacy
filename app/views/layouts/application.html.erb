@@ -44,23 +44,36 @@
         <div class="navigation-options">
             <h2 class="navigation-title">Navigation</h2>
             <ul class="navigation-list">
-                <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "Get Started", get_started_path %></li>
+                <li><%= link_to root_path do %><i class="fa fa-home" aria-hidden="true"></i> Home<% end %></li>
+                <li><%= link_to get_started_path do %><i class="fa fa-star" aria-hidden="true"></i> Get Started<% end %></li>
             <% if logged_in? %>
-                <li class="sep"><h2>Options</h2></li>
-                <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
-                <li><%= link_to "Health Targets", edit_user_path(current_user, p: "health") %></li>
-                <li><%= link_to "Faturday", edit_user_path(current_user, p: "faturday") %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
-                <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
-                <li class="sep"><h2>Log</h2></li>
-                <li><%= link_to "Food Log", foodlog_path %></li>
-                <li><%= link_to "Weight Log", weight_entries_path %></li>
-                <li class="sep"></li>
-            	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
+                <li><%= link_to dashboard_path do %><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard<% end %></li>
+                <li class="sep"><h2><i class="fa fa-cog" aria-hidden="true"></i> Options</h2>
+                  <ul>
+                    <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+                    <li><%= link_to "Health Targets", edit_user_path(current_user, p: "health") %></li>
+                    <li><%= link_to "Faturday", edit_user_path(current_user, p: "faturday") %></li>
+                    <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
+                    <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
+                  </ul>
+                </li>
+                <li class="sep"><h2><i class="fa fa-book" aria-hidden="true"></i> Log</h2>
+                  <ul>
+                    <li><%= link_to "Food Log", foodlog_path %></li>
+                    <li><%= link_to "Weight Log", weight_entries_path %></li>
+                  </ul>
+            	</li>
+            	<li><%= link_to logout_path, method: "delete"  do %><i class="fa fa-sign-out" aria-hidden="true"></i> Logout<% end %></li>
             <% else %>
-                <li><li><%= link_to "Register", get_started_path %></li></li>
-            	<li class="sep"><%= render 'sessions/login_form' %></li>
+                <li><%= link_to get_started_path do %><i class="fa fa-user-plus" aria-hidden="true"></i> Register<% end %></li>
+            	<li class="sep login">
+            	  <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h2>
+            	  <ul>
+            	    <li>
+            	        <%= render 'sessions/login_form' %>
+        	        </li>
+    	          </ul>
+            	</li>
             <% end %>
             </ul>
         </div>
@@ -72,11 +85,11 @@
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
 <% end %>
 
+<main id="main" role="main">
+
 <% current_user.nil? ? "" : current_user.get_pt_messages.each do |message| %>
     <%= content_tag(:div, message.message, class: "alert mood-#{mood}") %>
 <% end %>
-
-<main id="main" role="main">
 
 <%= yield %>
 
@@ -87,6 +100,7 @@
         <h2>About</h2>
         <p>Copyright 2009-<%= Time.now.year %>, Ryan Poe</p>
         <p>Built by hand on Rails, HTML, CSS, and JavaScript.</p>
+        <p>This software is open source. Want to add a feature or report a bug? Checkout <a href="https://github.com/baublet/w8mngr">w8mngr on GitHub</a>.</a></p>
     </div>
 
     <div class="footer-area-2">
