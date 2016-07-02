@@ -208,6 +208,10 @@ hr {
     max-width: 960px;
     margin: 0 2rem 0 0;
     margin-left: calc(200px + 2rem);
+    .welcome & {
+        max-width: 840px;
+        margin: 0 auto;
+    }
   }
 }
 
