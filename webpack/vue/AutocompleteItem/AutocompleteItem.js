@@ -27,12 +27,15 @@ export default {
       this.initializeComponent()
     },
     'autocomplete-item-selected': function(index) {
-      // Don't reselect this item if we're already selected
       if (index == this.index) {
+        // Don't reselect this item if we're already selected
+        console.log("Item already selected, showing...")
         if (this.selected == false) this.selectItem()
+        else console.log("Item already shown, doing nothing...")
       } else {
         this.selected = false
       }
+      return true
     },
     'next-measurement': function() {
       if(!this.selected) return true
@@ -55,7 +58,7 @@ export default {
       this.loadItemData()
     },
     selectMeasurement: function() {
-      console.log("Selecting measurement...")
+      console.log("Selecting measurement " + this.selectedMeasurement + "...")
       // If we don't do this asyncronously, Vue won't have time to update the
       // the DOM. This will defer the selection until Vue has time to update
       var self = this
@@ -65,9 +68,10 @@ export default {
         let i = 0
         while(!self.measurements[self.selectedMeasurement] && i < 1000) {i++}
         // Emit the event to our children
-        self.$children.forEach(function(m) {
-          m.$emit("measurement-selected", self.measurements[self.selectedMeasurement].id)
-        })
+        if(self.measurements[self.selectedMeasurement])
+          self.$children.forEach(function(m) {
+            m.$emit("measurement-selected", self.measurements[self.selectedMeasurement].id)
+          })
       }, 50)
     },
     firstMeasurement: function() {
@@ -75,7 +79,7 @@ export default {
       this.selectMeasurement()
     },
     nextMeasurement: function() {
-      if(this.selectedMeasurement + 1 > this.measurements.length - 1) return false
+      if(this.selectedMeasurement + 1 > this.measurements.length - 1) return true
       this.selectedMeasurement++
       this.selectMeasurement()
     },

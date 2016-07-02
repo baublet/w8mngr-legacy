@@ -357,10 +357,10 @@ export default {
     },
     // Handles selecting an autocomplete item
     selectAutocompleteItem: function(index) {
-      console.log("Selecting " + index)
       this.$children.forEach(function(item) {
         item.$emit('autocomplete-item-selected', index)
       })
+      return true
     },
     // Handles our arrow key down
     nextAutocompleteItem: function() {
