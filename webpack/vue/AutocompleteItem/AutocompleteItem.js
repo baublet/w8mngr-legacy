@@ -1,4 +1,3 @@
-var smoothScroll  = require("../../fn/smoothScroll.js")
 var _do = require("../../fn/do.js")
 
 import AutocompleteMeasurement from '../AutocompleteMeasurement.vue'
@@ -54,9 +53,6 @@ export default {
       this.selected = true
       // Load measurements
       this.loadItemData()
-      // Scroll to this item if we're on small screens
-      if (window.innerWidth < 640)
-        smoothScroll.scrollVerticalToElementById(this.$el.id, 150)
     },
     selectMeasurement: function() {
       console.log("Selecting measurement...")

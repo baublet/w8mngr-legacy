@@ -250,10 +250,6 @@ export default {
         })
         document.getElementById("description-input")
           .focus()
-        // Scroll to our description input if we're on mobile
-        // Removing this because pretty much every mobile device already does this
-        //if (window.innerWidth < 640)
-        //    smoothScroll.scrollVerticalToElementById(this.$el.id, 100)
       } else {
         // TODO: show a fancy error here
         document.getElementById("description-input")
