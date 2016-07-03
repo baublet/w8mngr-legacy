@@ -37,9 +37,10 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activity.destroy
+    @activity.deleted = true
+    @activity.save
     flash.now[:success] = "Activity deleted."
-    redirect_to "index"
+    redirect_to activities_path
   end
 
   private

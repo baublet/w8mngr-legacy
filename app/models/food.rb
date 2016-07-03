@@ -1,8 +1,8 @@
 class Food < ActiveRecord::Base
   # So that they're always sorted by popularity
-    default_scope {
-                where(deleted: false)
-            }
+  default_scope {
+    where(deleted: false)
+  }
 
   belongs_to   :user,         inverse_of: :foods
   validates    :user_id,	    presence: true

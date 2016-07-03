@@ -73,6 +73,8 @@ class ActivitiesControllerTest < ActionController::TestCase
     log_in
     activity = @user.activities.first
     delete :destroy, id: activity.id
+    assert_response :redirect
+    assert_redirected_to activities_path
   end
 
 end
