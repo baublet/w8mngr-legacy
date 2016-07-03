@@ -1,0 +1,26 @@
+<% provide(:title, "Your Activities") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Activities", activities_path %></li>
+      <li>My Activities</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-cutlery"></i> Your Activities</h1>
+
+  <div class="page-meta">
+      <%= link_to new_activity_path, :class => 'btn' do %>
+          <i class="fa fa-plus"></i>
+          New Activity
+      <% end %>
+  </div>
+
+  <%= render @activities || raw("<p>You don't have any custom activities yet. Click the button above to add some!</p>") %>
+</div>

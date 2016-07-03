@@ -89,4 +89,7 @@ Rails.application.routes.draw do
 
     # Dashboard
     get     "/dashboard"            => "dashboard#index",             as: :dashboard
+
+    # Activities
+    resources :activities
 end
