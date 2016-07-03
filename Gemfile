@@ -3,6 +3,9 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.2.6"
 
+# Replace WEBRick with Puma
+gem "puma"
+
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 
@@ -21,8 +24,9 @@ gem "ruby-units"
 # For converting dates entered in the user field
 gem "chronic"
 
-# Postgres
+# PostgreSQL
 gem "pg"
+# A brilliant PG Search gem to use native PG searching abilities
 gem "pg_search"
 
 # Markdown processor
@@ -69,7 +73,5 @@ end
 
 
 group :production do
-    # Required gems for Heroku
-    gem "puma"
     gem "rails_12factor"
 end

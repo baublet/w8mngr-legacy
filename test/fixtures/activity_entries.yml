@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  activity_id: 
-  user_id: 
-  routine_id: 
+  activity_id:
+  user_id:
+  routine_id:
   day: 1
   reps: 1
-  weight: 1
+  work: 1
 
 two:
-  activity_id: 
-  user_id: 
-  routine_id: 
+  activity_id:
+  user_id:
+  routine_id:
   day: 1
   reps: 1
-  weight: 1
+  work: 1

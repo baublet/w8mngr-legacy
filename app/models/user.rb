@@ -21,6 +21,12 @@ class User < ActiveRecord::Base
               dependent: :destroy,
               inverse_of: :user
 
+  has_many :activities, class_name: "Activity",
+              inverse_of: :user
+
+  has_many :activity_entries, class_name: "ActivityEntry",
+              inverse_of: :user
+
   attr_accessor  :remember_token, :reset_token
 
   before_save { email.downcase! }
