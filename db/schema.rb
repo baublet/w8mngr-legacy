@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703201356) do
+ActiveRecord::Schema.define(version: 20160704204608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 20160703201356) do
     t.text     "description"
     t.text     "exrx"
     t.integer  "activity_type",    limit: 2
-    t.integer  "muscle_groups"
+    t.string   "muscle_groups",    limit: 24, default: "000000000000000000000000", null: false
     t.integer  "calories_formula", limit: 2
     t.integer  "popularity"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.boolean  "deleted",                    default: false, null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.boolean  "deleted",                     default: false,                      null: false
   end
 
   add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree

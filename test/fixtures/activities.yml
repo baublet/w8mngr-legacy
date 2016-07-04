@@ -6,7 +6,7 @@ one:
   description: MyText
   exrx: MyText
   activity_type: 1
-  muscle_groups: 1
+  muscle_groups: 000000000000000000000000
   popularity: 1
 
 two:
@@ -15,5 +15,5 @@ two:
   description: MyText
   exrx: MyText
   activity_type: 1
-  muscle_groups: 1
+  muscle_groups: 000000000000000000000000
   popularity: 1
