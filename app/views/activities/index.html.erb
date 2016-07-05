@@ -22,5 +22,12 @@
       <% end %>
   </div>
 
-  <%= render @activities || raw("<p>You don't have any custom activities yet. Click the button above to add some!</p>") %>
+  <div class="activities">
+    <%= render  partial: "activity",
+                collection: @activities,
+                as: :activity,
+                locals: {card: true} ||
+                raw("<p>You don't have any custom activities yet. Click the button above to add some!</p>")
+    %>
+  </div>
 </div>

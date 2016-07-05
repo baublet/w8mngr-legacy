@@ -75,3 +75,43 @@
     }
   }
 }
+
+.muscle-groups.show {
+  @include mqAfterSize($desktop-breakpoint * .75) {
+    float: right;
+    min-width: 320px;
+    max-width: 30%;
+  }
+  label {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  input:checked + label {
+   display: inline-block;
+   width: auto;
+   height: auto;
+   cursor: default;
+   border: 0;
+   margin: 0 0 .25rem 0;
+   padding: 0;
+  }
+  input:checked + label ~ input:checked + label {
+    margin-left: -.25rem;
+    &:before {
+      content: ", ";
+    }
+  }
+  svg g g[id]:hover path {
+    cursor: default;
+    opacity: .1;
+  }
+  svg {
+    margin: 2rem 0 1rem;
+    padding: 0;
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+  }
+}

@@ -1,0 +1,18 @@
+<% if !defined? card %>
+<div class="muscle-groups show">
+  <h3>Muscle Groups</h3>
+    <% activity.muscle_group_values.each do |name| %>
+      <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
+      <%= label_tag "activity[muscle_groups][#{name}]", name %>
+    <% end %>
+
+    <%= render "muscle_groups" %>
+</div>
+<% end %>
+<div class="activity<%= (defined? card) ? raw(" card") : "" %>">
+  <% if defined? card %><div class="title"><%= activity.name %></div><% end %>
+  <div class="type"><%= activity.type_name %></div>
+  <% if defined? activity_description %>
+    <%= raw(activity_description) %>
+  <% end %>
+</div>

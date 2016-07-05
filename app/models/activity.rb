@@ -36,10 +36,14 @@ class Activity < ActiveRecord::Base
     return true
   end
 
-  # Takes the inputted array of muscle groups in the order of
-  # groups in muscle_group_values and formats it for our database
+  # Takes the array of muscle groups from params and formats it for our database
   def save_muscle_groups groups_array
-
+    groups_array = {} unless groups_array.is_a?(Hash)
+    self.muscle_groups = ""
+    muscle_group_values.each do |name|
+      bit = groups_array[name.to_s] == "1" ? "1" : "0"
+      self.muscle_groups = self.muscle_groups + bit
+    end
   end
 
   def activity_types display = false
@@ -50,15 +54,15 @@ class Activity < ActiveRecord::Base
      :repetitive_high,    # for unassisted exercises, higher is better (e.g., push ups)
     ] if display == false
     # These should match the above, but be the display versions
-    [ "Weighted Exercise",
+    [ "Weight Lifting (weighted repititions)",
       "Timed Exercise (more time is better)",
       "Timed Exercise (less time is better)",
-      "Repetitive Exercise (e.g., push ups, sit ups)"
+      "Repetitive Exercise (more repetitions are better)"
       ]
   end
 
   def type_name
-    activity_types.try(:[], activity_type)
+    activity_types(true)[self.activity_type]
   end
 
 end

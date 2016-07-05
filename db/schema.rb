@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704204608) do
+ActiveRecord::Schema.define(version: 20160705190809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20160704204608) do
     t.text     "name"
     t.text     "description"
     t.text     "exrx"
-    t.integer  "activity_type",    limit: 2
+    t.integer  "activity_type",    limit: 2,  default: 0,                          null: false
     t.string   "muscle_groups",    limit: 24, default: "000000000000000000000000", null: false
     t.integer  "calories_formula", limit: 2
     t.integer  "popularity"

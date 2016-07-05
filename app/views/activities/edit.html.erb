@@ -1,0 +1,30 @@
+<% provide(:title, "Edit Activity") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Activities", activities_path %></li>
+      <li><%= link_to @activity.name, activity_path(@activity) %></li>
+      <li>Edit</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-bolt"></i> Edit Activity</h1>
+
+  <% unless @activity.id.nil? %>
+    <div class="page-meta">
+    <%= link_to @activity do %>
+        <i class="fa fa-eye"></i>
+        View Activity
+    <% end if @activity.user_id = current_user.try(:id) %>
+  </div>
+  <% end %>
+
+  <%= render partial: 'form', locals: {activity: @activity} %>
+
+</div>

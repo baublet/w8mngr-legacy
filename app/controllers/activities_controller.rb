@@ -7,8 +7,16 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    # We do this here so anyone can view all activities added
+    # We do this here so anyone can view all activities
     @activity = Activity.find(params[:id])
+    html_renderer = Redcarpet::Render::HTML.new(
+      filter_html: true,
+      no_images: true,
+      no_links: true,
+      no_styles: true
+      )
+    markdown = Redcarpet::Markdown.new(html_renderer)
+    @activity_description = markdown.render(@activity.description)
   end
 
   def new
@@ -17,6 +25,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = current_user.activities.build(activities_params)
+    @activity.save_muscle_groups params[:activity]["muscle_groups"]
     if @activity.save
       redirect_to @activity
     else
@@ -28,7 +37,9 @@ class ActivitiesController < ApplicationController
   end
 
   def update
-    if @activity.update(activities_params)
+    if @activity.update(activities_params) &&
+        @activity.save_muscle_groups(params[:activity]["muscle_groups"]) &&
+        @activity.save
       flash.now[:success] = "Activity updated!"
     else
       flash.now[:error] = "Error updating activity..."
@@ -51,7 +62,7 @@ class ActivitiesController < ApplicationController
 
   def activities_params
     params.require(:activity)
-      .permit(:name, :description)
+      .permit(:name, :description, :exrx, :activity_type)
   end
 
 end

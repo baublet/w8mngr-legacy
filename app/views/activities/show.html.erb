@@ -1,0 +1,31 @@
+<% provide(:title, @activity.name) %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Activities", activities_path %></li>
+      <li><%= @activity.name %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-bolt"></i> <%= @activity.name %></h1>
+  <div class="page-meta">
+    <%= link_to edit_activity_path(@activity) do %>
+        <i class="fa fa-pencil"></i>
+        Edit Activity
+    <% end if @activity.user_id = current_user.try(:id) %>
+    <%= link_to activities_path do %>
+        <i class="fa fa-bolt"></i>
+        My Activities
+    <% end %>
+  </div>
+
+
+  <%= render partial: 'activity', locals: {activity: @activity, activity_description: @activity_description} %>
+
+</div>

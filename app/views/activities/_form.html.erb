@@ -11,7 +11,7 @@
   <%= f.text_area :description, placeholder: "e.g., Hold the bar across your front deltoids, slowly drop..." %>
 
   <%= f.label :activity_type %>
-  <%= f.select(:activity_type, activity.activity_types(true).collect {|n,k| [n, k] }) %>
+  <%= f.select(:activity_type, activity.activity_types(true).map.with_index {|n,k| [n, k] }) %>
 
   <div class="muscle-groups" id="muscle-groups-form">
     <h3>Muscle Groups</h3>
@@ -26,5 +26,7 @@
 
   <%= f.label :exrx, "ExRx link" %>
   <%= f.text_field :exrx, placeholder: "e.g., http://www.exrx.net/WeightExercises/Quadriceps/BBSquat.html" %>
+
+  <%= f.button (activity.id.nil?) ? "Create Activity" : "Save Activity", class: "btn" %>
 
 <% end %>
