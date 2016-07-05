@@ -1,0 +1,28 @@
+<%= form_for activity do |f| %>
+
+  <% if activity.errors.any? %>
+    <%= render partial: "shared/error_messages", locals: {errors: activity.errors} %>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "e.g., Front Squats"  %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, placeholder: "e.g., Hold the bar across your front deltoids, slowly drop..." %>
+
+  <%= f.label :activity_type %>
+  <%= f.select(:activity_type, activity.activity_types(true).collect {|n,k| [n, k] }) %>
+
+  <div class="muscle-groups" id="muscle-groups-form">
+    <h3>Muscle Groups</h3>
+    <% activity.muscle_group_values.each do |name| %>
+      <br>
+      <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
+      <%= label_tag "activity[muscle_groups][#{name}]", name %>
+    <% end %>
+
+    <%= render "muscle_groups" %>
+
+  </div>
+
+<% end %>

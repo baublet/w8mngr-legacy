@@ -1,7 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :logged_in_user
   before_action :find_activity, only: [:edit, :update, :destroy]
-  before_action :build_activity, only: [:new, :create]
 
   def index
     @activities = current_user.activities
@@ -13,6 +12,7 @@ class ActivitiesController < ApplicationController
   end
 
   def new
+    @activity = current_user.activities.build()
   end
 
   def create
@@ -47,10 +47,6 @@ class ActivitiesController < ApplicationController
 
   def find_activity
     @activity = current_user.activities.find(params[:id])
-  end
-
-  def build_activity
-    @activity = current_user.activities.build()
   end
 
   def activities_params
