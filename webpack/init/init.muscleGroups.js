@@ -14,15 +14,9 @@ w8mngr.init.addIf("muscle-groups-form", function() {
     }
     // For the hover
     group.addEventListener('mouseover', function(el) {
-      // Try the first five elements in the event tree
       let id = findElementParentID(el)
 
       let label = document.querySelectorAll("label[for=activity_muscle_groups_" + id + "]")[0]
-      if(!label) {
-        console.log("Couldn't find element label[for=activity_muscle_groups_" + id + "]...")
-        console.log(el)
-        return false
-      }
       let clss = 'hover'
 
       if (label.classList) label.classList.add(clss)
@@ -32,11 +26,6 @@ w8mngr.init.addIf("muscle-groups-form", function() {
       let id = findElementParentID(el)
 
       let label = document.querySelectorAll("label[for=activity_muscle_groups_" + id + "]")[0]
-      if(!label) {
-        console.log("Couldn't find element label[for=activity_muscle_groups_" + id + "]...")
-        console.log(el)
-        return false
-      }
       let clss = "hover"
 
       if (label.classList) label.classList.remove(clss)
@@ -47,11 +36,6 @@ w8mngr.init.addIf("muscle-groups-form", function() {
       let id = findElementParentID(el)
 
       let input = document.getElementById('activity_muscle_groups_' + id)
-      if(!input) {
-        console.log("Couldn't find element activity_muscle_groups_" + id + "...")
-        console.log(el)
-        return false
-      }
 
       if(input.checked) input.checked = false
       else input.checked = true
