@@ -27,6 +27,7 @@ class ActivitiesController < ApplicationController
     @activity = current_user.activities.build(activities_params)
     @activity.save_muscle_groups params[:activity]["muscle_groups"]
     if @activity.save
+      flash[:success] = "Activity created!"
       redirect_to @activity
     else
       flash.now[:error] = "Error creating activity..."
@@ -50,7 +51,7 @@ class ActivitiesController < ApplicationController
   def destroy
     @activity.deleted = true
     @activity.save
-    flash.now[:success] = "Activity deleted."
+    flash[:success] = "Activity deleted."
     redirect_to activities_path
   end
 

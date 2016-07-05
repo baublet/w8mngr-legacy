@@ -5,10 +5,24 @@
   <% end %>
 
   <%= f.label :name %>
-  <%= f.text_field :name, placeholder: "e.g., Front Squats"  %>
+  <%= f.text_field :name, placeholder: "e.g., Barbell Back Squat"  %>
 
   <%= f.label :description %>
-  <%= f.text_area :description, placeholder: "e.g., Hold the bar across your front deltoids, slowly drop..." %>
+  <%= f.text_area :description, placeholder: "e.g., ...
+
+# Preparation
+
+From rack with barbell at upper chest height, position bar high on back of shoulders and grasp barbell to sides. Dismount bar from rack and stand with shoulder width stance.
+
+# Execution
+
+Squat down by bending hips back while allowing knees to bend forward, keeping back straight and knees pointed same direction as feet. Descend until thighs are just past parallel to floor. Extend knees and hips until legs are straight. Return and repeat.
+
+# Comments
+
+Keep head facing forward, back straight and feet flat on floor; equal distribution of weight throughout forefoot and heel. Knees should point same direction as feet throughout movement.
+
+(This example text is from ExRx.net)" %>
 
   <%= f.label :activity_type %>
   <%= f.select(:activity_type, activity.activity_types(true).map.with_index {|n,k| [n, k] }) %>
@@ -27,6 +41,7 @@
   <%= f.label :exrx, "ExRx link" %>
   <%= f.text_field :exrx, placeholder: "e.g., http://www.exrx.net/WeightExercises/Quadriceps/BBSquat.html" %>
 
+  <%= link_to "Delete Activity", delete_activity_path(activity), class: "delete-btn" unless activity.id.nil? %>
   <%= f.button (activity.id.nil?) ? "Create Activity" : "Save Activity", class: "btn" %>
 
 <% end %>

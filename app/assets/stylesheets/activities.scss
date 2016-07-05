@@ -81,6 +81,8 @@
     float: right;
     min-width: 320px;
     max-width: 30%;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
   }
   label {
     display: none;
@@ -114,4 +116,24 @@
     width: auto;
     height: auto;
   }
+}
+
+.muscle-groups-list {
+  margin: 1rem -.5rem -.75rem;
+  .pill-list {
+    justify-content: flex-end;
+  }
+  // This is in the markup for screen readers
+  h3 {
+    display: none;
+  }
+}
+
+.activity .type {
+  font-weight: bold;
+  font-size: .75rem;
+  margin-top: -2rem;
+}
+.activity.card .type {
+  margin-top: 0;
 }

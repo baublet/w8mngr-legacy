@@ -29,11 +29,20 @@ class Activity < ActiveRecord::Base
       ]
   end
 
+  # Returns true if this activity targets the muscle group passed, otherwise false
   def targets_group? group
     index = muscle_group_values.index(group)
     return false if index.nil?
     return false if muscle_groups[index] ==  "0"
     return true
+  end
+
+  # Returns true if this activity has any muscle groups targeted, otherwise false
+  def targets_any_group?
+    self.muscle_groups.each_char do |c|
+      return true if c == "1"
+    end
+    return false
   end
 
   # Takes the array of muscle groups from params and formats it for our database
@@ -61,6 +70,7 @@ class Activity < ActiveRecord::Base
       ]
   end
 
+  # Returns a readable name of the activity_type
   def type_name
     activity_types(true)[self.activity_type]
   end

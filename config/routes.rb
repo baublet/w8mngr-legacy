@@ -88,8 +88,10 @@ Rails.application.routes.draw do
     post    "/getstarted/target"    =>  "registrations#save_target",  as: :get_started_target_save
 
     # Dashboard
-    get     "/dashboard"            => "dashboard#index",             as: :dashboard
+    get     "/dashboard"            =>  "dashboard#index",            as: :dashboard
 
     # Activities
     resources :activities
+    get     "/activities/:id/delete(.:format)" =>
+                                        "activities#destroy",         as: :delete_activity
 end
