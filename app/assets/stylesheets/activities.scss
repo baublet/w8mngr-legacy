@@ -2,10 +2,10 @@
   position: relative;
   padding: .5rem 1rem;
   max-width: 100%;
-  min-width: 320px;
   background: $white;
   @include height(1);
   overflow: hidden;
+  margin-bottom: 2rem;
   h3 {
     margin: .5rem 0;
     padding: 0;
@@ -17,8 +17,8 @@
     display: block;
     margin-bottom: .5rem;
     cursor: pointer;
-    font-size: .7rem;
-    opacity: .5;
+    font-size: .9rem;
+    opacity: .75;
     position: relative;
     z-index: 100;
     border-left: 5px solid transparent;
@@ -43,7 +43,6 @@
     height: auto;
     max-height: 27rem;
     bottom: 1rem;
-    margin-left: 80px;
   }
   svg g[id] path {
     opacity: .2;
@@ -66,6 +65,13 @@
     #activity_muscle_groups_#{$muscle}:checked ~ svg ##{$upper} path {
       opacity: .8;
       fill: $color-primary !important;
+    }
+  }
+  @include mqBeforeSize(470px) {
+    svg {
+      right: auto;
+      left: 80px;
+      width: calc(100% - 80px - 2rem);
     }
   }
 }

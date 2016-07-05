@@ -3,23 +3,40 @@ var addEvent = require("../fn/addEvent.js")
 
 w8mngr.init.addIf("muscle-groups-form", function() {
   document.querySelectorAll(".muscle-groups svg g g[id]").forEach(function(group) {
+    function findElementParentID(el, max) {
+      max = max ? max : 5
+      let id = null
+      for(let i = 0; i < max; i++) {
+        id = el.path[i].id.toLowerCase()
+        if(id) return id
+      }
+      return null
+    }
     // For the hover
     group.addEventListener('mouseover', function(el) {
-      let id = el.path[1].id.toLowerCase()
-
-      if(!id) id = el.path[2].id.toLowerCase()
+      // Try the first five elements in the event tree
+      let id = findElementParentID(el)
 
       let label = document.querySelectorAll("label[for=activity_muscle_groups_" + id + "]")[0]
+      if(!label) {
+        console.log("Couldn't find element label[for=activity_muscle_groups_" + id + "]...")
+        console.log(el)
+        return false
+      }
+      let clss = 'hover'
 
-      if (label.classList) label.classList.add("hover")
-      else label.className += ' ' + "hover"
+      if (label.classList) label.classList.add(clss)
+      else label.className += ' ' + clss
     })
     group.addEventListener('mouseout', function(el) {
-      let id = el.path[1].id.toLowerCase()
-
-      if(!id) id = el.path[2].id.toLowerCase()
+      let id = findElementParentID(el)
 
       let label = document.querySelectorAll("label[for=activity_muscle_groups_" + id + "]")[0]
+      if(!label) {
+        console.log("Couldn't find element label[for=activity_muscle_groups_" + id + "]...")
+        console.log(el)
+        return false
+      }
       let clss = "hover"
 
       if (label.classList) label.classList.remove(clss)
@@ -27,11 +44,14 @@ w8mngr.init.addIf("muscle-groups-form", function() {
     })
     // For the click
     group.addEventListener('click', function(el) {
-      let id = el.path[1].id.toLowerCase()
-
-      if(!id) id = el.path[2].id.toLowerCase()
+      let id = findElementParentID(el)
 
       let input = document.getElementById('activity_muscle_groups_' + id)
+      if(!input) {
+        console.log("Couldn't find element activity_muscle_groups_" + id + "...")
+        console.log(el)
+        return false
+      }
 
       if(input.checked) input.checked = false
       else input.checked = true

@@ -22,7 +22,9 @@
     <% end %>
 
     <%= render "muscle_groups" %>
-
   </div>
+
+  <%= f.label :exrx, "ExRx link" %>
+  <%= f.text_field :exrx, placeholder: "e.g., http://www.exrx.net/WeightExercises/Quadriceps/BBSquat.html" %>
 
 <% end %>
