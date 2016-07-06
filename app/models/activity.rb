@@ -6,6 +6,7 @@ class Activity < ActiveRecord::Base
   }
 
   belongs_to :user, inverse_of: :activities
+  has_many :activity_entries, inverse_of: :activities
 
   validates :user_id, presence: true
   validates :name, presence: true, length: { minimum: 4,  maximum: 96 }
@@ -63,7 +64,7 @@ class Activity < ActiveRecord::Base
      :repetitive_high,    # for unassisted exercises, higher is better (e.g., push ups)
     ] if display == false
     # These should match the above, but be the display versions
-    [ "Weight Lifting (weighted repititions)",
+    [ "Weightlifting (weighted repititions)",
       "Timed Exercise (more time is better)",
       "Timed Exercise (less time is better)",
       "Repetitive Exercise (more repetitions are better)"

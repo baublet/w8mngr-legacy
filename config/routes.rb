@@ -95,7 +95,7 @@ Rails.application.routes.draw do
       resources :activity_entries, only: [:create, :update, :destroy]
       get     "/activity_entries/(.:format)"  =>
                                         "activity_entries#index",     as: :log
-      get     "/activity_entries/:day/:id(.:format)"  =>
+      get     "/activity_entries/:day/(.:format)"  =>
                                         "activity_entries#index",     as: :log_day
       get     "/activity_entries/:id/delete(.:format)" =>
                                         "activity_entries#destroy",   as: :delete_entry

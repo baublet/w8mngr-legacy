@@ -48,6 +48,10 @@ class ActivityEntriesControllerTest < ActionController::TestCase
     log_in
     activity = @user.activity_entries.first
     delete :destroy, activity_id: activity.activity.id, id: activity.id
+    assert_response :success
+    assert assigns.key?(:activity)
+    assert assigns.key?(:activityentries)
+
   end
 
 end

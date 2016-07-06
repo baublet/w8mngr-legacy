@@ -1,0 +1,39 @@
+<% provide(:title, "Activity Log, " + @activity.name) %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="activity-entries-wrapper app-wrapper">
+
+  <%= render partial: "shared/day_navigator", :locals => {base_url: activity_log_path(@activity.id)} %>
+
+  <div class="section-inside">
+
+    <h1><i class="fa fa-bolt"></i> Activity Log</h1>
+
+    <div class="activity-box">
+
+      <div class="activity-description-box">
+        <h2><%= @activity.name %></h2>
+        <p class="type"><%= @activity.type_name %></p>
+        <ul class="pill-list">
+          <% @activity.muscle_group_values.each do |name|
+            next unless @activity.targets_group?(name)
+            %>
+            <li><span class="pill"><%= name %></span></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="activity-new-box app-form new">
+        Add
+      </div>
+    </div>
+
+    <div class="activity-entries">
+      <%= render @activityentries or raw("<p>You haven't logged any entries for this activity today.</p>") %>
+    </div>
+
+  </div>
+
+
+</div>

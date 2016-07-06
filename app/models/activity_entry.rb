@@ -1,5 +1,5 @@
 class ActivityEntry < ActiveRecord::Base
-  belongs_to :activity
+  belongs_to :activity,   inverse_of: :activity_entries
   belongs_to :user,       inverse_of: :activity_entries
   belongs_to :routine
 
