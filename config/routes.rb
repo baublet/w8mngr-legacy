@@ -91,7 +91,15 @@ Rails.application.routes.draw do
     get     "/dashboard"            =>  "dashboard#index",            as: :dashboard
 
     # Activities
-    resources :activities
-    get     "/activities/:id/delete(.:format)" =>
+    resources :activities do
+      resources :activity_entries, only: [:create, :update, :destroy]
+      get     "/activity_entries/(.:format)"  =>
+                                        "activity_entries#index",     as: :log
+      get     "/activity_entries/:day/:id(.:format)"  =>
+                                        "activity_entries#index",     as: :log_day
+      get     "/activity_entries/:id/delete(.:format)" =>
+                                        "activity_entries#destroy",   as: :delete_entry
+    end
+    get     "/activity/:id/delete(.:format)" =>
                                         "activities#destroy",         as: :delete_activity
 end

@@ -16,5 +16,4 @@ class ActivityEntry < ActiveRecord::Base
 
   include WeightManager::DayNavigator
 
-
 end
