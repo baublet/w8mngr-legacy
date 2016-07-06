@@ -1,0 +1,3 @@
+<div class="activity-entry <%= activity_entry.activity.type_template %>">
+  <%= render partial: "activities/types/" + activity_entry.activity.type_template, locals: { entry: activity_entry } %>
+</div>

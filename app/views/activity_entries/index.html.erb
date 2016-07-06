@@ -14,7 +14,6 @@
 
       <div class="activity-description-box">
         <h2><%= @activity.name %></h2>
-        <p class="type"><%= @activity.type_name %></p>
         <ul class="pill-list">
           <% @activity.muscle_group_values.each do |name|
             next unless @activity.targets_group?(name)
@@ -22,10 +21,28 @@
             <li><span class="pill"><%= name %></span></li>
           <% end %>
         </ul>
+        <p class="type"><%= @activity.type_name %></p>
+        <% unless @activity_pr.nil? %>
+        <p class="pr">
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+          <strong>Personal Record:</strong>
+          <%= @activity_pr %>
+        </p>
+        <% end %>
       </div>
 
       <div class="activity-new-box app-form new">
-        Add
+        <%= form_tag activity_new_activity_entry_path(activity_id: @activity.id) do %>
+          <%= hidden_field_tag "day", current_day %>
+          <%=
+            # Renders our partial forms, located in  views/activities/types/
+            render partial: "activities/types/" + @activity.type_template
+          %>
+          <%= button_tag type: "submit", class: "btn food-log-new-btn", title: "New Entry" do %>
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+          <% end %>
+        <% end %>
       </div>
     </div>
 

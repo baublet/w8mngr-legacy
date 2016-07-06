@@ -56,19 +56,19 @@ class Activity < ActiveRecord::Base
     end
   end
 
-  def activity_types display = false
+  def activity_types disp = false
     # Note: ONLY EVER append to this list. Do not splice.
-    [:weight,             # reps and weight (e.g. 3 reps at 50lbs)
-     :timed_high,         # timed, higher better (e.g., 60 second plank)
-     :timed_low,          # timed, lower better (e.g., 7 minute-mile)
-     :repetitive_high,    # for unassisted exercises, higher is better (e.g., push ups)
-    ] if display == false
+    return [ :weight,             # reps and weight (e.g. 3 reps at 50lbs)
+             :timed_high,         # timed, higher better (e.g., 60 second plank)
+             :timed_low,          # timed, lower better (e.g., 7 minute-mile)
+             :repetitive_high,    # for unassisted exercises, higher is better (e.g., push ups)
+            ] if disp == false
     # These should match the above, but be the display versions
-    [ "Weightlifting (weighted repititions)",
-      "Timed Exercise (more time is better)",
-      "Timed Exercise (less time is better)",
-      "Repetitive Exercise (more repetitions are better)"
-      ]
+    return [  "Weightlifting (weighted repititions)",
+              "Timed Exercise (more time is better)",
+              "Timed Exercise (less time is better)",
+              "Repetitive Exercise (more repetitions are better)"
+              ]
   end
 
   # Returns a readable name of the activity_type
@@ -76,4 +76,8 @@ class Activity < ActiveRecord::Base
     activity_types(true)[self.activity_type]
   end
 
+  # Returns the partial name of the activity_type
+  def type_template
+    activity_types(false)[self.activity_type].to_s
+  end
 end

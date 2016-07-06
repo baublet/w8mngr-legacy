@@ -1,0 +1,13 @@
+<div class="reps">
+  <%= number_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps" %>
+</div>
+
+<div class="work">
+  <%= text_field_tag :work, ((defined? entry) ? entry.work : ""), placeholder: "Weight, e.g., 100lbs, 10kg, etc..." %>
+</div>
+
+<% if defined? entry %>
+<div class="when">
+  <%= time_ago_in_words(entry.created_at) %> ago
+</div>
+<% end %>

@@ -2,6 +2,7 @@
   @include mqAfterSize($desktop-breakpoint) {
     display: flex;
   }
+  margin-bottom: 2rem;
 }
 
 .activity-description-box {
@@ -14,24 +15,18 @@
   transition: box-shadow .15s ease-in-out;
   order: 2;
   width: 100%;
-  @include mqAfterSize($desktop-breakpoint) {
-    display: flex;
-    flex-wrap: wrap;
-  }
   &:hover {
     @include height(2);
   }
   .pill-list {
-    @include mqAfterSize($desktop-breakpoint) {
-      justify-content: flex-end;
-      width: 34%;
-    }
-    margin: 0 -.5rem -.5rem 0;
+    margin: -.75rem 0 .5rem 0;
     order: 2;
   }
   .pill {
     background: $white;
     color: $black;
+    font-size: .6rem;
+    padding: .05rem .15rem;
   }
   h2 {
     margin: 0 0 .5rem;
@@ -48,10 +43,61 @@
 }
 
 .activity-new-box {
+  float: none;
   order: 1;.
   position: relative;
   z-index: 50;
   @include mqAfterSize($desktop-breakpoint) {
     &.app-form.new { margin-bottom: 0; }
+  }
+  .reps input, .work input {
+    font-size: 1.2rem;
+  }
+}
+
+.activity-entry {
+  width: 100%;
+  clear: both;
+  display: flex;
+  align-items: center;
+  input {
+    background: transparent;
+    border-color: transparent;
+    width: 4rem;
+    display: inline;
+    margin: 0;
+    &:hover {
+      background: rgba($white, .25);
+      border-color: rgba($black, .25);
+    }
+    &:focus {
+      background: $white;
+      border-color: $black;
+    }
+  }
+  &.weight {
+    .when {
+      vertical-align:  middle;
+      font-style: italic;
+      opacity: .5;
+      font-size: .6rem;
+      padding-left: .5rem;
+    }
+    .work input {
+      text-align: right;
+    }
+    .reps {
+      input {
+        width: 3.5rem;
+      }
+      &:after {
+        display: inline;
+        content: "x";
+        vertical-align: middle;
+        font-size: .75rem;
+        font-weight: 800;
+        margin-right: .25rem;
+      }
+    }
   }
 }
