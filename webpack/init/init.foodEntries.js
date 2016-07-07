@@ -1,4 +1,5 @@
 var w8mngr = require("w8mngr")
+var Turbolinks = require("turbolinks")
 
 w8mngr.init.addIf("food-entries-app", function() {
   // mount our Vue instance
@@ -12,10 +13,9 @@ w8mngr.init.addIf("food-entries-app", function() {
     var Vue = require("vue")
     Vue.use(require("../vue/init.js"))
 
-    w8mngr.foodEntries = new Vue(require("../vue/FoodEntries.vue"))
+    if(w8mngr.foodEntries) w8mngr.foodEntries.$destroy()
 
-    console.log("Vue instance for FoodEntries:")
-    console.log(w8mngr.foodEntries)
+    w8mngr.foodEntries = new Vue(require("../vue/FoodEntries.vue"))
 
   }, "food-entries-chunk")
 })

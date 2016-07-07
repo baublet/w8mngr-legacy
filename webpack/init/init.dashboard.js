@@ -12,7 +12,8 @@ w8mngr.init.addIf("dashboard-app", function() {
     var Vue = require("vue")
     Vue.use(require("../vue/init.js"))
 
-    w8mngr.dashboard = new Vue(require("../vue/Dashboard.vue"))
+    if(!w8mngr.dashboard)
+      w8mngr.dashboard = new Vue(require("../vue/Dashboard.vue"))
 
   }, "dashboard-chunk")
 })
