@@ -1,10 +1,26 @@
 <div class="reps">
+  <%= label_tag :reps, "Repetitions (how many time you lifted in this set)", class: "screen-reader-text" %>
   <%= number_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps" %>
 </div>
 
+<% if defined? entry %>
+  <i class="fa fa-times" aria-hidden="true"></i>
+<% end %>
+
 <div class="work">
-  <%= text_field_tag :work, ((defined? entry) ? entry.work : ""), placeholder: "Weight, e.g., 100lbs, 10kg, etc..." %>
+  <%= label_tag :work, "Weight (in any unit you specify, or defaults to your selected unit)", class: "screen-reader-text" %>
+  <%= text_field_tag :work,
+        ((defined? entry) ?
+          number_with_precision(entry.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2) :
+        ""),
+        placeholder: "Weight, e.g., 100lbs, 10kg, etc..." %>
 </div>
+
+<% if defined? entry %>
+  <span class="unit">
+    <%= current_user.unit %>
+  </span>
+<% end %>
 
 <% if defined? entry %>
 <div class="when">

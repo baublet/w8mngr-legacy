@@ -9,12 +9,13 @@ class ActivityEntriesController < ApplicationController
   def create
     unless @activity.nil?
       @new_activityentry = current_user.activity_entries.build(activity_entries_params)
+      convert_unit @new_activityentry
       if @new_activityentry.save
-        flash.now[:success] = "Activity entry created!"
+        flash[:success] = "Activity entry created!"
       else
-        flash.now[:error] = "Unable to create activity entry..."
+        flash[:error] = "Unable to create activity entry..."
       end
-      show_list
+       redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day)
     else
       show_404 "Invalid activity entry..."
     end
@@ -24,11 +25,12 @@ class ActivityEntriesController < ApplicationController
     find_activity_entry
     unless @activity_entry.nil?
       if @activity_entry.update(activity_entries_params)
-        flash.now[:success] = "Activity entry updated."
+        convert_unit @activity_entry
+        flash[:success] = "Activity entry updated."
       else
-        flash.now[:error] = "Unable to update activity entry..."
+        flash[:error] = "Unable to update activity entry..."
       end
-      show_list unless @activity_entry.nil?
+      redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day)
     else
       show_404 "Invalid activity entry..." if @activity_entry.nil?
     end
@@ -37,9 +39,10 @@ class ActivityEntriesController < ApplicationController
   def destroy
     find_activity_entry
     unless @activity_entry.nil?
-      flash.now[:success] = "Activity entry deleted."
+      flash[:success] = "Activity entry deleted."
+      day = @activity_entry.day
       @activity_entry.destroy
-      show_list
+      redirect_to activity_log_day_path(activity_id: params[:activity_id], day: day)
     else
       show_404 "Invalid activity entry..."
     end
@@ -61,13 +64,22 @@ class ActivityEntriesController < ApplicationController
     unless @activity.nil?
       @activity_pr = current_user.activity_entries.where(activity_id: params[:activity_id]).maximum(:work)
       @new_activityentry ||= current_user.activity_entries.build(activity: @activity)
-      @activityentries = current_user.activity_entries.where(activity_id: params[:activity_id]).order('created_at DESC')
+      @activityentries = current_user.activity_entries.where(activity_id: params[:activity_id], day: current_day).order('created_at DESC')
+      @olderactivityentries = current_user.activity_entries.where(activity_id: params[:activity_id]).where("day < ?", current_day).order('created_at DESC')
       render "index"
     end
   end
 
   def activity_entries_params
-    params.permit(:work, :reps, :routine_id, :activity_id, :day)
+    params.permit(:reps, :routine_id, :activity_id, :day)
+  end
+
+  def convert_unit entry
+    work_g = params[:work].to_unit.convert_to("g").scalar.to_i rescue false
+    work_g = (params[:work] + current_user.unit).to_unit.convert_to("g").scalar.to_i rescue false if work_g == false
+    return false if work_g == false
+    entry.work = work_g
+    return true
   end
 
 end

@@ -15,6 +15,10 @@
 
   <h1><i class="fa fa-bolt"></i> <%= @activity.name %></h1>
   <div class="page-meta">
+    <%= link_to activity_log_path(@activity), class: "btn" do %>
+      <i class="fa fa-plus"></i>
+      Log <%= @activity.name %>
+    <% end %>
     <%= link_to edit_activity_path(@activity) do %>
         <i class="fa fa-pencil"></i>
         Edit Activity

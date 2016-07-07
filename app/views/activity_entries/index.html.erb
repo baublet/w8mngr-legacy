@@ -9,11 +9,18 @@
   <div class="section-inside">
 
     <h1><i class="fa fa-bolt"></i> Activity Log</h1>
+    <div class="page-meta">
+      <%= link_to activities_path do %>
+          <i class="fa fa-chevron-circle-left"></i>
+          Activities
+      <% end %>
+    </div>
+
 
     <div class="activity-box">
 
       <div class="activity-description-box">
-        <h2><%= @activity.name %></h2>
+        <h2><%= link_to @activity.name, @activity %></h2>
         <ul class="pill-list">
           <% @activity.muscle_group_values.each do |name|
             next unless @activity.targets_group?(name)
@@ -46,9 +53,35 @@
       </div>
     </div>
 
-    <div class="activity-entries">
-      <%= render @activityentries or raw("<p>You haven't logged any entries for this activity today.</p>") %>
-    </div>
+    <% unless @activityentries.nil? %>
+      <div class="activity-entries">
+        <%= render @activityentries %>
+      </div>
+    <% end %>
+
+    <% if @activityentries.nil? || @activityentries.count == 0 %>
+      <p>You haven't logged any entries for this activity today.</p>
+    <% end %>
+
+    <% if !@olderactivityentries.nil? || @olderactivityentries.count > 0 %>
+      <div class="older-activity-entries">
+        <h3>Previous Entries</h3>
+        <%
+          prev_day = 0
+          @olderactivityentries.each do |entry|
+        %>
+
+          <% if prev_day == 0 || prev_day != entry.day %>
+            <h4><%= link_to nice_day(entry.day), activity_log_day_path(@activity, entry.day) %></h4>
+            <% prev_day = entry.day %>
+          <% end %>
+
+          <%= render entry %>
+
+        <% end %>
+        </div>
+      </div>
+    <% end %>
 
   </div>
 

@@ -1,3 +1,8 @@
-<div class="activity-entry <%= activity_entry.activity.type_template %>">
-  <%= render partial: "activities/types/" + activity_entry.activity.type_template, locals: { entry: activity_entry } %>
-</div>
+<%= form_tag activity_activity_entry_path(activity_id: activity_entry.activity.id, id: activity_entry.id), class: "activity-entry-form" do %>
+    <div class="activity-entry <%= activity_entry.activity.type_template %>">
+      <%= hidden_field_tag "day", current_day %>
+      <%= render partial: "activities/types/" + activity_entry.activity.type_template, locals: { entry: activity_entry } %>
+      <button type="submit" class="meta-btn"><i class="fa fa-floppy-o" aria-hidden="true"></i><span class="screen-reader-text">Save Activity Entry</span></button>
+      <a href="<%= activity_delete_entry_path(activity_id: activity_entry.activity.id, id: activity_entry.id) %>" class="delete-btn"><i class="fa fa-times"></i><span class="screen-reader-text">Delete Activity Entry</span></a>
+    </div>
+<% end %>

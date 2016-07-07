@@ -230,11 +230,26 @@ nav .login {
     text-align: center;
     background: $color-primary;
     margin: 0 -1rem;
+    position: relative;
     @include mqAfterSize($desktop-breakpoint) {
-      max-width: none;
-      margin: 0;
-      margin-left: calc(200px - 1rem);
-      margin-right: -1rem;
+      max-width: 960px;
+      margin: 0 2rem 0 0;
+      margin-left: calc(200px + 2rem);
+      &:before {
+        display: block;
+        background: $color-primary;
+        position: absolute;
+        top: 0;
+        right: -999px;
+        bottom: 0;
+        left: -999px;
+        content: " ";
+        z-index: 50;
+      }
+      a, span {
+        position: relative;
+        z-index: 100;
+      }
     }
     a {
         display: inline-block;

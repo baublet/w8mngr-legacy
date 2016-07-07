@@ -16,4 +16,9 @@ class ActivityEntry < ActiveRecord::Base
 
   include WeightManager::DayNavigator
 
+  # Returns the work expressed in the desired unit
+  def work_in unit
+    (work.to_s + "g").to_unit.convert_to(unit).scalar.to_f
+  end
+
 end

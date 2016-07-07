@@ -34,6 +34,12 @@
     font-weight: 800;
     order: 1;
     width: 66%;
+    a {
+      color: $white;
+      &:hover, &:focus {
+        color: $color-primary-light;
+      }
+    }
   }
   p {
     margin: 0 0 .5rem;
@@ -43,7 +49,7 @@
 }
 
 .activity-new-box {
-  float: none;
+  &.app-form.new { float: none; }
   order: 1;.
   position: relative;
   z-index: 50;
@@ -55,17 +61,34 @@
   }
 }
 
+.activity-entry-form + .activity-entry-form .activity-entry {
+  border-top: 1px solid rgba($black, .05);
+}
+
 .activity-entry {
   width: 100%;
   clear: both;
   display: flex;
   align-items: center;
+  margin: 0 auto;
+  min-width: 300px;
+  padding: .5rem;
+  opacity: .75;
+  transition: opacity .25s ease-in-out;
+  &:hover {
+    opacity: 1;
+  }
+  > .meta-btn, > .delete-btn {
+    width: 1rem;
+    margin: 0 0 0 .5rem;
+  }
   input {
     background: transparent;
     border-color: transparent;
-    width: 4rem;
+    width: 6rem;
     display: inline;
     margin: 0;
+    font-size: 1.2rem;
     &:hover {
       background: rgba($white, .25);
       border-color: rgba($black, .25);
@@ -75,29 +98,46 @@
       border-color: $black;
     }
   }
+  .when {
+    vertical-align:  middle;
+    font-style: italic;
+    opacity: .5;
+    font-size: .6rem;
+    padding-left: .5rem;
+    width: 100%;
+  }
   &.weight {
-    .when {
-      vertical-align:  middle;
-      font-style: italic;
-      opacity: .5;
-      font-size: .6rem;
-      padding-left: .5rem;
+    > .fa {
+      opacity: .25;
     }
     .work input {
       text-align: right;
+      font-size: 1.5rem;
     }
     .reps {
       input {
         width: 3.5rem;
       }
-      &:after {
-        display: inline;
-        content: "x";
-        vertical-align: middle;
-        font-size: .75rem;
-        font-weight: 800;
-        margin-right: .25rem;
-      }
     }
+  }
+}
+
+.activity-entries {
+  @include height(1);
+  background: $white;
+  transition: box-shadow .25s ease-in-out;
+  &:hover {
+    @include height(2);
+  }
+}
+
+.older-activity-entries {
+  .activity-entry + .activity-entry {
+    border-top: 1px solid rgba($black, .1);
+  }
+  h4 {
+    padding: 0 0 .25rem;
+    margin: .5rem 0;
+    border-bottom: 1px solid rgba($black, .25);
   }
 }
