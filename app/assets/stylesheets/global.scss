@@ -249,3 +249,12 @@ hr {
     font-weight: bold;
   }
 }
+
+.turbolinks-progress-bar {
+  height: 15px;
+  background-color: $color-primary-light;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}

@@ -1,10 +1,14 @@
+/* global w8mngr */
+
 var addEvent = require("../fn/addEvent.js")
 
 w8mngr.init.add(function() {
 
-	// Don't redo this script if turbolinks is on, indicating that it's already
-	// been run
-	if (window.Turbolinks) return false
+	if(!w8mngr.init.navLoaded) {
+		w8mngr.init.navLoaded = true
+	} else {
+		return false
+	}
 
 	console.log("Loading the navigation...")
 
