@@ -16,6 +16,8 @@ class DashboardController < ApplicationController
     end
   end
 
+  private
+
   def user_stats
     # Get their TDEE and Adaptive TDEE
     tdee = current_user.bmr
