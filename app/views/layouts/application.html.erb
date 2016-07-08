@@ -31,7 +31,7 @@
 
 <a href="#main" class="screen-reader-text">Skip to main content</a>
 
-<header<%= " data-turbolinks-permanent" if logged_in? %>>
+<header id="header" <%= " data-turbolinks-permanent" if logged_in? %>>
 
     <div class="brand" role="banner">
         <h1 class="site-title"><%= link_to "w8mngr", root_path %></h1>
@@ -57,7 +57,7 @@
                     <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
                   </ul>
                 </li>
-                <li class="sep"><h2><i class="fa fa-book" aria-hidden="true"></i> Log</h2>
+                <li class="sep" aria-role="button"><h2><i class="fa fa-book" aria-hidden="true"></i> Log</h2>
                   <ul>
                     <li><%= link_to "Food Log", foodlog_path %></li>
                     <li><%= link_to "Weight Log", weight_entries_path %></li>
