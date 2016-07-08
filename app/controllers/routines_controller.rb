@@ -55,6 +55,7 @@ class RoutinesController < ApplicationController
   end
 
   def destroy
+    @routine.destroy
     redirect_to routines_path
   end
 
