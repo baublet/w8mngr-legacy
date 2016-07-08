@@ -12,7 +12,8 @@
   <%= text_field_tag :work,
         ((defined? entry) ?
           number_with_precision(entry.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2) :
-        ""),
+          ""
+        ),
         placeholder: "Weight, e.g., 100lbs, 10kg, etc..." %>
 </div>
 

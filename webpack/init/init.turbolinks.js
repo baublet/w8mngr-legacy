@@ -8,7 +8,7 @@ w8mngr.init.add(function() {
   Turbolinks.start()
   console.log("Initializing turbolinks...")
   // Add an event that refires our init if Turbolinks restarts
-  document.addEventListener("turbolinks:visit", function(event) {
+  document.addEventListener("turbolinks:load", function(event) {
     w8mngr.init.run()
   })
 })

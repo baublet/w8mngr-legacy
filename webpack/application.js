@@ -7,8 +7,8 @@ if (typeof Array.prototype.forEach !== 'function') {
   }
 }
 
-// Our App entry point
-var w8mngr = require("w8mngr")
+// Our App objects
+window.w8mngr = require("w8mngr")
 console.log("w8mngr configuration loaded...")
 
 // This includes every file in our init directory

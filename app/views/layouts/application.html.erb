@@ -31,7 +31,7 @@
 
 <a href="#main" class="screen-reader-text">Skip to main content</a>
 
-<header>
+<header<%= " data-turbolinks-permanent" if logged_in? %>>
 
     <div class="brand" role="banner">
         <h1 class="site-title"><%= link_to "w8mngr", root_path %></h1>
