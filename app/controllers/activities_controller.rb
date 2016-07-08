@@ -8,15 +8,18 @@ class ActivitiesController < ApplicationController
 
   def show
     # We do this here so anyone can view all activities
-    @activity = Activity.find(params[:id])
-    html_renderer = Redcarpet::Render::HTML.new(
-      filter_html: true,
-      no_images: true,
-      no_links: true,
-      no_styles: true
-      )
-    markdown = Redcarpet::Markdown.new(html_renderer)
-    @activity_description = markdown.render(@activity.description)
+    @activity = Activity.find(params[:id]) rescue nil
+    show_404("Unable to find the activity you were searching for...") if @activity.nil?
+    unless @activity.nil?
+      html_renderer = Redcarpet::Render::HTML.new(
+        filter_html: true,
+        no_images: true,
+        no_links: true,
+        no_styles: true
+        )
+      markdown = Redcarpet::Markdown.new(html_renderer)
+      @activity_description = markdown.render(@activity.description)
+    end
   end
 
   def new
@@ -49,16 +52,19 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activity.deleted = true
-    @activity.save
-    flash[:success] = "Activity deleted."
-    redirect_to activities_path
+    unless @activity.nil?
+      @activity.deleted = true
+      @activity.save
+      flash[:success] = "Activity deleted."
+      redirect_to activities_path
+    end
   end
 
   private
 
   def find_activity
-    @activity = current_user.activities.find(params[:id])
+    @activity = current_user.activities.find(params[:id]) rescue nil
+    show_404("Unable to find the activity you were searching for...")  and return false if @activity.nil?
   end
 
   def activities_params

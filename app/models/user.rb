@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
   has_many :activity_entries, class_name: "ActivityEntry",
               inverse_of: :user
 
+  has_many :routines, class_name: "Routine",
+              inverse_of: :user
+
   attr_accessor  :remember_token, :reset_token
 
   before_save { email.downcase! }

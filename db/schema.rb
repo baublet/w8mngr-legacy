@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706180220) do
+ActiveRecord::Schema.define(version: 20160708170310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,12 +154,12 @@ ActiveRecord::Schema.define(version: 20160706180220) do
 
   create_table "routines", force: :cascade do |t|
     t.integer  "user_id"
-    t.text     "title"
+    t.text     "name"
     t.text     "description"
-    t.hstore   "activities"
     t.integer  "last_completion", limit: 8
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "activities",                default: [],              array: true
   end
 
   add_index "routines", ["user_id"], name: "index_routines_on_user_id", using: :btree

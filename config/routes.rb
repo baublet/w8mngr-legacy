@@ -102,6 +102,13 @@ Rails.application.routes.draw do
       get     "/activity_entries/:id/delete(.:format)" =>
                                         "activity_entries#destroy",   as: :delete_entry
     end
-    get     "/activity/:id/delete(.:format)" =>
+    get       "/activity/:id/delete(.:format)" =>
                                         "activities#destroy",         as: :delete_activity
+
+    resources :routines do
+      post    "activity/add/:activity_id(.:format)" =>
+                                        "routines#add_activity",      as: :add_activity
+      post    "activity/remove/:activity_id(.:format)" =>
+                                        "routines#remove_activity",   as: :remove_activity
+    end
 end

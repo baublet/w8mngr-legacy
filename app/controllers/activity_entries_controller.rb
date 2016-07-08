@@ -52,7 +52,7 @@ class ActivityEntriesController < ApplicationController
 
   def find_activity
     @activity = Activity.find(params[:activity_id]) rescue nil
-    show_404 "Invalid activity..." if @activity.nil?
+    show_404 "Invalid activity..." and return false if @activity.nil?
   end
 
   def find_activity_entry
