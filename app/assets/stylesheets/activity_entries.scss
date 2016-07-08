@@ -126,6 +126,7 @@
   @include height(1);
   background: $white;
   transition: box-shadow .25s ease-in-out;
+  margin-bottom: 1rem;
   &:hover {
     @include height(2);
   }

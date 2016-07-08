@@ -31,27 +31,20 @@ class ActivityEntriesControllerTest < ActionController::TestCase
   test "should create properly" do
     log_in
     put :create, activity_id: Activity.first.id, day: 20010101, work: 10
-    assert_response :success
-    assert_template "index"
-    assert assigns.key?(:activity)
-    assert assigns.key?(:activityentries)
+    assert_response :redirect
   end
 
   test "should update properly" do
     log_in
     patch :update, activity_id: Activity.first.id, id: ActivityEntry.first.id, work: 20
-    assert assigns.key?(:activity)
-    assert assigns.key?(:activityentries)
+    assert_response :redirect
   end
 
   test "should destroy properly" do
     log_in
     activity = @user.activity_entries.first
     delete :destroy, activity_id: activity.activity.id, id: activity.id
-    assert_response :success
-    assert assigns.key?(:activity)
-    assert assigns.key?(:activityentries)
-
+    assert_response :redirect
   end
 
 end

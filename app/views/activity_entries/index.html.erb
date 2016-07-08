@@ -16,6 +16,15 @@
       <% end %>
     </div>
 
+    <% unless @activityentries.nil? %>
+      <div class="activity-entries">
+        <%= render @activityentries %>
+      </div>
+    <% end %>
+
+    <% if @activityentries.nil? || @activityentries.count == 0 %>
+      <p>You haven't logged any entries for this activity today.</p>
+    <% end %>
 
     <div class="activity-box">
 
@@ -52,16 +61,6 @@
         <% end %>
       </div>
     </div>
-
-    <% unless @activityentries.nil? %>
-      <div class="activity-entries">
-        <%= render @activityentries %>
-      </div>
-    <% end %>
-
-    <% if @activityentries.nil? || @activityentries.count == 0 %>
-      <p>You haven't logged any entries for this activity today.</p>
-    <% end %>
 
     <% if !@olderactivityentries.nil? || @olderactivityentries.count > 0 %>
       <div class="older-activity-entries">
