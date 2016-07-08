@@ -9,15 +9,16 @@ class RoutinesController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
+    # Making this a WHERE clause because in the future, I'm going to add an OR
+    # here so that it shows both the user's own activities and those from the database
+    @activities = Activity.where("user_id = ?", current_user.id)
   end
 
   def new
-
+    @newroutine =  current_user.routines.build()
   end
 
   def create
@@ -32,13 +33,13 @@ class RoutinesController < ApplicationController
 
   def update
     if @routine.update(routines_params)
-      if params[:activities].is_a?(Array)
+      if params[:activities].is_a?(Hash)
         error = false
-        @routine = []
-        params[:activities].each do |activity_id|
+        @routine.activities = []
+        params[:activities].each do |activity_id, value|
           activity = Activity.find(activity_id) rescue false
           error = true and break if !activity
-          @routine << activity.id
+          @routine.activities << activity.id
         end
         if error
           flash.now[:error] = "Attempted to add an invalid activity to the routine..."

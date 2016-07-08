@@ -34,6 +34,13 @@ class RoutinesControllerTest < ActionController::TestCase
     assert_template "edit"
   end
 
+  test "should get new" do
+    log_in
+    get :new
+    assert_response :success
+    assert_template "new"
+  end
+
   test "should patch update" do
     log_in
     patch :update, id: @user.routines.first.id, routine: { name: "new name", description: "new description" }

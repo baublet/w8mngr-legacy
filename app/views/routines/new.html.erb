@@ -6,16 +6,15 @@
   <div class="section-inside">
     <ul>
       <li><%= link_to "Routines", routines_path %></li>
-      <li><%= link_to @routine.name, routine_path(@routine) %></li>
-      <li>Edit</li>
+      <li>New</li>
     </ul>
   </div>
 </div>
 
 <div class="section-inside">
 
-<h1><i class="fa fa-retweet" aria-hidden="true"></i> Edit Routine</h1>
+<h1><i class="fa fa-retweet" aria-hidden="true"></i> New Routine</h1>
 
-<%= render partial: "form", locals: {routine: @routine, activities: @activities} %>
+<%= render partial: "form", locals: {routine: @newroutine} %>
 
 </div>

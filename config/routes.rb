@@ -111,4 +111,6 @@ Rails.application.routes.draw do
       post    "activity/remove/:activity_id(.:format)" =>
                                         "routines#remove_activity",   as: :remove_activity
     end
+    get       "/routines/:id/delete(.:format)" =>
+                                        "routines#destroy",           as: :delete_routine
 end

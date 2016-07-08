@@ -1,0 +1,74 @@
+.routine-form {
+  .activities {
+    width: 100%;
+    max-width: none;
+    max-height: 21rem;
+    @include mqAfterSize($desktop-breakpoint) {
+      margin-left: 2rem;
+      margin-bottom: 0;
+      width: 400px;
+      max-width: 40vw;
+    }
+    h2 {
+      margin: 0 0 1rem;
+    }
+  }
+  .options {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    @include mqAfterSize($desktop-breakpoint) {
+      flex-wrap: nowrap;
+      margin-bottom: 2rem;
+      textarea {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .description {
+    width: 100%;
+  }
+}
+
+.activity-list {
+  min-height: calc(100% - 2.5rem);
+  max-height: calc(100% - 2.5rem);
+  overflow-y: scroll;
+  border-radius: 3px;
+  border: 1px solid rgba($black, .1);
+  padding: .5rem;
+  box-shadow: inset 0 0 3px 0 rgba(black, .1);
+  display: flex;
+  flex-wrap: wrap;
+  .helper-input + label {
+    opacity:.5;
+    font-weight: 400;
+    color: $black;
+    cursor: pointer;
+    &:hover, &:focus {
+      opacity: 1;
+      background: $color-primary-light;
+      color: $white;
+    }
+  }
+  .helper-input:checked + label {
+    opacity: 1;
+    color: $color-primary;
+    font-weight: bold;
+    order: 1;
+    &:hover, &:focus {
+      color: $white;
+    }
+  }
+  label {
+    display: block;
+    margin: 0 -.5rem;
+    padding: .5rem;
+    width: calc(100% + 1rem);
+    order: 3;
+    transition: all .25s ease-in-out;
+  }
+  .helper-input + label + .helper-input +  label {
+    border-top: 1px solid rgba($black, .05);
+  }
+}

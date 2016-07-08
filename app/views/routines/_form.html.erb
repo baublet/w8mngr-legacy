@@ -1,0 +1,35 @@
+<div class="routine-form">
+<%= form_for routine do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: "large" %>
+
+  <div class="options">
+
+    <div class="description">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+    <% unless routine.id.nil? %>
+      <div class="activities card">
+        <h2><i class="fa fa-bolt" aria-hidden="true"></i> Activities</h2>
+        <div class="activity-list">
+          <%= activities.find_each do |activity| %>
+          <input  type="checkbox"
+                  name="activities[<%= activity.id %>]"
+                  value="1"
+                  class="helper-input"
+                  <%= routine.activities.include?(activity.id) ? "checked" : "" %>
+                  id="activity-<%= activity.id %>">
+          <label for="activity-<%= activity.id %>" class="activity-label"><%= activity.name %></label>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+  <%= link_to "Delete Routine", delete_routine_path(routine), class: "delete-btn" unless routine.id.nil? %>
+  <%= f.button (routine.id.nil?) ? "Create Routine" : "Save Routine", class: "btn" %>
+<% end %>
+</div>
