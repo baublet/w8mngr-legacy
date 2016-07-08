@@ -1,48 +1,58 @@
-class RoutinesController < ApplicationController
+require 'test_helper'
 
-  before_action :logged_in_user
-  before_action :find_routine, only: [:show, :edit, :update, :destroy, :add_activity, :remove_activity]
-  before_action :find_activity, only: [:add_activity, :remove_activity]
+class RoutinesControllerTest < ActionController::TestCase
 
-  def index
-
+  test "should redirect if not logged in" do
+    [ "get :index",
+      "get :edit, id: 10",
+      "post :create",
+      "delete :destroy, id: 10",
+    "patch :update, id: 10"].each do |route|
+      eval(route)
+      assert_response :redirect
+    end
   end
 
-  def show
-
+  test "should get index" do
+    log_in
+    get :index
+    assert_response :success
+    assert_template "index"
   end
 
-  def edit
+  test "should get show" do
+    log_in
+    get :show, id: @user.routines.first.id
+    assert_response :success
+    assert_template "show"
   end
 
-  def create
+  test "should get edit" do
+    log_in
+    get :edit, id: @user.routines.first.id
+    assert_response :success
+    assert_template "edit"
   end
 
-  def update
+  test "should patch update" do
+    log_in
+    patch :update, id: @user.routines.first.id, routine: { name: "new name", description: "new description" }
+    assert_response :redirect
+    assert_redirected_to edit_routine_path @user.routines.first
   end
 
-  def destroy
-
+  test "should put new" do
+    log_in
+    put :create, user_id: @user.id, routine: { name: "new thing name", description: "new thing description" }
+    assert_response :redirect
+    assert_redirected_to edit_routine_path @user.routines.last
   end
 
-  def add_activity
-
-  end
-
-  def remove_activity
-
-  end
-
-  private
-
-  def find_routine
-    @routine = current_user.routines.find(params[:id]) rescue nil
-    show_404 "Unable to find routine..." and return false if @routine.nil?
-  end
-
-  def find_activity
-    @activity = current_user.activities.find(params[:activity_id]) rescue nil
-    show_404("Unable to find the activity you were searching for...")  and return false if @activity.nil?
+  test "should delete destroy" do
+    log_in
+    delete :destroy, id: @user.routines.first.id
+    assert_response :redirect
+    assert_redirected_to routines_path
   end
 
 end

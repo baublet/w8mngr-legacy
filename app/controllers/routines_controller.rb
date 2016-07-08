@@ -1,57 +1,86 @@
-require 'test_helper'
+class RoutinesController < ApplicationController
 
-class RoutinesControllerTest < ActionController::TestCase
+  before_action :logged_in_user
+  before_action :find_routine, only: [:show, :edit, :update, :destroy, :add_activity, :remove_activity]
+  before_action :find_activity, only: [:add_activity, :remove_activity]
 
-  test "should redirect if not logged in" do
-    [ "get :index",
-      "get :edit, id: 10",
-      "post :create",
-      "delete :destroy, id: 10",
-      "patch :update, id: 10"].each do |route|
-    eval(route)
-    assert_response :redirect
+  def index
+    @routines = current_user.routines
   end
 
-  test "should get index" do
-    log_in
-    get :index
-    assert_response :success
-    assert_template "index"
+  def show
+
   end
 
-  test "should get show" do
-    log_in
-    get :show, id: @user.routines.first.id
-    assert_response :success
-    assert_template "show"
+  def edit
+
   end
 
-  test "should get edit" do
-    log_in
-    get :edit
-    assert_response :success
-    assert_template "edit"
+  def new
+
   end
 
-  test "should patch update" do
-    log_in
-    patch :update, @user.routines.first.id, name: "new name", description: "new description"
-    assert_response :redirect
-    assert_redirected_to :edit
+  def create
+    routine = current_user.routines.build(routines_params)
+    if routine.save
+      redirect_to edit_routine_path routine
+    else
+      @routine = routine
+      render "new"
+    end
   end
 
-  test "should put new" do
-    log_in
-    put :create, user_id: @user.id, name: "new thing name", description: "new thing description"
-    assert_response :redirect
-    assert_redirected_to :edit
+  def update
+    if @routine.update(routines_params)
+      if params[:activities].is_a?(Array)
+        error = false
+        @routine = []
+        params[:activities].each do |activity_id|
+          activity = Activity.find(activity_id) rescue false
+          error = true and break if !activity
+          @routine << activity.id
+        end
+        if error
+          flash.now[:error] = "Attempted to add an invalid activity to the routine..."
+          render "edit"
+        end
+      end
+      @routine.save unless (defined? error).nil?
+      flash[:success] = "Routine updated!"
+      redirect_to edit_routine_path @routine
+    else
+      flash.now[:error] = "Error saving routine..."
+      render "edit"
+    end
   end
 
-  test "should delete destroy" do
-    log_in
-    delete :destroy, id: @user.routines.first.id
-    assert_response :redirect
-    assert_redirected_to :index
+  def destroy
+    redirect_to routines_path
+  end
+
+  def add_activity
+
+  end
+
+  def remove_activity
+
+  end
+
+  private
+
+  def find_routine
+    @routine = current_user.routines.find(params[:id]) rescue nil
+    show_404 "Unable to find routine..." and return false if @routine.nil?
+  end
+
+  def find_activity
+    @activity = current_user.activities.find(params[:activity_id]) rescue nil
+    show_404("Unable to find the activity you were searching for...")  and return false if @activity.nil?
+  end
+
+  def routines_params
+    params.require(:routine)
+      .permit(:name, :description)
   end
 
 end
