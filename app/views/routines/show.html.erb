@@ -1,0 +1,25 @@
+<% provide(:title, @routine.name + " | Routine") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Routines", routines_path %></li>
+      <li><%= @routine.name %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-retweet" aria-hidden="true"></i> <%= @routine.name %></h1>
+
+  <div class="page-meta">
+    <%= link_to edit_routine_path(@routine) do %>
+      <i class="fa fa-pencil"></i>
+      Edit Routine
+    <% end %>
+  </div>
+
+</div>

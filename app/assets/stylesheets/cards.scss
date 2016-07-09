@@ -2,11 +2,14 @@
   position: relative;
   display:inline-block;
   max-width: 100%;
-  width: 350px;
+  width: 460px;
   margin-bottom: 1rem;
   padding: 1rem;
   background: $white;
   @include height(1);
+  @include mqAfterSize($desktop-breakpoint) {
+    width: calc(480px - 1rem);
+  }
   &:hover {
     @include height(2);
   }

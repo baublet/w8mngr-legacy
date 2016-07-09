@@ -1,4 +1,4 @@
-<% provide(:title, "New Routine") %>
+<% provide(:title, "Edit Routine") %>
 
 <%= render partial: "shared/app_menu" %>
 
@@ -14,8 +14,15 @@
 
 <div class="section-inside">
 
-<h1><i class="fa fa-retweet" aria-hidden="true"></i> Edit Routine</h1>
+  <h1><i class="fa fa-retweet" aria-hidden="true"></i> Edit Routine</h1>
 
-<%= render partial: "form", locals: {routine: @routine, activities: @activities} %>
+  <div class="page-meta">
+    <%= link_to routine_path(@routine) do %>
+      <i class="fa fa-eye"></i>
+      View Routine
+    <% end %>
+  </div>
+
+  <%= render partial: "form", locals: {routine: @routine, activities: @activities} %>
 
 </div>
