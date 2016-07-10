@@ -1,4 +1,3 @@
-<% if !defined? card %>
 <div class="muscle-groups show">
   <h3>Muscle Groups</h3>
     <% activity.muscle_group_values.each do |name| %>
@@ -8,19 +7,7 @@
 
     <%= render "muscle_groups" %>
 </div>
-<% end %>
-<div class="activity<%= (defined? card) ? raw(" card") : "" %>">
-  <% if defined? card %>
-    <div class="header">
-      <h2>
-        <%= link_to edit_activity_path(activity), class: "meta", title: "Edit or Delete this Activity" do %>
-          <i class="fa fa-pencil"></i>
-          <span class="screen-reader-text">Edit Activity</span>
-        <% end if activity.user_id == current_user.try(:id) %>
-        <%= link_to activity.name, activity %>
-      </h2>
-    </div>
-  <% end %>
+<div class="activity">
   <div class="type"><%= activity.type_name %></div>
   <% if defined? activity_description %>
     <%= raw(activity_description) %>
@@ -28,17 +15,5 @@
   <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn card-meta-btn" do %>
     <i class="fa fa-bolt" aria-hidden="true"></i>
     Log Activity <span class="screen-reader-text"><%= activity.name %></span>
-  <% end %>
-  <% if ((defined? card) && activity.targets_any_group?) %>
-    <div class="muscle-groups-list">
-      <h3>Muscle Groups</h3>
-      <ul class="pill-list">
-      <% activity.muscle_group_values.each do |name|
-        next unless activity.targets_group?(name)
-        %>
-        <li><span class="pill"><%= name %></span></li>
-      <% end %>
-      </ul>
-    </div>
   <% end %>
 </div>

@@ -154,3 +154,41 @@
     vertical-align: top;
   }
 }
+.activity.medium {
+  overflow: auto;
+  overflow-y: hidden;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  .muscle-groups {
+    float: right;
+    background: transparent;
+    box-shadow: none;
+    min-width: 80px;
+    width: 120px;
+    max-width: 35%;
+    margin: 0;
+    svg { margin: 0; padding: 0; }
+    @include mqAfterSize($desktop-breakpoint) {
+      float: left;
+    }
+  }
+  .type {
+    margin: -1rem 0 0;
+    opacity: .5;
+    font-weight: 400;
+  }
+  + .activity.medium {
+    margin-top: 1rem;
+    border-top: 1px solid rgba($black, .1);
+    padding: 1rem 1rem 0;
+  }
+  h3 {
+    margin: 0 0 1rem;
+  }
+  .log-activity-btn {
+    position: static;
+    float: none;
+    margin: 1rem 0;
+    display: inline-block;
+  }
+}

@@ -9,6 +9,16 @@ class RoutinesController < ApplicationController
   end
 
   def show
+    unless @routine.nil?
+      html_renderer = Redcarpet::Render::HTML.new(
+        filter_html: true,
+        no_images: true,
+        no_links: true,
+        no_styles: true
+        )
+      markdown = Redcarpet::Markdown.new(html_renderer)
+      @routine_description = markdown.render(@routine.description)
+    end
   end
 
   def edit

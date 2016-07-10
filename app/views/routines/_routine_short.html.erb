@@ -1,0 +1,22 @@
+<div class="routine card">
+  <div class="header">
+    <h2>
+      <%= link_to edit_routine_path(routine), class: "meta", title: "Edit or Delete this Routine" do %>
+        <i class="fa fa-pencil"></i>
+        <span class="screen-reader-text">Edit Routine</span>
+      <% end %>
+      <%= link_to routine.name, routine %>
+    </h2>
+  </div>
+  <div class="activities">
+    <h3>Activities</h3>
+    <ul>
+      <% routine.activities.each do |activity_id|
+          activity = Activity.find(activity_id) %>
+      <li>
+        <%= link_to activity.name, activity %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

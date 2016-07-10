@@ -78,3 +78,13 @@
     font-size: .75rem;
   }
 }
+
+.routine-activities {
+  padding: 1rem;
+  background: $white;
+  @include height(1);
+  transition: box-shadow .25s ease-in-out;
+  &:hover {
+    @include height(2);
+  }
+}

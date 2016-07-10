@@ -1,0 +1,10 @@
+<div class="description">
+  <%= raw routine_description %>
+</div>
+
+<div class="routine-activities">
+  <% routine.activities.each do |activity_id|
+    activity = Activity.find(activity_id) %>
+    <%= render partial: "activities/activity_medium", locals: {activity: activity } %>
+  <% end %>
+</div>
