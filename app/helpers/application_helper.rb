@@ -63,8 +63,11 @@ module ApplicationHelper
     end
 
     # Converts YYYYMMDD into a nice looking date (Saturday, January 1, 2010)
+    # Also accepts a date in any other format  to try to convert
     def nice_day string
-        convert_day_to_date(string).strftime('%A, %B %e, %Y')
+        string = string.to_s
+        return convert_day_to_date(string).strftime('%A, %B %e, %Y') if string.length == 8
+        return Date.new(string).strftime('%A, %B %e, %Y')
     end
 
     # Validates a YYYYMMDD string, returning current_day if it's invalid

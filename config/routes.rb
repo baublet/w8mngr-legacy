@@ -113,4 +113,6 @@ Rails.application.routes.draw do
     end
     get       "/routines/:id/delete(.:format)" =>
                                         "routines#destroy",           as: :delete_routine
+    get       "/routines/:id/:day(.:format)" =>
+                                        "routines#show",              as: :routine_day
 end

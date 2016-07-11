@@ -1,27 +1,29 @@
 <div class="activity medium">
-  <% if activity.targets_any_group? %>
-  <div class="muscle-groups show">
-      <% activity.muscle_group_values.each do |name| %>
-        <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
+  <div class="activity-general-info">
+    <% if activity.targets_any_group? %>
+    <div class="muscle-groups show">
+        <% activity.muscle_group_values.each do |name| %>
+          <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
+        <% end %>
+        <%= render "activities/muscle_groups" %>
+    </div>
+    <% end %>
+    <h3><%= link_to activity.name, activity %></h3>
+    <div class="activity">
+      <div class="type"><%= activity.type_name %></div>
+      <% if defined? activity_description %>
+        <%= raw(activity_description) %>
       <% end %>
-      <%= render "activities/muscle_groups" %>
-  </div>
-  <% end %>
-  <h3><%= link_to activity.name, activity %></h3>
-  <div class="activity">
-    <div class="type"><%= activity.type_name %></div>
-    <% if defined? activity_description %>
-      <%= raw(activity_description) %>
-    <% end %>
-    <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn btn" do %>
-      <i class="fa fa-bolt" aria-hidden="true"></i>
-      Log Activity <span class="screen-reader-text"><%= activity.name %></span>
-    <% end %>
+      <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn btn" do %>
+        <i class="fa fa-bolt" aria-hidden="true"></i>
+        Log Activity <span class="screen-reader-text"><%= activity.name %></span>
+      <% end %>
+    </div>
   </div>
   <% entries = activity.entries(current_user.id) %>
   <% if entries.count > 0 %>
-    <div class="activity-entries">
-      <h4>Recent Entries <span class="day"><%= entries[0].day %></span></h4>
+    <div class="activity-entries<%= entries[0].day.to_i == current_day.to_i ? " today" : " not-today" %>">
+      <h4>Last Log (<span class="day"><%= entries[0].day.to_i == current_day.to_i ? "Today" : nice_day(entries[0].day) %></span>)</h4>
       <% entries.each do |entry| %>
         <%= render entry %>
       <% end %>

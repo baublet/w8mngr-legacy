@@ -159,6 +159,8 @@
   overflow-y: hidden;
   margin: 0 -1rem;
   padding: 0 1rem;
+  display: flex;
+  align-items: flex-start;
   .muscle-groups {
     float: right;
     background: transparent;
@@ -191,4 +193,26 @@
     margin: 1rem 0;
     display: inline-block;
   }
+  .activity-entries {
+    width: 40%;
+    margin: 0;
+    h4 {
+      margin: 0 0 .5rem;
+    }
+    &.today {
+      background: $color-primary-light;
+      color: $white;
+      padding: .75rem;
+      border-radius: 3px;
+      @include height(1);
+      input, a, button {
+        color: $white;
+        background: transparent;
+      }
+    }
+  }
+}
+
+.activity-general-info {
+  width: 60%;
 }
