@@ -151,3 +151,38 @@
     text-decoration: underline;
   }
 }
+
+.activity-form.short {
+  background: lighten($black, 15);
+  padding: .5rem;
+  .today & {
+    margin: .5rem -.75rem -.75rem;
+    padding: .75rem;
+  }
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  input {
+    margin: 0;
+  }
+  form > div {
+    padding: 0 .5rem 0 0;
+  }
+  .btn {
+    min-width: 0;
+    background: $color-primary;
+    margin: 0;
+    padding: .35rem .75rem;
+    &:hover, &:focus {
+      background: $color-primary-light;
+    }
+  }
+  .btn strong {
+    @include screenReaderText();
+  }
+  .btn .fa {
+    margin: 0;
+  }
+}

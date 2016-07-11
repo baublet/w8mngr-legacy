@@ -59,8 +59,7 @@
           <%= hidden_field_tag "day", current_day %>
           <%=
             # Renders our partial forms, located in  views/activities/types/
-            render partial: "activities/types/" + @activity.type_template
-          %>
+            render partial: "activities/types/" + @activity.type_template %>
           <%= button_tag type: "submit", class: "btn food-log-new-btn", title: "New Entry" do %>
             <i class="fa fa-plus"></i>
             <strong>New Entry</strong>

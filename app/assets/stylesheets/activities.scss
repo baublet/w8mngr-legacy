@@ -207,7 +207,7 @@
       padding: .75rem;
       border-radius: 3px;
       @include height(1);
-      input, a, button {
+      input, .meta-btn, .delete-btn {
         color: $white;
         background: transparent;
       }

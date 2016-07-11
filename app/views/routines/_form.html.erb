@@ -21,8 +21,15 @@
                   class="helper-input"
                   <%= routine.activities.include?(activity.id) ? "checked" : "" %>
                   id="activity-<%= activity.id %>">
-          <label for="activity-<%= activity.id %>" class="activity-label"><%= activity.name %></label>
+          <label for="activity-<%= activity.id %>"
+                 class="activity-label"
+                 style="order:<%= activity.user_id == current_user.id ? "15" : "25" %>">
+            <%= activity.name %>
+          </label>
           <% end %>
+          <label class="activity-label-category" style="order: 0">Selected</label>
+          <label class="activity-label-category" style="order: 10">Your Activities</label>
+          <label class="activity-label-category" style="order: 20">All Activities</label>
         </div>
       </div>
     <% end %>

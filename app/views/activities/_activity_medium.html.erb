@@ -27,6 +27,18 @@
       <% entries.each do |entry| %>
         <%= render entry %>
       <% end %>
+      <div class="activity-form new short">
+        <%= form_tag activity_new_activity_entry_path(activity_id: activity.id) do %>
+          <%= hidden_field_tag "day", current_day %>
+          <%=
+            # Renders our partial forms, located in  views/activities/types/
+            render partial: "activities/types/" + activity.type_template %>
+          <%= button_tag type: "submit", class: "btn food-log-new-btn", title: "New Entry" do %>
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
