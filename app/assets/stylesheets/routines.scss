@@ -108,23 +108,25 @@
 
 .routine.card {
   .activities {
-    display: flex;
-    align-items: flex-start;
     h3 {
-      width: 6rem;
-      margin: .25rem 0 0;
+      @include screenReaderText();
     }
     ul {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      margin: 0 0 0 1rem;
+      margin: 0;
       padding: 0;
       list-style-type: none;
     }
     li {
       padding: 0 .5rem 0 0;
       margin: 0;
+    }
+    a {
+      font-weight: bold;
+      font-size: .8rem;
+      background: transparent;
     }
   }
 }
@@ -158,6 +160,14 @@
     max-width: 50%;
     min-width: 160px;
     width: 30%;
+  }
+  .complete {
+    width: 100%;
+    text-align: right;
+  }
+  .complete .fa {
+    font-size: 6rem;
+    color: $green;
   }
 }
 

@@ -22,8 +22,10 @@ class ActivityEntry < ActiveRecord::Base
   end
 
   # Returns user_id's activity_id's last num (default: 1) days of entries with
-  # the offset of offset (default: 1, so as to exclude today's entries)
-  def self.recent_most (user_id, activity_id, num = 1, offset = 1)
+  # the offset of offset (default: 1, so as to exclude today's entries). If you
+  # pass day after offset, this function will return only entries before that
+  # day (as an int YYYYMMDD).
+  def self.recent_most (user_id, activity_id, num = 1, offset = 1, day = 30000000)
     find_by_sql(["SELECT *
                   FROM activity_entries
                   WHERE
@@ -38,6 +40,8 @@ class ActivityEntry < ActiveRecord::Base
                               user_id = :user_id
                             AND
                               activity_id = :activity_id
+                            AND
+                              day < :day
                           ORDER BY day DESC
                           LIMIT :num
                           OFFSET :offset
@@ -47,7 +51,8 @@ class ActivityEntry < ActiveRecord::Base
                     num: num,
                     user_id: user_id,
                     activity_id: activity_id,
-                    offset: offset
+                    offset: offset,
+                    day: day
                   }
                 ]
     )

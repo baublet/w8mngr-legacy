@@ -4,6 +4,8 @@ class Routine < ActiveRecord::Base
   validates :user_id, presence: true
   validates :name, presence: true, length: { minimum: 4, maximum: 96 }
 
+  attr_accessor :last_completed
+
   # Returns the progress in the form of an array of this routine based on the
   # current day.
   #
@@ -17,6 +19,19 @@ class Routine < ActiveRecord::Base
                                   where(user_id: user_id).
                                   count(:activity_id)
     return [activities_completed, activities.count]
+  end
+
+  # Returns the last day this routine was fully completed
+  def last_completed
+    @last_completed ||= ActivityEntry.
+        select(:day).distinct.
+        where(user_id: user_id).
+        where(activity_id: activities).
+        group(:day).
+        having("count(DISTINCT activity_id) = ?", activities.count).
+        order("day DESC").
+        try(:[], 0).
+        try(:day)
   end
 
 end

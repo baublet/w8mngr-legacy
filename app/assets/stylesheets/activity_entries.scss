@@ -142,3 +142,12 @@
     border-bottom: 1px solid rgba($black, .25);
   }
 }
+
+.pr a {
+  color: $white;
+  opacity: .75;
+  &:hover, &:focus {
+    opacity: 1;
+    text-decoration: underline;
+  }
+}

@@ -32,8 +32,8 @@ class Activity < ActiveRecord::Base
 
   # Returns num number of ActivityEntries for this activity for user_id. Specify
   # offset as 1 to exclude the first offset number of days
-  def entries user_id, num = 1, offset = 0
-    ActivityEntry.recent_most user_id, self.id, num, offset
+  def entries user_id, num = 1, offset = 0, day = 30000000
+    ActivityEntry.recent_most user_id, self.id, num, offset, day
   end
 
   # Returns true if this activity targets the muscle group passed, otherwise false

@@ -1,5 +1,5 @@
 <div class="routine card">
-  <div class="header">
+  <div class="short-header">
     <h2>
       <%= link_to edit_routine_path(routine), class: "meta", title: "Edit or Delete this Routine" do %>
         <i class="fa fa-pencil"></i>
@@ -8,7 +8,12 @@
       <%= link_to routine.name, routine %>
     </h2>
   </div>
-  <div class="activities">
+  <% unless routine.last_completed.nil? %>
+  <div class="last-completed section">
+    <strong>Last Completed:</strong> <%= link_to nice_day(routine.last_completed), routine_day_path(routine, routine.last_completed) %>
+  </div>
+  <% end %>
+  <div class="activities section">
     <h3>Activities</h3>
     <ul>
       <% routine.activities.each do |activity_id|
@@ -18,5 +23,12 @@
       </li>
       <% end %>
     </ul>
+  </div>
+  <div class="action-section">
+    <%= link_to routine, class: "card-meta-btn" do %>
+      <i class="fa fa-bolt"></i>
+      Complete Routine
+      <span class="screen-reader-text"><%= routine.name %></span>
+    <% end %>
   </div>
 </div>

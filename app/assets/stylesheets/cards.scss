@@ -40,13 +40,32 @@
       padding-bottom: 0;
     }
   }
+  .short-header {
+    h2 {
+      margin: 0 0 .5rem;
+      font-weight: 400;
+      a {
+        color: $color-primary;
+        &:hover, &:focus {
+          color: $black;
+        }
+      }
+    }
+  }
   hr {
     border-style: solid;
     margin: .75rem -1rem;
   }
-  .card-footer {
+  .card-footer, .action-section {
     margin: 0 -1rem;
     border-top: 1px solid rgba($black, .25);
     padding: 1rem 1rem .5rem;
+  }
+  .action-section {
+    text-align: right;
+  }
+  .section {
+    padding: 1rem 0 0;
+    margin-bottom: 1rem;
   }
 }

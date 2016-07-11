@@ -1,19 +1,36 @@
 <div class="routine-info">
 
-  <div class="progress-panel">
-    <h3>Progress for <%= nice_day current_day %></h3>
-    <div class="completed"><%= routine_progress[0] %></div>
-    <div class="sep screen-reader-text">out of</div>
-    <div class="total"><%= routine_progress[1] %></div>
-    <% progress_percent = routine_progress[0] > 0 && routine_progress[1] > 0 ? (routine_progress[0] / routine_progress[1] * 100).round : "0" %>
-    <div class="progress-bar">
-      <div class="container">
-        <div class="progress" style="width: <%= progress_percent %>%">
-          <span class="screen-reader-text"><%= progress_percent %> percent complete</span>
+  <% if routine_progress[0] > 0 && routine_progress[1] %>
+
+    <% if routine_progress[0] < routine_progress[1] %>
+
+    <div class="progress-panel">
+      <h3>Progress for <%= nice_day current_day %></h3>
+      <div class="completed"><%= routine_progress[0] %></div>
+      <div class="sep screen-reader-text">out of</div>
+      <div class="total"><%= routine_progress[1] %></div>
+      <% progress_percent = routine_progress[0] > 0 && routine_progress[1] > 0 ? (routine_progress[0] / routine_progress[1] * 100).round : "0" %>
+      <div class="progress-bar">
+        <div class="container">
+          <div class="progress" style="width: <%= progress_percent %>%">
+            <span class="screen-reader-text"><%= progress_percent %> percent complete</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <% else %>
+
+    <div class="progress-panel">
+      <div class="complete">
+        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+        <span class="screen-reader-text">You have completed this routine today!</span>
+      </div>
+    </div>
+
+    <% end %>
+
+  <% end %>
 
   <div class="description">
     <%= raw routine_description %>
