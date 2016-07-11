@@ -15,7 +15,8 @@ class ActivityEntriesController < ApplicationController
       else
         flash[:error] = "Unable to create activity entry..."
       end
-       redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day)
+       redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day) if params.try(:[], :from_routine_id).nil?
+       redirect_to routine_day_path(params.try(:[], :from_routine_id), current_day) unless params.try(:[], :from_routine_id).nil?
     else
       show_404 "Invalid activity entry..."
     end
@@ -31,7 +32,8 @@ class ActivityEntriesController < ApplicationController
       else
         flash[:error] = "Unable to update activity entry..."
       end
-      redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day)
+      redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day) if params.try(:[], :from_routine_id).nil?
+      redirect_to routine_day_path(params.try(:[], :from_routine_id), current_day) unless params.try(:[], :from_routine_id).nil?
     else
       show_404 "Invalid activity entry..." if @activity_entry.nil?
     end
@@ -43,7 +45,8 @@ class ActivityEntriesController < ApplicationController
       flash[:success] = "Activity entry deleted."
       day = @activity_entry.day
       @activity_entry.destroy
-      redirect_to activity_log_day_path(activity_id: params[:activity_id], day: day)
+      redirect_to activity_log_day_path(activity_id: params[:activity_id], day: day) if params.try(:[], :from_routine_id).nil?
+      redirect_to routine_day_path(params.try(:[], :from_routine_id), current_day) unless params.try(:[], :from_routine_id).nil?
     else
       show_404 "Invalid activity entry..."
     end

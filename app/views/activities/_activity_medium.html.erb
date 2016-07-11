@@ -29,6 +29,7 @@
       <% end %>
       <div class="activity-form new short">
         <%= form_tag activity_new_activity_entry_path(activity_id: activity.id) do %>
+          <% if (defined? @routine) %><%= hidden_field_tag "from_routine_id", @routine.id %><% end %>
           <%= hidden_field_tag "day", current_day %>
           <%=
             # Renders our partial forms, located in  views/activities/types/
