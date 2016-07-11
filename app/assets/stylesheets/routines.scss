@@ -128,3 +128,42 @@
     }
   }
 }
+
+.routine-show .progress-panel {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  h3 {
+    @include screenReaderText();
+  }
+  .completed, .total {
+    width: 50%;
+    font-size: 3rem;
+    font-weight: 100;
+    text-align: right;
+  }
+  .total {
+    text-align: left;
+    &:before {
+      font-size: 1rem;
+      opacity: .5;
+      content: "/";
+    }
+  }
+  .progress-bar {
+    width: 100%;
+  }
+  @include mqAfterSize($desktop-breakpoint) {
+    float: right;
+    max-width: 50%;
+    min-width: 160px;
+    width: 30%;
+  }
+}
+
+.routine-info {
+  overflow: auto;
+  padding-bottom: 2rem;
+  overflow-x: hidden;
+  overflow-y: visible;
+}

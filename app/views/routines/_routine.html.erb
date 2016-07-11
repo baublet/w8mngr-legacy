@@ -1,10 +1,28 @@
-<div class="description">
-  <%= raw routine_description %>
+<div class="routine-info">
+
+  <div class="progress-panel">
+    <h3>Progress for <%= nice_day current_day %></h3>
+    <div class="completed"><%= routine_progress[0] %></div>
+    <div class="sep screen-reader-text">out of</div>
+    <div class="total"><%= routine_progress[1] %></div>
+    <% progress_percent = routine_progress[0] > 0 && routine_progress[1] > 0 ? (routine_progress[0] / routine_progress[1] * 100).round : "0" %>
+    <div class="progress-bar">
+      <div class="container">
+        <div class="progress" style="width: <%= progress_percent %>%">
+          <span class="screen-reader-text"><%= progress_percent %> percent complete</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="description">
+    <%= raw routine_description %>
+</div>
+
 </div>
 
 <div class="routine-activities">
-  <% routine.activities.each do |activity_id|
-    activity = Activity.find(activity_id) %>
+  <% routine_activities.each do |activity| %>
     <%= render partial: "activities/activity_medium", locals: {activity: activity } %>
   <% end %>
 </div>

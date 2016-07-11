@@ -15,10 +15,26 @@ class RoutinesController < ApplicationController
         no_images: true,
         no_links: true,
         no_styles: true
-        )
+      )
       markdown = Redcarpet::Markdown.new(html_renderer)
       @routine_description = markdown.render(@routine.description)
+      @routine_activities = []
+      @routine.activities.each do |activity_id|
+        @routine_activities << Activity.find(activity_id)
+      end
+      # This is a bit of a difficult metric to build. We first want to get all
+      # activities associated with this routine, then query the user's activities
+      # from "day" matching the activity_ids. The number of returned columns is
+      # our progress.
+      @routine_progress = @routine.progress current_day
     end
+    # We set this cookie to give our activity views an idea of what routines they
+    # are associated with, so users can go back if they want. We unset it in
+    # two hours so that it doesn't show on subsequent logins
+    cookies[:routine_id] = {
+      value: 'a yummy cookie',
+      expires: 2.hours.from_now
+    }
   end
 
   def edit

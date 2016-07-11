@@ -16,6 +16,14 @@ $font-stack: "Roboto", "Helvetica", "Trebuchet MS", "Verdana";
 
 $easing-1: cubic-bezier(0,.95,0,1);
 
+@mixin screenReaderText() {
+  position:absolute;
+  left: 0;
+  top: 0;
+  text-indent: -9999rem;
+  z-index: -1;
+}
+
 // Ryan's favorite mediaquery mixins!
 // I typically use this one because I design mobile-first
 @mixin mqAfterSize($width) {

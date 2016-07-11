@@ -96,7 +96,7 @@ class UsersController < ApplicationController
         .permit(:email, :password, :password_confirmation)
   end
 
-    def correct_user
+  def correct_user
     redirect_to root_url if current_user.id != params[:id].to_i
   end
 end
