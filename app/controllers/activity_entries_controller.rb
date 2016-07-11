@@ -65,7 +65,7 @@ class ActivityEntriesController < ApplicationController
       @activity_pr = current_user.activity_entries.where(activity_id: params[:activity_id]).maximum(:work)
       @new_activityentry ||= current_user.activity_entries.build(activity: @activity)
       @activityentries = current_user.activity_entries.where(activity_id: params[:activity_id], day: current_day).order('created_at DESC')
-      @olderactivityentries = current_user.activity_entries.where(activity_id: params[:activity_id]).where("day < ?", current_day).order('created_at DESC')
+      @olderactivityentries = ActivityEntry.recent_most(current_user.id, params[:activity_id], 5)
       render "index"
     end
   end

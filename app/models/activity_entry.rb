@@ -21,4 +21,36 @@ class ActivityEntry < ActiveRecord::Base
     (work.to_s + "g").to_unit.convert_to(unit).scalar.to_f
   end
 
+  # Returns user_id's activity_id's last num (default: 1) days of entries with
+  # the offset of offset (default: 1, so as to exclude today's entries)
+  def self.recent_most (user_id, activity_id, num = 1, offset = 1)
+    find_by_sql(["SELECT *
+                  FROM activity_entries
+                  WHERE
+                      user_id = :user_id
+                    AND
+                      activity_id = :activity_id
+                    AND
+                      day IN
+                        ( SELECT DISTINCT day
+                          FROM activity_entries
+                          WHERE
+                              user_id = :user_id
+                            AND
+                              activity_id = :activity_id
+                          ORDER BY day DESC
+                          LIMIT :num
+                          OFFSET :offset
+                        )
+                  ORDER BY day DESC;",
+                  {
+                    num: num,
+                    user_id: user_id,
+                    activity_id: activity_id,
+                    offset: offset
+                  }
+                ]
+    )
+  end
+
 end

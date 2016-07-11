@@ -87,10 +87,6 @@
 
 <main id="main" role="main">
 
-<% current_user.nil? ? "" : current_user.get_pt_messages.each do |message| %>
-    <%= content_tag(:div, message.message, class: "alert mood-#{mood}") %>
-<% end %>
-
 <%= yield %>
 
 </main>

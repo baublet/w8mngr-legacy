@@ -18,4 +18,13 @@
       Log Activity <span class="screen-reader-text"><%= activity.name %></span>
     <% end %>
   </div>
+  <% entries = activity.entries(current_user.id) %>
+  <% if entries.count > 0 %>
+    <div class="activity-entries">
+      <h4>Recent Entries <span class="day"><%= entries[0].day %></span></h4>
+      <% entries.each do |entry| %>
+        <%= render entry %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
