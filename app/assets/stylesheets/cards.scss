@@ -23,6 +23,13 @@
     margin: -1rem -1rem 1rem;
     padding: 1.5rem 1rem;
     color: $white;
+    a {
+      color: $color-primary-light;
+      &:hover {
+        color: $white;
+        text-decoration: underline;
+      }
+    }
     h2 {
       margin: 0 0 1rem;
       padding: 0;
@@ -67,5 +74,11 @@
   .section {
     padding: 1rem 0 0;
     margin-bottom: 1rem;
+  }
+  .header + .section, .short-header + .section,
+  .header + .action-section, .short-header + .action-section {
+    border: 0;
+    margin: 0;
+    padding: 0;
   }
 }

@@ -155,12 +155,14 @@
   }
 }
 .activity.medium {
-  overflow: auto;
-  overflow-y: hidden;
   margin: 0 -1rem;
   padding: 0 1rem;
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
+  @include mqAfterSize($desktop-breakpoint) {
+    flex-wrap: nowrap;
+  }
   .muscle-groups {
     float: right;
     background: transparent;
@@ -194,8 +196,8 @@
     display: inline-block;
   }
   .activity-entries {
-    width: 40%;
-    margin: 0;
+    width: 100%;
+    margin: 1rem 0 0;
     h4 {
       margin: 0 0 .5rem;
     }
@@ -210,9 +212,16 @@
         background: transparent;
       }
     }
+    @include mqAfterSize($desktop-breakpoint) {
+      width: 40%;
+      margin: 0;
+    }
   }
 }
 
 .activity-general-info {
-  width: 60%;
+  width: 100%;
+  @include mqAfterSize($desktop-breakpoint) {
+    width: 60%;
+  }
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708170310) do
+ActiveRecord::Schema.define(version: 20160711193424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,9 +40,10 @@ ActiveRecord::Schema.define(version: 20160708170310) do
     t.integer  "day",         limit: 8
     t.integer  "reps"
     t.integer  "work"
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
-    t.datetime "day_ts",                default: '2016-07-06 18:03:32', null: false
+    t.datetime "created_at",                                                                    null: false
+    t.datetime "updated_at",                                                                    null: false
+    t.datetime "day_ts",                                        default: '2016-07-06 18:03:32', null: false
+    t.decimal  "calories",              precision: 5, scale: 2, default: 0.0
   end
 
   add_index "activity_entries", ["activity_id"], name: "index_activity_entries_on_activity_id", using: :btree
@@ -140,18 +141,6 @@ ActiveRecord::Schema.define(version: 20160708170310) do
   add_index "recipes", ["name"], name: "index_recipes_on_name", using: :btree
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
-  create_table "routine_completions", force: :cascade do |t|
-    t.integer  "routine_id"
-    t.integer  "user_id"
-    t.integer  "day",        limit: 8
-    t.text     "notes"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "routine_completions", ["routine_id"], name: "index_routine_completions_on_routine_id", using: :btree
-  add_index "routine_completions", ["user_id"], name: "index_routine_completions_on_user_id", using: :btree
-
   create_table "routines", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "name"
@@ -216,8 +205,6 @@ ActiveRecord::Schema.define(version: 20160708170310) do
   add_foreign_key "measurements", "foods"
   add_foreign_key "pt_messages", "users"
   add_foreign_key "recipes", "users"
-  add_foreign_key "routine_completions", "routines"
-  add_foreign_key "routine_completions", "users"
   add_foreign_key "routines", "users"
   add_foreign_key "weight_entries", "users"
 end

@@ -22,8 +22,8 @@
   </div>
   <% entries = activity.entries(current_user.id, 1, 0, current_day.to_i + 1) %>
   <% if entries.count > 0 %>
-    <div class="activity-entries<%= entries[0].day.to_i == current_day.to_i ? " today" : " not-today" %>">
-      <h4>Previous Log (<span class="day"><%= entries[0].day.to_i == current_day.to_i ? "Today" : nice_day(entries[0].day) %></span>)</h4>
+    <div class="activity-entries<%= entries[0].day.to_i == current_day.to_i ? " today" : " not-today" %>" title="Entries prior to <%= nice_day current_day %>">
+      <h4><%= entries[0].day.to_i == current_day.to_i ? "Today" : nice_day(entries[0].day) %></h4>
       <% entries.each do |entry| %>
         <%= render entry %>
       <% end %>

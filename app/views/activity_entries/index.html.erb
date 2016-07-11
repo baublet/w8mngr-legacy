@@ -8,7 +8,7 @@
 
   <div class="section-inside">
 
-    <h1><i class="fa fa-bolt"></i> Activity Log</h1>
+    <h1><i class="fa fa-bolt"></i> <%= @activity.name %></h1>
     <div class="page-meta">
       <%= link_to activities_path do %>
           <i class="fa fa-chevron-circle-left"></i>
@@ -46,7 +46,7 @@
         <p class="pr">
           <i class="fa fa-trophy" aria-hidden="true"></i>
           <strong>Personal Record:</strong>
-          <%= link_to activity_log_day_path(@activity, current_day) do %>
+          <%= link_to activity_log_day_path(@activity, @activity_pr.day), title: "You set your personal record " + time_ago_in_words(@activity_pr.day_ts) + " ago" do %>
             <%= number_with_precision(@activity_pr.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2)  %>
             <%= current_user.unit %>
           <% end %>
@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <% if !@olderactivityentries.nil? || @olderactivityentries.count > 0 %>
+    <% if !@olderactivityentries.nil? && @olderactivityentries.count > 0 %>
       <div class="older-activity-entries">
         <h3>Previous Entries</h3>
         <%
