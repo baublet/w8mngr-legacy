@@ -14,7 +14,32 @@ class ActivityEntry < ActiveRecord::Base
   # for example, will have both reps and weight, so we need both `reps` and `work`
   validates :work,        presence: true
 
+  before_save :calculate_calories_burned
+
   include WeightManager::DayNavigator
+
+  # Calculates the calories burned of this activity entry based on its type
+  # For notes on this, see  https://github.com/baublet/w8mngr/issues/28
+  def calculate_calories_burned
+    type = activity.activity_type
+    user_weight = user.recent_most_weight.value
+
+    case type
+      when 0
+        # Calculate the joules expended
+        joules = (work / 1000) * 9.81 * 0.75
+        # Calories per rep
+        per_rep = (joules * 0.000239006) * 5
+        # Multiplier for heart rate
+        multiplier = 5 * (user_weight / work)
+        # The full formula
+        calories_burned = per_rep * reps * multiplier
+
+        self.calories = calories_burned.round(2)
+      else
+        self.calories = 0
+      end
+  end
 
   # Returns the work expressed in the desired unit
   def work_in unit

@@ -86,4 +86,5 @@ class Activity < ActiveRecord::Base
   def type_template
     activity_types(false)[self.activity_type].to_s
   end
+
 end

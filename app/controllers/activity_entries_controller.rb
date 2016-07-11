@@ -26,6 +26,7 @@ class ActivityEntriesController < ApplicationController
     unless @activity_entry.nil?
       if @activity_entry.update(activity_entries_params)
         convert_unit @activity_entry
+        @activity_entry.save
         flash[:success] = "Activity entry updated."
       else
         flash[:error] = "Unable to update activity entry..."
