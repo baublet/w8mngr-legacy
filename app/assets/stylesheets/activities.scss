@@ -233,33 +233,63 @@
 .helper-input + .activity-filters .filters-panel {
   max-height: 1px;
   opacity: 0;
+  z-index: -1;
 }
 
 .helper-input:checked + .activity-filters .filters-panel {
-  max-height: 99rem;
+  max-height: 35rem;
   opacity: 1;
+  z-index: 100;
+  transition: opacity .25s ease-in-out;
 }
 
 .activity-filters {
   position: relative;
   margin: -4rem 0 2rem;
+  float: right;
+  display: inline-block;
   overflow: visible;
   text-align: right;
+  > label {
+    cursor: pointer;
+    opacity: .5;
+    &:hover, &:focus {
+      opacity: 1;
+    }
+  }
   .filters-panel {
     position: absolute;
-    right: 0;
+    right: -1rem;
     top: 100%;
     background: $white;
     border-radius: 3px;
-    transition: opacity .15s ease-in-out,
-                max-height .5s $easing-1;
     padding: 1rem;
     z-index: 100;
     text-align: left;
-    min-width: 300px;
-    width: 50%;
+    width: 50vw;
     min-height: 200px;
     max-width: 640px;
+    min-width: 260px;
     @include height(2);
+  }
+  .meta {
+    position: absolute;
+    left: .5rem;
+    bottom: .5rem;
+    cursor: pointer;
+    opacity: .5;
+    &:hover, &:focus {
+      opacity: 1;
+      color: $red;
+    }
+  }
+  .muscle-groups {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    svg {
+      max-height: 15rem;
+      right: -5vw;
+    }
   }
 }

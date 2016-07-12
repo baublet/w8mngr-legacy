@@ -5,10 +5,27 @@
     Search
   </label>
   <div class="filters-panel">
-    <label for="filters-toggle" alt="Click to toggle search form and filters...">
+    <label for="filters-toggle" alt="Click to toggle search form and filters..." class="meta">
       <i class="fa fa-times"></i>
-      <span class="screen-reader-text">Close Filters Panel</span>
+      Close <span class="screen-reader-text">Filters Panel</span>
     </label>
-    I'm a filter!
+    <%= form_tag "", method: "get" do %>
+      <%= label_tag :q, "Search Terms", class: "screen-reader-text" %>
+      <%= text_field_tag :q, params.try(:[], :q), placeholder: "Search Terms (leave blank for none)" %>
+      <div class="muscle-groups muscle-groups-filter">
+        <h3 title="Select all of the muscles you want the exercise or exercises to target">Targets</h3>
+        <% Activity.new().muscle_group_values.each do |name| %>
+          <%= check_box_tag "activity[muscle_groups][#{name}]", "1", params.try(:[], :activity).try(:[], :muscle_groups).try(:[], name), {class: "muscles-helper"} %>
+          <%= label_tag "activity[muscle_groups][#{name}]", name %>
+        <% end %>
+
+        <%= render "activities/muscle_groups" %>
+      </div>
+
+      <button type="submit" class="btn">
+        <i class="fa fa-search"></i>
+        Search
+      </button>
+    <% end %>
   </div>
 </div>

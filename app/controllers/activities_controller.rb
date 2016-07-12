@@ -78,4 +78,12 @@ class ActivitiesController < ApplicationController
       .permit(:name, :description, :exrx, :activity_type)
   end
 
+  # Uses all of our filters to load the entries from the passed user
+  def load_entries user
+    groups = params.try(:[], :activity).try(:[], :muscle_groups)
+    if groups.is_a? Hash
+
+    end
+  end
+
 end
