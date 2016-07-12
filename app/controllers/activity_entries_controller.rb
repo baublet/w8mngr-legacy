@@ -66,10 +66,9 @@ class ActivityEntriesController < ApplicationController
   def show_list
     # We don't want to even process anything else if we're on an invalid @activity
     unless @activity.nil?
-      @activity_pr = current_user.activity_entries.where(activity_id: params[:activity_id]).order("work DESC").first
       @new_activityentry ||= current_user.activity_entries.build(activity: @activity)
       @activityentries = current_user.activity_entries.where(activity_id: params[:activity_id], day: current_day).order('created_at DESC')
-      @olderactivityentries = ActivityEntry.recent_most(current_user.id, params[:activity_id], 5)
+      @olderactivityentries = ActivityEntry.recent_most(current_user.id, params[:activity_id], 5, 0, current_day.to_i)
       render "index"
     end
   end

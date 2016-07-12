@@ -6,6 +6,12 @@ class ActivitiesController < ApplicationController
     @activities = current_user.activities
   end
 
+  # A list for our curated database of activities, based on the first user's
+  # list of activities
+  def database
+    @activities = User.first.activities
+  end
+
   def show
     # We do this here so anyone can view all activities
     @activity = Activity.find(params[:id]) rescue nil
@@ -63,7 +69,7 @@ class ActivitiesController < ApplicationController
   private
 
   def find_activity
-    @activity = current_user.activities.find(params[:id]) rescue nil
+    @activity = Activity.find(params[:id]) rescue nil
     show_404("Unable to find the activity you were searching for...")  and return false if @activity.nil?
   end
 

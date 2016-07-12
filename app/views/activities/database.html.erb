@@ -1,4 +1,4 @@
-<% provide(:title, "Your Activities") %>
+<% provide(:title, "Activities Database") %>
 
 <%= render partial: "shared/app_menu" %>
 
@@ -6,23 +6,19 @@
   <div class="section-inside">
     <ul>
       <li><%= link_to "Activities", activities_path %></li>
-      <li>My Activities</li>
+      <li>Database</li>
     </ul>
   </div>
 </div>
 
 <div class="section-inside">
 
-  <h1><i class="fa fa-bolt"></i> Your Activities</h1>
+  <h1><i class="fa fa-bolt"></i> Activities Database</h1>
 
   <div class="page-meta">
-      <%= link_to new_activity_path, :class => 'btn' do %>
-        <i class="fa fa-plus"></i>
-        New Activity
-      <% end %>
-      <%= link_to activities_db_path do %>
+      <%= link_to activities_path do %>
         <i class="fa fa-bolt"></i>
-        Activities Database
+        My Activities
       <% end %>
   </div>
 

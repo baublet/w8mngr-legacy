@@ -163,6 +163,10 @@
   @include mqAfterSize($desktop-breakpoint) {
     flex-wrap: nowrap;
   }
+  input[type=text], input[type=number] {
+    min-width: none;
+    width: 100%;
+  }
   .muscle-groups {
     float: right;
     background: transparent;
@@ -223,5 +227,39 @@
   width: 100%;
   @include mqAfterSize($desktop-breakpoint) {
     width: 60%;
+  }
+}
+
+.helper-input + .activity-filters .filters-panel {
+  max-height: 1px;
+  opacity: 0;
+}
+
+.helper-input:checked + .activity-filters .filters-panel {
+  max-height: 99rem;
+  opacity: 1;
+}
+
+.activity-filters {
+  position: relative;
+  margin: -4rem 0 2rem;
+  overflow: visible;
+  text-align: right;
+  .filters-panel {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: $white;
+    border-radius: 3px;
+    transition: opacity .15s ease-in-out,
+                max-height .5s $easing-1;
+    padding: 1rem;
+    z-index: 100;
+    text-align: left;
+    min-width: 300px;
+    width: 50%;
+    min-height: 200px;
+    max-width: 640px;
+    @include height(2);
   }
 }

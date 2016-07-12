@@ -11,6 +11,21 @@ class Activity < ActiveRecord::Base
   validates :user_id, presence: true
   validates :name, presence: true, length: { minimum: 4,  maximum: 96 }
 
+  include PgSearch
+  pg_search_scope :search_activities,
+                      :against => {
+                          :name => 'A',
+                          :description => 'B'
+                      },
+                      :ranked_by => "(popularity * 0.1) + :tsearch",
+                      :using => {
+                          :tsearch => {
+                              :prefix => true,
+                              :negation => true,
+                              :dictionary => "english"
+                          }
+                      }
+
   def muscle_group_values
     # Again, don't change the order of these. Only append to the end.
     [ :biceps,

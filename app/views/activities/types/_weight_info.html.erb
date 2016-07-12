@@ -1,0 +1,11 @@
+<% activity_pr = user.activity_entries.where(activity_id: activity.id).order("work DESC").first %>
+
+<p class="pr">
+  <i class="fa fa-trophy" aria-hidden="true"></i>
+  <strong>Personal Record:</strong>
+  <%= link_to activity_log_day_path(activity, activity_pr.day), title: "You set your personal record " + time_ago_in_words(activity_pr.day_ts) + " ago" do %>
+    <%= number_with_precision(activity_pr.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2)  %>
+    <%= current_user.unit %>
+    (<%= activity_pr.reps %> reps, <%= time_ago_in_words(activity_pr.day_ts) %> ago)
+  <% end %>
+</p>

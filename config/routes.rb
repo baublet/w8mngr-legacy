@@ -91,6 +91,8 @@ Rails.application.routes.draw do
     get     "/dashboard"            =>  "dashboard#index",            as: :dashboard
 
     # Activities
+    get       "/activities/database(.:format)" =>
+                                        "activities#database",        as: :activities_db
     resources :activities do
       resources :activity_entries, only: [:create, :update, :destroy]
       post    "activity_entries/new(.:format)" =>

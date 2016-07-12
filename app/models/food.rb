@@ -28,7 +28,7 @@ class Food < ActiveRecord::Base
                           :name => 'A',
                           :description => 'B'
                       },
-                      :ranked_by => "(popularity * 0.01) + :tsearch",
+                      :ranked_by => "(popularity * 0.1) + :tsearch",
                       :using => {
                           :tsearch => {
                               :prefix => true,

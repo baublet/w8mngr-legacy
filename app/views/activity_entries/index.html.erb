@@ -42,16 +42,7 @@
           <% end %>
         </ul>
         <p class="type"><%= @activity.type_name %></p>
-        <% unless @activity_pr.nil? %>
-        <p class="pr">
-          <i class="fa fa-trophy" aria-hidden="true"></i>
-          <strong>Personal Record:</strong>
-          <%= link_to activity_log_day_path(@activity, @activity_pr.day), title: "You set your personal record " + time_ago_in_words(@activity_pr.day_ts) + " ago" do %>
-            <%= number_with_precision(@activity_pr.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2)  %>
-            <%= current_user.unit %>
-          <% end %>
-        </p>
-        <% end %>
+        <%= render partial: "activities/types/" + @activity.type_template + "_info", locals: { user: current_user, activity: @activity } %>
       </div>
 
       <div class="activity-new-box app-form new">

@@ -148,7 +148,7 @@
   opacity: .75;
   &:hover, &:focus {
     opacity: 1;
-    text-decoration: underline;
+    background: transparent;
   }
 }
 
@@ -166,6 +166,7 @@
   }
   input {
     margin: 0;
+    line-height: 1.75em;
   }
   form > div {
     padding: 0 .5rem 0 0;
@@ -174,7 +175,12 @@
     min-width: 0;
     background: $color-primary;
     margin: 0;
-    padding: .35rem .75rem;
+    width: 2.5rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
     &:hover, &:focus {
       background: $color-primary-light;
     }
@@ -184,5 +190,6 @@
   }
   .btn .fa {
     margin: 0;
+    padding: 0;
   }
 }
