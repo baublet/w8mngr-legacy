@@ -21,8 +21,9 @@ gem "bcrypt", "~> 3.1.7"
 # For our unit conversions and displays
 gem "ruby-units"
 
-# For converting dates entered in the user field
+# For converting dates and times entered in the user field
 gem "chronic"
+gem "chronic_duration"
 
 # PostgreSQL
 gem "pg"

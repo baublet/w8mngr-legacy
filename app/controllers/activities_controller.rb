@@ -34,7 +34,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = current_user.activities.build(activities_params)
-    @activity.save_muscle_groups params[:activity]["muscle_groups"]
+    @activity.update_muscle_groups params[:activity]["muscle_groups"]
     if @activity.save
       flash[:success] = "Activity created!"
       redirect_to @activity

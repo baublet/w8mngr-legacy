@@ -42,7 +42,7 @@ class ActivityEntry < ActiveRecord::Base
         # Altering our intensity to work in the formula at
         # http://ask.metafilter.com/48652/Walking-formula
         intensity = intensity / 100
-        intensity = intensity < 0.03 ? 0.03 : intensity
+        intensity = intensity < 0.015 ? 0.015 : intensity
         # Convert user_weight to pounds from grams
         user_weight =  user_weight * 0.00220462
         # Work here will be time in seconds

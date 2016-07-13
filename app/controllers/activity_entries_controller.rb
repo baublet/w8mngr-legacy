@@ -1,3 +1,5 @@
+require "chronic_duration"
+
 class ActivityEntriesController < ApplicationController
   before_action :logged_in_user
   before_action :find_activity
@@ -78,11 +80,22 @@ class ActivityEntriesController < ApplicationController
   end
 
   def convert_unit entry
-    work_g = params[:work].to_unit.convert_to("g").scalar.to_i rescue false
-    work_g = (params[:work] + current_user.unit).to_unit.convert_to("g").scalar.to_i rescue false if work_g == false
-    return false if work_g == false
-    entry.work = work_g
-    return true
+    type = entry.activity.activity_type
+    case type
+    when 0                            # Weight lifting
+      # Converts the passed work units to grams (since we keep all weights in the DB as grams)
+      work_g = params[:work].to_unit.convert_to("g").scalar.to_i rescue false
+      work_g = (params[:work] + current_user.unit).to_unit.convert_to("g").scalar.to_i rescue false if work_g == false
+      return false if work_g == false
+      entry.work = work_g
+      return true
+    when 1                            # Time
+      # Converts the passed work unit to seconds
+      work = ChronicDuration.parse(params[:work]) rescue 0
+      work = work.nil? ? 0 : work
+      entry.work = work
+      return true
+    end
   end
 
 end

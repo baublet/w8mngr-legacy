@@ -120,6 +120,14 @@
       }
     }
   }
+  &.timed .work {
+    width: 50%;
+    min-width: 175px;
+    #work {
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
 }
 
 .activity-entries {
