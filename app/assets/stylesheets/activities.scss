@@ -133,18 +133,27 @@
 .activity .type {
   font-weight: bold;
   font-size: .75rem;
-  margin-top: -2rem;
+  @include mqAfterSize($desktop-breakpoint) {
+    margin-top: -2rem;
+  }
 }
+
 .activity.card {
-  min-height: 10rem;
+  min-height: 7rem;
   .type {
     margin-top: 0;
     margin-bottom: .5rem;
+    font-weight: 400;
+    opacity: .5;
   }
   .pill-list {
-    margin-left: 7rem;
-    overflow: hidden;
-    max-height: 1.5rem;
+    justify-content: flex-start;
+  }
+  .log-activity-btn {
+    margin: 0;
+  }
+  .muscle-groups-list {
+    margin: 0 0 1rem;
   }
 }
 

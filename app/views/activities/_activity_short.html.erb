@@ -1,5 +1,5 @@
 <div class="activity card">
-  <div class="header">
+  <div class="short-header">
     <h2>
       <%= link_to edit_activity_path(activity), class: "meta", title: "Edit or Delete this Activity" do %>
         <i class="fa fa-pencil"></i>
@@ -11,10 +11,6 @@
   <div class="type"><%= activity.type_name %></div>
   <% if defined? activity_description %>
     <%= raw(activity_description) %>
-  <% end %>
-  <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn card-meta-btn" do %>
-    <i class="fa fa-bolt" aria-hidden="true"></i>
-    Log Activity <span class="screen-reader-text"><%= activity.name %></span>
   <% end %>
   <% if activity.targets_any_group? %>
     <div class="muscle-groups-list">
@@ -28,4 +24,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="action-section">
+    <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn card-meta-btn" do %>
+      <i class="fa fa-bolt" aria-hidden="true"></i>
+      Log Activity <span class="screen-reader-text"><%= activity.name %></span>
+    <% end %>
+  </div>
 </div>
