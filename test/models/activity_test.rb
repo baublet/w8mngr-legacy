@@ -30,4 +30,11 @@ class ActivityTest < ActiveSupport::TestCase
     end
   end
 
+  test "muscle_groups_like should return proper values" do
+    Activity::MUSCLE_GROUP_VALUES.each_with_index do |name, key|
+      string = Activity::muscle_groups_like(Hash[name, 1])
+      assert_equal "1", string[key], "In string: " + string + " (looking at index " + key.to_s + ")"
+    end
+  end
+
 end

@@ -26,24 +26,22 @@ class Activity < ActiveRecord::Base
                           }
                       }
 
-  def muscle_group_values
-    # Again, don't change the order of these. Only append to the end.
-    [ :biceps,
-      :deltoids,
-      :forearms,
-      :triceps,
-      :trapezius,
-      :lats,
-      :abs,
-      :obliques,
-      :pectorals,
-      :adductors,
-      :calves,
-      :hamstrings,
-      :glutes,
-      :quads
-      ]
-  end
+  # NOTE: Don't change the order of these. Only append to the end.
+  MUSCLE_GROUP_VALUES =     [ :biceps,
+                              :deltoids,
+                              :forearms,
+                              :triceps,
+                              :trapezius,
+                              :lats,
+                              :abs,
+                              :obliques,
+                              :pectorals,
+                              :adductors,
+                              :calves,
+                              :hamstrings,
+                              :glutes,
+                              :quads
+                              ]
 
   # Returns num number of ActivityEntries for this activity for user_id. Specify
   # offset as 1 to exclude the first offset number of days
@@ -53,7 +51,7 @@ class Activity < ActiveRecord::Base
 
   # Returns true if this activity targets the muscle group passed, otherwise false
   def targets_group? group
-    index = muscle_group_values.index(group)
+    index = self::MUSCLE_GROUP_VALUES.index(group)
     return false if index.nil?
     return false if muscle_groups[index] ==  "0"
     return true
@@ -68,13 +66,33 @@ class Activity < ActiveRecord::Base
   end
 
   # Takes the array of muscle groups from params and formats it for our database
-  def save_muscle_groups groups_array
-    groups_array = {} unless groups_array.is_a?(Hash)
+  def save_muscle_groups groups
+    groups = {} unless groups.is_a?(Hash)
+    groups.symbolize_keys
     self.muscle_groups = ""
-    muscle_group_values.each do |name|
-      bit = groups_array[name.to_s] == "1" ? "1" : "0"
+    self::MUSCLE_GROUP_VALUES.each do |name|
+      bit = groups[name] == "1" ? "1" : "0"
       self.muscle_groups = self.muscle_groups + bit
     end
+  end
+
+  # Returns the LIKE column search string for querying the database based on
+  # muscle groups targeted. For instance, if you want to search for only activities
+  # that target biceps:
+  #
+  # muscle_groups_like {biceps: 1}
+  #                                 =>    "1____________%"
+  #
+  # We then use this to query the column for muscle_groups LIKE "1____________%"
+  def self.muscle_groups_like groups
+    groups = {} unless groups.is_a?(Hash)
+    groups.symbolize_keys
+    like_string = ""
+    self::MUSCLE_GROUP_VALUES.each do |name|
+      bit = groups[name].nil? ? "_": groups[name].to_s[0]
+      like_string = like_string + bit
+    end
+    return like_string + "%"
   end
 
   def activity_types disp = false
