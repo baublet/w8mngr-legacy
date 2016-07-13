@@ -204,6 +204,8 @@
   opacity: .5;
   &:hover, &:focus {
     opacity: 1;
+    background: $color-primary;
+    color: $white;
   }
 }
 

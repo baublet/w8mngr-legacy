@@ -32,8 +32,15 @@
     <%= render  partial: "activity_short",
                 collection: @activities,
                 as: :activity,
-                locals: {card: true} ||
-                raw("<p>You don't have any custom activities yet. Click the button above to add some!</p>")
+                locals: {card: true}
     %>
+    <% if @activities.count < 1 %>
+      <h1 class="search-results-empty">Nothing Found</h1>
+       <% if params.try(:[], :q).nil? && params.try(:[], :activity).try(:[], :muscle_groups).nil? %>
+         <p>No activities entered yet here! Get started by <%= link_to "adding custom activities", new_activity_path %>.</p>
+       <% else %>
+         <p>No results found for your query. Try expanding your search, or <%= link_to "adding the activity to your own list", new_activity_path %>.</p>
+       <% end %>
+    <% end %>
   </div>
 </div>

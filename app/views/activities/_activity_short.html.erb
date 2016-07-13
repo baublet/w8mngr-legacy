@@ -23,7 +23,7 @@
       <% Activity::MUSCLE_GROUP_VALUES.each do |name|
         next unless activity.targets_group?(name)
         %>
-        <li><span class="pill"><%= name %></span></li>
+        <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5B<%= name %>%5D=1" title="View activities that target: <%= name %>"><%= name %></a></li>
       <% end %>
       </ul>
     </div>

@@ -2,7 +2,7 @@
   <div class="activity-general-info">
     <% if activity.targets_any_group? %>
     <div class="muscle-groups show">
-        <% activity.muscle_group_values.each do |name| %>
+        <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
           <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
         <% end %>
         <%= render "activities/muscle_groups" %>

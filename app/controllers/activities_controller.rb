@@ -75,7 +75,7 @@ class ActivitiesController < ApplicationController
 
   def activities_params
     params.require(:activity)
-      .permit(:name, :description, :exrx, :activity_type)
+      .permit(:name, :description, :exrx, :activity_type, :intensity)
   end
 
   # Uses all of our filters to load the entries from the passed user

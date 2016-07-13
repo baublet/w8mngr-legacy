@@ -27,6 +27,16 @@ Keep head facing forward, back straight and feet flat on floor; equal distributi
   <%= f.label :activity_type %>
   <%= f.select(:activity_type, activity.activity_types(true).map.with_index {|n,k| [n, k] }) %>
 
+  <div class="range-group">
+    <%= f.label :intensity %>
+    <%= f.range_field :intensity, min: 0, max: 10 %>
+    <div class="locations">
+      <div class="location-tick" style="left: 0">Light Walking</div>
+      <div class="location-tick" style="left: 50%; transform: translateX(-50%);">Weightlifting</div>
+      <div class="location-tick" style="right: 0">Sprints</div>
+    </div>
+  </div>
+
   <div class="muscle-groups" id="muscle-groups-form">
     <h3>Muscle Groups</h3>
     <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>

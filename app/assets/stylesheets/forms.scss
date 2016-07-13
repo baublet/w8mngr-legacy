@@ -351,3 +351,23 @@ input[type=checkbox].toggle-switch {
     border-bottom-left-radius: 3px;
   }
 }
+
+input[type=range] {
+  width: 100%;
+}
+
+.range-group {
+  margin: 0 0 2rem 0;
+  .locations {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  .location-tick {
+    position: absolute;
+    top: 0;
+    font-weight: bold;
+    font-size: .55rem;
+    opacity: .5;
+  }
+}

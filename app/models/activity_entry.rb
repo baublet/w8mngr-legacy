@@ -23,19 +23,31 @@ class ActivityEntry < ActiveRecord::Base
   def calculate_calories_burned
     type = activity.activity_type
     user_weight = user.recent_most_weight.value
+    # Our global intensity multipler
+    intensity = 1 + (activity.intensity / 10)
 
     case type
-      when 0
+      when 0                                              # Weight lifting
         # Calculate the joules expended
         joules = (work / 1000) * 9.81 * 0.75
         # Calories per rep
         per_rep = (joules * 0.000239006) * 5
-        # Multiplier for heart rate
-        multiplier = 5 * (user_weight / work)
+        # Multiplier for heart rate elevation and work intensity
+        multiplier = 3.5 * (user_weight / work)
         # The full formula
-        calories_burned = per_rep * reps * multiplier
-
+        calories_burned = per_rep * reps * multiplier * intensity
         self.calories = calories_burned.round(2)
+
+      when 1                                              # Timed things
+        # Altering our intensity to work in the formula at
+        # http://ask.metafilter.com/48652/Walking-formula
+        intensity = intensity / 100
+        intensity = intensity < 0.03 ? 0.03 : intensity
+        # Convert user_weight to pounds from grams
+        user_weight =  user_weight * 0.00220462
+        # Work here will be time in seconds
+        self.calories = intensity * user_weight * (work / 60)
+
       else
         self.calories = 0
       end
