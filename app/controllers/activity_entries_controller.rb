@@ -11,7 +11,7 @@ class ActivityEntriesController < ApplicationController
   def create
     unless @activity.nil?
       @new_activityentry = current_user.activity_entries.build(activity_entries_params)
-      convert_unit @new_activityentry
+      convert_unit @new_activityentry, params[:reps], params[:work]
       if @new_activityentry.save
         flash[:success] = "Activity entry created!"
       else
@@ -27,8 +27,8 @@ class ActivityEntriesController < ApplicationController
   def update
     find_activity_entry
     unless @activity_entry.nil?
-      if @activity_entry.update(activity_entries_params)
-        convert_unit @activity_entry
+      if @activity_entry.update activity_entries_params
+        @activity_entry.convert_unit_for_save params[:reps], params[:work]
         @activity_entry.save
         flash[:success] = "Activity entry updated."
       else
@@ -77,25 +77,6 @@ class ActivityEntriesController < ApplicationController
 
   def activity_entries_params
     params.permit(:reps, :routine_id, :activity_id, :day)
-  end
-
-  def convert_unit entry
-    type = entry.activity.activity_type
-    case type
-    when 0                            # Weight lifting
-      # Converts the passed work units to grams (since we keep all weights in the DB as grams)
-      work_g = params[:work].to_unit.convert_to("g").scalar.to_i rescue false
-      work_g = (params[:work] + current_user.unit).to_unit.convert_to("g").scalar.to_i rescue false if work_g == false
-      return false if work_g == false
-      entry.work = work_g
-      return true
-    when 1                            # Time
-      # Converts the passed work unit to seconds
-      work = ChronicDuration.parse(params[:work]) rescue 0
-      work = work.nil? ? 0 : work
-      entry.work = work
-      return true
-    end
   end
 
 end

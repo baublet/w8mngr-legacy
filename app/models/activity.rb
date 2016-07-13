@@ -100,7 +100,7 @@ class Activity < ActiveRecord::Base
     return [ :weight,             # reps and weight (e.g. 3 reps at 50lbs)
              :timed,              # timed (e.g., 20 minutes running)
              :distance,           # distance exercises (e.g., 5 miles)
-             :repetitive_high,    # for unassisted exercises, higher is better (e.g., push ups)
+             :repetitive,         # for unassisted exercises, higher is better (e.g., push ups)
             ] if disp == false
     # These should match the above, but be the display versions
     return [  "Weightlifting (e.g., squats, bench press)",

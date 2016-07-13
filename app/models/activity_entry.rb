@@ -27,7 +27,9 @@ class ActivityEntry < ActiveRecord::Base
     intensity = 1 + (activity.intensity / 10)
 
     case type
+
       when 0                                              # Weight lifting
+        self.calories = 0 and return true if work == 0
         # Calculate the joules expended
         joules = (work / 1000) * 9.81 * 0.75
         # Calories per rep
@@ -48,9 +50,63 @@ class ActivityEntry < ActiveRecord::Base
         # Work here will be time in seconds
         self.calories = intensity * user_weight * (work / 60)
 
+      when 2                                              # Distance
+
+
+      when 3                                              # Repetitions
+
+
       else
+
         self.calories = 0
+    end
+  end
+
+  # Updates the activity entry's reps and work based on its type
+  def convert_unit_for_save reps, work
+    type = activity.activity_type
+    case type
+    when 0                            # Weight lifting
+      # If there's no unit attached, add their default one
+      if (true if Float(work) rescue false)
+        work = work + self.user.unit
       end
+      # Converts the passed work units to grams (since we keep all weights in the DB as grams)
+      work_g = work.to_unit.convert_to("g").scalar.to_i rescue false
+      work_g = (work + current_user.unit).to_unit.convert_to("g").scalar.to_i rescue false if work_g == false
+      unless work_g == false
+        self.work = work_g
+        return true
+      end
+      errors.add(:base, "Unable to parse the weight " + work)
+    when 1                            # Time
+      # Converts the passed work unit to seconds
+      work = ChronicDuration.parse(work) rescue 0
+      work = work.nil? ? 0 : work
+      self.work = work
+      return true
+    when 2                            # Distance
+      parsed_work = Unit.new(work) rescue nil
+      # If it's nil, then Ruby Unit can't parse it, so let's try a quick parse ourselves for steps
+      if parsed_work.nil?
+        # Does the user specify steps?
+        if parsed_work =~ /steps/i
+          # Cool! Then let's find the number
+          steps = /[0-9]+/.match(parsed_work)
+          unless steps.nil?
+            self.reps = steps.to_i
+            return true
+          end
+        end
+      end
+      errors.add(:base, "Unable to parse the distance " + work)
+    when 3                            # Repetitions
+      # Just make sure they pass in an integer
+      reps = reps.to_i
+      return true
+    end
+    errors.add(:base, "Invalid workout type... What gives?!")
+    return false
   end
 
   # Returns the work expressed in the desired unit
