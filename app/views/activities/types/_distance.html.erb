@@ -1,0 +1,20 @@
+<div class="work">
+  <%= label_tag :work, "Distance", class: "screen-reader-text", title: "In any human-readable distance" %>
+  <%= text_field_tag :work,
+        ((defined? entry) ?
+          (Unit.new(entry.work) rescue 0) :
+          ""
+        ),
+        placeholder: "Distance, e.g., 12 miles, 3000 steps, 2km" %>
+</div>
+
+<% if defined? entry %>
+<div class="when">
+  <span class="calories" title="Estimated Calories Burned">
+    <span class="screen-reader-text">Estimated Calories Burned:</span>
+    <%= entry.calories %> calories
+  </span>
+  &bull;
+  <%= time_ago_in_words(entry.created_at) %> ago
+</div>
+<% end %>

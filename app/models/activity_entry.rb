@@ -102,7 +102,8 @@ class ActivityEntry < ActiveRecord::Base
       errors.add(:base, "Unable to parse the distance " + work)
     when 3                            # Repetitions
       # Just make sure they pass in an integer
-      reps = reps.to_i
+      self.reps = reps.to_i
+      self.work = 0
       return true
     end
     errors.add(:base, "Invalid workout type... What gives?!")

@@ -11,7 +11,7 @@ class ActivityEntriesController < ApplicationController
   def create
     unless @activity.nil?
       @new_activityentry = current_user.activity_entries.build(activity_entries_params)
-      convert_unit @new_activityentry, params[:reps], params[:work]
+      @new_activityentry.convert_unit_for_save params[:reps], params[:work]
       if @new_activityentry.save
         flash[:success] = "Activity entry created!"
       else
