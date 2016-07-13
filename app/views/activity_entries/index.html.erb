@@ -17,7 +17,7 @@
       <%= link_to routine_path(cookies[:routine_id]) do %>
           <i class="fa fa-chevron-circle-left"></i>
           Back to Routine: <%= Routine.find(cookies[:routine_id]).name %>
-      <% end %>
+      <% end unless cookies[:routine_id].nil? %>
     </div>
 
     <% unless @activityentries.nil? %>
@@ -35,7 +35,7 @@
       <div class="activity-description-box">
         <h2><%= link_to @activity.name, @activity %></h2>
         <ul class="pill-list">
-          <% @activity.muscle_group_values.each do |name|
+          <% Activity::MUSCLE_GROUP_VALUES.each do |name|
             next unless @activity.targets_group?(name)
             %>
             <li><span class="pill"><%= name %></span></li>

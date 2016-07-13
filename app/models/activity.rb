@@ -51,7 +51,7 @@ class Activity < ActiveRecord::Base
 
   # Returns true if this activity targets the muscle group passed, otherwise false
   def targets_group? group
-    index = self::MUSCLE_GROUP_VALUES.index(group)
+    index = Activity::MUSCLE_GROUP_VALUES.index(group)
     return false if index.nil?
     return false if muscle_groups[index] ==  "0"
     return true
@@ -66,11 +66,11 @@ class Activity < ActiveRecord::Base
   end
 
   # Takes the array of muscle groups from params and formats it for our database
-  def save_muscle_groups groups
+  def update_muscle_groups groups
     groups = {} unless groups.is_a?(Hash)
     groups.symbolize_keys
     self.muscle_groups = ""
-    self::MUSCLE_GROUP_VALUES.each do |name|
+    Activity::MUSCLE_GROUP_VALUES.each do |name|
       bit = groups[name] == "1" ? "1" : "0"
       self.muscle_groups = self.muscle_groups + bit
     end

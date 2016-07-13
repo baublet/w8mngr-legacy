@@ -29,7 +29,7 @@ Keep head facing forward, back straight and feet flat on floor; equal distributi
 
   <div class="muscle-groups" id="muscle-groups-form">
     <h3>Muscle Groups</h3>
-    <% activity.muscle_group_values.each do |name| %>
+    <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
       <br>
       <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
       <%= label_tag "activity[muscle_groups][#{name}]", name %>

@@ -20,7 +20,7 @@
     <div class="muscle-groups-list">
       <h3>Muscle Groups</h3>
       <ul class="pill-list">
-      <% activity.muscle_group_values.each do |name|
+      <% Activity::MUSCLE_GROUP_VALUES.each do |name|
         next unless activity.targets_group?(name)
         %>
         <li><span class="pill"><%= name %></span></li>

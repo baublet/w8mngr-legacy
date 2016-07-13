@@ -14,7 +14,7 @@
       <%= text_field_tag :q, params.try(:[], :q), placeholder: "Search Terms (leave blank for none)" %>
       <div class="muscle-groups muscle-groups-filter">
         <h3 title="Select all of the muscles you want the exercise or exercises to target">Targets</h3>
-        <% Activity.new().muscle_group_values.each do |name| %>
+        <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
           <%= check_box_tag "activity[muscle_groups][#{name}]", "1", params.try(:[], :activity).try(:[], :muscle_groups).try(:[], name), {class: "muscles-helper"} %>
           <%= label_tag "activity[muscle_groups][#{name}]", name %>
         <% end %>

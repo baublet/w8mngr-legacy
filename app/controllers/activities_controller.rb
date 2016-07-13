@@ -3,13 +3,13 @@ class ActivitiesController < ApplicationController
   before_action :find_activity, only: [:edit, :update, :destroy]
 
   def index
-    @activities = current_user.activities
+    @activities = load_activities_from current_user
   end
 
   # A list for our curated database of activities, based on the first user's
   # list of activities
   def database
-    @activities = User.first.activities
+    @activities = load_activities_from User.first
   end
 
   def show
@@ -48,7 +48,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.update(activities_params) &&
-        @activity.save_muscle_groups(params[:activity]["muscle_groups"]) &&
+        @activity.update_muscle_groups(params[:activity]["muscle_groups"]) &&
         @activity.save
       flash.now[:success] = "Activity updated!"
     else
@@ -79,11 +79,18 @@ class ActivitiesController < ApplicationController
   end
 
   # Uses all of our filters to load the entries from the passed user
-  def load_entries user
+  def load_activities_from user
+    activities = user.activities
     groups = params.try(:[], :activity).try(:[], :muscle_groups)
     if groups.is_a? Hash
-
+      like_string = Activity::muscle_groups_like groups
+      activities = activities.where("muscle_groups LIKE ?", like_string)
     end
+    q = params.try(:[], :q).nil? ? "" : params.try(:[], :q)
+    unless q.empty?
+      activities = activities.search_activities q
+    end
+    return activities
   end
 
 end
