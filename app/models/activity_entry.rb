@@ -51,7 +51,20 @@ class ActivityEntry < ActiveRecord::Base
         self.calories = intensity * user_weight * (work / 60)
 
       when 2                                              # Distance
-
+        # Credit: NET calories burned per miles as listed at
+        # https://www.checkyourmath.com/convert/length/miles_mm.php
+        #
+        # Find our intensity. Basic running is .65, walking is .3, sprinting is
+        # all the way at .8
+        intensity = intensity - 1
+        intensity = intensity < 0.2 ? 0.2 : intensity
+        intensity = intensity > 0.8 ? 0.8 : intensity
+        # Convert their weight to pounds
+        user_weight =  user_weight * 0.00220462
+        # Convert the unit of work from mm to miles
+        work_in_miles = self.work * 0.00000062
+        # And finally
+        self.calories = intensity * user_weight * work_in_miles
 
       when 3                                              # Repetitions
 
