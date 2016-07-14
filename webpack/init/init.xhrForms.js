@@ -37,12 +37,14 @@ w8mngr.init.add(function() {
           // to instead alter our serverside code to return javascript that tells
           // TL what to do... asinine considering TL's original purpose (progressive
           // enhancement).
+          console.log(response)
           let url = response.responseURL
           if (url !== window.location.href) {
             window.Turbolinks.visit(url)
           } else {
             Turbolinks.clearCache()
             document.documentElement.innerHTML = response.responseText
+            history.pushState({turbolinks: true, url: url}, '', url)
             Turbolinks.dispatch("turbolinks:load")
             document.w8mngrLoading(false)
           }
