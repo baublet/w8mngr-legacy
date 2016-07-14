@@ -25,7 +25,7 @@ class ActivityEntriesController < ApplicationController
   end
 
   def update
-    find_activity_entry
+    return false unless find_activity_entry
     unless @activity_entry.nil?
       if @activity_entry.update activity_entries_params
         @activity_entry.convert_unit_for_save params[:reps], params[:work]
@@ -42,7 +42,7 @@ class ActivityEntriesController < ApplicationController
   end
 
   def destroy
-    find_activity_entry
+    return false unless find_activity_entry
     unless @activity_entry.nil?
       flash[:success] = "Activity entry deleted."
       day = @activity_entry.day
@@ -59,10 +59,15 @@ class ActivityEntriesController < ApplicationController
   def find_activity
     @activity = Activity.find(params[:activity_id]) rescue nil
     show_404 "Invalid activity..." and return false if @activity.nil?
+    return true
   end
 
   def find_activity_entry
-    @activity_entry = current_user.activity_entries.find(params[:id])
+    @activity_entry = current_user.activity_entries.find(params[:id]) rescue nil
+    # We do this because these errors are always caused by users using the back button
+    # after deleting an entry.
+    redirect_to activity_log_day_path(params[:activity_id], current_day) and return false if @activity_entry.nil?
+    return true
   end
 
   def show_list

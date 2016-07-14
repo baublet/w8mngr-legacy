@@ -273,3 +273,71 @@ hr {
     background: $color-primary-light;
   }
 }
+
+.totals {
+  margin: 2rem 0 2rem;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  .number {
+    font-size: 1rem;
+    font-weight: 400;
+    @include mqAfterSize($desktop-breakpoint / 1.5) {
+      font-size: 2rem;
+      font-weight: 100;
+    }
+    @include mqAfterSize($desktop-breakpoint) {
+      font-size: 3rem;
+    }
+  }
+  .unit, .label {
+    font-size: .6rem;
+    font-weight: 900;
+    opacity: .25;
+    @include mqAfterSize($desktop-breakpoint) {
+      font-size: 1rem;
+    }
+  }
+  .unit {
+    font-size: .6rem;
+  }
+  .label {
+    display: block;
+  }
+}
+
+.turbolinks-loading {
+  position: fixed;
+  z-index: 99999;
+  background: rgba($black, .9);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
+  color: $white;
+  display: none;
+  h1 {
+    @include screenReaderText();
+  }
+  .fa {
+    color: $color-primary-light;
+    font-size: 10rem;
+  }
+  .turbolinks-loading-panel {
+    display: inline-block;
+    padding: 2rem 1rem;
+    background: $black;
+    @include height(2);
+  }
+  &.on {
+    display: flex;
+  }
+}

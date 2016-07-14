@@ -22,6 +22,13 @@
 </head>
 <body class="nojs <%= controller.controller_name %> <%= controller.action_name %>">
 
+<div class="turbolinks-loading" id="turbolinks-loading-notifier" data-turbolinks-permanent>
+  <div class="turbolinks-loading-panel">
+    <h1>Loading</h1>
+    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+  </div>
+</div>
+
 <div class="beta-notification">
     <%= link_to beta_path do %>
         <i class="fa fa-exclamation-triangle"></i>

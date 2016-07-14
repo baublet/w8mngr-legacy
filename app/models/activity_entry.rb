@@ -23,6 +23,7 @@ class ActivityEntry < ActiveRecord::Base
   def calculate_calories_burned
     type = activity.activity_type
     user_weight = user.recent_most_weight.value
+    user_weight = user_weight < 1 || user_weight.nil? ? 0 : user_weight
     # Our global intensity multipler
     intensity = 1 + (activity.intensity / 10)
 
@@ -31,11 +32,12 @@ class ActivityEntry < ActiveRecord::Base
       when 0                                              # Weight lifting
         self.calories = 0 and return true if work == 0
         # Calculate the joules expended
-        joules = (work / 1000) * 9.81 * 0.75
+        joules = (self.work / 1000) * 9.81 * 0.75
         # Calories per rep
-        per_rep = (joules * 0.000239006) * 5
-        # Multiplier for heart rate elevation and work intensity
-        multiplier = 3.5 * (user_weight / work)
+        per_rep = (joules * 0.000239006) * 5 # Times 5 here because 5 * 20 = 100; Muscles are roughly 20% efficient
+        # Multiplier for heart rate elevation and work intensity. Default is 1.5
+        # if we don't know their weight
+        multiplier = user_weight == 0 ? 1.5 : 3.5 * (self.work / user_weight)
         # The full formula
         calories_burned = per_rep * reps * multiplier * intensity
         self.calories = calories_burned.round(2)
@@ -48,7 +50,7 @@ class ActivityEntry < ActiveRecord::Base
         # Convert user_weight to pounds from grams
         user_weight =  user_weight * 0.00220462
         # Work here will be time in seconds
-        self.calories = intensity * user_weight * (work / 60)
+        self.calories = (intensity * user_weight * (work / 60)).round(2)
 
       when 2                                              # Distance
         # Credit: NET calories burned per miles as listed at
@@ -64,7 +66,7 @@ class ActivityEntry < ActiveRecord::Base
         # Convert the unit of work from mm to miles
         work_in_miles = self.work * 0.00000062
         # And finally
-        self.calories = intensity * user_weight * work_in_miles
+        self.calories = (intensity * user_weight * work_in_miles).round(2)
 
       when 3                                              # Repetitions
         # A VERY simple and dirty calculation here. Basically, any of these reps

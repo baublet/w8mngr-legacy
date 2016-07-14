@@ -22,7 +22,7 @@
   </div>
   <% entries = activity.entries(current_user.id, 1, 0, current_day.to_i + 1) %>
   <% if entries.count > 0 %>
-    <div class="activity-entries<%= entries[0].day.to_i == current_day.to_i ? " today" : " not-today" %>" title="Entries prior to <%= nice_day current_day %>">
+    <div class="activity-entries<%= entries[0].day.to_i == current_day.to_i ? " today" : " not-today" %>">
       <h4><%= entries[0].day.to_i == current_day.to_i ? "Today's Entries, " + nice_day(entries[0].day) : "Last Entry: " + pluralize(current_day.to_i - entries[0].day, "day") + " ago" %></h4>
       <% entries.each do |entry| %>
         <%= render entry %>

@@ -20,10 +20,6 @@
       <% end unless cookies[:routine_id].nil? %>
     </div>
 
-    <% if @new_activityentry.errors.any? %>
-        <%= render partial: "shared/error_messages", locals: {errors: @new_activityentry.errors} %>
-    <% end %>
-
     <% unless @activityentries.nil? %>
       <div class="activity-entries">
         <%= render @activityentries %>
@@ -32,6 +28,55 @@
 
     <% if @activityentries.nil? || @activityentries.count == 0 %>
       <p>You haven't logged any entries for this activity today.</p>
+    <% end %>
+
+    <% if @activityentries.count > 0 %>
+    <div class="totals">
+      <div class="first">
+        <%
+        case @activity.activity_type
+          when 0                                                        # Weightlifting
+            %>
+            <span class="number">
+              <%= number_with_delimiter Unit.new((
+                @activityentries.map { |e| e.reps }.inject(0){ |sum, x| sum + x } *
+                @activityentries.map { |e| e.work }.inject(0){ |sum, x| sum + x }
+                ).to_s + "g").convert_to(current_user.unit).scalar.round %>
+              <span class="unit"><%= current_user.unit %></span>
+            </span>
+            <span class="label" alt="Total Weight Moved on <%= nice_day current_day %>">Weight Moved</span>
+            <%
+          when 1                                                       # Timed
+            %>
+            <span class="number">
+              <%= ChronicDuration.output(@activityentries.map { |e| e.work }.inject(0){ |sum, x| sum + x }, :format => :chrono) %>
+            </span>
+            <span class="label" alt="Total Time Spent on <%= @activity.name %> on <%= nice_day current_day %>">Total Time</span>
+            <%
+        end
+        %>
+      </div>
+      <% if @activity.activity_type == 0 %>
+        <div class="one-rep-max">
+          <span class="number">
+            <%
+            # Calculate the one-rep-max for this day
+            highest_weight = @activityentries.max_by(&:work)
+            max = highest_weight.work_in(current_user.unit) * ( 36 / (37 - highest_weight.reps) )
+            %>
+            <%= max.round %>
+            <span class="unit"><%= current_user.unit %></span>
+          </span>
+          <span class="label" title="Estimated max using the Brzycki formula">One Rep Max</span>
+        </div>
+      <% end %>
+      <div class="calories">
+        <span class="number">
+          <%= number_with_delimiter @activityentries.map { |e| e.calories }.inject(0){ |sum, x| sum + x } %>
+        </span>
+        <span class="label" alt="Calories Burned on <%= nice_day current_day %>">Calories</span>
+      </div>
+    </div>
     <% end %>
 
     <div class="activity-box">
