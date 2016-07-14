@@ -60,15 +60,22 @@ class ActivityEntry < ActiveRecord::Base
         intensity = intensity < 0.2 ? 0.2 : intensity
         intensity = intensity > 0.8 ? 0.8 : intensity
         # Convert their weight to pounds
-        user_weight =  user_weight * 0.00220462
+        user_weight = user_weight * 0.00220462
         # Convert the unit of work from mm to miles
         work_in_miles = self.work * 0.00000062
         # And finally
         self.calories = intensity * user_weight * work_in_miles
 
       when 3                                              # Repetitions
-
-
+        # A VERY simple and dirty calculation here. Basically, any of these reps
+        # are going to be bodyweight, ranging from ridiculously easy for even the
+        # most out of shape people (like a simple crunch), to something difficult
+        # for even professional athletes (dragon flags). So we'll have a baseline
+        # of 1 calorie, and range up to 6 per repetition depending on the exercise's
+        # intensity
+        intensity = (activity.intensity / 2).round
+        intensity = intensity < 1 ? 1 : intensity
+        self.calories = intensity * self.reps
       else
 
         self.calories = 0
@@ -78,7 +85,7 @@ class ActivityEntry < ActiveRecord::Base
   # Updates the activity entry's reps and work based on its type
   def convert_unit_for_save reps, work
     reps = reps.to_i
-    work = work.downcase
+    work = work.downcase unless work.nil?
     type = activity.activity_type
     case type
     when 0                            # Weight lifting
