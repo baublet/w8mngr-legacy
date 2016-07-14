@@ -1,0 +1,25 @@
+<%
+  activity_pr = user.activity_entries.where(activity_id: activity.id).order("work DESC").first
+  activity_pr_this_month = user.activity_entries.where(activity_id: activity.id).where("day_ts > ?", 1.month.ago).order("work DESC").first
+%>
+
+<div class="pr">
+  <% unless activity_pr.nil? %>
+  <p>
+    <i class="fa fa-trophy" aria-hidden="true"></i>
+    <strong>Longest:</strong>
+    <%= link_to activity_log_day_path(activity, activity_pr.day), title: "You set your personal record " + time_ago_in_words(activity_pr.day_ts) + " ago" do %>
+      <%= number_with_precision(activity_pr.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2)  %>
+      <%= current_user.unit(:distance) %>
+      (<%= time_ago_in_words(activity_pr.day_ts) %> ago)
+    <% end %>
+    <% if activity_pr != activity_pr_this_month && !activity_pr_this_month.nil? %>
+    | <strong>This Month: </strong>
+    <%= link_to activity_log_day_path(activity, activity_pr_this_month.day), title: "In the past month, your record has been " + time_ago_in_words(activity_pr_this_month.day_ts) + " ago" do %>
+      <%= number_with_precision(activity_pr.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2)  %>      <%= current_user.unit(:distance) %>
+      (<%= time_ago_in_words(activity_pr_this_month.day_ts) %> ago)
+    <% end %>
+    <% end %>
+  </p>
+  <% end %>
+</div>

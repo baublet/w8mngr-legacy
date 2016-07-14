@@ -20,6 +20,10 @@
       <% end unless cookies[:routine_id].nil? %>
     </div>
 
+    <% if @new_activityentry.errors.any? %>
+        <%= render partial: "shared/error_messages", locals: {errors: @new_activityentry.errors} %>
+    <% end %>
+
     <% unless @activityentries.nil? %>
       <div class="activity-entries">
         <%= render @activityentries %>
@@ -50,7 +54,7 @@
           <%= hidden_field_tag "day", current_day %>
           <%=
             # Renders our partial forms, located in  views/activities/types/
-            render partial: "activities/types/" + @activity.type_template %>
+            render partial: "activities/types/" + @activity.type_template, entry: @new_activityentry %>
           <%= button_tag type: "submit", class: "btn food-log-new-btn", title: "New Entry" do %>
             <i class="fa fa-plus"></i>
             <strong>New Entry</strong>

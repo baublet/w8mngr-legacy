@@ -98,6 +98,9 @@ class ActivityEntry < ActiveRecord::Base
             return true
           end
         end
+      else
+        self.work = parsed_work.convert_to("mm").scalar.to_i
+        return true
       end
       errors.add(:base, "Unable to parse the distance " + work)
     when 3                            # Repetitions
@@ -111,8 +114,8 @@ class ActivityEntry < ActiveRecord::Base
   end
 
   # Returns the work expressed in the desired unit
-  def work_in unit
-    (work.to_s + "g").to_unit.convert_to(unit).scalar.to_f
+  def work_in unit, from = "g"
+    (work.to_s + from).to_unit.convert_to(unit).scalar.to_f
   end
 
   # Returns user_id's activity_id's last num (default: 1) days of entries with

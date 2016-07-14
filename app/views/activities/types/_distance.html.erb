@@ -2,7 +2,9 @@
   <%= label_tag :work, "Distance", class: "screen-reader-text", title: "In any human-readable distance" %>
   <%= text_field_tag :work,
         ((defined? entry) ?
-          (Unit.new(entry.work) rescue 0) :
+          # Convert our MM's (which is how we save our distances) to the unit
+          # the user provides
+          ( Unit.new(entry.work.to_s + "mm").convert_to(entry.user.unit(:distance)) ) :
           ""
         ),
         placeholder: "Distance, e.g., 12 miles, 3000 steps, 2km" %>
