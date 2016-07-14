@@ -19,6 +19,7 @@ require("./init/init.foodEntries.js")
 require("./init/init.dashboard.js")
 require("./init/init.muscleGroups.js")
 require("./init/init.turbolinksLoadingNotifier.js")
+require("./init/init.xhrForms.js")
 
 // Run our initializations
 console.log("Initializing w8mngr...")
