@@ -16,7 +16,7 @@
     <% if activity_pr != activity_pr_this_month && !activity_pr_this_month.nil? %>
     | <strong>This Month: </strong>
     <%= link_to activity_log_day_path(activity, activity_pr_this_month.day), title: "In the past month, your record has been " + time_ago_in_words(activity_pr_this_month.day_ts) + " ago" do %>
-      <%= number_with_precision(activity_pr.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2)  %>      <%= current_user.unit(:distance) %>
+      <%= number_with_precision(activity_pr_this_month.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2)  %>      <%= current_user.unit(:distance) %>
       (<%= time_ago_in_words(activity_pr_this_month.day_ts) %> ago)
     <% end %>
     <% end %>

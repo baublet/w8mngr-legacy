@@ -64,6 +64,8 @@ class ActivityEntry < ActiveRecord::Base
 
   # Updates the activity entry's reps and work based on its type
   def convert_unit_for_save reps, work
+    reps = reps.to_i
+    work = work.downcase
     type = activity.activity_type
     case type
     when 0                            # Weight lifting
@@ -90,11 +92,17 @@ class ActivityEntry < ActiveRecord::Base
       # If it's nil, then Ruby Unit can't parse it, so let's try a quick parse ourselves for steps
       if parsed_work.nil?
         # Does the user specify steps?
-        if parsed_work =~ /steps/i
+        if work =~ /steps/i
           # Cool! Then let's find the number
-          steps = /[0-9]+/.match(parsed_work)
+          steps = /[0-9]+/.match(work)
           unless steps.nil?
-            self.reps = steps.to_i
+            # Now, calculate the distance based on average stride data from
+            stride = 74
+            if self.user.preferences["height"].to_i > 0
+              stride = 0.414 * self.user.preferences["height"].to_i
+            end
+            # Now multiply the steps by the height and we can get an approximate distance in cm, which we then convert to mm
+            self.work = (stride * steps.to_s.to_i) * 10
             return true
           end
         end

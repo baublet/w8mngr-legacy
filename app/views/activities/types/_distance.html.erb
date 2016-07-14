@@ -4,7 +4,7 @@
         ((defined? entry) ?
           # Convert our MM's (which is how we save our distances) to the unit
           # the user provides
-          ( Unit.new(entry.work.to_s + "mm").convert_to(entry.user.unit(:distance)) ) :
+          ( number_with_precision(entry.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2) + " " + current_user.unit(:distance) ) :
           ""
         ),
         placeholder: "Distance, e.g., 12 miles, 3000 steps, 2km" %>

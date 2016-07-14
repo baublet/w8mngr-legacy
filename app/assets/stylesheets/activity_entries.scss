@@ -120,7 +120,7 @@
       }
     }
   }
-  &.timed .work {
+  &.timed .work, &.distance .work {
     width: 50%;
     min-width: 175px;
     #work {

@@ -72,7 +72,7 @@ module UserPreferences
     when :mass
       return (self.preferences["unit"] == "m") ? "kg" : "lb"
     when :distance
-      return (self.preferences["unit"] == "m") ? "km" : "mi"
+      return (self.preferences["unit"] == "m") ? "km" : "miles"
     end
   end
 
