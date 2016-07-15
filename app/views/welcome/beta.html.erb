@@ -16,9 +16,21 @@
 
   <h2>Change Log</h2>
 
-  <h3>Saturday, July 2, 2016</h3>
+  <h3>Friday, July 15</h3>
 
-  <p>Major UI changes, mostly focused on the desktop version.</p>
+  <p><%= link_to "Activities", activities_path %> and <%= link_to "routines", routines_path %> are here! You can:</p>
+
+  <ul>
+    <li><%= link_to "Create custom activities", new_activity_path %> to keep track of your workouts over time.</li>
+    <li><%= link_to "Access our activities database", activities_db_path %> (with more entries coming frequently) to get started quickly.</li>
+    <li><%= link_to "Add and track routines", routines_path %> so you can keep track of your progress in carefully-managed chunks.</li>
+  </ul>
+
+  <p>We will soon be adding information about total calories burned and other relevant information related to your activities in your dashboard. In addition, I will be switching from <%= link_to "Chart.js", "https://github.com/chartjs/Chart.js" %> to <%= link_to "D3", "https://github.com/d3/d3" %>. Chart.js served me well to get up and running quickly, but I need the power of D3 going forward.</p>
+
+  <p>You may also note that there hae been some major UI changes, mostly focused on the desktop version. First, every version of the site has been polished to improve the user experience and overall smoothness of the interactions and interface. Second, we have incorporated <%= link_to "Turbolinks", "https://github.com/turbolinks/turbolinks" %> into the site for a smoother, snappier feel on every device.</p>
+
+  <p>In the future, you can expect more polishing on existing features and interfaces. This includes things you may notice and many you won't. For one, I want to ensure that my messaging queueing system is working properly. It's erratic at the moment, so getting that up and running is priority. Second, I want to increase my test coverage, especially for integration tests. At the moment, I only have controller and model tests for many of the new features. I'd like to add some robust integration tests for them, as well, to ensure rock-solid CI.</p>
 
   <h3>Wednesday, June 8, 2016</h3>
 

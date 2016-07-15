@@ -26,7 +26,7 @@ class ActivitiesControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns.key?(:activities)
     assert_template "index"
-    assert_template "_activity"
+    assert_template "_activity_short"
   end
 
   test "should get show" do
