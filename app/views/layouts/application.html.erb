@@ -2,25 +2,22 @@
 <html>
 <head>
     <title><%= full_title(yield(:title)) %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="HandheldFriendly" content="true">
     <meta charset="UTF-8" />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track' => true %>
-    <script type="text/javascript">
-      WebFontConfig = {
-        google: { families: [ 'Roboto:400,100,400italic,700,900:latin' ] }
-      };
-      (function() {
-        var wf = document.createElement('script');
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-    })(); </script>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:300,400,900', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 </head>
 <body class="nojs <%= controller.controller_name %> <%= controller.action_name %>">
+
+<div class="turbolinks-loading" id="turbolinks-loading-notifier" data-turbolinks-permanent>
+  <div class="turbolinks-loading-panel">
+    <h1>Loading</h1>
+    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+  </div>
+</div>
 
 <div class="beta-notification">
     <%= link_to beta_path do %>
@@ -31,7 +28,7 @@
 
 <a href="#main" class="screen-reader-text">Skip to main content</a>
 
-<header>
+<header id="header" <%= " data-turbolinks-permanent" if logged_in? %>>
 
     <div class="brand" role="banner">
         <h1 class="site-title"><%= link_to "w8mngr", root_path %></h1>
@@ -44,23 +41,36 @@
         <div class="navigation-options">
             <h2 class="navigation-title">Navigation</h2>
             <ul class="navigation-list">
-                <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "Get Started", get_started_path %></li>
+                <li><%= link_to root_path do %><i class="fa fa-home" aria-hidden="true"></i> Home<% end %></li>
+                <li><%= link_to get_started_path do %><i class="fa fa-star" aria-hidden="true"></i> Get Started<% end %></li>
             <% if logged_in? %>
-                <li class="sep"><h2>Options</h2></li>
-                <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
-                <li><%= link_to "Health Targets", edit_user_path(current_user, p: "health") %></li>
-                <li><%= link_to "Faturday", edit_user_path(current_user, p: "faturday") %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
-                <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
-                <li class="sep"><h2>Log</h2></li>
-                <li><%= link_to "Food Log", foodlog_path %></li>
-                <li><%= link_to "Weight Log", weight_entries_path %></li>
-                <li class="sep"></li>
-            	<li><%= link_to "Logout", logout_path, method: "delete" %></li>
+                <li><%= link_to dashboard_path do %><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard<% end %></li>
+                <li class="sep"><h2><i class="fa fa-cog" aria-hidden="true"></i> Options</h2>
+                  <ul>
+                    <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+                    <li><%= link_to "Health Targets", edit_user_path(current_user, p: "health") %></li>
+                    <li><%= link_to "Faturday", edit_user_path(current_user, p: "faturday") %></li>
+                    <li><%= link_to "Settings", edit_user_path(current_user, p: "settings") %></li>
+                    <li><%= link_to "Alerts", edit_user_path(current_user, p: "alerts") %></li>
+                  </ul>
+                </li>
+                <li class="sep" aria-role="button"><h2><i class="fa fa-book" aria-hidden="true"></i> Log</h2>
+                  <ul>
+                    <li><%= link_to "Food Log", foodlog_path %></li>
+                    <li><%= link_to "Weight Log", weight_entries_path %></li>
+                  </ul>
+            	</li>
+            	<li><%= link_to logout_path, method: "delete"  do %><i class="fa fa-sign-out" aria-hidden="true"></i> Logout<% end %></li>
             <% else %>
-                <li><li><%= link_to "Register", get_started_path %></li></li>
-            	<li class="sep"><%= render 'sessions/login_form' %></li>
+                <li><%= link_to get_started_path do %><i class="fa fa-user-plus" aria-hidden="true"></i> Register<% end %></li>
+            	<li class="sep login">
+            	  <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h2>
+            	  <ul>
+            	    <li>
+            	        <%= render 'sessions/login_form' %>
+        	        </li>
+    	          </ul>
+            	</li>
             <% end %>
             </ul>
         </div>
@@ -70,10 +80,6 @@
 
 <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
-<% end %>
-
-<% current_user.nil? ? "" : current_user.get_pt_messages.each do |message| %>
-    <%= content_tag(:div, message.message, class: "alert mood-#{mood}") %>
 <% end %>
 
 <main id="main" role="main">
@@ -87,6 +93,7 @@
         <h2>About</h2>
         <p>Copyright 2009-<%= Time.now.year %>, Ryan Poe</p>
         <p>Built by hand on Rails, HTML, CSS, and JavaScript.</p>
+        <p>This software is open source. Want to add a feature or report a bug? Checkout <a href="https://github.com/baublet/w8mngr">w8mngr on GitHub</a>.</a></p>
     </div>
 
     <div class="footer-area-2">
@@ -119,7 +126,7 @@
     </div>
 </footer>
 
-<%= javascript_include_tag *webpack_asset_paths("application") %>
+<%= javascript_include_tag *webpack_asset_paths("application"), {"data-turbolinks-eval": "false"} %>
 
 </body>
 </html>

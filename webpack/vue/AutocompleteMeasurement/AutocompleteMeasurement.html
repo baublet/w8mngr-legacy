@@ -10,7 +10,7 @@
     @keyup.right="$emit('next-measurement')"
     @keyup.up="$emit('prev-autocomplete-item')"
     @keyup.down="$emit('next-autocomplete-item')"
-    @click="selectMe()">
+    @click="selectBox()">
   <div class="unit" alt="Unit" v-text="unit"></div>
   <div class="calories" alt="Calories" v-text="cCalories"></div>
   <div class="fat" alt="Fat" v-text="cFat"></div>

@@ -1,8 +1,8 @@
 class Food < ActiveRecord::Base
   # So that they're always sorted by popularity
-    default_scope {
-                where(deleted: false)
-            }
+  default_scope {
+    where(deleted: false)
+  }
 
   belongs_to   :user,         inverse_of: :foods
   validates    :user_id,	    presence: true
@@ -28,7 +28,7 @@ class Food < ActiveRecord::Base
                           :name => 'A',
                           :description => 'B'
                       },
-                      :ranked_by => "(popularity * 0.01) + :tsearch",
+                      :ranked_by => "(popularity * 0.1) + :tsearch",
                       :using => {
                           :tsearch => {
                               :prefix => true,

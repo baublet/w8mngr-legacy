@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>
+  name: MyText
+  description: MyText
+  exrx: MyText
+  activity_type: 1
+  muscle_groups: 000000000000000000000000
+  popularity: 1
+
+two:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:secondtest) %>
+  name: MyText
+  description: MyText
+  exrx: MyText
+  activity_type: 1
+  muscle_groups: 000000000000000000000000
+  popularity: 1

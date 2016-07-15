@@ -67,10 +67,12 @@ module UserPreferences
   end
 
   # Returns the default measurement for the user based on their preferences
-  def unit measurement = "human-mass"
+  def unit measurement = :mass
     case measurement
-    when "human-mass"
-      return (self.preferences["unit"] == "m")? "kg" : "lb"
+    when :mass
+      return (self.preferences["unit"] == "m") ? "kg" : "lb"
+    when :distance
+      return (self.preferences["unit"] == "m") ? "km" : "miles"
     end
   end
 

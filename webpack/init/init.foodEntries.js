@@ -1,4 +1,4 @@
-var w8mngr = require("w8mngr")
+/* global w8mngr */
 
 w8mngr.init.addIf("food-entries-app", function() {
   // mount our Vue instance
@@ -7,15 +7,18 @@ w8mngr.init.addIf("food-entries-app", function() {
   // Load the following asyncronously
   require.ensure(["vue", "../vue/init.js", "../vue/FoodEntries.vue"], function(require) {
 
+    if(w8mngr.foodEntries) {
+      // Nuke the old vm and make a new one
+      console.log("Nuking the old FoodEntries vm...")
+      w8mngr.foodEntries.$destroy()
+    }
+
     console.log("Mounting food-entries-app...")
 
     var Vue = require("vue")
     Vue.use(require("../vue/init.js"))
 
     w8mngr.foodEntries = new Vue(require("../vue/FoodEntries.vue"))
-
-    console.log("Vue instance for FoodEntries:")
-    console.log(w8mngr.foodEntries)
 
   }, "food-entries-chunk")
 })

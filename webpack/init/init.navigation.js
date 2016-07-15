@@ -1,7 +1,14 @@
-var w8mngr = require("w8mngr")
+/* global w8mngr */
+
 var addEvent = require("../fn/addEvent.js")
 
 w8mngr.init.add(function() {
+
+	if(!w8mngr.init.navLoaded) {
+		w8mngr.init.navLoaded = true
+	} else {
+		return false
+	}
 
 	console.log("Loading the navigation...")
 

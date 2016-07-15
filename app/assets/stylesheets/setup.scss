@@ -1,18 +1,30 @@
 $black: #1F1F1F;
 $white: #F7F7F7;
-$red: #F63700;
-$green: #4DA400;
+$red: #FF0000;
+$green: #00D800;
 $yellow: #FFAA00;
-$color-primary: #007E80;
-$color-primary-light: #00B9BD;
-$color-secondary: #530A8F;
+$color-primary: #3492ae;
+$color-primary-light: #21C6F5;
+$color-secondary: #540BBA;
 $color-usda: #555;
+
+$desktop-breakpoint: 960px;
 
 // My color pallette:  http://www.colourlovers.com/palette/1365151/piccadilly_sparrows
 
+//$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $font-stack: "Roboto", "Helvetica", "Trebuchet MS", "Verdana";
 
 $easing-1: cubic-bezier(0,.95,0,1);
+
+@mixin screenReaderText() {
+  position:absolute;
+  left: 0;
+  top: 0;
+  text-indent: -9999rem;
+  z-index: -1;
+  opacity: .00001;
+}
 
 // Ryan's favorite mediaquery mixins!
 // I typically use this one because I design mobile-first
@@ -63,7 +75,7 @@ $easing-1: cubic-bezier(0,.95,0,1);
     $y: ($height * 2) + px;
     $depth: ($height * 5) + px;
     box-shadow: $inset $x $y $depth 0 rgba(black, .15);
-  }
+}
 
 @import "global",
         "header",
@@ -83,5 +95,9 @@ $easing-1: cubic-bezier(0,.95,0,1);
         "weight_entries",
         "recipes",
         "dashboard",
+        "activities",
+        "activity_entries",
+        "routines",
+
 
         "footer";

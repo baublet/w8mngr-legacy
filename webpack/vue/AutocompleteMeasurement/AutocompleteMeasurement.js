@@ -29,9 +29,13 @@ export default {
       })
     },
     "measurement-selected": function(id) {
-      this.selected = false
       if(id == this.id) {
-        this.selectMe()
+        // Don't select this measurement if we're already selected
+        console.log("Selecting measurement " + id + "...")
+        if(this.selected == false) this.selectMe()
+        else console.log("Nevermind! Already selected...")
+      } else {
+        this.selected = false
       }
     },
     // Our next/prev measurement and autocomplete listeners are
@@ -43,12 +47,13 @@ export default {
       this.selected = true
       this.dispatchMeasurementInfo()
       // Focus on our measurements box and select the text
-      var self = this
-      _do(function() {
-        self.$el.children[1].select()
-        // FIXME: IOS Safari won't do this because you can't select one form
-        // element from another element unless the user directly calls for it
-      }, 100)
+      this.selectBox()
+    },
+
+    // Selects the input box of this measumrent
+    selectBox: function() {
+      if (this.selected == false) return true
+      this.$el.children[1].select()
     },
 
     // Pushes a notification up the chain to add the current entry

@@ -1,0 +1,20 @@
+<% provide(:title, "New Activity") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Activities", activities_path %></li>
+      <li>New Activity</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-bolt"></i> New Activity</h1>
+
+  <%= render partial: 'form', locals: {activity: @activity} %>
+
+</div>

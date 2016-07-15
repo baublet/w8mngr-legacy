@@ -14,22 +14,20 @@ class WeightEntriesControllerTest < ActionController::TestCase
   end
 
   test "should post create" do
-    @weight_entry = {
+    weight_entry = {
       day: 20000101,
       value: 199
     }
-    post :create, { weight_entry: @weight_entry }
-    assert_response :success
-    assert assigns.key?(:weightentry)
-    should_get_index
+    post :create, { weight_entry: weight_entry }
+    assert_response :redirect
+    assert_redirected_to weight_log_day_path(weight_entry[:day])
   end
 
   test "should post delete" do
     weight_entry = @user.weightentries.first
     delete :destroy, { id: weight_entry.id }
-    assert_response :success
-    assert assigns.key?(:current_day)
-    should_get_index
+    assert_response :redirect
+    assert_redirected_to weight_log_day_path(weight_entry.day)
   end
 
   private

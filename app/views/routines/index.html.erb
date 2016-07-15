@@ -1,0 +1,28 @@
+<% provide(:title, "Routines") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Routines", routines_path %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-retweet" aria-hidden="true"></i> Routines</h1>
+
+  <div class="page-meta">
+    <%= link_to new_routine_path, :class => 'btn' do %>
+      <i class="fa fa-plus"></i>
+      New Routine
+    <% end %>
+  </div>
+
+  <div class="routines">
+    <%= render partial: "routine_short", collection: @routines, as: :routine %>
+  </div>
+
+</div>

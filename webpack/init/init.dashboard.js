@@ -1,4 +1,4 @@
-var w8mngr = require("w8mngr")
+/* global w8mngr */
 
 w8mngr.init.addIf("dashboard-app", function() {
   // mount our Vue instance
@@ -6,6 +6,11 @@ w8mngr.init.addIf("dashboard-app", function() {
 
   // Load the following asyncronously
   require.ensure(["vue", "../vue/init.js", "../vue/FoodEntries.vue", "chart.js"], function(require) {
+
+    if(w8mngr.dashboard) {
+      console.log("Nuking the old dashboard vm...")
+      w8mngr.dashboard.$destroy()
+    }
 
     console.log("Mounting dashboard-app...")
 

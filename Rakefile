@@ -14,4 +14,4 @@ namespace :test do
 end
 
 Rake::Task['test:run'].enhance ['test:modules']
-Rake::Task[:test].enhance { Rake::Task["test:modules"].invoke }
+#Rake::Task[:test].enhance { Rake::Task["test:modules"].invoke }

@@ -9,7 +9,7 @@ module.exports = {
   },
   run: function() {
     this._toInit.forEach(function(fn) {
-      fn()
+      fn.call()
     })
   },
   // This is a special utility class I use to only declare certan JS functions if

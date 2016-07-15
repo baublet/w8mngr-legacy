@@ -13,7 +13,7 @@
 
   <h1>Step 1: Make an Account</h1>
 
-  <%= form_tag get_started_create_path, method: "post", class: "large" do %>
+  <%= form_tag get_started_create_path, class: "large" do %>
 
   	<% if @user.errors.any? %>
   		<%= render partial: "shared/error_messages", locals: {errors: @user.errors} %>

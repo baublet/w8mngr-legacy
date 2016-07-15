@@ -1,0 +1,134 @@
+<% provide(:title, "Activity Log, " + @activity.name) %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="activity-entries-wrapper app-wrapper">
+
+  <%= render partial: "shared/day_navigator", :locals => {base_url: activity_log_path(@activity.id)} %>
+
+  <div class="section-inside">
+
+    <h1><i class="fa fa-bolt"></i> <%= @activity.name %></h1>
+    <div class="page-meta">
+      <%= link_to activities_path do %>
+          <i class="fa fa-chevron-circle-left"></i>
+          Activities
+      <% end if cookies[:routine_id].nil?  %>
+      <%= link_to routine_path(cookies[:routine_id]) do %>
+          <i class="fa fa-chevron-circle-left"></i>
+          Back to Routine: <%= Routine.find(cookies[:routine_id]).name %>
+      <% end unless cookies[:routine_id].nil? %>
+    </div>
+
+    <% unless @activityentries.nil? %>
+      <div class="activity-entries">
+        <%= render @activityentries %>
+      </div>
+    <% end %>
+
+    <% if @activityentries.nil? || @activityentries.count == 0 %>
+      <p>You haven't logged any entries for this activity today.</p>
+    <% end %>
+
+    <% if @activityentries.count > 0 %>
+    <div class="totals">
+      <div class="first">
+        <%
+        case @activity.activity_type
+          when 0                                                        # Weightlifting
+            %>
+            <span class="number">
+              <%= number_with_delimiter Unit.new((
+                @activityentries.map { |e| e.reps }.inject(0){ |sum, x| sum + x } *
+                @activityentries.map { |e| e.work }.inject(0){ |sum, x| sum + x }
+                ).to_s + "g").convert_to(current_user.unit).scalar.round %>
+              <span class="unit"><%= current_user.unit %></span>
+            </span>
+            <span class="label" alt="Total Weight Moved on <%= nice_day current_day %>">Weight Moved</span>
+            <%
+          when 1                                                       # Timed
+            %>
+            <span class="number">
+              <%= ChronicDuration.output(@activityentries.map { |e| e.work }.inject(0){ |sum, x| sum + x }, :format => :chrono) %>
+            </span>
+            <span class="label" alt="Total Time Spent on <%= @activity.name %> on <%= nice_day current_day %>">Total Time</span>
+            <%
+        end
+        %>
+      </div>
+      <% if @activity.activity_type == 0 %>
+        <div class="one-rep-max">
+          <span class="number">
+            <%
+            # Calculate the one-rep-max for this day
+            highest_weight = @activityentries.max_by(&:work)
+            max = highest_weight.work_in(current_user.unit) * ( 36 / (37 - highest_weight.reps) )
+            %>
+            <%= max.round %>
+            <span class="unit"><%= current_user.unit %></span>
+          </span>
+          <span class="label" title="Estimated max using the Brzycki formula">One Rep Max</span>
+        </div>
+      <% end %>
+      <div class="calories">
+        <span class="number">
+          <%= number_with_delimiter @activityentries.map { |e| e.calories }.inject(0){ |sum, x| sum + x } %>
+        </span>
+        <span class="label" alt="Calories Burned on <%= nice_day current_day %>">Calories</span>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="activity-box">
+
+      <div class="activity-description-box">
+        <h2><%= link_to @activity.name, @activity %></h2>
+        <ul class="pill-list">
+          <% Activity::MUSCLE_GROUP_VALUES.each do |name|
+            next unless @activity.targets_group?(name)
+            %>
+            <li><span class="pill"><%= name %></span></li>
+          <% end %>
+        </ul>
+        <p class="type"><%= @activity.type_name %></p>
+        <%= render partial: "activities/types/" + @activity.type_template + "_info", locals: { user: current_user, activity: @activity } %>
+      </div>
+
+      <div class="activity-new-box app-form new">
+        <%= form_tag activity_new_activity_entry_path(activity_id: @activity.id) do %>
+          <%= hidden_field_tag "day", current_day %>
+          <%=
+            # Renders our partial forms, located in  views/activities/types/
+            render partial: "activities/types/" + @activity.type_template, entry: @new_activityentry %>
+          <%= button_tag type: "submit", class: "btn food-log-new-btn", title: "New Entry" do %>
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if !@olderactivityentries.nil? && @olderactivityentries.count > 0 %>
+      <div class="older-activity-entries">
+        <h3>Previous Entries</h3>
+        <%
+          prev_day = 0
+          @olderactivityentries.each do |entry|
+        %>
+
+          <% if prev_day == 0 || prev_day != entry.day %>
+            <h4><%= link_to nice_day(entry.day), activity_log_day_path(@activity, entry.day) %></h4>
+            <% prev_day = entry.day %>
+          <% end %>
+
+          <%= render entry %>
+
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+
+</div>

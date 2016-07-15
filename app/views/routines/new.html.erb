@@ -1,0 +1,20 @@
+<% provide(:title, "New Routine") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Routines", routines_path %></li>
+      <li>New</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+<h1><i class="fa fa-retweet" aria-hidden="true"></i> New Routine</h1>
+
+<%= render partial: "form", locals: {routine: @newroutine} %>
+
+</div>

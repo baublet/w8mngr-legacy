@@ -1,0 +1,36 @@
+<% provide(:title, @routine.name + " | Routine") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="routine-wrapper app-wrapper">
+
+  <%= render partial: "shared/day_navigator", :locals => {base_url: routine_path(@routine)} %>
+
+  <div class="section-inside">
+
+    <h1><i class="fa fa-retweet" aria-hidden="true"></i> <%= @routine.name %></h1>
+
+    <div class="page-meta">
+      <%= link_to routines_path, title: "Back to Routines" do %>
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+        <span class="screen-reader-text">Back to</span>
+        Routines
+      <% end %>
+      <%= link_to edit_routine_path(@routine) do %>
+        <i class="fa fa-pencil"></i>
+        Edit Routine
+      <% end %>
+    </div>
+
+    <div class="routine-show">
+      <%= render partial: "routine", locals:
+                                        { routine: @routine,
+                                          routine_description: @routine_description,
+                                          routine_activities: @routine_activities,
+                                          routine_progress: @routine_progress }
+      %>
+    </div>
+
+  </div>
+
+</div>

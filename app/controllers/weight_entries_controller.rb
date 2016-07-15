@@ -1,5 +1,4 @@
 class WeightEntriesController < ApplicationController
-  before_action :set_weight_entry, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
 
   # GET /weight_entries
@@ -13,21 +12,22 @@ class WeightEntriesController < ApplicationController
     @weightentry.update_value params[:weight_entry][:value]
 
     if @weightentry.save
-        @newweightentry = current_user.weightentries.build(day: current_day)
-        flash.now[:success] = "Weight entry added"
+        flash[:success] = "Weight entry added"
+        redirect_to weight_log_day_path(current_day)
     else
         @newweightentry = @weightentry
         @newweightentry.value = params[:weight_entry][:value]
         flash.now[:error] = "Failed to add weight entry"
+        show_list
     end
-    show_list
   end
 
   # DELETE /weight_entries/1
   def destroy
+    @weightentry = current_user.weightentries.find(params[:id])
     @current_day = @weightentry.day
     @weightentry.destroy
-    show_list
+    redirect_to weight_log_day_path(current_day)
   end
 
   private
@@ -37,11 +37,6 @@ class WeightEntriesController < ApplicationController
         @weight_average = current_user.weight_average_display(current_day, '<span class="unit">', '</span>')
         @newweightentry ||= current_user.weightentries.build(day: current_day)
         render :index
-    end
-
-    # Use callbacks to share common setup or constraints between actions.
-    def set_weight_entry
-      @weightentry = current_user.weightentries.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

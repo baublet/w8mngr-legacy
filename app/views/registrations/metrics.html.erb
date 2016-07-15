@@ -26,7 +26,7 @@
   your Total Daily Expended Energy. This number can help you calculate how much
   more or less you should eat to hit your caloric intake goals.</p>
 
-  <%= form_tag(controller: "registrations", action: "save_metrics", method: "post") do %>
+  <%= form_tag(controller: "registrations", action: "save_metrics") do %>
 
     <%= label_tag "height_display", "Height" %>
   	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>

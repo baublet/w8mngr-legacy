@@ -1,0 +1,203 @@
+.activity-box {
+  @include mqAfterSize($desktop-breakpoint) {
+    display: flex;
+  }
+  margin-bottom: 2rem;
+}
+
+.activity-description-box {
+  position: relative;
+  z-index: 50;
+  background: lighten($black, 25);
+  color: $white;
+  padding: 1rem;
+  @include height(1);
+  transition: box-shadow .15s ease-in-out;
+  order: 2;
+  width: 100%;
+  &:hover {
+    @include height(2);
+  }
+  .pill-list {
+    margin: -.75rem 0 .5rem 0;
+    order: 2;
+  }
+  .pill {
+    background: $white;
+    color: $black;
+    font-size: .6rem;
+    padding: .05rem .15rem;
+  }
+  h2 {
+    margin: 0 0 .5rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    order: 1;
+    width: 66%;
+    a {
+      color: $white;
+      &:hover, &:focus {
+        color: $color-primary-light;
+      }
+    }
+  }
+  p {
+    margin: 0 0 .5rem;
+    order: 3;
+    width: 100%;
+  }
+}
+
+.activity-new-box {
+  &.app-form.new { float: none; }
+  order: 1;.
+  position: relative;
+  z-index: 50;
+  @include mqAfterSize($desktop-breakpoint) {
+    &.app-form.new { margin-bottom: 0; }
+  }
+  .reps input, .work input {
+    font-size: 1.2rem;
+  }
+}
+
+.activity-entry-form + .activity-entry-form .activity-entry {
+  border-top: 1px solid rgba($black, .05);
+}
+
+.activity-entry {
+  width: 100%;
+  clear: both;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  //in-width: 300px;
+  padding: .5rem;
+  opacity: .75;
+  transition: opacity .25s ease-in-out;
+  &:hover {
+    opacity: 1;
+  }
+  > .meta-btn, > .delete-btn {
+    width: 1rem;
+    margin: 0 0 0 .5rem;
+  }
+  input {
+    background: transparent;
+    border-color: transparent;
+    display: inline;
+    margin: 0;
+    font-size: 1.2rem;
+    &:hover {
+      background: rgba($white, .25);
+      border-color: rgba($black, .25);
+    }
+    &:focus {
+      background: $white;
+      border-color: $black;
+    }
+  }
+  .when {
+    vertical-align:  middle;
+    font-style: italic;
+    opacity: .5;
+    font-size: .6rem;
+    padding-left: .5rem;
+    width: 100%;
+  }
+  &.weight {
+    > .fa {
+      opacity: .25;
+    }
+    .work input {
+      text-align: right;
+      font-size: 1.5rem;
+    }
+    .reps {
+      input {
+        @include mqAfterSize($desktop-breakpoint) {
+          width: 3.5rem;
+        }
+      }
+    }
+  }
+  &.timed .work, &.distance .work {
+    width: 50%;
+    #work {
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+}
+
+.activity-entries {
+  @include height(1);
+  background: $white;
+  transition: box-shadow .25s ease-in-out;
+  margin-bottom: 1rem;
+  &:hover {
+    @include height(2);
+  }
+}
+
+.older-activity-entries {
+  .activity-entry + .activity-entry {
+    border-top: 1px solid rgba($black, .1);
+  }
+  h4 {
+    padding: 0 0 .25rem;
+    margin: .5rem 0;
+    border-bottom: 1px solid rgba($black, .25);
+  }
+}
+
+.pr a {
+  color: $white;
+  opacity: .75;
+  &:hover, &:focus {
+    opacity: 1;
+    background: transparent;
+  }
+}
+
+.activity-form.short {
+  background: lighten($black, 15);
+  padding: .5rem;
+  .today & {
+    margin: .5rem -.75rem -.75rem;
+    padding: .75rem;
+  }
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  input {
+    margin: 0;
+    line-height: 1.75em;
+  }
+  form > div {
+    padding: 0 .5rem 0 0;
+  }
+  .btn {
+    min-width: 0;
+    background: $color-primary;
+    margin: 0;
+    width: 2.5rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    &:hover, &:focus {
+      background: $color-primary-light;
+    }
+  }
+  .btn strong {
+    @include screenReaderText();
+  }
+  .btn .fa {
+    margin: 0;
+    padding: 0;
+  }
+}

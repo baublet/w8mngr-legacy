@@ -1,0 +1,23 @@
+<div class="reps">
+  <%= label_tag :reps, "Repetitions (how many time you completedthe exercise in this set)", class: "screen-reader-text" %>
+  <%= number_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps, e.g. 3, 12" %>
+</div>
+
+<% if defined? entry %>
+  <span class="unit">
+    repetitions
+  </span>
+<% end %>
+
+<% if defined? entry %>
+<div class="when">
+  <% if entry.calories > 0 %>
+    <span class="calories" title="Estimated Calories Burned">
+      <span class="screen-reader-text">Estimated Calories Burned:</span>
+      <%= entry.calories %> calories
+    </span>
+    &bull;
+  <% end %>
+  <%= time_ago_in_words(entry.created_at) %> ago
+</div>
+<% end %>

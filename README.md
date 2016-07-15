@@ -1,4 +1,6 @@
-# w8mngr | The Lifestyle Tracker [![Travis CI Build](https://api.travis-ci.org/baublet/w8mngr.svg)](https://travis-ci.org/baublet/w8mngr) [![Code Climate](https://codeclimate.com/github/baublet/w8mngr/badges/gpa.svg)](https://codeclimate.com/github/baublet/w8mngr)
+# w8mngr | The Lifestyle Tracker
+
+[![Travis CI Build](https://api.travis-ci.org/baublet/w8mngr.svg)](https://travis-ci.org/baublet/w8mngr) [![Code Climate](https://codeclimate.com/github/baublet/w8mngr/badges/gpa.svg)](https://codeclimate.com/github/baublet/w8mngr) [![Test Coverage](https://codeclimate.com/github/baublet/w8mngr/badges/coverage.svg)](https://codeclimate.com/github/baublet/w8mngr/coverage)
 
 The source for my side project, a lifestyle and fitness tracker. I want users to be able to track their calories, food intake, fitness, weight, and other variables that affect their health. The current version, [w8mngr.com](http://w8mngr.com) was originally coded in 2009. Back then, I was interested in super high-performance PHP. It is based on super simple architecture, raw queries, and PHP templates. As expected, it was quick to code but tough to maintain. So with this version I'm testing out Ruby on Rails.
 

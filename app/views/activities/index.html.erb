@@ -1,0 +1,46 @@
+<% provide(:title, "Your Activities") %>
+
+<%= render partial: "shared/app_menu" %>
+
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><%= link_to "Activities", activities_path %></li>
+      <li>My Activities</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-inside">
+
+  <h1><i class="fa fa-bolt"></i> Your Activities</h1>
+
+  <div class="page-meta">
+      <%= link_to new_activity_path, :class => 'btn' do %>
+        <i class="fa fa-plus"></i>
+        New Activity
+      <% end %>
+      <%= link_to activities_db_path do %>
+        <i class="fa fa-bolt"></i>
+        Activities Database
+      <% end %>
+  </div>
+
+  <%= render "filters" %>
+
+  <div class="activities">
+    <%= render  partial: "activity_short",
+                collection: @activities,
+                as: :activity,
+                locals: {card: true}
+    %>
+    <% if @activities.count < 1 %>
+      <h1 class="search-results-empty">Nothing Found</h1>
+       <% if params.try(:[], :q).nil? && params.try(:[], :activity).try(:[], :muscle_groups).nil? %>
+         <p>No activities entered yet here! Get started by <%= link_to "adding custom activities", new_activity_path %>.</p>
+       <% else %>
+         <p>No results found for your query. Try expanding your search, or <%= link_to "adding the activity to your own list", new_activity_path %>.</p>
+       <% end %>
+    <% end %>
+  </div>
+</div>

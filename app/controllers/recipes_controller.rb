@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
       no_links: true,
       no_styles: true
       )
-    markdown = Redcarpet::Markdown.new(html_renderer, extensions = {})
+    markdown = Redcarpet::Markdown.new(html_renderer)
     @preparation_instructions = markdown.render(@recipe.instructions)
   end
 

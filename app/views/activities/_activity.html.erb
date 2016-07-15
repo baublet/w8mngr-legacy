@@ -1,0 +1,22 @@
+<div class="muscle-groups show">
+  <h3>Muscle Groups</h3>
+    <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
+      <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
+    <% end %>
+
+    <%= render "muscle_groups" %>
+
+    <ul class="pill-list">
+      <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
+        <% if activity.targets_group?(name) %>
+          <li><span class="pill"><%=name %></span></li>
+        <% end %>
+      <% end %>
+    </ul>
+</div>
+<div class="activity">
+  <div class="type"><%= activity.type_name %></div>
+  <% if defined? activity_description %>
+    <%= raw(activity_description) %>
+  <% end %>
+</div>

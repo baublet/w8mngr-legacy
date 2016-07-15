@@ -16,6 +16,12 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    # Shows our 404 with an optional message passed to it
+    def show_404 message = nil
+      render "shared/404", status: 404, locals: { message: message } unless message.nil?
+      render "shared/404", status: 404 if message.nil?
+    end
+
     protected
 
     # We use this to prevent CSRF tokens stopping our JSON requests

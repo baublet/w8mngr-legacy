@@ -66,6 +66,8 @@ GEM
       capybara (>= 2.3.0, < 2.8.0)
       json
     chronic (0.10.2)
+    chronic_duration (0.10.6)
+      numerizer (~> 0.1.1)
     codeclimate-test-reporter (0.5.1)
       simplecov (>= 0.7.1, < 1.0.0)
     concurrent-ruby (1.0.2)
@@ -104,6 +106,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    numerizer (0.1.1)
     pg (0.17.1)
     pg_search (1.0.5)
       activerecord (>= 3.1)
@@ -237,6 +240,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   chronic
+  chronic_duration
   codeclimate-test-reporter
   foreman
   groupdate

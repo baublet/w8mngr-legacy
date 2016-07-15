@@ -88,5 +88,35 @@ Rails.application.routes.draw do
     post    "/getstarted/target"    =>  "registrations#save_target",  as: :get_started_target_save
 
     # Dashboard
-    get     "/dashboard"            => "dashboard#index",             as: :dashboard
+    get     "/dashboard"            =>  "dashboard#index",            as: :dashboard
+
+    # Activities
+    get       "/activities/database(.:format)" =>
+                                        "activities#database",        as: :activities_db
+    resources :activities do
+      resources :activity_entries, only: [:create, :update, :destroy]
+      post    "activity_entries/new(.:format)" =>
+                                        "activity_entries#create",    as: :new_activity_entry
+      post    "activity_entries/:id(.:format)" =>
+                                        "activity_entries#update"
+      get     "/activity_entries/(.:format)"  =>
+                                        "activity_entries#index",     as: :log
+      get     "/activity_entries/:day/(.:format)"  =>
+                                        "activity_entries#index",     as: :log_day
+      get     "/activity_entries/:id/delete(.:format)" =>
+                                        "activity_entries#destroy",   as: :delete_entry
+    end
+    get       "/activity/:id/delete(.:format)" =>
+                                        "activities#destroy",         as: :delete_activity
+
+    resources :routines do
+      post    "activity/add/:activity_id(.:format)" =>
+                                        "routines#add_activity",      as: :add_activity
+      post    "activity/remove/:activity_id(.:format)" =>
+                                        "routines#remove_activity",   as: :remove_activity
+    end
+    get       "/routines/:id/delete(.:format)" =>
+                                        "routines#destroy",           as: :delete_routine
+    get       "/routines/:id/:day(.:format)" =>
+                                        "routines#show",              as: :routine_day
 end

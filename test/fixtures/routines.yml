@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>
+  name: MyText
+  description: MyText
+  activities:  []
+  last_completion: 1
+
+two:
+  user_id: <%= ActiveRecord::FixtureSet.identify(:test) %>
+  name: MyText
+  description: MyText
+  activities: []
+  last_completion: 1

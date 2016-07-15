@@ -1,0 +1,20 @@
+<div class="work">
+  <%= label_tag :work, "Time", class: "screen-reader-text", title: "In any human-readable format" %>
+  <%= text_field_tag :work,
+        ((defined? entry) ?
+          ChronicDuration.output(entry.work, :format => :long) :
+          ""
+        ),
+        placeholder: "Time, e.g., 15 minutes and 30 seconds, 00:15:30, etc..." %>
+</div>
+
+<% if defined? entry %>
+<div class="when">
+  <span class="calories" title="Estimated Calories Burned">
+    <span class="screen-reader-text">Estimated Calories Burned:</span>
+    <%= entry.calories %> calories
+  </span>
+  &bull;
+  <%= time_ago_in_words(entry.created_at) %> ago
+</div>
+<% end %>
