@@ -61,7 +61,22 @@ h1 {
     color: lighten($black, 15%);
     margin: 3rem 0 2rem;
     .fa {
-      margin-left: -2rem;
+      margin-left: -1.25rem;
+    }
+    @include mqBeforeSize($desktop-breakpoint) {
+      position: relative;
+      .fa {
+        position: absolute;
+        font-size: 6rem;
+        opacity: .075;
+        left: 0rem;
+        top: -2.25rem;
+        z-index: 1;
+      }
+      + .page-meta {
+        position: relative;
+        z-index: 2;
+      }
     }
 }
 h2 {
@@ -138,7 +153,8 @@ hr {
         margin-top: -1rem;
     }
     a {
-        margin: 0 1rem 0 0;
+        display: inline-block;
+        margin: 0 1rem .5rem 0;
         padding-bottom: .1rem;
         color: rgba($black, .5);
         border-bottom: 3px solid transparent;
@@ -146,9 +162,6 @@ hr {
             color: $black;
             border-color: $black;
         }
-    }
-    a + a {
-        margin-left: -.5rem;
     }
 }
 
@@ -250,14 +263,6 @@ hr {
   tfoot td {
     font-weight: bold;
   }
-}
-
-.turbolinks-progress-bar {
-  background-color: $color-primary-light;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
 }
 
 .progress-bar {

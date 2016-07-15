@@ -7,7 +7,7 @@
 
 .activity-description-box {
   position: relative;
-  z-index: 100;
+  z-index: 50;
   background: lighten($black, 25);
   color: $white;
   padding: 1rem;
@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  min-width: 300px;
+  //in-width: 300px;
   padding: .5rem;
   opacity: .75;
   transition: opacity .25s ease-in-out;
@@ -85,7 +85,6 @@
   input {
     background: transparent;
     border-color: transparent;
-    width: 6rem;
     display: inline;
     margin: 0;
     font-size: 1.2rem;
@@ -116,13 +115,14 @@
     }
     .reps {
       input {
-        width: 3.5rem;
+        @include mqAfterSize($desktop-breakpoint) {
+          width: 3.5rem;
+        }
       }
     }
   }
   &.timed .work, &.distance .work {
     width: 50%;
-    min-width: 175px;
     #work {
       width: 100%;
       font-size: 1rem;
