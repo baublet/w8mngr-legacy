@@ -328,14 +328,11 @@ hr {
     @include screenReaderText();
   }
   .fa {
-    color: $color-primary-light;
+    color: $black;
     font-size: 10rem;
   }
   .turbolinks-loading-panel {
     display: inline-block;
-    padding: 2rem 1rem;
-    background: $black;
-    @include height(2);
   }
   &.on {
     display: flex;
