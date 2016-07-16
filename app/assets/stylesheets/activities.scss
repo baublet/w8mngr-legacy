@@ -159,6 +159,11 @@
     color: rgba($black, .5);
     border: 1px solid rgba($black, .075);
     float: none;
+    @include mqBeforeSize($desktop-breakpoint / 2) {
+      margin: .5rem 0 .5rem 0;
+      display: block;
+          width: 6rem;
+    }
     .fa {
       font-size: 1em;
     }
