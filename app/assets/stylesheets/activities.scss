@@ -140,6 +140,9 @@
 
 .activity.card {
   min-height: 7rem;
+  h2 {
+    font-size: 1rem;
+  }
   .type {
     margin-top: 0;
     margin-bottom: .5rem;
@@ -150,10 +153,21 @@
     justify-content: flex-start;
   }
   .log-activity-btn {
-    margin: 0;
+    margin: 0 0 0 1rem;
+    padding: .5rem;
+    font-size: .6rem;
+    color: rgba($black, .5);
+    border: 1px solid rgba($black, .075);
+    float: none;
+    .fa {
+      font-size: 1em;
+    }
+    &:hover {
+      color: $white;
+    }
   }
   .muscle-groups-list {
-    margin: 0 0 1rem;
+    margin: 0;
   }
 }
 
@@ -256,12 +270,16 @@
 
 .activity-filters {
   position: relative;
-  margin: -4rem 0 2rem;
-  float: right;
   display: inline-block;
   overflow: visible;
   text-align: right;
   z-index: 3;
+  margin: -1rem 0 2rem;
+  float: right;
+  @include mqAfterSize($desktop-breakpoint / 2) {
+    margin: -4rem 0 2rem;
+    float: right;
+  }
   > label {
     cursor: pointer;
     opacity: .5;
