@@ -241,6 +241,7 @@
 
 .helper-input + .activity-filters .filters-panel {
   max-height: 1px;
+  min-height: 0;
   opacity: 0;
   z-index: -1;
 }
