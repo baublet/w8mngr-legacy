@@ -259,6 +259,7 @@
   display: inline-block;
   overflow: visible;
   text-align: right;
+  z-index: 3;
   > label {
     cursor: pointer;
     opacity: .5;
