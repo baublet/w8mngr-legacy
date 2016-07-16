@@ -244,6 +244,7 @@
   min-height: 0;
   opacity: 0;
   z-index: -1;
+  overflow: hidden;
 }
 
 .helper-input:checked + .activity-filters .filters-panel {
