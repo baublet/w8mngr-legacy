@@ -2,7 +2,7 @@ desc "Processes every user's faturdays and sets today as faturday if they have i
 task :faturday => :environment do
   # puts "Processing automatic Faturday entries"
   User.find_each.each do |user|
-    return false if user.preferences["faturday_enabled"] == "false"
+    next if user.preferences["faturday_enabled"] == "false"
     CronProcessUserFaturdaysJob.perform_later user.id
   end
 end
