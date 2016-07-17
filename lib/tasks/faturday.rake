@@ -3,6 +3,6 @@ task :faturday => :environment do
   # puts "Processing automatic Faturday entries"
   User.find_each.each do |user|
     return false if user.preferences["faturday_enabled"] == "false"
-    CronProcessUserFaturdaysJob.perform_later self.id
+    CronProcessUserFaturdaysJob.perform_later user.id
   end
 end
