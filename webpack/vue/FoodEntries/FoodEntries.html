@@ -30,7 +30,7 @@
 
     <div class="totals" v-if="entries.length > 0">
       <h2 class="screen-reader-text">Today's Totals:</h2>
-      <a href="/users/{{ user.id }}/edit?p=health#target_calories" class="tooltip" v-bind:class="{ show: overTotalCalories }">Why is this red?</a>
+      <a href="/users/{{ user.id }}/edit?p=health#target_calories" class="tooltip" v-if="overTotalCalories">Why is this red?</a>
       <div title="Calories">
         <span class="number" v-text="totalCalories.toLocaleString()" v-bind:class="{ over: overTotalCalories }"></span>
         <span class="label">Calories</span>

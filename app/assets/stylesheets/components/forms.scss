@@ -100,7 +100,7 @@ label, .label {
     transition: box-shadow .15s ease-in-out;
     color: $white;
     padding: 1rem;
-    margin: 2rem 0 0;
+    margin: 0 0 $spacing-large;
     &:hover {
       @include height(3);
     }
@@ -156,7 +156,7 @@ label, .label {
     color: rgba($black, .75);
     border: 0;
     background: transparent;
-    background: linear-gradient(0deg, rgba($black, .25) 1px, rgba($black, 0) 1px);
+    background: linear-gradient(0deg, rgba($black, .05) 1px, rgba($black, 0) 1px);
     border-radius: 0;
     margin: 0;
     padding-left: 0;

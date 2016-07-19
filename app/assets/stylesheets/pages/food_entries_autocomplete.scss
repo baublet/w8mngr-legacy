@@ -1,0 +1,158 @@
+.autocomplete-results {
+  margin: 0 0 $spacing-large;
+  padding: 0;
+  @include mqAfterSize(640px) {
+    margin-left: 320px;
+    padding: 0 0 0 $spacing-normal;
+  }
+  h5 {
+    margin-bottom: .5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $font-size-small;
+  }
+}
+
+.autocomplete-item {
+  max-height: 2rem;
+  margin: 0 -1rem;
+  padding: #{$spacing-small} #{$spacing-normal};
+  overflow: hidden;
+  cursor: pointer;
+  @include mqAfterSize(640px) {
+    margin: 0;
+  }
+  &:nth-child(even) {
+    background: rgba($black, .035);
+  }
+  .name {
+    margin: 0;
+    padding:  0;
+    font-size: .7rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    overflow: hidden;
+  }
+  .add-food {
+    @include height(1);
+    float: right;
+    margin-top: -.5rem;
+    margin-right: -.5rem;
+    color: rgba($white, .75);
+    display: none;
+    padding: .5rem;
+    min-width: 0;
+    font-size: $font-size-tiny;
+    text-transform: uppercase;
+    font-weight: bold;
+    &:hover {
+      color: rgba($white, 1);
+      @include height(1);
+    }
+  }
+  .measurements {
+    display: none;
+  }
+  &:hover {
+    background: rgba($color-primary-light, .25);
+  }
+  &.selected {
+    margin: 0;
+    padding: 1rem 3rem;
+    max-height: 15rem;
+    background: $white;
+    @include height(3);
+    transform: translateY(-1rem);
+    cursor: auto;
+    .add-food {
+      display: inline;
+    }
+    .name {
+      margin: 0 -2rem 1rem;
+      white-space: normal;
+      font-size: .8rem;
+      font-weight: bold;
+      overflow: visible;
+    }
+    .measurements {
+      display: block;
+    }
+  }
+  .measurement {
+    position: relative;
+    z-index: -1;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    max-height: 0;
+    display: flex;
+    align-items: flex-end;
+    .previous-measurement, .next-measurement {
+      position: absolute;
+      left: -3rem;
+      top: 0;
+      bottom: -1rem;
+      background: $color-primary;
+      color: $white;
+      padding: .25rem .5rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+    }
+    .next-measurement {
+      left: auto;
+      right: -3rem;
+    }
+  }
+  .measurement.selected  {
+    transition: opacity .25s ease-in-out;
+    opacity: 1;
+    max-height: 15rem;
+    z-index: $layer-base;
+    .amount {
+      z-index: 10;
+      position: relative;
+    }
+    .previous-measurement, .next-measurement {
+      display: flex;
+    }
+    &:first-child .previous-measurement, &:last-child .next-measurement {
+      opacity: .25;
+    }
+  }
+  .amount, .unit, .calories, .fat, .carbs, .protein {
+    text-align: center;
+    font-size: .8rem;
+  }
+  .amount {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    width: 10%;
+  }
+  .unit {
+    width: 30%;
+    padding: 0 .75rem 0;
+    font-size: $font-size-tiny;
+  }
+  .calories, .fat, .carbs, .protein {
+    padding-top: .75rem;
+    width: 15%;
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      content: attr(alt);
+      display: block;
+      font-size: .45rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: rgba($black, .5);
+    }
+  }
+}

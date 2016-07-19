@@ -8,16 +8,58 @@
     width: 320px;
     float: left;
   }
+  .left {
+    width: 10%;
+  }
+  .right {
+    width: 90%;
+  }
   .full input {
     font-size: $font-size-huge;
+    padding-top: 0;
   }
   .macros input {
     font-size: $font-size-large;
   }
 }
 
+.foodlog .entry + .entry {
+  margin-top: $spacing-normal;
+  padding-top: $spacing-normal;
+  position: relative;
+  &:before {
+    content: " ";
+    max-height: 1px;
+    border-top: 1px solid rgba($black, .1);
+    position: absolute;
+    top: 0;
+    display: block;
+    left: -$spacing-normal;
+    right: -$spacing-normal;
+  }
+}
+
 .app-panel.foodlog .grid {
   padding-right: $spacing-normal;
+}
+
+@include mqAfterSize($desktop-breakpoint / 1.5) {
+  .foodlog .entry {
+    display: flex;
+    align-content: flex-end;
+    .row {
+      width: 50%;
+      margin: 0;
+      align-items: flex-end;
+    }
+    .macros {
+      padding-left: $spacing-small;
+    }
+  }
+}
+
+.app-panel .full input {
+  padding-top: 0;
 }
 
 .app-panel.foodlog  .macros .col {
@@ -39,4 +81,24 @@
   input {
     padding-bottom: $font-size-normal;
   }
+}
+
+.entry {
+  position: relative;
+}
+
+.entry.loading:after {
+  display: block;
+  content: " ";
+  height: 3px;
+  background-color: $color-secondary;
+  position: absolute;
+  bottom: -#{$spacing-normal / 2};
+  left: 0;
+  right: 0;
+  transform: translateX(0);
+  animation-name: entryRowLoading;
+  animation-duration: 3s;
+  animation-timing-function: $easing-1;
+  animation-iteration-count: infinite;
 }
