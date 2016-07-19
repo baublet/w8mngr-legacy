@@ -1,5 +1,8 @@
 $black: #1F1F1F;
+$black-light: lighten($black, 15);
+
 $white: #F7F7F7;
+
 $red: #FF0000;
 $green: #00D800;
 $yellow: #FFAA00;
@@ -9,6 +12,20 @@ $color-secondary: #540BBA;
 $color-usda: #555;
 
 $desktop-breakpoint: 960px;
+
+// Our widths for vertical spacing in the document. Also applicable for horizontal
+// spacing when it corresponds with vertical spacing
+$spacing-small: .5rem;
+$spacing-normal: 1rem;
+$spacing-large:  2.5rem;
+
+// For making our font-size look and feel similar everywhere
+$font-size-huge:   1.75rem;
+$font-size-large:  1.3rem;
+$font-size-normal: 1rem;
+$font-size-small: .75rem;
+$font-size-tiny:  .6rem;
+
 
 // My color pallette:  http://www.colourlovers.com/palette/1365151/piccadilly_sparrows
 

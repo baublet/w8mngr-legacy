@@ -1,0 +1,53 @@
+h1, h2, h3, h4 {
+    margin: 0 0 $spacing-normal;
+    a {
+        color: $black;
+        &:hover{
+            color: $color-primary-light;
+        }
+    }
+    .fa {
+        font-size:.75em;
+        opacity: .25;
+    }
+}
+
+h1 {
+    font-size: $font-size-huge;
+    font-weight: 300;
+    color: lighten($black, 15%);
+    .fa {
+      margin-left: -1rem;
+    }
+    // This makes it so icons for page titles show up behind the actual text
+    // on mobile, so that it doesn't take up screen real estate
+    @include mqBeforeSize($desktop-breakpoint) {
+      position: relative;
+      .fa {
+        position: absolute;
+        font-size: 6rem;
+        opacity: .075;
+        left: 0rem;
+        top: -2.25rem;
+        z-index: 1;
+      }
+      + .page-meta {
+        position: relative;
+        z-index: 2;
+      }
+    }
+}
+h2 {
+    font-size: $font-size-large;
+    font-weight: 300;
+}
+h3 {
+  font-size: $font-size-normal;
+  font-weight: 900;
+  margin-bottom: $spacing-normal;
+}
+h4 {
+    font-weight: 900;
+    font-size: .8rem;
+    margin-bottom: $spacing-normal;
+}

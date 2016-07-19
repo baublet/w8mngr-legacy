@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 .screen-reader-text {
@@ -21,95 +21,16 @@ body {
 }
 
 p {
-    line-height:160%;
-    margin: 1.5rem 0 2rem;
+    line-height:140%;
+    margin: 0 0 $spacing-large;
 }
 
 a {
     color: $color-primary;
     text-decoration: none;
     &:hover {
-        color: darken($color-primary,10%);
+        color: darken($color-primary, 10%);
     }
-}
-
-main p a, main li a {
-    background: linear-gradient(0deg, rgba($color-primary, .15) 1px, rgba($black, 0) 1px);
-    &:hover {
-        text-decoration: none;
-        background: linear-gradient(0deg, rgba($color-primary, .15) 80%, rgba($black, 0) 80%);
-    }
-}
-
-h1, h2, h3, h4 {
-    margin: 1rem 0;
-    a {
-        color: $black;
-        &:hover{
-            color: $color-primary-light;
-        }
-    }
-    .fa {
-        font-size:.75em;
-        opacity: .25;
-    }
-}
-
-h1 {
-    font-size: 1.75rem;
-    font-weight: 300;
-    color: lighten($black, 15%);
-    margin: 3rem 0 2rem;
-    .fa {
-      margin-left: -1.25rem;
-    }
-    @include mqBeforeSize($desktop-breakpoint) {
-      position: relative;
-      .fa {
-        position: absolute;
-        font-size: 6rem;
-        opacity: .075;
-        left: 0rem;
-        top: -2.25rem;
-        z-index: 1;
-      }
-      + .page-meta {
-        position: relative;
-        z-index: 2;
-      }
-    }
-}
-h2 {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin: 2.5rem 0 2rem;
-}
-h3 {
-  font-size: 1rem;
-  font-weight: 900;
-  margin: 2rem 0 1.5rem;
-}
-h4 {
-    font-weight: 900;
-    font-size: .8rem;
-    margin: 2rem 0 1.5rem;
-}
-
-ul, ol {
-    line-height: 1.5rem;
-    padding-left: 2rem;
-    li {
-        margin-bottom:.4rem;
-    }
-    li:last-child {
-        margin-bottom:0;
-    }
-}
-ul {
-    list-style-type: disc;
-}
-ol {
-  list-style-type: decimal;
 }
 
 section, main {
@@ -120,16 +41,14 @@ section, main {
 main {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 2rem;
 }
 
 blockquote {
-    margin: 2rem;
+    margin: $spacing-normal;
     padding: .5rem 0 .5rem 1rem;
     font-size: 1.2rem;
     line-height: 1.8rem;
     border-left: 3px solid rgba($black, .25);
-    border-radius: 5px;
 }
 
 strong {
@@ -141,14 +60,14 @@ em {
 }
 
 hr {
-    margin: 3rem 1rem;
+    margin: $spacing-large $spacing-normal;
     border: 0;
-    border-top: 1px dotted rgba($black, .25);
+    border-top: 1px dotted $black-light;
 }
 
 .page-meta {
     font-size: .8rem;
-    margin: 2rem 0 3rem;
+    margin: 0 0 $spacing-large;
     h1 + & {
         margin-top: -1rem;
     }
