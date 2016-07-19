@@ -108,6 +108,8 @@ $easing-1: cubic-bezier(0,.95,0,1);
 
         // Components
         "components/*",
+        // Page-specific blocks,
+        "pages/*",
 
         // Page-specific blocks
         "welcome",

@@ -1,0 +1,42 @@
+.app-form.food-entries {
+  padding: $spacing-small;
+  background: $color-primary;
+  color: $white;
+  position: relative;
+  z-index: $layer-base;
+  @include mqAfterSize(640px) {
+    width: 320px;
+    float: left;
+  }
+  .full input {
+    font-size: $font-size-huge;
+  }
+  .macros input {
+    font-size: $font-size-large;
+  }
+}
+
+.app-panel.foodlog .grid {
+  padding-right: $spacing-normal;
+}
+
+.app-panel.foodlog  .macros .col {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 4px;
+    font-size: $font-size-tiny;
+    content: attr(title);
+    text-transform: uppercase;
+    font-weight: 900;
+    opacity:.25;
+    pointer-events: none;
+  }
+  input {
+    padding-bottom: $font-size-normal;
+  }
+}

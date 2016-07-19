@@ -104,15 +104,6 @@ label, .label {
     &:hover {
       @include height(3);
     }
-    &.transparent {
-      color: $black;
-    }
-    div {
-        margin-bottom: 1rem;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
     input {
         margin-bottom: 0;
         &.large {
@@ -122,12 +113,6 @@ label, .label {
           color: rgba($white, .5);
           font-size: 80%;
         }
-    }
-    &.transparent {
-      @include placeholder {
-        color: rgba($black, .5);
-        font-size: 80%;
-      }
     }
     input[type=text], input[type=number] {
         color: rgba($white, .5);
@@ -145,21 +130,8 @@ label, .label {
           background: linear-gradient(0deg, rgba($white, .75) 3px, rgba($white, 0) 3px);
         }
     }
-    &.transparent input[type=text], &.transparent input[type=number] {
-      color: rgba($black, .5);
-      border-bottom: 1px solid rgba($black, .01);
-      &:hover {
-        color: rgba($black, .75);
-        border-bottom-color: rgba($black, .5);
-      }
-      &:focus {
-        color: rgba($black, .85);
-        border-bottom: 3px solid $black;
-        margin-bottom: -2px;
-      }
-    }
-    .meta {
-        text-align: right;
+    .large {
+      font-size: $font-size-large;
     }
     &:after {
       visibility: hidden;
@@ -171,23 +143,46 @@ label, .label {
     }
 }
 
-.app-wrapper {
-  position: relative;
-  .fa.loading {
-    display: block;
-    z-index:-1;
-    color: rgba($black, .5);
-    font-size: 10rem;
-    position: fixed;
-    right: -2rem;
-    top: 0;
-    opacity: 0;
-    transition: opacity .25s ease-in-out;
+.app-panel-form {
+  padding: $spacing-normal;
+  .grid .row {
+    margin-bottom: $spacing-small;
+    justify-content: space-between;
   }
-  &.loading {
-    .fa.loading {
-      opacity: 1;
+  .grid .col {
+    width: calc(25% - #{$spacing-small});
+  }
+  input {
+    color: rgba($black, .75);
+    border: 0;
+    background: transparent;
+    background: linear-gradient(0deg, rgba($black, .25) 1px, rgba($black, 0) 1px);
+    border-radius: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    &:hover {
+      background: linear-gradient(0deg, rgba($black, .5) 1px, rgba($black, 0) 1px);
     }
+    &:focus {
+      background: linear-gradient(0deg, rgba($black, .9) 3px, rgba($black, 0) 3px);
+    }
+    @include placeholder {
+      color: rgba($black, .5);
+      font-size: 80%;
+    }
+  }
+  // Full-size elements will have larger fonts
+  .full input {
+    font-size: $font-size-large;
+  }
+}
+
+.app-panel .meta {
+  position: absolute;
+  right: 0;
+  .fa {
+    margin: 0;
   }
 }
 

@@ -17,10 +17,10 @@ export default {
       this.initializeApp()
     },
     "loading": function() {
-      this.loading = 1
+      document.w8mngrLoading(true)
     },
     "not-loading": function() {
-      this.loading = 0
+      document.w8mngrLoading(false)
     },
   },
   computed: {

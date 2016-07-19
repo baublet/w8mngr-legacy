@@ -1,30 +1,43 @@
-<div class="row entry" transition="fl-fade" v-bind:class="{ loading: loading }">
-  <div class="col long">
-    <input  type="text"
-            @keyup.enter="saveEntry(index)"
-            v-model="description"
-            @blur="saveEntry(index)"
-            @focus="selectDescription()"
-            debounce="250">
-  </div>
-  <div class="col short" title="Calories">
-    <input type="text" @keyup.enter="saveEntry(index)" @blur="saveEntry(index)" v-model="calories">
-  </div>
-  <div class="col short" title="Fat">
-    <input type="text" @keyup.enter="saveEntry(index)" @blur="saveEntry(index)" v-model="fat">
-  </div>
-  <div class="col short" title="Carbs">
-    <input type="text" @keyup.enter="saveEntry(index)" @blur="saveEntry(index)" v-model="carbs">
-  </div>
-  <div class="col short" title="Protein">
-    <input type="text" @keyup.enter="saveEntry(index)" @blur="saveEntry(index)" v-model="protein">
-  </div>
-  <div class="col meta">
-    <a href="#" class="btn delete-btn" title="Delete Entry"
+<div class="grid" transition="fl-fade" v-bind:class="{ loading: loading }">
+  <div class="full meta">
+    <a href="#" class="delete small-icon" title="Delete Entry"
       @click.stop.prevent="removeEntry(index)"
       v-if="id">
       <i class="fa fa-times"></i>
       <span class="screen-reader-text">Delete Entry</span>
     </a>
+  </div>
+  <div class="row">
+    <div class="col full">
+      <input  type="text"
+              @keyup.enter="saveEntry(index)"
+              v-model="description"
+              @blur="saveEntry(index)"
+              @focus="selectText($event.target, 'amount')"
+              debounce="250">
+    </div>
+  </div>
+  <div class="row macros">
+    <div class="col short" title="Calories">
+      <input type="text" @keyup.enter="saveEntry(index)"
+                         @blur="saveEntry(index)"
+                         @focus="selectText($event.target, 'all')"
+                         v-model="calories">
+    </div>
+    <div class="col short" title="Fat">
+      <input type="text" @keyup.enter="saveEntry(index)"
+                         @blur="saveEntry(index)"
+                         @focus="selectText($event.target, 'all')"
+                         v-model="fat">
+    </div>
+    <div class="col short" title="Carbs">
+      <input type="text" @keyup.enter="saveEntry(index)"
+                         @blur="saveEntry(index)"
+                         @focus="selectText($event.target, 'all')"
+                         v-model="carbs">
+    </div>
+    <div class="col short" title="Protein">
+      <input type="text" @keyup.enter="saveEntry(index)" @blur="saveEntry(index)" v-model="protein">
+    </div>
   </div>
 </div>

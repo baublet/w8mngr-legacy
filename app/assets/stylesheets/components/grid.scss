@@ -7,12 +7,19 @@
     align-items: stretch;
     justify-content: space-around;
     width: 100%;
+    margin-bottom: $spacing-normal;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
   .col {
     display: block;
-    width: calc(33.33333% - ($spacing-normal * 2));
+    width: calc(33.33333% - (#{$spacing-normal} * 2));
   }
   .col.double {
-    width: calc(66.66666% - ($spacing-normal * 2));
+    width: calc(66.66666% - (#{$spacing-normal} * 2));
+  }
+  .col.full {
+    width: 100%;
   }
 }

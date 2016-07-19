@@ -77,9 +77,9 @@ nav {
     }
 }
 .navigation-title {
-    font-size: .9rem;
+    font-size: $font-size-normal;
     text-transform:uppercase;
-    margin:0 0 1rem;
+    margin: $spacing-normal 0 $spacing-normal;
     font-weight: 800;
     @include mqAfterSize($desktop-breakpoint) {
       display: none;

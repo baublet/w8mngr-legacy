@@ -4,10 +4,10 @@
     <p class="second suggestion">one day at a time</p>
     <div class="sign-up">
       <% if logged_in? %>
-      <a href="<%= dashboard_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Dashboard</a>
+      <a href="<%= dashboard_path %>" class="btn hero"><i class="fa fa-star"></i> Dashboard</a>
       <p>Or, you can <%= link_to "Logout", logout_path %></p>
       <% else %>
-      <a href="<%= get_started_path %>" class="btn banner-btn"><i class="fa fa-star"></i> Get Started</a>
+      <a href="<%= get_started_path %>" class="btn hero"><i class="fa fa-star"></i> Get Started</a>
       <p>Have an account? <%= link_to "Login", login_path %></p>
       <% end %>
     </div>

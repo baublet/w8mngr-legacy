@@ -1,0 +1,30 @@
+.app-panel {
+  padding: 0;
+  width:100%;
+  background: $white;
+  @include height(1);
+  transition: box-shadow .15s ease-in-out;
+  &:hover {
+    @include height(3);
+  }
+
+  .long {
+    @include mqAfterSize(640px) {
+      width:60%;
+      padding: 0 1rem 0 0;
+    }
+    input {
+      font-size: .9rem;
+      padding:0;
+      color: rgba($black, .75);
+      font-weight: bold;
+      @include mqAfterSize(640px) {
+        font-size: 1.3rem;
+        font-weight: 400;
+        height: 100%;
+        padding-bottom: .25rem;
+      }
+    }
+  }
+
+}

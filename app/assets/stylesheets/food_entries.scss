@@ -182,53 +182,6 @@
   }
 }
 
-.app-form.new {
-  padding: .5rem;
-  margin: 0;
-  background: $color-primary;
-  color: $white;
-  position: relative;
-  z-index: 20;
-
-  @include mqAfterSize(640px) {
-    // Only adding this bottom margin so we can see dat sexy drop shadow :)
-    margin-bottom: 2rem;
-    width: 320px;
-    float: left;
-  }
-
-  .col.long {
-    display:block;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: .5rem;
-    input {
-      font-size: 1.6rem;
-    }
-  }
-  .col.short {
-    padding-left: 3px;
-    width: 25%;
-    max-width: 25%;
-    &:first-child {
-      padding-left: 0;
-    }
-    input {
-      font-size: 1.2rem;
-      text-align: center;
-    }
-  }
-  .col.meta {
-    overflow: visible;
-    display:flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%;
-    max-width: 100%;
-    text-align:right;
-  }
-}
-
 .autocomplete-results {
   margin: 1rem -1rem 0;
   padding: 0 1rem;
