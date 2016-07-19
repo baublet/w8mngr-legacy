@@ -8,14 +8,14 @@ class CronProcessUserFaturdaysJob < ActiveJob::Base
     today = Date.today
 
     day_token = today.strftime("%a").downcase.byteslice(0,2)
-    return false if user.preferences["auto_faturdays"].nil?
-    return false if user.preferences["auto_faturdays"][day_token].nil?
-    return false if user.preferences["auto_faturdays"][day_token] == "false"
+    return true if user.preferences["auto_faturdays"].nil?
+    return true if user.preferences["auto_faturdays"][day_token].nil?
+    return true if user.preferences["auto_faturdays"][day_token] == "false"
 
     # If the user has an entry for this day, don't add the faturday
     today = today.strftime('%Y%m%d')
     existing = user.foodentries.where(day: today).limit(1)
-    return false if !existing.nil?
+    return true if !existing.nil?
 
     new_entry = user.foodentries.build(day: today)
     new_entry.description = "Faturday!"
