@@ -2,7 +2,7 @@
   .activities {
     width: 100%;
     max-width: none;
-    max-height: 21rem;
+    overflow: hidden;
     @include mqAfterSize($desktop-breakpoint) {
       margin-left: 2rem;
       margin-bottom: 0;
@@ -31,9 +31,8 @@
 }
 
 .activity-list {
-  min-height: calc(100% - 2.5rem);
-  max-height: calc(100% - 2.5rem);
   overflow-y: scroll;
+  max-height: 80vh;
   border-radius: 3px;
   border: 1px solid rgba($black, .1);
   padding: .5rem;
