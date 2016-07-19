@@ -51,7 +51,13 @@ Keep head facing forward, back straight and feet flat on floor; equal distributi
   <%= f.label :exrx, "ExRx link" %>
   <%= f.text_field :exrx, placeholder: "e.g., http://www.exrx.net/WeightExercises/Quadriceps/BBSquat.html" %>
 
-  <%= link_to "Delete Activity", delete_activity_path(activity), class: "delete-btn" unless activity.id.nil? %>
-  <%= f.button (activity.id.nil?) ? "Create Activity" : "Save Activity", class: "btn" %>
+  <div class="btn-bar">
+    <div class="left">
+      <%= link_to "Delete Activity", delete_activity_path(activity), class: "delete-btn" unless activity.id.nil? %>
+    </div>
+    <div class="right">
+      <%= f.button (activity.id.nil?) ? "Create Activity" : "Save Activity", class: "btn" %>
+    </div>
+  </div>
 
 <% end %>

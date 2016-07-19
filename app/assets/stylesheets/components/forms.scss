@@ -33,9 +33,9 @@ textarea {
 }
 label, .label {
   font-weight: 800;
-  text-transform: uppercase;
   font-size: .8rem;
-  margin-bottom: .25rem;
+  margin-bottom: $spacing-tiny;
+  display: inline-block;
   &.req::after {
     content: "*";
     padding-left: .25rem;
@@ -58,24 +58,25 @@ label, .label {
     }
     label {
       padding: .25rem 0 0;
-        display: inline-block;
-        cursor: pointer;
-        color: #999;
-        transition: color .15s ease-in-out;
-        margin-right: .5rem;
-        margin-left: 1.5rem;
-        position: relative;
-        &:hover {
-            color: $black;
-        }
-        &::before {
-            position: absolute;
-            left: -1.5rem;
-            top: .15rem;
-            font-family: "FontAwesome";
-            font-size: 1rem;
-            content: "\f10c";
-        }
+      display: block;
+      clear: right;
+      cursor: pointer;
+      color: #999;
+      transition: color .15s ease-in-out;
+      margin-right: .5rem;
+      margin-left: 1.5rem;
+      position: relative;
+      &:hover {
+          color: $black;
+      }
+      &::before {
+          position: absolute;
+          left: -1.5rem;
+          top: .15rem;
+          font-family: "FontAwesome";
+          font-size: 1rem;
+          content: "\f10c";
+      }
     }
     input[type=radio]:checked + label {
         color: $color-primary;
@@ -99,7 +100,7 @@ label, .label {
     @include height(1);
     transition: box-shadow .15s ease-in-out;
     color: $white;
-    padding: 1rem;
+    padding: $spacing-small;
     margin: 0 0 $spacing-large;
     &:hover {
       @include height(3);
@@ -144,7 +145,7 @@ label, .label {
 }
 
 .app-panel-form {
-  padding: $spacing-normal;
+  padding: $spacing-small;
   .grid .row {
     margin-bottom: $spacing-small;
     justify-content: space-between;
@@ -156,7 +157,7 @@ label, .label {
     color: rgba($black, .75);
     border: 0;
     background: transparent;
-    background: linear-gradient(0deg, rgba($black, .05) 1px, rgba($black, 0) 1px);
+    background: linear-gradient(0deg, rgba($black, .01) 1px, rgba($black, 0) 1px);
     border-radius: 0;
     margin: 0;
     padding-left: 0;

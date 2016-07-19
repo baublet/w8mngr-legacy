@@ -17,6 +17,7 @@ $desktop-breakpoint: 960px;
 
 // Our widths for vertical spacing in the document. Also applicable for horizontal
 // spacing when it corresponds with vertical spacing
+$spacing-tiny:  .25rem;
 $spacing-small: .5rem;
 $spacing-normal: 1rem;
 $spacing-large:  2.5rem;
@@ -56,7 +57,7 @@ $easing-1: cubic-bezier(0,.95,0,1);
 // Ryan's favorite mediaquery mixins!
 // I typically use this one because I design mobile-first
 @mixin mqAfterSize($width) {
-    @media screen and (min-width: $width) {
+    @media screen and (min-width: $width + 1) {
         @content;
     }
 }

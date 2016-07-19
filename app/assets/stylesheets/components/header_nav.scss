@@ -2,7 +2,7 @@
     display:none;
     @include mqBeforeSize($desktop-breakpoint) {
       &:checked ~ .navigation-options {
-        transform: translateX(-330px);
+        transform: translateX(-290px);
       }
       &:checked ~ .nav-toggle-btn {
           position: fixed;
@@ -42,11 +42,11 @@
     background: linear-gradient(-25deg, darken($color-primary, 5), $color-primary);
     padding: 1rem;
     border-top-right-radius: 0;
-    width: 320px;
+    width: 280px;
     position: fixed;
     z-index: $layer-options-panel;
     top: 0;
-    right: -330px;
+    right: -290px;
     transition: transform .5s $easing-1;
     box-shadow: 0 0 15px 0 rgba(black, .75);
     height: 100vh;

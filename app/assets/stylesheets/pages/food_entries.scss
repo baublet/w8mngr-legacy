@@ -1,5 +1,4 @@
 .app-form.food-entries {
-  padding: $spacing-small;
   background: $color-primary;
   color: $white;
   position: relative;
@@ -24,8 +23,8 @@
 }
 
 .foodlog .entry + .entry {
-  margin-top: $spacing-normal;
-  padding-top: $spacing-normal;
+  margin-top: $spacing-small;
+  padding-top: $spacing-small;
   position: relative;
   &:before {
     content: " ";
@@ -34,13 +33,17 @@
     position: absolute;
     top: 0;
     display: block;
-    left: -$spacing-normal;
-    right: -$spacing-normal;
+    left: -$spacing-small;
+    right: -$spacing-small;
   }
 }
 
 .app-panel.foodlog .grid {
   padding-right: $spacing-normal;
+  margin-bottom: 0;
+  .row {
+    margin-bottom: 0;
+  }
 }
 
 @include mqAfterSize($desktop-breakpoint / 1.5) {

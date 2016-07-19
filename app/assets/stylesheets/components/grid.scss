@@ -2,6 +2,10 @@
 
 .grid {
   display: block;
+  margin-bottom: $spacing-normal;
+  &:last-child {
+    margin-bottom: 0;
+  }
   .row {
     display: flex;
     align-items: stretch;
