@@ -42,11 +42,18 @@ w8mngr.init.add(function() {
           if (url !== window.location.href) {
             window.Turbolinks.visit(url)
           } else {
-            Turbolinks.clearCache()
-            document.documentElement.innerHTML = response.responseText
-            history.pushState({turbolinks: true, url: url}, '', url)
-            Turbolinks.dispatch("turbolinks:load")
-            document.w8mngrLoading(false)
+            window.requestAnimationFrame(function() {
+              // Let's grab the body from the respose
+              let parser = new DOMParser()
+              let doc = parser.parseFromString(response.responseText, "text/html")
+              console.log(doc)
+              Turbolinks.clearCache()
+              document.getElementById("main").innerHTML = doc.getElementById("main").innerHTML
+              history.pushState({turbolinks: true, url: url}, '', url)
+              Turbolinks.dispatch("turbolinks:load")
+              window.scroll(0,0)
+              document.w8mngrLoading(false)
+            })
           }
         })
       })

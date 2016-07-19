@@ -3838,6 +3838,16 @@ input[type=range] {
 }
 
 /* line 1, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+.muscle-groups svg, .muscle-groups svg g {
+  pointer-events: none;
+}
+
+/* line 2, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+.muscle-groups svg path {
+  pointer-events: auto;
+}
+
+/* line 4, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups {
   position: relative;
   padding: .5rem 1rem;
@@ -3847,14 +3857,14 @@ input[type=range] {
   overflow: hidden;
   margin-bottom: 2rem;
 }
-/* line 9, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 12, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups h3 {
   margin: .5rem 0;
   padding: 0;
   text-transform: uppercase;
   font-size: 1.3rem;
 }
-/* line 15, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 18, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label {
   width: 50px;
   display: block;
@@ -3870,18 +3880,18 @@ input[type=range] {
   font-weight: 400;
   text-transform: capitalize;
 }
-/* line 29, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 32, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label:hover, .muscle-groups label.hover {
   opacity: 1;
   border-color: rgba(31, 31, 31, 0.75);
 }
-/* line 34, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 37, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups input:checked + label {
   opacity: 1;
   font-weight: bold;
   color: #3492ae;
 }
-/* line 39, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 42, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups svg {
   position: absolute;
   right: -15vw;
@@ -3891,158 +3901,158 @@ input[type=range] {
   max-height: 27rem;
   bottom: 1rem;
 }
-/* line 48, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 51, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups svg g[id] path {
   opacity: .2;
   transition: opacity .25s ease-in-out;
 }
-/* line 52, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 55, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups svg g g[id]:hover path {
   cursor: pointer;
   opacity: .5;
   fill: #3492ae !important;
 }
-/* line 57, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 60, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups .muscles-helper {
   display: none;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_obliques"]:hover ~ svg #Obliques path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_obliques:checked ~ svg #Obliques path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_abs"]:hover ~ svg #Abs path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_abs:checked ~ svg #Abs path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_quads"]:hover ~ svg #Quads path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_quads:checked ~ svg #Quads path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_biceps"]:hover ~ svg #Biceps path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_biceps:checked ~ svg #Biceps path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_adductors"]:hover ~ svg #Adductors path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_adductors:checked ~ svg #Adductors path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_pectorals"]:hover ~ svg #Pectorals path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_pectorals:checked ~ svg #Pectorals path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_deltoids"]:hover ~ svg #Deltoids path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_deltoids:checked ~ svg #Deltoids path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_hamstrings"]:hover ~ svg #Hamstrings path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_hamstrings:checked ~ svg #Hamstrings path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_quads"]:hover ~ svg #Quads path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_quads:checked ~ svg #Quads path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_forearms"]:hover ~ svg #Forearms path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_forearms:checked ~ svg #Forearms path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_calves"]:hover ~ svg #Calves path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_calves:checked ~ svg #Calves path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_triceps"]:hover ~ svg #Triceps path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_triceps:checked ~ svg #Triceps path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_glutes"]:hover ~ svg #Glutes path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_glutes:checked ~ svg #Glutes path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_lats"]:hover ~ svg #Lats path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_lats:checked ~ svg #Lats path {
   opacity: .8;
   fill: #3492ae !important;
 }
-/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups label[for="activity_muscle_groups_trapezius"]:hover ~ svg #Trapezius path {
   opacity: .75;
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 69, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups #activity_muscle_groups_trapezius:checked ~ svg #Trapezius path {
   opacity: .8;
   fill: #3492ae !important;
 }
 @media screen and (max-width: 470px) {
-  /* line 72, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 75, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .muscle-groups svg {
     right: auto;
     left: 80px;
@@ -4051,7 +4061,7 @@ input[type=range] {
 }
 
 @media screen and (min-width: 720px) {
-  /* line 80, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 83, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .muscle-groups.show {
     float: right;
     min-width: 320px;
@@ -4060,13 +4070,13 @@ input[type=range] {
     margin-bottom: 2rem;
   }
 }
-/* line 88, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 91, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups.show label {
   display: none;
   width: 0;
   height: 0;
 }
-/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 96, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups.show input:checked + label {
   display: inline-block;
   width: auto;
@@ -4076,20 +4086,20 @@ input[type=range] {
   margin: 0 0 .25rem 0;
   padding: 0;
 }
-/* line 102, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 105, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups.show input:checked + label ~ input:checked + label {
   margin-left: -.25rem;
 }
-/* line 104, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 107, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups.show input:checked + label ~ input:checked + label:before {
   content: ", ";
 }
-/* line 108, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 111, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups.show svg g g[id]:hover path {
   cursor: default;
   opacity: .1;
 }
-/* line 112, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 115, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups.show svg {
   margin: 2rem 0 1rem;
   padding: 0;
@@ -4099,63 +4109,88 @@ input[type=range] {
   height: auto;
 }
 
-/* line 122, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 125, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups-list {
   margin: 0 -.5rem -.75rem;
 }
-/* line 124, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 127, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups-list .pill-list {
   justify-content: flex-end;
 }
-/* line 128, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 131, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .muscle-groups-list h3 {
   display: none;
 }
 
-/* line 133, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 136, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity .type {
   font-weight: bold;
   font-size: .75rem;
 }
 @media screen and (min-width: 960px) {
-  /* line 133, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 136, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .activity .type {
     margin-top: -2rem;
   }
 }
 
-/* line 141, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 144, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.card {
   min-height: 7rem;
 }
-/* line 143, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 146, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+.activity.card h2 {
+  font-size: 1rem;
+}
+/* line 149, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.card .type {
   margin-top: 0;
   margin-bottom: .5rem;
   font-weight: 400;
   opacity: .5;
 }
-/* line 149, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 155, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.card .pill-list {
   justify-content: flex-start;
 }
-/* line 152, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 158, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.card .log-activity-btn {
-  margin: 0;
+  margin: 0 0 0 1rem;
+  padding: .5rem;
+  font-size: .6rem;
+  color: rgba(31, 31, 31, 0.5);
+  border: 1px solid rgba(31, 31, 31, 0.075);
+  float: none;
 }
-/* line 155, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+@media screen and (max-width: 480px) {
+  /* line 158, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  .activity.card .log-activity-btn {
+    margin: .5rem 0 .5rem 0;
+    display: block;
+    width: 6rem;
+  }
+}
+/* line 170, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+.activity.card .log-activity-btn .fa {
+  font-size: 1em;
+}
+/* line 173, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+.activity.card .log-activity-btn:hover {
+  color: #F7F7F7;
+}
+/* line 177, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.card .muscle-groups-list {
-  margin: 0 0 1rem;
+  margin: 0;
 }
 
 @media screen and (min-width: 960px) {
-  /* line 161, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 183, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .activity.card {
     margin-right: 1rem;
     vertical-align: top;
   }
 }
-/* line 166, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 188, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium {
   margin: 0 -1rem;
   padding: 0 1rem;
@@ -4164,17 +4199,17 @@ input[type=range] {
   flex-wrap: wrap;
 }
 @media screen and (min-width: 960px) {
-  /* line 166, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 188, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .activity.medium {
     flex-wrap: nowrap;
   }
 }
-/* line 175, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 197, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium input[type=text], .activity.medium input[type=number] {
   min-width: 0;
   width: 100%;
 }
-/* line 179, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 201, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .muscle-groups {
   float: right;
   background: transparent;
@@ -4184,50 +4219,50 @@ input[type=range] {
   max-width: 35%;
   margin: 0;
 }
-/* line 187, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 209, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .muscle-groups svg {
   margin: 0;
   padding: 0;
 }
 @media screen and (min-width: 960px) {
-  /* line 179, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 201, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .activity.medium .muscle-groups {
     float: left;
   }
 }
-/* line 192, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 214, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .type {
   margin: -1rem 0 0;
   opacity: .5;
   font-weight: 400;
 }
-/* line 197, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 219, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium + .activity.medium {
   margin-top: 1rem;
   border-top: 1px solid rgba(31, 31, 31, 0.1);
   padding: 1rem 1rem 0;
 }
-/* line 202, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 224, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium h3 {
   margin: 0 0 1rem;
 }
-/* line 205, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 227, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .log-activity-btn {
   position: static;
   float: none;
   margin: 1rem 0;
   display: inline-block;
 }
-/* line 211, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 233, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .activity-entries {
   width: 100%;
   margin: 1rem 0 0;
 }
-/* line 214, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 236, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .activity-entries h4 {
   margin: 0 0 .5rem;
 }
-/* line 217, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 239, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .activity-entries.today {
   background: #21C6F5;
   color: #F7F7F7;
@@ -4235,38 +4270,40 @@ input[type=range] {
   border-radius: 3px;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 223, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 245, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity.medium .activity-entries.today input, .activity.medium .activity-entries.today .meta-btn, .activity.medium .activity-entries.today .delete-btn {
   color: #F7F7F7;
   background: transparent;
 }
 @media screen and (min-width: 960px) {
-  /* line 211, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 233, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .activity.medium .activity-entries {
     width: 40%;
     margin: 0;
   }
 }
 
-/* line 235, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 257, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-general-info {
   width: 100%;
 }
 @media screen and (min-width: 960px) {
-  /* line 235, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  /* line 257, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
   .activity-general-info {
     width: 60%;
   }
 }
 
-/* line 242, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 264, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .helper-input + .activity-filters .filters-panel {
   max-height: 1px;
+  min-height: 0;
   opacity: 0;
   z-index: -1;
+  overflow: hidden;
 }
 
-/* line 248, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 272, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .helper-input:checked + .activity-filters .filters-panel {
   max-height: 35rem;
   opacity: 1;
@@ -4274,25 +4311,33 @@ input[type=range] {
   transition: opacity .25s ease-in-out;
 }
 
-/* line 255, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 279, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters {
   position: relative;
-  margin: -4rem 0 2rem;
-  float: right;
   display: inline-block;
   overflow: visible;
   text-align: right;
+  z-index: 3;
+  margin: -1rem 0 2rem;
+  float: right;
 }
-/* line 262, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+@media screen and (min-width: 480px) {
+  /* line 279, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+  .activity-filters {
+    margin: -4rem 0 2rem;
+    float: right;
+  }
+}
+/* line 291, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters > label {
   cursor: pointer;
   opacity: .5;
 }
-/* line 265, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 294, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters > label:hover, .activity-filters > label:focus {
   opacity: 1;
 }
-/* line 269, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 298, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters .filters-panel {
   position: absolute;
   right: -1rem;
@@ -4308,7 +4353,7 @@ input[type=range] {
   min-width: 260px;
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 284, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 313, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters .meta {
   position: absolute;
   left: .5rem;
@@ -4316,18 +4361,18 @@ input[type=range] {
   cursor: pointer;
   opacity: .5;
 }
-/* line 290, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 319, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters .meta:hover, .activity-filters .meta:focus {
   opacity: 1;
   color: #FF0000;
 }
-/* line 295, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 324, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters .muscle-groups {
   background: transparent;
   padding: 0;
   box-shadow: none;
 }
-/* line 299, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
+/* line 328, /home/ubuntu/workspace/app/assets/stylesheets/activities.scss */
 .activity-filters .muscle-groups svg {
   max-height: 15rem;
   right: -5vw;

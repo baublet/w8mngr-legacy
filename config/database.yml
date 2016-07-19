@@ -19,4 +19,4 @@ production:
   <<: *default
   database: w8mngr
   adapter: postgresql
-  url: <%= ENV['POSTGRESQL_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
