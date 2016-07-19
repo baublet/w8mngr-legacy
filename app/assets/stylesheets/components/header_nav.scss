@@ -1,14 +1,3 @@
-nav {
-  vertical-align: middle;
-    .meta a {
-        color: $color-primary-light;
-        &:hover {
-            color: $white;
-            text-decoration: underline;
-        }
-    }
-}
-
 .nav-toggle {
     display:none;
     @include mqBeforeSize($desktop-breakpoint) {
