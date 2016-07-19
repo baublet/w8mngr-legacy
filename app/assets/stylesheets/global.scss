@@ -13,16 +13,20 @@ html {
 }
 
 body {
-  // overflow-x: hidden;
+  // We use this because sometimes we want elements to go to the left or right of
+  // of the screen, but we don't really care what's out there (for display purposes).
+  // Since this website will never feature horizontal scrolling at the window
+  // level, we just remove the ability of the body to scroll horizontally.
+  overflow-x: hidden;
 }
 
 .screen-reader-text {
     @include screenReaderText();
 }
 
-p {
-    line-height:140%;
-    margin: 0 0 $spacing-large;
+p, li {
+    line-height:130%;
+    margin: 0 0 $spacing-normal;
 }
 
 a {
@@ -31,16 +35,6 @@ a {
     &:hover {
         color: darken($color-primary, 10%);
     }
-}
-
-section, main {
-    padding: 0 1rem;
-    overflow: hidden;
-}
-
-main {
-  min-height: 100vh;
-  position: relative;
 }
 
 blockquote {
@@ -65,42 +59,13 @@ hr {
     border-top: 1px dotted $black-light;
 }
 
-.page-meta {
-    font-size: .8rem;
-    margin: 0 0 $spacing-large;
-    h1 + & {
-        margin-top: -1rem;
-    }
-    a {
-        display: inline-block;
-        margin: 0 1rem .5rem 0;
-        padding-bottom: .1rem;
-        color: rgba($black, .5);
-        border-bottom: 3px solid transparent;
-        &:hover {
-            color: $black;
-            border-color: $black;
-        }
-    }
-}
-
-.pagination {
-    margin-top: 2rem;
-    .previous {
-        float:left;
-    }
-    .next {
-        float: right;
-    }
-}
-
 .beta-notification {
     position:absolute;
     width: 100%;
     left:0;
     top: 0;
     text-align:center;
-    z-index: 299;
+    z-index: $layer-options-panel - 1;
     a {
         border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
@@ -116,150 +81,14 @@ hr {
     }
 }
 
-.table {
-  .row {
-    display:block;
-		overflow: visible;
-		font-size: 0;
-  }
-  .col {
-    font-size: 1rem;
-		display: inline-block;
-    overflow: visible;
-		white-space: nowrap;
-		vertical-align: top;
-  }
-}
-
 .nojs .hide-if-no-js {
   display: none;
-}
-
-.section-inside {
-  max-width: 640px;
-  margin-right: auto;
-  margin-left: auto;
-  @include mqAfterSize($desktop-breakpoint) {
-    max-width: 960px;
-    margin: 0 2rem 0 0;
-    margin-left: calc(200px + 2rem);
-    .welcome & {
-        max-width: 840px;
-        margin: 0 auto;
-    }
-  }
 }
 
 .got-it {
   color: $green;
 }
+
 .dont-got-it {
   color: $red;
-}
-
-.app-wrapper p {
-  line-height: 1rem;
-  font-size: .8rem;
-}
-
-.data-table {
-  thead th, tfoot th {
-    font-weight: bold;
-    color: rgba($black, .75);
-    border-bottom: 3px solid rgba($black, .75);
-    background: rgba($black, .025);
-    text-transform: uppercase;
-    font-size: .75rem;
-  }
-  td,th {
-    padding: .75rem;
-  }
-  tr:hover td {
-    background: rgba($black, .025);
-  }
-  tbody td {
-    font-size: .75rem;
-  }
-  tfoot td {
-    font-weight: bold;
-  }
-}
-
-.progress-bar {
-  overflow: hidden;
-  width: 100%;
-  height: 1rem;
-  .container, .progress {
-    height: 100%;
-    background: rgba($black, .1);
-  }
-  .progress {
-    width: auto;
-    background: $color-primary-light;
-  }
-}
-
-.totals {
-  margin: 2rem 0 2rem;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  text-align: center;
-  .number {
-    font-size: 1rem;
-    font-weight: 400;
-    @include mqAfterSize($desktop-breakpoint / 1.5) {
-      font-size: 2rem;
-      font-weight: 100;
-    }
-    @include mqAfterSize($desktop-breakpoint) {
-      font-size: 3rem;
-    }
-  }
-  .unit, .label {
-    font-size: .6rem;
-    font-weight: 900;
-    opacity: .25;
-    @include mqAfterSize($desktop-breakpoint) {
-      font-size: 1rem;
-    }
-  }
-  .unit {
-    font-size: .6rem;
-  }
-  .label {
-    display: block;
-  }
-}
-
-.turbolinks-loading {
-  position: fixed;
-  z-index: 99999;
-  background: rgba($black, .5);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: space-around;
-  color: $white;
-  display: none;
-  h1 {
-    @include screenReaderText();
-  }
-  .fa {
-    color: $black;
-    font-size: 10rem;
-  }
-  .turbolinks-loading-panel {
-    display: inline-block;
-  }
-  &.on {
-    display: flex;
-  }
 }

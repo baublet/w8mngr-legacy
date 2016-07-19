@@ -4,6 +4,8 @@ footer {
     width: 100%;
     background: $black;
     color: rgba($white, .75);
+    position: relative;
+    z-index: $layer-footer;
     div {
       margin-top: 1rem;
     }

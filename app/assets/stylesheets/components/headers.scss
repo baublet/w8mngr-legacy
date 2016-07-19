@@ -2,7 +2,7 @@ h1, h2, h3, h4 {
     margin: 0 0 $spacing-normal;
     a {
         color: $black;
-        &:hover{
+        &:hover {
             color: $color-primary-light;
         }
     }
@@ -37,15 +37,18 @@ h1 {
       }
     }
 }
+
 h2 {
     font-size: $font-size-large;
     font-weight: 300;
 }
+
 h3 {
   font-size: $font-size-normal;
   font-weight: 900;
   margin-bottom: $spacing-normal;
 }
+
 h4 {
     font-weight: 900;
     font-size: .8rem;

@@ -1,0 +1,27 @@
+.page-meta {
+    font-size: $font-size-small;
+    margin: 0 0 $spacing-large;
+    h1 + & {
+        margin-top: -$spacing-small;
+    }
+    a {
+        display: inline-block;
+        margin: 0 1rem .5rem 0;
+        padding-bottom: .1rem;
+        color: rgba($black, .5);
+        border-bottom: 3px solid transparent;
+        &:hover {
+            color: $black;
+            border-color: $black;
+        }
+    }
+}
+
+.pagination {
+    .previous {
+        float:left;
+    }
+    .next {
+        float: right;
+    }
+}

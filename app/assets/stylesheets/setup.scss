@@ -11,6 +11,8 @@ $color-primary-light: #21C6F5;
 $color-secondary: #540BBA;
 $color-usda: #555;
 
+$color-nav: darken($color-primary, 20);
+
 $desktop-breakpoint: 960px;
 
 // Our widths for vertical spacing in the document. Also applicable for horizontal
@@ -25,6 +27,14 @@ $font-size-large:  1.3rem;
 $font-size-normal: 1rem;
 $font-size-small: .75rem;
 $font-size-tiny:  .6rem;
+
+// For z-index ordering
+$layer-modal:          1000;
+$layer-options-panel:  600;
+$layer-app-navigation: 500;
+$layer-footer:         400;
+$layer-header:         300;
+$layer-base:           100;
 
 
 // My color pallette:  http://www.colourlovers.com/palette/1365151/piccadilly_sparrows
@@ -95,14 +105,10 @@ $easing-1: cubic-bezier(0,.95,0,1);
 }
 
 @import "global",
-        "header",
-        "nav",
-        "buttons",
-        "forms",
-        "messages",
-        "animations",
-        "cards",
-        "breadcrumbs",
+
+        // Components
+        "components/*",
+
         // Page-specific blocks
         "welcome",
         "users",
@@ -114,7 +120,6 @@ $easing-1: cubic-bezier(0,.95,0,1);
         "dashboard",
         "activities",
         "activity_entries",
-        "routines",
+        "routines"
 
-
-        "footer";
+        ;

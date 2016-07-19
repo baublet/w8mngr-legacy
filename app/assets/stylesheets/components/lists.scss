@@ -1,9 +1,7 @@
 ul, ol {
     padding-left: 2rem;
-
-    li {
-        margin-bottom:.4rem;
-    }
+    margin-bottom: $spacing-large;
+    // .li inherits stuff from .p in global.scss for consistent look in text
     li:last-child {
         margin-bottom:0;
     }

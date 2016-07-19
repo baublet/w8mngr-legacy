@@ -4,14 +4,17 @@ header {
     padding: .5rem 1rem;
     font-size: 0;
     position: relative;
-    z-index: 200;
+    z-index: $layer-header;
     display: flex;
     align-items: center;
+    margin-bottom: $spacing-large;
 }
+
 header .brand, header nav {
     width:50%;
     font-size: 1;
 }
+
 .site-title {
     margin: .25rem 0 0;
     a {
@@ -22,9 +25,9 @@ header .brand, header nav {
         height: 50px;
         background: asset_url('logo-heart.svg') top left no-repeat;
         background-size:contain;
-        //-webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,.25));
     }
 }
+
 .site-subtitle {
     display: none;
 }

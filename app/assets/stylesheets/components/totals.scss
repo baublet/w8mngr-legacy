@@ -1,0 +1,33 @@
+.totals {
+  margin: 2rem 0 2rem;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  .number {
+    font-size: 1rem;
+    font-weight: 400;
+    @include mqAfterSize($desktop-breakpoint / 1.5) {
+      font-size: 2rem;
+      font-weight: 100;
+    }
+    @include mqAfterSize($desktop-breakpoint) {
+      font-size: 3rem;
+    }
+  }
+  .unit, .label {
+    font-size: .6rem;
+    font-weight: 900;
+    opacity: .25;
+    @include mqAfterSize($desktop-breakpoint) {
+      font-size: 1rem;
+    }
+  }
+  .unit {
+    font-size: .6rem;
+  }
+  .label {
+    display: block;
+  }
+}

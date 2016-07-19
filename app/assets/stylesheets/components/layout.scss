@@ -1,0 +1,23 @@
+section, main {
+    padding: 0 1rem;
+}
+
+main {
+  min-height: 100vh;
+  position: relative;
+}
+
+.section-inside {
+  max-width: 640px;
+  margin-right: auto;
+  margin-left: auto;
+  @include mqAfterSize($desktop-breakpoint) {
+    max-width: 960px;
+    margin: 0 2rem 0 0;
+    margin-left: calc(200px + 2rem);
+    .welcome & {
+        max-width: 840px;
+        margin: 0 auto;
+    }
+  }
+}

@@ -1,0 +1,182 @@
+.app-menu-box {
+    position: fixed;
+    z-index: $layer-app-navigation;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    @include mqAfterSize($desktop-breakpoint) {
+      position: absolute;
+      top: -$spacing-large;
+      right: auto;
+      width: 200px;
+      padding: 0;
+      background: $white;
+      @include height(1);
+    }
+    ul {
+        font-size: 0;
+    }
+    li {
+        font-size: $font-size-small;
+    }
+    ul, li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.app-menu-base {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: $layer-app-navigation + 10;
+    @include mqAfterSize($desktop-breakpoint) {
+      display: block;
+    }
+    li {
+        flex-grow: 1;
+        vertical-align: middle;
+        text-align: center;
+    }
+    input[type=radio] {
+        display: none;
+        &:checked {
+            + label {
+              @include mqBeforeSize($desktop-breakpoint) {
+                background: lighten($color-nav, 5);
+                color: $white;
+                + .app-menu-sub {
+                    transform: translateY(-5.5rem);
+                }
+              }
+            }
+        }
+    }
+    label {
+      background: $color-nav;
+      position: relative;
+      z-index: $layer-app-navigation + 10;
+      color: rgba($white, .5);
+      font-size: $font-size-normal;
+      display: block;
+      height: 3.5rem;
+      line-height: 3.5rem;
+      width: 100%;
+      vertical-align: middle;
+      cursor: pointer;
+      margin: 0;
+      &:hover {
+        color: rgba($white, .75);
+      }
+      @include mqAfterSize($desktop-breakpoint) {
+        text-align: left;
+        font-size: 1.5rem;
+        line-height: 1rem;
+        height: auto;
+        padding: .5rem;
+        background: $black-light;
+        color: rgba($white, .75);
+        text-transform: none;
+        font-weight: 100;
+        border-top: 1px solid rgba($white, .25);
+        border-bottom: 1px solid rgba($black, .5);
+        &:hover {
+          cursor: default;
+        }
+        .screen-reader-text {
+          display: inline;
+          visibility: visible;
+          font-size: $font-size-normal;
+          vertical-align: middle;
+          text-indent: 0;
+          position: static;
+          opacity: 1;
+        }
+        .fa {
+          width: 1.5rem;
+        }
+      }
+    }
+}
+
+.app-menu-sub {
+    position: fixed;
+    z-index: $layer-app-navigation;
+    left: 0;
+    right: 0;
+    bottom: -2rem;
+    transition: transform .5s cubic-bezier(0,.98,.8,.99);
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 0 7px 1px rgba(black, .3);
+    @include mqAfterSize($desktop-breakpoint) {
+      position: static;
+      display: block;
+      max-height: none;
+      box-shadow: none;
+    }
+    li {
+        flex-grow: 1;
+        text-align: center;
+        @include mqAfterSize($desktop-breakpoint) {
+          + li a {
+            border-top: 1px solid rgba($black, .05);
+          }
+        }
+    }
+    a {
+      position: relative;
+      z-index: $layer-app-navigation + 5;
+      text-decoration: none;
+      color: rgba($white, .5);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 4rem;
+      width: 100%;
+      background: lighten($color-nav, 5);
+      border-top: 5px solid transparent;
+      border-bottom-color: transparent;
+      span {
+        width: 100%;
+        display: block;
+        font-size: $font-size-tiny;
+        text-transform: uppercase;
+        font-weight: 400;
+        margin-top: -.2rem;
+      }
+      &:hover {
+          color: rgba($white, .75);
+          background: lighten($color-nav, 10);
+      }
+      .fa {
+        width: 100%;
+        font-size: $font-size-normal;
+      }
+      @include mqAfterSize($desktop-breakpoint) {
+        height: auto;
+        border: 0;
+        background: transparent;
+        padding: .45rem .5rem;
+        color: rgba($black, .75);
+        .fa, span {
+          width: auto;
+          margin: 0;
+          display: inline;
+          font-size: .8rem;
+          text-transform: none;
+          opacity: 1;
+        }
+        .fa {
+          width: 2rem;
+        }
+        &:hover {
+          background: rgba($color-nav, .1);
+          color: $black;
+        }
+      }
+    }
+}
