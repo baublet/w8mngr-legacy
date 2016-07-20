@@ -70,6 +70,7 @@ group :development, :test do
     gem "therubyracer", platforms: :ruby
     gem "foreman"
     gem "brakeman"
+    gem "bullet"
 end
 
 

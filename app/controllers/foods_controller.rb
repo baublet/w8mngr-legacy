@@ -6,7 +6,7 @@ class FoodsController < ApplicationController
 
   # GET /foods
   def index
-    @foods = current_user.foods.all.where(deleted: false)
+    @foods = current_user.foods.all.includes(:measurements).where(deleted: false)
   end
 
   # GET /foods/1
