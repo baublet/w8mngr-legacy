@@ -6,8 +6,8 @@
     }
     a {
         display: inline-block;
-        margin: 0 1rem .5rem 0;
-        padding-bottom: .1rem;
+        margin: 0 $spacing-tiny $spacing-small 0;
+        padding: $spacing-tiny;
         color: rgba($black, .5);
         border-bottom: 3px solid transparent;
         &:hover {
@@ -15,11 +15,22 @@
             border-color: $black;
         }
     }
+    .btn {
+        color: $white;
+        padding: $spacing-small;
+        border: none;
+        background: $black-light;
+        font-size: $font-size-small;
+        &:hover {
+            color: $white;
+            background: $color-primary;
+        }
+    }
 }
 
 .pagination {
     .previous {
-        float:left;
+        float: left;
     }
     .next {
         float: right;

@@ -23,7 +23,7 @@
     cursor: pointer;
     background: $color-primary;
     border-radius: 5px;
-    padding: .5rem 1rem;
+    padding: $spacing-small $spacing-normal;
     color: rgba(255,255,255,.75);
     outline: none;
     font-size: $font-size-normal;
@@ -49,7 +49,19 @@
     }
 }
 
-.btn.hero {
+.btn-small {
+    padding: $spacing-small;
+    font-size: $font-size-small;
+}
+
+.btn-secondary {
+    background: $black-light;
+    &:hover {
+        background: $color-primary;
+    }
+}
+
+.btn-hero {
     display: inline-block;
     background: $color-secondary;
     text-align: center;
@@ -69,11 +81,11 @@
     }
 }
 
-.app-form .submit.btn {
+.app-form .btn-submit {
     background: $color-primary-light;
 }
 
-.small-icon {
+.btn-icon {
     border: none;
     margin: 0;
     overflow:hidden;
@@ -98,34 +110,21 @@
     }
 }
 
-.app-form .small-icon {
+.app-form .btn-icon {
     color: $white;
 }
 
-.prev-btn, .next-btn {
+.btn-prev, .btn-next {
     min-width: 0;
     float: none;
     font-size:.9rem;
     padding: .75rem;
     text-align: left;
 }
-.next-btn {
+.btn-next {
     text-align: right;
     .fa {
         margin: 0 0 0 .75rem;
-    }
-}
-
-.page-meta .btn {
-    float: none;
-    font-size: .75rem;
-    padding: .5rem;
-    color: rgba($white, .75);
-    background: rgba($black, .35);
-    border: 0;
-    &:hover, &:focus {
-        background: $color-primary;
-        color: $white;
     }
 }
 

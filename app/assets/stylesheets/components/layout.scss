@@ -9,7 +9,7 @@ main {
 }
 
 .section-inside {
-  max-width: 640px;
+  max-width: 960px;
   margin-right: auto;
   margin-left: auto;
   @include mqAfterSize($desktop-breakpoint) {

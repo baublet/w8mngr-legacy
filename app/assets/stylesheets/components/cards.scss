@@ -1,4 +1,4 @@
-.card {
+/*.card {
   position: relative;
   display:inline-block;
   max-width: 100%;
@@ -81,4 +81,73 @@
     margin: 0;
     padding: 0;
   }
+}*/
+
+.card-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-large;
+  .card {
+    width: 100%;
+    max-width: 460px;
+    @include mqAfterSize($desktop-breakpoint / 1.5) {
+      max-width: none;
+      width: calc(50% - (#{$spacing-normal} / 2));
+    }
+  }
+}
+
+.card, .card-colorful {
+  width: 460px;
+  max-width: 100%;
+  background: $white;
+  position: relative;
+  @include height(1);
+  margin-bottom: $spacing-normal;
+  padding: $spacing-normal;
+}
+
+.card-colorful {
+  background: $color-primary;
+}
+
+.card-top-meta {
+  position: absolute;
+  right: $spacing-tiny;
+  top: $spacing-tiny;
+  margin: 0;
+  padding: 0;
+}
+
+.card-header {
+  margin: -#{$spacing-normal};
+  padding: $spacing-normal;
+  margin-bottom: $spacing-normal;
+  border-bottom: 1px solid rgba(black, .1);
+  h2 {
+    font-size: $font-size-large;
+  }
+}
+
+.card-colorful .card-header {
+  color: $white;
+  padding: $spacing-small;
+  a {
+    color: $white;
+    &:hover {
+      text-decoration: underline;
+      color: $white;
+    }
+  }
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-colorful .card-body {
+  padding: $spacing-small;
+  background: $white;
 }

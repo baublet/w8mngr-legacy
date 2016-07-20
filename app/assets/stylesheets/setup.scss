@@ -1,5 +1,5 @@
 $black: #1F1F1F;
-$black-light: lighten($black, 15);
+$black-light: lighten($black, 35);
 
 $white: #F7F7F7;
 
@@ -117,7 +117,7 @@ $easing-1: cubic-bezier(0,.95,0,1);
         "users",
         "sessions",
         //"food_entries",
-        "foods",
+        //"foods",
         "weight_entries",
         "recipes",
         "dashboard",

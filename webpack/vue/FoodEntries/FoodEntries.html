@@ -82,28 +82,28 @@
         <div class="col full">
           <div class="btn-bar">
             <div class="left">
-              <a class="btn small-icon" alt="Make this day a Faturday!"
+              <a class="btn btn-icon" alt="Make this day a Faturday!"
                  title="Make this day a Faturday!" v-if="user.preferences.faturday_enabled == 'true'"
                  @click="faturday()">
                 <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                 <span class="screen-reader-text">Faturday</span>
               </a>
-              <a class="btn small-icon disabled" alt="Faturdays are disabled..."
+              <a class="btn btn-icon disabled" alt="Faturdays are disabled..."
                  title="Faturdays are disabled..." v-else>
                 <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                 <span class="screen-reader-text">Faturday</span>
               </a>
             </div>
             <div class="right">
-              <a class="btn small-icon" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
+              <a class="btn btn-icon" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
                 <i class="fa fa-barcode"></i>
                 <span class="screen-reader-text">Scan Barcode</span>
               </a>
-              <a class="btn small-icon" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
+              <a class="btn btn-icon" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
                 <i class="fa fa-search"></i>
                 <span class="screen-reader-text">Search for Foods</span>
               </a>
-              <button name="button" type="submit" class="btn submit" @click.stop.prevent="addEntry">
+              <button name="button" type="submit" class="btn btn-submit" @click.stop.prevent="addEntry">
                 <i class="fa fa-plus"></i>
                 <strong>New Entry</strong>
               </button>

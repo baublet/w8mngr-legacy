@@ -9,37 +9,56 @@
   end
 %>
 
-<div class="food <%= food_class %>">
-  <h2>
-      <% if !food.is_a?(Hash)  %>
-          <%= link_to food.name, food_path(food) %>
-          <%= link_to edit_food_path(food), class: "edit", title: "Edit Entry" do %>
-              <i class="fa fa-pencil"></i>
-              <span class="screen-reader-text">Edit Entry</span>
-          <% end if food.user_id == current_user.id %>
-          <%= link_to food_delete_path(food), class: "delete",  title: "Delete Entry" do %>
-              <i class="fa fa-times"></i>
-              <span class="screen-reader-text">Delete Entry</span>
-          <% end if food.user_id == current_user.id %>
-      <% else %>
-          <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
-      <% end %>
-  </h2>
-  <% if !food.is_a?(Hash) && !food.description.blank? %>
-      <p class="description">
-          <%= food.description %>
-      </p>
-  <% end %>
-  <%  if !food.is_a?(Hash) && food.measurements.present?
-      measurement = food.measurements.first %>
-      <div class="measurement">
-        <span class="unit">per
-        <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
-                      verbose_measurement_unit(measurement.unit) %></span>
-          <strong>Calories:</strong> <%= measurement.calories %>
-          <strong>Fat:</strong> <%= measurement.fat %>
-          <strong>Carbs:</strong> <%= measurement.carbs %>
-          <strong>Protein:</strong> <%= measurement.protein %>
-      </div>
-  <% end %>
+<div class="food <%= food_class %> card">
+  <div class="card-top-meta">
+     <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
+          <i class="fa fa-pencil"></i>
+          <span class="screen-reader-text">Edit Entry</span>
+      <% end if food.user_id == current_user.id %>
+      <%= link_to food_delete_path(food), class: "btn-delete btn-icon",  title: "Delete Entry" do %>
+          <i class="fa fa-times"></i>
+          <span class="screen-reader-text">Delete Entry</span>
+      <% end if food.user_id == current_user.id %>
+  </div>
+  <div class="card-header">
+    <h2>
+        <% if food.is_a?(Hash)  %>
+            <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
+        <% else %>
+            <%= link_to food.name, food_path(food) %>
+        <% end %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <% if !food.is_a?(Hash) && !food.description.blank? %>
+        <p class="description">
+            <%= food.description %>
+        </p>
+    <% end %>
+    <%  if !food.is_a?(Hash) && food.measurements.present?
+        measurement = food.measurements.first %>
+        <p class="measurement">
+          <span class="unit">per
+          <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
+                        verbose_measurement_unit(measurement.unit) %></span>
+            <strong>Calories:</strong> <%= measurement.calories %>
+            <strong>Fat:</strong> <%= measurement.fat %>
+            <strong>Carbs:</strong> <%= measurement.carbs %>
+            <strong>Protein:</strong> <%= measurement.protein %>
+        </p>
+    <% end %>
+    <% if food.is_a?(Hash)  %>
+        <%= link_to food_pull_path(food["ndbno"]), class: "btn btn-small" do %>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          View Details
+          <span class="screen-reader-text">about <%= food["name"] %></span>
+        <% end %>
+    <% else %>
+        <%= link_to food_path(food), class: "btn btn-small" do %>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          View Details
+          <span class="screen-reader-text">about <%= food.name %></span>
+        <% end %>
+    <% end %>
+  </div>
 </div>
