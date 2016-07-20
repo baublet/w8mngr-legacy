@@ -20,7 +20,7 @@
 
     <%= render @food.measurements %>
 
-    <%= render @newmeasurement %>
+    <%= render partial: "measurements/measurement_form", locals: {measurement: @newmeasurement} %>
 
     <%= f.button (@food.id.nil?) ? "Create Food" : "Save Food", class: "btn" %>
 
