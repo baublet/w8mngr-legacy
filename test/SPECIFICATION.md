@@ -12,6 +12,8 @@ That said, I'm being specific about what my certain tests cover.
 - Any models that work together
 - Malicious inputs passed into models
 
+Try to avoid testing saving to the database unless absolutely required.
+
 ## Controller Tests
 
 - Routes
@@ -30,4 +32,8 @@ properly.
 ## Integration Tests
 
 - Full tests of models, views, and controllers working together
-- Focused on happy path useages
+- Focused on happy path useages first, then moving to testing malicious params and attempts at SQL injection
+- Never test HTML/CSS here. That's an impossible task. Just test to see if certain
+  requests achieve the desired behavior across all levels of the database/session.
+
+That means that we will be testing DB access in integration tests.
