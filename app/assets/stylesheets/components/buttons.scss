@@ -146,6 +146,23 @@ category: buttons
   }
 }
 
+
+.btn-meta {
+    color: $black-light;
+    display: inline-block;
+    padding: $spacing-small;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    &:hover, &:focus {
+        color: $black;
+        border-color: $black-light;
+    }
+    &.delete:hover, &.delete:focus {
+        color: $red;
+        border-color: $red;
+    }
+}
+
 .pill-list {
   display: flex;
   flex-wrap: wrap;

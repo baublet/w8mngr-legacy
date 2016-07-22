@@ -2,7 +2,7 @@
 	<%= render partial: "shared/error_messages", locals: {errors: measurement.errors} %>
 <% end %>
 
-<div class="measurement measurement-form <%= measurement.try(:id).nil? ? "new" : "" %> card">
+<div class="measurement <%= measurement.try(:id).nil? ? "new" : "" %> card">
 
 <% unless measurement.id.nil? %>
   <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "foods-measurement-delete-box" }, "yes", "no") %>

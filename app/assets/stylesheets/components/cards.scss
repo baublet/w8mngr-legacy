@@ -36,6 +36,10 @@
   padding: 0;
 }
 
+.card-top-meta + .card-header {
+  padding-right: $spacing-large;
+}
+
 .card-header {
   margin: -#{$spacing-normal};
   padding: $spacing-normal;

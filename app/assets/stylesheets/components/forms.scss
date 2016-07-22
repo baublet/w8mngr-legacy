@@ -7,7 +7,10 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
   border-radius: 2px;
   width:100%;
   display: block;
-  margin-bottom: 2rem;
+  margin-bottom: $spacing-small;
+  &:last-child {
+    margin-bottom: 0;
+  }
   &:hover {
     border-color: lighten($black, 30%);
   }
@@ -358,4 +361,13 @@ input[type=range] {
     font-size: .55rem;
     opacity: .5;
   }
+}
+
+.form-info {
+  font-size: $font-size-small;
+  font-style: italic;
+}
+
+.form-group {
+  margin-bottom: $spacing-large;
 }
