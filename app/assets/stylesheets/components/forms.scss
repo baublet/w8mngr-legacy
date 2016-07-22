@@ -36,7 +36,7 @@ textarea {
 }
 label, .label {
   font-weight: 800;
-  font-size: .8rem;
+  font-size: $font-size-small;
   margin-bottom: $spacing-tiny;
   display: inline-block;
   &.req::after {

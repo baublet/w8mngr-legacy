@@ -1,0 +1,17 @@
+.measurement.card {
+  padding: $spacing-small;
+  label, .label {
+    display: block;
+    font-size: $font-size-tiny;
+  }
+  .row {
+    align-items: center;
+  }
+  .col {
+    width: calc(14% - #{$spacing-small});
+    text-align: center;
+  }
+  .btn-text {
+    @include screenReaderText();
+  }
+}
