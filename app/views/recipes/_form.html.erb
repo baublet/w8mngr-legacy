@@ -5,9 +5,9 @@
   <% end %>
 
 
-  <div class="info">
+  <div class="info form-group">
     <%= f.label :name, :class => "req" %>
-    <%= f.text_field :name, placeholder: "Recipe Name", class: "name" %>
+    <%= f.text_field :name, placeholder: "Recipe Name", class: "name input-large" %>
 
     <%= f.label :description, :class => "req" %>
     <%= f.text_area :description, placeholder: "Description of the dish. What is the end result?" %>
@@ -17,38 +17,36 @@
   </div>
 
   <% if !@recipe.id.nil? %>
-    <div class="ingredients">
-      <div class="section-inside">
-        <h2><i class="fa fa-cutlery"></i> Ingredients</h2>
-        <% if @recipe.ingredients.count > 0 %>
+    <div class="ingredients form-well form-group">
+      <h2><i class="fa fa-cutlery"></i> Ingredients</h2>
+      <% if @recipe.ingredients.count > 0 %>
+          <div class="grid">
             <%= render partial: "ingredients/ingredient", collection: @recipe.ingredients,
-                                as: :ingredient, locals: {view: "edit", recipe: @recipe} ||
-                                "None yet! Add ingredients to this recipe using the form below." %>
-            <% if @recipe.ingredients.count > 1 %>
-              <div class="ingredient totals full">
-                <h3></h3>
-                <div class="calories"><%= number_with_delimiter @recipe.calories %></div>
-                <div class="fat"><%= number_with_delimiter @recipe.fat %></div>
-                <div class="carbs"><%= number_with_delimiter @recipe.carbs %></div>
-                <div class="protein"><%= number_with_delimiter @recipe.protein %></div>
-              </div>
-            <% end %>
-        <% else %>
-          <p>None yet! Add ingredients to this recipe using the form below.</p>
+                                as: :ingredient, locals: {view: "edit", recipe: @recipe} %>
+          </div>
+          <% if @recipe.ingredients.count > 1 %>
+            <div class="ingredient totals full">
+              <div class="calories"><%= number_with_delimiter @recipe.calories %></div>
+              <div class="fat"><%= number_with_delimiter @recipe.fat %></div>
+              <div class="carbs"><%= number_with_delimiter @recipe.carbs %></div>
+              <div class="protein"><%= number_with_delimiter @recipe.protein %></div>
+            </div>
+          <% end %>
+      <% else %>
+        <p class="form-info">None yet! Add ingredients to this recipe using the form below.</p>
+      <% end %>
+      <div class="new-ingredient app-form">
+        <% if @newingredient.errors.any? %>
+            <%= render partial: "shared/error_messages", locals: {errors: @newingredient.errors} %>
         <% end %>
-        <div class="new-ingredient app-form">
+        <h2>New Ingredient</h2>
+        <div class="grid">
           <div class="row">
-            <div class="col long">
-              <% if @newingredient.errors.any? %>
-                  <%= render partial: "shared/error_messages", locals: {errors: @newingredient.errors} %>
-              <% end %>
-              <h2><i class="fa fa-cutlery"></i> New Ingredient</h2>
+            <div class="col full">
+              <%= text_field :newingredient, :name, placeholder: "Amount and Ingredient, e.g., 1/2 tsp Salt", class: "large" %>
             </div>
           </div>
           <div class="row">
-            <div class="col long">
-              <%= text_field :newingredient, :name, placeholder: "Amount and Ingredient, e.g., 1/2 tsp Salt" %>
-            </div>
             <div class="col short">
               <%= number_field :newingredient, :calories, placeholder: "Calories" %>
             </div>
@@ -62,23 +60,53 @@
               <%= number_field :newingredient, :protein, placeholder: "Protein" %>
             </div>
           </div>
+          <div class="row">
+            <div class="col full">
+              <div class="btn-bar">
+                <div class="left"></div>
+                <div class="right">
+                  <%= f.button class: "btn btn-submit" do %>
+                  <i class="fa fa-plus"></i>
+                    Add Ingredient
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="add-food">
-          <%= link_to food_search_path(:recipe => @recipe.id) do %>
-            <i class="fa fa-search"></i> Add a Food
-          <% end %>
-        </div>
+      </div>
+      <div class="search-for-food">
+        <%= link_to food_search_path(:recipe => @recipe.id) do %>
+          <i class="fa fa-search"></i> Search for Food
+        <% end %>
       </div>
     </div>
 
     <%= f.label :instructions %>
     <%= f.text_area :instructions, placeholder: "Preparation instructions. How do you make this dish?" %>
 
-    <%= link_to "Delete Recipe", delete_recipe_path(@recipe), class: "delete-btn" %>
+    <div class="btn-bar">
+      <div class="left">
+        <%= link_to delete_recipe_path(@recipe), class: "btn-meta delete" do %>
+          Delete Recipe
+          <span class="screen-reader-text"><%= @recipe.name %></span>
+        <% end %>
+      </div>
+      <div class="right">
+        <%= f.button class: "btn" do %>
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          Save Recipe
+        <% end %>
+      </div>
+    </div>
   <% else %>
-    <p class="reminder">Once you fill in this form, and create your recipe, you will be able to add ingredients and provide preparation instructions for your dish.</p>
+    <p class="form-info">Once you fill in this form, and create your recipe, you will be able to add ingredients and provide preparation instructions for your dish.</p>
+    <div class="btn-bar">
+      <div class="left"></div>
+      <div class="right">
+        <%= f.button "Create Recipe", class: "btn" %>
+      </div>
+    </div>
   <% end %>
-
-  <%= f.button (@recipe.id.nil?) ? "Create Recipe" : "Save Recipe", class: "btn" %>
 
 <% end %>

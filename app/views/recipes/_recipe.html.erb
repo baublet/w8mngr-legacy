@@ -1,24 +1,39 @@
 <div class="recipe card">
-  <div class="header">
-    <h2>
-      <%= link_to edit_recipe_path(recipe), class: "meta", title: "Edit or Delete this Recipe" do %>
-        <i class="fa fa-pencil"></i>
-        <span class="screen-reader-text">Edit Recipe</span>
-      <% end %>
-      <%= link_to recipe.name, recipe_path(recipe) %>
-    </h2>
-    <% if !recipe.description.blank? %>
-      <p class="description"><%= recipe.description.truncate_words(30) %></p>
+  <div class="card-top-meta">
+    <%= link_to edit_recipe_path(recipe), class: "btn-icon", title: "Edit this Recipe" do %>
+      <i class="fa fa-pencil"></i>
+      <span class="screen-reader-text">
+        Edit Recipe
+        <%= recipe.name %>
+      </span>
+    <% end %>
+    <%= link_to delete_recipe_path(recipe), class:"btn-icon  btn-delete", title: "Delete this Recipe" do %>
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">
+        Delete Recipe
+        <%= recipe.name %>
+      </span>
     <% end %>
   </div>
-  <div class="info">
-    <strong>Calories: </strong><span class="calories-total"><%= number_with_delimiter recipe.calories %> </span>
-    <% if recipe.servings > 0 %>
-      <span class="calories-per-serving">(<%= number_with_delimiter recipe.calories_per_serving %> per serving)</span><br>
+  <div class="card-header">
+    <h2 class="card-title"><%= link_to recipe.name, recipe_path(recipe) %></h2>
+    <% if !recipe.description.blank? %>
+      <h3 class="card-subtitle">
+        <strong>Calories: </strong><span class="calories-total"><%= number_with_delimiter recipe.calories %> </span>
+        <% if recipe.servings > 0 %>
+          <span class="calories-per-serving">(<%= number_with_delimiter recipe.calories_per_serving %> per serving)</span>
+        <% end %>
+      </h3>
     <% end %>
-    <%= recipe.ingredients.each do |ingredient| %>
-      <span class="ingredient"><%= ingredient.name %></span>
+  </div>
+  <div class="card-body">
+    <% unless recipe.description.blank? %>
+      <p class="description"><%= recipe.description.truncate_words(30) %></p>
     <% end %>
-    </strong>
+    <%= link_to recipe_path(recipe), class: "btn btn-small", title: "View details about " + recipe.name do %>
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      View Details
+      <span class="screen-reader-text">about <%= recipe.name %></span>
+    <% end %>
   </div>
 </div>

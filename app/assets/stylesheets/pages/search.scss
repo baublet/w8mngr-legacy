@@ -1,0 +1,26 @@
+.search-form {
+  margin-bottom: $spacing-large;
+  .row {
+
+  }
+  .input {
+    width: auto;
+    flex-grow: 5;
+  }
+  .button {
+    margin-left: $spacing-small;
+    width: auto;
+  }
+  @include mqAfterSize($desktop-breakpoint / 2) {
+    .fa {
+      margin: 0;
+    }
+    button {
+      white-space: nowrap;
+    }
+    .screen-reader-text {
+      @include deScreenReaderText();
+      white-space: nowrap;
+    }
+  }
+}

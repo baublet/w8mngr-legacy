@@ -11,16 +11,18 @@
 %>
 
 <div class="food <%= food_class %> card">
-  <div class="card-top-meta">
-     <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
-          <i class="fa fa-pencil"></i>
-          <span class="screen-reader-text">Edit Entry</span>
-      <% end if food.user_id == current_user.id %>
-      <%= link_to food_delete_path(food), class: "btn-delete btn-icon",  title: "Delete Entry" do %>
-          <i class="fa fa-times"></i>
-          <span class="screen-reader-text">Delete Entry</span>
-      <% end if food.user_id == current_user.id %>
-  </div>
+  <% unless food.is_a?(Hash) %>
+    <div class="card-top-meta">
+       <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
+            <i class="fa fa-pencil"></i>
+            <span class="screen-reader-text">Edit Entry</span>
+        <% end if food.try(:user_id) == current_user.id %>
+        <%= link_to food_delete_path(food), class: "btn-delete btn-icon",  title: "Delete Entry" do %>
+            <i class="fa fa-times"></i>
+            <span class="screen-reader-text">Delete Entry</span>
+        <% end if food.try(:user_id) == current_user.id %>
+    </div>
+  <% end %>
   <div class="card-header">
     <h2 class="card-title">
         <% if food.is_a?(Hash)  %>
@@ -76,7 +78,7 @@
         <% end %>
         </div>
         <div class="right">
-          <span class="info-text">(<%= pluralize(food.measurements.count, "additional measurement") %>)</span>
+          <span class="info-text">(<%= pluralize(food.measurements.to_a.count, "additional measurement") %>)</span>
         </div>
       </div>
     <% end %>

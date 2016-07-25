@@ -1,9 +1,17 @@
-<div class="food-search-form">
+<div class="search-form">
 	<%= form_tag @base_url, method: :get do %>
-		<%= text_field_tag 'q', params[:q], placeholder: 'E.g., butter, cheese, etc...' %>
-		<%= button_tag(type: 'submit', class: 'btn search-btn') do %>
-			<i class="fa fa-search"></i>
-			<span class="screen-reader-text">Search for Foods</span>
-		<% end %>
+	<div class="grid">
+		<div class="row">
+			<div class="col input">
+				<%= text_field_tag 'q', params[:q], class: "input-large", placeholder: 'E.g., butter, cheese, etc...' %>
+			</div>
+			<div class="col button">
+				<%= button_tag(type: 'submit', class: 'btn btn-secondary') do %>
+					<i class="fa fa-search"></i>
+					<span class="screen-reader-text">Search for Foods</span>
+				<% end %>
+			</div>
+		</div>
+	</div>
 	<%  end %>
 </div>

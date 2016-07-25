@@ -1,5 +1,6 @@
 .profile-header {
-  margin: 0 -1rem 0;
+  margin: 0 -#{$spacing-large} 0;
+  transform: translateY(-#{$spacing-large});
   background: darken($color-secondary, 10);
   background: linear-gradient(25deg, darken($color-secondary, 15), $color-secondary);
   color: $white;

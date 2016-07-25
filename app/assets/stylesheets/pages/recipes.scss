@@ -1,0 +1,23 @@
+.search-for-food {
+  padding-top: $spacing-normal;
+  margin: -#{$spacing-large} 0 0;
+  text-align: right;
+  a {
+    color: rgba($black, .5);
+    &:hover, &:focus {
+      color: $black;
+    }
+  }
+}
+
+.ingredient .col {
+  width: calc(13.3333% - #{$spacing-small});
+  text-align: center;
+  &:first-child {
+    width: 33.3333%;
+    text-align: left;
+  }
+  &:last-child {
+    text-align: right;
+  }
+}
