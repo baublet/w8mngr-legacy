@@ -2,14 +2,24 @@
 	<%= render partial: "shared/error_messages", locals: {errors: measurement.errors} %>
 <% end %>
 
-<div class="measurement <%= measurement.try(:id).nil? ? "new" : "" %> card">
+<div class="measurement card<%= measurement.try(:id).nil? ? " new" : "" %>">
 
 <% unless measurement.id.nil? %>
   <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "foods-measurement-delete-box" }, "yes", "no") %>
   <%= label_tag "measurement_" + measurement.id.to_s + "_delete", { class: "foods-measurement-delete-button" } do %>
-  	<span class="screen-reader-text">Delete the measurement <%= measurement.amount %> <%= measurement.unit %> (You must submit this form to delete this measurement...)</span>
+  	<span class="screen-reader-text">
+  	  Delete the measurement
+  	  <%= measurement.amount %>
+  	  <%= measurement.unit %>
+  	  (You must submit this form to delete this measurement...)
+  	 </span>
   <% end %>
 <% end %>
+
+<%
+  # We set the ID to 0, which tells the controller that this is is the new measurement
+  measurement.id = 0 if measurement.id.nil?
+%>
 
 <div class="grid">
   <div class="row">

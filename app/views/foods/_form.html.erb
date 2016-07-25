@@ -1,4 +1,4 @@
-<%= form_for(@food, :html => {:class => "food-form"}) do |f| %>
+<%= form_for @food do |f| %>
 
     <% if @food.errors.any? %>
         <%= render partial: "shared/error_messages", locals: {errors: @food.errors} %>
@@ -13,24 +13,17 @@
     </div>
 
     <div class="form-group">
-
         <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
-
         <% if @food.id.nil? %>
             <p>Each food requires at least one measurement, be it by cups, weight, cookie, slice, or whatever. Because foods can come in many different variations, weights, shapes, and sizes, you can add multiple measurements to allow for easier tracking.</p>
         <% end %>
-
         <%= render partial: "measurements/measurement_form", collection: @food.measurements, as: :measurement %>
     </div>
 
     <div class="form-group">
-
         <h2><i class="fa fa-pie-chart"></i> New Measurement</h2>
-
         <p class="form-info">Leave blank if you don't wish to add a new measurement.</p>
-
         <%= render partial: "measurements/measurement_form", locals: {measurement: @newmeasurement} %>
-
     </div>
 
     <% if @food.id.nil? %>

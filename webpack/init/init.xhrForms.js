@@ -20,6 +20,7 @@ w8mngr.init.add(function() {
   })
 
   function takeOverForms() {
+    return false
     var elements = document.querySelectorAll("form[method=post]")
     elements.forEach(function(el) {
       if (el.w8mngrWatched) return false
@@ -36,7 +37,7 @@ w8mngr.init.add(function() {
           // doing it myself manually here. The creator of Turbolinks wants us
           // to instead alter our serverside code to return javascript that tells
           // TL what to do... asinine considering TL's original purpose (progressive
-          // enhancement).
+          // enhancement and quicker app development).
           console.log(response)
           let url = response.responseURL
           if (url !== window.location.href) {
@@ -77,7 +78,7 @@ w8mngr.init.add(function() {
     .map(function(el) {
         return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
     }).join('&') //Then join all the strings by &
-    xhr.open("POST", form.action)
+    xhr.open(form.method, form.action)
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xhr.onload = callback.bind(xhr)
     console.log("Sending " + params + " to " + form.action)
