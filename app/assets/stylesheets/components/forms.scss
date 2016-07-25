@@ -17,7 +17,7 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
   &:focus {
     color: #000;
     border-color: $black;
-    outline: none;
+    box-shadow: 0 0 10px rgba($color-primary-light, .5);
   }
   .large & {
     font-size: 2rem;

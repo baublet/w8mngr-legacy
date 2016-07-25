@@ -21,7 +21,7 @@
   .btn-text {
     @include screenReaderText();
     @include mqAfterSize($desktop-breakpoint) {
-      @include deScreenReaderText();
+      //@include deScreenReaderText();
     }
   }
   .unit, .calories, .fat, .carbs, .protein {

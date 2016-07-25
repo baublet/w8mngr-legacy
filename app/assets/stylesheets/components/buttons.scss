@@ -111,8 +111,8 @@ category: buttons
         color: $black;
     }
     &.delete:hover, &.delete:focus {
-        //color: $red;
-        //box-shadow: none;
+        color: $red;
+        box-shadow: none;
     }
     &.disabled {
         opacity: .25;
@@ -127,8 +127,9 @@ category: buttons
         .fa {
             margin: 0;
         }
-        &:hover {
+        &:hover, &:focus {
             background: $color-primary-light;
+            color: $white;
         }
     }
 }
