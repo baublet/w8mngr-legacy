@@ -47,4 +47,10 @@ Rails.application.configure do
   config.webpack.dev_server.host = "w8mngr-baublet.c9users.io"
   config.webpack.dev_server.port = "8081"
 
+
+  # Bullet config
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+  end
 end

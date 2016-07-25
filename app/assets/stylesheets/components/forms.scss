@@ -39,6 +39,7 @@ label, .label {
   font-size: $font-size-small;
   margin-bottom: $spacing-tiny;
   display: inline-block;
+  cursor: pointer;
   &.req::after {
     content: "*";
     padding-left: .25rem;

@@ -35,6 +35,25 @@
   text-align: center;
 }
 
+.measurement.card .helper-input + .card-top-meta + .grid {
+  @include animationCollapseExpand();
+}
+
+.measurement.card .helper-input:checked + .card-top-meta + .grid {
+  max-height: $spacing-large;
+  opacity: .1;
+  pointer-events: none;
+}
+
+.measurement.card .helper-input:checked + .card-top-meta label {
+  padding: $spacing-small;
+  color: $red;
+  .screen-reader-text {
+    @include deScreenReaderText();
+  }
+}
+
+
 .food.card .measurements.grid .row {
   align-items: flex-end;
 }

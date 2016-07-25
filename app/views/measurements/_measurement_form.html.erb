@@ -5,15 +5,19 @@
 <div class="measurement card<%= measurement.try(:id).nil? ? " new" : "" %>">
 
 <% unless measurement.id.nil? %>
-  <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "foods-measurement-delete-box" }, "yes", "no") %>
-  <%= label_tag "measurement_" + measurement.id.to_s + "_delete", { class: "foods-measurement-delete-button" } do %>
-  	<span class="screen-reader-text">
-  	  Delete the measurement
-  	  <%= measurement.amount %>
-  	  <%= measurement.unit %>
-  	  (You must submit this form to delete this measurement...)
-  	 </span>
-  <% end %>
+  <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "helper-input" }, "yes", "no") %>
+  <div class="card-top-meta">
+    <%= label_tag "measurement_" + measurement.id.to_s + "_delete", { class: "" } do %>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    	<span class="screen-reader-text">
+    	  Delete the measurement
+    	  <%= measurement.amount %>
+    	  <%= measurement.unit %>
+    	  (You must submit this form to delete this measurement...)
+    	 </span>
+    <% end %>
+  </div>
+
 <% end %>
 
 <%

@@ -40,7 +40,6 @@ Rails.application.routes.draw do
     get     "/foods/pull/(:ndbno)" => "usda#pull",
                                 as: :food_pull
     resources :foods
-    post    "/foods/:id(.:format)" => "foods#update"
 
     # Faturdays
     get     "/faturday/:day(:format)"=>"faturday#create", as: :faturday_day

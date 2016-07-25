@@ -139,3 +139,11 @@
         visibility: hidden;
     }
 }
+
+
+@mixin animationCollapseExpand() {
+    max-height: 9999rem;
+    opacity: 1;
+    transition: opacity .15s ease-in-out,
+                max-height .25s ease-in-out;
+}
