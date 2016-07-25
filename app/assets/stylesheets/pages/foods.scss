@@ -15,3 +15,23 @@
     @include screenReaderText();
   }
 }
+
+.food.card .measurements.grid .row {
+  align-items: flex-end;
+}
+
+.food.card .measurements.grid .col {
+  text-align: center;
+  &:first-child {
+    font-size: $font-size-small;
+    font-weight: bold;
+    text-align: left;
+  }
+  strong {
+    text-transform: uppercase;
+    display: block;
+    font-size: $font-size-tiny;
+    opacity: .25;
+    margin-bottom:$spacing-tiny;
+  }
+}
