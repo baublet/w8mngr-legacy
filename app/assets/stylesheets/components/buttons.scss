@@ -118,6 +118,19 @@ category: buttons
         opacity: .25;
         cursor: normal;
     }
+    &-filled {
+        background: $color-primary;
+        padding: $spacing-small;
+        color: $white;
+        @include height(1);
+        border-radius: 3px;
+        .fa {
+            margin: 0;
+        }
+        &:hover {
+            background: $color-primary-light;
+        }
+    }
 }
 
 .app-form .btn-icon {

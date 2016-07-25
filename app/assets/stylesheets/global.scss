@@ -20,7 +20,7 @@ html {
     }
 }
 
-body {
+body, html {
   // We use this because sometimes we want elements to go to the left or right of
   // of the screen, but we don't really care what's out there (for display purposes).
   // Since this website will never feature horizontal scrolling at the window

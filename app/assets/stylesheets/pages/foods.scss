@@ -1,19 +1,38 @@
 .measurement.card {
   padding: $spacing-small;
+  input {
+    padding: $spacing-tiny;
+  }
   label, .label {
     display: block;
     font-size: $font-size-tiny;
   }
   .row {
-    align-items: center;
+    align-items: flex-start;
   }
   .col {
     width: calc(14% - #{$spacing-small});
     text-align: center;
+    &:last-child {
+      text-align: right;
+      align-self: center;
+    }
   }
   .btn-text {
     @include screenReaderText();
+    @include mqAfterSize($desktop-breakpoint) {
+      @include deScreenReaderText();
+    }
   }
+  .unit, .calories, .fat, .carbs, .protein {
+    display: block;
+    margin-top: $font-size-small;
+  }
+}
+
+.food-form .measurement.card .col {
+  width: calc(16.6666% - #{$spacing-small});
+  text-align: center;
 }
 
 .food.card .measurements.grid .row {
