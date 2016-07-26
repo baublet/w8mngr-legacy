@@ -15,6 +15,7 @@
 }
 
 .card, .card-colorful {
+  border-radius: 3px;
   width: 460px;
   max-width: 100%;
   background: $white;
@@ -45,12 +46,11 @@
 .card-header {
   margin: -#{$spacing-normal};
   padding: $spacing-normal;
-  padding-bottom: $spacing-large;
   margin-bottom: $spacing-normal;
-  background: #e7e7e7;
   position: relative;
   z-index: $layer-base;
-  &:after {
+  border-bottom: 1px solid rgba($black, .05);
+  /*&:after {
     display: block;
     width: 0;
     height: 0;
@@ -61,17 +61,17 @@
     position: absolute;
     bottom: 0;
     left: $spacing-normal;
-  }
+  }*/
 }
 
 .card-title {
-  font-size: $font-size-normal;
-  font-weight: 800;
+  font-size: $font-size-large;
+  font-weight: bold;
   margin: 0;
 }
 
 .card-subtitle {
-  font-size: $font-size-small;
+  font-size: $font-size-normal;
   font-weight: 400;
   margin: $spacing-tiny 0 0;
   color: rgba($black, .75);

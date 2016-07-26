@@ -6,8 +6,11 @@ $white: #F7F7F7;
 $red: #FF0000;
 $green: #00D800;
 $yellow: #FFAA00;
+
 $color-primary: #3492ae;
 $color-primary-light: #21C6F5;
+$color-primary-white: lighten($color-primary, 50);
+
 $color-secondary: #540BBA;
 $color-usda: #555;
 

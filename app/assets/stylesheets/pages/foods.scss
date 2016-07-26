@@ -53,23 +53,27 @@
   }
 }
 
-
-.food.card .measurements.grid .row {
-  align-items: flex-end;
+.scannable-table.foods-table .serving {
+    text-align: right;
+    padding-right: $spacing-normal;
+    font-weight: bold;
 }
 
-.food.card .measurements.grid .col {
-  text-align: center;
-  &:first-child {
-    font-size: $font-size-small;
-    font-weight: bold;
-    text-align: left;
+.scannable-table-item-title {
+  margin: 0;
+  font-size: $font-size-large;
+  font-weight: bold;
+  color: rgba($black, .75);
+  a {
+    color: rgba($black, .75);
+    &:hover {
+      color: $color-primary-light;
+    }
   }
-  strong {
-    text-transform: uppercase;
-    display: block;
-    font-size: $font-size-tiny;
-    opacity: .25;
-    margin-bottom:$spacing-tiny;
-  }
+}
+
+.scannable-table-item-subtitle {
+  margin: $spacing-small 0 0;
+  font-size: $font-size-normal;
+  font-weight: normal;
 }

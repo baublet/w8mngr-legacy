@@ -4,83 +4,90 @@
   if !food.is_a?(Hash)
     food_class = food.data_source
     food_class += " user-owned" if food.user_id == current_user.id
-    measurement = food.measurements.first
   else
     food_class = food["data_source"]
   end
 %>
 
-<div class="food <%= food_class %> card">
-  <% unless food.is_a?(Hash) %>
-    <div class="card-top-meta">
-       <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
-            <i class="fa fa-pencil"></i>
-            <span class="screen-reader-text">Edit Entry</span>
-        <% end if food.try(:user_id) == current_user.id %>
-        <%= link_to food_delete_path(food), class: "btn-delete btn-icon",  title: "Delete Entry" do %>
-            <i class="fa fa-times"></i>
-            <span class="screen-reader-text">Delete Entry</span>
-        <% end if food.try(:user_id) == current_user.id %>
-    </div>
-  <% end %>
-  <div class="card-header">
-    <h2 class="card-title">
-        <% if food.is_a?(Hash)  %>
-            <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
-        <% else %>
-            <%= link_to food.name, food_path(food) %>
-        <% end %>
-    </h2>
-  </div>
-  <div class="card-body">
-    <% if !food.is_a?(Hash) && !food.description.blank? %>
-        <p class="description">
+<tbody class="food scannable-table-item <%= food_class %>">
+
+<tr>
+  <td class="scannable-table-heading" colspan="6">
+
+    <div class="scannable-table-heading-bar">
+      <div class="left">
+
+        <h2 class="scannable-table-item-title">
+            <% if food.is_a?(Hash)  %>
+                <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
+            <% else %>
+                <%= link_to food.name, food_path(food) %>
+            <% end %>
+        </h2>
+        <% unless food.is_a?(Hash)  %>
+          <h3 class="scannable-table-item-subtitle">
+            <%= pluralize(food.measurements.to_a.count, "measurement") %>
+          </h3>
+          <p class="description">
             <%= food.description %>
-        </p>
-    <% end %>
-    <%  if !food.is_a?(Hash) && food.measurements.present? %>
-        <div class="measurements grid">
-          <div class="row">
-            <div class="col">
-              <span class="unit">
-                per
-                <%= pluralize(number_with_precision(measurement.amount, precision: 1, significant: true), verbose_measurement_unit(measurement.unit)) %>
-              </span>
-            </div>
-            <div class="col">
-              <strong>Calories</strong> <%= measurement.calories %>
-            </div>
-            <div class="col">
-              <strong>Fat</strong> <%= measurement.fat %>
-            </div>
-            <div class="col">
-              <strong>Carbs</strong> <%= measurement.carbs %>
-            </div>
-            <div class="col">
-              <strong>Protein</strong> <%= measurement.protein %>
-            </div>
-          </div>
-        </div>
-    <% end %>
-    <% if food.is_a?(Hash)  %>
-        <%= link_to food_pull_path(food["ndbno"]), class: "btn btn-small" do %>
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          View Details
-          <span class="screen-reader-text">about <%= food["name"] %></span>
+          </p>
         <% end %>
-    <% else %>
-      <div class="btn-bar">
-        <div class="left">
-          <%= link_to food_path(food), class: "btn btn-small" do %>
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          View Details
-          <span class="screen-reader-text">about <%= food.name %></span>
-        <% end %>
-        </div>
-        <div class="right">
-          <span class="info-text">(<%= pluralize(food.measurements.to_a.count, "additional measurement") %>)</span>
-        </div>
+
       </div>
-    <% end %>
-  </div>
-</div>
+      <div class="right">
+
+        <% unless food.is_a? Hash %>
+          <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
+              <i class="fa fa-pencil"></i>
+              <span class="screen-reader-text">Edit Entry</span>
+          <% end if food.try(:user_id) == current_user.id %>
+          <%= link_to food_delete_path(food), class: "btn-delete btn-icon",  title: "Delete Entry" do %>
+              <i class="fa fa-times"></i>
+              <span class="screen-reader-text">Delete Entry</span>
+          <% end if food.try(:user_id) == current_user.id %>
+        <% end %>
+
+      </div>
+    </div>
+
+  </td>
+</tr>
+<% unless food.is_a?(Hash) && !food.measurements.present? %>
+  <tr class="scannable-table-lower-heading">
+    <th><span class="screen-reader-text">Serving/Unit</span></th>
+    <th>Calories</th>
+    <th>Fat</th>
+    <th>Carbs</th>
+    <th>Protein</th>
+    <th></th>
+  </tr>
+  <% food.measurements.each do |measurement| %>
+    <tr class="measurement scannable-table-data">
+      <td class="serving">
+        <span>
+          <%= pluralize(number_with_precision(measurement.amount, precision: 1, significant: true), verbose_measurement_unit(measurement.unit)) %>
+        </span>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.calories %>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.fat %>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.carbs %>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.protein %>
+      </td>
+      <td>
+        <%= button_tag(type: 'submit', class: 'btn btn-icon btn-icon-filled', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
+	      			<i class="fa fa-plus"></i>
+	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
+	      <% end %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+
+</tbody>
