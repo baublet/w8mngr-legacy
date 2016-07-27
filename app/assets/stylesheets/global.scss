@@ -35,6 +35,9 @@ body, html {
 p, li {
     line-height:130%;
     margin: 0 0 $spacing-normal;
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 a {
@@ -82,4 +85,19 @@ hr {
 .info-text {
   font-size: $font-size-small;
   font-style: italic;
+}
+
+pre {
+    font-family: monospace;
+    margin: 0 0 $spacing-normal;
+    padding: $spacing-normal;
+    font-size: $font-size-small;
+    border-radius: 5px;
+    @include height(2);
+    border: 1px solid rgba(black, .1);
+    border-right: 0;
+    border-bottom: 0;
+    &:last-child {
+        margin-bottom: 0;
+    }
 }

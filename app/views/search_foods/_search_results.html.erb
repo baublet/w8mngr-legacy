@@ -1,6 +1,12 @@
 <% if results.size > 0 %>
-  <% results.each do |food| %>
-    <%= render partial: "foods/food", object: food if @search_type == "Foods" %>
-    <%= render partial: "recipes/recipe", object: food if @search_type == "Recipes" %>
+  <% if @search_type == "Foods" %>
+    <table class="scannable-table foods-table">
+      <%= render partial: "foods/food", collection: results, as: :food %>
+    </table>
+  <% else %>
+    <div class="card-grid">
+      <%= render partial: "recipes/recipe", collection: results, as: :result %>
+    </div>
   <% end %>
+
 <% end %>

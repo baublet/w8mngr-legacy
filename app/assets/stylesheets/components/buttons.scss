@@ -95,7 +95,8 @@ category: buttons
     background: $color-primary-light;
 }
 
-.btn-icon {
+.btn-icon, .btn-icon-filled {
+    cursor: pointer;
     border: none;
     margin: 0;
     overflow:hidden;
@@ -118,20 +119,26 @@ category: buttons
         opacity: .25;
         cursor: normal;
     }
-    &-filled {
-        background: $color-primary;
-        padding: $spacing-small;
-        color: $white;
-        @include height(1);
-        border-radius: 3px;
-        .fa {
-            margin: 0;
-        }
-        &:hover, &:focus {
-            background: $color-primary-light;
-            color: $white;
-        }
+}
+
+.btn-icon-filled {
+    background: $color-primary;
+    padding: $spacing-small;
+    color: $white;
+    @include height(1);
+    border-radius: 3px;
+    .fa {
+        margin: 0;
     }
+    &:hover, &:focus {
+        background: $color-primary-light;
+        color: $white;
+    }
+}
+
+.btn-icon-small {
+    padding: $spacing-tiny;
+    font-size: $font-size-tiny;
 }
 
 .app-form .btn-icon {

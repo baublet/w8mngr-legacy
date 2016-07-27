@@ -111,10 +111,14 @@ label, .label {
 .app-form {
     background: $color-primary;
     @include height(1);
-    transition: box-shadow .15s ease-in-out;
     color: $white;
     padding: $spacing-small;
     margin: 0 0 $spacing-large;
+    width: 460px;
+    max-width: 100%;
+    @include mqAfterSize($desktop-breakpoint) {
+      margin-left: auto;
+    }
     &:hover {
       @include height(3);
     }

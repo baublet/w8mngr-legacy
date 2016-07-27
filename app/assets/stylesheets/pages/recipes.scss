@@ -21,3 +21,27 @@
     text-align: right;
   }
 }
+
+.recipe .description {
+  margin-top: -#{$spacing-large};
+  padding-top: $spacing-normal;
+  margin-bottom: $spacing-large;
+}
+
+.recipe .nutritional-info {
+  .label {
+    display: block;
+    color: rgba(black, .25);
+    text-transform: uppercase;
+    font-size: $font-size-tiny;
+    ~ .label {
+      margin-top: $spacing-normal;
+    }
+  }
+  span {
+    margin-right: $spacing-normal;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

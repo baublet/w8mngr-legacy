@@ -26,10 +26,6 @@
   font-size: $font-size-normal;
 }
 
-.card-colorful {
-  background: $color-primary;
-}
-
 .card-top-meta {
   position: absolute;
   right: $spacing-tiny;
@@ -50,18 +46,6 @@
   position: relative;
   z-index: $layer-base;
   border-bottom: 1px solid rgba($black, .05);
-  /*&:after {
-    display: block;
-    width: 0;
-    height: 0;
-    content: " ";
-    border: $spacing-normal solid transparent;
-    border-top: 0;
-    border-bottom-color: $white;
-    position: absolute;
-    bottom: 0;
-    left: $spacing-normal;
-  }*/
 }
 
 .card-title {
@@ -79,7 +63,30 @@
 
 .card-colorful .card-header {
   color: $white;
-  padding: $spacing-small;
+  border: 0;
+  background: $color-primary;
+  background: linear-gradient(45deg, $color-primary, lighten($color-primary, 20));
+  padding: $spacing-normal;
+  padding-bottom: $spacing-large;
+  .card-title, .card-subtitle {
+    font-weight: normal;
+    color: $white;
+  }
+  .card-subtitle {
+    color: rgba(white, .5);
+  }
+  &:after {
+    display: block;
+    width: 0;
+    height: 0;
+    content: " ";
+    border: $spacing-normal solid transparent;
+    border-top: 0;
+    border-bottom-color: $white;
+    position: absolute;
+    bottom: 0;
+    left: $spacing-normal;
+  }
   a {
     color: $white;
     &:hover {

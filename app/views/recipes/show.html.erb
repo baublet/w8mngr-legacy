@@ -24,40 +24,59 @@
           <% end %>
         </div>
       <% end %>
-      <% if @recipe.servings > 0 %>
-        <p class="serves">Serves <%= @recipe.servings %></p>
-      <% end %>
-      <p class="description"><%= @recipe.description %></p>
-    </div>
-
-    <div class="info">
-      <div class="nutrition">
-        <h3><i class="fa fa-balance-scale"></i> Nutrition</h3>
-        <strong class="calories">Calories:</strong> <span class="calories-total"><%= number_with_delimiter @recipe.calories %></span>
-        <strong class="fat">Calories:</strong> <span class="fat-total"><%= @recipe.fat %></span>
-        <strong class="carbs">Carbs:</strong> <span class="carbs-total"><%= @recipe.carbs %></span>
-        <strong class="protein">Protein:</strong> <span class="protein-total"><%= @recipe.protein %></span>
+      <div class="description">
+        <% if @recipe.servings > 0 %>
+          <h4 class="serves">Serves <%= @recipe.servings %></h4>
+        <% end %>
+        <p><%= @recipe.description %></p>
       </div>
-      <% if @recipe.servings > 0 %>
-        <div class="nutrition per-serving">
-          <h3>per serving (1/<%= @recipe.servings %>)</h3>
-          <strong class="calories">Calories:</strong> <span class="calories-per-serving"><%= number_with_delimiter @recipe.calories_per_serving %></span>
-          <strong class="fat">Calories:</strong> <span class="fat-per-serving"><%= @recipe.fat_per_serving %></span>
-          <strong class="carbs">Carbs:</strong> <span class="carbs-per-serving"><%= @recipe.carbs_per_serving %></span>
-          <strong class="protein">Protein:</strong> <span class="protein-per-serving"><%= @recipe.protein_per_serving %></span>
-        </div>
-      <% end %>
     </div>
 
-    <div class="ingredients">
-      <h3><i class="fa fa-cutlery"></i> Ingredients</h3>
-      <%= render partial: "ingredients/ingredient", collection: @recipe.ingredients,
-                          as: :ingredient, locals: {view: "show"} %>
+    <div class="nutritional-info card">
+      <h2><i class="fa fa-balance-scale"></i> Nutrition</h2>
+      <% if @recipe.servings > 1 %>
+          <strong class="label">Per serving:</strong>
+          <strong class="calories">Calories:</strong> <span class="calories-per-serving"><%= number_with_delimiter @recipe.calories_per_serving %></span>
+          <strong class="fat">Fat:</strong> <span class="fat-per-serving"><%= @recipe.fat_per_serving %></span>
+          <strong class="carbs">Carbs:</strong> <span class="carbs-per-serving"><%= @recipe.carbs_per_serving %></span>
+          <strong class="protein">Protein:</strong> <span class="protein-per-serving"><%= @recipe.protein_per_serving %></span><br>
+      <% end %>
+      <% if @recipe.servings > 1 %><strong class="label">Totals:</strong><% end %>
+      <strong class="calories">Calories:</strong> <span class="calories-total"><%= number_with_delimiter @recipe.calories %></span>
+      <strong class="fat">Fat:</strong> <span class="fat-total"><%= @recipe.fat %></span>
+      <strong class="carbs">Carbs:</strong> <span class="carbs-total"><%= @recipe.carbs %></span>
+      <strong class="protein">Protein:</strong> <span class="protein-total"><%= @recipe.protein %></span>
+    </div>
+
+    <div class="ingredients form-well">
+      <h2><i class="fa fa-cutlery"></i> Ingredients</h2>
+      <table class="data-table">
+        <thead class="lowkey">
+          <tr>
+            <th></th>
+            <th>Calories</th>
+            <th>Fat</th>
+            <th>Carbs</th>
+            <th>Protein</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @recipe.ingredients.each do |ingredient| %>
+        <tr>
+          <th><%= ingredient.name %></th>
+          <td><%= number_with_delimiter ingredient.calories %></td>
+          <td><%= ingredient.fat %></td>
+          <td><%= ingredient.carbs %></td>
+          <td><%= ingredient.protein %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
 
     <div class="instructions">
-      <h3><i class="fa fa-flask"></i> Preparation Instructions</h3>
-      <div class="preparation">
+      <h2><i class="fa fa-flask"></i> Preparation Instructions</h2>
+      <div class="preparation user-markdown">
         <%= raw(@preparation_instructions) %>
       </div>
     </div>

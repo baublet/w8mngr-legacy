@@ -52,7 +52,7 @@
 
   </td>
 </tr>
-<% unless food.is_a?(Hash) && !food.measurements.present? %>
+<% unless food.is_a?(Hash) && !food.try(:measurements) %>
   <tr class="scannable-table-lower-heading">
     <th><span class="screen-reader-text">Serving/Unit</span></th>
     <th>Calories</th>
@@ -80,8 +80,8 @@
       <td>
         <%= number_with_delimiter measurement.protein %>
       </td>
-      <td>
-        <%= button_tag(type: 'submit', class: 'btn btn-icon btn-icon-filled', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
+      <td class="meta">
+        <%= button_tag(type: 'submit', class: 'btn-icon-filled btn-icon-small', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
 	      			<i class="fa fa-plus"></i>
 	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
 	      <% end %>

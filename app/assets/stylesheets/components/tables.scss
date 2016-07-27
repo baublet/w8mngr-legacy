@@ -1,4 +1,5 @@
 .data-table {
+  width: 100%;
   margin-bottom: $spacing-large;
   thead th, tfoot th {
     font-weight: bold;
@@ -8,14 +9,26 @@
     text-transform: uppercase;
     font-size: $font-size-small;
   }
-  td,th {
+  .lowkey th {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  td, th {
     padding: .75rem;
   }
-  tr:hover td {
+  tr:hover td, tr:hover th {
     background: rgba($black, .025);
   }
   tbody td {
     font-size: $font-size-small;
+    text-align: center;
+  }
+  td.meta {
+    text-align: right;
+  }
+  tbody th {
+    text-align: left;
   }
   tfoot td {
     font-weight: bold;
@@ -36,57 +49,6 @@
   }
 }
 
-
-/*
-
-*/
-
-.scannable-table {
-  margin: 0 -#{$spacing-normal} $spacing-large;
-  th {
-    text-transform: uppercase;
-    font-size: $font-size-small;
-    font-weight: bold;
-    color: rgba(black, .25);
-    margin-bottom: $spacing-tiny;
-    text-align: left;
-  }
-  tbody tr:last-child td {
-    padding-bottom: $spacing-normal;
-  }
-}
-
-.scannable-table-item {
-  td {
-    padding: $spacing-normal;
-  }
-  + .scannable-table-item tr:first-child td {
-    border-top: 1px solid rgba($black, .05);
-  }
-  &:nth-child(even) td, &:nth-child(even) th {
-    background: rgba(white, .4);
-  }
-}
-
-.scannable-table-heading-bar {
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: nowrap;
-  .left, .right {
-    width: 80%;
-  }
-  .right {
-    width: 20%;
-    text-align: right;
-  }
-}
-
-.scannable-table-data td {
-  padding: $spacing-small;
-  padding-right: $spacing-small;
-  padding-left: $spacing-small;
-}
-
-.scannable-table-data +  .scannable-table-data td {
-  padding-top: 0;
+table:last-child {
+  margin-bottom: 0;
 }

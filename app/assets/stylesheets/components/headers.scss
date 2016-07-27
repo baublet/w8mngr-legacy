@@ -15,6 +15,9 @@ h1, h2, h3, h4 {
       margin-bottom: 0;
     }
 }
+h4, h5, h6 {
+  margin: 0 0 $spacing-small;
+}
 
 h1 {
     font-size: $font-size-huge;
@@ -44,17 +47,15 @@ h1 {
 
 h2 {
     font-size: $font-size-large;
-    font-weight: 300;
+    font-weight: lighter;
 }
 
 h3 {
   font-size: $font-size-normal;
-  font-weight: 900;
-  margin-bottom: $spacing-normal;
+  font-weight: bold;
 }
 
 h4 {
-    font-weight: 900;
+    font-weight: bold;
     font-size: .8rem;
-    margin-bottom: $spacing-normal;
 }

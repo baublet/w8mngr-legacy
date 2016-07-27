@@ -48,9 +48,7 @@
     </p>
   <% end %>
 
-  <div class="card-grid">
-    <%= render partial: "search_results", locals: {results: @searchresults} %>
-  </div>
+  <%= render partial: "search_results", locals: {results: @searchresults} %>
 
   <%= render partial: "shared/simple_pagination", locals: {base_url: @base_url, previous_page: @prev_page, next_page: @next_page} %>
 
