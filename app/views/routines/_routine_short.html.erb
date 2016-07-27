@@ -1,10 +1,16 @@
-<div class="routine card">
-  <div class="header">
+<div class="routine card-colorful">
+  <div class="card-top-meta">
+    <%= link_to edit_routine_path(routine), class: "btn-icon", title: "Edit this Routine" do %>
+      <i class="fa fa-pencil"></i>
+      <span class="screen-reader-text">Edit Routine <%= routine.name %></span>
+    <% end %>
+    <%= link_to delete_routine_path(routine), class: "btn-icon delete", title: "Delete this Routine" do %>
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Routine <%= routine.name %></span>
+    <% end %>
+  </div>
+  <div class="card-header">
     <h2>
-      <%= link_to edit_routine_path(routine), class: "meta", title: "Edit or Delete this Routine" do %>
-        <i class="fa fa-pencil"></i>
-        <span class="screen-reader-text">Edit Routine</span>
-      <% end %>
       <%= link_to routine.name, routine %>
     </h2>
     <% unless routine.last_completed.nil? %>
@@ -13,22 +19,24 @@
     </div>
     <% end %>
     <div class="activities">
-      <h3>Activities</h3>
-      <ul>
+      <h3 class="screen-reader-text">Activities</h3>
+      <ul class="pill-list">
         <% routine.activities.each do |activity_id|
             activity = Activity.find(activity_id) %>
         <li>
-          <%= link_to activity.name, activity %>
+          <%= link_to activity.name, activity, class: "pill white" %>
         </li>
         <% end %>
       </ul>
     </div>
   </div>
-  <div class="action-section">
-    <%= link_to routine, class: "card-meta-btn" do %>
-      <i class="fa fa-bolt"></i>
-      Train Routine
-      <span class="screen-reader-text"><%= routine.name %></span>
-    <% end %>
+  <div class="card-body">
+    <div class="card-action-section">
+      <%= link_to routine, class: "btn small" do %>
+        <i class="fa fa-bolt"></i>
+        Train Routine
+        <span class="screen-reader-text"><%= routine.name %></span>
+      <% end %>
+    </div>
   </div>
 </div>

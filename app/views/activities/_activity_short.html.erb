@@ -1,31 +1,38 @@
-<div class="activity card">
-  <div class="short-header">
-    <h2>
-      <%= link_to edit_activity_path(activity), class: "meta", title: "Edit or Delete this Activity" do %>
-        <i class="fa fa-pencil"></i>
-        <span class="screen-reader-text">Edit Activity</span>
-      <% end if activity.user_id == current_user.try(:id) %>
-      <%= link_to activity.name, activity %>
-      <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn card-meta-btn" do %>
-        <i class="fa fa-bolt" aria-hidden="true"></i>
-        Log Activity <span class="screen-reader-text"><%= activity.name %></span>
-      <% end %>
-    </h2>
+<div class="activity card-colorful">
+  <div class="card-top-meta">
+    <%= link_to edit_activity_path(activity), class: "btn-icon", title: "Edit this Activity" do %>
+      <i class="fa fa-pencil"></i>
+      <span class="screen-reader-text">Edit Activity</span>
+    <% end if activity.user_id == current_user.try(:id) %>
+    <%= link_to delete_activity_path(activity), class: "btn-icon delete", title: "Delete this Activity" do %>
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Activity</span>
+    <% end if activity.user_id == current_user.try(:id) %>
   </div>
-  <div class="type"><%= activity.type_name %></div>
-  <% if defined? activity_description %>
-    <%= raw(activity_description) %>
-  <% end %>
-  <% if activity.targets_any_group? %>
-    <div class="muscle-groups-list">
-      <h3>Muscle Groups</h3>
-      <ul class="pill-list">
-      <% Activity::MUSCLE_GROUP_VALUES.each do |name|
-        next unless activity.targets_group?(name)
-        %>
-        <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5B<%= name %>%5D=1" title="View activities that target: <%= name %>"><%= name %></a></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="card-header">
+    <h2 class="card-title">
+      <%= link_to activity.name, activity %>
+    </h2>
+    <h3 class="card-subtitle">
+      <%= activity.type_name %>
+    </h3>
+  </div>
+  <div class="card-body">
+    <% if activity.targets_any_group? %>
+      <div class="muscle-groups-list">
+        <h3 class="screen-reader-text">Muscle Groups</h3>
+        <ul class="pill-list">
+        <% Activity::MUSCLE_GROUP_VALUES.each do |name|
+          next unless activity.targets_group?(name)
+          %>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5B<%= name %>%5D=1" title="View activities that target: <%= name %>"><%= name %></a></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= link_to activity_log_day_path(activity, current_day), class: "btn small" do %>
+      <i class="fa fa-bolt" aria-hidden="true"></i>
+      Log Activity <span class="screen-reader-text"><%= activity.name %></span>
+    <% end %>
+  </div>
 </div>

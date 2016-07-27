@@ -15,6 +15,9 @@
   td.meta {
     text-align: right;
   }
+  .scannable-table-heading {
+    padding-right: $spacing-small;
+  }
 }
 
 .scannable-table-item {

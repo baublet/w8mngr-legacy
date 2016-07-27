@@ -1,7 +1,10 @@
 .search-for-food {
   padding-top: $spacing-normal;
+  padding-right: $spacing-small;
   margin: -#{$spacing-large} 0 0;
   text-align: right;
+  width: 460px;
+  max-width: 100%;
   a {
     color: rgba($black, .5);
     &:hover, &:focus {
@@ -22,7 +25,7 @@
   }
 }
 
-.recipe .description {
+.recipe-header .description {
   margin-top: -#{$spacing-large};
   padding-top: $spacing-normal;
   margin-bottom: $spacing-large;

@@ -47,6 +47,12 @@
     font-size: $font-size-tiny;
     text-transform: uppercase;
     font-weight: bold;
+    .fa {
+      color: $white;
+      opacity: 1;
+      margin: 0 $spacing-tiny 0 0;
+      font-size: 1em;
+    }
     &:hover {
       color: rgba($white, 1);
       @include height(1);

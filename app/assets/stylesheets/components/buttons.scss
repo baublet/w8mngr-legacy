@@ -42,6 +42,9 @@ category: buttons
     text-align:center;
     @include height(1);
     margin-bottom: $spacing-normal;
+    letter-spacing: normal;
+    line-height: normal;
+    white-space: nowrap;
     .fa {
         margin-right: $spacing-small;
     }
@@ -59,24 +62,24 @@ category: buttons
     }
 }
 
-.btn-small {
+.btn.small {
     padding: $spacing-small;
     font-size: $font-size-small;
 }
 
-.btn-secondary {
+.btn.secondary {
     background: $black-light;
     &:hover {
         background: $color-primary;
     }
 }
 
-.btn-hero {
+.btn.hero {
     display: inline-block;
     background: $color-secondary;
     text-align: center;
     font-weight: 400;
-    font-size:$font-size-large;
+    font-size:$font-size-huge;
     color: $white;
     animation: pulsateSecondaryColor 3s 4s 99 forwards normal;
     width: auto;
@@ -95,7 +98,7 @@ category: buttons
     background: $color-primary-light;
 }
 
-.btn-icon, .btn-icon-filled {
+.btn-icon {
     cursor: pointer;
     border: none;
     margin: 0;
@@ -105,6 +108,7 @@ category: buttons
     box-shadow: none;
     background: transparent;
     color: rgba($black, .5);
+    line-height: normal;
     &:hover, &:focus {
         border: none;
         box-shadow: none;
@@ -119,9 +123,12 @@ category: buttons
         opacity: .25;
         cursor: normal;
     }
+    + .btn-icon {
+        margin-left: $spacing-small;
+    }
 }
 
-.btn-icon-filled {
+.btn-icon.filled {
     background: $color-primary;
     padding: $spacing-small;
     color: $white;
@@ -136,13 +143,31 @@ category: buttons
     }
 }
 
-.btn-icon-small {
+.btn-icon.small {
     padding: $spacing-tiny;
     font-size: $font-size-tiny;
+    line-height: $font-size-tiny;
+}
+
+.btn-icon.small.filled {
+    border-radius: 100%;
+    width: $font-size-normal;
+    height: $font-size-normal;
+    overflow: hidden;
+    position: relative;
+    .fa {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .app-form .btn-icon {
-    color: $white;
+    color: rgba($white, .5);
+    &:hover, &:focus {
+        color: $white;
+    }
 }
 
 .btn-prev, .btn-next {
@@ -151,6 +176,7 @@ category: buttons
     font-size:.9rem;
     padding: .75rem;
     text-align: left;
+    line-height: normal;
 }
 .btn-next {
     text-align: right;
@@ -205,8 +231,19 @@ category: buttons
   border: 1px solid rgba($black, .25);
   border-radius: 3px;
   &:hover, &:focus {
-      border-color: transparent;
+    border-color: transparent;
     background: $color-primary;
     color: $white;
+  }
+  &.white {
+      background: transparent;
+      color: rgba($white, .5);
+      border-color: rgba($white, .25);
+      &:hover, &:focus {
+          text-decoration: none !important;
+          color: $white;
+          border-color: $white;
+          background: rgba($white, .125);
+      }
   }
 }

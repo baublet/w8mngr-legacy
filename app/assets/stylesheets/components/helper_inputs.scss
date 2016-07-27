@@ -1,0 +1,80 @@
+.helper-input {
+  visibility: hidden;
+  position: absolute;
+  left: -999px;
+}
+
+.helper-input + .helper-panel,
+.helper-input + label + .helper-panel {
+  max-height: 0px;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
+  transition: opacity .25s ease-in-out;
+}
+
+.helper-input:checked + .helper-panel,
+.helper-panel:target,
+.helper-input:checked + label + .helper-panel {
+  position: static;
+  opacity: 1;
+  max-height: 9999px;
+  overflow: visible;
+  &.floating {
+    position: absolute;
+    background: $white;
+    padding: $spacing-small;
+    @include height(1);
+    right: 0;
+    width: 75vw;
+    max-width: 100%;
+    min-width: 280px;
+    z-index: $layer-base + 20;
+  }
+}
+
+input[type=checkbox].toggle-switch {
+  display: none;
+  + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 4rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    &:before {
+      display: block;
+      content: " ";
+      background-color: #eee;
+      border: 1px solid rgba($black, .25);
+      border-radius: 2rem;
+      width: 3rem;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      box-shadow: inset 0 0 5px 0 rgba(black, .1);
+      transition: background-color .25s ease-in-out;
+    }
+    &:after {
+      display: block;
+      content: " ";
+      width: 1rem;
+      position: absolute;
+      left: .25rem;
+      top: -.25rem;
+      bottom:-.25rem;
+      border-radius:50%;
+      border: 1px solid #ccc;
+      background: $white;
+      @include height(1);
+      transform: translateX(0);
+      transition: transform .5s $easing-1;
+    }
+  }
+  &:checked + label:before {
+    background-color: $color-primary-light;
+  }
+  &:checked + label:after {
+    transform: translateX(1.5rem);
+  }
+}

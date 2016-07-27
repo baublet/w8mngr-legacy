@@ -1,6 +1,8 @@
 .page-meta {
     font-size: $font-size-small;
     margin: 0 0 $spacing-large;
+    position: relative;
+    z-index: $layer-base + 20;
     h1 + & {
         margin-top: -$spacing-small;
     }
@@ -26,6 +28,10 @@
             background: $color-primary;
         }
     }
+}
+
+.page-meta.btn-bar {
+    align-items: flex-end;
 }
 
 .pagination {

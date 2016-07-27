@@ -23,7 +23,7 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   align-content: center;
   justify-content: space-around;
   color: $white;
@@ -32,11 +32,15 @@
     @include screenReaderText();
   }
   .fa {
-    color: $black;
-    font-size: 10rem;
+    color: $white;
+    font-size: 7rem;
   }
   .turbolinks-loading-panel {
     display: inline-block;
+    background: $color-primary-light;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    padding: $spacing-normal $spacing-large;
   }
   &.on {
     display: flex;

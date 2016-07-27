@@ -19,37 +19,41 @@
   <% if !@recipe.id.nil? %>
   <div class="ingredients form-well">
     <h2><i class="fa fa-cutlery"></i> Ingredients</h2>
-    <table class="data-table">
-      <thead class="lowkey">
+    <% if @recipe.ingredients.to_a.count > 0 %>
+      <table class="data-table">
+        <thead class="lowkey">
+          <tr>
+            <th></th>
+            <th>Calories</th>
+            <th>Fat</th>
+            <th>Carbs</th>
+            <th>Protein</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @recipe.ingredients.each do |ingredient| %>
         <tr>
-          <th></th>
-          <th>Calories</th>
-          <th>Fat</th>
-          <th>Carbs</th>
-          <th>Protein</th>
-          <th></th>
+          <th><%= ingredient.name %></th>
+          <td><%= number_with_delimiter ingredient.calories %></td>
+          <td><%= ingredient.fat %></td>
+          <td><%= ingredient.carbs %></td>
+          <td><%= ingredient.protein %></td>
+          <td class="meta">
+            <%= link_to delete_recipe_ingredient_path(ingredient.recipe, ingredient), class: "btn btn-delete btn-icon", title: "Delete ingredient" do %>
+              <i class="fa fa-times"></i>
+              <span class="screen-reader-text">Delete Ingredient</span>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-      <% @recipe.ingredients.each do |ingredient| %>
-      <tr>
-        <th><%= ingredient.name %></th>
-        <td><%= number_with_delimiter ingredient.calories %></td>
-        <td><%= ingredient.fat %></td>
-        <td><%= ingredient.carbs %></td>
-        <td><%= ingredient.protein %></td>
-        <td class="meta">
-          <%= link_to delete_recipe_ingredient_path(ingredient.recipe, ingredient), class: "btn btn-delete btn-icon", title: "Delete ingredient" do %>
-            <i class="fa fa-times"></i>
-            <span class="screen-reader-text">Delete Ingredient</span>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-      </tbody>
-    </table>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="form-info">None yet! Add ingredients to this recipe using the form below.</p>
+    <% end %>
 
-    <% if @recipe.ingredients.count > 1 %>
+    <% if @recipe.ingredients.to_a.count > 1 %>
       <div class="totals">
         <div class="calories number">
           <span class="label">Calories</span>
@@ -68,8 +72,6 @@
           <span class="number"><%= number_with_delimiter @recipe.protein %></span>
         </div>
       </div>
-    <% else %>
-      <p class="form-info">None yet! Add ingredients to this recipe using the form below.</p>
     <% end %>
 
     <div class="new-ingredient app-form">

@@ -34,9 +34,9 @@
 			</div>
 
 			<div class="col">
-				<%= button_tag(type: 'submit', class: 'btn btn-icon btn-icon-filled', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
+				<%= button_tag(type: 'submit', class: 'btn-icon filled', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
 	      			<i class="fa fa-plus"></i>
-	      			<span class="btn-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
+	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
 	      <% end %>
 			</div>
 		</div>

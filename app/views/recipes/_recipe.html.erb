@@ -7,7 +7,7 @@
         <%= recipe.name %>
       </span>
     <% end %>
-    <%= link_to delete_recipe_path(recipe), class:"btn-icon  btn-delete", title: "Delete this Recipe" do %>
+    <%= link_to delete_recipe_path(recipe), class:"btn-icon  delete", title: "Delete this Recipe" do %>
       <i class="fa fa-times"></i>
       <span class="screen-reader-text">
         Delete Recipe
@@ -30,7 +30,7 @@
     <% unless recipe.description.blank? %>
       <p class="description"><%= recipe.description.truncate_words(30) %></p>
     <% end %>
-    <%= link_to recipe_path(recipe), class: "btn btn-small", title: "View details about " + recipe.name do %>
+    <%= link_to recipe_path(recipe), class: "btn small", title: "View details about " + recipe.name do %>
       <i class="fa fa-arrow-right" aria-hidden="true"></i>
       View Details
       <span class="screen-reader-text">about <%= recipe.name %></span>
