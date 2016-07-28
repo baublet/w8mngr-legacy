@@ -35,6 +35,11 @@ body.activities.show .user-markdown {
   }
 }
 
+.app-panel-form .activity-entry .meta {
+  position: static;
+  transform: none;
+}
+
 .activity-entry {
   display: flex;
   flex-wrap: nowrap;

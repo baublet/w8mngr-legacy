@@ -20,13 +20,13 @@
       <% end unless cookies[:routine_id].nil? %>
     </div>
 
-    <% unless @activityentries.nil? %>
-      <div class="activity-entries">
+    <% unless @activityentries.nil? || @activityentries.count < 1 %>
+      <div class="activity-entries app-panel app-panel-form">
         <%= render @activityentries %>
       </div>
     <% end %>
 
-    <% if @activityentries.nil? || @activityentries.count == 0 %>
+    <% if @activityentries.nil? || @activityentries.count < 1 %>
       <p>You haven't logged any entries for this activity today.</p>
     <% end %>
 
