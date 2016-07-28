@@ -41,7 +41,8 @@
               <%= number_with_delimiter Unit.new((
                 @activityentries.map { |e| e.reps }.inject(0){ |sum, x| sum + x } *
                 @activityentries.map { |e| e.work }.inject(0){ |sum, x| sum + x }
-                ).to_s + "g").convert_to(current_user.unit).scalar.round %>
+                ).to_s + "g").convert_to(current_user.unit).scalar.round
+              %>
               <span class="unit"><%= current_user.unit %></span>
             </span>
             <span class="label" alt="Total Weight Moved on <%= nice_day current_day %>">Weight Moved</span>
@@ -53,6 +54,24 @@
             </span>
             <span class="label" alt="Total Time Spent on <%= @activity.name %> on <%= nice_day current_day %>">Total Time</span>
             <%
+          when 2                                                       # Distance
+          %>
+            <span class="number">
+              <%= number_with_delimiter Unit.new((
+                @activityentries.map { |e| e.work }.inject(0){ |sum, x| sum + x }
+                ).to_s + "mm").convert_to(current_user.unit(:distance)).scalar.round
+              %>
+              <span class="unit"><%= current_user.unit :distance %></span>
+            </span>
+            <span class="label" alt="Total Distance on <%= nice_day current_day %>">Distance</span>
+          <%
+          when 3                                                       # Reps
+          %>
+            <span class="number">
+              <%= number_with_delimiter @activityentries.map { |e| e.reps }.inject(0){ |sum, x| sum + x } %>
+            </span>
+            <span class="label" alt="Total Reps on <%= nice_day current_day %>">Repetitions</span>
+          <%
         end
         %>
       </div>
@@ -79,9 +98,9 @@
     </div>
     <% end %>
 
-    <div class="activity-box">
+    <div class="form-descriptor-box">
 
-      <div class="activity-description-box">
+      <div class="form-desciption">
         <h2><%= link_to @activity.name, @activity %></h2>
         <ul class="pill-list">
           <% Activity::MUSCLE_GROUP_VALUES.each do |name|
@@ -97,10 +116,10 @@
       <div class="activity-new-box app-form new">
         <%= form_tag activity_new_activity_entry_path(activity_id: @activity.id) do %>
           <%= hidden_field_tag "day", current_day %>
-          <%=
-            # Renders our partial forms, located in  views/activities/types/
-            render partial: "activities/types/" + @activity.type_template, entry: @new_activityentry %>
-          <%= button_tag type: "submit", class: "btn food-log-new-btn", title: "New Entry" do %>
+            <%=
+              # Renders our partial forms, located in  views/activities/types/
+              render partial: "activities/types/" + @activity.type_template, entry: @new_activityentry %>
+          <%= button_tag type: "submit", class: "btn", title: "New Entry" do %>
             <i class="fa fa-plus"></i>
             <strong>New Entry</strong>
           <% end %>

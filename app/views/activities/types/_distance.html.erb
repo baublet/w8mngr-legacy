@@ -7,7 +7,8 @@
           ( number_with_precision(entry.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2) + " " + current_user.unit(:distance) ) :
           ""
         ),
-        placeholder: "Distance, e.g., 12 miles, 3000 steps, 2km" %>
+        placeholder: "Distance, e.g., 12 miles, 3000 steps, 2km",
+        class: "large" %>
 </div>
 
 <% if defined? entry %>
@@ -16,7 +17,6 @@
     <span class="screen-reader-text">Estimated Calories Burned:</span>
     <%= entry.calories %> calories
   </span>
-  &bull;
   <%= time_ago_in_words(entry.created_at) %> ago
 </div>
 <% end %>

@@ -4,11 +4,12 @@
     <%= render partial: "shared/error_messages", locals: {errors: activity.errors} %>
   <% end %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name, placeholder: "e.g., Barbell Back Squat"  %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "e.g., Barbell Back Squat"  %>
 
-  <%= f.label :description %>
-  <%= f.text_area :description, placeholder: "e.g., ...
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: "e.g., ...
 
 # Preparation
 
@@ -23,17 +24,19 @@ Squat down by bending hips back while allowing knees to bend forward, keeping ba
 Keep head facing forward, back straight and feet flat on floor; equal distribution of weight throughout forefoot and heel. Knees should point same direction as feet throughout movement.
 
 (This example text is from ExRx.net)" %>
+  </div>
 
-  <%= f.label :activity_type %>
-  <%= f.select(:activity_type, activity.activity_types(true).map.with_index {|n,k| [n, k] }) %>
-
-  <div class="range-group">
-    <%= f.label :intensity %>
-    <%= f.range_field :intensity, min: 0, max: 10 %>
-    <div class="locations">
-      <div class="location-tick" style="left: 0">Light Walking</div>
-      <div class="location-tick" style="left: 50%; transform: translateX(-50%);">Weightlifting</div>
-      <div class="location-tick" style="right: 0">Sprints</div>
+  <div class="form-group">
+    <%= f.label :activity_type %>
+    <%= f.select(:activity_type, activity.activity_types(true).map.with_index {|n,k| [n, k] }) %>
+    <div class="range-group">
+      <%= f.label :intensity %>
+      <%= f.range_field :intensity, min: 0, max: 10 %>
+      <div class="locations">
+        <div class="location-tick" style="left: 0">Light Walking</div>
+        <div class="location-tick" style="left: 50%; transform: translateX(-50%);">Weightlifting</div>
+        <div class="location-tick" style="right: 0">Sprints</div>
+      </div>
     </div>
   </div>
 
@@ -48,15 +51,24 @@ Keep head facing forward, back straight and feet flat on floor; equal distributi
     <%= render "muscle_groups" %>
   </div>
 
-  <%= f.label :exrx, "ExRx link" %>
-  <%= f.text_field :exrx, placeholder: "e.g., http://www.exrx.net/WeightExercises/Quadriceps/BBSquat.html" %>
+  <div class="form-group">
+    <%= f.label :exrx, "ExRx link" %>
+    <%= f.text_field :exrx, placeholder: "e.g., http://www.exrx.net/WeightExercises/Quadriceps/BBSquat.html" %>
+  </div>
 
   <div class="btn-bar">
     <div class="left">
-      <%= link_to "Delete Activity", delete_activity_path(activity), class: "delete-btn" unless activity.id.nil? %>
+      <%= link_to "Delete Activity", delete_activity_path(activity), class: "btn-meta delete" unless activity.id.nil? %>
     </div>
     <div class="right">
-      <%= f.button (activity.id.nil?) ? "Create Activity" : "Save Activity", class: "btn" %>
+      <%= button_tag type: "submit", class: "btn" do %>
+        <% if activity.id.nil? %>
+          Create Activity
+        <% else %>
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          Save Activity
+        <% end %>
+      <% end %>
     </div>
   </div>
 

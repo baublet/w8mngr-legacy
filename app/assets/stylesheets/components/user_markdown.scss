@@ -1,6 +1,7 @@
 .user-markdown {
   padding-top: $spacing-normal;
   border-top: 1px solid rgba(black, .1);
+  overflow: auto;
   @include mqAfterSize($desktop-breakpoint) {
     border: 0;
     background: $white;

@@ -1,3 +1,33 @@
+/*doc
+---
+title: Button Bar (for Layout)
+name: button-bar
+category: buttons
+---
+Layout element for positioning buttons on the same horizontal line, but with
+some buttons arranged on the left side, the others on the right.
+
+It can also be used to align buttons in the center.
+
+```html_example
+    <div class="btn-bar">
+        <div class="left">
+            <a href="" class="btn">Button</a>
+            <a href="" class="btn secondary">on the Left</a>
+        </div>
+        <div class="right">
+            <a href="" class="btn">Button</a>
+            <a href="" class="btn secondary">on the Right</a>
+        </div>
+    </div>
+
+    <div class="btn-bar">
+        <a href="" class="btn">Buttons</a>
+        <a href="" class="btn secondary">in the middle</a>
+    </div>
+```
+*/
+
 .btn-bar {
     display: flex;
     align-items: flex-end;
@@ -13,6 +43,9 @@
     .btn {
         margin-bottom: 0;
         vertical-align: bottom;
+        + .btn {
+            margin-left: $spacing-small;
+        }
     }
 }
 
@@ -94,7 +127,7 @@ category: buttons
     }
 }
 
-.app-form .btn-submit {
+.app-form .btn {
     background: $color-primary-light;
 }
 
@@ -108,6 +141,7 @@ category: buttons
     box-shadow: none;
     background: transparent;
     color: rgba($black, .5);
+    font-size: $font-size-normal;
     line-height: normal;
     &:hover, &:focus {
         border: none;
@@ -128,38 +162,10 @@ category: buttons
     }
 }
 
-.btn-icon.filled {
-    background: $color-primary;
-    padding: $spacing-small;
-    color: $white;
-    @include height(1);
-    border-radius: 3px;
-    .fa {
-        margin: 0;
-    }
+.btn-icon.primary {
+    color: $color-primary;
     &:hover, &:focus {
-        background: $color-primary-light;
-        color: $white;
-    }
-}
-
-.btn-icon.small {
-    padding: $spacing-tiny;
-    font-size: $font-size-tiny;
-    line-height: $font-size-tiny;
-}
-
-.btn-icon.small.filled {
-    border-radius: 100%;
-    width: $font-size-normal;
-    height: $font-size-normal;
-    overflow: hidden;
-    position: relative;
-    .fa {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        color: $color-primary-light;
     }
 }
 

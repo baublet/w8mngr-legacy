@@ -1,0 +1,79 @@
+body.activities.show .muscle-groups.show {
+  float: right;
+  width: 100%;
+  margin: 0 0 $spacing-normal;
+}
+
+body.activities.show .user-markdown {
+  border: 0;
+  margin-top: 0;
+}
+
+.activity-new-box div + .btn {
+  margin-top: $spacing-normal;
+}
+
+@include mqAfterSize($desktop-breakpoint) {
+  body.activities.show .muscle-groups.show {
+    border: 0;
+    box-shadow: none;
+    margin: 0 0 $spacing-large $spacing-large;
+    float: right;
+  }
+}
+
+.older-activity-entries h3 {
+  padding-bottom: $spacing-small;
+  margin-bottom: $spacing-small;
+  border-bottom: 1px solid rgba($black, .1);
+}
+
+.activity-entry.weight div {
+  width: calc(50% - 5rem);
+  &.meta {
+    width: 4rem;
+  }
+}
+
+.activity-entry {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  .meta {
+    width: 3rem;
+  }
+  .when {
+    font-size: $font-size-small;
+    color: rgba($black, .75);
+  }
+  .calories {
+    margin-right: $spacing-small;
+  }
+  .unit, .reps + .fa-times {
+    font-size: $font-size-tiny;
+    color: rgba($black, .75);
+    padding: 0 $spacing-small;
+    font-weight: bold;
+  }
+  .reps + .fa-times {
+    color: rgba($black, .25);
+  }
+  div {
+    width: calc(50% - 3rem);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    + div {
+      padding-left: $spacing-small;
+    }
+  }
+}
+
+.activity-entry-form + h4 {
+  margin-top: $spacing-normal;
+}
+
+.activity-entry-form + .activity-entry-form {
+  margin-top: $spacing-small;
+}

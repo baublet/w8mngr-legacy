@@ -8,7 +8,7 @@
     }
     a {
         display: inline-block;
-        margin: 0 $spacing-tiny $spacing-small 0;
+        margin: 0 $spacing-tiny 0 0;
         padding: $spacing-tiny;
         color: rgba($black, .5);
         border-bottom: 3px solid transparent;
@@ -32,6 +32,19 @@
 
 .page-meta.btn-bar {
     align-items: flex-end;
+    @include mqBeforeSize($desktop-breakpoint / 2) {
+        flex-wrap: wrap;
+        .left, .right {
+            width: 100%;
+            order: 2;
+        }
+        .right {
+            order: 1;
+            margin-top: -$spacing-large;
+            padding-top: $spacing-normal;
+            margin-bottom: $spacing-normal;
+        }
+    }
 }
 
 .pagination {

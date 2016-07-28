@@ -56,20 +56,20 @@
     <% if @recipe.ingredients.to_a.count > 1 %>
       <div class="totals">
         <div class="calories number">
-          <span class="label">Calories</span>
           <span class="number"><%= number_with_delimiter @recipe.calories %></span>
+          <span class="label">Calories</span>
         </div>
         <div class="fat number">
-          <span class="label">Fat</span>
           <span class="number"><%= number_with_delimiter @recipe.fat %></span>
+          <span class="label">Fat</span>
         </div>
         <div class="carbs number">
-          <span class="label">Carbs</span>
           <span class="number"><%= number_with_delimiter @recipe.carbs %></span>
+          <span class="label">Carbs</span>
         </div>
         <div class="protein number">
-          <span class="label">Protein</span>
           <span class="number"><%= number_with_delimiter @recipe.protein %></span>
+          <span class="label">Protein</span>
         </div>
       </div>
     <% end %>

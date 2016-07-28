@@ -1,5 +1,12 @@
-<div class="muscle-groups show">
-  <h3>Muscle Groups</h3>
+<p class="info-text"><%= activity.type_name %></p>
+
+<div class="activity">
+  <% if defined? activity_description %>
+    <div class="user-markdown">
+  <% end %>
+
+  <div class="muscle-groups show">
+    <h3 class="screen-reader-text">Muscle Groups</h3>
     <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
       <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
     <% end %>
@@ -13,10 +20,10 @@
         <% end %>
       <% end %>
     </ul>
-</div>
-<div class="activity">
-  <div class="type"><%= activity.type_name %></div>
+  </div>
+
   <% if defined? activity_description %>
-    <%= raw(activity_description) %>
+      <%= raw(activity_description) %>
+    </div>
   <% end %>
 </div>

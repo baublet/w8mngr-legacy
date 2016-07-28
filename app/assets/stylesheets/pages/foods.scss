@@ -58,22 +58,3 @@
     padding-right: $spacing-normal;
     font-weight: bold;
 }
-
-.scannable-table-item-title {
-  margin: 0;
-  font-size: $font-size-large;
-  font-weight: bold;
-  color: rgba($black, .75);
-  a {
-    color: rgba($black, .75);
-    &:hover {
-      color: $color-primary-light;
-    }
-  }
-}
-
-.scannable-table-item-subtitle {
-  margin: $spacing-small 0 0;
-  font-size: $font-size-normal;
-  font-weight: normal;
-}

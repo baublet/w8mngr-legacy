@@ -46,6 +46,13 @@
     order: 3;
     width: 100%;
   }
+  a {
+    color: rgba($white, .5);
+    &:hover, &:focus {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
 }
 
 .activity-new-box {
