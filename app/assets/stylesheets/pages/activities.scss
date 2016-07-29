@@ -97,11 +97,13 @@ body.activities.show .user-markdown {
 .activity.medium {
   padding: $spacing-small;
   margin: 0;
+  h3 {
+    margin-bottom: $spacing-tiny;
+  }
   + .activity.medium {
     border-top: 1px solid rgba($black, .1);
   }
   .type {
-    font-weight: bold;
     font-size: $font-size-tiny;
     margin-bottom: $spacing-normal;
     color: rgba($black, .5);
@@ -114,10 +116,16 @@ body.activities.show .user-markdown {
   }
   .muscle-groups.show {
     width: 125px;
+    height: 95px;
+    padding: 4px 0 0;
     min-width: 0;
     margin: 0;
-    padding: 0;
     box-shadow: none;
+    svg {
+      margin: 0;
+      width: 100%;
+      height: auto;
+    }
   }
   .activity-info {
     padding: 0 $spacing-normal;
@@ -126,11 +134,17 @@ body.activities.show .user-markdown {
     text-align: right;
     padding-right: $spacing-small;
     .fa {
-      font-size: 3rem;
+      font-size: 2rem;
       @include mqAfterSize(360px) {
+        font-size: 2.5rem;
+      }
+      @include mqAfterSize($desktop-breakpoint) {
         font-size: 5rem;
       }
       color: rgba($black, .5);
+      &:hover {
+        color: $black;
+      }
     }
     .complete {
       color: $color-primary-light;

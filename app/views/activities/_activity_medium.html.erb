@@ -24,15 +24,15 @@
     <% entries = activity.entries(current_user.id, 1, 0, current_day.to_i + 1) %>
     <div class="progress col">
       <% if entries.count > 0 %>
-        <% if entries[0].day.to_i == current_day.to_i %>
-          <i class="fa fa-check-circle-o complete" aria-hidden="true"></i>
-          <span class="screen-reader-text">You have logged entries for this activity today. Great work!</span>
-        <% else %>
-          <a href="<%= activity_log_day_path(activity, current_day) %>" alt="Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago">
+        <a href="<%= activity_log_day_path(activity, current_day) %>" alt="Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago">
+          <% if entries[0].day.to_i == current_day.to_i %>
+            <i class="fa fa-check-circle-o complete" aria-hidden="true"></i>
+            <span class="screen-reader-text">You have logged entries for this activity today. Great work!</span>
+          <% else %>
             <i class="fa fa-circle-o" aria-hidden="true" alt="Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago"></i>
-          </a>
-          <span class="screen-reader-text">Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago</span>
-        <% end %>
+            <span class="screen-reader-text">Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago</span>
+          <% end %>
+        </a>
       <% else %>
         You have not yet logged this activity.
       <% end %>

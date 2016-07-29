@@ -15,19 +15,33 @@ w8mngr.init.add(function() {
 
   takeOverForms()
 
+  // Whenever turbolinks brings up a new page, this will ensure that new forms
+  // are taken over by this script
   addEvent(document, "turbolinks:load", function() {
     takeOverForms()
   })
 
   function takeOverForms() {
-    return false
-    var elements = document.querySelectorAll("form[method=post]")
-    elements.forEach(function(el) {
+    // First, we need to hijack all of the buttons in the form to prevent
+    // mobile browsers from auto-submitting things
+    /*let buttons = document.querySelectorAll("form[method=post] button[type=submit]")
+    console.log(buttons)
+    buttons.forEach(function(el) {
+      addEvent(el, ["click"], function(e) {
+        el.form.w8mngrSubmit()
+      })
+    })*/
+
+    // Now, let's hijack the form submit action
+    let forms = document.querySelectorAll("form[method=post]")
+    forms.forEach(function(el) {
+      // Already watched? Skip it
       if (el.w8mngrWatched) return false
-      console.log("Taking over form with action " + el.action)
       el.w8mngrWatched = true
+      console.log("Taking over form with action " + el.action)
+
+      // Stop the form submission process
       addEvent(el, "submit", function(e) {
-        // Stop the form from submitting
         e.preventDefault()
         document.w8mngrLoading(true)
         // Send it via XHR
@@ -38,7 +52,6 @@ w8mngr.init.add(function() {
           // to instead alter our serverside code to return javascript that tells
           // TL what to do... asinine considering TL's original purpose (progressive
           // enhancement and quicker app development).
-          console.log(response)
           let url = response.responseURL
           if (url !== window.location.href) {
             window.Turbolinks.visit(url)
@@ -57,6 +70,7 @@ w8mngr.init.add(function() {
             })
           }
         })
+        return false
       })
     })
   }
@@ -64,8 +78,8 @@ w8mngr.init.add(function() {
   // Borrowed from StackOverflow,
   // http://stackoverflow.com/questions/6990729/simple-ajax-form-using-javascript-no-jquery/26556347#26556347
   function xhrForm(form, callback) {
-    var xhr = new XMLHttpRequest()
-    var params = [].filter.call(form.elements, function(el) { return true })
+    let xhr = new XMLHttpRequest()
+    let params = [].filter.call(form.elements, function(el) { return true })
     .filter(function(el) {
       if(['checkbox', 'radio'].indexOf(el.type) > -1) {
         return document.getElementById(el.id).checked

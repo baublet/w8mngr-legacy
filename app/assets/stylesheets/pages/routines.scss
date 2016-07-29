@@ -1,6 +1,7 @@
 .progress-panel {
   color: $white;
   background: $color-primary;
+  margin-bottom: $spacing-large;
   @include mqAfterSize($desktop-breakpoint / 2) {
     width: 230px;
     float: right;
@@ -23,4 +24,75 @@
   padding: 0;
   box-shadow: none;
   background: transparent;
+  @include mqBeforeSize($desktop-breakpoint / 2) {
+    overflow: visible;
+  }
+}
+
+.routine-form .activities {
+  margin-bottom: $spacing-large;
+  width: 100%;
+  .activity-list-window {
+    max-height: 50vh;
+    overflow: hidden;
+    overflow-y: auto;
+    background: rgba($black, .01);
+    border-radius: 5px;
+    @include height(-1);
+  }
+  .activity-list {
+    @include mqAfterSize($desktop-breakpoint / 3) {
+      column-count: 2;
+      -webkit-column-count: 2;
+      -webkit-column-gap: $spacing-small;
+         -moz-column-gap: $spacing-small;
+              column-gap: $spacing-small;
+    }
+    @include mqAfterSize($desktop-breakpoint / 2) {
+      column-count: 3;
+      -webkit-column-count: 3;
+    }
+    @include mqAfterSize($desktop-breakpoint) {
+      column-count: 4;
+      -webkit-column-count: 4;
+    }
+  }
+  .activity-label {
+    display: block;
+    padding: $spacing-small;
+    font-weight: normal;
+    margin: 0;
+    font-size: $font-size-normal;
+    position: relative;
+    padding-left: 2rem;
+    -webkit-column-break-inside: avoid;
+          page-break-inside:     avoid;
+               break-inside:     avoid;
+    &:before {
+      opacity: .5;
+      font-family: "FontAwesome";
+      font-size: 1em;
+      content: "\f10c";
+      position: absolute;
+      left: $spacing-small;
+      top: 8px;
+    }
+  }
+  .helper-input:checked + .activity-label {
+    font-weight: bold;
+    background: $color-primary-light;
+    color: $white;
+    &:before {
+      content: "\f05d";
+    }
+  }
+  .activity-label-category {
+    padding: $spacing-small;
+    display: block;
+    cursor: default;
+  }
+}
+
+.activity-label + .activity-label {
+  border-top: 1px solid rgba($black, .1);
 }

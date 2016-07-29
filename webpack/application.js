@@ -1,6 +1,14 @@
-// Our small forEach polyfill
+// Our small forEach polyfills
 if (typeof Array.prototype.forEach !== 'function') {
   Array.prototype.forEach = function(callback, context) {
+    for (var i = 0; i < this.length; i++) {
+      callback.apply(context, [ this[i], i, this ])
+    }
+  }
+}
+
+if (typeof NodeList.prototype.forEach !== 'function') {
+  NodeList.prototype.forEach = function(callback, context) {
     for (var i = 0; i < this.length; i++) {
       callback.apply(context, [ this[i], i, this ])
     }
