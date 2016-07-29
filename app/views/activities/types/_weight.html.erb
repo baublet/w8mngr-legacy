@@ -29,6 +29,6 @@
     <span class="screen-reader-text">Estimated Calories Burned:</span>
     <%= entry.calories %> calories
   </span>
-  <%= time_ago_in_words(entry.created_at) %> ago
+  <span class="time"><%= time_ago_in_words(entry.created_at) %> ago</span>
 </div>
 <% end %>

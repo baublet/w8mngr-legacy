@@ -1,0 +1,26 @@
+.progress-panel {
+  color: $white;
+  background: $color-primary;
+  @include mqAfterSize($desktop-breakpoint / 2) {
+    width: 230px;
+    float: right;
+    margin: 0 0 0 $spacing-large;
+  }
+  h3 {
+    font-size: $font-size-normal;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.routine-info {
+  margin-bottom: $spacing-large;
+}
+
+.routine-info .user-markdown {
+  margin-top: 0;
+  border-top: 0;
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}

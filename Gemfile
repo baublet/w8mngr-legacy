@@ -74,6 +74,8 @@ group :development, :test do
     gem "brakeman"
     gem "bullet"
     gem "hologram"
+
+    gem "guard", :require => false
 end
 
 

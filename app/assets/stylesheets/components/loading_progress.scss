@@ -1,14 +1,31 @@
 .progress-bar {
   overflow: hidden;
   width: 100%;
-  height: 1rem;
+  height: $spacing-large;
+  @include height(-2);
+  border-radius: 3px;
+  position: relative;
   .container, .progress {
     height: 100%;
     background: rgba($black, .1);
   }
   .progress {
     width: auto;
-    background: $color-primary-light;
+    background: rgba($color-primary-light, .75);
+  }
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: lighter;
+    font-size: $font-size-huge;
+    display:  flex;
+    justify-content: center;
+    .total:before {
+      content: "/";
+      color: rgba($white, .25);
+    }
   }
 }
 

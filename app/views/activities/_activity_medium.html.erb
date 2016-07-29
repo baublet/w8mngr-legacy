@@ -1,32 +1,41 @@
-<div class="activity medium">
-  <div class="activity-general-info">
+<div class="activity medium grid">
+  <div class="row">
     <% if activity.targets_any_group? %>
-    <div class="muscle-groups show">
-        <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
-          <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
-        <% end %>
-        <%= render "activities/muscle_groups" %>
-    </div>
+      <div class="muscle-groups show col">
+          <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
+            <%= check_box_tag "activity[muscle_groups][#{name}]", "1", activity.targets_group?(name), {class: "muscles-helper"} %>
+          <% end %>
+          <%= render "activities/muscle_groups" %>
+      </div>
     <% end %>
-    <h3><%= link_to activity.name, activity %></h3>
-    <div class="activity">
-      <div class="type"><%= activity.type_name %></div>
-      <% if defined? activity_description %>
-        <%= raw(activity_description) %>
-      <% end %>
-      <%= link_to activity_log_day_path(activity, current_day), class: "log-activity-btn btn" do %>
-        <i class="fa fa-bolt" aria-hidden="true"></i>
-        Log Activity <span class="screen-reader-text"><%= activity.name %></span>
+    <div class="activity-info col full">
+      <h3><%= link_to activity.name, activity %></h3>
+      <div class="activity">
+        <div class="type"><%= activity.type_name %></div>
+        <% if defined? activity_description %>
+          <%= raw(activity_description) %>
+        <% end %>
+        <%= link_to activity_log_day_path(activity, current_day), class: "btn" do %>
+          <i class="fa fa-bolt" aria-hidden="true"></i>
+          Log Activity <span class="screen-reader-text"><%= activity.name %></span>
+        <% end %>
+      </div>
+    </div>
+    <% entries = activity.entries(current_user.id, 1, 0, current_day.to_i + 1) %>
+    <div class="progress col">
+      <% if entries.count > 0 %>
+        <% if entries[0].day.to_i == current_day.to_i %>
+          <i class="fa fa-check-circle-o complete" aria-hidden="true"></i>
+          <span class="screen-reader-text">You have logged entries for this activity today. Great work!</span>
+        <% else %>
+          <a href="<%= activity_log_day_path(activity, current_day) %>" alt="Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago">
+            <i class="fa fa-circle-o" aria-hidden="true" alt="Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago"></i>
+          </a>
+          <span class="screen-reader-text">Last entry <%= pluralize (current_day.to_i - entries[0].day.to_i), "day" %> ago</span>
+        <% end %>
+      <% else %>
+        You have not yet logged this activity.
       <% end %>
     </div>
   </div>
-  <% entries = activity.entries(current_user.id, 1, 0, current_day.to_i + 1) %>
-  <% if entries.count > 0 %>
-    <div class="activity-entries<%= entries[0].day.to_i == current_day.to_i ? " today" : " not-today" %>">
-      <h4><%= entries[0].day.to_i == current_day.to_i ? "Today's Entries, " + nice_day(entries[0].day) : "Last Entry: " + pluralize(current_day.to_i - entries[0].day, "day") + " ago" %></h4>
-      <% entries.each do |entry| %>
-        <%= render entry %>
-      <% end %>
-    </div>
-  <% end %>
 </div>
