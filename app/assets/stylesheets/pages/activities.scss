@@ -30,6 +30,19 @@ body.activities.show .user-markdown {
   border-bottom: 1px solid rgba($black, .1);
 }
 
+.older-activity-entries {
+  input {
+    background: transparent;
+    border-color: transparent;
+    &:hover {
+      background: rgba(white, .5);
+    }
+    &:focus {
+      background: $white;
+    }
+  }
+}
+
 .activity-entry.weight div {
   width: calc(60% - 5rem);
   &.meta {
@@ -97,6 +110,9 @@ body.activities.show .user-markdown {
 .activity.medium {
   padding: $spacing-small;
   margin: 0;
+  @include mqAfterSize($desktop-breakpoint) {
+    padding: $spacing-normal;
+  }
   h3 {
     margin-bottom: $spacing-tiny;
   }

@@ -28,23 +28,29 @@
 
   <%= form_tag(controller: "registrations", action: "save_metrics") do %>
 
-    <%= label_tag "height_display", "Height" %>
-  	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+    <div class="form-group">
+      <%= label_tag "height_display", "Height" %>
+    	<%= text_field_tag "height_display", @user.preferences["height_display"], placeholder: "e.g. 5'8\", 175 cm, 5 feet 8 inches, 72 inches, etc." %>
+      <%= label_tag "birthday", "Birthday" %>
+  	  <%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year and a month, e.g., May 1982, 05/01/1977, 1/7/88, etc." %>
+    </div>
 
-  	<%= label_tag "birthday", "Birthday" %>
-  	<%= text_field_tag "birthday", @user.preferences["birthday"], placeholder: "Anything with a year and a month, e.g., May 1982, 05/01/1977, 1/7/88, etc." %>
+    <div class="form-group">
+    	<%= label_tag "activity_level", "Activity Level" %>
+    	<%= select_tag "activity_level", options_for_select([
+      	                            ["Sedentary", 1],
+      	                            ["Lightly Active", 2],
+      	                            ["Active", 3],
+      	                            ["Highly Active", 4],
+      	                            ["Intensely Active", 5],
+    	                            ], @user.preferences["activity_level"]) %>
+      <p class="form-info">Ranging from immobilized persons to olympic athletes. Be honest with yourself!</p>
+    </div>
 
-  	<%= label_tag "activity_level", "Activity Level" %>
-  	<%= select_tag "activity_level", options_for_select([
-    	                            ["Sedentary", 1],
-    	                            ["Lightly Active", 2],
-    	                            ["Active", 3],
-    	                            ["Highly Active", 4],
-    	                            ["Intensely Active", 5],
-  	                            ], @user.preferences["activity_level"]) %>
-
-  	<%= label_tag "weight", "Recent Weight" %>
-    <%= text_field_tag "weight", @weightentry.display_value , placeholder: "e.g., 165 lbs, 83.9kg, 12 stone, etc." %>
+    <div class="form-group">
+    	<%= label_tag "weight", "Recent Weight" %>
+      <%= text_field_tag "weight", @weightentry.display_value , placeholder: "e.g., 165 lbs, 83.9kg, 12 stone, etc." %>
+    </div>
 
     <div class="radio-list">
   		<span class="header">Sex</span>

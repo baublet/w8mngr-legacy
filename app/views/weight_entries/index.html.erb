@@ -10,19 +10,23 @@
 
     <h1><i class="fa fa-balance-scale"></i> Weight Log</h1>
 
-    <div class="weightlog-table">
+    <div class="weightlog-table card-grid">
         <% if @weightentries.count > 0 %>
             <%= render @weightentries %>
-            <% if @weightentries.size > 1 %>
-            <div class="average">
-                Today's Average:
-                <span class="number"><%= raw(@weight_average) %></span>
-        	  </div>
-            <% end %>
     	<% else %>
     		<p>You haven't entered any entries yet today. Add some using the form below!</p>
     	<% end %>
     </div>
+
+    <% if @weightentries.size > 1 %>
+      <div class="totals">
+        <div class="full">
+          <span class="number"><%= raw(@weight_average) %></span>
+          <span class="label">Today's Average</span>
+        </div>
+  	  </div>
+    <% end %>
+
     <%= render "form" %>
 
   </div>

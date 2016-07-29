@@ -1,10 +1,12 @@
 <div class="weight-entry card">
-	<%= link_to weight_entry_delete_path(weight_entry),
-				class: 'delete-btn meta',
-				title: 'Delete Entry' do %>
-		<i class="fa fa-times"></i>
-	<% end %>
-	<div class="weight-container">
+  <div class="card-top-meta">
+  	<%= link_to weight_entry_delete_path(weight_entry),
+  				class: 'btn-icon delete',
+  				title: 'Delete Entry' do %>
+  		<i class="fa fa-times"></i>
+  	<% end %>
+	</div>
+	<div class="weight-container card-body">
 	  <div class="weight"><%= weight_entry.display_value %><span class="unit"><%= current_user.unit %></span></div>
 	  <div class="other-units" alt="Unit conversions">
 	    <h5>Other Units</h5>
