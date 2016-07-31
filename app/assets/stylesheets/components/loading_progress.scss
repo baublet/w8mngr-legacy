@@ -32,7 +32,7 @@
 .turbolinks-loading {
   position: fixed;
   z-index: 99999;
-  background: rgba($black, .5);
+  background: rgba($black, .75);
   top: 0;
   right: 0;
   bottom: 0;
@@ -44,7 +44,7 @@
   align-content: center;
   justify-content: space-around;
   color: $white;
-  //display: none;
+  display: none;
   h1 {
     position: absolute;
     left: 50%;
@@ -79,10 +79,12 @@
   .turbolinks-loading-panel {
     display: inline-block;
     background: rgba($black, .95);
-    border-bottom-right-radius: 9px;
-    border-bottom-left-radius: 9px;
+    border-radius: 9px;
     padding: $spacing-normal $spacing-large;
-    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   &.on {
     display: flex;
