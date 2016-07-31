@@ -1,6 +1,6 @@
 <div class="reps">
   <%= label_tag :reps, "Repetitions (how many time you lifted in this set)", class: "screen-reader-text" %>
-  <%= number_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps" %>
+  <%= number_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps", class: "large" %>
 </div>
 
 <% if defined? entry %>
@@ -14,7 +14,8 @@
           number_with_precision(entry.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2) :
           ""
         ),
-        placeholder: "Weight, e.g., 100lbs, 10kg, etc..." %>
+        placeholder: "Weight, e.g., 100lbs, 10kg, etc...",
+        class: "large" %>
 </div>
 
 <% if defined? entry %>

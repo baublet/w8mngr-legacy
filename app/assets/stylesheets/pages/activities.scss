@@ -149,6 +149,15 @@ body.activities.show .user-markdown {
   .progress {
     text-align: right;
     padding-right: $spacing-small;
+    a {
+      display: inline-block;
+      text-align: center;
+    }
+    .last-entry {
+      font-size: $font-size-tiny;
+      text-transform: uppercase;
+      color: rgba($black, .5);
+    }
     .fa {
       font-size: 2rem;
       @include mqAfterSize(360px) {

@@ -70,16 +70,15 @@
 
 .message-inline {
   display: block;
-  border: 1px solid rgba($black, .1);
+  border: 1px solid rgba($black, .2);
   background: rgba($black, .1);
   padding: $spacing-normal;
   margin-bottom: $spacing-large;
   font-size: $font-size-small;
   border-radius: 3px;
-  font-weight: bold;
   &.notify {
     color: $white;
-    background: $color-primary;
+    background: $color-primary-light;
     a {
       color: rgba($white, .5);
 

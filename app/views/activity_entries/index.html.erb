@@ -27,7 +27,7 @@
     <% end %>
 
     <% if @activityentries.nil? || @activityentries.count < 1 %>
-      <p>You haven't logged any entries for this activity today.</p>
+      <p class="message-inline notify">You haven't logged any entries for this activity today. Get started using the form below.</p>
     <% end %>
 
     <% if @activityentries.count > 0 %>

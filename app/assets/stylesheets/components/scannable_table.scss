@@ -49,6 +49,7 @@
   padding: $spacing-small;
   padding-right: $spacing-small;
   padding-left: $spacing-small;
+  font-size: $font-size-small;
 }
 
 .scannable-table-data +  .scannable-table-data td {
@@ -57,7 +58,7 @@
 
 .scannable-table-item-title {
   margin: 0;
-  font-size: $font-size-large;
+  font-size: $font-size-normal;
   font-weight: bold;
   color: rgba($black, .75);
   a {
