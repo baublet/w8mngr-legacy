@@ -4,7 +4,7 @@
 
     <% if routine_progress[1] %>
 
-      <% if routine_progress[0] < routine_progress[1] %>
+      <% if routine.activities.count > 0 && routine_progress[0] < routine_progress[1] %>
 
       <% progress_percent = routine_progress[0] > 0 && routine_progress[1] > 0 ? (routine_progress[0] / routine_progress[1] * 100).round : "0" %>
       <div class="progress-panel card" title="You have completed <%= progress_percent %>% of the routines for <%= nice_day current_day %> for this routine.">
@@ -25,12 +25,20 @@
 
       <% else %>
 
-      <div class="progress-panel card" title="You have completed this routine today. Congratulations!">
-        <div class="complete">
-          <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-          <span class="screen-reader-text">You have completed this routine today!</span>
+        <% if routine.activities.count > 0 %>
+
+        <div class="progress-panel card" title="You have completed this routine today. Congratulations!">
+          <div class="complete">
+            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+            <span class="screen-reader-text">You have completed this routine today!</span>
+          </div>
         </div>
-      </div>
+
+        <% else %>
+
+        <p class="message-inline notify">This routine doesn't have any activities, yet. <%= link_to "Edit this routine", edit_routine_path(routine) %> to add some.</p>
+
+        <% end %>
 
       <% end %>
 

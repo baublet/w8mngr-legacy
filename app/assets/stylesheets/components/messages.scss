@@ -67,3 +67,26 @@
     font-weight: bold;
   }
 }
+
+.message-inline {
+  display: block;
+  border: 1px solid rgba($black, .1);
+  background: rgba($black, .1);
+  padding: $spacing-normal;
+  margin-bottom: $spacing-large;
+  font-size: $font-size-small;
+  border-radius: 3px;
+  font-weight: bold;
+  &.notify {
+    color: $white;
+    background: $color-primary;
+    a {
+      color: rgba($white, .5);
+
+      &:hover, &:focus {
+        color: $white;
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@
       <% if current_user.unit == "lb" %>
         <%= WeightEntry.get_display_value weight_entry.value, "kg" %><span class="unit">kilograms</span>
       <% end %>
+      <br>
       <% if current_user.unit == "kg" %>
         <%= WeightEntry.get_display_value weight_entry.value, "lb" %><span class="unit">pounds</span>
       <% end %>
