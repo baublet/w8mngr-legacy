@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+  <head>
+    <title>w8mngr | styleguide</title>
+    
+      <link rel="stylesheet" href="/assets/application-43a36a0c2f05d524138721e5631d14aa737dfdc6545e0b10115665cf63517b64.css">
+    
+    <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
+  </head>
+  <body>
+    <main class="main styleguide">
+
+      <h1>w8mngr | styleguide</h1>
+
+      <nav>
+        <ul>
+        
+          <li><a href="buttons.html">buttons</a></li>
+        
+          <li><a href="layout.html">layout</a></li>
+        
+          <li><a href="index.html">basics</a></li>
+        
+        </ul>
+      </nav>
+
+      <section>
+        <ul>
+        
+          <li><a href="#apppanel">Application Panels</a></li>
+        
+        </ul>
+<h1 id="apppanel" class="styleguide">Application Panels</h1>
+<p class="styleguide">Used to indicate some information that can be added to, subtracted from, or
+otherwise manipulated in the course of using our application. They are typically
+forms, but not always. They differ from cards in that they are always full-width.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="app-panel">
+  <div class="full meta">
+    <a href="#" class="btn-icon delete" title="Delete Entry">
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Entry</span>
+    </a>
+  </div>
+  <h2>A Simple Example</h2>
+  <p>This is an example that's not much different from a card.</p>
+</div>
+
+<h2>Complicated Examples</h2>
+
+<div class="foodlog app-panel app-panel-form">
+  <div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="A food entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div><div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="Another Food Entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"app-panel"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"full meta"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn-icon delete"</span> <span class="na">title=</span><span class="s">"Delete Entry"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-times"</span><span class="nt">&gt;&lt;/i&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"screen-reader-text"</span><span class="nt">&gt;</span>Delete Entry<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>A Simple Example<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;p&gt;</span>This is an example that's not much different from a card.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;h2&gt;</span>Complicated Examples<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"foodlog app-panel app-panel-form"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid entry fl-fade-transition"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"full meta"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn-icon delete"</span> <span class="na">title=</span><span class="s">"Delete Entry"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-times"</span><span class="nt">&gt;&lt;/i&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"screen-reader-text"</span><span class="nt">&gt;</span>Delete Entry<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col full"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"A food entry"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row macros"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Calories"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Fat"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Carbs"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Protein"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"grid entry fl-fade-transition"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"full meta"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn-icon delete"</span> <span class="na">title=</span><span class="s">"Delete Entry"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-times"</span><span class="nt">&gt;&lt;/i&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"screen-reader-text"</span><span class="nt">&gt;</span>Delete Entry<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col full"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Another Food Entry"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row macros"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Calories"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Fat"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Carbs"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Protein"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+      </section>
+      <div class="styleguide-footer">
+        <p>This documentation generated using <a href="http://github.com/trulia/hologram">Hologram</a>
+      </div>
+    </main>
+  </body>
+</html>

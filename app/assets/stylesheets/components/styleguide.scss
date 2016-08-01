@@ -2,6 +2,65 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  padding-top: $spacing-large;
+  nav {
+    background: $color-primary;
+    padding: $spacing-normal;
+    @include height(1);
+    border-radius: 5px;
+    margin-bottom: $spacing-large;
+    ul, li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    li {
+      display: inlin-block;
+      a {
+        padding: $spacing-small;
+        font-size: $font-size-small;
+        color: $white;
+        background: $color-primary-light;
+        @include height(1);
+        text-transform: uppercase;
+        border-radius:3px;
+        font-weight: bold;
+        &:hover, &:focus {
+          color: $black;
+          background: $white;
+        }
+      }
+      + li {
+        margin-left: $spacing-small;
+      }
+    }
+  }
+  section > ul:first-child {
+    display: inline-block;
+    padding: 0;
+    margin: 0 0 $spacing-large;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    li {
+      list-style-type: none;
+      padding: 0 $spacing-tiny $spacing-tiny 0;
+      margin: 0;
+      a {
+        display: inline-block;
+        padding: $spacing-tiny $spacing-small;
+        background: $color-primary;
+        font-size: $font-size-small;
+        color: $white;
+        border-radius: 3px;
+        &:hover, &:focus {
+          background: $color-primary-light;
+        }
+      }
+    }
+  }
 }
 
 .codeExample {
@@ -38,4 +97,18 @@ code.styleguide {
   font-size: $font-size-small;
   border: 1px solid rgba($black, .1);
   padding: $spacing-tiny;
+}
+
+.styleguide-footer {
+  background: #333;
+  color: $white;
+  padding: $spacing-large;
+  text-align: center;
+  a {
+    color: $white;
+    text-decoration: underline;
+    &:focus {
+      outline: 1;
+    }
+  }
 }
