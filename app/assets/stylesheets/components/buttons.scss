@@ -7,24 +7,27 @@ category: buttons
 Layout element for positioning buttons on the same horizontal line, but with
 some buttons arranged on the left side, the others on the right.
 
-It can also be used to align buttons in the center.
+It can also be used to align buttons in the center if you skip the left and right
+divs.
 
 ```html_example
-    <div class="btn-bar">
-        <div class="left">
-            <a href="" class="btn">Button</a>
-            <a href="" class="btn secondary">on the Left</a>
-        </div>
-        <div class="right">
-            <a href="" class="btn">Button</a>
-            <a href="" class="btn secondary">on the Right</a>
-        </div>
+<div class="btn-bar">
+    <div class="left">
+        <a href="" class="btn">Button</a>
+        <a href="" class="btn secondary">on the Left</a>
     </div>
+    <div class="right">
+        <a href="" class="btn">Button</a>
+        <a href="" class="btn secondary">on the Right</a>
+    </div>
+</div>
 
-    <div class="btn-bar">
-        <a href="" class="btn">Buttons</a>
-        <a href="" class="btn secondary">in the middle</a>
-    </div>
+<hr>
+
+<div class="btn-bar">
+    <a href="" class="btn">Buttons</a>
+    <a href="" class="btn secondary">in the middle</a>
+</div>
 ```
 */
 
@@ -57,6 +60,10 @@ category: buttons
 ---
 ```html_example
     <a class="btn" href="#">Button</a>
+    <a class="btn" href="#">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        Icon Button
+    </a>
 ```
 */
 .btn {
@@ -93,19 +100,65 @@ category: buttons
     &:last-child {
         margin-bottom: 0;
     }
+    + .btn {
+        margin-left: $spacing-tiny;
+    }
 }
 
+/*doc
+---
+title: Small Button
+name: small button
+category: buttons
+---
+```html_example
+    <a class="btn small" href="#">Button</a>
+    <a class="btn small" href="#">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        Icon Button
+    </a>
+```
+*/
 .btn.small {
     padding: $spacing-small;
     font-size: $font-size-small;
 }
 
+/*doc
+---
+title: Secondary Button
+name: secondary button
+category: buttons
+---
+```html_example
+    <a class="btn secondary" href="#">Button</a>
+    <a class="btn secondary" href="#">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        Icon Button
+    </a>
+```
+*/
 .btn.secondary {
     background: $black-light;
     &:hover {
         background: $color-primary;
     }
 }
+
+/*doc
+---
+title: Hero Button
+name: hero button
+category: buttons
+---
+```html_example
+    <a class="btn" href="#">Button</a>
+    <a class="btn" href="#">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        Icon Button
+    </a>
+```
+*/
 
 .btn.hero {
     display: inline-block;
@@ -126,6 +179,21 @@ category: buttons
         @include height(3);
     }
 }
+
+/*doc
+---
+title: Application Form Button
+name: app-form button
+category: buttons
+---
+```html_example
+    <a class="btn" href="#">Button</a>
+    <a class="btn" href="#">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        Icon Button
+    </a>
+```
+*/
 
 .app-form .btn {
     background: $color-primary-light;

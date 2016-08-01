@@ -1,3 +1,33 @@
+/*doc
+---
+title: w8mngr Styleguide
+name: headers
+category: basics
+---
+Headers!
+```html_example
+<h1>Standard H1</h1>
+
+<h1><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header</h1>
+
+<h2>Standard H2</h2>
+
+<h2><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 2</h2>
+
+<h3>Standard H3</h3>
+
+<h3><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 3</h3>
+
+<h4>Standard H4</h4>
+
+<h4><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 4</h4>
+
+<h5>Standard H5</h5>
+
+<h6>Standard H6</h6>
+```
+*/
+
 h1, h2, h3, h4 {
     margin: 0 0 $spacing-normal;
     letter-spacing: -0.05em;

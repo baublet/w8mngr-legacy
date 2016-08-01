@@ -28,10 +28,42 @@ body, html {
   overflow-x: hidden;
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: headers
+category: basics
+---
+Basic screen reader text for more verbose links and messages on screen readers
+but the context is clear for the non-visually impaired. If you're using SCSS, you
+can add these styles to other styles via the mixin `screenReaderText();` To remove
+screen reader text, just use the mixin `deScreenReaderText();`.
+```html_example
+<a class="btn" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Download <span class="screen-reader-text">Your Weight Data</span>
+</a>
+```
+*/
+
 .screen-reader-text {
     @include screenReaderText();
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: paragraphs
+category: basics
+---
+```html_example
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
+
+<p>Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean auctor bibendum sagittis. Proin luctus enim eu est iaculis, ac ultricies turpis posuere. Nullam fringilla tincidunt dui at consequat. Vivamus viverra augue tempor sapien hendrerit, id gravida urna mollis. Pellentesque nulla lacus, pretium eget lacinia a, ultrices non dolor. Cras sapien eros, fermentum quis neque a, varius tempus eros. Praesent ac varius orci.</p>
+
+<p>Pellentesque eu massa convallis, porta urna vestibulum, sollicitudin purus. Donec non feugiat tellus, vitae pellentesque urna. Aliquam eu hendrerit ante, pretium molestie augue. Etiam odio massa, aliquam et neque eu, hendrerit convallis arcu. Vivamus eget ullamcorper neque. Vestibulum fermentum diam ut scelerisque lacinia. Vestibulum gravida urna quis lectus luctus vestibulum.</p>
+```
+*/
 p, li {
     line-height:130%;
     margin: 0 0 $spacing-normal;
@@ -40,6 +72,16 @@ p, li {
     }
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: links
+category: basics
+---
+```html_example
+<a href="#">This is a link</a>, this is not.
+```
+*/
 a {
     color: $color-primary;
     text-decoration: none;
@@ -48,6 +90,20 @@ a {
     }
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: blockquote
+category: basics
+---
+```html_example
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
+
+<blockquote>Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean auctor bibendum sagittis. Proin luctus enim eu est iaculis, ac ultricies turpis posuere. Nullam fringilla tincidunt dui at consequat. Vivamus viverra augue tempor sapien hendrerit, id gravida urna mollis. Pellentesque nulla lacus, pretium eget lacinia a, ultrices non dolor. Cras sapien eros, fermentum quis neque a, varius tempus eros. Praesent ac varius orci.</blockquote>
+
+<p>Pellentesque eu massa convallis, porta urna vestibulum, sollicitudin purus. Donec non feugiat tellus, vitae pellentesque urna. Aliquam eu hendrerit ante, pretium molestie augue. Etiam odio massa, aliquam et neque eu, hendrerit convallis arcu. Vivamus eget ullamcorper neque. Vestibulum fermentum diam ut scelerisque lacinia. Vestibulum gravida urna quis lectus luctus vestibulum.</p>
+```
+*/
 blockquote {
     margin: $spacing-normal;
     padding: .5rem 0 .5rem 1rem;
@@ -56,6 +112,17 @@ blockquote {
     border-left: 3px solid rgba($black, .25);
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: strong and em
+category: basics
+---
+Use `em` and `strong`, not `b` or `i`.
+```html_example
+Use <strong>strong</strong> and <em>emphasis</em> tags.
+```
+*/
 strong {
     font-weight: bold;
 }
@@ -64,12 +131,37 @@ em {
     font-style: italic;
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: horizontal rule
+category: basics
+---
+```html_example
+<h3>Here's a section</h3>
+<p>Pellentesque eu massa convallis, porta urna vestibulum, sollicitudin purus. Donec non feugiat tellus, vitae pellentesque urna. Aliquam eu hendrerit ante, pretium molestie augue. Etiam odio massa, aliquam et neque eu, hendrerit convallis arcu. Vivamus eget ullamcorper neque. Vestibulum fermentum diam ut scelerisque lacinia. Vestibulum gravida urna quis lectus luctus vestibulum.</p>
+<hr>
+<h3>And Another</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
+```
+*/
 hr {
     margin: $spacing-large $spacing-normal;
     border: 0;
     border-top: 1px dotted $black-light;
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: hide if no js
+category: basics
+---
+```html_example
+<p class="hide-if-no-js">This is not shown if the user doesn't have Javascript enabled.</p>
+<p>But this still does!</p>
+```
+*/
 .nojs .hide-if-no-js {
   display: none;
 }
@@ -82,6 +174,16 @@ hr {
   color: $red;
 }
 
+/*doc
+---
+title: w8mngr Styleguide
+name: links
+category: basics
+---
+```html_example
+<p class="info-text">Small text that the user might need to know, but isn't super critical.</p>
+```
+*/
 .info-text {
   font-size: $font-size-small;
   font-style: italic;
