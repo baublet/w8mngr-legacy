@@ -12,6 +12,10 @@ don't really need to be aligned in relation to one another (like a table).
 By default, this grid is three-columns, but we can do things to make it
 slightly different with ease.
 
+We don't include default breakfpoints here because grids are intended strictly
+for telling us how the default behavior should be on larger screens. Use
+breakpoints in custom page sheets and components to make these more fluid.
+
 <strong>NB:</strong> This grid looks small because of the styleguide, but on
 a full screen, the spacing is more even. (We use a standard spacing for our
 column separations.)

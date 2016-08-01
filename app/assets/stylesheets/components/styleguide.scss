@@ -3,12 +3,15 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: $spacing-large 0 0;
+  > h1 {
+    padding: 0 $spacing-normal;
+  }
   nav {
     background: $color-primary;
     padding: $spacing-normal;
     @include height(1);
     border-radius: 5px;
-    margin-bottom: $spacing-large;
+    margin: 0 $spacing-normal $spacing-normal;
     ul, li {
       list-style-type: none;
       margin: 0;
@@ -75,6 +78,8 @@
   display: flex;
   width: 100%;
   align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: $spacing-large;
   pre {
     overflow-x: auto;
@@ -87,7 +92,13 @@
 }
 
 .exampleOutput, .codeBlock {
-  width: 50%;
+  width: calc(50% - #{$spacing-normal});
+  min-width: 300px;
+  max-width: 100%;
+  @include mqBeforeSize(650px) {
+    width: 100%;
+  }
+  margin-bottom: $spacing-normal;
 }
 
 .exampleOutput {
@@ -96,7 +107,6 @@
 
 .codeBlock {
   order: 1;
-  margin-right: $spacing-large;
 }
 
 code.styleguide {
