@@ -664,7 +664,8 @@ category: layout
 ---
 
 Used to indicate some information that can be added to, subtracted from, or
-otherwise manipulated in the course of using our application.
+otherwise manipulated in the course of using our application. They are typically
+forms, but not always. They differ from cards in that they are always full-width.
 
 ```html_example
 <div class="app-panel">
@@ -678,7 +679,7 @@ otherwise manipulated in the course of using our application.
   <p>This is an example that's not much different from a card.</p>
 </div>
 
-<h2>Complicated Examples</h2>
+<h2>Complicated Example</h2>
 
 <div class="foodlog app-panel app-panel-form">
   <div class="grid entry fl-fade-transition">
@@ -738,7 +739,7 @@ otherwise manipulated in the course of using our application.
 ```
 
 */
-/* line 84, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+/* line 85, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
 .app-panel {
   padding: 0.5rem;
   width: 100%;
@@ -748,18 +749,18 @@ otherwise manipulated in the course of using our application.
   margin-bottom: 2.5rem;
   position: relative;
 }
-/* line 92, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
 .app-panel:hover {
   box-shadow: 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 @media screen and (min-width: 641px) {
-  /* line 95, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+  /* line 96, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
   .app-panel .long {
     width: 60%;
     padding: 0 1rem 0 0;
   }
 }
-/* line 100, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
 .app-panel .long input {
   font-size: .9rem;
   padding: 0;
@@ -767,7 +768,7 @@ otherwise manipulated in the course of using our application.
   font-weight: bold;
 }
 @media screen and (min-width: 641px) {
-  /* line 100, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+  /* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
   .app-panel .long input {
     font-size: 1.3rem;
     font-weight: 400;
@@ -776,14 +777,14 @@ otherwise manipulated in the course of using our application.
   }
 }
 
-/* line 115, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+/* line 116, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
 .app-panel .meta {
   position: absolute;
   top: 50%;
   right: 0.5rem;
   transform: translateY(-50%);
 }
-/* line 120, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
+/* line 121, /home/ubuntu/workspace/app/assets/stylesheets/components/app_panel.scss */
 .app-panel .meta .fa {
   margin: 0;
 }
@@ -812,7 +813,38 @@ otherwise manipulated in the course of using our application.
   font-weight: 900;
 }
 
-/* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
+/*doc
+---
+title: Breadcrumbs
+name: breadcrumbs
+category: navigation
+---
+
+Used to indicate a path for the user. I like these as a way for helping users
+and developers understand the flow and hierarchy of the application.
+
+On live (as below) we wrap the inner contents in a `.section-inside` class so
+the container overflows the window, while the contents stay aligned with the
+rest of the view.
+
+<strong>NB:</strong> To show this styleguide properly, I modified the breadcrumbs and its
+inner contents. Use just as shown in pages in order for the breadcrumbs to render
+properly.
+
+
+```html_example
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><a href="/foods">Foods</a></li>
+      <li><a href="/foods/1">ARCHWAY Home Style Cookies, Peanut Butter</a></li>
+      <li>Edit</li>
+    </ul>
+  </div>
+</div>
+```
+*/
+/* line 33, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
 .breadcrumbs {
   transform: translateY(-2.5rem);
   margin: -2.5rem;
@@ -824,7 +856,7 @@ otherwise manipulated in the course of using our application.
   text-transform: uppercase;
   font-size: 0;
 }
-/* line 11, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
+/* line 43, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
 .breadcrumbs ul {
   padding: 0.25rem 0;
   margin: 0;
@@ -832,20 +864,20 @@ otherwise manipulated in the course of using our application.
   align-items: center;
   list-style-type: none;
 }
-/* line 18, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
+/* line 50, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
 .breadcrumbs li {
   font-size: 0.6rem;
   font-weight: 800;
   margin: 0;
   line-height: 1;
 }
-/* line 23, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
+/* line 55, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
 .breadcrumbs li + li:before {
   font-family: "FontAwesome";
   content: "\f0a9";
   padding: 0 0.25rem;
 }
-/* line 28, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
+/* line 60, /home/ubuntu/workspace/app/assets/stylesheets/components/breadcrumbs.scss */
 .breadcrumbs li a {
   border: 0;
   color: #1F1F1F;
@@ -3462,15 +3494,25 @@ h1 + .page-meta {
 .styleguide.main section > ul:first-child li a:hover, .styleguide.main section > ul:first-child li a:focus {
   background: #21C6F5;
 }
+/* line 64, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+.styleguide.main .breadcrumbs {
+  margin: 0;
+  transform: none;
+}
+/* line 67, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+.styleguide.main .breadcrumbs .section-inside {
+  margin: 0;
+  padding: 0;
+}
 
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 74, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeExample {
   display: flex;
   width: 100%;
   align-items: flex-start;
   margin-bottom: 2.5rem;
 }
-/* line 71, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 79, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeExample pre {
   overflow-x: auto;
   font-family: monospace;
@@ -3480,23 +3522,23 @@ h1 + .page-meta {
   border: 1px solid rgba(31, 31, 31, 0.1);
 }
 
-/* line 81, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 89, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput, .codeBlock {
   width: 50%;
 }
 
-/* line 85, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput {
   order: 2;
 }
 
-/* line 89, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 97, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeBlock {
   order: 1;
   margin-right: 2.5rem;
 }
 
-/* line 94, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 102, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 code.styleguide {
   background: rgba(31, 31, 31, 0.1);
   font-family: monospace;
@@ -3505,19 +3547,19 @@ code.styleguide {
   padding: 0.25rem;
 }
 
-/* line 102, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 110, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide-footer {
   background: #333;
   color: #F7F7F7;
   padding: 2.5rem;
   text-align: center;
 }
-/* line 107, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 115, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide-footer a {
   color: #F7F7F7;
   text-decoration: underline;
 }
-/* line 110, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 118, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide-footer a:focus {
   outline: 1;
 }

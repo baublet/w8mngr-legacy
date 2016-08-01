@@ -1,3 +1,35 @@
+/*doc
+---
+title: Breadcrumbs
+name: breadcrumbs
+category: navigation
+---
+
+Used to indicate a path for the user. I like these as a way for helping users
+and developers understand the flow and hierarchy of the application.
+
+On live (as below) we wrap the inner contents in a `.section-inside` class so
+the container overflows the window, while the contents stay aligned with the
+rest of the view.
+
+<strong>NB:</strong> To show this styleguide properly, I modified the breadcrumbs and its
+inner contents. Use just as shown in pages in order for the breadcrumbs to render
+properly.
+
+
+```html_example
+<div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><a href="/foods">Foods</a></li>
+      <li><a href="/foods/1">ARCHWAY Home Style Cookies, Peanut Butter</a></li>
+      <li>Edit</li>
+    </ul>
+  </div>
+</div>
+```
+*/
+
 .breadcrumbs {
   transform: translateY(-$spacing-large);
   margin: -$spacing-large;

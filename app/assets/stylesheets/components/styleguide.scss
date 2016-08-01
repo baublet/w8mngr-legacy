@@ -61,6 +61,14 @@
       }
     }
   }
+  .breadcrumbs {
+    margin: 0;
+    transform: none;
+    .section-inside {
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
 .codeExample {
