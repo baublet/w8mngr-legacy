@@ -1,5 +1,96 @@
-// A small 3-part grid I use for various things
+/*doc
+---
+title: Grid
+name: grid
+category: layout
+---
 
+A very simple grid used for showing elements that need to be
+aligned in a specific way on desktop screens, but where the columns
+don't really need to be aligned in relation to one another (like a table).
+
+By default, this grid is three-columns, but we can do things to make it
+slightly different with ease.
+
+<strong>NB:</strong> This grid looks small because of the styleguide, but on
+a full screen, the spacing is more even. (We use a standard spacing for our
+column separations.)
+
+```html_example
+<style>
+  .example-grid { border: 1px solid red }
+  .example-grid .row { border: 1px solid blue }
+  .example-grid .col { border: 1px solid green; padding: .5rem; }
+</style>
+
+<div class="example-grid grid">
+
+  <div class="row">
+    <div class="col">
+      Column 1
+    </div>
+    <div class="col">
+      Column 2
+    </div>
+    <div class="col">
+      Column 3
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col full">
+      A full column
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      Column
+    </div>
+    <div class="col double">
+      A double column!
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col half">
+      A half-length column!
+    </div>
+    <div class="col half">
+      And another!
+    </div>
+  </div>
+
+  <div class="row quarters">
+    <div class="col">
+      1/4
+    </div>
+    <div class="col">
+      1/4
+    </div>
+    <div class="col">
+      1/4
+    </div>
+    <div class="col">
+      1/4
+    </div>
+  </div>
+
+  <div class="row quarters">
+    <div class="col">
+      1/4
+    </div>
+    <div class="col half">
+      Half!
+    </div>
+    <div class="col">
+      1/4
+    </div>
+  </div>
+
+</div>
+```
+*/
 .grid {
   display: block;
   margin-bottom: $spacing-normal;
@@ -9,7 +100,7 @@
   .row {
     display: flex;
     align-items: stretch;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     margin-bottom: $spacing-normal;
     &:last-child {
@@ -18,15 +109,18 @@
   }
   .col {
     display: block;
-    width: calc(33.33333% - (#{$spacing-normal} * 2));
+    width: calc(33.33333% - (#{$spacing-normal} / 3 * 2));
   }
   .col.double {
-    width: calc(66.66666% - (#{$spacing-normal} * 2));
+    width: calc(66.66666% - (1rem / 3));
   }
   .col.full {
     width: 100%;
   }
-  .col.half {
-    width: calc(50% - #{$spacing-normal});
+  .half, .quarters .col.half {
+    width: calc(50% - (#{$spacing-normal} / 2));
+  }
+  .quarters .col {
+    width: calc(25% - (#{$spacing-normal} / 3 * 2));
   }
 }
