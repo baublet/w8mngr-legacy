@@ -1,13 +1,15 @@
 <!doctype html>
 <html>
   <head>
-    <title>a brand new styleguide: basics</title>
+    <title>w8mngr | Style Guide</title>
     
-      <link rel="stylesheet" href="/assets/application-233226c92f53e38f5bc365aee49c95058dab4ed72fd6e8655d3430c04dfcf1a2.css">
+      <link rel="stylesheet" href="/assets/application-31484eeeb4bc02672847ed946d17144f221f04666c4d37cf290d3dd99fea6e35.css">
     
+    <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
   </head>
   <body>
-    <main class="main section-inside">
+    <main class="main styleguide">
 
       <h1>w8mngr | styleguide</h1>
 
@@ -28,9 +30,9 @@
         
           <li><a href="#headers">Headers</a></li>
         
-          <li><a href="#hide if no js">Hiding if User doesn&#39;t have Javascript</a></li>
+          <li><a href="#hideifnojs">Hiding if User doesn&#39;t have Javascript</a></li>
         
-          <li><a href="#horizontal rule">Horizontal Rules</a></li>
+          <li><a href="#horizontalrule">Horizontal Rules</a></li>
         
           <li><a href="#infotext">Info Text</a></li>
         
@@ -38,15 +40,11 @@
         
           <li><a href="#paragraphs">Paragraphs</a></li>
         
-          <li><a href="#strong and em">Strong and Emphasis (bold and italics)</a></li>
+          <li><a href="#screenreadertext">Screen Reader Text</a></li>
         
-          <li><a href="#styleguide">w8mngr Styleguide</a></li>
+          <li><a href="#strongandem">Strong and Emphasis (bold and italics)</a></li>
         
         </ul>
-<p class="styleguide">[app-form button]: buttons.html#app-form button</p><p class="styleguide">[hero button]: buttons.html#hero button
-[secondary button]: buttons.html#secondary button
-[small button]: buttons.html#small button</p><p class="styleguide">[hide if no js]: basics.html#hide if no js
-[horizontal rule]: basics.html#horizontal rule</p><p class="styleguide">[strong and em]: basics.html#strong and em</p>
 <h1 id="blockquote" class="styleguide">Blockquotes</h1>
 <div class="codeExample">
   <div class="exampleOutput">
@@ -69,15 +67,55 @@
 </div>
 
 <h1 id="headers" class="styleguide">Headers</h1>
-<p class="styleguide">Basic screen reader text for more verbose links and messages on screen readers
-but the context is clear for the non-visually impaired. If you&#39;re using SCSS, you
-can add these styles to other styles via the mixin <code class="styleguide">screenReaderText();</code> To remove
-screen reader text, just use the mixin <code class="styleguide">deScreenReaderText();</code>.</p><p class="styleguide"><code class="styleguide">html_example &lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;
-    &lt;i class=&quot;fa fa-cloud-download&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
-    Download &lt;span class=&quot;screen-reader-text&quot;&gt;Your Weight Data&lt;/span&gt;
-&lt;/a&gt;
-</code></p>
-<h1 id="hide if no js" class="styleguide">Hiding if User doesn&#39;t have Javascript</h1>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <h1>Standard H1</h1>
+
+<h1><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header</h1>
+
+<h2>Standard H2</h2>
+
+<h2><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 2</h2>
+
+<h3>Standard H3</h3>
+
+<h3><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 3</h3>
+
+<h4>Standard H4</h4>
+
+<h4><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 4</h4>
+
+<h5>Standard H5</h5>
+
+<h6>Standard H6</h6>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;h1&gt;</span>Standard H1<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;h1&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cloud-download"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/i&gt;</span> Icon Header<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;h2&gt;</span>Standard H2<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;h2&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cloud-download"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/i&gt;</span> Icon Header 2<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;h3&gt;</span>Standard H3<span class="nt">&lt;/h3&gt;</span>
+
+<span class="nt">&lt;h3&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cloud-download"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/i&gt;</span> Icon Header 3<span class="nt">&lt;/h3&gt;</span>
+
+<span class="nt">&lt;h4&gt;</span>Standard H4<span class="nt">&lt;/h4&gt;</span>
+
+<span class="nt">&lt;h4&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cloud-download"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/i&gt;</span> Icon Header 4<span class="nt">&lt;/h4&gt;</span>
+
+<span class="nt">&lt;h5&gt;</span>Standard H5<span class="nt">&lt;/h5&gt;</span>
+
+<span class="nt">&lt;h6&gt;</span>Standard H6<span class="nt">&lt;/h6&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="hideifnojs" class="styleguide">Hiding if User doesn&#39;t have Javascript</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <p class="hide-if-no-js">This is not shown if the user doesn't have Javascript enabled.</p>
@@ -92,7 +130,7 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
   </div>
 </div>
 
-<h1 id="horizontal rule" class="styleguide">Horizontal Rules</h1>
+<h1 id="horizontalrule" class="styleguide">Horizontal Rules</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <h3>Here's a section</h3>
@@ -127,14 +165,15 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
 </div>
 
 <h1 id="links" class="styleguide">Links</h1>
-<div class="codeExample">
+<p class="styleguide">Don&#39;t forget to set verbose title tags if the link&#39;s location isn&#39;t obvious from
+context!</p><div class="codeExample">
   <div class="exampleOutput">
-    <a href="#">This is a link</a>, this is not.
+    <a href="#" title="This takes you to the top of the page...">This is a link</a>, this is not.
 
   </div>
   <div class="codeBlock">
     <div class="highlight">
-      <pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>This is a link<span class="nt">&lt;/a&gt;</span>, this is not.</pre>
+      <pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">title=</span><span class="s">"This takes you to the top of the page..."</span><span class="nt">&gt;</span>This is a link<span class="nt">&lt;/a&gt;</span>, this is not.</pre>
     </div>
   </div>
 </div>
@@ -160,13 +199,41 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
   </div>
 </div>
 
-<h1 id="strong and em" class="styleguide">Strong and Emphasis (bold and italics)</h1>
-<p class="styleguide">Use <code class="styleguide">em</code> and <code class="styleguide">strong</code>, not <code class="styleguide">b</code> or <code class="styleguide">i</code>.
-<code class="styleguide">html_example
-Use &lt;strong&gt;strong&lt;/strong&gt; and &lt;em&gt;emphasis&lt;/em&gt; tags.
-</code></p>
-<h1 id="styleguide" class="styleguide">w8mngr Styleguide</h1>
-<p class="styleguide">Welcome to the w8mngr.com styleguide.</p>      </section>
+<h1 id="screenreadertext" class="styleguide">Screen Reader Text</h1>
+<p class="styleguide">Basic screen reader text for more verbose links and messages on screen readers
+but the context is clear for the non-visually impaired. If you&#39;re using SCSS, you
+can add these styles to other styles via the mixin <code class="styleguide">screenReaderText();</code> To remove
+screen reader text, just use the mixin <code class="styleguide">deScreenReaderText();</code>.</p><p class="styleguide">Don&#39;t forget to include a verbose link title, as well, for screen readers.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <a class="btn" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Download <span class="screen-reader-text">Your Weight Data</span>
+</a>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">title=</span><span class="s">"Download your weight data"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cloud-download"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    Download <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"screen-reader-text"</span><span class="nt">&gt;</span>Your Weight Data<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/a&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="strongandem" class="styleguide">Strong and Emphasis (bold and italics)</h1>
+<p class="styleguide">Use <code class="styleguide">em</code> and <code class="styleguide">strong</code>, not <code class="styleguide">b</code> or <code class="styleguide">i</code>.</p><div class="codeExample">
+  <div class="exampleOutput">
+    Use <strong>strong</strong> and <em>emphasis</em> tags.
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre>Use <span class="nt">&lt;strong&gt;</span>strong<span class="nt">&lt;/strong&gt;</span> and <span class="nt">&lt;em&gt;</span>emphasis<span class="nt">&lt;/em&gt;</span> tags.</pre>
+    </div>
+  </div>
+</div>
+      </section>
       <div class="styleguide-footer">
         <p>This documentation generated using <a href="http://github.com/trulia/hologram">Hologram</a>
       </div>

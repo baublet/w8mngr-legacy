@@ -1,15 +1,15 @@
 <!doctype html>
 <html>
   <head>
-    <title>a brand new styleguide: <%= title %></title>
+    <title>w8mngr | Style Guide</title>
     <% Dir["./public/assets/application*.css"].each do |sheet| %>
       <link rel="stylesheet" href="/assets/<%= sheet.split('/').last %>">
     <% end %>
-    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700', media: 'all', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
   </head>
   <body>
-    <main class="main section-inside">
+    <main class="main styleguide">
 
       <h1>w8mngr | styleguide</h1>
 

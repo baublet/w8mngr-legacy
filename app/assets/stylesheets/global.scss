@@ -30,16 +30,20 @@ body, html {
 
 /*doc
 ---
-title: Headers
-name: headers
+title: Screen Reader Text
+name: screenreadertext
 category: basics
 ---
+
 Basic screen reader text for more verbose links and messages on screen readers
 but the context is clear for the non-visually impaired. If you're using SCSS, you
 can add these styles to other styles via the mixin `screenReaderText();` To remove
 screen reader text, just use the mixin `deScreenReaderText();`.
 
-```html_example <a class="btn" href="#">
+Don't forget to include a verbose link title, as well, for screen readers.
+
+```html_example
+<a class="btn" href="#" title="Download your weight data">
     <i class="fa fa-cloud-download" aria-hidden="true"></i>
     Download <span class="screen-reader-text">Your Weight Data</span>
 </a>
@@ -56,6 +60,7 @@ title: Paragraphs
 name: paragraphs
 category: basics
 ---
+
 ```html_example
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
 
@@ -78,8 +83,12 @@ title: Links
 name: links
 category: basics
 ---
+
+Don't forget to set verbose title tags if the link's location isn't obvious from
+context!
+
 ```html_example
-<a href="#">This is a link</a>, this is not.
+<a href="#" title="This takes you to the top of the page...">This is a link</a>, this is not.
 ```
 */
 a {
@@ -96,6 +105,7 @@ title: Blockquotes
 name: blockquote
 category: basics
 ---
+
 ```html_example
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
 
@@ -115,10 +125,12 @@ blockquote {
 /*doc
 ---
 title: Strong and Emphasis (bold and italics)
-name: strong and em
+name: strongandem
 category: basics
 ---
+
 Use `em` and `strong`, not `b` or `i`.
+
 ```html_example
 Use <strong>strong</strong> and <em>emphasis</em> tags.
 ```
@@ -134,9 +146,10 @@ em {
 /*doc
 ---
 title: Horizontal Rules
-name: horizontal rule
+name: horizontalrule
 category: basics
 ---
+
 ```html_example
 <h3>Here's a section</h3>
 <p>Pellentesque eu massa convallis, porta urna vestibulum, sollicitudin purus. Donec non feugiat tellus, vitae pellentesque urna. Aliquam eu hendrerit ante, pretium molestie augue. Etiam odio massa, aliquam et neque eu, hendrerit convallis arcu. Vivamus eget ullamcorper neque. Vestibulum fermentum diam ut scelerisque lacinia. Vestibulum gravida urna quis lectus luctus vestibulum.</p>
@@ -144,6 +157,7 @@ category: basics
 <h3>And Another</h3>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
 ```
+
 */
 hr {
     margin: $spacing-large $spacing-normal;
@@ -154,13 +168,15 @@ hr {
 /*doc
 ---
 title: Hiding if User doesn't have Javascript
-name: hide if no js
+name: hideifnojs
 category: basics
 ---
+
 ```html_example
 <p class="hide-if-no-js">This is not shown if the user doesn't have Javascript enabled.</p>
 <p>But this still does!</p>
 ```
+
 */
 .nojs .hide-if-no-js {
   display: none;

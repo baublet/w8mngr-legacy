@@ -1,7 +1,7 @@
 /*doc
 ---
 title: Button Bar (for Layout)
-name: button-bar
+name: buttonbar
 category: buttons
 ---
 Layout element for positioning buttons on the same horizontal line, but with
@@ -22,7 +22,7 @@ divs.
     </div>
 </div>
 
-<hr>
+<p>Or...</p>
 
 <div class="btn-bar">
     <a href="" class="btn">Buttons</a>
@@ -34,7 +34,9 @@ divs.
 .btn-bar {
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     text-align: center;
+    width: 100%;
     .left {
         width: 50%;
         text-align: left;
@@ -59,11 +61,14 @@ name: button
 category: buttons
 ---
 ```html_example
-    <a class="btn" href="#">Button</a>
-    <a class="btn" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
+<a class="btn" href="#">Button</a>
+
+<a class="btn" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+
+<a class="btn disabled" href="#">Disabled Button</a>
 ```
 */
 .btn {
@@ -103,12 +108,19 @@ category: buttons
     + .btn {
         margin-left: $spacing-tiny;
     }
+    &.disabled {
+      cursor: default;
+      opacity: .5;
+      &:hover, &:focus {
+        opacity: .75;
+      }
+    }
 }
 
 /*doc
 ---
 title: Small Button
-name: small button
+name: smallbutton
 category: buttons
 ---
 ```html_example
@@ -127,7 +139,7 @@ category: buttons
 /*doc
 ---
 title: Secondary Button
-name: secondary button
+name: secondarybutton
 category: buttons
 ---
 ```html_example
@@ -148,18 +160,20 @@ category: buttons
 /*doc
 ---
 title: Hero Button
-name: hero button
+name: herobutton
 category: buttons
 ---
-```html_example
-    <a class="btn" href="#">Button</a>
-    <a class="btn" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
-```
-*/
 
+A "hero" button for very large, typically promotional, action buttons.
+
+```html_example
+<a class="btn hero" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Hero Button
+</a>
+```
+
+*/
 .btn.hero {
     display: inline-block;
     background: $color-secondary;
@@ -182,23 +196,110 @@ category: buttons
 
 /*doc
 ---
-title: Application Form Button
-name: app-form button
+title: Application Form Buttons
+name: appformbuttons
 category: buttons
 ---
-```html_example
-    <a class="btn" href="#">Button</a>
-    <a class="btn" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
-```
-*/
 
+Buttons that show on our primary-colored application forms. This includes different
+colors for icon buttons.
+
+```html_example
+<div class="app-form food-entries grid">
+  <div class="row">
+    <div class="col full">
+      <input type="text" placeholder="Description" autofocus="autofocus" id="description-input" class="large">
+    </div>
+  </div>
+  <div class="row macros">
+    <div class="col" title="Calories">
+      <input type="text" placeholder="Calories">
+    </div>
+    <div class="col" title="Fat">
+      <input type="text" placeholder="Fat">
+    </div>
+    <div class="col" title="Carbs">
+      <input type="text" placeholder="Carbs">
+    </div>
+    <div class="col" title="Protein">
+      <input type="text" placeholder="Protein">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col full">
+      <div class="btn-bar">
+        <div class="left">
+          <a class="btn-icon" alt="Make this day a Faturday!" title="Make this day a Faturday!">
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+            <span class="screen-reader-text">Faturday</span>
+          </a>
+
+        </div>
+        <div class="right">
+          <a class="btn-icon" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
+            <i class="fa fa-barcode"></i>
+            <span class="screen-reader-text">Scan Barcode</span>
+          </a>
+          <a class="btn-icon" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
+            <i class="fa fa-search"></i>
+            <span class="screen-reader-text">Search for Foods</span>
+          </a>
+          <button name="button" type="submit" class="btn btn-submit">
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
 .app-form .btn {
     background: $color-primary-light;
 }
 
+.app-form .btn-icon {
+    color: rgba($white, .5);
+    &:hover, &:focus {
+        color: $white;
+    }
+}
+
+/*doc
+---
+title: Icon Button
+name: iconbutton
+category: buttons
+---
+
+Please keep in mind that you always need screen reader text on
+icon buttons. In addition, use verbose link titles!
+
+```html_example
+<a class="btn-icon" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    <span class="screen-reader-text">Download your weight data</a>
+</a>
+
+<a class="btn-icon primary" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    <span class="screen-reader-text">Download your weight data</a>
+</a>
+
+<a class="btn-icon disabled" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    <span class="screen-reader-text">Download your weight data</a>
+</a>
+
+<a class="btn-icon delete" href="#" title="Delete weight 145lbs">
+    <i class="fa fa-times" aria-hidden="true"></i>
+    <span class="screen-reader-text">Delete weight 145lbs</a>
+</a>
+
+```
+*/
 .btn-icon {
     cursor: pointer;
     border: none;
@@ -237,37 +338,71 @@ category: buttons
     }
 }
 
-.app-form .btn-icon {
-    color: rgba($white, .5);
-    &:hover, &:focus {
-        color: $white;
-    }
-}
+/*doc
+---
+title: Pagination Buttons
+name: paginationbuttons
+category: buttons
+---
 
-.btn-prev, .btn-next {
+```html_example
+<div class="pagination btn-bar">
+  <div class="left">
+    <a class="btn prev" href="#" title="See the previous page of foods">
+      <i class="fa fa-chevron-circle-left"></i> Back
+      <span class="screen-reader-text">to Previous Foods</span>
+    </a>
+  </div>
+  <div class="right">
+    <a class="btn next" href="#" title="See more foods">
+      More <i class="fa fa-chevron-circle-right"></i>
+      <span class="screen-reader-text">Foods</span>
+    </a>
+  </div>
+</div>
+```
+*/
+
+.btn.prev, .btn.next {
     min-width: 0;
-    float: none;
-    font-size:.9rem;
-    padding: .75rem;
+    font-size: $font-size-normal;
+    padding: $spacing-small $spacing-normal;
     text-align: left;
     line-height: normal;
+    color: $white;
+    background: $color-primary;
+    @include height(1);
+    &:hover, &:focus {
+        background: $color-primary-light;
+        @include height(3);
+    }
+    .fa {
+        margin-right: $spacing-small;
+    }
 }
-.btn-next {
+.btn.next {
     text-align: right;
     .fa {
-        margin: 0 0 0 .75rem;
+        margin: 0 0 0 $spacing-small;
     }
 }
 
-.btn.disabled {
-  cursor: default;
-  opacity: .5;
-  &:hover, &:focus {
-    opacity: .75;
-  }
-}
+/*doc
+---
+title: Meta Buttons
+name: metabuttons
+category: buttons
+---
 
+Meta buttons are displayed next to other buttons, but without borders, indicating
+certain drastic (yet explicity) actions, such as deletion.
 
+```html_example
+<a href="#" class="btn-meta">Default Meta Button</a>
+
+<a href="#" class="btn-meta delete">Delete Button</a>
+```
+*/
 .btn-meta {
     color: $black-light;
     display: inline-block;
@@ -284,6 +419,38 @@ category: buttons
     }
 }
 
+/*doc
+---
+title: Pills
+name: pillbuttons
+category: buttons
+---
+
+Pills are a list of very small buttons that have some sort of interaction. A
+classic example is tags.
+
+```html_example
+<a href="#" class="pill">Free-Standing Pill</a>
+
+<br><br>
+
+<ul class="pill-list">
+<li><a href="#" class="pill">Or</a></li>
+<li><a href="#" class="pill">They</a></li>
+<li><a href="#" class="pill">Can</a></li>
+<li><a href="#" class="pill">Come</a></li>
+<li><a href="#" class="pill">As</a></li>
+<li><a href="#" class="pill">Lists</a></li>
+</ul>
+
+<br><br>
+
+<div style="background:#222;padding:2rem;">
+    <span style="color: white">And they can be used on dark backgrounds:</span>
+    <a href="#" class="pill white">Free-Standing Pill</a>
+</div>
+```
+*/
 .pill-list {
   display: flex;
   flex-wrap: wrap;

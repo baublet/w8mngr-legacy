@@ -1,11 +1,8 @@
-/*doc
----
-title: w8mngr Styleguide
-name: styleguide
-category: basics
----
-Welcome to the w8mngr.com styleguide.
-*/
+.styleguide.main {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
 .codeExample {
   display: flex;
@@ -17,6 +14,8 @@ Welcome to the w8mngr.com styleguide.
     font-family: monospace;
     font-size: $font-size-small;
     @include height(-3);
+    background: rgba($black, .1);
+    border: 1px solid rgba($black, .1);
   }
 }
 
@@ -26,9 +25,17 @@ Welcome to the w8mngr.com styleguide.
 
 .exampleOutput {
   order: 2;
-  margin: 0 $spacing-small;
 }
 
 .codeBlock {
   order: 1;
+  margin-right: $spacing-large;
+}
+
+code.styleguide {
+  background: rgba($black, .1);
+  font-family: monospace;
+  font-size: $font-size-small;
+  border: 1px solid rgba($black, .1);
+  padding: $spacing-tiny;
 }
