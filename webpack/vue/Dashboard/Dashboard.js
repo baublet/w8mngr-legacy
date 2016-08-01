@@ -8,6 +8,7 @@ export default {
   el: "#dashboard-app",
   events: {
     "hook:ready": function() {
+      this.$dispatch('loading')
       console.log("Loading dashboard...")
       // Load our data from the rails app when the component is ready
       var app = this
@@ -67,10 +68,10 @@ export default {
       })
     },
     "loading": function() {
-      this.loading = 1
+      document.w8mngrLoading(true)
     },
     "notLoading": function() {
-      this.loading = 0
+      document.w8mngrLoading(false)
     },
   },
   computed: {

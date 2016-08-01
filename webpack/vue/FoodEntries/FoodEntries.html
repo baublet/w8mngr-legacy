@@ -139,13 +139,19 @@
                          @add-entry="addEntry()"
                          @fill-in-form="fillInForm($arguments[0])"
                          transition="ac-fade" stagger="20"></autocomplete-item>
-      <div class="pagination" v-if="(prevPage || nextPage) && !autocompleteLoading" transition="ac-pagination-fade">
-        <a class="btn prev-btn previous" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage">
-          <i class="fa fa-chevron-circle-left"></i> Back
-        </a>
-        <a class="btn next-btn next" href="#" @click.prevent="autocompletePage(nextPage)" v-if="nextPage">
-          More <i class="fa fa-chevron-circle-right"></i>
-        </a>
+      <div class="pagination btn-bar" v-if="(prevPage || nextPage) && !autocompleteLoading" transition="ac-pagination-fade">
+        <div class="left">
+          <a class="btn prev" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage" title="View the previous page of foods">
+            <i class="fa fa-chevron-circle-left"></i> Back
+            <span class="screen-reader-text">to the previous page of foods</span>
+          </a>
+        </div>
+        <div class="right">
+          <a class="btn next" href="#" @click.prevent="autocompletePage(nextPage)" v-if="nextPage" title="View more foods">
+            More <i class="fa fa-chevron-circle-right"></i>
+            <span class="screen-reader-text">foods</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

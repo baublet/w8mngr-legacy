@@ -26,4 +26,7 @@
   .col.full {
     width: 100%;
   }
+  .col.half {
+    width: calc(50% - #{$spacing-normal});
+  }
 }
