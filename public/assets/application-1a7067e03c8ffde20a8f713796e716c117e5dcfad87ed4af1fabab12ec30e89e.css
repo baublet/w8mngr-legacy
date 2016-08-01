@@ -85,10 +85,10 @@ category: basics
 ---
 Basic screen reader text for more verbose links and messages on screen readers
 but the context is clear for the non-visually impaired. If you're using SCSS, you
-can add these styles to other styles via the mixin screenReaderText(); To remove
-screen reader text, just use the mixin deScreenReaderText();.
-```html_example
-<a class="btn" href="#">
+can add these styles to other styles via the mixin `screenReaderText();` To remove
+screen reader text, just use the mixin `deScreenReaderText();`.
+
+```html_example <a class="btn" href="#">
     <i class="fa fa-cloud-download" aria-hidden="true"></i>
     Download <span class="screen-reader-text">Your Weight Data</span>
 </a>
@@ -3122,7 +3122,7 @@ Welcome to the w8mngr.com styleguide.
 .codeExample {
   display: flex;
   width: 100%;
-  align-items: stretch;
+  align-items: flex-start;
   margin-bottom: 2.5rem;
 }
 /* line 15, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
@@ -3130,31 +3130,21 @@ Welcome to the w8mngr.com styleguide.
   overflow-x: auto;
   font-family: monospace;
   font-size: 0.75rem;
-}
-/* line 20, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
-.codeExample .highlight, .codeExample .pre {
-  height: 100%;
+  box-shadow: inset 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
-/* line 25, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 23, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput, .codeBlock {
   width: 50%;
-  height: 100%;
-  min-height: 5rem;
 }
 
-/* line 31, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 27, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput {
   order: 2;
   margin: 0 0.5rem;
-  box-shadow: inset 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
-  padding: 0.5rem;
-  border-radius: 5px;
-  background: rgba(31, 31, 31, 0.1);
-  border: 1px solid rgba(31, 31, 31, 0.1);
 }
 
-/* line 41, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 32, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeBlock {
   order: 1;
 }

@@ -5,6 +5,8 @@
     <% Dir["./public/assets/application*.css"].each do |sheet| %>
       <link rel="stylesheet" href="/assets/<%= sheet.split('/').last %>">
     <% end %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700', media: 'all', 'data-turbolinks-track' => true %>
   </head>
   <body>
     <main class="main section-inside">

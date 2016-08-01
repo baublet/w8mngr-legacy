@@ -3,7 +3,7 @@
   <head>
     <title>a brand new styleguide: basics</title>
     
-      <link rel="stylesheet" href="/assets/application-c25c0c1f834d252d4697905834fa88332e9e70c0dfc7e9e7291a09cddd794b88.css">
+      <link rel="stylesheet" href="/assets/application-233226c92f53e38f5bc365aee49c95058dab4ed72fd6e8655d3430c04dfcf1a2.css">
     
   </head>
   <body>
@@ -24,19 +24,21 @@
       <section>
         <ul>
         
-          <li><a href="#blockquote">w8mngr Styleguide</a></li>
+          <li><a href="#blockquote">Blockquotes</a></li>
         
-          <li><a href="#headers">w8mngr Styleguide</a></li>
+          <li><a href="#headers">Headers</a></li>
         
-          <li><a href="#hide if no js">w8mngr Styleguide</a></li>
+          <li><a href="#hide if no js">Hiding if User doesn&#39;t have Javascript</a></li>
         
-          <li><a href="#horizontal rule">w8mngr Styleguide</a></li>
+          <li><a href="#horizontal rule">Horizontal Rules</a></li>
         
-          <li><a href="#links">w8mngr Styleguide</a></li>
+          <li><a href="#infotext">Info Text</a></li>
         
-          <li><a href="#paragraphs">w8mngr Styleguide</a></li>
+          <li><a href="#links">Links</a></li>
         
-          <li><a href="#strong and em">w8mngr Styleguide</a></li>
+          <li><a href="#paragraphs">Paragraphs</a></li>
+        
+          <li><a href="#strong and em">Strong and Emphasis (bold and italics)</a></li>
         
           <li><a href="#styleguide">w8mngr Styleguide</a></li>
         
@@ -45,7 +47,7 @@
 [secondary button]: buttons.html#secondary button
 [small button]: buttons.html#small button</p><p class="styleguide">[hide if no js]: basics.html#hide if no js
 [horizontal rule]: basics.html#horizontal rule</p><p class="styleguide">[strong and em]: basics.html#strong and em</p>
-<h1 id="blockquote" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="blockquote" class="styleguide">Blockquotes</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
@@ -66,18 +68,16 @@
   </div>
 </div>
 
-<h1 id="headers" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="headers" class="styleguide">Headers</h1>
 <p class="styleguide">Basic screen reader text for more verbose links and messages on screen readers
 but the context is clear for the non-visually impaired. If you&#39;re using SCSS, you
 can add these styles to other styles via the mixin <code class="styleguide">screenReaderText();</code> To remove
-screen reader text, just use the mixin <code class="styleguide">deScreenReaderText();</code>.
-<code class="styleguide">html_example
-&lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;
+screen reader text, just use the mixin <code class="styleguide">deScreenReaderText();</code>.</p><p class="styleguide"><code class="styleguide">html_example &lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;
     &lt;i class=&quot;fa fa-cloud-download&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
     Download &lt;span class=&quot;screen-reader-text&quot;&gt;Your Weight Data&lt;/span&gt;
 &lt;/a&gt;
 </code></p>
-<h1 id="hide if no js" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="hide if no js" class="styleguide">Hiding if User doesn&#39;t have Javascript</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <p class="hide-if-no-js">This is not shown if the user doesn't have Javascript enabled.</p>
@@ -92,7 +92,7 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
   </div>
 </div>
 
-<h1 id="horizontal rule" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="horizontal rule" class="styleguide">Horizontal Rules</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <h3>Here's a section</h3>
@@ -113,7 +113,20 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
   </div>
 </div>
 
-<h1 id="links" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="infotext" class="styleguide">Info Text</h1>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <p class="info-text">Small text that the user might need to know, but isn't super critical.</p>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"info-text"</span><span class="nt">&gt;</span>Small text that the user might need to know, but isn't super critical.<span class="nt">&lt;/p&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="links" class="styleguide">Links</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <a href="#">This is a link</a>, this is not.
@@ -126,7 +139,7 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
   </div>
 </div>
 
-<h1 id="paragraphs" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="paragraphs" class="styleguide">Paragraphs</h1>
 <div class="codeExample">
   <div class="exampleOutput">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget justo nec orci suscipit finibus eu non felis. Nullam molestie nunc in egestas blandit. Mauris semper ipsum ac neque tristique, sit amet tincidunt est pretium. Suspendisse sit amet urna non est aliquam tempus consequat at metus. Nulla eleifend purus at ligula malesuada bibendum. Nullam sed nisl eros. Aliquam condimentum blandit ante, et dapibus lectus interdum non. Aliquam et leo ut leo pulvinar suscipit. Proin malesuada mi sit amet ante pulvinar, non rhoncus nulla fermentum. Integer euismod magna dolor, sit amet aliquet tellus pellentesque ut.</p>
@@ -147,7 +160,7 @@ screen reader text, just use the mixin <code class="styleguide">deScreenReaderTe
   </div>
 </div>
 
-<h1 id="strong and em" class="styleguide">w8mngr Styleguide</h1>
+<h1 id="strong and em" class="styleguide">Strong and Emphasis (bold and italics)</h1>
 <p class="styleguide">Use <code class="styleguide">em</code> and <code class="styleguide">strong</code>, not <code class="styleguide">b</code> or <code class="styleguide">i</code>.
 <code class="styleguide">html_example
 Use &lt;strong&gt;strong&lt;/strong&gt; and &lt;em&gt;emphasis&lt;/em&gt; tags.
