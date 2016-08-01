@@ -30,7 +30,7 @@ body, html {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Headers
 name: headers
 category: basics
 ---
@@ -38,8 +38,8 @@ Basic screen reader text for more verbose links and messages on screen readers
 but the context is clear for the non-visually impaired. If you're using SCSS, you
 can add these styles to other styles via the mixin `screenReaderText();` To remove
 screen reader text, just use the mixin `deScreenReaderText();`.
-```html_example
-<a class="btn" href="#">
+
+```html_example <a class="btn" href="#">
     <i class="fa fa-cloud-download" aria-hidden="true"></i>
     Download <span class="screen-reader-text">Your Weight Data</span>
 </a>
@@ -52,7 +52,7 @@ screen reader text, just use the mixin `deScreenReaderText();`.
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Paragraphs
 name: paragraphs
 category: basics
 ---
@@ -74,7 +74,7 @@ p, li {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Links
 name: links
 category: basics
 ---
@@ -92,7 +92,7 @@ a {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Blockquotes
 name: blockquote
 category: basics
 ---
@@ -114,7 +114,7 @@ blockquote {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Strong and Emphasis (bold and italics)
 name: strong and em
 category: basics
 ---
@@ -133,7 +133,7 @@ em {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Horizontal Rules
 name: horizontal rule
 category: basics
 ---
@@ -153,7 +153,7 @@ hr {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Hiding if User doesn't have Javascript
 name: hide if no js
 category: basics
 ---
@@ -176,8 +176,8 @@ category: basics
 
 /*doc
 ---
-title: w8mngr Styleguide
-name: links
+title: Info Text
+name: infotext
 category: basics
 ---
 ```html_example

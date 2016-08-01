@@ -79,14 +79,14 @@ body, html {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Headers
 name: headers
 category: basics
 ---
 Basic screen reader text for more verbose links and messages on screen readers
 but the context is clear for the non-visually impaired. If you're using SCSS, you
-can add these styles to other styles via the mixin `screenReaderText();` To remove
-screen reader text, just use the mixin `deScreenReaderText();`.
+can add these styles to other styles via the mixin screenReaderText(); To remove
+screen reader text, just use the mixin deScreenReaderText();.
 ```html_example
 <a class="btn" href="#">
     <i class="fa fa-cloud-download" aria-hidden="true"></i>
@@ -106,7 +106,7 @@ screen reader text, just use the mixin `deScreenReaderText();`.
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Paragraphs
 name: paragraphs
 category: basics
 ---
@@ -130,7 +130,7 @@ p:last-child, li:last-child {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Links
 name: links
 category: basics
 ---
@@ -150,7 +150,7 @@ a:hover {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Blockquotes
 name: blockquote
 category: basics
 ---
@@ -173,7 +173,7 @@ blockquote {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Strong and Emphasis (bold and italics)
 name: strong and em
 category: basics
 ---
@@ -194,7 +194,7 @@ em {
 
 /*doc
 ---
-title: w8mngr Styleguide
+title: Horizontal Rules
 name: horizontal rule
 category: basics
 ---
@@ -215,8 +215,8 @@ hr {
 
 /*doc
 ---
-title: w8mngr Styleguide
-name: hide-if-no-js
+title: Hiding if User doesn't have Javascript
+name: hide if no js
 category: basics
 ---
 ```html_example
@@ -241,8 +241,8 @@ category: basics
 
 /*doc
 ---
-title: w8mngr Styleguide
-name: links
+title: Info Text
+name: infotext
 category: basics
 ---
 ```html_example
@@ -3139,9 +3139,11 @@ Welcome to the w8mngr.com styleguide.
 /* line 25, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput, .codeBlock {
   width: 50%;
+  height: 100%;
+  min-height: 5rem;
 }
 
-/* line 29, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 31, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput {
   order: 2;
   margin: 0 0.5rem;
@@ -3152,7 +3154,7 @@ Welcome to the w8mngr.com styleguide.
   border: 1px solid rgba(31, 31, 31, 0.1);
 }
 
-/* line 39, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 41, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeBlock {
   order: 1;
 }
