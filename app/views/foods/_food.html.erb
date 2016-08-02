@@ -81,10 +81,12 @@
         <%= number_with_delimiter measurement.protein %>
       </td>
       <td class="meta">
-        <%= button_tag(type: 'submit', class: 'btn-icon primary', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
-	      			<i class="fa fa-plus-circle" aria-hidden="true"></i>
-	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
-	      <% end %>
+        <%= form_tag food_entry_add_food_path(current_day, measurement.id) do %>
+          <%= button_tag(type: 'submit', class: 'btn-icon primary', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
+  	      			<i class="fa fa-plus-circle" aria-hidden="true"></i>
+  	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
+  	      <% end %>
+  	     <% end %>
       </td>
     </tr>
   <% end %>

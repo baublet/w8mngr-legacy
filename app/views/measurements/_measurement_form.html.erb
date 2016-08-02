@@ -5,7 +5,7 @@
 <div class="measurement card<%= measurement.try(:id).nil? ? " new" : "" %>">
 
 <% unless measurement.id.nil? %>
-  <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "helper-input" }, "yes", "no") %>
+  <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "helper-input" }, "yes") %>
   <div class="card-top-meta">
     <%= label_tag "measurement_" + measurement.id.to_s + "_delete", { class: "" } do %>
       <i class="fa fa-times" aria-hidden="true"></i>

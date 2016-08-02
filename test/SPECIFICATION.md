@@ -37,3 +37,5 @@ properly.
   requests achieve the desired behavior across all levels of the database/session.
 
 That means that we will be testing DB access in integration tests.
+
+As an aside, changing to not manipulating HTML/CSS is big. I'll have to rewrite most of my integration tests :( But at least that leaves me free to alter HTML in the future without the fear of having to constantly update my tests.

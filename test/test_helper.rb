@@ -14,11 +14,15 @@ class ActiveSupport::TestCase
   include SessionsHelper
   include ApplicationHelper
 
+  def current_day
+    Time.current.strftime('%Y%m%d')
+  end
+
   # A custom method for testing if text appears in the response
   #
   # Use:
   #   assert response_contains "foo"
-  def response_contains string
+  def response_contains? string
     response.body.include? string.to_s
   end
 
