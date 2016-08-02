@@ -128,12 +128,12 @@ name: smallbutton
 category: buttons
 ---
 ```html_example
-    <a class="btn small" href="#">Button</a>
-    <a class="btn small" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
-    <a class="btn secondary small" href="#">Small Secondary Button</a>
+<a class="btn small" href="#">Button</a>
+<a class="btn small" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+<a class="btn secondary small" href="#">Small Secondary Button</a>
 ```
 */
 .btn.small {
@@ -148,12 +148,12 @@ name: secondarybutton
 category: buttons
 ---
 ```html_example
-    <a class="btn secondary" href="#">Button</a>
-    <a class="btn secondary" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
-    <a class="btn secondary small" href="#">Small Secondary Button</a>
+<a class="btn secondary" href="#">Button</a>
+<a class="btn secondary" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+<a class="btn secondary small" href="#">Small Secondary Button</a>
 ```
 */
 .btn.secondary {
