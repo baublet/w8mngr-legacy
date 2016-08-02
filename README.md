@@ -24,7 +24,7 @@ The site is now live! Check it out at [w8mngr.com](https://w8mngr.com/).
 
 I'm not accepting contributions without very good reasoning at the moment. I'm using this as a learning project, so open an issue that hints at the problem, point me toward a solution or two, and I will address it.
 
-# Deploy and Development Aliases
+# Deploy and Development Aliases and Environment Variables
 
 For testing and deployment, you need the following environment variables set:
 
@@ -33,21 +33,30 @@ For testing and deployment, you need the following environment variables set:
 
 ## Development
 
-```
+```bash
 alias prep_dev="sudo service redis-server start && sudo service postgresql start"
 alias start_dev="prep_dev && foreman start -f Procfile.dev"
 ```
 
 To start developing, add these two lines to your `.bash_aliases` file and start the appropriate services by running `start_dev`. It will start Redis, PostgreSQL, and run our development Procfile using Foreman.
 
+To compile your styleguide, use the following bash alias:
+
+```bash
+alias _hologram="echo 'Clearing old stylesheets...' && rm -f ~/workspace/public/*.css* && echo 'Compiling assets...' && rake assets:precompile && echo 'Compiling Hologram styleguide...' && hologram"
+```
+
+This command, `_hologram` will clear your assets of CSS files, recompile them, and recompile the styleguide using Hologram.
+
 ## Deployment
 
-```
+```bash
 alias clear_assets="echo 'Clearing old assets...' && rm -f ~/workspace/public/webpack/* && rm -f -r ~/workspace/public/assets/*"
-alias deploy="echo 'Running deployment script...' && clear_assets && echo 'Precompiling rake assets...' && rake assets:precompile && echo 'Compiling webpack assets...' && rake webpack:compile && echo 'Adding compiled assets to the repo...' && git add . && git commit -a -m 'Precompile assets for deploy' && echo 'Pushing to Dokku...' && git push && git push dokku master"
+alias precompile="echo 'Running deployment script...' && clear_assets && echo 'Precompiling rake assets...' && rake assets:precompile && echo 'Compiling webpack assets...' && rake webpack:compile && echo 'Compiling Hologram styleguide...' && hologram && echo 'Adding compiled assets to the repo...' && git add . && git commit -a -m 'Precompile assets and styleguide for deploy'"
+alias deploy="precompile && echo 'Pushing to Dokku...' && git push && git push dokku master"
 ```
 
-These aliases clear the old assets out of our public folder, runs our Rake and webpack tasks to precompile new assets, adds them via git commit, and pushes it all up to our Github account and Dokku.
+These aliases clear the old assets out of our public folder, runs our Rake and webpack tasks to precompile new assets (including our styleguide), adds them via git commit, and pushes it all up to our Github account and Dokku.
 
 *Note:* you must be on your `master` branch for this to work properly with Dokku. You may also need to change the path of your public folder so this script can properly clear your assets.
 

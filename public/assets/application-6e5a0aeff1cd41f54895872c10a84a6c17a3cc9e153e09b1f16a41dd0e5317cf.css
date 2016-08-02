@@ -4203,7 +4203,7 @@ h1 + .page-meta {
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 /* line 50, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide.main section > ul:first-child li {

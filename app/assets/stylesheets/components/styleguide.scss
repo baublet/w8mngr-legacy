@@ -46,7 +46,7 @@
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     li {
       list-style-type: none;
       padding: 0 $spacing-tiny $spacing-tiny 0;
