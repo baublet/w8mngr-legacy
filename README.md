@@ -30,6 +30,7 @@ For testing and deployment, you need the following environment variables set:
 
 * `W8MNGR_API_KEY_POSTMARK` - API key for [Postmark](https://postmarkapp.com/), our email provider
 * `W8MNGR_API_KEY_USDA` - Our [USDA API key](https://ndb.nal.usda.gov/ndb/api/doc), for nutritional info
+* `DATABASE_URL` - The URL of your database connection. E.g., `postgres://username:password@127.0.0.1`. (Only needed for production. Development and test use local databases.)
 
 ## Development
 
