@@ -12,6 +12,8 @@ $color-primary-light: #21C6F5;
 $color-primary-white: lighten($color-primary, 50);
 
 $color-secondary: #540BBA;
+$color-secondary-light: #873FEC;
+
 $color-usda: #555;
 
 $color-nav: darken($color-primary, 20);
@@ -115,11 +117,7 @@ $easing-1: cubic-bezier(0,.95,0,1);
 }
 
 @import "global",
-
         // Components
         "components/*",
         // Page-specific blocks,
-        "pages/*",
-
-        // Page-specific blocks
-        "welcome";
+        "pages/*";

@@ -195,11 +195,11 @@ A "hero" button for very large, typically promotional, action buttons.
     @include height(1);
     &:hover, &:focus {
         @include height(2);
-        border-color: darken($color-secondary, 10%);
         animation: none;
+        background: $color-secondary-light;
     }
     &:active {
-        @include height(3);
+        @include height(-3);
     }
 }
 
