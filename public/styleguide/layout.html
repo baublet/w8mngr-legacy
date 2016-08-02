@@ -36,6 +36,10 @@
         
           <li><a href="#grid">Grid</a></li>
         
+          <li><a href="#helperinputs">Helper Inputs</a></li>
+        
+          <li><a href="#tabs">Tabs</a></li>
+        
         </ul>
 <h1 id="apppanel" class="styleguide">Application Panels</h1>
 <p class="styleguide">Used to indicate some information that can be added to, subtracted from, or
@@ -343,6 +347,73 @@ column separations.)</p><div class="codeExample">
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="helperinputs" class="styleguide">Helper Inputs</h1>
+<p class="styleguide">We use helper inputs to toggle things on and off using only CSS.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <label for="toggle">Click to Toggle</label>
+<input type="checkbox" class="helper-input" id="toggle">
+<span class="helper-panel">
+  Here I am!
+</span>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"toggle"</span><span class="nt">&gt;</span>Click to Toggle<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">class=</span><span class="s">"helper-input"</span> <span class="na">id=</span><span class="s">"toggle"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"helper-panel"</span><span class="nt">&gt;</span>
+  Here I am!
+<span class="nt">&lt;/span&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="tabs" class="styleguide">Tabs</h1>
+<p class="styleguide">Here, we use our helper inputs to create tabs. In the future, we&#39;ll use Javascript
+to make sure our tabs display corresponding to the selected tab.</p><p class="styleguide">These are fully screen-reader-compatible, so should be widely accessible. They
+don&#39;t display:none, but instead position it absolutely using a max-height of 0px.
+Then, when shown, it reverts the element to static positioning and fades it in.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="helper-tabs">
+  <ul>
+    <li><label for="tab-one">Tab One</label></li>
+    <li><label for="tab-two">Tab Two</label></li>
+  </ul>
+</div>
+
+<input type="radio" class="helper-input" name="tabs" id="tab-one" checked>
+<div class="helper-panel">
+  <h1>This is Tab One</h1>
+</div>
+
+<input type="radio" class="helper-input" name="tabs" id="tab-two">
+<div class="helper-panel">
+  <h1>This is Tab Two</h1>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"helper-tabs"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;label</span> <span class="na">for=</span><span class="s">"tab-one"</span><span class="nt">&gt;</span>Tab One<span class="nt">&lt;/label&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;label</span> <span class="na">for=</span><span class="s">"tab-two"</span><span class="nt">&gt;</span>Tab Two<span class="nt">&lt;/label&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">class=</span><span class="s">"helper-input"</span> <span class="na">name=</span><span class="s">"tabs"</span> <span class="na">id=</span><span class="s">"tab-one"</span> <span class="na">checked</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"helper-panel"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>This is Tab One<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">class=</span><span class="s">"helper-input"</span> <span class="na">name=</span><span class="s">"tabs"</span> <span class="na">id=</span><span class="s">"tab-two"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"helper-panel"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>This is Tab Two<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/div&gt;</span></pre>
     </div>
   </div>

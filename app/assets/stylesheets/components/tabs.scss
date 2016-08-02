@@ -1,3 +1,37 @@
+/*doc
+---
+title: Tabs
+name: tabs
+category: layout
+---
+
+Here, we use our helper inputs to create tabs. In the future, we'll use Javascript
+to make sure our tabs display corresponding to the selected tab.
+
+These are fully screen-reader-compatible, so should be widely accessible. They
+don't display:none, but instead position it absolutely using a max-height of 0px.
+Then, when shown, it reverts the element to static positioning and fades it in.
+
+```html_example
+<div class="helper-tabs">
+  <ul>
+    <li><label for="tab-one">Tab One</label></li>
+    <li><label for="tab-two">Tab Two</label></li>
+  </ul>
+</div>
+
+<input type="radio" class="helper-input" name="tabs" id="tab-one" checked>
+<div class="helper-panel">
+  <h1>This is Tab One</h1>
+</div>
+
+<input type="radio" class="helper-input" name="tabs" id="tab-two">
+<div class="helper-panel">
+  <h1>This is Tab Two</h1>
+</div>
+```
+*/
+
 .helper-tabs {
   margin: 0 0 $spacing-normal 0;
   ul {
