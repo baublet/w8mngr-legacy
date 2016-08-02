@@ -338,6 +338,19 @@ icon buttons. In addition, use verbose link titles!
     + .btn-icon {
         margin-left: $spacing-small;
     }
+    // For our giant dashboard icons
+    &.giant {
+        display: inline-block;
+        text-align: center;
+        .fa {
+            font-size: $font-size-huge;
+            color: rgba($black, .25);
+        }
+        .text {
+            font-size: $font-size-normal;
+            color: rgba($black, .75);
+        }
+    }
 }
 
 .btn-icon.primary {

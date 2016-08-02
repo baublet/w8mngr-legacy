@@ -92,6 +92,22 @@ column separations.)
     </div>
   </div>
 
+  <div class="row arbitrary">
+    <div class="col">a</div>
+    <div class="col">Even Arbitrary/No-Width Columns!</div>
+    <div class="col">a</div>
+  </div>
+
+  <div class="row arbitrary">
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+  </div>
+
 </div>
 ```
 */
@@ -126,5 +142,12 @@ column separations.)
   }
   .quarters .col {
     width: calc(25% - (#{$spacing-normal} / 3 * 2));
+  }
+  .arbitrary .col {
+    flex-grow: 1;
+    width: auto;
+    + .col {
+      margin-left: $spacing-normal;
+    }
   }
 }
