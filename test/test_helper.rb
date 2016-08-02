@@ -14,6 +14,14 @@ class ActiveSupport::TestCase
   include SessionsHelper
   include ApplicationHelper
 
+  # A custom method for testing if text appears in the response
+  #
+  # Use:
+  #   assert response_contains "foo"
+  def response_contains string
+    response.body.include? string.to_s
+  end
+
   # Simple login
   def log_in
     @user = users(:test)

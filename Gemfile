@@ -76,6 +76,9 @@ group :development, :test do
     gem "hologram"
 
     gem "guard", :require => false
+
+    # For generating fake data
+    gem "faker"
 end
 
 

@@ -42,12 +42,11 @@ class FoodsController < ApplicationController
   # POST /foods
   def create
     @food = current_user.foods.new(food_params)
-    @measurement = @food.measurements.new(measurement_params(params[:measurement][0]))
+    @measurement = @food.measurements.new(measurement_params(params[:measurement]['0']))
 
     if @food.save
         flash.now[:success] = "Your food was successfully created!"
-        @newmeasurement = Measurement.new
-        render :edit
+        redirect_to edit_food_path(@food)
     else
         @food.measurements.clear
         @newmeasurement = @measurement
