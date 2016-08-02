@@ -7,6 +7,10 @@ category: layout
 
 We use helper inputs to toggle things on and off using only CSS.
 
+These are fully screen-reader-compatible, so should be widely accessible. They
+don't display:none, but instead position it absolutely using a max-height of 0px.
+Then, when shown, it reverts the element to static positioning and fades it in.
+
 ```html_example
 <label for="toggle">Click to Toggle</label>
 <input type="checkbox" class="helper-input" id="toggle">

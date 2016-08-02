@@ -3,7 +3,7 @@
   <head>
     <title>w8mngr | styleguide</title>
     
-      <link rel="stylesheet" href="/assets/application-268e4e2a0cac8f7cd7fd53a9ef552554b7255bcd66eb6cc2e5009b24786de2d3.css">
+      <link rel="stylesheet" href="/assets/application-c609175881ccd4dd87496762244c00a0918d28a5f6d41575352ea2f341919110.css">
     
     <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
     <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
@@ -353,7 +353,9 @@ column separations.)</p><div class="codeExample">
 </div>
 
 <h1 id="helperinputs" class="styleguide">Helper Inputs</h1>
-<p class="styleguide">We use helper inputs to toggle things on and off using only CSS.</p><div class="codeExample">
+<p class="styleguide">We use helper inputs to toggle things on and off using only CSS.</p><p class="styleguide">These are fully screen-reader-compatible, so should be widely accessible. They
+don&#39;t display:none, but instead position it absolutely using a max-height of 0px.
+Then, when shown, it reverts the element to static positioning and fades it in.</p><div class="codeExample">
   <div class="exampleOutput">
     <label for="toggle">Click to Toggle</label>
 <input type="checkbox" class="helper-input" id="toggle">
@@ -375,9 +377,7 @@ column separations.)</p><div class="codeExample">
 
 <h1 id="tabs" class="styleguide">Tabs</h1>
 <p class="styleguide">Here, we use our helper inputs to create tabs. In the future, we&#39;ll use Javascript
-to make sure our tabs display corresponding to the selected tab.</p><p class="styleguide">These are fully screen-reader-compatible, so should be widely accessible. They
-don&#39;t display:none, but instead position it absolutely using a max-height of 0px.
-Then, when shown, it reverts the element to static positioning and fades it in.</p><div class="codeExample">
+to make sure our tabs display corresponding to the selected tab.</p><div class="codeExample">
   <div class="exampleOutput">
     <div class="helper-tabs">
   <ul>
