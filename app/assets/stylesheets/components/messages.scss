@@ -1,23 +1,85 @@
+/*doc
+---
+title: Form Error Explanation
+name: errorexplanations
+category:
+  - messages
+  - forms
+---
+
+A set of classes for showing errors attached to certain forms.
+
+```html_example
+<h1>Make an Account</h1>
+
+<div class="error-explanation">
+	<ul>
+		<li>Email can't be blank</li>
+		<li>Email is invalid</li>
+		<li>Password can't be blank</li>
+	</ul>
+</div>
+
+<label for="email">Email</label>
+<input type="email" name="email" id="email">
+
+<label for="password">Password</label>
+<input type="password" name="password" id="password">
+
+<label for="password_confirmation">Confirmation</label>
+<input type="password" name="password_confirmation" id="password_confirmation">
+
+<button name="button" type="submit" class="btn">
+	Step 2: Calculate Your TDEE
+</button>
+
+
+<hr>
+
+
+<div class="app-form">
+  <div class="error-explanation">
+    <ul>
+      <li>Value must be greater than 1359</li>
+    </ul>
+  </div>
+  <div class="field_with_errors">
+    <input placeholder="e.g., 165 lbs, 83.9kg, 12 stone, etc." class="large" type="text" value="" name="weight_entry[value]" id="weight_entry_value">
+  </div>
+  <div class="btn-bar">
+    <div class="left"></div>
+    <div class="right">
+      <button name="button" type="submit" class="btn submit">
+          <i class="fa fa-plus"></i>
+          <strong>New Entry</strong>
+      </button>
+    </div>
+  </div>
+</div>
+```
+*/
 .error-explanation {
     color: $red;
-    padding: 1rem 0 1rem 1rem;
-    margin: 2rem 0;
+    padding: $spacing-normal 0 $spacing-normal $spacing-normal;
+    margin: 0 0 $spacing-normal;
     font-weight: bold;
-    font-size: .8rem;
+    font-size: $font-size-small;
     border-left: 5px solid $red;
-    li {
-        line-height: 1rem;
-    }
     .app-form & {
-      margin: -1.05rem -1rem .995rem;
+      margin: 0;
       background: darken($red, 10);
-      border: none;
       color: $white;
       text-align: left;
       padding-left: 0;
+      @include height(2);
     }
 }
 
+
+/*
+  These are our flash messages, which don't have a use beyond their original purpose.
+  So we aren't adding these to the style guide.
+*/
 .alert {
     color: $white;
     border: 1px solid rgba($black, .15);
@@ -44,6 +106,25 @@
     }
 }
 
+/*doc
+---
+title: Inline Messages
+name: inlinemessages
+category: messages
+---
+
+A set of classes for showing inline messages and errors.
+
+```html_example
+<div class="message-inline">
+  Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</div>
+
+<div class="message-inline notify">
+  Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</div>
+```
+*/
 .errors {
   margin: 1rem auto;
   width: 640px;
@@ -70,18 +151,18 @@
 
 .message-inline {
   display: block;
-  border: 1px solid rgba($black, .2);
-  background: rgba($black, .1);
+  border: 1px solid rgba($black, .1);
+  background: rgba($black, .05);
   padding: $spacing-normal;
   margin-bottom: $spacing-large;
-  font-size: $font-size-small;
+  font-size: $font-size-normal;
   border-radius: 3px;
   &.notify {
     color: $white;
     background: $color-primary-light;
     a {
-      color: rgba($white, .5);
-
+      color: rgba($white, .8);
+      text-decoration: underline;
       &:hover, &:focus {
         color: $white;
         text-decoration: underline;

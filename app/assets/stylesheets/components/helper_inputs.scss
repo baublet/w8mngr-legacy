@@ -55,41 +55,73 @@ Then, when shown, it reverts the element to static positioning and fades it in.
   }
 }
 
+/*doc
+---
+title: Toggle Switch
+name: toggleswitch
+category: forms
+---
+
+A set of classes for creating a toggle switch. Can also be used to show otherwise-hidden
+panels when the toggle is activated.
+
+```html_example
+<input type="checkbox" name="faturday_enabled" id="ep-faturday-enabled" value="true" class="helper-input toggle-switch" checked="checked">
+<label for="ep-faturday-enabled">Toggle Faturdays</label>
+
+<br>
+
+<input type="checkbox" name="toggle_2" id="toggle-2" value="true" class="helper-input toggle-switch">
+<label for="toggle-2">Toggle Me to Show a Panel</label>
+<div class="helper-panel">
+  <h2>And here I am!</h2>
+</div>
+
+```
+*/
 input[type=checkbox].toggle-switch {
   display: none;
   + label {
     display: inline-block;
     position: relative;
-    padding-left: 4rem;
+    padding-left: calc(#{$spacing-large} + #{$spacing-normal});
     cursor: pointer;
-    margin-bottom: 2rem;
+    margin-bottom: $spacing-large;
+    font-size: $font-size-normal;
+    color: rgba($black, .8);
+    &:hover, &:focus {
+      color: $black;
+    }
     &:before {
       display: block;
       content: " ";
       background-color: #eee;
       border: 1px solid rgba($black, .25);
-      border-radius: 2rem;
-      width: 3rem;
+      border-radius: 5px;
+      width: $spacing-large;
+      height: $spacing-small;
       position: absolute;
       left: 0;
-      top: 0;
+      top: 50%;
+      transform: translateY(-50%);
       bottom: 0;
-      box-shadow: inset 0 0 5px 0 rgba(black, .1);
+      @include height(-1);
       transition: background-color .25s ease-in-out;
     }
     &:after {
       display: block;
       content: " ";
-      width: 1rem;
+      width: $spacing-normal;
+      height: $spacing-normal;
+      line-height: $spacing-normal;
       position: absolute;
-      left: .25rem;
-      top: -.25rem;
-      bottom:-.25rem;
-      border-radius:50%;
-      border: 1px solid #ccc;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius:100%;
+      border: 1px solid rgba($black, .25);
       background: $white;
       @include height(1);
-      transform: translateX(0);
       transition: transform .5s $easing-1;
     }
   }
@@ -97,6 +129,6 @@ input[type=checkbox].toggle-switch {
     background-color: $color-primary-light;
   }
   &:checked + label:after {
-    transform: translateX(1.5rem);
+    transform: translate(1.9rem, -50%);
   }
 }

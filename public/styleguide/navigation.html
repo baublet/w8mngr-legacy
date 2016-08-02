@@ -3,7 +3,7 @@
   <head>
     <title>w8mngr | styleguide</title>
     
-      <link rel="stylesheet" href="/assets/application-c609175881ccd4dd87496762244c00a0918d28a5f6d41575352ea2f341919110.css">
+      <link rel="stylesheet" href="/assets/application-b621fc7731f53e1f6b29ecb119c5565c3f3ecf3569f66222b1b5b27035ed065b.css">
     
     <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
     <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
@@ -16,6 +16,8 @@
       <nav>
         <ul>
         
+          <li><a href="forms.html">forms</a></li>
+        
           <li><a href="buttons.html">buttons</a></li>
         
           <li><a href="layout.html">layout</a></li>
@@ -26,6 +28,8 @@
         
           <li><a href="cards.html">cards</a></li>
         
+          <li><a href="messages.html">messages</a></li>
+        
         </ul>
       </nav>
 
@@ -33,6 +37,8 @@
         <ul>
         
           <li><a href="#breadcrumbs">Breadcrumbs</a></li>
+        
+          <li><a href="#daynavigator">Day Navigator</a></li>
         
         </ul>
 <h1 id="breadcrumbs" class="styleguide">Breadcrumbs</h1>
@@ -64,6 +70,28 @@ properly.</p><div class="codeExample">
       <span class="nt">&lt;li&gt;</span>Edit<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="daynavigator" class="styleguide">Day Navigator</h1>
+<p class="styleguide">Used to indicate the current day and give options to change that day for the user.</p><p class="styleguide"><strong>NB:</strong> To show this styleguide properly, I modified this style.
+Use just as shown in pages in order for the day navigator to show properly.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="day-navigator">
+    <a href="#" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
+    <span class="current-day">Tuesday, August  2, 2016</span>
+    <a href="#" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"day-navigator"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">title=</span><span class="s">"Previous Day"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-circle-left"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"current-day"</span><span class="nt">&gt;</span>Tuesday, August  2, 2016<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">title=</span><span class="s">"Next Day"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-circle-right"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
 <span class="nt">&lt;/div&gt;</span></pre>
     </div>
   </div>

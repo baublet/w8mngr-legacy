@@ -884,7 +884,9 @@ properly.
 ---
 title: Button Bar (for Layout)
 name: buttonbar
-category: buttons
+category:
+  - buttons
+  - layout
 ---
 Layout element for positioning buttons on the same horizontal line, but with
 some buttons arranged on the left side, the others on the right.
@@ -912,7 +914,7 @@ divs.
 </div>
 ```
 */
-/* line 38, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 40, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-bar {
   display: flex;
   align-items: flex-end;
@@ -920,22 +922,22 @@ divs.
   text-align: center;
   width: 100%;
 }
-/* line 44, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 46, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-bar .left {
   width: 50%;
   text-align: left;
 }
-/* line 48, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 50, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-bar .right {
   width: 50%;
   text-align: right;
 }
-/* line 52, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 54, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-bar .btn {
   margin-bottom: 0;
   vertical-align: bottom;
 }
-/* line 55, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 57, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-bar .btn + .btn {
   margin-left: 0.5rem;
 }
@@ -957,7 +959,7 @@ category: buttons
 <a class="btn disabled" href="#">Disabled Button</a>
 ```
 */
-/* line 78, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 80, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn {
   display: inline-block;
   border: 0;
@@ -978,35 +980,35 @@ category: buttons
   line-height: normal;
   white-space: nowrap;
 }
-/* line 97, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn .fa {
   margin-right: 0.5rem;
 }
-/* line 100, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 102, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn:hover, .btn:focus {
   background: #21C6F5;
   color: #fff;
   text-decoration: none;
 }
-/* line 105, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 107, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn:active {
   cursor: pointer;
   box-shadow: inset 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 109, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 111, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn:last-child {
   margin-bottom: 0;
 }
-/* line 112, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 114, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn + .btn {
   margin-left: 0.25rem;
 }
-/* line 115, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 117, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.disabled {
   cursor: default;
   opacity: .5;
 }
-/* line 118, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 120, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.disabled:hover, .btn.disabled:focus {
   opacity: .75;
 }
@@ -1018,15 +1020,15 @@ name: smallbutton
 category: buttons
 ---
 ```html_example
-    <a class="btn small" href="#">Button</a>
-    <a class="btn small" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
-    <a class="btn secondary small" href="#">Small Secondary Button</a>
+<a class="btn small" href="#">Button</a>
+<a class="btn small" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+<a class="btn secondary small" href="#">Small Secondary Button</a>
 ```
 */
-/* line 139, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 141, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.small {
   padding: 0.5rem;
   font-size: 0.75rem;
@@ -1039,19 +1041,19 @@ name: secondarybutton
 category: buttons
 ---
 ```html_example
-    <a class="btn secondary" href="#">Button</a>
-    <a class="btn secondary" href="#">
-        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-        Icon Button
-    </a>
-    <a class="btn secondary small" href="#">Small Secondary Button</a>
+<a class="btn secondary" href="#">Button</a>
+<a class="btn secondary" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+<a class="btn secondary small" href="#">Small Secondary Button</a>
 ```
 */
-/* line 159, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 161, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.secondary {
   background: #787878;
 }
-/* line 161, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.secondary:hover {
   background: #3492ae;
 }
@@ -1073,25 +1075,26 @@ A "hero" button for very large, typically promotional, action buttons.
 ```
 
 */
-/* line 183, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 185, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.hero {
   display: inline-block;
   background: #540BBA;
   text-align: center;
   font-weight: 400;
   font-size: 2rem;
+  font-weight: lighter;
   color: #F7F7F7;
   animation: pulsateSecondaryColor 3s 4s 99 forwards normal;
   width: auto;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 193, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 196, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.hero:hover, .btn.hero:focus {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
   border-color: #3e088a;
   animation: none;
 }
-/* line 198, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 201, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.hero:active {
   box-shadow: 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
@@ -1158,16 +1161,16 @@ colors for icon buttons.
 ```
 
 */
-/* line 265, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 268, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .app-form .btn {
   background: #21C6F5;
 }
 
-/* line 269, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 272, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .app-form .btn-icon {
   color: rgba(247, 247, 247, 0.5);
 }
-/* line 271, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 274, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .app-form .btn-icon:hover, .app-form .btn-icon:focus {
   color: #F7F7F7;
 }
@@ -1205,7 +1208,7 @@ icon buttons. In addition, use verbose link titles!
 
 ```
 */
-/* line 309, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 312, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon {
   cursor: pointer;
   border: none;
@@ -1219,33 +1222,33 @@ icon buttons. In addition, use verbose link titles!
   font-size: 1rem;
   line-height: normal;
 }
-/* line 321, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 324, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon:hover, .btn-icon:focus {
   border: none;
   box-shadow: none;
   background: transparent;
   color: #1F1F1F;
 }
-/* line 327, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 330, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.delete:hover, .btn-icon.delete:focus {
   color: #FF0000;
   box-shadow: none;
 }
-/* line 331, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 334, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.disabled {
   opacity: .25;
   cursor: normal;
 }
-/* line 335, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 338, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon + .btn-icon {
   margin-left: 0.5rem;
 }
 
-/* line 340, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 343, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.primary {
   color: #3492ae;
 }
-/* line 342, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 345, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.primary:hover, .btn-icon.primary:focus {
   color: #21C6F5;
 }
@@ -1274,32 +1277,25 @@ category: buttons
 </div>
 ```
 */
-/* line 372, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 375, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.prev, .btn.next {
   min-width: 0;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   text-align: left;
   line-height: normal;
   color: #F7F7F7;
-  background: #3492ae;
-  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 381, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
-.btn.prev:hover, .btn.prev:focus, .btn.next:hover, .btn.next:focus {
-  background: #21C6F5;
-  box-shadow: 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
-}
-/* line 385, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 382, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.prev .fa, .btn.next .fa {
   margin-right: 0.5rem;
 }
 
-/* line 389, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 386, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.next {
   text-align: right;
 }
-/* line 391, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 388, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.next .fa {
   margin: 0 0 0 0.5rem;
 }
@@ -1320,7 +1316,7 @@ certain drastic (yet explicity) actions, such as deletion.
 <a href="#" class="btn-meta delete">Delete Button</a>
 ```
 */
-/* line 412, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 409, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-meta {
   color: #787878;
   display: inline-block;
@@ -1328,12 +1324,12 @@ certain drastic (yet explicity) actions, such as deletion.
   border: 1px solid transparent;
   border-radius: 3px;
 }
-/* line 418, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 415, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-meta:hover, .btn-meta:focus {
   color: #1F1F1F;
   border-color: #787878;
 }
-/* line 422, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 419, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-meta.delete:hover, .btn-meta.delete:focus {
   color: #FF0000;
   border-color: #FF0000;
@@ -1371,7 +1367,7 @@ classic example is tags.
 </div>
 ```
 */
-/* line 460, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 457, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill-list {
   display: flex;
   flex-wrap: wrap;
@@ -1379,12 +1375,12 @@ classic example is tags.
   margin: 0;
   padding: 0;
 }
-/* line 466, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 463, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill-list li {
   margin: 0 .15rem 0 0;
 }
 
-/* line 471, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 468, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill {
   display: inline-block;
   font-size: .75rem;
@@ -1395,19 +1391,19 @@ classic example is tags.
   border: 1px solid rgba(31, 31, 31, 0.25);
   border-radius: 3px;
 }
-/* line 480, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 477, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill:hover, .pill:focus {
   border-color: transparent;
   background: #3492ae;
   color: #F7F7F7;
 }
-/* line 485, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 482, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill.white {
   background: transparent;
   color: rgba(247, 247, 247, 0.5);
   border-color: rgba(247, 247, 247, 0.25);
 }
-/* line 489, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 486, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill.white:hover, .pill.white:focus {
   text-decoration: none !important;
   color: #F7F7F7;
@@ -1715,7 +1711,28 @@ category: cards
 </div>
 ```
 */
-/* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+/*doc
+---
+title: Day Navigator
+name: daynavigator
+category: navigation
+---
+
+Used to indicate the current day and give options to change that day for the user.
+
+<strong>NB:</strong> To show this styleguide properly, I modified this style.
+Use just as shown in pages in order for the day navigator to show properly.
+
+
+```html_example
+<div class="day-navigator">
+    <a href="#" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
+    <span class="current-day">Tuesday, August  2, 2016</span>
+    <a href="#" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
+</div>
+```
+*/
+/* line 23, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
 .day-navigator {
   padding: 1rem 0;
   text-align: center;
@@ -1727,14 +1744,14 @@ category: cards
   justify-content: center;
 }
 @media screen and (min-width: 961px) {
-  /* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+  /* line 23, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
   .day-navigator {
     max-width: 960px;
     margin: 0;
     margin-left: calc(200px + 2rem);
     transform: translateY(-2.5rem);
   }
-  /* line 15, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+  /* line 37, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
   .day-navigator:before {
     display: block;
     background: #3492ae;
@@ -1746,23 +1763,23 @@ category: cards
     content: " ";
     z-index: 99;
   }
-  /* line 26, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+  /* line 48, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
   .day-navigator a, .day-navigator span {
     position: relative;
     z-index: 100;
   }
 }
-/* line 31, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+/* line 53, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
 .day-navigator a {
   font-size: 1.3rem;
   color: #F7F7F7;
 }
-/* line 34, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+/* line 56, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
 .day-navigator a:hover {
   color: #21C6F5;
   text-decoration: none;
 }
-/* line 40, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
+/* line 62, /home/ubuntu/workspace/app/assets/stylesheets/components/day_navigator.scss */
 .day-navigator .current-day {
   font-size: 0.75rem;
   padding: 0 1rem;
@@ -1910,7 +1927,38 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Basic Inputs
+name: basicinputs
+category: forms
+---
+
+```html_example
+<input type="text" value="An input form">
+
+<input type="text" value="A large input form" class="large">
+
+<input type="email" placeholder="And a placeholder">
+
+<input type="password" placeholder="Password field">
+
+<label for="number-field">With a Label</label>
+<input type="number" value="24" placeholder="Number Field" id="number-field">
+
+<textarea>This is a text area that allows...
+...
+..
+/...
+Multiline text!</textarea>
+
+<select>
+  <option>Select Box</option>
+  <option>With Options!</option>
+</select>
+```
+*/
+/* line 33, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
   padding: .4rem;
   color: #1F1F1F;
@@ -1921,25 +1969,30 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
   width: 100%;
   display: block;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
-/* line 11, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 44, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=text]:last-child, input[type=email]:last-child, input[type=password]:last-child, input[type=number]:last-child, textarea:last-child, select:last-child {
   margin-bottom: 0;
 }
-/* line 14, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 47, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=number]:hover, textarea:hover, select:hover {
   border-color: #6c6c6c;
 }
-/* line 17, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 50, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=number]:focus, textarea:focus, select:focus {
-  color: #000;
+  color: #1F1F1F;
   border-color: #1F1F1F;
   box-shadow: 0 0 10px rgba(33, 198, 245, 0.5);
 }
-/* line 22, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
-.large input[type=text], .large input[type=email], .large input[type=password], .large input[type=number], .large textarea, .large select {
+/* line 55, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+.large input[type=text], input[type=text].large, .large input[type=email], input[type=email].large, .large input[type=password], input[type=password].large, .large input[type=number], input[type=number].large, .large textarea, textarea.large, .large select, select.large {
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: normal;
+}
+/* line 59, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+.small input[type=text], input[type=text].small, .small input[type=email], input[type=email].small, .small input[type=password], input[type=password].small, .small input[type=number], input[type=number].small, .small textarea, textarea.small, .small select, select.small {
+  font-size: 0.75rem;
 }
 /* line 87, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 input[type=text]::-webkit-input-placeholder, input[type=email]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-webkit-input-placeholder {
@@ -1959,108 +2012,168 @@ input[type=text]::-moz-placeholder, input[type=email]::-moz-placeholder, input[t
 input[type=text]:-ms-input-placeholder, input[type=email]:-ms-input-placeholder, input[type=password]:-ms-input-placeholder, input[type=number]:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder {
   font-family: "Source Sans Pro", "Roboto", "Helvetica", "Trebuchet MS", "Verdana", sans-serif;
 }
-/* line 29, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 65, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=text]:target, input[type=email]:target, input[type=password]:target, input[type=number]:target, textarea:target, select:target {
   box-shadow: 0 0 0 0.5rem rgba(255, 0, 0, 0.15);
 }
-/* line 32, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
-input[type=text].input-large, input[type=email].input-large, input[type=password].input-large, input[type=number].input-large, textarea.input-large, select.input-large {
-  font-size: 2rem;
-}
 
-/* line 37, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 70, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 select {
   width: auto;
   min-width: 200px;
 }
 
-/* line 42, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 75, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* line 48, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 81, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 textarea {
   height: 20em;
 }
 
-/* line 51, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 85, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 label, .label {
-  font-weight: 800;
+  font-weight: bold;
   font-size: 0.75rem;
   margin-bottom: 0.25rem;
   display: inline-block;
   cursor: pointer;
 }
-/* line 57, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
-label.req::after, .label.req::after {
-  content: "*";
-  padding-left: .25rem;
-  color: #FF0000;
+/* line 91, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+label.optional:after, .label.optional:after {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: rgba(31, 31, 31, 0.5);
+  font-variant: italic;
+  content: "optional";
+  padding-left: 2.5rem;
+}
+/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+label.req:after, .label.req:after {
+  display: none;
 }
 
-/* line 65, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Radio Lists
+name: radiolist
+category: forms
+---
+
+```html_example
+<div class="radio-list">
+	<span class="header">Sex</span>
+
+	<input type="radio" name="sex" id="sex-f" value="f">
+	<label for="sex-f">Female</label>
+
+	<input type="radio" name="sex" id="sex-m" value="m" checked="checked">
+	<label for="sex-m">Male</label>
+
+	<input type="radio" name="sex" id="sex-na" value="na">
+	<label for="sex-na">Other / Prefer Not to Disclose</label>
+</div>
+```
+*/
+/* line 127, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio label, .radio input[type=radio] {
   display: inline-block;
 }
 
-/* line 70, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 132, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list {
   position: relative;
   padding: 1rem 1rem 1rem 6rem;
   margin-bottom: 2rem;
 }
-/* line 74, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 136, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list input[type=radio] {
   display: none;
 }
-/* line 77, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 139, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list label {
-  padding: .25rem 0 0;
+  padding: 0 0 0 0.5rem;
   display: block;
   clear: right;
   cursor: pointer;
-  color: #999;
-  transition: color .15s ease-in-out;
+  color: rgba(31, 31, 31, 0.75);
   margin-right: .5rem;
-  margin-left: 1.5rem;
+  margin-left: 1rem;
   position: relative;
+  font-size: 1rem;
+  font-weight: normal;
 }
-/* line 87, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 150, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list label:hover {
   color: #1F1F1F;
 }
-/* line 90, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
-.radio-list label::before {
+/* line 153, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+.radio-list label:before {
   position: absolute;
-  left: -1.5rem;
-  top: .15rem;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
   font-family: "FontAwesome";
   font-size: 1rem;
   content: "\f10c";
 }
-/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list input[type=radio]:checked + label {
   color: #3492ae;
 }
-/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 165, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list input[type=radio]:checked + label::before {
   content: "\f192";
 }
-/* line 105, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 169, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .radio-list .header {
   position: absolute;
   top: 1rem;
   left: 0;
   display: block;
   text-transform: uppercase;
-  font-size: 1.4rem;
-  font-weight: 200;
+  font-size: 1.3rem;
+  font-weight: lighter;
 }
 
-/* line 116, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Application Form
+name: appform
+category: forms
+---
+
+Forms for entering new data. Specifically-colored to ensure a consistent flow.
+
+```html_example
+<div class="app-form">
+  <form class="new_weight_entry" id="new_weight_entry" action="/weight_entries" accept-charset="UTF-8" method="post">
+    <input type="hidden" value="20160802" name="weight_entry[day]" id="weight_entry_day">
+    <div class="grid">
+      <div class="row">
+        <div class="col full">
+          <input placeholder="e.g., 165 lbs, 83.9kg, 12 stone, etc." class="large" type="text" name="weight_entry[value]" id="weight_entry_value">
+        </div>
+      </div>
+    </div>
+    <div class="btn-bar">
+      <div class="left"></div>
+      <div class="right">
+        <button name="button" type="submit" class="btn submit">
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+```
+*/
+/* line 213, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form {
   background: #3492ae;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
@@ -2070,15 +2183,15 @@ label.req::after, .label.req::after {
   width: 460px;
   max-width: 100%;
 }
-/* line 124, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 221, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form:hover {
   box-shadow: 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 127, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 224, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form input {
   margin-bottom: 0;
 }
-/* line 129, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 226, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form input.large {
   font-size: 1.3rem;
 }
@@ -2104,12 +2217,12 @@ label.req::after, .label.req::after {
   color: rgba(247, 247, 247, 0.5);
   font-size: 90%;
 }
-/* line 136, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 233, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form input:focus, .app-form input:hover {
   box-shadow: none;
   outline: none;
 }
-/* line 141, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 238, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form input[type=text], .app-form input[type=number] {
   color: rgba(247, 247, 247, 0.5);
   background: transparent;
@@ -2118,21 +2231,21 @@ label.req::after, .label.req::after {
   border-radius: 0;
   padding: .25rem 0;
 }
-/* line 148, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 245, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form input[type=text]:hover, .app-form input[type=number]:hover {
   color: rgba(247, 247, 247, 0.75);
   background: linear-gradient(0deg, rgba(247, 247, 247, 0.5) 1px, rgba(247, 247, 247, 0) 1px);
 }
-/* line 152, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 249, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form input[type=text]:focus, .app-form input[type=number]:focus {
   color: rgba(247, 247, 247, 0.85);
   background: linear-gradient(0deg, rgba(247, 247, 247, 0.75) 3px, rgba(247, 247, 247, 0) 3px);
 }
-/* line 157, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 254, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form .large {
   font-size: 1.3rem;
 }
-/* line 160, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 257, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-form:after {
   visibility: hidden;
   display: block;
@@ -2142,20 +2255,94 @@ label.req::after, .label.req::after {
   height: 0;
 }
 
-/* line 170, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Application Panel Form
+name: apppanelform
+category: forms
+---
+
+Forms for editing data entered via the Application Form. We style this a different
+color than the entry form for two reasons:
+
+1. To deter editing, but not preclude it. It's easy to view in the format we want,
+   but may not immediately indicate editing.
+
+2. To make it easy to understand that this data exists as a list, just like any
+   other card and application panel.
+
+```html_example
+<div class="foodlog app-panel app-panel-form">
+  <div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="A food entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div><div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="Another Food Entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div>
+</div>
+```
+*/
+/* line 341, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form {
   padding: 0.5rem;
 }
-/* line 172, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 343, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form .grid .row {
   margin-bottom: 0.5rem;
   justify-content: space-between;
 }
-/* line 176, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 347, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form .grid .col {
   width: calc(25% - 0.5rem);
 }
-/* line 179, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 350, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form input {
   color: rgba(31, 31, 31, 0.75);
   border: 0;
@@ -2166,13 +2353,15 @@ label.req::after, .label.req::after {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 188, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 359, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form input:hover {
   background: linear-gradient(0deg, rgba(31, 31, 31, 0.5) 1px, rgba(31, 31, 31, 0) 1px);
 }
-/* line 191, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 362, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form input:focus {
   background: linear-gradient(0deg, rgba(31, 31, 31, 0.9) 3px, rgba(31, 31, 31, 0) 3px);
+  box-shadow: none;
+  outline: none;
 }
 /* line 87, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-panel-form input::-webkit-input-placeholder {
@@ -2196,21 +2385,65 @@ label.req::after, .label.req::after {
   color: rgba(31, 31, 31, 0.5);
   font-size: 80%;
 }
-/* line 200, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 373, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .app-panel-form .full input {
   font-size: 1.3rem;
 }
 
-/* line 205, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Checkbox List
+name: checkboxlist
+category: forms
+---
+
+A set of classes for creating a grouped list of checkboxes.
+
+<strong>NB:</strong> To layout the ticks on your range slider, you must use inline styles.
+
+```html_example
+<h3>Automatic Faturdays</h3>
+
+<p>These days will automagically be considered faturdays if you don't log
+calories by the end of the day. You can always go back and delete the
+faturday and log calories if you'd rather be specific.</p>
+
+<div class="faturday-days check-list">
+
+  <input type="checkbox" name="faturday[]" id="f-mo" value="mo" checked="checked">
+  <label for="f-mo">Monday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-tu" value="tu" checked="checked">
+  <label for="f-tu">Tuesday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-we" value="we" checked="checked">
+  <label for="f-we">Wednesday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-th" value="th" checked="checked">
+  <label for="f-th">Thursday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-fr" value="fr" checked="checked">
+  <label for="f-fr">Friday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-sa" value="sa" checked="checked">
+  <label for="f-sa">Saturday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-su" value="su" checked="checked">
+  <label for="f-su">Sunday</label>
+
+</div>
+```
+*/
+/* line 422, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list {
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
-/* line 208, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 425, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list input {
   display: none;
 }
-/* line 211, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 428, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list label {
   display: block;
   text-transform: none;
@@ -2220,104 +2453,192 @@ label.req::after, .label.req::after {
   margin: 0;
   cursor: pointer;
   position: relative;
+  font-size: 1rem;
 }
-/* line 220, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 438, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list label:before {
   content: "\f10c";
   font-family: "FontAwesome";
   position: absolute;
-  left: 1rem;
+  left: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
-  transition: all 0.15s cubic-bezier(0, 0.95, 0, 1);
 }
-/* line 229, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 446, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list label:hover {
-  background: #fff;
+  background: #F7F7F7;
   color: #1F1F1F;
 }
-/* line 234, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 451, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list input:first-child + label {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
-/* line 238, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 455, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list label + input + label {
   border-top: 1px solid rgba(31, 31, 31, 0.15);
 }
-/* line 241, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 458, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list input:checked + label {
   background: #3492ae;
   color: #F7F7F7;
 }
-/* line 244, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 461, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list input:checked + label:before {
   content: "\f00c";
-  left: .5rem;
-  font-size: 2rem;
+  left: 0.5rem;
+  font-size: 1.3rem;
 }
-/* line 249, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 466, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list input:checked + label:hover {
   background: #21C6F5;
 }
-/* line 253, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 470, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .check-list label:last-child {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
 
-/* line 259, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Range/Slider Group
+name: rangeslidergroup
+category: forms
+---
+
+A block-level set of classes for laying out sliders and providing description labels
+for certain points on the range.
+
+<strong>NB:</strong> To layout the ticks on your range slider, you must use inline styles.
+
+```html_example
+<div class="range-group">
+  <label for="activity_intensity">Intensity</label>
+  <input min="0" max="10" type="range" value="4" name="activity[intensity]" id="activity_intensity">
+  <div class="locations">
+    <div class="location-tick" style="left: 0">Light Walking</div>
+    <div class="location-tick" style="left: 50%; transform: translateX(-50%);">Weightlifting</div>
+    <div class="location-tick" style="right: 0">Sprints</div>
+  </div>
+</div>
+```
+*/
+/* line 500, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 input[type=range] {
   width: 100%;
 }
 
-/* line 263, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 504, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .range-group {
-  margin: 0 0 2rem 0;
+  margin: 0 0 2.5rem 0;
+  cursor: pointer;
 }
-/* line 265, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 507, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .range-group .locations {
   width: 100%;
   position: relative;
   overflow: visible;
 }
-/* line 270, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/* line 512, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .range-group .location-tick {
   position: absolute;
   top: 0;
   font-weight: bold;
-  font-size: .55rem;
-  opacity: .5;
+  font-size: 0.6rem;
+  color: rgba(31, 31, 31, 0.5);
 }
 
-/* line 279, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Form Info
+name: forminfo
+category: forms
+---
+
+A block-level class for giving users information about the preceding form element.
+
+```html_example
+<h2>Personal Info</h2>
+<label>Email</label>
+<input type="text" placeholder="Email address">
+<label>Phone Number</label>
+<input type="text" placeholder="Phone number">
+<p class="form-info">For sending you personalized reminders...</p>
+```
+*/
+/* line 539, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .form-info {
   font-size: 0.75rem;
   font-style: italic;
 }
 
-/* line 284, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Form Group
+name: formgroup
+category: forms
+---
+
+A divider made to specify groups of form items (really, just uses our spacing well).
+
+```html_example
+<div class="form-group">
+  <h2>Personal Info</h2>
+  <label>Email</label>
+  <input type="text" placeholder="Email address">
+  <label>Phone Number</label>
+  <input type="text" placeholder="Phone number">
+  <p class="form-info">For sending you personalized reminders...</p>
+</div>
+<div class="form-group">
+  <h2>Health</h2>
+  <label>Height</label>
+  <input type="text" placeholder="Height">
+  <label>Weight</label>
+  <input type="text" placeholder="Weight">
+</div>
+```
+*/
+/* line 572, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .form-group {
   margin-bottom: 2.5rem;
 }
 
-/* line 288, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+/*doc
+---
+title: Form  Well
+name: formwell
+category: forms
+---
+
+A well made to indicate configuration of a specific form option or field group.
+
+```html_example
+<div class="form-well">
+  <h3>Ingredients</h3>
+  <input type="text" placeholder="Ingredient name">
+  <input type="text" placeholder="Ingredient name">
+  <input type="text" placeholder="Ingredient name">
+  <button class="btn small">Save Ingredients</button>
+</div>
+```
+*/
+/* line 595, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
 .form-well {
   margin: 0 -2.5rem 2.5rem;
   padding: 1rem;
-  padding-left: calc(2.5rem);
-  padding-right: calc(2.5rem);
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   border: rgba(31, 31, 31, 0.25);
   background: rgba(31, 31, 31, 0.05);
   box-shadow: inset 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }
 @media screen and (min-width: 961px) {
-  /* line 288, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
+  /* line 595, /home/ubuntu/workspace/app/assets/stylesheets/components/forms.scss */
   .form-well {
-    background: transparent;
-    border: 0;
-    box-shadow: none;
+    margin: 0 0 2.5rem;
+    padding: 1rem;
   }
 }
 
@@ -2936,56 +3257,89 @@ Then, when shown, it reverts the element to static positioning and fades it in.
   z-index: 120;
 }
 
-/* line 58, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+/*doc
+---
+title: Toggle Switch
+name: toggleswitch
+category: forms
+---
+
+A set of classes for creating a toggle switch. Can also be used to show otherwise-hidden
+panels when the toggle is activated.
+
+```html_example
+<input type="checkbox" name="faturday_enabled" id="ep-faturday-enabled" value="true" class="helper-input toggle-switch" checked="checked">
+<label for="ep-faturday-enabled">Toggle Faturdays</label>
+
+<br>
+
+<input type="checkbox" name="toggle_2" id="toggle-2" value="true" class="helper-input toggle-switch">
+<label for="toggle-2">Toggle Me to Show a Panel</label>
+<div class="helper-panel">
+  <h2>And here I am!</h2>
+</div>
+
+```
+*/
+/* line 82, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
 input[type=checkbox].toggle-switch {
   display: none;
 }
-/* line 60, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+/* line 84, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
 input[type=checkbox].toggle-switch + label {
   display: inline-block;
   position: relative;
-  padding-left: 4rem;
+  padding-left: calc(2.5rem + 1rem);
   cursor: pointer;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  color: rgba(31, 31, 31, 0.8);
 }
-/* line 66, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+/* line 92, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+input[type=checkbox].toggle-switch + label:hover, input[type=checkbox].toggle-switch + label:focus {
+  color: #1F1F1F;
+}
+/* line 95, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
 input[type=checkbox].toggle-switch + label:before {
   display: block;
   content: " ";
   background-color: #eee;
   border: 1px solid rgba(31, 31, 31, 0.25);
-  border-radius: 2rem;
-  width: 3rem;
+  border-radius: 5px;
+  width: 2.5rem;
+  height: 0.5rem;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   bottom: 0;
-  box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
   transition: background-color .25s ease-in-out;
 }
-/* line 80, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+/* line 111, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
 input[type=checkbox].toggle-switch + label:after {
   display: block;
   content: " ";
   width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
   position: absolute;
-  left: .25rem;
-  top: -.25rem;
-  bottom: -.25rem;
-  border-radius: 50%;
-  border: 1px solid #ccc;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 100%;
+  border: 1px solid rgba(31, 31, 31, 0.25);
   background: #F7F7F7;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
-  transform: translateX(0);
   transition: transform 0.5s cubic-bezier(0, 0.95, 0, 1);
 }
-/* line 96, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+/* line 128, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
 input[type=checkbox].toggle-switch:checked + label:before {
   background-color: #21C6F5;
 }
-/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
+/* line 131, /home/ubuntu/workspace/app/assets/stylesheets/components/helper_inputs.scss */
 input[type=checkbox].toggle-switch:checked + label:after {
-  transform: translateX(1.5rem);
+  transform: translate(1.9rem, -50%);
 }
 
 /* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/layout.scss */
@@ -3149,30 +3503,90 @@ ol {
   display: flex;
 }
 
-/* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/*doc
+---
+title: Form Error Explanation
+name: errorexplanations
+category:
+  - messages
+  - forms
+---
+
+A set of classes for showing errors attached to certain forms.
+
+```html_example
+<h1>Make an Account</h1>
+
+<div class="error-explanation">
+	<ul>
+		<li>Email can't be blank</li>
+		<li>Email is invalid</li>
+		<li>Password can't be blank</li>
+	</ul>
+</div>
+
+<label for="email">Email</label>
+<input type="email" name="email" id="email">
+
+<label for="password">Password</label>
+<input type="password" name="password" id="password">
+
+<label for="password_confirmation">Confirmation</label>
+<input type="password" name="password_confirmation" id="password_confirmation">
+
+<button name="button" type="submit" class="btn">
+	Step 2: Calculate Your TDEE
+</button>
+
+
+<hr>
+
+
+<div class="app-form">
+  <div class="error-explanation">
+    <ul>
+      <li>Value must be greater than 1359</li>
+    </ul>
+  </div>
+  <div class="field_with_errors">
+    <input placeholder="e.g., 165 lbs, 83.9kg, 12 stone, etc." class="large" type="text" value="" name="weight_entry[value]" id="weight_entry_value">
+  </div>
+  <div class="btn-bar">
+    <div class="left"></div>
+    <div class="right">
+      <button name="button" type="submit" class="btn submit">
+          <i class="fa fa-plus"></i>
+          <strong>New Entry</strong>
+      </button>
+    </div>
+  </div>
+</div>
+```
+*/
+/* line 61, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .error-explanation {
   color: #FF0000;
   padding: 1rem 0 1rem 1rem;
-  margin: 2rem 0;
+  margin: 0 0 1rem;
   font-weight: bold;
-  font-size: .8rem;
+  font-size: 0.75rem;
   border-left: 5px solid #FF0000;
 }
-/* line 8, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
-.error-explanation li {
-  line-height: 1rem;
-}
-/* line 11, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 68, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .app-form .error-explanation {
-  margin: -1.05rem -1rem .995rem;
+  margin: 0;
   background: #cc0000;
-  border: none;
   color: #F7F7F7;
   text-align: left;
   padding-left: 0;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
 }
 
-/* line 21, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/*
+  These are our flash messages, which don't have a use beyond their original purpose.
+  So we aren't adding these to the style guide.
+*/
+/* line 83, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .alert {
   color: #F7F7F7;
   border: 1px solid rgba(31, 31, 31, 0.15);
@@ -3192,21 +3606,40 @@ ol {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-/* line 39, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .alert.error {
   background: #FF0000;
 }
-/* line 42, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 104, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .alert.success {
   background: #00D800;
 }
 
-/* line 47, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/*doc
+---
+title: Inline Messages
+name: inlinemessages
+category: messages
+---
+
+A set of classes for showing inline messages and errors.
+
+```html_example
+<div class="message-inline">
+  Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</div>
+
+<div class="message-inline notify">
+  Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</div>
+```
+*/
+/* line 128, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .errors {
   margin: 1rem auto;
   width: 640px;
 }
-/* line 50, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 131, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .errors .error {
   background: #FF0000;
   color: #F7F7F7;
@@ -3214,42 +3647,43 @@ ol {
   border: 1px solid rgba(31, 31, 31, 0.25);
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
 }
-/* line 57, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 138, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .errors .connectivity {
   background: #FFAA00;
   color: #1F1F1F;
 }
-/* line 60, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 141, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .errors .connectivity a {
   color: #1F1F1F;
 }
-/* line 64, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 145, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .errors a {
   color: #F7F7F7;
   text-decoration: underline;
   font-weight: bold;
 }
 
-/* line 71, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 152, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .message-inline {
   display: block;
-  border: 1px solid rgba(31, 31, 31, 0.2);
-  background: rgba(31, 31, 31, 0.1);
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  background: rgba(31, 31, 31, 0.05);
   padding: 1rem;
   margin-bottom: 2.5rem;
-  font-size: 0.75rem;
+  font-size: 1rem;
   border-radius: 3px;
 }
-/* line 79, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 160, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .message-inline.notify {
   color: #F7F7F7;
   background: #21C6F5;
 }
-/* line 82, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .message-inline.notify a {
-  color: rgba(247, 247, 247, 0.5);
+  color: rgba(247, 247, 247, 0.8);
+  text-decoration: underline;
 }
-/* line 85, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
+/* line 166, /home/ubuntu/workspace/app/assets/stylesheets/components/messages.scss */
 .message-inline.notify a:hover, .message-inline.notify a:focus {
   color: #F7F7F7;
   text-decoration: underline;
@@ -3800,8 +4234,17 @@ h1 + .page-meta {
   margin: 0;
   padding: 0;
 }
+/* line 75, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+.styleguide.main .day-navigator {
+  margin: 0;
+  transform: none !important;
+}
+/* line 78, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+.styleguide.main .day-navigator:before, .styleguide.main .day-navigator:after {
+  display: none !important;
+}
 
-/* line 77, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 84, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeExample {
   display: flex;
   width: 100%;
@@ -3810,7 +4253,7 @@ h1 + .page-meta {
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
 }
-/* line 84, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 91, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeExample pre {
   overflow-x: auto;
   font-family: monospace;
@@ -3820,7 +4263,7 @@ h1 + .page-meta {
   border: 1px solid rgba(31, 31, 31, 0.1);
 }
 
-/* line 94, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput, .codeBlock {
   width: calc(50% - 1rem);
   min-width: 300px;
@@ -3828,23 +4271,23 @@ h1 + .page-meta {
   margin-bottom: 1rem;
 }
 @media screen and (max-width: 650px) {
-  /* line 94, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+  /* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
   .exampleOutput, .codeBlock {
     width: 100%;
   }
 }
 
-/* line 104, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 111, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .exampleOutput {
   order: 2;
 }
 
-/* line 108, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 115, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .codeBlock {
   order: 1;
 }
 
-/* line 112, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 119, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 code.styleguide {
   background: rgba(31, 31, 31, 0.1);
   font-family: monospace;
@@ -3853,24 +4296,24 @@ code.styleguide {
   padding: 0.25rem;
 }
 
-/* line 120, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 127, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide-footer {
   background: #333;
   color: #F7F7F7;
   padding: 2.5rem;
   text-align: center;
 }
-/* line 125, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 132, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide-footer a {
   color: #F7F7F7;
   text-decoration: underline;
 }
-/* line 128, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 135, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .styleguide-footer a:focus {
   outline: 1;
 }
 
-/* line 135, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 142, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight {
   /* Comment */
   /* Error */
@@ -3933,268 +4376,268 @@ code.styleguide {
   /* Name.Variable.Instance */
   /* Literal.Number.Integer.Long */
 }
-/* line 136, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 143, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .c {
   color: #999988;
   font-style: italic;
 }
-/* line 137, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 144, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .err {
   color: #a61717;
   background-color: #e3d2d2;
 }
-/* line 138, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 145, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .k {
   color: #000000;
   font-weight: bold;
 }
-/* line 139, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 146, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .o {
   color: #000000;
   font-weight: bold;
 }
-/* line 140, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 147, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .cm {
   color: #999988;
   font-style: italic;
 }
-/* line 141, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 148, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .cp {
   color: #999999;
   font-weight: bold;
   font-style: italic;
 }
-/* line 142, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 149, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .c1 {
   color: #999988;
   font-style: italic;
 }
-/* line 143, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 150, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .cs {
   color: #999999;
   font-weight: bold;
   font-style: italic;
 }
-/* line 144, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 151, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gd {
   color: #000000;
   background-color: #ffdddd;
 }
-/* line 145, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 152, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .ge {
   color: #000000;
   font-style: italic;
 }
-/* line 146, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 153, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gr {
   color: #aa0000;
 }
-/* line 147, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 154, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gh {
   color: #999999;
 }
-/* line 148, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 155, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gi {
   color: #000000;
   background-color: #ddffdd;
 }
-/* line 149, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 156, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .go {
   color: #888888;
 }
-/* line 150, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 157, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gp {
   color: #555555;
 }
-/* line 151, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 158, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gs {
   font-weight: bold;
 }
-/* line 152, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 159, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gu {
   color: #aaaaaa;
 }
-/* line 153, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 160, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .gt {
   color: #aa0000;
 }
-/* line 154, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 161, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .kc {
   color: #000000;
   font-weight: bold;
 }
-/* line 155, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 162, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .kd {
   color: #000000;
   font-weight: bold;
 }
-/* line 156, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .kn {
   color: #000000;
   font-weight: bold;
 }
-/* line 157, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 164, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .kp {
   color: #000000;
   font-weight: bold;
 }
-/* line 158, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 165, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .kr {
   color: #000000;
   font-weight: bold;
 }
-/* line 159, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 166, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .kt {
   color: #445588;
   font-weight: bold;
 }
-/* line 160, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 167, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .m {
   color: #009999;
 }
-/* line 161, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 168, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .s {
   color: #d01040;
 }
-/* line 162, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 169, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .na {
   color: #008080;
 }
-/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 170, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nb {
   color: #0086B3;
 }
-/* line 164, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 171, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nc {
   color: #445588;
   font-weight: bold;
 }
-/* line 165, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 172, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .no {
   color: #008080;
 }
-/* line 166, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 173, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nd {
   color: #3c5d5d;
   font-weight: bold;
 }
-/* line 167, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 174, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .ni {
   color: #800080;
 }
-/* line 168, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 175, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .ne {
   color: #990000;
   font-weight: bold;
 }
-/* line 169, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 176, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nf {
   color: #990000;
   font-weight: bold;
 }
-/* line 170, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 177, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nl {
   color: #990000;
   font-weight: bold;
 }
-/* line 171, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 178, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nn {
   color: #555555;
 }
-/* line 172, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 179, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nt {
   color: #000080;
 }
-/* line 173, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 180, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .nv {
   color: #008080;
 }
-/* line 174, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 181, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .ow {
   color: #000000;
   font-weight: bold;
 }
-/* line 175, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 182, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .w {
   color: #bbbbbb;
 }
-/* line 176, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 183, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .mf {
   color: #009999;
 }
-/* line 177, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 184, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .mh {
   color: #009999;
 }
-/* line 178, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 185, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .mi {
   color: #009999;
 }
-/* line 179, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 186, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .mo {
   color: #009999;
 }
-/* line 180, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 187, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .sb {
   color: #d01040;
 }
-/* line 181, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 188, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .sc {
   color: #d01040;
 }
-/* line 182, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 189, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .sd {
   color: #d01040;
 }
-/* line 183, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 190, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .s2 {
   color: #d01040;
 }
-/* line 184, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 191, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .se {
   color: #d01040;
 }
-/* line 185, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 192, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .sh {
   color: #d01040;
 }
-/* line 186, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 193, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .si {
   color: #d01040;
 }
-/* line 187, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 194, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .sx {
   color: #d01040;
 }
-/* line 188, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 195, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .sr {
   color: #009926;
 }
-/* line 189, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 196, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .s1 {
   color: #d01040;
 }
-/* line 190, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 197, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .ss {
   color: #990073;
 }
-/* line 191, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 198, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .bp {
   color: #999999;
 }
-/* line 192, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 199, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .vc {
   color: #008080;
 }
-/* line 193, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 200, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .vg {
   color: #008080;
 }
-/* line 194, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 201, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .vi {
   color: #008080;
 }
-/* line 195, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
+/* line 202, /home/ubuntu/workspace/app/assets/stylesheets/components/styleguide.scss */
 .highlight .il {
   color: #009999;
 }

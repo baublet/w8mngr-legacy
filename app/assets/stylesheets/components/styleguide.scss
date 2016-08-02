@@ -72,6 +72,13 @@
       padding: 0;
     }
   }
+  .day-navigator {
+    margin: 0;
+    transform: none !important;
+    &:before, &:after {
+      display: none !important;
+    }
+  }
 }
 
 .codeExample {

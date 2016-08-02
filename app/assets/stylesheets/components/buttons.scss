@@ -6,7 +6,9 @@
 ---
 title: Button Bar (for Layout)
 name: buttonbar
-category: buttons
+category:
+  - buttons
+  - layout
 ---
 Layout element for positioning buttons on the same horizontal line, but with
 some buttons arranged on the left side, the others on the right.
@@ -186,6 +188,7 @@ A "hero" button for very large, typically promotional, action buttons.
     text-align: center;
     font-weight: 400;
     font-size:$font-size-huge;
+    font-weight: lighter;
     color: $white;
     animation: pulsateSecondaryColor 3s 4s 99 forwards normal;
     width: auto;
@@ -372,16 +375,10 @@ category: buttons
 .btn.prev, .btn.next {
     min-width: 0;
     font-size: $font-size-normal;
-    padding: $spacing-small $spacing-normal;
+    padding: $spacing-small;
     text-align: left;
     line-height: normal;
     color: $white;
-    background: $color-primary;
-    @include height(1);
-    &:hover, &:focus {
-        background: $color-primary-light;
-        @include height(3);
-    }
     .fa {
         margin-right: $spacing-small;
     }

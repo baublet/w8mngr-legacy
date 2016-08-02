@@ -3,7 +3,7 @@
   <head>
     <title>w8mngr | styleguide</title>
     
-      <link rel="stylesheet" href="/assets/application-c609175881ccd4dd87496762244c00a0918d28a5f6d41575352ea2f341919110.css">
+      <link rel="stylesheet" href="/assets/application-b621fc7731f53e1f6b29ecb119c5565c3f3ecf3569f66222b1b5b27035ed065b.css">
     
     <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
     <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
@@ -16,6 +16,8 @@
       <nav>
         <ul>
         
+          <li><a href="forms.html">forms</a></li>
+        
           <li><a href="buttons.html">buttons</a></li>
         
           <li><a href="layout.html">layout</a></li>
@@ -26,6 +28,8 @@
         
           <li><a href="cards.html">cards</a></li>
         
+          <li><a href="messages.html">messages</a></li>
+        
         </ul>
       </nav>
 
@@ -33,6 +37,8 @@
         <ul>
         
           <li><a href="#apppanel">Application Panels</a></li>
+        
+          <li><a href="#buttonbar">Button Bar (for Layout)</a></li>
         
           <li><a href="#grid">Grid</a></li>
         
@@ -185,6 +191,53 @@ forms, but not always. They differ from cards in that they are always full-width
       <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="buttonbar" class="styleguide">Button Bar (for Layout)</h1>
+<p class="styleguide">Layout element for positioning buttons on the same horizontal line, but with
+some buttons arranged on the left side, the others on the right.</p><p class="styleguide">It can also be used to align buttons in the center if you skip the left and right
+divs.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="btn-bar">
+    <div class="left">
+        <a href="" class="btn">Button</a>
+        <a href="" class="btn secondary">on the Left</a>
+    </div>
+    <div class="right">
+        <a href="" class="btn">Button</a>
+        <a href="" class="btn secondary">on the Right</a>
+    </div>
+</div>
+
+<p>Or...</p>
+
+<div class="btn-bar">
+    <a href="" class="btn">Buttons</a>
+    <a href="" class="btn secondary">in the middle</a>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-bar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"btn secondary"</span><span class="nt">&gt;</span>on the Left<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Button<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"btn secondary"</span><span class="nt">&gt;</span>on the Right<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>Or...<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-bar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>Buttons<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"btn secondary"</span><span class="nt">&gt;</span>in the middle<span class="nt">&lt;/a&gt;</span>
 <span class="nt">&lt;/div&gt;</span></pre>
     </div>
   </div>
