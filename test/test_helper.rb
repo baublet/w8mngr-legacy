@@ -26,6 +26,15 @@ class ActiveSupport::TestCase
     response.body.include? string.to_s
   end
 
+  # A method for wrapping response_contains as a custom assertion with a message,
+  # so that I don't have to write my own messages
+  #
+  # Use:
+  #  assert_response_contains "foo"
+  def assert_response_contains string
+    assert response_contains?(string), "Response did not contain: " + string.to_s
+  end
+
   # Simple login
   def log_in
     @user = users(:test)
