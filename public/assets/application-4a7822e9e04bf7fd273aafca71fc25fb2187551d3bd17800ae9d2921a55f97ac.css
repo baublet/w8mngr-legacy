@@ -1091,12 +1091,12 @@ A "hero" button for very large, typically promotional, action buttons.
 /* line 196, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.hero:hover, .btn.hero:focus {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
-  border-color: #3e088a;
   animation: none;
+  background: #873FEC;
 }
 /* line 201, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.hero:active {
-  box-shadow: 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 6px 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 /*doc
@@ -1205,10 +1205,9 @@ icon buttons. In addition, use verbose link titles!
     <i class="fa fa-times" aria-hidden="true"></i>
     <span class="screen-reader-text">Delete weight 145lbs</a>
 </a>
-
 ```
 */
-/* line 312, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 311, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon {
   cursor: pointer;
   border: none;
@@ -1222,37 +1221,129 @@ icon buttons. In addition, use verbose link titles!
   font-size: 1rem;
   line-height: normal;
 }
-/* line 324, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 323, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon:hover, .btn-icon:focus {
   border: none;
   box-shadow: none;
   background: transparent;
   color: #1F1F1F;
 }
-/* line 330, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 329, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.delete:hover, .btn-icon.delete:focus {
   color: #FF0000;
   box-shadow: none;
 }
-/* line 334, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 333, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.disabled {
   opacity: .25;
   cursor: normal;
 }
-/* line 338, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 337, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon + .btn-icon {
   margin-left: 0.5rem;
 }
+/* line 341, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+.btn-icon.giant {
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+  padding: 1rem 0.5rem;
+}
+/* line 346, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+.btn-icon.giant .fa {
+  font-size: 7vmax;
+  color: rgba(31, 31, 31, 0.25);
+  display: block;
+  text-align: center;
+}
+/* line 352, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+.btn-icon.giant .text {
+  display: block;
+  margin: 0.5rem auto 0;
+  width: 90%;
+  border-top: 1px solid rgba(31, 31, 31, 0.1);
+  padding-top: 0.5rem;
+  color: rgba(31, 31, 31, 0.75);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+}
+@media screen and (min-width: 481px) {
+  /* line 352, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+  .btn-icon.giant .text {
+    font-size: 0.75rem;
+  }
+}
+/* line 366, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+.btn-icon.giant:hover, .btn-icon.giant:focus {
+  background: #21C6F5;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
+}
+/* line 369, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+.btn-icon.giant:hover .fa, .btn-icon.giant:focus .fa {
+  color: rgba(247, 247, 247, 0.75);
+}
+/* line 372, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+.btn-icon.giant:hover .text, .btn-icon.giant:focus .text {
+  color: #F7F7F7;
+  border-color: rgba(247, 247, 247, 0.1);
+}
 
-/* line 343, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 380, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.primary {
   color: #3492ae;
 }
-/* line 345, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 382, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-icon.primary:hover, .btn-icon.primary:focus {
   color: #21C6F5;
 }
 
+/*doc
+---
+title: Giant Icon Buttons
+name: gianticonbutton
+category: buttons
+---
+
+Large icons for using in grids on mobile to show a large list of available logs
+to go to, primarily from the <a href="/dashboard">user dashboard</a>.
+
+```html_example
+<div class="grid arbitrary dashboard-buttons">
+    <div class="row">
+
+        <div class="col">
+            <a class="btn-icon giant" href="/foodlog">
+                <i class="fa fa-cutlery" aria-hidden="true"></i>
+                <span class="text">Food Log</span>
+            </a>
+        </div>
+
+        <div class="col">
+            <a class="btn-icon giant" href="/foodlog">
+                <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                <span class="text">Weight Log</span>
+            </a>
+        </div>
+
+        <div class="col">
+            <a class="btn-icon giant" href="/activities">
+                <i class="fa fa-bolt" aria-hidden="true"></i>
+                <span class="text">Activities</span>
+            </a>
+        </div>
+
+        <div class="col">
+            <a class="btn-icon giant" href="/routines">
+                <i class="fa fa-retweet" aria-hidden="true"></i>
+                <span class="text">Routines</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+```
+*/
 /*doc
 ---
 title: Pagination Buttons
@@ -1277,7 +1368,7 @@ category: buttons
 </div>
 ```
 */
-/* line 375, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 459, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.prev, .btn.next {
   min-width: 0;
   font-size: 1rem;
@@ -1286,16 +1377,16 @@ category: buttons
   line-height: normal;
   color: #F7F7F7;
 }
-/* line 382, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 466, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.prev .fa, .btn.next .fa {
   margin-right: 0.5rem;
 }
 
-/* line 386, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 470, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.next {
   text-align: right;
 }
-/* line 388, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 472, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn.next .fa {
   margin: 0 0 0 0.5rem;
 }
@@ -1316,7 +1407,7 @@ certain drastic (yet explicity) actions, such as deletion.
 <a href="#" class="btn-meta delete">Delete Button</a>
 ```
 */
-/* line 409, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 493, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-meta {
   color: #787878;
   display: inline-block;
@@ -1324,12 +1415,12 @@ certain drastic (yet explicity) actions, such as deletion.
   border: 1px solid transparent;
   border-radius: 3px;
 }
-/* line 415, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 499, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-meta:hover, .btn-meta:focus {
   color: #1F1F1F;
   border-color: #787878;
 }
-/* line 419, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 503, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .btn-meta.delete:hover, .btn-meta.delete:focus {
   color: #FF0000;
   border-color: #FF0000;
@@ -1367,7 +1458,7 @@ classic example is tags.
 </div>
 ```
 */
-/* line 457, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 541, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill-list {
   display: flex;
   flex-wrap: wrap;
@@ -1375,12 +1466,12 @@ classic example is tags.
   margin: 0;
   padding: 0;
 }
-/* line 463, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 547, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill-list li {
   margin: 0 .15rem 0 0;
 }
 
-/* line 468, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 552, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill {
   display: inline-block;
   font-size: .75rem;
@@ -1391,19 +1482,19 @@ classic example is tags.
   border: 1px solid rgba(31, 31, 31, 0.25);
   border-radius: 3px;
 }
-/* line 477, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 561, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill:hover, .pill:focus {
   border-color: transparent;
   background: #3492ae;
   color: #F7F7F7;
 }
-/* line 482, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 566, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill.white {
   background: transparent;
   color: rgba(247, 247, 247, 0.5);
   border-color: rgba(247, 247, 247, 0.25);
 }
-/* line 486, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
+/* line 570, /home/ubuntu/workspace/app/assets/stylesheets/components/buttons.scss */
 .pill.white:hover, .pill.white:focus {
   text-decoration: none !important;
   color: #F7F7F7;
@@ -1994,21 +2085,21 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, inp
 .small input[type=text], input[type=text].small, .small input[type=email], input[type=email].small, .small input[type=password], input[type=password].small, .small input[type=number], input[type=number].small, .small textarea, textarea.small, .small select, select.small {
   font-size: 0.75rem;
 }
-/* line 87, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 89, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 input[type=text]::-webkit-input-placeholder, input[type=email]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-webkit-input-placeholder {
   font-family: "Source Sans Pro", "Roboto", "Helvetica", "Trebuchet MS", "Verdana", sans-serif;
 }
-/* line 91, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 input[type=text]:-moz-placeholder, input[type=email]:-moz-placeholder, input[type=password]:-moz-placeholder, input[type=number]:-moz-placeholder, textarea:-moz-placeholder, select:-moz-placeholder {
   /* Firefox 18- */
   font-family: "Source Sans Pro", "Roboto", "Helvetica", "Trebuchet MS", "Verdana", sans-serif;
 }
-/* line 95, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 97, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 input[type=text]::-moz-placeholder, input[type=email]::-moz-placeholder, input[type=password]::-moz-placeholder, input[type=number]::-moz-placeholder, textarea::-moz-placeholder, select::-moz-placeholder {
   /* Firefox 19+ */
   font-family: "Source Sans Pro", "Roboto", "Helvetica", "Trebuchet MS", "Verdana", sans-serif;
 }
-/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 input[type=text]:-ms-input-placeholder, input[type=email]:-ms-input-placeholder, input[type=password]:-ms-input-placeholder, input[type=number]:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder {
   font-family: "Source Sans Pro", "Roboto", "Helvetica", "Trebuchet MS", "Verdana", sans-serif;
 }
@@ -2195,24 +2286,24 @@ Forms for entering new data. Specifically-colored to ensure a consistent flow.
 .app-form input.large {
   font-size: 1.3rem;
 }
-/* line 87, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 89, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-form input::-webkit-input-placeholder {
   color: rgba(247, 247, 247, 0.5);
   font-size: 90%;
 }
-/* line 91, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-form input:-moz-placeholder {
   /* Firefox 18- */
   color: rgba(247, 247, 247, 0.5);
   font-size: 90%;
 }
-/* line 95, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 97, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-form input::-moz-placeholder {
   /* Firefox 19+ */
   color: rgba(247, 247, 247, 0.5);
   font-size: 90%;
 }
-/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-form input:-ms-input-placeholder {
   color: rgba(247, 247, 247, 0.5);
   font-size: 90%;
@@ -2363,24 +2454,24 @@ color than the entry form for two reasons:
   box-shadow: none;
   outline: none;
 }
-/* line 87, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 89, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-panel-form input::-webkit-input-placeholder {
   color: rgba(31, 31, 31, 0.5);
   font-size: 80%;
 }
-/* line 91, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-panel-form input:-moz-placeholder {
   /* Firefox 18- */
   color: rgba(31, 31, 31, 0.5);
   font-size: 80%;
 }
-/* line 95, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 97, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-panel-form input::-moz-placeholder {
   /* Firefox 19+ */
   color: rgba(31, 31, 31, 0.5);
   font-size: 80%;
 }
-/* line 99, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/setup.scss */
 .app-panel-form input:-ms-input-placeholder {
   color: rgba(31, 31, 31, 0.5);
   font-size: 80%;
@@ -2736,19 +2827,35 @@ column separations.)
     </div>
   </div>
 
+  <div class="row arbitrary">
+    <div class="col">a</div>
+    <div class="col">Even Arbitrary/No-Width Columns!</div>
+    <div class="col">a</div>
+  </div>
+
+  <div class="row arbitrary">
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+    <div class="col">a</div>
+  </div>
+
 </div>
 ```
 */
-/* line 98, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 114, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid {
   display: block;
   margin-bottom: 1rem;
 }
-/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 117, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid:last-child {
   margin-bottom: 0;
 }
-/* line 104, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 120, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .row {
   display: flex;
   align-items: stretch;
@@ -2756,30 +2863,39 @@ column separations.)
   width: 100%;
   margin-bottom: 1rem;
 }
-/* line 110, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 126, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .row:last-child {
   margin-bottom: 0;
 }
-/* line 114, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 130, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .col {
   display: block;
   width: calc(33.33333% - (1rem / 3 * 2));
 }
-/* line 118, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 134, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .col.double {
   width: calc(66.66666% - (1rem / 3));
 }
-/* line 121, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 137, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .col.full {
   width: 100%;
 }
-/* line 124, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 140, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .half, .grid .quarters .col.half {
   width: calc(50% - (1rem / 2));
 }
-/* line 127, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+/* line 143, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
 .grid .quarters .col {
   width: calc(25% - (1rem / 3 * 2));
+}
+/* line 146, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+.grid .arbitrary .col {
+  flex-grow: 1;
+  width: auto;
+}
+/* line 149, /home/ubuntu/workspace/app/assets/stylesheets/components/grid.scss */
+.grid .arbitrary .col + .col {
+  margin-left: 1rem;
 }
 
 /* line 1, /home/ubuntu/workspace/app/assets/stylesheets/components/header.scss */
@@ -2846,15 +2962,15 @@ header .brand, header nav {
   z-index: 610;
   font-family: "FontAwesome";
   cursor: pointer;
-  font-size: 2rem;
-  padding: .2rem .5rem;
+  font-size: 1.3rem;
+  padding: 0.6rem 0.75rem;
   color: #F7F7F7;
   right: 1rem;
   top: 1rem;
 }
 /* line 27, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
-.nav-toggle-btn:hover {
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+.nav-toggle-btn:hover, .nav-toggle-btn:focus {
+  color: #21C6F5;
 }
 /* line 30, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 .nav-toggle-btn:after {
@@ -2907,10 +3023,10 @@ header .brand, header nav {
 
 /* line 68, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 .navigation-title {
-  font-size: 1rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   margin: 1rem 0 1rem;
-  font-weight: 800;
+  font-weight: bold;
 }
 @media screen and (min-width: 961px) {
   /* line 68, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
@@ -2923,7 +3039,7 @@ header .brand, header nav {
 .navigation-list {
   list-style-type: none;
   padding: 0;
-  font-weight: 500;
+  font-weight: normal;
   font-size: .7rem;
   position: relative;
   z-index: 600;
@@ -2948,7 +3064,7 @@ header .brand, header nav {
   }
   /* line 96, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
   .navigation-list li + li {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 }
 /* line 101, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
@@ -2956,7 +3072,7 @@ header .brand, header nav {
   display: block;
   color: rgba(247, 247, 247, 0.75);
   font-weight: bold;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 3px;
 }
 /* line 107, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
@@ -2979,7 +3095,7 @@ header .brand, header nav {
     position: relative;
     margin: 0;
     padding: 0;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
   /* line 124, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
   .navigation-list .sep.login ul {
@@ -3048,45 +3164,63 @@ header .brand, header nav {
   .navigation-list .sep h2 {
     margin: 0;
     font-size: 100%;
-    font-weight: 400;
-    padding: .5rem;
+    padding: 0.5rem;
     color: rgba(247, 247, 247, 0.75);
     font-weight: bold;
     background: rgba(247, 247, 247, 0.05);
     border-radius: 3px;
   }
-  /* line 185, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+  /* line 184, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
   .navigation-list .sep h2 .fa {
     opacity: 1;
     font-size: 100%;
   }
 }
 
-/* line 195, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+/* line 194, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+nav .login h2 .fa {
+  margin-right: 0.25rem;
+}
+/* line 197, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+nav .login .btn-bar.form-group {
+  margin-bottom: 0;
+}
+/* line 200, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 nav .login input[type="text"], nav .login input[type="email"], nav .login input[type="password"] {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
 }
-/* line 199, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+/* line 204, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 nav .login .btn {
-  background: #1F1F1F;
+  background: #21C6F5;
   margin-bottom: 0;
-  font-size: 1rem;
+  font-size: 0.75rem;
   float: right;
   width: auto;
-  padding: .5rem;
+  padding: 0.5rem;
 }
-/* line 206, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+/* line 211, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 nav .login .btn:hover {
   background-color: #454545;
 }
-/* line 209, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+/* line 214, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 nav .login .btn:active {
   margin-bottom: 0;
 }
-/* line 213, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+/* line 218, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
 nav .login label {
   display: none;
+}
+/* line 221, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+nav .login .pill {
+  color: rgba(247, 247, 247, 0.5);
+  border-radius: 3px !important;
+  border-color: rgba(247, 247, 247, 0.25);
+}
+/* line 225, /home/ubuntu/workspace/app/assets/stylesheets/components/header_nav.scss */
+nav .login .pill:hover, nav .login .pill:focus {
+  color: #F7F7F7;
+  border-color: #F7F7F7;
 }
 
 /*doc
@@ -5869,32 +6003,32 @@ body.activities.show .user-markdown {
   margin: 0 0 0.25rem 0.5rem;
 }
 
-/* line 4, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 4, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 101;
   background: #1F1F1F;
   overflow: hidden;
   padding: 150px 0 0;
   height: 100vh;
   min-height: 480px;
 }
-/* line 16, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 16, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .actions {
   position: absolute;
   bottom: 5rem;
   width: 100%;
   text-align: center;
 }
-/* line 22, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 22, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .suggestion {
   position: relative;
-  z-index: 10;
-  font-weight: 300;
-  font-size: 1.8rem;
+  z-index: 110;
+  font-weight: lighter;
+  font-size: 2rem;
   color: #F7F7F7;
   margin: 0;
   padding: 0;
@@ -5902,32 +6036,35 @@ body.activities.show .user-markdown {
   white-space: nowrap;
   animation: slideInLeft 2s 0s 1;
 }
-/* line 33, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 33, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .suggestion.second {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   animation: none;
-  animation: slideInRight 4s 0s 1;
+  animation: slideInRight 3s 0s 1;
 }
-/* line 39, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 39, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .sign-up {
   position: relative;
-  z-index: 10;
+  z-index: 110;
   text-align: center;
   margin: 1rem auto 0;
 }
-/* line 44, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 44, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .sign-up p {
-  margin: .5rem 0 0;
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: #F7F7F7;
 }
-/* line 48, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 47, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .sign-up p a {
   color: #F7F7F7;
   text-decoration: underline;
   font-weight: bold;
 }
-/* line 55, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 51, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
+.call-to-action .sign-up p a:hover, .call-to-action .sign-up p a:focus {
+  text-shadow: 0 0 5px #21C6F5;
+}
+/* line 57, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .call-to-action .banner-img {
   max-width: 100%;
   width: 100%;
@@ -5935,28 +6072,27 @@ body.activities.show .user-markdown {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 105;
   opacity: .1;
 }
 
-/* line 68, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 70, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .welcome.index header {
   position: absolute;
   top: 0;
-  z-index: 15;
   width: 100%;
   background: transparent;
   padding: 0;
+  z-index: 300;
 }
-/* line 76, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 78, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .welcome.index .site-title {
   padding: 0 1rem;
-  z-index: 16;
   position: absolute;
   top: 2rem;
   width: 100%;
 }
-/* line 82, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 83, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .welcome.index .site-title a {
   max-width: 100%;
   background: url(/assets/logo.svg) top left no-repeat;
@@ -5966,162 +6102,19 @@ body.activities.show .user-markdown {
   height: 380px;
 }
 @media screen and (max-width: 900px) {
-  /* line 82, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+  /* line 83, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
   .welcome.index .site-title a {
     max-width: 250px;
     max-height: 30vh;
   }
 }
-/* line 96, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 96, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .welcome.index footer {
   position: relative;
-  z-index: 2;
-  margin-top: 100vh;
   opacity: 1;
 }
 
-/* line 104, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
+/* line 102, /home/ubuntu/workspace/app/assets/stylesheets/pages/welcome.scss */
 .welcome.index main {
   padding: 0;
-}
-
-/* line 107, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.what-is-it, .summary {
-  position: relative;
-  z-index: 2;
-  padding: 2rem 1rem;
-  background: #F7F7F7;
-}
-
-/* line 114, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary {
-  margin-top: 100vh;
-  background: #3492ae;
-  color: rgba(247, 247, 247, 0.75);
-}
-
-/* line 120, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points {
-  padding: 0;
-  list-style-type: none;
-  margin: 0 auto;
-  font-size: 0;
-  text-align: center;
-}
-/* line 126, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points li {
-  padding: 1rem 0 1rem 6rem;
-  position: relative;
-  overflow: hidden;
-  max-width: 100%;
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-  border: 2px solid transparent;
-  border-radius: 5px;
-}
-@media screen and (max-width: 630px) {
-  /* line 137, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li + li {
-    margin-top: 3rem;
-  }
-  /* line 140, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li:nth-child(even) {
-    padding: 1rem 6rem 1rem 0;
-  }
-  /* line 142, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li:nth-child(even) h2 {
-    margin: 0 -6rem 0 0;
-  }
-  /* line 144, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li:nth-child(even) h2 .fa {
-    left: auto;
-    right: 0;
-  }
-}
-/* line 152, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points h2 {
-  padding: 0 0 1rem;
-  margin: 0 0 0 -6rem;
-  text-align: left;
-}
-/* line 153, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points h2 a {
-  color: rgba(247, 247, 247, 0.75);
-  background: transparent;
-}
-/* line 156, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points h2 a:hover {
-  background: transparent;
-}
-/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points h2 .fa {
-  color: #5fb6cf;
-  opacity: 1;
-  position: absolute;
-  bottom: 0rem;
-  left: 0;
-  font-size: 5rem;
-}
-/* line 172, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.summary-points p {
-  text-align: left;
-  padding: 0;
-  margin: 0;
-  font-size: .75rem;
-  line-height: 1rem;
-}
-@media screen and (min-width: 631px) {
-  /* line 120, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points {
-    font-size: 0;
-  }
-  /* line 182, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li {
-    width: 300px;
-    display: inline-block;
-    font-size: 1;
-    vertical-align: top;
-    padding: 1rem;
-    margin: 2rem 0;
-  }
-  /* line 189, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li:hover {
-    background: #3699b6;
-    border-color: #389cba;
-    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
-  }
-  /* line 194, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li h2 {
-    margin: 0 0 1rem;
-    padding: 0;
-    text-align: center;
-  }
-  /* line 198, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .summary-points li h2 .fa {
-    position: static;
-    display: block;
-    width: 100%;
-    height: 6rem;
-  }
-}
-
-/* line 209, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.home-ss {
-  max-width: 100%;
-  border: 1px solid #9f9f9f;
-  margin: 1rem 0;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15);
-}
-/* line 215, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-.home-ss:hover {
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
-}
-@media screen and (min-width: 631px) {
-  /* line 209, /home/ubuntu/workspace/app/assets/stylesheets/welcome.scss */
-  .home-ss {
-    float: right;
-    margin: 1rem -7.5vw 1rem 1rem;
-  }
 }
