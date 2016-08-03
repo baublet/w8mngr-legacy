@@ -72,9 +72,8 @@
                     <li><%= link_to "Weight Log", weight_entries_path %></li>
                   </ul>
             	</li>
-            	<li><%= link_to logout_path, method: "delete"  do %><i class="fa fa-sign-out" aria-hidden="true"></i> Logout<% end %></li>
+            	<li class="sep"><%= link_to logout_path, method: "delete"  do %><i class="fa fa-sign-out" aria-hidden="true"></i> Logout<% end %></li>
             <% else %>
-                <li><%= link_to get_started_path do %><i class="fa fa-user-plus" aria-hidden="true"></i> Register<% end %></li>
             	<li class="sep login">
             	  <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h2>
             	  <ul>

@@ -19,13 +19,13 @@
     z-index: $layer-options-panel + 10;
     font-family: "FontAwesome";
     cursor: pointer;
-    font-size:2rem;
-    padding:.2rem .5rem;
+    font-size: $font-size-large;
+    padding: $font-size-tiny $font-size-small;
     color: $white;
-    right: 1rem;
-    top: 1rem;
-    &:hover {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, .05);
+    right: $spacing-normal;
+    top: $spacing-normal;
+    &:hover, &:focus {
+        color: $color-primary-light;
     }
     &:after {
         content: "\f0c9";
@@ -35,12 +35,12 @@
     }
 }
 .welcome.index .navigation-options {
-  padding: 1rem
+  padding: $spacing-normal;
 }
 .navigation-options {
     background: darken($color-primary, 15);
     background: linear-gradient(-25deg, darken($color-primary, 5), $color-primary);
-    padding: 1rem;
+    padding: $spacing-normal;
     border-top-right-radius: 0;
     width: 280px;
     position: fixed;
@@ -66,18 +66,18 @@
     }
 }
 .navigation-title {
-    font-size: $font-size-normal;
+    font-size: $font-size-small;
     text-transform:uppercase;
     margin: $spacing-normal 0 $spacing-normal;
-    font-weight: 800;
+    font-weight: bold;
     @include mqAfterSize($desktop-breakpoint) {
       display: none;
     }
 }
 .navigation-list {
     list-style-type: none;
-    padding:0;
-    font-weight:500;
+    padding: 0;
+    font-weight: normal;
     font-size: .7rem;
     position: relative;
     z-index: $layer-options-panel;
@@ -94,7 +94,7 @@
         margin: 0;
         padding: 0;
         + li {
-          margin-left: .5rem;
+          margin-left: $spacing-small;
         }
       }
     }
@@ -102,7 +102,7 @@
         display: block;
         color: rgba($white, .75);
         font-weight: bold;
-        padding: .5rem;
+        padding: $spacing-small;
         border-radius: 3px;
         &:hover {
             background: $color-primary;
@@ -111,8 +111,8 @@
         }
     }
     .sep {
-        margin-top: 1rem;
-        padding-top: 1rem;
+        margin-top: $spacing-normal;
+        padding-top: $spacing-normal;
         border-top: 1px dashed rgba($white, .5);
         @include mqAfterSize($desktop-breakpoint) {
           cursor: pointer;
@@ -120,7 +120,7 @@
           position: relative;
           margin: 0;
           padding: 0;
-          margin-left: .5rem;
+          margin-left: $spacing-small;
           &.login ul {
             padding: 1rem;
             width: 300px;
@@ -176,8 +176,7 @@
           h2 {
             margin: 0;
             font-size: 100%;
-            font-weight: 400;
-            padding: .5rem;
+            padding: $spacing-small;
             color: rgba($white, .75);
             font-weight: bold;
             background: rgba($white, .05);
@@ -192,17 +191,23 @@
 }
 
 nav .login {
+    h2 .fa {
+      margin-right: $spacing-tiny;
+    }
+    .btn-bar.form-group {
+      margin-bottom: 0;
+    }
     input[type="text"], input[type="email"], input[type="password"] {
-        margin-bottom: .5rem;
-        font-size: 1rem;
+        margin-bottom: $spacing-small;
+        font-size: $font-size-normal;
     }
     .btn {
-        background: $black;
+        background: $color-primary-light;
         margin-bottom: 0;
-        font-size: 1rem;
+        font-size: $font-size-small;
         float: right;
         width: auto;
-        padding: .5rem;
+        padding: $spacing-small;
         &:hover {
             background-color: lighten($black, 15);
         }
@@ -212,5 +217,14 @@ nav .login {
     }
     label {
         display: none;
+    }
+    .pill {
+      color: rgba($white, .5);
+      border-radius: 3px !important;
+      border-color: rgba($white, .25);
+      &:hover, &:focus {
+        color: $white;
+        border-color: $white;
+      }
     }
 }
