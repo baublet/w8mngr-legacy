@@ -1,0 +1,91 @@
+/*doc
+---
+title: Headers
+name: headers
+category: basics
+---
+
+```html_example
+<h1>Standard H1</h1>
+
+<h1><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header</h1>
+
+<h2>Standard H2</h2>
+
+<h2><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 2</h2>
+
+<h3>Standard H3</h3>
+
+<h3><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 3</h3>
+
+<h4>Standard H4</h4>
+
+<h4><i class="fa fa-cloud-download" aria-hidden="true"></i> Icon Header 4</h4>
+
+<h5>Standard H5</h5>
+
+<h6>Standard H6</h6>
+```
+
+*/
+
+h1, h2, h3, h4 {
+    margin: 0 0 $spacing-normal;
+    letter-spacing: -0.05em;
+    a {
+        color: $black;
+        &:hover {
+            color: $color-primary-light;
+        }
+    }
+    .fa {
+        font-size:.75em;
+        opacity: .25;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+}
+h4, h5, h6 {
+  margin: 0 0 $spacing-small;
+}
+
+h1 {
+    font-size: $font-size-huge;
+    font-weight: 300;
+    color: lighten($black, 15%);
+    .fa {
+      margin-left: -1rem;
+    }
+    // This makes it so icons for page titles show up behind the actual text
+    // on mobile, so that it doesn't take up screen real estate
+    @include mqBeforeSize($desktop-breakpoint) {
+      position: relative;
+      .fa {
+        position: absolute;
+        font-size: 6rem;
+        opacity: .075;
+        left: 0rem;
+        top: -2.25rem;
+        z-index: -1;
+      }
+      + .page-meta {
+        position: relative;
+      }
+    }
+}
+
+h2 {
+    font-size: $font-size-large;
+    font-weight: lighter;
+}
+
+h3 {
+  font-size: $font-size-normal;
+  font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: .8rem;
+}

@@ -1,0 +1,61 @@
+<% if measurement.errors.any? %>
+	<%= render partial: "shared/error_messages", locals: {errors: measurement.errors} %>
+<% end %>
+
+<div class="measurement card<%= measurement.try(:id).nil? ? " new" : "" %>">
+
+<% unless measurement.id.nil? %>
+  <%= check_box("measurement[" + measurement.id.to_s + "]", "delete", { class: "helper-input" }, "yes") %>
+  <div class="card-top-meta">
+    <%= label_tag "measurement_" + measurement.id.to_s + "_delete", { class: "" } do %>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    	<span class="screen-reader-text">
+    	  Delete the measurement
+    	  <%= measurement.amount %>
+    	  <%= measurement.unit %>
+    	  (You must submit this form to delete this measurement...)
+    	 </span>
+    <% end %>
+  </div>
+
+<% end %>
+
+<%
+  # We set the ID to 0, which tells the controller that this is is the new measurement
+  measurement.id = 0 if measurement.id.nil?
+%>
+
+<div class="grid">
+  <div class="row">
+    <div class="col">
+  		<%= label_tag("measurement_" + measurement.id.to_s + "_amount", "Amount") %>
+  		<%= text_field_tag("measurement[" + measurement.id.to_s + "][amount]", measurement.amount, placeholder: "e.g. 1, 1/2, .5, etc.") %>
+  	</div>
+    <div class="col">
+  		<%= label_tag("measurement_" + measurement.id.to_s + "_unit", "Unit") %>
+  		<%= text_field_tag("measurement[" + measurement.id.to_s + "][unit]", measurement.unit, placeholder: "Slice, OZ, Grams, etc.") %>
+  	</div>
+
+  	<div class="col">
+  		<%= label_tag("measurement_" + measurement.id.to_s + "_calories", "Calories") %>
+  		<%= number_field_tag("measurement[" + measurement.id.to_s + "][calories]", measurement.calories) %>
+  	</div>
+
+  	<div class="col">
+  		<%= label_tag("measurement_" + measurement.id.to_s + "_fat", "Fat") %>
+  		<%= number_field_tag("measurement[" + measurement.id.to_s + "][fat]", measurement.fat) %>
+  	</div>
+
+  	<div class="col">
+  		<%= label_tag("measurement_" + measurement.id.to_s + "_carbs", "Carbs") %>
+  		<%= number_field_tag("measurement[" + measurement.id.to_s + "][carbs]", measurement.carbs) %>
+  	</div>
+
+  	<div class="col">
+  		<%= label_tag("measurement_" + measurement.id.to_s + "_protein", "Protein") %>
+  		<%= number_field_tag("measurement[" + measurement.id.to_s + "][protein]", measurement.protein) %>
+  	</div>
+  </div>
+</div>
+
+</div>

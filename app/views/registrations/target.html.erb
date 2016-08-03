@@ -19,6 +19,8 @@
   <%= form_tag(controller: "registrations", action: "save_target", method: "post") do %>
 
     <% bmr = @user.bmr %>
+
+    <div class="form-group">
     <% if bmr.nil? %>
 
       <p>Before we can calculate your total daily expended energy (TDEE), we need your
@@ -35,20 +37,25 @@
 
       <p><label>Calculated TDEE:</label> <%= number_with_delimiter(bmr) %></p>
 
-      <p>We suggest gently ramping up or raising your intake so you feel as few adverse
+      <p>We suggest gently ramping down or raising your intake
+      (depending on which way you want your weight to go, up or down) so you feel
+      as few adverse
       effects as possible when changing your eating habbits. Try a number such as:</p>
 
-      <p>
-        <ul>
-          <li><strong style="display:inline-block;width:3rem">+10%:</strong> <%= number_with_delimiter((bmr * 1.1).ceil) %></li>
-          <li><strong style="display:inline-block;width:3rem">-10%:</strong> <%= number_with_delimiter((bmr * 0.9).ceil) %></li>
-        </ul>
-      </p>
+      <ul>
+        <li><strong style="display:inline-block;width:3rem">+10%:</strong> <%= number_with_delimiter((bmr * 1.1).ceil) %></li>
+        <li><strong style="display:inline-block;width:3rem">-10%:</strong> <%= number_with_delimiter((bmr * 0.9).ceil) %></li>
+      </ul>
 
     <% end %>
 
-   	<%= label_tag "target_calories", "Target Calories" %>
-  	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+    </div>
+
+    <div class="form-group">
+     	<%= label_tag "target_calories", "Target Calories" %>
+    	<%= text_field_tag "target_calories", @user.preferences["target_calories"], placeholder: "The calories you want to reach every day" %>
+    	<p class="form-info">Before making dramatic changes (more than 10%) to your caloric intake, please consult a doctor.</p>
+  	</div>
 
     <%= button_tag(type: 'submit', class: 'btn') do %>
   		Start Logging!

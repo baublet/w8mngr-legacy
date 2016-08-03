@@ -1,0 +1,69 @@
+/*doc
+---
+title: Day Navigator
+name: daynavigator
+category: navigation
+---
+
+Used to indicate the current day and give options to change that day for the user.
+
+<strong>NB:</strong> To show this styleguide properly, I modified this style.
+Use just as shown in pages in order for the day navigator to show properly.
+
+
+```html_example
+<div class="day-navigator">
+    <a href="#" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
+    <span class="current-day">Tuesday, August  2, 2016</span>
+    <a href="#" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
+</div>
+```
+*/
+
+.day-navigator {
+    padding: 1rem 0;
+    text-align: center;
+    background: $color-primary;
+    margin: -$spacing-large -1rem $spacing-large;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mqAfterSize($desktop-breakpoint) {
+      max-width: 960px;
+      margin: 0;
+      margin-left: calc(200px + 2rem);
+      transform: translateY(-$spacing-large);
+      &:before {
+        display: block;
+        background: $color-primary;
+        position: absolute;
+        top: 0;
+        right: -999px;
+        bottom: 0;
+        left: -999px;
+        content: " ";
+        z-index: $layer-base - 1;
+      }
+      a, span {
+        position: relative;
+        z-index: $layer-base;
+      }
+    }
+    a {
+        font-size: $font-size-large;
+        color: $white;
+        &:hover {
+            color: $color-primary-light;
+            text-decoration: none;
+        }
+    }
+
+  .current-day {
+    font-size: $font-size-small;
+    padding: 0 1rem;
+    font-weight: bold;
+    color: $white;
+    text-transform: uppercase;
+  }
+}

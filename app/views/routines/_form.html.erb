@@ -1,18 +1,20 @@
 <div class="routine-form">
 <%= form_for routine do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "large" %>
 
-  <div class="options">
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "large" %>
 
     <div class="description">
       <%= f.label :description %>
       <%= f.text_area :description %>
     </div>
+  </div>
 
-    <% unless routine.id.nil? %>
-      <div class="activities card">
-        <h2><i class="fa fa-bolt" aria-hidden="true"></i> Activities</h2>
+  <% unless routine.id.nil? %>
+    <div class="activities card">
+      <h2><i class="fa fa-bolt" aria-hidden="true"></i> Activities</h2>
+      <div class="activity-list-window">
         <div class="activity-list">
           <%= activities.find_each do |activity| %>
           <input  type="checkbox"
@@ -27,16 +29,18 @@
             <%= activity.name %>
           </label>
           <% end %>
-          <label class="activity-label-category" style="order: 0">Selected</label>
-          <label class="activity-label-category" style="order: 10">Your Activities</label>
-          <label class="activity-label-category" style="order: 20">Database</label>
         </div>
       </div>
-    <% end %>
+    </div>
+  <% end %>
 
+  <div class="btn-bar">
+    <div class="left">
+      <%= link_to "Delete Routine", delete_routine_path(routine), class: "btn-meta delete" unless routine.id.nil? %>
+    </div>
+    <div class="right">
+      <%= f.button (routine.id.nil?) ? "Create Routine" : "Save Routine", class: "btn" %>
+    </div>
   </div>
-
-  <%= link_to "Delete Routine", delete_routine_path(routine), class: "delete-btn" unless routine.id.nil? %>
-  <%= f.button (routine.id.nil?) ? "Create Routine" : "Save Routine", class: "btn" %>
 <% end %>
 </div>

@@ -1,0 +1,60 @@
+.measurement.card {
+  padding: $spacing-small;
+  input {
+    padding: $spacing-tiny;
+  }
+  label, .label {
+    display: block;
+    font-size: $font-size-tiny;
+  }
+  .row {
+    align-items: flex-start;
+  }
+  .col {
+    width: calc(14% - #{$spacing-small});
+    text-align: left;
+    &:last-child {
+      text-align: right;
+      align-self: center;
+    }
+  }
+  .btn-text {
+    @include screenReaderText();
+    @include mqAfterSize($desktop-breakpoint) {
+      //@include deScreenReaderText();
+    }
+  }
+  .unit, .calories, .fat, .carbs, .protein {
+    display: block;
+    margin-top: $font-size-small;
+  }
+}
+
+.food-form .measurement.card .col {
+  width: calc(16.6666% - #{$spacing-small});
+  text-align: left;
+}
+
+.measurement.card .helper-input + .card-top-meta + .grid {
+  @include animationCollapseExpand();
+}
+
+.measurement.card .helper-input:checked + .card-top-meta + .grid {
+  max-height: $spacing-large;
+  opacity: .1;
+  pointer-events: none;
+}
+
+.measurement.card .helper-input:checked + .card-top-meta label {
+  padding: $spacing-small;
+  color: $red;
+  .screen-reader-text {
+    @include deScreenReaderText();
+  }
+}
+
+.scannable-table.foods-table .serving {
+    text-align: right;
+    padding-right: $spacing-normal;
+    font-weight: bold;
+}

@@ -1,0 +1,13 @@
+.search-results {
+  color: rgba($black, .5);
+  margin-bottom: $spacing-normal;
+  padding-left: $spacing-large;
+}
+
+.clear-search {
+  float: left;
+  font-size: $font-size-small;
+  font-weight: bold;
+  padding-top: $spacing-tiny;
+  margin-left: -$spacing-large;
+}

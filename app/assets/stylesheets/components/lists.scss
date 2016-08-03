@@ -1,0 +1,17 @@
+ul, ol {
+    padding-left: 2rem;
+    margin-bottom: $spacing-large;
+    // .li inherits spacing information from .p in global.scss for consistent look in text
+    li:last-child {
+        margin-bottom:0;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+ul {
+    list-style-type: disc;
+}
+ol {
+  list-style-type: decimal;
+}

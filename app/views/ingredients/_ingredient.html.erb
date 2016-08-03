@@ -1,20 +1,20 @@
-<% if !ingredient.id.nil? %>
-<div class="ingredient <%= (view == "show") ? "list" : "full" %>">
-  <h3>
-    <% if view == "show" %>
-      <i class="fa fa-check"></i>
-    <% end %>
-    <%= ingredient.name %>
-  </h3>
-  <% if view == "edit" %>
-    <div class="calories"><%= number_with_delimiter ingredient.calories %></div>
-    <div class="fat"><%= ingredient.fat %></div>
-    <div class="carbs"><%= ingredient.carbs %></div>
-    <div class="protein"><%= ingredient.protein %></div>
-    <%= link_to delete_recipe_ingredient_path(recipe, ingredient), class: "delete-btn", title: "Delete ingredient" do %>
+<div class="row ingredient">
+  <div class="col name">
+    <h3>
+      <% if view == "show" %>
+        <i class="fa fa-check"></i>
+      <% end %>
+      <%= ingredient.name %>
+    </h3>
+  </div>
+  <div class="col calories"><%= number_with_delimiter ingredient.calories %></div>
+  <div class="col fat"><%= ingredient.fat %></div>
+  <div class="col carbs"><%= ingredient.carbs %></div>
+  <div class="col protein"><%= ingredient.protein %></div>
+  <div class="col">
+      <%= link_to delete_recipe_ingredient_path(ingredient.recipe, ingredient), class: "btn btn-delete btn-icon", title: "Delete ingredient" do %>
       <i class="fa fa-times"></i>
       <span class="screen-reader-text">Delete Ingredient</span>
     <% end %>
-  <% end %>
+  </div>
 </div>
-<% end %>

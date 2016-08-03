@@ -1,0 +1,127 @@
+.muscle-groups-list {
+  margin-bottom: $spacing-normal;
+}
+
+.muscle-groups svg, .muscle-groups svg g { pointer-events: none; }
+.muscle-groups svg path { pointer-events: auto; }
+
+.muscle-groups {
+  position: relative;
+  padding: $spacing-small $spacing-normal;
+  max-width: 100%;
+  background: $white;
+  @include height(1);
+  overflow: hidden;
+  margin-bottom: $spacing-large;
+  h3 {
+    margin: $spacing-normal 0;
+    padding: 0;
+    font-size: 1.3rem;
+  }
+  label {
+    width: 50px;
+    display: block;
+    margin-bottom: $spacing-small;
+    cursor: pointer;
+    font-size: $font-size-small;
+    opacity: .75;
+    position: relative;
+    border-left: 5px solid transparent;
+    font-weight: 400;
+    text-transform: capitalize;
+    text-align: left;
+    padding-left: $spacing-small;
+    &:hover, &.hover {
+      opacity: 1;
+      border-color: rgba($black, .75);
+    }
+  }
+  input:checked + label {
+    opacity: 1;
+    font-weight: bold;
+    color: $color-primary;
+  }
+  svg {
+    position: absolute;
+    right: -50px;
+    overflow: visible;
+    width: 100%;
+    height: auto;
+    max-height: 27rem;
+    bottom: 1rem;
+  }
+  svg g[id] path {
+    opacity: .2;
+    transition: opacity .25s ease-in-out;
+  }
+  svg g g[id]:hover path {
+    cursor: pointer;
+    opacity: .5;
+    fill: $color-primary !important;
+  }
+  .muscles-helper {
+    display: none;
+  }
+  $groups: obliques, abs, quads, biceps, adductors, pectorals, deltoids, hamstrings, quads, forearms, calves, triceps, glutes, lats, trapezius;
+  @each $muscle in $groups {
+    $upper: to-upper-case(str-slice($muscle, 1, 1)) + str-slice($muscle, 2);
+    label[for="activity_muscle_groups_#{$muscle}"]:hover ~ svg ##{$upper} path {
+      opacity: .75;
+    }
+    #activity_muscle_groups_#{$muscle}:checked ~ svg ##{$upper} path {
+      opacity: .8;
+      fill: $color-primary !important;
+    }
+  }
+}
+
+.muscle-groups.filter {
+  padding: 0;
+  margin: $spacing-normal 0;
+  box-shadow: none;
+  svg {
+    max-height: 80%;
+  }
+}
+
+.muscle-groups.show {
+  @include mqAfterSize($desktop-breakpoint * .75) {
+    float: right;
+    min-width: 320px;
+    max-width: 30%;
+    margin-left: $spacing-large;
+    margin-bottom: $spacing-large;
+  }
+  label {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  input:checked + label {
+   display: inline-block;
+   width: auto;
+   height: auto;
+   cursor: default;
+   border: 0;
+   margin: 0 0 .25rem 0;
+   padding: 0;
+  }
+  input:checked + label ~ input:checked + label {
+    margin-left: -.25rem;
+    &:before {
+      content: ", ";
+    }
+  }
+  svg g g[id]:hover path {
+    cursor: default;
+    opacity: .1;
+  }
+  svg {
+    margin: 2rem 0 1rem;
+    padding: 0;
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+  }
+}

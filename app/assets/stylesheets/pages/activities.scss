@@ -1,0 +1,178 @@
+
+
+body.activities.show .muscle-groups.show {
+  float: right;
+  width: 100%;
+  margin: 0 0 $spacing-normal;
+}
+
+body.activities.show .user-markdown {
+  border: 0;
+  margin-top: 0;
+}
+
+.activity-new-box div + .btn {
+  margin-top: $spacing-normal;
+}
+
+@include mqAfterSize($desktop-breakpoint) {
+  body.activities.show .muscle-groups.show {
+    border: 0;
+    box-shadow: none;
+    margin: 0 0 $spacing-large $spacing-large;
+    float: right;
+  }
+}
+
+.older-activity-entries h3 {
+  padding-bottom: $spacing-small;
+  margin-bottom: $spacing-small;
+  border-bottom: 1px solid rgba($black, .1);
+}
+
+.older-activity-entries {
+  input {
+    background: transparent;
+    border-color: transparent;
+    &:hover {
+      background: rgba(white, .5);
+    }
+    &:focus {
+      background: $white;
+    }
+  }
+}
+
+.activity-entry.weight div {
+  width: calc(60% - 5rem);
+  &.meta {
+    width: 4rem;
+  }
+  &.when {
+    text-align: center;
+    justify-content: center;
+  }
+  @include mqBeforeSize(360px) {
+    .time {
+      display: none;
+    }
+  }
+}
+
+.app-panel-form .activity-entry .meta {
+  position: static;
+  transform: none;
+}
+
+.activity-entry {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  .meta {
+    width: 3rem;
+  }
+  .when {
+    font-size: $font-size-small;
+    color: rgba($black, .75);
+  }
+  .calories {
+    margin-right: $spacing-small;
+  }
+  .unit, .reps + .fa-times {
+    font-size: $font-size-tiny;
+    color: rgba($black, .75);
+    padding: 0 $spacing-small;
+    font-weight: bold;
+  }
+  .reps + .fa-times {
+    color: rgba($black, .25);
+  }
+  div {
+    width: calc(50% - 3rem);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    + div {
+      padding-left: $spacing-small;
+    }
+  }
+}
+
+.activity-entry-form + h4 {
+  margin-top: $spacing-normal;
+}
+
+.activity-entry-form + .activity-entry-form {
+  margin-top: $spacing-small;
+}
+
+.activity.medium {
+  padding: $spacing-small;
+  margin: 0;
+  @include mqAfterSize($desktop-breakpoint) {
+    padding: $spacing-normal;
+  }
+  h3 {
+    margin-bottom: $spacing-tiny;
+  }
+  + .activity.medium {
+    border-top: 1px solid rgba($black, .1);
+  }
+  .type {
+    font-size: $font-size-tiny;
+    margin-bottom: $spacing-normal;
+    color: rgba($black, .5);
+  }
+  .row {
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+  }
+  .muscle-groups.show {
+    width: 125px;
+    height: 95px;
+    padding: 4px 0 0;
+    min-width: 0;
+    margin: 0;
+    box-shadow: none;
+    svg {
+      margin: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .activity-info {
+    padding: 0 $spacing-normal;
+  }
+  .progress {
+    text-align: right;
+    padding-right: $spacing-small;
+    a {
+      display: inline-block;
+      text-align: center;
+    }
+    .last-entry {
+      font-size: $font-size-tiny;
+      text-transform: uppercase;
+      color: rgba($black, .5);
+    }
+    .fa {
+      font-size: 2rem;
+      @include mqAfterSize(360px) {
+        font-size: 2.5rem;
+      }
+      @include mqAfterSize($desktop-breakpoint) {
+        font-size: 5rem;
+      }
+      color: rgba($black, .5);
+      &:hover {
+        color: $black;
+      }
+    }
+    .complete {
+      color: $color-primary-light;
+    }
+  }
+}

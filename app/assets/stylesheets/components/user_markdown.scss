@@ -1,0 +1,40 @@
+.user-markdown {
+  padding-top: $spacing-normal;
+  border-top: 1px solid rgba(black, .1);
+  overflow: auto;
+  @include mqAfterSize($desktop-breakpoint) {
+    border: 0;
+    background: $white;
+    padding: $spacing-normal;
+    border-radius: 5px;
+    @include height(1);
+  }
+  h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+  }
+  h1 {
+    font-size: 1.5em;
+    font-weight: lighter;
+  }
+  h2 {
+    font-size: 1.3em;
+    font-weight: lighter;
+  }
+  h3 {
+    font-size: 1.15em;
+    font-weight: lighter;
+  }
+  h4 {
+    font-size: .9em;
+    font-weight: normal;
+  }
+  h5, h6 {
+    font-size: .75em;
+    font-weight: bold;
+    margin-bottom: $spacing-small;
+  }
+  h6 {
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+}

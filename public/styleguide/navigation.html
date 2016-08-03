@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <title>w8mngr | styleguide</title>
+    
+      <link rel="stylesheet" href="/assets/application-d171ddefe5974abd941738542ac8e15ea44e527711075c25383a9e673ebc88aa.css">
+    
+      <link rel="stylesheet" href="/assets/application-6e5a0aeff1cd41f54895872c10a84a6c17a3cc9e153e09b1f16a41dd0e5317cf.css">
+    
+      <link rel="stylesheet" href="/assets/application-3a7a50ae02170a1801733c1c91085209845ba0666746e278ec26cbe886d2ab4f.css">
+    
+      <link rel="stylesheet" href="/assets/application-dc421a35ff4967470863c6775efe678ff6fe3c0b210af21238342bce754bff43.css">
+    
+    <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
+  </head>
+  <body>
+    <main class="main styleguide">
+
+      <h1>w8mngr | styleguide</h1>
+
+      <nav>
+        <ul>
+        
+          <li><a href="forms.html">forms</a></li>
+        
+          <li><a href="buttons.html">buttons</a></li>
+        
+          <li><a href="layout.html">layout</a></li>
+        
+          <li><a href="index.html">basics</a></li>
+        
+          <li><a href="navigation.html">navigation</a></li>
+        
+          <li><a href="cards.html">cards</a></li>
+        
+          <li><a href="messages.html">messages</a></li>
+        
+        </ul>
+      </nav>
+
+      <section>
+        <ul>
+        
+          <li><a href="#breadcrumbs">Breadcrumbs</a></li>
+        
+          <li><a href="#daynavigator">Day Navigator</a></li>
+        
+        </ul>
+<h1 id="breadcrumbs" class="styleguide">Breadcrumbs</h1>
+<p class="styleguide">Used to indicate a path for the user. I like these as a way for helping users
+and developers understand the flow and hierarchy of the application.</p><p class="styleguide">On live (as below) we wrap the inner contents in a <code class="styleguide">.section-inside</code> class so
+the container overflows the window, while the contents stay aligned with the
+rest of the view.</p><p class="styleguide"><strong>NB:</strong> To show this styleguide properly, I modified the breadcrumbs and its
+inner contents. Use just as shown in pages in order for the breadcrumbs to render
+properly.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="breadcrumbs">
+  <div class="section-inside">
+    <ul>
+      <li><a href="/foods">Foods</a></li>
+      <li><a href="/foods/1">ARCHWAY Home Style Cookies, Peanut Butter</a></li>
+      <li>Edit</li>
+    </ul>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"breadcrumbs"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"section-inside"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/foods"</span><span class="nt">&gt;</span>Foods<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/foods/1"</span><span class="nt">&gt;</span>ARCHWAY Home Style Cookies, Peanut Butter<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Edit<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="daynavigator" class="styleguide">Day Navigator</h1>
+<p class="styleguide">Used to indicate the current day and give options to change that day for the user.</p><p class="styleguide"><strong>NB:</strong> To show this styleguide properly, I modified this style.
+Use just as shown in pages in order for the day navigator to show properly.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="day-navigator">
+    <a href="#" title="Previous Day"><i class="fa fa-chevron-circle-left"></i></a>
+    <span class="current-day">Tuesday, August  2, 2016</span>
+    <a href="#" title="Next Day"><i class="fa fa-chevron-circle-right"></i></a>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"day-navigator"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">title=</span><span class="s">"Previous Day"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-circle-left"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"current-day"</span><span class="nt">&gt;</span>Tuesday, August  2, 2016<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">title=</span><span class="s">"Next Day"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-chevron-circle-right"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+      </section>
+      <div class="styleguide-footer">
+        <p>This documentation generated using <a href="http://github.com/trulia/hologram">Hologram</a>
+      </div>
+    </main>
+  </body>
+</html>

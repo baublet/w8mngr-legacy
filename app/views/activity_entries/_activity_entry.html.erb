@@ -3,11 +3,9 @@
     <div class="activity-entry <%= activity_entry.activity.type_template %>">
       <%= hidden_field_tag "day", current_day %>
       <%= render partial: "activities/types/" + activity_entry.activity.type_template, locals: { entry: activity_entry } %>
-      <button type="submit" class="meta-btn"><i class="fa fa-floppy-o" aria-hidden="true"></i><span class="screen-reader-text">Save Activity Entry</span></button>
-      <% if defined? @routine %>
-        <a href="<%= activity_delete_entry_path(activity_id: activity_entry.activity.id, id: activity_entry.id, from_routine_id: @routine.id) %>" class="delete-btn"><i class="fa fa-times"></i><span class="screen-reader-text">Delete Activity Entry</span></a>
-      <% else %>
-        <a href="<%= activity_delete_entry_path(activity_id: activity_entry.activity.id, id: activity_entry.id) %>" class="delete-btn"><i class="fa fa-times"></i><span class="screen-reader-text">Delete Activity Entry</span></a>
-      <% end %>
+      <div class="meta">
+        <button type="submit" class="btn-icon"><i class="fa fa-floppy-o" aria-hidden="true"></i><span class="screen-reader-text">Save Activity Entry</span></button>
+        <a href="<%= activity_delete_entry_path(activity_id: activity_entry.activity.id, id: activity_entry.id) %>" class="btn-icon delete"><i class="fa fa-times"></i><span class="screen-reader-text">Delete Activity Entry</span></a>
+      </div>
     </div>
 <% end %>

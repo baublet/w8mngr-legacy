@@ -1,0 +1,134 @@
+/*doc
+---
+title: Helper Inputs
+name: helperinputs
+category: layout
+---
+
+We use helper inputs to toggle things on and off using only CSS.
+
+These are fully screen-reader-compatible, so should be widely accessible. They
+don't display:none, but instead position it absolutely using a max-height of 0px.
+Then, when shown, it reverts the element to static positioning and fades it in.
+
+```html_example
+<label for="toggle">Click to Toggle</label>
+<input type="checkbox" class="helper-input" id="toggle">
+<span class="helper-panel">
+  Here I am!
+</span>
+```
+*/
+
+.helper-input {
+  visibility: hidden;
+  position: absolute;
+  left: -999px;
+}
+
+.helper-input + .helper-panel,
+.helper-input + label + .helper-panel {
+  max-height: 0px;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
+  transition: opacity .25s ease-in-out;
+}
+
+.helper-input:checked + .helper-panel,
+.helper-panel:target,
+.helper-input:checked + label + .helper-panel {
+  position: static;
+  opacity: 1;
+  max-height: 9999px;
+  overflow: visible;
+  &.floating {
+    position: absolute;
+    background: $white;
+    padding: $spacing-small;
+    @include height(1);
+    right: 0;
+    width: 75vw;
+    max-width: 100%;
+    min-width: 280px;
+    z-index: $layer-base + 20;
+  }
+}
+
+/*doc
+---
+title: Toggle Switch
+name: toggleswitch
+category: forms
+---
+
+A set of classes for creating a toggle switch. Can also be used to show otherwise-hidden
+panels when the toggle is activated.
+
+```html_example
+<input type="checkbox" name="faturday_enabled" id="ep-faturday-enabled" value="true" class="helper-input toggle-switch" checked="checked">
+<label for="ep-faturday-enabled">Toggle Faturdays</label>
+
+<br>
+
+<input type="checkbox" name="toggle_2" id="toggle-2" value="true" class="helper-input toggle-switch">
+<label for="toggle-2">Toggle Me to Show a Panel</label>
+<div class="helper-panel">
+  <h2>And here I am!</h2>
+</div>
+
+```
+*/
+input[type=checkbox].toggle-switch {
+  display: none;
+  + label {
+    display: inline-block;
+    position: relative;
+    padding-left: calc(#{$spacing-large} + #{$spacing-normal});
+    cursor: pointer;
+    margin-bottom: $spacing-large;
+    font-size: $font-size-normal;
+    color: rgba($black, .8);
+    &:hover, &:focus {
+      color: $black;
+    }
+    &:before {
+      display: block;
+      content: " ";
+      background-color: #eee;
+      border: 1px solid rgba($black, .25);
+      border-radius: 5px;
+      width: $spacing-large;
+      height: $spacing-small;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      bottom: 0;
+      @include height(-1);
+      transition: background-color .25s ease-in-out;
+    }
+    &:after {
+      display: block;
+      content: " ";
+      width: $spacing-normal;
+      height: $spacing-normal;
+      line-height: $spacing-normal;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius:100%;
+      border: 1px solid rgba($black, .25);
+      background: $white;
+      @include height(1);
+      transition: transform .5s $easing-1;
+    }
+  }
+  &:checked + label:before {
+    background-color: $color-primary-light;
+  }
+  &:checked + label:after {
+    transform: translate(1.9rem, -50%);
+  }
+}

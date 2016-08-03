@@ -1,0 +1,52 @@
+.totals {
+  margin: 2rem 0 2rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  position: relative;
+  @include mqAfterSize($desktop-breakpoint / 1.5) {
+    padding: 0 2rem;
+  }
+  .number {
+    font-size: $font-size-large;
+    font-weight: 400;
+    @include mqAfterSize($desktop-breakpoint) {
+      font-size: $font-size-huge;
+      font-size: 100;
+    }
+  }
+  .unit, .label {
+    font-size: $font-size-small;
+    font-weight: 900;
+    opacity: .25;
+    @include mqAfterSize($desktop-breakpoint) {
+      font-size: $font-size-normal;
+    }
+  }
+  .unit {
+    font-size: .6rem;
+  }
+  .label {
+    display: block;
+  }
+  .over {
+    color: $red;
+  }
+  .tooltip {
+    position: absolute;
+    background: $red;
+    border-radius: 3px;
+    padding: .25rem;
+    font-size: .6em;
+    font-weight: bold;
+    color: $white;
+    bottom: -$spacing-normal;
+    opacity: 0;
+    display: block;
+  }
+  &:hover .tooltip {
+    opacity: 1;
+  }
+}

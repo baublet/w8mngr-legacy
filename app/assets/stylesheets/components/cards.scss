@@ -1,0 +1,281 @@
+/*doc
+---
+title: Card Grids
+name: cardgrids
+category: cards
+---
+
+For a grid of cards. Aligns them at 50% until the desktop  breakpoint
+is reached. Assumes this grid is filling the full width of the viewport
+(or near enough to full).
+
+```html_example
+<div class="card-grid">
+  <div class="card">
+    <div class="card-header">
+      <h1>Card Header</h1>
+    </div>
+    <div class="card-body">
+      <p>Here's the card body</p>
+    </div>
+  </div>
+  <div class="card-colorful">
+    <div class="card-header">
+      <h1>Card Header</h1>
+    </div>
+    <div class="card-body">
+      <p>Here's the card body</p>
+    </div>
+  </div>
+</div>
+```
+*/
+.card-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-large;
+  .card, .card-colorful {
+    width: 100%;
+    max-width: 460px;
+    @include mqAfterSize($desktop-breakpoint / 1.5) {
+      max-width: none;
+      width: calc(50% - (#{$spacing-normal} / 2));
+    }
+  }
+}
+
+/*doc
+---
+title: Cards
+name: card
+category: cards
+---
+
+For information that needs to be grouped and is independent, often sortable.
+
+```html_example
+<div class="card">
+  <div class="card-header">
+    <h1>Card Header</h1>
+  </div>
+  <div class="card-body">
+    <p>Here's the card body</p>
+  </div>
+</div>
+<div class="card-colorful">
+  <div class="card-header">
+    <h1>Card Header</h1>
+  </div>
+  <div class="card-body">
+    <p>Here's the card body</p>
+  </div>
+</div>
+```
+*/
+.card, .card-colorful {
+  border-radius: 3px;
+  width: 460px;
+  max-width: 100%;
+  background: $white;
+  position: relative;
+  @include height(1);
+  margin-bottom: $spacing-normal;
+  padding: $spacing-normal;
+  font-size: $font-size-normal;
+}
+
+/*doc
+---
+title: Card Meta
+name: cardmeta
+category: cards
+---
+
+For options regarding the editing or deletion of a card.
+
+```html_example
+<div class="card-colorful">
+  <div class="card-top-meta">
+    <a href="#" class="btn-icon">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      <span class="screen-reader-text">Edit This Card</span>
+    </a>
+    <a href="#" class="btn-icon delete">
+      <i class="fa fa-times" aria-hidden="true"></i>
+      <span class="screen-reader-text">Delete This Card</span>
+    </a>
+  </div>
+  <div class="card-header">
+    <h1>Card Header</h1>
+  </div>
+  <div class="card-body">
+    <p>Here's the card body</p>
+  </div>
+</div>
+```
+*/
+.card-top-meta {
+  position: absolute;
+  right: $spacing-tiny;
+  top: $spacing-tiny;
+  margin: 0;
+  padding: 0;
+  z-index: $layer-base + 10;
+}
+
+.card-top-meta + .card-header {
+  padding-right: $spacing-large;
+}
+
+.card-header {
+  margin: -#{$spacing-normal};
+  padding: $spacing-normal;
+  margin-bottom: $spacing-normal;
+  position: relative;
+  z-index: $layer-base;
+  border-bottom: 1px solid rgba($black, .05);
+}
+
+.card-title {
+  font-size: $font-size-large;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: $font-size-normal;
+  font-weight: 400;
+  margin: $spacing-tiny 0 0;
+  color: rgba($black, .75);
+}
+
+.card-colorful .card-header {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: $white;
+  border: 0;
+  background: $color-primary;
+  background: linear-gradient(45deg, $color-primary, lighten($color-primary, 20));
+  padding: $spacing-normal;
+  padding-bottom: $spacing-large;
+  .card-title, .card-subtitle, h1, h2, h3 {
+    color: $white;
+  }
+  .card-subtitle {
+    color: rgba(white, .5);
+  }
+  &:after {
+    display: block;
+    width: 0;
+    height: 0;
+    content: " ";
+    border: $spacing-normal solid transparent;
+    border-top: 0;
+    border-bottom-color: $white;
+    position: absolute;
+    bottom: 0;
+    left: $spacing-normal;
+  }
+  a {
+    color: $white;
+    &:hover {
+      text-decoration: underline;
+      color: $white;
+    }
+  }
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-colorful .card-body {
+  padding: $spacing-small;
+  background: $white;
+}
+
+/*doc
+---
+title: Full Card Example
+name: cardexample
+category: cards
+---
+
+```html_example
+<div class="activity card-colorful">
+  <div class="card-top-meta">
+    <a class="btn-icon" title="Edit this Activity" href="/activities/4/edit">
+      <i class="fa fa-pencil"></i>
+      <span class="screen-reader-text">Edit Activity</span>
+    </a>
+    <a class="btn-icon delete" title="Delete this Activity" href="/activity/4/delete">
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Activity</span>
+    </a>
+  </div>
+  <div class="card-header">
+    <h2 class="card-title">
+      <a href="/activities/4">Biking, Moderate Intensity</a>
+    </h2>
+    <h3 class="card-subtitle">
+      Distance Exercise (e.g., running, biking)
+    </h3>
+  </div>
+  <div class="card-body">
+      <div class="muscle-groups-list">
+        <h3 class="screen-reader-text">Muscle Groups</h3>
+        <ul class="pill-list">
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Badductors%5D=1" title="View activities that target: adductors">adductors</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bcalves%5D=1" title="View activities that target: calves">calves</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bhamstrings%5D=1" title="View activities that target: hamstrings">hamstrings</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bglutes%5D=1" title="View activities that target: glutes">glutes</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bquads%5D=1" title="View activities that target: quads">quads</a></li>
+        </ul>
+      </div>
+    <a class="btn small" href="/activities/4/activity_entries/20160801">
+      <i class="fa fa-bolt" aria-hidden="true"></i>
+      Log Activity <span class="screen-reader-text">Biking, Moderate Intensity</span>
+    </a>
+  </div>
+</div>
+
+<div class="activity card">
+  <div class="card-top-meta">
+    <a class="btn-icon" title="Edit this Activity" href="/activities/4/edit">
+      <i class="fa fa-pencil"></i>
+      <span class="screen-reader-text">Edit Activity</span>
+    </a>
+    <a class="btn-icon delete" title="Delete this Activity" href="/activity/4/delete">
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Activity</span>
+    </a>
+  </div>
+  <div class="card-header">
+    <h2 class="card-title">
+      <a href="/activities/4">Biking, Moderate Intensity</a>
+    </h2>
+    <h3 class="card-subtitle">
+      Distance Exercise (e.g., running, biking)
+    </h3>
+  </div>
+  <div class="card-body">
+      <div class="muscle-groups-list">
+        <h3 class="screen-reader-text">Muscle Groups</h3>
+        <ul class="pill-list">
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Badductors%5D=1" title="View activities that target: adductors">adductors</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bcalves%5D=1" title="View activities that target: calves">calves</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bhamstrings%5D=1" title="View activities that target: hamstrings">hamstrings</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bglutes%5D=1" title="View activities that target: glutes">glutes</a></li>
+          <li><a class="pill" href="?activity%5Bmuscle_groups%5D%5Bquads%5D=1" title="View activities that target: quads">quads</a></li>
+        </ul>
+      </div>
+    <a class="btn small" href="/activities/4/activity_entries/20160801">
+      <i class="fa fa-bolt" aria-hidden="true"></i>
+      Log Activity <span class="screen-reader-text">Biking, Moderate Intensity</span>
+    </a>
+  </div>
+</div>
+```
+*/

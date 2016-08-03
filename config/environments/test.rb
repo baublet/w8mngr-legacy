@@ -55,14 +55,4 @@ Rails.application.configure do
   #config.webpack.dev_server.port = "8081"
   config.webpack.output_dir = Rails.root.join("public", "webpack").to_s
 
-  # Capybara config
-  Capybara::Webkit.configure do |config|
-    config.debug = false
-    # Silently return an empty 200 response for any requests to unknown URLs.
-    config.block_unknown_urls
-    # Don't load images
-    config.skip_image_loading
-    config.timeout = 15
-  end
-
 end

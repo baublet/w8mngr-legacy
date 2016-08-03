@@ -1,0 +1,666 @@
+<!doctype html>
+<html>
+  <head>
+    <title>w8mngr | styleguide</title>
+    
+      <link rel="stylesheet" href="/assets/application-d171ddefe5974abd941738542ac8e15ea44e527711075c25383a9e673ebc88aa.css">
+    
+      <link rel="stylesheet" href="/assets/application-6e5a0aeff1cd41f54895872c10a84a6c17a3cc9e153e09b1f16a41dd0e5317cf.css">
+    
+      <link rel="stylesheet" href="/assets/application-3a7a50ae02170a1801733c1c91085209845ba0666746e278ec26cbe886d2ab4f.css">
+    
+      <link rel="stylesheet" href="/assets/application-dc421a35ff4967470863c6775efe678ff6fe3c0b210af21238342bce754bff43.css">
+    
+    <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" data-turbolinks-track="true">
+  </head>
+  <body>
+    <main class="main styleguide">
+
+      <h1>w8mngr | styleguide</h1>
+
+      <nav>
+        <ul>
+        
+          <li><a href="forms.html">forms</a></li>
+        
+          <li><a href="buttons.html">buttons</a></li>
+        
+          <li><a href="layout.html">layout</a></li>
+        
+          <li><a href="index.html">basics</a></li>
+        
+          <li><a href="navigation.html">navigation</a></li>
+        
+          <li><a href="cards.html">cards</a></li>
+        
+          <li><a href="messages.html">messages</a></li>
+        
+        </ul>
+      </nav>
+
+      <section>
+        <ul>
+        
+          <li><a href="#appform">Application Form</a></li>
+        
+          <li><a href="#apppanelform">Application Panel Form</a></li>
+        
+          <li><a href="#basicinputs">Basic Inputs</a></li>
+        
+          <li><a href="#checkboxlist">Checkbox List</a></li>
+        
+          <li><a href="#errorexplanations">Form Error Explanation</a></li>
+        
+          <li><a href="#formgroup">Form Group</a></li>
+        
+          <li><a href="#forminfo">Form Info</a></li>
+        
+          <li><a href="#formwell">Form  Well</a></li>
+        
+          <li><a href="#radiolist">Radio Lists</a></li>
+        
+          <li><a href="#rangeslidergroup">Range/Slider Group</a></li>
+        
+          <li><a href="#toggleswitch">Toggle Switch</a></li>
+        
+        </ul>
+<h1 id="appform" class="styleguide">Application Form</h1>
+<p class="styleguide">Forms for entering new data. Specifically-colored to ensure a consistent flow.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="app-form">
+  <form class="new_weight_entry" id="new_weight_entry" action="/weight_entries" accept-charset="UTF-8" method="post">
+    <input type="hidden" value="20160802" name="weight_entry[day]" id="weight_entry_day">
+    <div class="grid">
+      <div class="row">
+        <div class="col full">
+          <input placeholder="e.g., 165 lbs, 83.9kg, 12 stone, etc." class="large" type="text" name="weight_entry[value]" id="weight_entry_value">
+        </div>
+      </div>
+    </div>
+    <div class="btn-bar">
+      <div class="left"></div>
+      <div class="right">
+        <button name="button" type="submit" class="btn submit">
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"app-form"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"new_weight_entry"</span> <span class="na">id=</span><span class="s">"new_weight_entry"</span> <span class="na">action=</span><span class="s">"/weight_entries"</span> <span class="na">accept-charset=</span><span class="s">"UTF-8"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"20160802"</span> <span class="na">name=</span><span class="s">"weight_entry[day]"</span> <span class="na">id=</span><span class="s">"weight_entry_day"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col full"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">"e.g., 165 lbs, 83.9kg, 12 stone, etc."</span> <span class="na">class=</span><span class="s">"large"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"weight_entry[value]"</span> <span class="na">id=</span><span class="s">"weight_entry_value"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-bar"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">name=</span><span class="s">"button"</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn submit"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-plus"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;strong&gt;</span>New Entry<span class="nt">&lt;/strong&gt;</span>
+        <span class="nt">&lt;/button&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="apppanelform" class="styleguide">Application Panel Form</h1>
+<p class="styleguide">Forms for editing data entered via the Application Form. We style this a different
+color than the entry form for two reasons:</p><ol class="styleguide"><li><p class="styleguide">To deter editing, but not preclude it. It&#39;s easy to view in the format we want,
+but may not immediately indicate editing.</p></li>
+<li><p class="styleguide">To make it easy to understand that this data exists as a list, just like any
+other card and application panel.</p></li>
+</ol><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="foodlog app-panel app-panel-form">
+  <div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="A food entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div><div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="Another Food Entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"foodlog app-panel app-panel-form"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid entry fl-fade-transition"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"full meta"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn-icon delete"</span> <span class="na">title=</span><span class="s">"Delete Entry"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-times"</span><span class="nt">&gt;&lt;/i&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"screen-reader-text"</span><span class="nt">&gt;</span>Delete Entry<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col full"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"A food entry"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row macros"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Calories"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Fat"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Carbs"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Protein"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;&lt;div</span> <span class="na">class=</span><span class="s">"grid entry fl-fade-transition"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"full meta"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn-icon delete"</span> <span class="na">title=</span><span class="s">"Delete Entry"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-times"</span><span class="nt">&gt;&lt;/i&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"screen-reader-text"</span><span class="nt">&gt;</span>Delete Entry<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col full"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Another Food Entry"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row macros"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Calories"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Fat"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Carbs"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col short"</span> <span class="na">title=</span><span class="s">"Protein"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="basicinputs" class="styleguide">Basic Inputs</h1>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <input type="text" value="An input form">
+
+<input type="text" value="A large input form" class="large">
+
+<input type="email" placeholder="And a placeholder">
+
+<input type="password" placeholder="Password field">
+
+<label for="number-field">With a Label</label>
+<input type="number" value="24" placeholder="Number Field" id="number-field">
+
+<textarea>This is a text area that allows...
+...
+..
+/...
+Multiline text!</textarea>
+
+<select>
+  <option>Select Box</option>
+  <option>With Options!</option>
+</select>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"An input form"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"A large input form"</span> <span class="na">class=</span><span class="s">"large"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"And a placeholder"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">placeholder=</span><span class="s">"Password field"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"number-field"</span><span class="nt">&gt;</span>With a Label<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"number"</span> <span class="na">value=</span><span class="s">"24"</span> <span class="na">placeholder=</span><span class="s">"Number Field"</span> <span class="na">id=</span><span class="s">"number-field"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;textarea&gt;</span>This is a text area that allows...
+...
+..
+/...
+Multiline text!<span class="nt">&lt;/textarea&gt;</span>
+
+<span class="nt">&lt;select&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Select Box<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>With Options!<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="checkboxlist" class="styleguide">Checkbox List</h1>
+<p class="styleguide">A set of classes for creating a grouped list of checkboxes.</p><p class="styleguide"><strong>NB:</strong> To layout the ticks on your range slider, you must use inline styles.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <h3>Automatic Faturdays</h3>
+
+<p>These days will automagically be considered faturdays if you don't log
+calories by the end of the day. You can always go back and delete the
+faturday and log calories if you'd rather be specific.</p>
+
+<div class="faturday-days check-list">
+
+  <input type="checkbox" name="faturday[]" id="f-mo" value="mo" checked="checked">
+  <label for="f-mo">Monday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-tu" value="tu" checked="checked">
+  <label for="f-tu">Tuesday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-we" value="we" checked="checked">
+  <label for="f-we">Wednesday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-th" value="th" checked="checked">
+  <label for="f-th">Thursday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-fr" value="fr" checked="checked">
+  <label for="f-fr">Friday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-sa" value="sa" checked="checked">
+  <label for="f-sa">Saturday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-su" value="su" checked="checked">
+  <label for="f-su">Sunday</label>
+
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;h3&gt;</span>Automatic Faturdays<span class="nt">&lt;/h3&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>These days will automagically be considered faturdays if you don't log
+calories by the end of the day. You can always go back and delete the
+faturday and log calories if you'd rather be specific.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"faturday-days check-list"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-mo"</span> <span class="na">value=</span><span class="s">"mo"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-mo"</span><span class="nt">&gt;</span>Monday<span class="nt">&lt;/label&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-tu"</span> <span class="na">value=</span><span class="s">"tu"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-tu"</span><span class="nt">&gt;</span>Tuesday<span class="nt">&lt;/label&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-we"</span> <span class="na">value=</span><span class="s">"we"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-we"</span><span class="nt">&gt;</span>Wednesday<span class="nt">&lt;/label&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-th"</span> <span class="na">value=</span><span class="s">"th"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-th"</span><span class="nt">&gt;</span>Thursday<span class="nt">&lt;/label&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-fr"</span> <span class="na">value=</span><span class="s">"fr"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-fr"</span><span class="nt">&gt;</span>Friday<span class="nt">&lt;/label&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-sa"</span> <span class="na">value=</span><span class="s">"sa"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-sa"</span><span class="nt">&gt;</span>Saturday<span class="nt">&lt;/label&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday[]"</span> <span class="na">id=</span><span class="s">"f-su"</span> <span class="na">value=</span><span class="s">"su"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"f-su"</span><span class="nt">&gt;</span>Sunday<span class="nt">&lt;/label&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="errorexplanations" class="styleguide">Form Error Explanation</h1>
+<p class="styleguide">A set of classes for showing errors attached to certain forms.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <h1>Make an Account</h1>
+
+<div class="error-explanation">
+    <ul>
+        <li>Email can't be blank</li>
+        <li>Email is invalid</li>
+        <li>Password can't be blank</li>
+    </ul>
+</div>
+
+<label for="email">Email</label>
+<input type="email" name="email" id="email">
+
+<label for="password">Password</label>
+<input type="password" name="password" id="password">
+
+<label for="password_confirmation">Confirmation</label>
+<input type="password" name="password_confirmation" id="password_confirmation">
+
+<button name="button" type="submit" class="btn">
+    Step 2: Calculate Your TDEE
+</button>
+
+
+<hr>
+
+
+<div class="app-form">
+  <div class="error-explanation">
+    <ul>
+      <li>Value must be greater than 1359</li>
+    </ul>
+  </div>
+  <div class="field_with_errors">
+    <input placeholder="e.g., 165 lbs, 83.9kg, 12 stone, etc." class="large" type="text" value="" name="weight_entry[value]" id="weight_entry_value">
+  </div>
+  <div class="btn-bar">
+    <div class="left"></div>
+    <div class="right">
+      <button name="button" type="submit" class="btn submit">
+          <i class="fa fa-plus"></i>
+          <strong>New Entry</strong>
+      </button>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;h1&gt;</span>Make an Account<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"error-explanation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;</span>Email can't be blank<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>Email is invalid<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>Password can't be blank<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">id=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"password"</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">id=</span><span class="s">"password"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"password_confirmation"</span><span class="nt">&gt;</span>Confirmation<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">name=</span><span class="s">"password_confirmation"</span> <span class="na">id=</span><span class="s">"password_confirmation"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">name=</span><span class="s">"button"</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>
+    Step 2: Calculate Your TDEE
+<span class="nt">&lt;/button&gt;</span>
+
+
+<span class="nt">&lt;hr&gt;</span>
+
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"app-form"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"error-explanation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Value must be greater than 1359<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"field_with_errors"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">placeholder=</span><span class="s">"e.g., 165 lbs, 83.9kg, 12 stone, etc."</span> <span class="na">class=</span><span class="s">"large"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">""</span> <span class="na">name=</span><span class="s">"weight_entry[value]"</span> <span class="na">id=</span><span class="s">"weight_entry_value"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-bar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">name=</span><span class="s">"button"</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn submit"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-plus"</span><span class="nt">&gt;&lt;/i&gt;</span>
+          <span class="nt">&lt;strong&gt;</span>New Entry<span class="nt">&lt;/strong&gt;</span>
+      <span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="formgroup" class="styleguide">Form Group</h1>
+<p class="styleguide">A divider made to specify groups of form items (really, just uses our spacing well).</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="form-group">
+  <h2>Personal Info</h2>
+  <label>Email</label>
+  <input type="text" placeholder="Email address">
+  <label>Phone Number</label>
+  <input type="text" placeholder="Phone number">
+  <p class="form-info">For sending you personalized reminders...</p>
+</div>
+<div class="form-group">
+  <h2>Health</h2>
+  <label>Height</label>
+  <input type="text" placeholder="Height">
+  <label>Weight</label>
+  <input type="text" placeholder="Weight">
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Personal Info<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;label&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Email address"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label&gt;</span>Phone Number<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Phone number"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"form-info"</span><span class="nt">&gt;</span>For sending you personalized reminders...<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Health<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;label&gt;</span>Height<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Height"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label&gt;</span>Weight<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Weight"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="forminfo" class="styleguide">Form Info</h1>
+<p class="styleguide">A block-level class for giving users information about the preceding form element.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <h2>Personal Info</h2>
+<label>Email</label>
+<input type="text" placeholder="Email address">
+<label>Phone Number</label>
+<input type="text" placeholder="Phone number">
+<p class="form-info">For sending you personalized reminders...</p>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;h2&gt;</span>Personal Info<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;label&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Email address"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label&gt;</span>Phone Number<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Phone number"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"form-info"</span><span class="nt">&gt;</span>For sending you personalized reminders...<span class="nt">&lt;/p&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="formwell" class="styleguide">Form  Well</h1>
+<p class="styleguide">A well made to indicate configuration of a specific form option or field group.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="form-well">
+  <h3>Ingredients</h3>
+  <input type="text" placeholder="Ingredient name">
+  <input type="text" placeholder="Ingredient name">
+  <input type="text" placeholder="Ingredient name">
+  <button class="btn small">Save Ingredients</button>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-well"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3&gt;</span>Ingredients<span class="nt">&lt;/h3&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Ingredient name"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Ingredient name"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Ingredient name"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn small"</span><span class="nt">&gt;</span>Save Ingredients<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="radiolist" class="styleguide">Radio Lists</h1>
+<div class="codeExample">
+  <div class="exampleOutput">
+    <div class="radio-list">
+    <span class="header">Sex</span>
+
+    <input type="radio" name="sex" id="sex-f" value="f">
+    <label for="sex-f">Female</label>
+
+    <input type="radio" name="sex" id="sex-m" value="m" checked="checked">
+    <label for="sex-m">Male</label>
+
+    <input type="radio" name="sex" id="sex-na" value="na">
+    <label for="sex-na">Other / Prefer Not to Disclose</label>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"radio-list"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"header"</span><span class="nt">&gt;</span>Sex<span class="nt">&lt;/span&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"sex"</span> <span class="na">id=</span><span class="s">"sex-f"</span> <span class="na">value=</span><span class="s">"f"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"sex-f"</span><span class="nt">&gt;</span>Female<span class="nt">&lt;/label&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"sex"</span> <span class="na">id=</span><span class="s">"sex-m"</span> <span class="na">value=</span><span class="s">"m"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"sex-m"</span><span class="nt">&gt;</span>Male<span class="nt">&lt;/label&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"sex"</span> <span class="na">id=</span><span class="s">"sex-na"</span> <span class="na">value=</span><span class="s">"na"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"sex-na"</span><span class="nt">&gt;</span>Other / Prefer Not to Disclose<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="rangeslidergroup" class="styleguide">Range/Slider Group</h1>
+<p class="styleguide">A block-level set of classes for laying out sliders and providing description labels
+for certain points on the range.</p><p class="styleguide"><strong>NB:</strong> To layout the ticks on your range slider, you must use inline styles.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <div class="range-group">
+  <label for="activity_intensity">Intensity</label>
+  <input min="0" max="10" type="range" value="4" name="activity[intensity]" id="activity_intensity">
+  <div class="locations">
+    <div class="location-tick" style="left: 0">Light Walking</div>
+    <div class="location-tick" style="left: 50%; transform: translateX(-50%);">Weightlifting</div>
+    <div class="location-tick" style="right: 0">Sprints</div>
+  </div>
+</div>
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"range-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"activity_intensity"</span><span class="nt">&gt;</span>Intensity<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"10"</span> <span class="na">type=</span><span class="s">"range"</span> <span class="na">value=</span><span class="s">"4"</span> <span class="na">name=</span><span class="s">"activity[intensity]"</span> <span class="na">id=</span><span class="s">"activity_intensity"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"locations"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"location-tick"</span> <span class="na">style=</span><span class="s">"left: 0"</span><span class="nt">&gt;</span>Light Walking<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"location-tick"</span> <span class="na">style=</span><span class="s">"left: 50%; transform: translateX(-50%);"</span><span class="nt">&gt;</span>Weightlifting<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"location-tick"</span> <span class="na">style=</span><span class="s">"right: 0"</span><span class="nt">&gt;</span>Sprints<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<h1 id="toggleswitch" class="styleguide">Toggle Switch</h1>
+<p class="styleguide">A set of classes for creating a toggle switch. Can also be used to show otherwise-hidden
+panels when the toggle is activated.</p><div class="codeExample">
+  <div class="exampleOutput">
+    <input type="checkbox" name="faturday_enabled" id="ep-faturday-enabled" value="true" class="helper-input toggle-switch" checked="checked">
+<label for="ep-faturday-enabled">Toggle Faturdays</label>
+
+<br>
+
+<input type="checkbox" name="toggle_2" id="toggle-2" value="true" class="helper-input toggle-switch">
+<label for="toggle-2">Toggle Me to Show a Panel</label>
+<div class="helper-panel">
+  <h2>And here I am!</h2>
+</div>
+
+
+  </div>
+  <div class="codeBlock">
+    <div class="highlight">
+      <pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"faturday_enabled"</span> <span class="na">id=</span><span class="s">"ep-faturday-enabled"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="na">class=</span><span class="s">"helper-input toggle-switch"</span> <span class="na">checked=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"ep-faturday-enabled"</span><span class="nt">&gt;</span>Toggle Faturdays<span class="nt">&lt;/label&gt;</span>
+
+<span class="nt">&lt;br&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"toggle_2"</span> <span class="na">id=</span><span class="s">"toggle-2"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="na">class=</span><span class="s">"helper-input toggle-switch"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"toggle-2"</span><span class="nt">&gt;</span>Toggle Me to Show a Panel<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"helper-panel"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>And here I am!<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;/div&gt;</span></pre>
+    </div>
+  </div>
+</div>
+      </section>
+      <div class="styleguide-footer">
+        <p>This documentation generated using <a href="http://github.com/trulia/hologram">Hologram</a>
+      </div>
+    </main>
+  </body>
+</html>

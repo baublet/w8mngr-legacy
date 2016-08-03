@@ -15,16 +15,39 @@
 
   <h1><i class="fa fa-bolt"></i> Activities Database</h1>
 
-  <div class="page-meta">
+  <div class="page-meta btn-bar">
+    <div class="left">
       <%= link_to activities_path do %>
         <i class="fa fa-bolt"></i>
         My Activities
       <% end %>
+    </div>
+    <div class="right">
+      <%= render "filters" %>
+    </div>
   </div>
 
-  <%= render "filters" %>
+  <% unless params.try(:[], :q).nil? && params.try(:[], :activity).try(:[], :muscle_groups).nil? %>
+    <div class="search-results">
 
-  <div class="activities">
+      <div class="clear-search">
+        <a href="?">(clear)</a>
+      </div>
+
+      Searching for activities
+      <% unless params.try(:[], :activity).try(:[], :muscle_groups).nil? %>
+        targeting
+        <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
+          <% if params[:activity][:muscle_groups].include?(name) %><em class="pill"><%= name %></em><% end %>
+        <% end %>
+      <% end %>
+      <% unless params.try(:[], :q).nil? || params[:q].empty? %>
+        using the search term <em><%= params[:q] %></em>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="activities card-grid">
     <%= render  partial: "activity_short",
                 collection: @activities,
                 as: :activity,

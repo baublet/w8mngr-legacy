@@ -1,0 +1,608 @@
+/*doc
+---
+title: Basic Inputs
+name: basicinputs
+category: forms
+---
+
+```html_example
+<input type="text" value="An input form">
+
+<input type="text" value="A large input form" class="large">
+
+<input type="email" placeholder="And a placeholder">
+
+<input type="password" placeholder="Password field">
+
+<label for="number-field">With a Label</label>
+<input type="number" value="24" placeholder="Number Field" id="number-field">
+
+<textarea>This is a text area that allows...
+...
+..
+/...
+Multiline text!</textarea>
+
+<select>
+  <option>Select Box</option>
+  <option>With Options!</option>
+</select>
+```
+*/
+
+input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
+  padding: .4rem;
+  color: $black;
+  background: $white;
+  border: 1px solid lighten($black, 60%);
+  font-family: $font-stack;
+  border-radius: 2px;
+  width:100%;
+  display: block;
+  margin-bottom: $spacing-small;
+  font-size: $font-size-normal;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    border-color: lighten($black, 30%);
+  }
+  &:focus {
+    color: $black;
+    border-color: $black;
+    box-shadow: 0 0 10px rgba($color-primary-light, .5);
+  }
+  .large &, &.large {
+    font-size: $font-size-huge;
+    font-weight: normal;
+  }
+  .small &, &.small {
+    font-size: $font-size-small;
+  }
+  @include placeholder() {
+    font-family: $font-stack;
+  }
+  &:target {
+    box-shadow: 0 0 0 .5rem rgba($red, .15);
+  }
+}
+
+select {
+  width: auto;
+  min-width: 200px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+  height: 20em;
+}
+
+label, .label {
+  font-weight: bold;
+  font-size: $font-size-small;
+  margin-bottom: $spacing-tiny;
+  display: inline-block;
+  cursor: pointer;
+  &.optional:after {
+    display: inline-block;
+    font-size: $font-size-small;
+    color: rgba($black, .5);
+    font-variant: italic;
+    content: "optional";
+    padding-left: $spacing-large;
+  }
+  &.req:after {
+    display: none;
+  }
+}
+
+/*doc
+---
+title: Radio Lists
+name: radiolist
+category: forms
+---
+
+```html_example
+<div class="radio-list">
+	<span class="header">Sex</span>
+
+	<input type="radio" name="sex" id="sex-f" value="f">
+	<label for="sex-f">Female</label>
+
+	<input type="radio" name="sex" id="sex-m" value="m" checked="checked">
+	<label for="sex-m">Male</label>
+
+	<input type="radio" name="sex" id="sex-na" value="na">
+	<label for="sex-na">Other / Prefer Not to Disclose</label>
+</div>
+```
+*/
+.radio {
+    label, input[type=radio] {
+        display: inline-block;
+    }
+}
+
+.radio-list {
+  position: relative;
+    padding: 1rem 1rem 1rem 6rem;
+    margin-bottom: 2rem;
+    input[type=radio] {
+        display: none;
+    }
+    label {
+      padding: 0 0 0 $spacing-small;
+      display: block;
+      clear: right;
+      cursor: pointer;
+      color: rgba($black, .75);
+      margin-right: .5rem;
+      margin-left: $spacing-normal;
+      position: relative;
+      font-size: $font-size-normal;
+      font-weight: normal;
+      &:hover {
+          color: $black;
+      }
+      &:before {
+          position: absolute;
+          left: -$spacing-normal;
+          top: 50%;
+          transform: translateY(-50%);
+          font-family: "FontAwesome";
+          font-size: $font-size-normal;
+          content: "\f10c";
+      }
+    }
+    input[type=radio]:checked + label {
+        color: $color-primary;
+        &::before {
+            content: "\f192";
+        }
+    }
+    .header {
+      position: absolute;
+      top: $spacing-normal;
+      left: 0;
+      display: block;
+        text-transform: uppercase;
+        font-size: $font-size-large;
+        font-weight: lighter;
+    }
+}
+
+/*doc
+---
+title: Application Form
+name: appform
+category: forms
+---
+
+Forms for entering new data. Specifically-colored to ensure a consistent flow.
+
+```html_example
+<div class="app-form">
+  <form class="new_weight_entry" id="new_weight_entry" action="/weight_entries" accept-charset="UTF-8" method="post">
+    <input type="hidden" value="20160802" name="weight_entry[day]" id="weight_entry_day">
+    <div class="grid">
+      <div class="row">
+        <div class="col full">
+          <input placeholder="e.g., 165 lbs, 83.9kg, 12 stone, etc." class="large" type="text" name="weight_entry[value]" id="weight_entry_value">
+        </div>
+      </div>
+    </div>
+    <div class="btn-bar">
+      <div class="left"></div>
+      <div class="right">
+        <button name="button" type="submit" class="btn submit">
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+```
+*/
+.app-form {
+    background: $color-primary;
+    @include height(1);
+    color: $white;
+    padding: $spacing-small;
+    margin: 0 0 $spacing-large;
+    width: 460px;
+    max-width: 100%;
+    &:hover {
+      @include height(3);
+    }
+    input {
+        margin-bottom: 0;
+        &.large {
+            font-size: $font-size-large;
+        }
+        @include placeholder {
+          color: rgba($white, .5);
+          font-size: 90%;
+        }
+        &:focus, &:hover {
+          box-shadow: none;
+          outline: none;
+        }
+    }
+    input[type=text], input[type=number] {
+        color: rgba($white, .5);
+        background: transparent;
+        background: linear-gradient(0deg, rgba($white, .25) 1px, rgba($white, 0) 1px);
+        border: 0;
+        border-radius: 0;
+        padding: .25rem 0;
+        &:hover {
+          color: rgba($white, .75);
+          background: linear-gradient(0deg, rgba($white, .5)  1px, rgba($white, 0) 1px);
+        }
+        &:focus {
+          color: rgba($white, .85);
+          background: linear-gradient(0deg, rgba($white, .75) 3px, rgba($white, 0) 3px);
+        }
+    }
+    .large {
+      font-size: $font-size-large;
+    }
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+}
+
+/*doc
+---
+title: Application Panel Form
+name: apppanelform
+category: forms
+---
+
+Forms for editing data entered via the Application Form. We style this a different
+color than the entry form for two reasons:
+
+1. To deter editing, but not preclude it. It's easy to view in the format we want,
+   but may not immediately indicate editing.
+
+2. To make it easy to understand that this data exists as a list, just like any
+   other card and application panel.
+
+```html_example
+<div class="foodlog app-panel app-panel-form">
+  <div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="A food entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div><div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="Another Food Entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div>
+</div>
+```
+*/
+.app-panel-form {
+  padding: $spacing-small;
+  .grid .row {
+    margin-bottom: $spacing-small;
+    justify-content: space-between;
+  }
+  .grid .col {
+    width: calc(25% - #{$spacing-small});
+  }
+  input {
+    color: rgba($black, .75);
+    border: 0;
+    background: transparent;
+    background: linear-gradient(0deg, rgba($black, .01) 1px, rgba($black, 0) 1px);
+    border-radius: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    &:hover {
+      background: linear-gradient(0deg, rgba($black, .5) 1px, rgba($black, 0) 1px);
+    }
+    &:focus {
+      background: linear-gradient(0deg, rgba($black, .9) 3px, rgba($black, 0) 3px);
+      box-shadow: none;
+      outline: none;
+    }
+    @include placeholder {
+      color: rgba($black, .5);
+      font-size: 80%;
+    }
+  }
+  // Full-size elements will have larger fonts
+  .full input {
+    font-size: $font-size-large;
+  }
+}
+
+/*doc
+---
+title: Checkbox List
+name: checkboxlist
+category: forms
+---
+
+A set of classes for creating a grouped list of checkboxes.
+
+<strong>NB:</strong> To layout the ticks on your range slider, you must use inline styles.
+
+```html_example
+<h3>Automatic Faturdays</h3>
+
+<p>These days will automagically be considered faturdays if you don't log
+calories by the end of the day. You can always go back and delete the
+faturday and log calories if you'd rather be specific.</p>
+
+<div class="faturday-days check-list">
+
+  <input type="checkbox" name="faturday[]" id="f-mo" value="mo" checked="checked">
+  <label for="f-mo">Monday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-tu" value="tu" checked="checked">
+  <label for="f-tu">Tuesday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-we" value="we" checked="checked">
+  <label for="f-we">Wednesday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-th" value="th" checked="checked">
+  <label for="f-th">Thursday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-fr" value="fr" checked="checked">
+  <label for="f-fr">Friday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-sa" value="sa" checked="checked">
+  <label for="f-sa">Saturday</label>
+
+  <input type="checkbox" name="faturday[]" id="f-su" value="su" checked="checked">
+  <label for="f-su">Sunday</label>
+
+</div>
+```
+*/
+.check-list {
+  @include height(1);
+  margin-bottom: $spacing-large;
+  input {
+    display: none;
+  }
+  label {
+    display: block;
+    text-transform: none;
+    padding: $spacing-normal $spacing-normal $spacing-normal $spacing-large;
+    color: rgba($black, .5);
+    background: $white;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    font-size: $font-size-normal;
+    &:before {
+      content: "\f10c";
+      font-family:"FontAwesome";
+      position: absolute;
+      left: $spacing-small;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &:hover {
+      background: $white;
+      color: $black;
+    }
+  }
+  input:first-child + label {
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+  label + input + label {
+    border-top: 1px solid rgba($black, .15);
+  }
+  input:checked + label {
+    background: $color-primary;
+    color: $white;
+    &:before {
+      content: "\f00c";
+      left: $spacing-small;
+      font-size: $font-size-large;
+    }
+    &:hover {
+      background: $color-primary-light;
+    }
+  }
+  label:last-child {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+}
+
+/*doc
+---
+title: Range/Slider Group
+name: rangeslidergroup
+category: forms
+---
+
+A block-level set of classes for laying out sliders and providing description labels
+for certain points on the range.
+
+<strong>NB:</strong> To layout the ticks on your range slider, you must use inline styles.
+
+```html_example
+<div class="range-group">
+  <label for="activity_intensity">Intensity</label>
+  <input min="0" max="10" type="range" value="4" name="activity[intensity]" id="activity_intensity">
+  <div class="locations">
+    <div class="location-tick" style="left: 0">Light Walking</div>
+    <div class="location-tick" style="left: 50%; transform: translateX(-50%);">Weightlifting</div>
+    <div class="location-tick" style="right: 0">Sprints</div>
+  </div>
+</div>
+```
+*/
+input[type=range] {
+  width: 100%;
+}
+
+.range-group {
+  margin: 0 0 $spacing-large 0;
+  cursor: pointer;
+  .locations {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  .location-tick {
+    position: absolute;
+    top: 0;
+    font-weight: bold;
+    font-size: $font-size-tiny;
+    color: rgba($black, .5);
+  }
+}
+
+/*doc
+---
+title: Form Info
+name: forminfo
+category: forms
+---
+
+A block-level class for giving users information about the preceding form element.
+
+```html_example
+<h2>Personal Info</h2>
+<label>Email</label>
+<input type="text" placeholder="Email address">
+<label>Phone Number</label>
+<input type="text" placeholder="Phone number">
+<p class="form-info">For sending you personalized reminders...</p>
+```
+*/
+.form-info {
+  font-size: $font-size-small;
+  font-style: italic;
+}
+
+/*doc
+---
+title: Form Group
+name: formgroup
+category: forms
+---
+
+A divider made to specify groups of form items (really, just uses our spacing well).
+
+```html_example
+<div class="form-group">
+  <h2>Personal Info</h2>
+  <label>Email</label>
+  <input type="text" placeholder="Email address">
+  <label>Phone Number</label>
+  <input type="text" placeholder="Phone number">
+  <p class="form-info">For sending you personalized reminders...</p>
+</div>
+<div class="form-group">
+  <h2>Health</h2>
+  <label>Height</label>
+  <input type="text" placeholder="Height">
+  <label>Weight</label>
+  <input type="text" placeholder="Weight">
+</div>
+```
+*/
+
+.form-group {
+  margin-bottom: $spacing-large;
+}
+
+/*doc
+---
+title: Form  Well
+name: formwell
+category: forms
+---
+
+A well made to indicate configuration of a specific form option or field group.
+
+```html_example
+<div class="form-well">
+  <h3>Ingredients</h3>
+  <input type="text" placeholder="Ingredient name">
+  <input type="text" placeholder="Ingredient name">
+  <input type="text" placeholder="Ingredient name">
+  <button class="btn small">Save Ingredients</button>
+</div>
+```
+*/
+.form-well {
+  margin: 0 -#{$spacing-large} $spacing-large;
+  padding: $spacing-normal;
+  padding-left: $spacing-large;
+  padding-right: $spacing-large;
+  border: rgba($black, .25);
+  background: rgba($black, .05);
+  @include height(-3);
+  border-radius: 5px;
+  @include mqAfterSize($desktop-breakpoint) {
+    margin: 0 0 $spacing-large;
+    padding: $spacing-normal;
+  }
+}

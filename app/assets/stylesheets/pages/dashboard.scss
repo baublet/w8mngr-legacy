@@ -1,0 +1,20 @@
+.user-stats {
+  background: $color-primary;
+  color: $white;
+  text-align: center;
+  border-radius: 5px;
+  .col:first-child {
+    padding-right: $spacing-small;
+  }
+  .col:last-child {
+    padding-left: $spacing-small;
+  }
+  label {
+    margin: 0;
+  }
+}
+
+.week-review .day {
+  font-weight: bold;
+}
+

@@ -1,0 +1,230 @@
+.nav-toggle {
+    display:none;
+    @include mqBeforeSize($desktop-breakpoint) {
+      &:checked ~ .navigation-options {
+        transform: translateX(-290px);
+      }
+      &:checked ~ .nav-toggle-btn {
+          position: fixed;
+          color: $white;
+          &:after {
+              content: "\f0da";
+          }
+      }
+    }
+}
+
+.nav-toggle-btn {
+    position: absolute;
+    z-index: $layer-options-panel + 10;
+    font-family: "FontAwesome";
+    cursor: pointer;
+    font-size: $font-size-large;
+    padding: $font-size-tiny $font-size-small;
+    color: $white;
+    right: $spacing-normal;
+    top: $spacing-normal;
+    &:hover, &:focus {
+        color: $color-primary-light;
+    }
+    &:after {
+        content: "\f0c9";
+    }
+    @include mqAfterSize($desktop-breakpoint) {
+      display: none;
+    }
+}
+.welcome.index .navigation-options {
+  padding: $spacing-normal;
+}
+.navigation-options {
+    background: darken($color-primary, 15);
+    background: linear-gradient(-25deg, darken($color-primary, 5), $color-primary);
+    padding: $spacing-normal;
+    border-top-right-radius: 0;
+    width: 280px;
+    position: fixed;
+    z-index: $layer-options-panel;
+    top: 0;
+    right: -290px;
+    transition: transform .5s $easing-1;
+    box-shadow: 0 0 15px 0 rgba(black, .75);
+    height: 100vh;
+    overflow-y: auto;
+    @include mqAfterSize($desktop-breakpoint) {
+      width: calc(100vw - (200px + 3rem));
+      position: static;
+      right: auto;
+      top: auto;
+      background: transparent;
+      float: right;
+      box-shadow: none;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      overflow-y: visible;
+    }
+}
+.navigation-title {
+    font-size: $font-size-small;
+    text-transform:uppercase;
+    margin: $spacing-normal 0 $spacing-normal;
+    font-weight: bold;
+    @include mqAfterSize($desktop-breakpoint) {
+      display: none;
+    }
+}
+.navigation-list {
+    list-style-type: none;
+    padding: 0;
+    font-weight: normal;
+    font-size: .7rem;
+    position: relative;
+    z-index: $layer-options-panel;
+    margin-bottom: 0;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    @include mqAfterSize($desktop-breakpoint) {
+      display: flex;
+      justify-content: flex-end;
+      li {
+        margin: 0;
+        padding: 0;
+        + li {
+          margin-left: $spacing-small;
+        }
+      }
+    }
+    li > a {
+        display: block;
+        color: rgba($white, .75);
+        font-weight: bold;
+        padding: $spacing-small;
+        border-radius: 3px;
+        &:hover {
+            background: $color-primary;
+            color: $white;
+            text-decoration:none;
+        }
+    }
+    .sep {
+        margin-top: $spacing-normal;
+        padding-top: $spacing-normal;
+        border-top: 1px dashed rgba($white, .5);
+        @include mqAfterSize($desktop-breakpoint) {
+          cursor: pointer;
+          border: 0;
+          position: relative;
+          margin: 0;
+          padding: 0;
+          margin-left: $spacing-small;
+          &.login ul {
+            padding: 1rem;
+            width: 300px;
+            a {
+              color: lighten($color-primary, 15);
+              &:hover {
+                color: $white;
+                background: transparent;
+              }
+            }
+          }
+          ul {
+            display: none;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            min-width: 200px;
+            li {
+              padding: 0;
+              margin: 0;
+              &:first-child a {
+                border-top-left-radius: 5px;
+              }
+              &:last-child a {
+                border-radius: 5px;
+                border-top-right-radius: 0;
+                border-top-left-radius: 0;
+              }
+            }
+            a {
+              background: $color-primary;
+              border-radius: 0;
+              &:hover {
+                background: lighten($color-primary, 15);
+              }
+            }
+          }
+          &:hover {
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            background: $color-primary;
+          }
+          &:hover ul {
+            border-radius: 5px;
+            border-top-right-radius: 0;
+            @include height(2);
+            position: absolute;
+            display: block;
+            right: 0;
+            top: 99%;
+            background: $color-primary;
+          }
+          h2 {
+            margin: 0;
+            font-size: 100%;
+            padding: $spacing-small;
+            color: rgba($white, .75);
+            font-weight: bold;
+            background: rgba($white, .05);
+            border-radius: 3px;
+            .fa {
+              opacity: 1;
+              font-size: 100%;
+            }
+          }
+        }
+    }
+}
+
+nav .login {
+    h2 .fa {
+      margin-right: $spacing-tiny;
+    }
+    .btn-bar.form-group {
+      margin-bottom: 0;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        margin-bottom: $spacing-small;
+        font-size: $font-size-normal;
+    }
+    .btn {
+        background: $color-primary-light;
+        margin-bottom: 0;
+        font-size: $font-size-small;
+        float: right;
+        width: auto;
+        padding: $spacing-small;
+        &:hover {
+            background-color: lighten($black, 15);
+        }
+        &:active {
+            margin-bottom: 0;
+        }
+    }
+    label {
+        display: none;
+    }
+    .pill {
+      color: rgba($white, .5);
+      border-radius: 3px !important;
+      border-color: rgba($white, .25);
+      &:hover, &:focus {
+        color: $white;
+        border-color: $white;
+      }
+    }
+}

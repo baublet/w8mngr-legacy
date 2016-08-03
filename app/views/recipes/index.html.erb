@@ -24,20 +24,8 @@
 
   <% if !@recipes.nil? && @recipes.size > 0 %>
 
-  <div class="recipes-table">
-  <% @recipes.each do |recipe| %>
-      <div class="row">
-          <div class="col long">
-              <%= render recipe %>
-          </div>
-          <div class="col meta">
-              <%= link_to delete_recipe_path(recipe), :class => 'btn delete-btn' do %>
-                  <i class="fa fa-cross"></i>
-                  <span class="screen-reader-text">Delete</span>
-              <% end %>
-          </div>
-    </div>
-  <% end %>
+  <div class="card-grid">
+    <%= render @recipes %>
   </div>
 
   <% else %>

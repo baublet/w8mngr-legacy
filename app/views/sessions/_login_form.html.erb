@@ -7,9 +7,16 @@
     	<%= f.label :password %>
     	<%= f.password_field :password, placeholder: 'Password' %>
 
-    	<div class="meta">
-            <%= link_to 'Forgot Password', new_password_reset_path %>
-            <%= f.button "Log in", class: "btn" %>
+    	<div class="btn-bar form-group">
+    	    <div class="left">
+                <%= link_to 'Forgot Password', new_password_reset_path, class: "pill" %>
+            </div>
+            <div class="right">
+                <%= f.button class: "btn" do %>
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    Login
+                <% end %>
+            </div>
         </div>
     <% end %>
 </div>

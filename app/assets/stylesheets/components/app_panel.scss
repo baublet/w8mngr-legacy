@@ -1,0 +1,124 @@
+/*doc
+---
+title: Application Panels
+name: apppanel
+category: layout
+---
+
+Used to indicate some information that can be added to, subtracted from, or
+otherwise manipulated in the course of using our application. They are typically
+forms, but not always. They differ from cards in that they are always full-width.
+
+```html_example
+<div class="app-panel">
+  <div class="full meta">
+    <a href="#" class="btn-icon delete" title="Delete Entry">
+      <i class="fa fa-times"></i>
+      <span class="screen-reader-text">Delete Entry</span>
+    </a>
+  </div>
+  <h2>A Simple Example</h2>
+  <p>This is an example that's not much different from a card.</p>
+</div>
+
+<h2>Complicated Example</h2>
+
+<div class="foodlog app-panel app-panel-form">
+  <div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="A food entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div><div class="grid entry fl-fade-transition">
+    <div class="full meta">
+      <a href="#" class="btn-icon delete" title="Delete Entry">
+        <i class="fa fa-times"></i>
+        <span class="screen-reader-text">Delete Entry</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col full">
+        <input type="text" value="Another Food Entry">
+      </div>
+    </div>
+    <div class="row macros">
+      <div class="col short" title="Calories">
+        <input type="text" value="1">
+      </div>
+      <div class="col short" title="Fat">
+        <input type="text" value="2">
+      </div>
+      <div class="col short" title="Carbs">
+        <input type="text" value="3">
+      </div>
+      <div class="col short" title="Protein">
+        <input type="text" value="4">
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+
+.app-panel {
+  padding: $spacing-small;
+  width:100%;
+  background: $white;
+  @include height(1);
+  transition: box-shadow .15s ease-in-out;
+  margin-bottom: $spacing-large;
+  position: relative;
+  &:hover {
+    @include height(3);
+  }
+  .long {
+    @include mqAfterSize(640px) {
+      width:60%;
+      padding: 0 1rem 0 0;
+    }
+    input {
+      font-size: .9rem;
+      padding:0;
+      color: rgba($black, .75);
+      font-weight: bold;
+      @include mqAfterSize(640px) {
+        font-size: 1.3rem;
+        font-weight: 400;
+        height: 100%;
+        padding-bottom: .25rem;
+      }
+    }
+  }
+}
+
+.app-panel .meta {
+  position: absolute;
+  top: 50%;
+  right: $spacing-small;
+  transform: translateY(-50%);
+  .fa {
+    margin: 0;
+  }
+}

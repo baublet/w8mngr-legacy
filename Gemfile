@@ -39,9 +39,6 @@ gem "httparty"
 # For our tags!
 gem "acts-as-taggable-on"
 
-# Webpack for rails
-gem "webpack-rails"
-
 # Resque, our queueing engine
 gem "resque"
 
@@ -51,18 +48,15 @@ gem "postmark"
 # For our charting, groupdate and calculate_all makes things easier
 gem "groupdate"
 
-# Testing-related gems
-gem "codeclimate-test-reporter", group: :test, require: nil
-# Allows us to test JS in integration tests
-gem "capybara", group: :test
-# Required to runcapybaray webkit without a true display
-# Requires sudo apt-get install xvfb
-gem "headless", group: :test
-# Our driver that will be executing JS
-# Requires: sudo apt-get install libqt4-dev libqtwebkit-dev
-gem "capybara-webkit", group: :test
+# Webpack for rails
+gem "webpack-rails"
+
 
 group :development, :test do
+
+    # For helping us estimate test coverate
+    gem "codeclimate-test-reporter", group: :test, require: nil
+
     gem "sqlite3"
     gem "byebug"
     gem "web-console", "~> 2.0"
@@ -70,6 +64,13 @@ group :development, :test do
     gem "therubyracer", platforms: :ruby
     gem "foreman"
     gem "brakeman"
+    gem "bullet"
+    gem "hologram"
+
+    gem "guard", :require => false
+
+    # For generating fake data
+    gem "faker"
 end
 
 

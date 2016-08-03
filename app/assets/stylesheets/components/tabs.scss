@@ -1,0 +1,66 @@
+/*doc
+---
+title: Tabs
+name: tabs
+category: layout
+---
+
+Here, we use our helper inputs to create tabs. In the future, we'll use Javascript
+to make sure our tabs display corresponding to the selected tab.
+
+```html_example
+<div class="helper-tabs">
+  <ul>
+    <li><label for="tab-one">Tab One</label></li>
+    <li><label for="tab-two">Tab Two</label></li>
+  </ul>
+</div>
+
+<input type="radio" class="helper-input" name="tabs" id="tab-one" checked>
+<div class="helper-panel">
+  <h1>This is Tab One</h1>
+</div>
+
+<input type="radio" class="helper-input" name="tabs" id="tab-two">
+<div class="helper-panel">
+  <h1>This is Tab Two</h1>
+</div>
+```
+*/
+
+.helper-tabs {
+  margin: 0 0 $spacing-normal 0;
+  ul {
+    padding: 0 $spacing-small;
+    margin: 0;
+    display: flex;
+    align-items: flex-end;
+    background: linear-gradient(0deg,
+                  transparent 1px,
+                  lighten($black, 30) 2px,
+                  transparent 2px);
+  }
+  li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  label {
+    text-align: center;
+    display: block;
+    padding: $spacing-small;
+    margin: 0;
+    font-size: .6rem;
+    line-height: .6rem;
+    cursor: pointer;
+    color: rgba($black, .75);
+    border: 1px solid transparent;
+    border-bottom: 0;
+    transition: all .15s ease-in-out;
+    &:hover, &.selected {
+      color: $black;
+      border-color: lighten($black, 50%);
+      background: darken($white, 5%);
+    }
+  }
+}

@@ -1,27 +1,55 @@
-<%= form_for(@food, :html => {:class => "food-form"}) do |f| %>
+<%= form_for @food, :html => { class: "food-form" } do |f| %>
 
     <% if @food.errors.any? %>
         <%= render partial: "shared/error_messages", locals: {errors: @food.errors} %>
     <% end %>
 
-    <div class="info">
+    <div class="form-group">
         <%= f.label :name, :class => "req" %>
-        <%= f.text_field :name, placeholder: "Food Name", class: "name" %>
+        <%= f.text_field :name, placeholder: "Food Name", class: "name input-large" %>
 
         <%= f.label :description %>
         <%= f.text_area :description, placeholder: "Description" %>
     </div>
 
-    <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
+    <div class="form-group">
+        <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
+        <% if @food.id.nil? %>
+            <p>Each food requires at least one measurement, be it by cups, weight, cookie, slice, or whatever. Because foods can come in many different variations, weights, shapes, and sizes, you can add multiple measurements to allow for easier tracking.</p>
+        <% end %>
+        <div class="card-grid">
+            <%= render partial: "measurements/measurement_form", collection: @food.measurements, as: :measurement %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h2><i class="fa fa-pie-chart"></i> New Measurement</h2>
+        <p class="form-info">Leave blank if you don't wish to add a new measurement.</p>
+        <%= render partial: "measurements/measurement_form", locals: {measurement: @newmeasurement} %>
+    </div>
 
     <% if @food.id.nil? %>
-        <p>Each food requires at least one measurement, be it by cups, weight, cookie, slice, or whatever. Because foods can come in many different variations, weights, shapes, and sizes, you can add multiple measurements to allow for easier tracking.</p>
+        <%= f.button class: "btn" do %>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Create Food
+        <% end %>
+    <% else %>
+        <div class="btn-bar">
+            <div class="left">
+                <%= link_to food_delete_path(@food), class: "btn-meta delete",  title: "Delete Food " + @food.name do %>
+                  Delete Food
+                  <span class="btn-text screen-reader-text"><%= @food.name %></span>
+                <% end %>
+            </div>
+
+            <div class="right">
+                <%= f.button class: "btn" do %>
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    Save Food
+                    <span class="screen-reader-text"><%= @food.name %></span>
+                <% end %>
+            </div>
+        </div>
     <% end %>
-
-    <%= render @food.measurements %>
-
-    <%= render @newmeasurement %>
-
-    <%= f.button (@food.id.nil?) ? "Create Food" : "Save Food", class: "btn" %>
 
 <% end %>

@@ -14,9 +14,8 @@
   </div>
 
   <div class="section-inside" style="position:relative;">
-    <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom loading"></i>
     <h1><i class="fa fa-cutlery"></i> Food Log</h1>
-    <div class="foodlog-table app-form transparent table" v-if="entries.length > 0">
+    <div class="foodlog app-panel app-panel-form" v-if="entries.length > 0">
       <food-entry v-for="entry in entries"
                   :id="entry.id"
                   :index="$index"
@@ -29,18 +28,30 @@
 
     <p v-if="entries.length < 1">You have not logged any entries today. Add some via the form below!</p>
 
-    <div class="row header totals" v-if="entries.length > 0">
-      <div class="col long">Totals:</div>
-      <a href="/users/{{ user.id }}/edit?p=health#target_calories" class="tooltip" v-bind:class="{ show: overTotalCalories }">Why is this red?</a>
-      <div class="col" title="Calories" v-text="totalCalories.toLocaleString()" v-bind:class="{ over: overTotalCalories }"></div>
-      <div class="col" title="Fat" v-text="totalFat.toLocaleString()"></div>
-      <div class="col" title="Carbs" v-text="totalCarbs.toLocaleString()"></div>
-      <div class="col" title="Protein" v-text="totalProtein.toLocaleString()"></div>
+    <div class="totals" v-if="entries.length > 0">
+      <h2 class="screen-reader-text">Today's Totals:</h2>
+      <a href="/users/{{ user.id }}/edit?p=health#target_calories" class="tooltip" v-if="overTotalCalories">Why is this red?</a>
+      <div title="Calories">
+        <span class="number" v-text="totalCalories.toLocaleString()" v-bind:class="{ over: overTotalCalories }"></span>
+        <span class="label">Calories</span>
+        </div>
+      <div title="Fat">
+        <span class="number" v-text="totalFat.toLocaleString()"></span>
+        <span class="label">Fat</span>
+      </div>
+      <div title="Carbs">
+        <span class="number" v-text="totalCarbs.toLocaleString()"></span>
+        <span class="label">Carbs</span>
+      </div>
+      <div title="Protein">
+        <span class="number" v-text="totalProtein.toLocaleString()"></span>
+        <span class="label">Protein</span>
+      </div>
     </div>
 
-    <div class="app-form new table">
-      <div class="row new">
-        <div class="col long">
+    <div class="app-form food-entries grid">
+      <div class="row">
+        <div class="col full">
           <input  type="text"
                   @keyup.enter="addEntry"
                   @keyup.up="prevAutocompleteItem"
@@ -49,44 +60,55 @@
                   @keyup.left="previousMeasurement()"
                   debounce="500"
                   v-model="newDescription"
-                  placeholder="Description" autofocus="autofocus" id="description-input">
+                  placeholder="Description" autofocus="autofocus" id="description-input"
+                  class="large">
         </div>
-        <div class="col short" title="Calories">
+      </div>
+      <div class="row macros">
+        <div class="col" title="Calories">
           <input type="text" @keyup.enter="addEntry" v-model="newCalories" placeholder="Calories">
         </div>
-        <div class="col short" title="Fat">
+        <div class="col" title="Fat">
           <input type="text" @keyup.enter="addEntry" v-model="newFat" placeholder="Fat">
         </div>
-        <div class="col short" title="Carbs">
+        <div class="col" title="Carbs">
           <input type="text" @keyup.enter="addEntry" v-model="newCarbs" placeholder="Carbs">
         </div>
-        <div class="col short" title="Protein">
+        <div class="col" title="Protein">
           <input type="text" @keyup.enter="addEntry" v-model="newProtein" placeholder="Protein">
         </div>
-        <div class="col meta">
-          <a class="btn faturday-btn" alt="Make this day a Faturday!"
-             title="Make this day a Faturday!" v-if="user.preferences.faturday_enabled == 'true'"
-             @click="faturday()">
-            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-            <span class="screen-reader-text">Faturday</span>
-          </a>
-          <a class="btn faturday-btn disabled" alt="Faturdays are disabled..."
-             title="Faturdays are disabled..." v-else>
-            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-            <span class="screen-reader-text">Faturday</span>
-          </a>
-          <a class="btn barcode-btn" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
-            <i class="fa fa-barcode"></i>
-            <span class="screen-reader-text">Scan Barcode</span>
-          </a>
-          <a class="btn search-btn" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
-            <i class="fa fa-search"></i>
-            <span class="screen-reader-text">Search for Foods</span>
-          </a>
-          <button name="button" type="submit" class="btn food-log-new-btn" @click.stop.prevent="addEntry">
-            <i class="fa fa-plus"></i>
-            <strong>New Entry</strong>
-          </button>
+      </div>
+      <div class="row">
+        <div class="col full">
+          <div class="btn-bar">
+            <div class="left">
+              <a class="btn-icon" alt="Make this day a Faturday!"
+                 title="Make this day a Faturday!" v-if="user.preferences.faturday_enabled == 'true'"
+                 @click="faturday()">
+                <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                <span class="screen-reader-text">Faturday</span>
+              </a>
+              <a class="btn-icon disabled" alt="Faturdays are disabled..."
+                 title="Faturdays are disabled..." v-else>
+                <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                <span class="screen-reader-text">Faturday</span>
+              </a>
+            </div>
+            <div class="right">
+              <a class="btn-icon" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
+                <i class="fa fa-barcode"></i>
+                <span class="screen-reader-text">Scan Barcode</span>
+              </a>
+              <a class="btn-icon" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
+                <i class="fa fa-search"></i>
+                <span class="screen-reader-text">Search for Foods</span>
+              </a>
+              <button name="button" type="submit" class="btn btn-submit" @click.stop.prevent="addEntry">
+                <i class="fa fa-plus"></i>
+                <strong>New Entry</strong>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -117,13 +139,19 @@
                          @add-entry="addEntry()"
                          @fill-in-form="fillInForm($arguments[0])"
                          transition="ac-fade" stagger="20"></autocomplete-item>
-      <div class="pagination" v-if="(prevPage || nextPage) && !autocompleteLoading" transition="ac-pagination-fade">
-        <a class="btn prev-btn previous" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage">
-          <i class="fa fa-chevron-circle-left"></i> Back
-        </a>
-        <a class="btn next-btn next" href="#" @click.prevent="autocompletePage(nextPage)" v-if="nextPage">
-          More <i class="fa fa-chevron-circle-right"></i>
-        </a>
+      <div class="pagination btn-bar" v-if="(prevPage || nextPage) && !autocompleteLoading" transition="ac-pagination-fade">
+        <div class="left">
+          <a class="btn prev" href="#" @click.prevent="autocompletePage(prevPage)" v-if="prevPage" title="View the previous page of foods">
+            <i class="fa fa-chevron-circle-left"></i> Back
+            <span class="screen-reader-text">to the previous page of foods</span>
+          </a>
+        </div>
+        <div class="right">
+          <a class="btn next" href="#" @click.prevent="autocompletePage(nextPage)" v-if="nextPage" title="View more foods">
+            More <i class="fa fa-chevron-circle-right"></i>
+            <span class="screen-reader-text">foods</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

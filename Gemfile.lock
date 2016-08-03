@@ -38,7 +38,6 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
-    addressable (2.4.0)
     arel (6.0.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
@@ -54,47 +53,62 @@ GEM
       slim (>= 1.3.6, < 4.0)
       terminal-table (~> 1.4)
     builder (3.2.2)
+    bullet (5.1.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (8.2.1)
-    capybara (2.7.1)
-      addressable
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    capybara-webkit (1.11.1)
-      capybara (>= 2.3.0, < 2.8.0)
-      json
     chronic (0.10.2)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     codeclimate-test-reporter (0.5.1)
       simplecov (>= 0.7.1, < 1.0.0)
+    coderay (1.1.1)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     docile (1.1.5)
     erubis (2.7.0)
     execjs (2.6.0)
+    faker (1.6.6)
+      i18n (~> 0.5)
+    ffi (1.9.14)
     foreman (0.80.2)
       thor (~> 0.19.1)
+    formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     groupdate (2.5.3)
       activesupport (>= 3)
+    guard (2.14.0)
+      formatador (>= 0.2.4)
+      listen (>= 2.7, < 4.0)
+      lumberjack (~> 1.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.9.12)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
     haml (4.0.7)
       tilt
-    headless (2.2.3)
     highline (1.7.8)
+    hologram (1.4.0)
+      redcarpet (>= 2.2, < 4.0)
+      rouge (>= 1.5)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     libv8 (3.16.14.13)
+    listen (3.1.5)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    lumberjack (1.0.10)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -103,9 +117,13 @@ GEM
     mono_logger (1.1.0)
     multi_json (1.12.0)
     multi_xml (0.5.5)
+    nenv (0.3.0)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    notiffany (0.1.1)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
     numerizer (0.1.1)
     pg (0.17.1)
     pg_search (1.0.5)
@@ -116,6 +134,10 @@ GEM
     postmark (1.7.1)
       json
       rake
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     puma (2.16.0)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -152,6 +174,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.2.2)
+    rb-fsevent (0.9.7)
+    rb-inotify (0.9.7)
+      ffi (>= 0.5.0)
     rdoc (4.2.1)
       json (~> 1.4)
     redcarpet (3.3.4)
@@ -165,10 +190,12 @@ GEM
       redis-namespace (~> 1.3)
       sinatra (>= 0.9.2)
       vegas (~> 0.1.2)
+    rouge (2.0.5)
     ruby-units (2.0.0)
     ruby2ruby (2.3.0)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
+    ruby_dep (1.3.1)
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     safe_yaml (1.0.4)
@@ -183,6 +210,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.7.0)
+    shellany (0.0.1)
     simplecov (0.11.2)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -195,6 +223,7 @@ GEM
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
+    slop (3.6.0)
     spring (1.6.2)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -217,6 +246,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.10.0)
     vegas (0.1.11)
       rack (>= 1.0.0)
     web-console (2.2.1)
@@ -226,8 +256,6 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     webpack-rails (0.9.7)
       rails (>= 3.2.0)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -236,15 +264,16 @@ DEPENDENCIES
   acts-as-taggable-on
   bcrypt (~> 3.1.7)
   brakeman
+  bullet
   byebug
-  capybara
-  capybara-webkit
   chronic
   chronic_duration
   codeclimate-test-reporter
+  faker
   foreman
   groupdate
-  headless
+  guard
+  hologram
   httparty
   pg
   pg_search

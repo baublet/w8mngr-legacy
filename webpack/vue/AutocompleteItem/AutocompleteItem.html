@@ -1,6 +1,7 @@
 <div class="autocomplete-item" v-bind:class="{ selected: selected }">
   <h3 class="name">
     <a class="add-food btn" @click.stop.prevent="$emit('add-entry')" v-if="measurements">
+      <i class="fa fa-plus"></i>
       Add Entry
     </a>
     {{ name }}

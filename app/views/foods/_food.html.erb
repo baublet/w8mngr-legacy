@@ -9,37 +9,87 @@
   end
 %>
 
-<div class="food <%= food_class %>">
-  <h2>
-      <% if !food.is_a?(Hash)  %>
-          <%= link_to food.name, food_path(food) %>
-          <%= link_to edit_food_path(food), class: "edit", title: "Edit Entry" do %>
+<tbody class="food scannable-table-item <%= food_class %>">
+
+<tr>
+  <td class="scannable-table-heading" colspan="6">
+
+    <div class="scannable-table-heading-bar">
+      <div class="left">
+
+        <h2 class="scannable-table-item-title">
+            <% if food.is_a?(Hash)  %>
+                <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
+            <% else %>
+                <%= link_to food.name, food_path(food) %>
+            <% end %>
+        </h2>
+        <% unless food.is_a?(Hash)  %>
+          <h3 class="scannable-table-item-subtitle">
+            <%= pluralize(food.measurements.to_a.count, "measurement") %>
+          </h3>
+          <p class="description">
+            <%= food.description %>
+          </p>
+        <% end %>
+
+      </div>
+      <div class="right">
+
+        <% unless food.is_a? Hash %>
+          <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
               <i class="fa fa-pencil"></i>
               <span class="screen-reader-text">Edit Entry</span>
-          <% end if food.user_id == current_user.id %>
-          <%= link_to food_delete_path(food), class: "delete",  title: "Delete Entry" do %>
+          <% end if food.try(:user_id) == current_user.id %>
+          <%= link_to food_delete_path(food), class: "btn-icon delete",  title: "Delete Entry" do %>
               <i class="fa fa-times"></i>
               <span class="screen-reader-text">Delete Entry</span>
-          <% end if food.user_id == current_user.id %>
-      <% else %>
-          <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
-      <% end %>
-  </h2>
-  <% if !food.is_a?(Hash) && !food.description.blank? %>
-      <p class="description">
-          <%= food.description %>
-      </p>
-  <% end %>
-  <%  if !food.is_a?(Hash) && food.measurements.present?
-      measurement = food.measurements.first %>
-      <div class="measurement">
-        <span class="unit">per
-        <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
-                      verbose_measurement_unit(measurement.unit) %></span>
-          <strong>Calories:</strong> <%= measurement.calories %>
-          <strong>Fat:</strong> <%= measurement.fat %>
-          <strong>Carbs:</strong> <%= measurement.carbs %>
-          <strong>Protein:</strong> <%= measurement.protein %>
+          <% end if food.try(:user_id) == current_user.id %>
+        <% end %>
+
       </div>
+    </div>
+
+  </td>
+</tr>
+<% unless food.is_a?(Hash) && !food.try(:measurements) %>
+  <tr class="scannable-table-lower-heading">
+    <th><span class="screen-reader-text">Serving/Unit</span></th>
+    <th>Calories</th>
+    <th>Fat</th>
+    <th>Carbs</th>
+    <th>Protein</th>
+    <th></th>
+  </tr>
+  <% food.measurements.each do |measurement| %>
+    <tr class="measurement scannable-table-data">
+      <td class="serving">
+        <span>
+          <%= pluralize(number_with_precision(measurement.amount, precision: 1, significant: true), verbose_measurement_unit(measurement.unit)) %>
+        </span>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.calories %>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.fat %>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.carbs %>
+      </td>
+      <td>
+        <%= number_with_delimiter measurement.protein %>
+      </td>
+      <td class="meta">
+        <%= form_tag food_entry_add_food_path(current_day, measurement.id) do %>
+          <%= button_tag(type: 'submit', class: 'btn-icon primary', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
+  	      			<i class="fa fa-plus-circle" aria-hidden="true"></i>
+  	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
+  	      <% end %>
+  	     <% end %>
+      </td>
+    </tr>
   <% end %>
-</div>
+<% end %>
+
+</tbody>

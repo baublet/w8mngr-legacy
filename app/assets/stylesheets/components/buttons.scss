@@ -1,0 +1,577 @@
+.disabled {
+    pointer-events: none;
+}
+
+/*doc
+---
+title: Button Bar (for Layout)
+name: buttonbar
+category:
+  - buttons
+  - layout
+---
+Layout element for positioning buttons on the same horizontal line, but with
+some buttons arranged on the left side, the others on the right.
+
+It can also be used to align buttons in the center if you skip the left and right
+divs.
+
+```html_example
+<div class="btn-bar">
+    <div class="left">
+        <a href="" class="btn">Button</a>
+        <a href="" class="btn secondary">on the Left</a>
+    </div>
+    <div class="right">
+        <a href="" class="btn">Button</a>
+        <a href="" class="btn secondary">on the Right</a>
+    </div>
+</div>
+
+<p>Or...</p>
+
+<div class="btn-bar">
+    <a href="" class="btn">Buttons</a>
+    <a href="" class="btn secondary">in the middle</a>
+</div>
+```
+*/
+
+.btn-bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    .left {
+        width: 50%;
+        text-align: left;
+    }
+    .right {
+        width: 50%;
+        text-align: right;
+    }
+    .btn {
+        margin-bottom: 0;
+        vertical-align: bottom;
+        + .btn {
+            margin-left: $spacing-small;
+        }
+    }
+}
+
+/*doc
+---
+title: Button (Regular)
+name: button
+category: buttons
+---
+```html_example
+<a class="btn" href="#">Button</a>
+
+<a class="btn" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+
+<a class="btn disabled" href="#">Disabled Button</a>
+```
+*/
+.btn {
+    display: inline-block;
+    border: 0;
+    font-family: $font-stack;
+    cursor: pointer;
+    background: $color-primary;
+    border-radius: 5px;
+    padding: $spacing-small $spacing-normal;
+    color: rgba(255,255,255,.75);
+    outline: none;
+    font-size: $font-size-normal;
+    padding:1rem;
+    font-weight: 200;
+    text-align:center;
+    @include height(1);
+    margin-bottom: $spacing-normal;
+    letter-spacing: normal;
+    line-height: normal;
+    white-space: nowrap;
+    .fa {
+        margin-right: $spacing-small;
+    }
+    &:hover, &:focus {
+        background: $color-primary-light;
+        color: #fff;
+        text-decoration: none;
+    }
+    &:active {
+        cursor: pointer;
+        @include height(-2);
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+    + .btn {
+        margin-left: $spacing-tiny;
+    }
+    &.disabled {
+      cursor: default;
+      opacity: .5;
+      &:hover, &:focus {
+        opacity: .75;
+      }
+    }
+}
+
+/*doc
+---
+title: Small Button
+name: smallbutton
+category: buttons
+---
+```html_example
+<a class="btn small" href="#">Button</a>
+<a class="btn small" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+<a class="btn secondary small" href="#">Small Secondary Button</a>
+```
+*/
+.btn.small {
+    padding: $spacing-small;
+    font-size: $font-size-small;
+}
+
+/*doc
+---
+title: Secondary Button
+name: secondarybutton
+category: buttons
+---
+```html_example
+<a class="btn secondary" href="#">Button</a>
+<a class="btn secondary" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Icon Button
+</a>
+<a class="btn secondary small" href="#">Small Secondary Button</a>
+```
+*/
+.btn.secondary {
+    background: $black-light;
+    &:hover {
+        background: $color-primary;
+    }
+}
+
+/*doc
+---
+title: Hero Button
+name: herobutton
+category: buttons
+---
+
+A "hero" button for very large, typically promotional, action buttons.
+
+```html_example
+<a class="btn hero" href="#">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    Hero Button
+</a>
+```
+
+*/
+.btn.hero {
+    display: inline-block;
+    background: $color-secondary;
+    text-align: center;
+    font-weight: 400;
+    font-size:$font-size-huge;
+    font-weight: lighter;
+    color: $white;
+    animation: pulsateSecondaryColor 3s 4s 99 forwards normal;
+    width: auto;
+    @include height(1);
+    &:hover, &:focus {
+        @include height(2);
+        animation: none;
+        background: $color-secondary-light;
+    }
+    &:active {
+        @include height(-3);
+    }
+}
+
+/*doc
+---
+title: Application Form Buttons
+name: appformbuttons
+category: buttons
+---
+
+Buttons that show on our primary-colored application forms. This includes different
+colors for icon buttons.
+
+```html_example
+<div class="app-form food-entries grid">
+  <div class="row">
+    <div class="col full">
+      <input type="text" placeholder="Description" autofocus="autofocus" id="description-input" class="large">
+    </div>
+  </div>
+  <div class="row macros">
+    <div class="col" title="Calories">
+      <input type="text" placeholder="Calories">
+    </div>
+    <div class="col" title="Fat">
+      <input type="text" placeholder="Fat">
+    </div>
+    <div class="col" title="Carbs">
+      <input type="text" placeholder="Carbs">
+    </div>
+    <div class="col" title="Protein">
+      <input type="text" placeholder="Protein">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col full">
+      <div class="btn-bar">
+        <div class="left">
+          <a class="btn-icon" alt="Make this day a Faturday!" title="Make this day a Faturday!">
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+            <span class="screen-reader-text">Faturday</span>
+          </a>
+
+        </div>
+        <div class="right">
+          <a class="btn-icon" alt="Scan Barcode" title="Scan Barcode" href="/search/foods?food_log_referrer=true">
+            <i class="fa fa-barcode"></i>
+            <span class="screen-reader-text">Scan Barcode</span>
+          </a>
+          <a class="btn-icon" alt="Search for Foods" title="Search for Foods" href="/search/foods?food_log_referrer=true">
+            <i class="fa fa-search"></i>
+            <span class="screen-reader-text">Search for Foods</span>
+          </a>
+          <button name="button" type="submit" class="btn btn-submit">
+            <i class="fa fa-plus"></i>
+            <strong>New Entry</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+.app-form .btn {
+    background: $color-primary-light;
+}
+
+.app-form .btn-icon {
+    color: rgba($white, .5);
+    &:hover, &:focus {
+        color: $white;
+    }
+}
+
+/*doc
+---
+title: Icon Button
+name: iconbutton
+category: buttons
+---
+
+Please keep in mind that you always need screen reader text on
+icon buttons. In addition, use verbose link titles!
+
+```html_example
+<a class="btn-icon" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    <span class="screen-reader-text">Download your weight data</a>
+</a>
+
+<a class="btn-icon primary" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    <span class="screen-reader-text">Download your weight data</a>
+</a>
+
+<a class="btn-icon disabled" href="#" title="Download your weight data">
+    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    <span class="screen-reader-text">Download your weight data</a>
+</a>
+
+<a class="btn-icon delete" href="#" title="Delete weight 145lbs">
+    <i class="fa fa-times" aria-hidden="true"></i>
+    <span class="screen-reader-text">Delete weight 145lbs</a>
+</a>
+```
+*/
+.btn-icon {
+    cursor: pointer;
+    border: none;
+    margin: 0;
+    overflow:hidden;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    color: rgba($black, .5);
+    font-size: $font-size-normal;
+    line-height: normal;
+    &:hover, &:focus {
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        color: $black;
+    }
+    &.delete:hover, &.delete:focus {
+        color: $red;
+        box-shadow: none;
+    }
+    &.disabled {
+        opacity: .25;
+        cursor: normal;
+    }
+    + .btn-icon {
+        margin-left: $spacing-small;
+    }
+    // For our giant dashboard icons
+    &.giant {
+        display: block;
+        text-align: center;
+        border-radius: 5px;
+        padding: $spacing-normal $spacing-small;
+        .fa {
+            font-size: 7vmax;
+            color: rgba($black, .25);
+            display: block;
+            text-align: center;
+        }
+        .text {
+            display: block;
+            margin: $spacing-small auto 0;
+            width: 90%;
+            border-top: 1px solid rgba($black, .1);
+            padding-top: $spacing-small;
+            color: rgba($black, .75);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: $font-size-tiny;
+            @include mqAfterSize($desktop-breakpoint/ 2) {
+                font-size: $font-size-small;
+            }
+        }
+        &:hover, &:focus {
+            background: $color-primary-light;
+            @include height(1);
+            .fa {
+                color: rgba($white, .75);
+            }
+            .text {
+                color: $white;
+                border-color: rgba($white, .1);
+            }
+        }
+    }
+}
+
+.btn-icon.primary {
+    color: $color-primary;
+    &:hover, &:focus {
+        color: $color-primary-light;
+    }
+}
+
+/*doc
+---
+title: Giant Icon Buttons
+name: gianticonbutton
+category: buttons
+---
+
+Large icons for using in grids on mobile to show a large list of available logs
+to go to, primarily from the <a href="/dashboard">user dashboard</a>.
+
+```html_example
+<div class="grid arbitrary dashboard-buttons">
+    <div class="row">
+
+        <div class="col">
+            <a class="btn-icon giant" href="/foodlog">
+                <i class="fa fa-cutlery" aria-hidden="true"></i>
+                <span class="text">Food Log</span>
+            </a>
+        </div>
+
+        <div class="col">
+            <a class="btn-icon giant" href="/foodlog">
+                <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                <span class="text">Weight Log</span>
+            </a>
+        </div>
+
+        <div class="col">
+            <a class="btn-icon giant" href="/activities">
+                <i class="fa fa-bolt" aria-hidden="true"></i>
+                <span class="text">Activities</span>
+            </a>
+        </div>
+
+        <div class="col">
+            <a class="btn-icon giant" href="/routines">
+                <i class="fa fa-retweet" aria-hidden="true"></i>
+                <span class="text">Routines</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+```
+*/
+
+/*doc
+---
+title: Pagination Buttons
+name: paginationbuttons
+category: buttons
+---
+
+```html_example
+<div class="pagination btn-bar">
+  <div class="left">
+    <a class="btn prev" href="#" title="See the previous page of foods">
+      <i class="fa fa-chevron-circle-left"></i> Back
+      <span class="screen-reader-text">to Previous Foods</span>
+    </a>
+  </div>
+  <div class="right">
+    <a class="btn next" href="#" title="See more foods">
+      More <i class="fa fa-chevron-circle-right"></i>
+      <span class="screen-reader-text">Foods</span>
+    </a>
+  </div>
+</div>
+```
+*/
+
+.btn.prev, .btn.next {
+    min-width: 0;
+    font-size: $font-size-normal;
+    padding: $spacing-small;
+    text-align: left;
+    line-height: normal;
+    color: $white;
+    .fa {
+        margin-right: $spacing-small;
+    }
+}
+.btn.next {
+    text-align: right;
+    .fa {
+        margin: 0 0 0 $spacing-small;
+    }
+}
+
+/*doc
+---
+title: Meta Buttons
+name: metabuttons
+category: buttons
+---
+
+Meta buttons are displayed next to other buttons, but without borders, indicating
+certain drastic (yet explicity) actions, such as deletion.
+
+```html_example
+<a href="#" class="btn-meta">Default Meta Button</a>
+
+<a href="#" class="btn-meta delete">Delete Button</a>
+```
+*/
+.btn-meta {
+    color: $black-light;
+    display: inline-block;
+    padding: $spacing-small;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    &:hover, &:focus {
+        color: $black;
+        border-color: $black-light;
+    }
+    &.delete:hover, &.delete:focus {
+        color: $red;
+        border-color: $red;
+    }
+}
+
+/*doc
+---
+title: Pills
+name: pillbuttons
+category: buttons
+---
+
+Pills are a list of very small buttons that have some sort of interaction. A
+classic example is tags.
+
+```html_example
+<a href="#" class="pill">Free-Standing Pill</a>
+
+<br><br>
+
+<ul class="pill-list">
+<li><a href="#" class="pill">Or</a></li>
+<li><a href="#" class="pill">They</a></li>
+<li><a href="#" class="pill">Can</a></li>
+<li><a href="#" class="pill">Come</a></li>
+<li><a href="#" class="pill">As</a></li>
+<li><a href="#" class="pill">Lists</a></li>
+</ul>
+
+<br><br>
+
+<div style="background:#222;padding:2rem;">
+    <span style="color: white">And they can be used on dark backgrounds:</span>
+    <a href="#" class="pill white">Free-Standing Pill</a>
+</div>
+```
+*/
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 0 .15rem 0 0;
+  }
+}
+
+.pill {
+  display:inline-block;
+  font-size: .75rem;
+  color: rgba($black, .5);
+  background: transparent;
+  padding: .25rem .5rem;
+  line-height: .75rem;
+  border: 1px solid rgba($black, .25);
+  border-radius: 3px;
+  &:hover, &:focus {
+    border-color: transparent;
+    background: $color-primary;
+    color: $white;
+  }
+  &.white {
+      background: transparent;
+      color: rgba($white, .5);
+      border-color: rgba($white, .25);
+      &:hover, &:focus {
+          text-decoration: none !important;
+          color: $white;
+          border-color: $white;
+          background: rgba($white, .125);
+      }
+  }
+}

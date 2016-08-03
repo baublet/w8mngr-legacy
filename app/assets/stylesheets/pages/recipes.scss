@@ -1,0 +1,51 @@
+.search-for-food {
+  padding-top: $spacing-normal;
+  padding-right: $spacing-small;
+  margin: -#{$spacing-large} 0 0;
+  text-align: right;
+  width: 460px;
+  max-width: 100%;
+  a {
+    color: rgba($black, .5);
+    &:hover, &:focus {
+      color: $black;
+    }
+  }
+}
+
+.ingredient .col {
+  width: calc(13.3333% - #{$spacing-small});
+  text-align: center;
+  &:first-child {
+    width: 33.3333%;
+    text-align: left;
+  }
+  &:last-child {
+    text-align: right;
+  }
+}
+
+.recipe-header .description {
+  margin-top: -#{$spacing-large};
+  padding-top: $spacing-normal;
+  margin-bottom: $spacing-large;
+}
+
+.recipe .nutritional-info {
+  margin-bottom: $spacing-large;
+  .label {
+    display: block;
+    color: rgba(black, .25);
+    text-transform: uppercase;
+    font-size: $font-size-tiny;
+    ~ .label {
+      margin-top: $spacing-normal;
+    }
+  }
+  span {
+    margin-right: $spacing-normal;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -5,7 +5,8 @@
           ChronicDuration.output(entry.work, :format => :long) :
           ""
         ),
-        placeholder: "Time, e.g., 15 minutes and 30 seconds, 00:15:30, etc..." %>
+        placeholder: "Time, e.g., 15 minutes and 30 seconds, 00:15:30, etc...",
+        class: "large" %>
 </div>
 
 <% if defined? entry %>
@@ -14,7 +15,6 @@
     <span class="screen-reader-text">Estimated Calories Burned:</span>
     <%= entry.calories %> calories
   </span>
-  &bull;
   <%= time_ago_in_words(entry.created_at) %> ago
 </div>
 <% end %>

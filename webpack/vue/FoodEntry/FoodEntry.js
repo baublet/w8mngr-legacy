@@ -50,10 +50,6 @@ export default {
           el.selectionEnd = 9
         }, 100)
       }
-      addEvent(this.$el.children[1].children[0], ["focus", "click"], selectFunction)
-      addEvent(this.$el.children[2].children[0], ["focus", "click"], selectFunction)
-      addEvent(this.$el.children[3].children[0], ["focus", "click"], selectFunction)
-      addEvent(this.$el.children[4].children[0], ["focus", "click"], selectFunction)
     },
     // This function watches for our description to change. When it does, we
     // call this function to see if the amount was altered, and if it was, update
@@ -71,22 +67,8 @@ export default {
     },
   },
   methods: {
-    // Selects the first part of a food if that first part is a number
-    selectDescription: function() {
-      var app = this
-      setTimeout(function() {
-        var el = app.$el.children[0].children[0]
-        var chunks = app.description.split(" ")
-        var currentAmount = parseFloat(chunks[0])
-        if (!isNaN(currentAmount)) {
-          el.selectionStart = 0
-          el.selectionEnd = chunks[0].length
-        } else {
-          el.selectionStart = 0
-          el.selectionEnd = 999
-        }
-      }, 100)
-    },
+    // Selects the text in the passed form field based on what they want to select
+    selectText: require("../../fn/selectText.js"),
     // Sends an entry to be removed from the database
     removeEntry: function(index) {
       this.loading = 1

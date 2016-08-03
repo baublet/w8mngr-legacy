@@ -1,0 +1,104 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.call-to-action {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: $layer-base + 1;
+    background: $black;
+    //background: linear-gradient(25deg, #283048, #181818);
+    overflow: hidden;
+    padding: 150px 0 0;
+    height: 100vh;
+    min-height: 480px;
+    .actions {
+        position: absolute;
+        bottom: 5rem;
+        width: 100%;
+        text-align: center;
+    }
+    .suggestion {
+        position: relative;
+        z-index: $layer-base + 10;
+        font-weight: lighter;
+        font-size: $font-size-huge;
+        color: $white;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        white-space: nowrap;
+        animation: slideInLeft 2s 0s 1;
+        &.second {
+            font-size: $font-size-large;
+            animation: none;
+            animation: slideInRight 3s 0s 1;
+        }
+    }
+    .sign-up {
+        position: relative;
+        z-index: $layer-base + 10;
+        text-align: center;
+        margin: $spacing-normal auto 0;
+        p {
+            font-size: $font-size-small;
+            color: $white;
+            a {
+                color: $white;
+                text-decoration: underline;
+                font-weight: bold;
+                &:hover, &:focus {
+                    text-shadow: 0 0 5px $color-primary-light;
+                }
+            }
+        }
+    }
+    .banner-img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: $layer-base + 5;
+        opacity: .1;
+    }
+}
+
+.welcome.index {
+    header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background: transparent;
+        padding: 0;
+        z-index: $layer-header;
+    }
+    .site-title {
+      padding: 0 1rem;
+        position: absolute;
+        top: 2rem;
+        width: 100%;
+        a {
+            max-width: 100%;
+            background: asset_url('logo.svg') top left no-repeat;
+            background-size:contain;
+            margin: 0 auto;
+            width: 400px;
+            height: 380px;
+            @include mqBeforeSize(900px) {
+                max-width: 250px;
+                max-height: 30vh;
+            }
+        }
+    }
+    footer {
+        position: relative;
+        opacity: 1;
+    }
+}
+
+.welcome.index main {
+    padding: 0;
+}

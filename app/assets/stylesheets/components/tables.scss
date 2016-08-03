@@ -1,0 +1,54 @@
+.data-table {
+  width: 100%;
+  margin-bottom: $spacing-large;
+  thead th, tfoot th {
+    font-weight: bold;
+    color: rgba($black, .75);
+    border-bottom: 3px solid rgba($black, .75);
+    background: rgba($black, .025);
+    text-transform: uppercase;
+    font-size: $font-size-small;
+  }
+  .lowkey th {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  td, th {
+    padding: .75rem;
+  }
+  tr:hover td, tr:hover th {
+    background: rgba($black, .025);
+  }
+  tbody td {
+    font-size: $font-size-small;
+    text-align: center;
+  }
+  td.meta {
+    text-align: right;
+  }
+  tbody th {
+    text-align: left;
+  }
+  tfoot td {
+    font-weight: bold;
+  }
+}
+
+.table {
+  display: block;
+  .row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+  }
+  .col {
+    display: block;
+    overflow: visible;
+  }
+}
+
+table:last-child {
+  margin-bottom: 0;
+}

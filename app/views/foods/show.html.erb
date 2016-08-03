@@ -29,45 +29,8 @@
 
   <h2><i class="fa fa-pie-chart"></i> Measurements</h2>
 
-  <% @food.measurements.each do |measurement| %>
-      <%= form_tag (cookies[:add_to_recipe].blank?) ? food_entry_add_food_path(@day, measurement.id.to_s) : add_food_to_recipe_path(current_user.recipes.find_by(id: cookies[:add_to_recipe]), measurement) do %>
-      <div class="measurement-box in-transition"<%= measurement.id != 0 ? "data-measurement-id=" + measurement.id.to_s : '' %>>
-          <div class="col unit">
-              <%= pluralize number_with_precision(measurement.amount, precision: 1, significant: true),
-                            verbose_measurement_unit(measurement.unit) %>
-          </div>
-
-          <div class="col">
-              <%= label_tag("amount_" + measurement.id.to_s, "Serving(s)") %>
-              <%= text_field_tag("amount", nil, placeholder: "e.g. 1, 1/2, .5, etc.", id: "amount_" + measurement.id.to_s) %>
-          </div>
-
-          <div class="col">
-              <strong class="label">Calories</strong>
-              <span class="value"><%= measurement.calories %></span>
-          </div>
-
-          <div class="col">
-              <strong class="label">Fat</strong>
-              <span class="value"><%= measurement.fat %></span>
-          </div>
-
-          <div class="col">
-              <strong class="label">Carbs</strong>
-              <span class="value"><%= measurement.carbs %></span>
-          </div>
-
-          <div class="col">
-              <strong class="label">Protein</strong>
-              <span class="value"><%= measurement.protein %></span>
-          </div>
-
-          <%= button_tag(type: 'submit', class: 'btn food-log-new-btn', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
-      			<i class="fa fa-plus"></i>
-      			<span class="btn-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
-      		<% end %>
-      </div>
-      <% end %>
-  <% end %>
+  <div class="card-grid">
+    <%= render @food.measurements %>
+  </div>
 
 </div>

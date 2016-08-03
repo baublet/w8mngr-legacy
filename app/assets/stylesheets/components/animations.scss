@@ -1,0 +1,159 @@
+//  Vue animations
+
+// For our food-log items
+.fl-fade-transition {
+  transform: translate(0);
+  transition: all .15s ease;
+  opacity: 1;
+  max-height: 10rem;
+}
+
+.fl-fade-enter, .fl-fade-leave {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 0;
+}
+
+.ac-fade-transition {
+  transition: transform .25s $easing-1,
+              opacity .1s ease-in-out;
+  opacity: 1;
+  transform: translateX(0);
+}
+.ac-fade-enter {
+  opacity: 0;
+  transform: translateX(10rem);
+}
+
+.ac-fade-leave {
+  opacity: 0;
+}
+
+.ac-pagination-fade-transition {
+  transition: all .15s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ac-pagination-fade-leave, .ac-pagination-fade-enter {
+  transform: translateY(5rem);
+  opacity: 0;
+}
+
+// Various animations
+
+@keyframes entryRowLoading {
+    0% {
+        left: 0;
+        right: 99%;
+    }
+
+    25% {
+        left: 0;
+        right: 0;
+    }
+
+    50% {
+        left: 99%;
+        right: 0;
+    }
+
+    75% {
+        left: 0;
+        right: 0;
+    }
+
+    100% {
+        left: 0;
+        right: 99%;
+    }
+}
+
+// For the home page elements
+
+@keyframes slideInLeft {
+    0% {
+        text-indent: -10%;
+        opacity: 0;
+    }
+    50% {
+        text-indent: -10%;
+        opacity: 0;
+    }
+    100% {
+        text-indent: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        text-indent: 10%;
+        opacity: 0;
+    }
+    50% {
+        text-indent: 10%;
+        opacity: 0;
+    }
+    100% {
+        text-indent: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes pulsateSecondaryColor {
+    0% {
+        box-shadow: 0 0 0 1px rgba($color-secondary, .75);
+    }
+    100% {
+        box-shadow: 0 0 0 15px rgba($color-secondary, 0);
+    }
+}
+
+
+// Best for about 3-4 seconds of animation
+@keyframes blinkFadeOut {
+    5% {
+        opacity: 1;
+    }
+    10% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    99% {
+      opacity: 0;
+      transform: translateX(500px);
+    }
+    100% {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+// For our loader
+@keyframes loader {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+
+@mixin animationCollapseExpand() {
+    max-height: 9999rem;
+    opacity: 1;
+    transition: opacity .15s ease-in-out,
+                max-height .25s ease-in-out;
+}

@@ -1,0 +1,62 @@
+.form-descriptor-box {
+  @include mqAfterSize($desktop-breakpoint) {
+    display: flex;
+  }
+  margin-bottom: $spacing-large;
+  .app-form {
+    margin-bottom: 0;
+    align-self: flex-start;
+  }
+}
+
+.form-desciption {
+  position: relative;
+  background: lighten($black, 25);
+  color: $white;
+  padding: 1rem;
+  @include height(1);
+  transition: box-shadow .15s ease-in-out;
+  order: 2;
+  width: 100%;
+  &:hover {
+    @include height(2);
+  }
+  .pill-list {
+    margin: 0 0 $spacing-normal 0;
+    order: 2;
+  }
+  .pill {
+    background: $white;
+    color: $black;
+    font-size: $font-size-tiny;
+    padding: $spacing-tiny;
+  }
+  h2 {
+    margin: 0 0 $spacing-tiny;
+    font-size: $font-size-large;
+    font-weight: bold;
+    order: 1;
+    width: 66%;
+    a {
+      color: rgba($white,.75);
+      &:hover, &:focus {
+        color: $white;
+      }
+    }
+  }
+  p {
+    margin: 0 0 $spacing-normal;
+    order: 3;
+    width: 100%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  a {
+    color: rgba($white, .5);
+    &:hover, &:focus {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+}

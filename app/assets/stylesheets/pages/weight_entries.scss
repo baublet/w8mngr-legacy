@@ -1,0 +1,33 @@
+.weight-entry .added {
+  font-size: $font-size-small;
+  color: rgba($black,.5);
+}
+
+.weight-container {
+  display: flex;
+  align-items: center;
+  .weight {
+    font-size: $font-size-huge * 2;
+    font-weight: bold;
+    color: rgba($black, .75);
+    width: 50%;
+  }
+  .unit {
+    font-size: $font-size-small;
+    color: rgba($black, .5);
+    font-weight: normal;
+  }
+  h5 {
+    font-size: $font-size-small;
+    font-weight: bold;
+    color: rgba($black, .75);
+  }
+  .other-units {
+    font-size: $font-size-small;
+    .unit {
+      display: inline-block;
+      color: rgba($black,.75);
+      margin: 0 0 $spacing-tiny $spacing-small;
+    }
+  }
+}

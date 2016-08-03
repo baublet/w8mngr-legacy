@@ -1,19 +1,19 @@
+<label for="filters-toggle" alt="Click to toggle search form and filters...">
+  <i class="fa fa-search"></i>
+  Search
+</label>
 <input type="checkbox" class="helper-input" id="filters-toggle">
-<div class="activity-filters">
-  <label for="filters-toggle" alt="Click to toggle search form and filters...">
-    <i class="fa fa-search"></i>
-    Search
-  </label>
+<div class="activity-filters helper-panel floating">
   <div class="filters-panel">
-    <label for="filters-toggle" alt="Click to toggle search form and filters..." class="meta">
+    <label for="filters-toggle" alt="Click to toggle search form and filters..." class="btn-meta close">
       <i class="fa fa-times"></i>
       Close <span class="screen-reader-text">Filters Panel</span>
     </label>
     <%= form_tag "", method: "get" do %>
       <%= label_tag :q, "Search Terms", class: "screen-reader-text" %>
       <%= text_field_tag :q, params.try(:[], :q), placeholder: "Search Terms (leave blank for none)" %>
-      <div class="muscle-groups muscle-groups-filter" id="muscle-groups-form">
-        <h3 title="Select all of the muscles you want the exercise or exercises to target">Targets</h3>
+      <div class="muscle-groups filter" id="muscle-groups-form">
+        <h3 class="screen-reader-text" title="Select all of the muscles you want the exercise or exercises to target">Targets</h3>
         <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
           <%= check_box_tag "activity[muscle_groups][#{name}]", "1", params.try(:[], :activity).try(:[], :muscle_groups).try(:[], name), {class: "muscles-helper"} %>
           <%= label_tag "activity[muscle_groups][#{name}]", name %>
@@ -29,21 +29,3 @@
     <% end %>
   </div>
 </div>
-
-<% unless params.try(:[], :q).nil? && params.try(:[], :activity).try(:[], :muscle_groups).nil? %>
-  <div class="search-results-information">
-    Searching for activities
-    <% unless params.try(:[], :activity).try(:[], :muscle_groups).nil? %>
-      targeting
-      <% Activity::MUSCLE_GROUP_VALUES.each do |name| %>
-        <% if params[:activity][:muscle_groups].include?(name) %><em class="pill"><%= name %></em><% end %>
-      <% end %>
-    <% end %>
-    <% unless params.try(:[], :q).nil? || params[:q].empty? %>
-      using the search term <em><%= params[:q] %></em>
-    <% end %>
-    <div class="clear-search">
-      <a href="?">(clear)</a>
-    </div>
-  </div>
-<% end %>

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
                                 as: :food_delete
     get     "/foods/pull/(:ndbno)" => "usda#pull",
                                 as: :food_pull
-    resources :foods,           only: [:new, :edit, :index, :show, :create, :update, :destroy]
+    resources :foods
 
     # Faturdays
     get     "/faturday/:day(:format)"=>"faturday#create", as: :faturday_day

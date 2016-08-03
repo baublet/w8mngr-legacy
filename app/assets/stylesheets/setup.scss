@@ -1,19 +1,52 @@
 $black: #1F1F1F;
+$black-light: lighten($black, 35);
+
 $white: #F7F7F7;
+
 $red: #FF0000;
 $green: #00D800;
 $yellow: #FFAA00;
+
 $color-primary: #3492ae;
 $color-primary-light: #21C6F5;
+$color-primary-white: lighten($color-primary, 50);
+
 $color-secondary: #540BBA;
+$color-secondary-light: #873FEC;
+
 $color-usda: #555;
 
+$color-nav: darken($color-primary, 20);
+
 $desktop-breakpoint: 960px;
+
+// Our widths for vertical spacing in the document. Also applicable for horizontal
+// spacing when it corresponds with vertical spacing
+$spacing-tiny:  .25rem;
+$spacing-small: .5rem;
+$spacing-normal: 1rem;
+$spacing-large:  2.5rem;
+
+// For making our font-size look and feel similar everywhere
+$font-size-huge:   2rem;
+$font-size-large:  1.3rem;
+$font-size-normal: 1rem;
+$font-size-small: .75rem;
+$font-size-tiny:  .6rem;
+
+// For z-index ordering
+$layer-modal:          1000;
+$layer-options-panel:  600;
+$layer-app-navigation: 500;
+$layer-footer:         400;
+$layer-header:         300;
+$layer-base:           100;
+
 
 // My color pallette:  http://www.colourlovers.com/palette/1365151/piccadilly_sparrows
 
 //$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font-stack: "Roboto", "Helvetica", "Trebuchet MS", "Verdana";
+$font-stack: "Source Sans Pro", "Roboto", "Helvetica", "Trebuchet MS", "Verdana", sans-serif;
 
 $easing-1: cubic-bezier(0,.95,0,1);
 
@@ -26,10 +59,16 @@ $easing-1: cubic-bezier(0,.95,0,1);
   opacity: .00001;
 }
 
+@mixin deScreenReaderText() {
+  position: static;
+  text-indent: 0;
+  opacity: 1;
+}
+
 // Ryan's favorite mediaquery mixins!
 // I typically use this one because I design mobile-first
 @mixin mqAfterSize($width) {
-    @media screen and (min-width: $width) {
+    @media screen and (min-width: $width + 1) {
         @content;
     }
 }
@@ -78,26 +117,7 @@ $easing-1: cubic-bezier(0,.95,0,1);
 }
 
 @import "global",
-        "header",
-        "nav",
-        "buttons",
-        "forms",
-        "messages",
-        "animations",
-        "cards",
-        "breadcrumbs",
-        // Page-specific blocks
-        "welcome",
-        "users",
-        "sessions",
-        "food_entries",
-        "foods",
-        "weight_entries",
-        "recipes",
-        "dashboard",
-        "activities",
-        "activity_entries",
-        "routines",
-
-
-        "footer";
+        // Components
+        "components/*",
+        // Page-specific blocks,
+        "pages/*";
