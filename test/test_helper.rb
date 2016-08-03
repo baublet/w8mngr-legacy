@@ -31,8 +31,14 @@ class ActiveSupport::TestCase
   #
   # Use:
   #  assert_response_contains "foo"
-  def assert_response_contains string
-    assert response_contains?(string), "Response did not contain: " + string.to_s
+  def assert_response_contains item
+    if item.is_a?(Hash) || item.is_a?(Array)
+      item.each_pair do |key, value|
+        assert_response_contains value
+      end
+    else
+      assert response_contains?(item), "Response did not contain: " + item.to_s
+    end
   end
 
   # Simple login
