@@ -16,6 +16,14 @@
 
   <h2>Change Log</h2>
 
+  <h3>Wednesday, August 3</h3>
+
+  <p>Many bug fixes and CSS refactorings that have made maintanence and feature-addition much easier for me. I have also added a <a href="/styleguide/">styleguide</a> to help me build new features without creating new CSS as often. You may also notice a ton of tweaks to font sizes and spacing. They have all been standardized. I also added a new loading animation that I think fits the theme of this site better, as well as a custom background rather than gray.</p>
+
+  <p>Perhaps the biggest fix is that <strong>form posts now work on iOS</strong>. So no more having to reload the page when you modify activities, routines, and weights. This allows Turbolinks to run much more smooth for us iOS users.</p>
+
+  <p>Aside from various bigfixes and feature tweaks, I'm working on expanding and refactoring my test suite so that it's easier to maintain while letting me keep the ability to quickly add features and modify existing features without breaking existing tests. This should increase the site's overall stability. Along with these changes, we're going to be handling messages much, much better in the future--things from 404, to 500, to connectivity issues will be handled in not just a more standardized manner, but for many, they'll be handled for the first time!</p>
+
   <h3>Friday, July 15</h3>
 
   <p><%= link_to "Activities", activities_path %> and <%= link_to "routines", routines_path %> are here! You can:</p>
