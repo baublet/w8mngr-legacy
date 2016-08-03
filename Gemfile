@@ -56,14 +56,6 @@ group :development, :test do
 
     # For helping us estimate test coverate
     gem "codeclimate-test-reporter", group: :test, require: nil
-    # Allows us to test JS in integration tests
-    gem "capybara"
-    # Required to runcapybaray webkit without a true display
-    # Requires sudo apt-get install xvfb
-    gem "headless"
-    # Our driver that will be executing JS
-    # Requires: sudo apt-get install libqt4-dev libqtwebkit-dev
-    gem "capybara-webkit"
 
     gem "sqlite3"
     gem "byebug"

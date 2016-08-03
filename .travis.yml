@@ -8,7 +8,6 @@ before_install:
  - "sh -e /etc/init.d/xvfb start"
  - sleep 3 # give xvfb some time to start
  - cp config/database.yml.travis config/database.yml
- - rm test/integration/*js_test.rb    # We have to remove these because Travis just doesn't seem to test them consistently. It throws weird errors
  - psql -c 'create database travis_ci_test;' -U postgres
 addons:
   code_climate:
