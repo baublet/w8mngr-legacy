@@ -1,5 +1,6 @@
 .scannable-table {
-  width: 100%;
+  width: auto;
+  min-width: 100%;
   margin: 0 -#{$spacing-normal} $spacing-large;
   th {
     text-transform: uppercase;

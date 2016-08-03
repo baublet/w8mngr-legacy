@@ -6,7 +6,15 @@ class FoodsController < ApplicationController
 
   # GET /foods
   def index
-    @foods = current_user.foods.includes(:measurements).all.where(deleted: false)
+    per_page = 10
+    @page = (params.try(:[], :p) || 1).to_i
+    @prev_page = @page == 1 ? nil : @page - 1
+    @foods = current_user.foods.includes(:measurements).where(deleted: false).offset(per_page * (@page - 1)).limit(per_page + 1)
+    @foods = @foods.to_a
+    # If there are 11 foods, there's a next page, otherwise make the next_page nil
+    @next_page = @foods.count > 10 ? @page + 1 : nil
+    @paginator_url = foods_path
+    @foods.pop if @foods.count > 10
   end
 
   # GET /foods/1

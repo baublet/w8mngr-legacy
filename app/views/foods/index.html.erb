@@ -2,6 +2,14 @@
 
 <%= render partial: "shared/app_menu" %>
 
+<%  # Load up the pagination since we want to show it at the top and the bottom
+    unless @next_page.nil? && @prev_page.nil?
+      pagination = render partial: "shared/simple_pagination", locals: {previous_page: @prev_page, next_page: @next_page, base_url: @paginator_url}
+    else
+      pagination = ""
+    end
+%>
+
 <div class="breadcrumbs">
   <div class="section-inside">
     <ul>
@@ -24,9 +32,11 @@
 
   <% if !@foods.nil? && @foods.size > 0 %>
 
+  <%= pagination %>
   <table class="foods-table scannable-table">
     <%= render @foods %>
   </table>
+  <%= pagination %>
 
   <% else %>
 
