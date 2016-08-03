@@ -53,7 +53,7 @@ This command, `_hologram` will clear your assets of CSS files, recompile them, a
 
 ```bash
 alias clear_assets="echo 'Clearing old assets...' && rm -f ~/workspace/public/webpack/* && rm -f -r ~/workspace/public/assets/*"
-alias precompile="echo 'Running deployment script...' && clear_assets && echo 'Precompiling rake assets...' && rake assets:precompile && echo 'Compiling webpack assets...' && rake webpack:compile && echo 'Compiling Hologram styleguide...' && hologram && echo 'Adding compiled assets to the repo...' && git add . && git commit -a -m 'Precompile assets and styleguide for deploy'"
+alias precompile="echo 'Running deployment script...' && clear_assets && echo 'Precompiling rake assets...' && RAILS_ENV=production rake assets:precompile && echo 'Compiling webpack assets...' && rake webpack:compile && echo 'Compiling Hologram styleguide...' && hologram && echo 'Adding compiled assets to the repo...' && git add . && git commit -a -m 'Precompile assets and styleguide for deploy'"
 alias deploy="precompile && echo 'Pushing to Dokku...' && git push && git push dokku master"
 ```
 

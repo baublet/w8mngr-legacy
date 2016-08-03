@@ -28,6 +28,10 @@ module W8mngr
 
     # Adds the fonts to the assets pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    # Add our component and pages directory to assets
+    config.assets.paths << Rails.root.join("app", "assets", "stylesheets", "components")
+    config.assets.paths << Rails.root.join("app", "assets", "stylesheets", "pages")
+
     # Our validators
     config.autoload_paths << Rails.root.join("lib", "validators")
     # My custom modules
