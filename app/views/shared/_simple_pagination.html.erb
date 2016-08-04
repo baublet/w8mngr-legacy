@@ -1,15 +1,15 @@
 <% if !previous_page.nil? || !next_page.nil? %>
+<% # If the base_url contains a ?, we should only add to the variables it has,
+	 # otherwise, we'll just be adding the variables (the only variables) to the URL
+	 sep = base_url.include?("?") ? "&" : "?"
+%>
 <div class="pagination btn-bar">
 	<div class="left">
-	<% if !previous_page.nil? %>
-		<a href="<%= base_url %>&p=<%= previous_page %>" class="btn btn-prev"><i class="fa fa-chevron-circle-left"></i> Back</a>
-	<% end %>
+		<a href="<%= base_url %><%= sep %>p=<%= previous_page %>" class="btn prev<%= previous_page.nil? ? " disabled" : "" %>"><i class="fa fa-chevron-circle-left"></i> Back</a>
 	</div>
 
 	<div class="right">
-	<% if !next_page.nil? %>
-		<a href="<%= base_url %>&p=<%= next_page %>" class="btn btn-next">Next <i class="fa fa-chevron-circle-right"></i></a>
-	<% end %>
+		<a href="<%= base_url %><%= sep %>p=<%= next_page %>" class="btn next<%= next_page.nil? ? " disabled" : "" %>">Next <i class="fa fa-chevron-circle-right"></i></a>
 	</div>
 </div>
 <% end %>

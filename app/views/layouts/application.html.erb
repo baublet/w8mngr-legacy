@@ -19,7 +19,7 @@
         </script>
     <% end %>
 </head>
-<body class="nojs <%= controller.controller_name %> <%= controller.action_name %>">
+<body class="nojs <%= controller.controller_name %> <%= controller.action_name %>" id="body">
 
 <div class="turbolinks-loading" id="turbolinks-loading-notifier" data-turbolinks-permanent>
   <div class="turbolinks-loading-panel">
@@ -89,11 +89,11 @@
 
 </header>
 
+<main id="main" role="main">
+
 <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert #{message_type}") %>
 <% end %>
-
-<main id="main" role="main">
 
 <%= yield %>
 

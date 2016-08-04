@@ -29,14 +29,14 @@
     <div class="progress col">
       <% if !last_entry.nil? %>
         <a href="<%= activity_log_day_path(activity, current_day) %>" title="Last entry for <%= activity.name %> was <%= pluralize days_ago, "day" %> ago. Click to log for <%= nice_day current_day %>">
-          <% if last_entry.day.to_i == current_day.to_i %>
+          <% if days_ago == 0 %>
             <i class="fa fa-check-circle-o complete" aria-hidden="true"></i>
             <span class="screen-reader-text">You have logged entries for this activity today. Great work!</span>
           <% else %>
             <i class="fa fa-circle-o" aria-hidden="true"></i>
             <span class="screen-reader-text">Last entry <%= pluralize days_ago, "day" %> ago</span>
+            <div class="last-entry"><span class="screen-reader-text">Last entry for <%= activity.name %> was</span> <%= pluralize days_ago, "day" %> ago</div>
           <% end %>
-          <div class="last-entry"><span class="screen-reader-text">Last entry for <%= activity.name %> was</span> <%= pluralize days_ago, "day" %> ago</div>
         </a>
       <% else %>
         <a href="<%= activity_log_day_path(activity, current_day) %>" title="Get started with <%= activity.name %> for <%= nice_day current_day %>">

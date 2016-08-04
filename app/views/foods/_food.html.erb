@@ -1,15 +1,4 @@
-<%
-  # Figure out which class to give it
-  food_class = "local"
-  if !food.is_a?(Hash)
-    food_class = food.data_source
-    food_class += " user-owned" if food.user_id == current_user.id
-  else
-    food_class = food["data_source"]
-  end
-%>
-
-<tbody class="food scannable-table-item <%= food_class %>">
+<tbody class="food scannable-table-item">
 
 <tr>
   <td class="scannable-table-heading" colspan="6">
@@ -18,41 +7,27 @@
       <div class="left">
 
         <h2 class="scannable-table-item-title">
-            <% if food.is_a?(Hash)  %>
-                <%= link_to food["name"], food_pull_path(food["ndbno"]) %>
-            <% else %>
-                <%= link_to food.name, food_path(food) %>
-            <% end %>
+          <%= link_to food.name, food_path(food) %>
         </h2>
-        <% unless food.is_a?(Hash)  %>
-          <h3 class="scannable-table-item-subtitle">
-            <%= pluralize(food.measurements.to_a.count, "measurement") %>
-          </h3>
-          <p class="description">
-            <%= food.description %>
-          </p>
-        <% end %>
 
       </div>
       <div class="right">
 
-        <% unless food.is_a? Hash %>
-          <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
-              <i class="fa fa-pencil"></i>
-              <span class="screen-reader-text">Edit Entry</span>
-          <% end if food.try(:user_id) == current_user.id %>
-          <%= link_to food_delete_path(food), class: "btn-icon delete",  title: "Delete Entry" do %>
-              <i class="fa fa-times"></i>
-              <span class="screen-reader-text">Delete Entry</span>
-          <% end if food.try(:user_id) == current_user.id %>
-        <% end %>
+      <%= link_to edit_food_path(food), class: "btn-icon", title: "Edit Entry" do %>
+          <i class="fa fa-pencil"></i>
+          <span class="screen-reader-text">Edit Entry</span>
+      <% end if food.try(:user_id) == current_user.id %>
+      <%= link_to food_delete_path(food), class: "btn-icon delete",  title: "Delete Entry" do %>
+          <i class="fa fa-times"></i>
+          <span class="screen-reader-text">Delete Entry</span>
+      <% end if food.try(:user_id) == current_user.id %>
 
       </div>
     </div>
 
   </td>
 </tr>
-<% unless food.is_a?(Hash) && !food.try(:measurements) %>
+<% unless !food.try(:measurements) %>
   <tr class="scannable-table-lower-heading">
     <th><span class="screen-reader-text">Serving/Unit</span></th>
     <th>Calories</th>
@@ -81,12 +56,14 @@
         <%= number_with_delimiter measurement.protein %>
       </td>
       <td class="meta">
-        <%= form_tag food_entry_add_food_path(current_day, measurement.id) do %>
-          <%= button_tag(type: 'submit', class: 'btn-icon primary', title: (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe") do %>
-  	      			<i class="fa fa-plus-circle" aria-hidden="true"></i>
-  	      			<span class="btn-text screen-reader-text"><%= (cookies[:add_to_recipe].blank?) ? "Add to Log" : "Add to Recipe" %></span>
-  	      <% end %>
-  	     <% end %>
+        <%= link_to food_entry_add_food_path(current_day, measurement.id), class: 'btn-icon primary', title: "Add to Log for " + nice_day(current_day) do %>
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+  	      <span class="btn-text screen-reader-text">Add to Log for <%= nice_day current_day %></span>
+        <% end if cookies[:add_to_recipe].nil? %>
+        <%= link_to add_food_to_recipe_path(cookies[:add_to_recipe], measurement.id), class: 'btn small', title: "Add to Recipe, " + @recipe.name do %>
+	      			<i class="fa fa-plus" aria-hidden="true"></i>
+	      			<span class="screen-reader-text">Add to </span>Recipe<span class="screen-reader-text"> <%= @recipe.name %></span>
+	      <% end unless cookies[:add_to_recipe].nil? %>
       </td>
     </tr>
   <% end %>
