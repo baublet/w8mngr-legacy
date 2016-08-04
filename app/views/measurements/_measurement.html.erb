@@ -2,8 +2,6 @@
 	form_action = (cookies[:add_to_recipe].blank?) ?
 									food_entry_add_food_path(current_day, measurement.id.to_s) :
 									add_food_to_recipe_path(recipe_id: cookies[:add_to_recipe], measurement_id: measurement.id)
-
-									byebug
 %>
 
 <div class="measurement card">

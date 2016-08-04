@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
       no_styles: true
       )
     markdown = Redcarpet::Markdown.new(html_renderer)
-    @preparation_instructions = markdown.render(@recipe.instructions)
+    @preparation_instructions = markdown.render(@recipe.instructions.nil? ? "" : @recipe.instructions)
   end
 
   def edit

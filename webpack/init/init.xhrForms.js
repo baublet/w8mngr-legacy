@@ -53,9 +53,9 @@ w8mngr.init.add(function() {
           // TL what to do... asinine considering TL's original purpose (progressive
           // enhancement and quicker app development).
           let url = response.responseURL
-          if (url !== window.location.href) {
-            window.Turbolinks.visit(url)
-          } else {
+          //if (url !== window.location.href) {
+            //window.Turbolinks.visit(url)
+          //} else {
             window.requestAnimationFrame(function() {
               // Let's grab the body from the respose
               let parser = new DOMParser()
@@ -68,7 +68,7 @@ w8mngr.init.add(function() {
               window.scroll(0,0)
               document.w8mngrLoading(false)
             })
-          }
+          //}
         })
         return false
       })

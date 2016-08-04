@@ -1,5 +1,9 @@
 <% provide(:title, "Search Results") %>
 
+<% # Pagination
+  pagination = render partial: "shared/simple_pagination", locals: {base_url: @base_url, previous_page: @prev_page, next_page: @next_page}
+%>
+
 <%= render partial: "shared/app_menu" %>
 
 <div class="breadcrumbs">
@@ -48,8 +52,10 @@
     </p>
   <% end %>
 
+  <%= pagination %>
+
   <%= render partial: "search_results", locals: {results: @searchresults} %>
 
-  <%= render partial: "shared/simple_pagination", locals: {base_url: @base_url, previous_page: @prev_page, next_page: @next_page} %>
+  <%= pagination %>
 
 </div>
