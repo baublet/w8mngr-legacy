@@ -16,6 +16,12 @@
 
   <h2>Change Log</h2>
 
+  <h3>Thursday, August 4</h3>
+
+  <p>We now no longer ping the NDB API for each search request/attempt. Our foods database is MASSIVELY expanded (check out the search) from that source, so we no longer rely on the NDB being online to work. Woohoo!</p>
+
+  <p>This comes with a few changes for our search. If you search from the search form, everything is the same. It's a full text search using a dictionary lookup. But if you search from autocomplete, it now works more like an autocomplete, sorted by the item's popularity. Those searches are also cached for 12 hours. This should give you quicker, more accurate ways to search for foods to add to your log.</p>
+
   <h3>Wednesday, August 3</h3>
 
   <p>Many bug fixes and CSS refactorings that have made maintanence and feature-addition much easier for me. I have also added a <a href="/styleguide/">styleguide</a> to help me build new features without creating new CSS as often. You may also notice a ton of tweaks to font sizes and spacing. They have all been standardized. I also added a new loading animation that I think fits the theme of this site better, as well as a custom background rather than gray.</p>
