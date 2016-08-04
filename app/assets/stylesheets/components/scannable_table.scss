@@ -1,5 +1,5 @@
 .scannable-table {
-  width: auto;
+  width: calc(100% + (#{$spacing-normal} *  2));
   min-width: 100%;
   margin: 0 -#{$spacing-normal} $spacing-large;
   th {
@@ -9,9 +9,6 @@
     color: rgba(black, .25);
     margin-bottom: $spacing-tiny;
     text-align: left;
-  }
-  tbody tr:last-child td {
-    padding-bottom: $spacing-normal;
   }
   td.meta {
     text-align: right;
@@ -37,6 +34,7 @@
   display: flex;
   align-content: flex-start;
   flex-wrap: nowrap;
+  padding-bottom: $spacing-small;
   .left, .right {
     width: 80%;
   }
@@ -53,8 +51,8 @@
   font-size: $font-size-small;
 }
 
-.scannable-table-data +  .scannable-table-data td {
-  padding-top: 0;
+.scannable-table-data:hover td {
+  background: rgba($black, .025);
 }
 
 .scannable-table-item-title {

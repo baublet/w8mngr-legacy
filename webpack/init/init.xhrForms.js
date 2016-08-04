@@ -53,22 +53,23 @@ w8mngr.init.add(function() {
           // TL what to do... asinine considering TL's original purpose (progressive
           // enhancement and quicker app development).
           let url = response.responseURL
-          //if (url !== window.location.href) {
-            //window.Turbolinks.visit(url)
-          //} else {
-            window.requestAnimationFrame(function() {
-              // Let's grab the body from the respose
-              let parser = new DOMParser()
-              let doc = parser.parseFromString(response.responseText, "text/html")
-              console.log(doc)
+          window.requestAnimationFrame(function() {
+            // Let's grab the body from the respose
+            let parser = new DOMParser()
+            let doc = parser.parseFromString(response.responseText, "text/html")
+            if (doc && doc.getElementById("main")) {
               Turbolinks.clearCache()
-              document.getElementById("main").innerHTML = doc.getElementById("main").innerHTML
+              document.getElementById("main").innerHTML =
+                                                          doc.getElementById("main").innerHTML
               history.pushState({turbolinks: true, url: url}, '', url)
               Turbolinks.dispatch("turbolinks:load")
               window.scroll(0,0)
               document.w8mngrLoading(false)
-            })
-          //}
+            } else {
+              Turbolinks.visit(url)
+            }
+          })
+          window.scroll(0,0)
         })
         return false
       })

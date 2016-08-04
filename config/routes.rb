@@ -28,17 +28,16 @@ Rails.application.routes.draw do
     get     "/food_entries/delete/:id" =>
                                 "food_entries#destroy",
                                 as: :food_entry_delete
-    post    "/food_entries/:day/log/:measurement_id" =>
+    match   "/food_entries/:day/log/:measurement_id" =>
                                 "food_entries#add_food",
-                                as: :food_entry_add_food
+                                as: :food_entry_add_food,
+                                via: [:get, :post]
     get     "/measurements/:id/chosen" => "measurements#increment_popularity"
 
     # Foods
     get     "/foods/:id/delete/" =>
                                 "foods#destroy",
                                 as: :food_delete
-    get     "/foods/pull/(:ndbno)" => "usda#pull",
-                                as: :food_pull
     resources :foods
 
     # Faturdays

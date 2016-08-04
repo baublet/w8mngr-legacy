@@ -48,6 +48,11 @@
 }
 
 .pagination {
+    margin-bottom: $spacing-normal;
+    padding: $spacing-small;
+    border-radius: 5px;
+    background: rgba($black, .1);
+    @include height(-1);
     .previous {
         float: left;
     }

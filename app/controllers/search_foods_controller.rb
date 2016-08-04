@@ -1,20 +1,22 @@
 class SearchFoodsController < ApplicationController
 
   def index
+
     # If the user is coming from a recipe, make sure the recipe exists and
     # belongs to the user. If it does, save that recipe ID to a cookie so that
-    # they can add the food directly to a recipe...
-    if !params[:recipe].blank?
-      recipe = current_user.recipes.find_by(id: params[:recipe])
-      if !recipe.nil?
-        cookies[:add_to_recipe] = recipe.id
+    # they can add the food directly to a recipe... If they aren't coming from
+    # from a recipe, delete the add_to_recipe cookie.
+    if params[:recipe].blank? && params[:q].blank?
+      cookies.delete :add_to_recipe
+    else
+      @recipe = current_user.recipes.find_by(id: params[:recipe])
+      unless @recipe.nil?
+        cookies[:add_to_recipe] = @recipe.id
       end
     end
-    # If they're coming from the food log, destroy the add_to_recipe cookie so
-    # the user can add entries to their food log
-    if !params[:food_log_referrer].blank?
-      cookies.delete :add_to_recipe
-    end
+
+    # Load our recipe if we're looking to add ingredients to one
+    @recipe = current_user.recipes.find_by(id: cookies[:add_to_recipe]) unless cookies[:add_to_recipe].nil? || !@recipe.nil?
 
     # Set our templates' default variables
     @searchresults = []
