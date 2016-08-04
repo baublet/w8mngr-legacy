@@ -5,7 +5,7 @@ class RoutinesController < ApplicationController
   before_action :find_activity, only: [:add_activity, :remove_activity]
 
   def index
-    @routines = current_user.routines
+    @routines = current_user.routines.all.to_a.sort_by { |routine| routine.last_completed || 0 }
   end
 
   def show
