@@ -24,7 +24,7 @@ class SearchFoodsController < ApplicationController
     @search_type = "Foods"
 
     if !params[:q].blank?
-      search_foods
+      search_foods  (params[:format] == "json")
     end
 
     respond_to do |format|
@@ -93,35 +93,36 @@ class SearchFoodsController < ApplicationController
 
   # I'm abstracting this out because in a JSON end point, we're going to want
   # to return search results for both recipes and foods
-  def search_foods
-    # Prepare the pagination with 30 per page
+  def search_foods json = false
+    # Prepare the pagination with 10 per page
     page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
-    per_page = params[:per_page] || 30
+    per_page = params[:per_page] || 10
     per_page = per_page.to_i
 
     # Search the wider database with a preference for the user's saved and liked foods
 
     # Break the search into its parts and search for each term
-    query = params[:q].squish
-    results = Food.search_foods(query)
-                  .limit(per_page + 1)                          # We do +1 here because if, at the end, we have per_page + 1 entries, we know there's a next page
-                  .offset((page - 1) * per_page)
+    if json
+      # Our JSON query searches for LIKE instead
+      query = params[:q].squish.gsub(" ", "%")
+      query = "%#{query}%"
+      # Cache this request
+      results = Rails.cache.fetch("json-food-search-" + query + "-p-" + page, :expires_in => 12.hours) do
+        Food.where("name LIKE :q OR description LIKE :q", {q: query})
+            .order("popularity ASC")
+            .limit(per_page + 1)
+            .offset((page - 1) * per_page)
+            .includes(:measurements)
+      end
+    else
+      query = params[:q].squish
+      results = Food.search_foods(query)
+                    .limit(per_page + 1)                          # We do +1 here because if, at the end, we have per_page + 1 entries, we know there's a next page
+                    .offset((page - 1) * per_page)
+                    .includes(:measurements)
+    end
+
     @searchresults = results.each { |x| x.data_source = "local" }
-
-    # We need to ping the USDA for as many entries as we need to get to per_page
-    # usda_entries = per_page + 1 - results.size
-
-    # Then, search the USDA API if we have fewer than per_page + 1 results
-    # if usda_entries > 0
-    #  usda = Apis::USDA.new
-    #  @searchresults += usda.search({
-    #    q:      params[:q],
-    #    max:    usda_entries,
-    #    offset: (page - 1) * per_page
-    #  }).each { |x|
-    #    x["data_source"] = "usda"
-    #  }
-    # end
 
     # Matches? Show the search form
     # Prepare simple pagination
