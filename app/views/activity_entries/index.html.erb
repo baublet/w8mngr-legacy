@@ -140,7 +140,11 @@
             <% prev_day = entry.day %>
           <% end %>
 
-          <%= render entry %>
+          <div class="grid arbitrary">
+            <div class="row activity-entry">
+              <%= render partial: "activities/types/" + entry.activity.type_template + "_shown", locals: { entry: entry } %>
+            </div>
+          </div>
 
         <% end %>
         </div>

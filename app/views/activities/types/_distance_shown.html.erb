@@ -1,0 +1,12 @@
+<div class="work col">
+  <%= (number_with_precision(entry.work_in(current_user.unit(:distance), "mm"), strip_insignificant_zeros: true, precision: 2) + " " + current_user.unit(:distance) ) %>
+</div>
+
+<div class="when col">
+  <span class="calories" title="Estimated Calories Burned">
+    <span class="screen-reader-text">Estimated Calories Burned:</span>
+    <%= entry.calories %> calories
+  </span>
+  <br>
+  <%= time_ago_in_words(entry.created_at) %> ago
+</div>

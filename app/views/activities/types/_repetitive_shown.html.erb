@@ -1,0 +1,16 @@
+<div class="reps col">
+  <%= entry.reps %>
+</div>
+
+<span class="unit col">
+  repetitions
+</span>
+
+<div class="when col">
+  <span class="calories" title="Estimated Calories Burned">
+    <span class="screen-reader-text">Estimated Calories Burned:</span>
+    <%= entry.calories %> calories
+  </span>
+  <br>
+  <%= time_ago_in_words(entry.created_at) %> ago
+</div>
