@@ -1,0 +1,24 @@
+<div class="reps col">
+  <%= entry.reps %>
+</div>
+
+<div class="col">
+  <i class="fa fa-times" aria-hidden="true"></i>
+</div>
+
+<div class="work col">
+  <%= number_with_precision(entry.work_in(current_user.unit), strip_insignificant_zeros: true, precision: 2) %>
+</div>
+
+<span class="unit col">
+  <%= current_user.unit %>
+</span>
+
+<div class="when col">
+  <span class="calories" title="Estimated Calories Burned">
+    <span class="screen-reader-text">Estimated Calories Burned:</span>
+    <%= entry.calories %> calories
+  </span>
+  <br>
+  <span class="time"><%= time_ago_in_words(entry.created_at) %> ago</span>
+</div>
