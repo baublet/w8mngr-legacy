@@ -26,10 +26,14 @@
     order: 2;
   }
   .pill {
-    background: $white;
+    background: rgba($white, .5);
     color: $black;
     font-size: $font-size-tiny;
     padding: $spacing-tiny;
+    border: 0;
+    &:hover {
+      background: $white;
+    }
   }
   h2 {
     margin: 0 0 $spacing-tiny;
