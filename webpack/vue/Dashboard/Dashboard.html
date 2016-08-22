@@ -2,21 +2,17 @@
   <div class="grid">
     <div class="row">
       <div class="col full">
+        <week-in-review :wir-data="weekInReview"></week-in-review>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col full">
         <line-chart chart="quarter-calories"></line-chart>
       </div>
     </div>
     <div class="row">
       <div class="col full">
         <user-stats :user-stats="userStats"></user-stats>
-      </div>
-    </div>
-    <div class="stats-and-review row">
-      <div class="col half">
-        <week-in-review :wir-data="weekInReview"></week-in-review>
-      </div>
-      <div class="macros col half">
-        <h2><i class="fa fa-pie-chart" aria-hidden="true"></i> Weekly Macros</h2>
-        <donut-chart :values="macroPie" :labels="macroPieLabels"></donut-chart>
       </div>
     </div>
   </div>

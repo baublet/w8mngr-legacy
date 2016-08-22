@@ -115,7 +115,9 @@ module UserHealthFunctions
       last_weight = weights[key][1]
       last_calories = week[1]
     end
-    return tdee.to_f.ceil
+    tdee = tdee.to_f.ceil
+    return tdee if tdee >= 1000 && tdee <= 7000
+    return nil
   end
 
   def food_totals day = nil

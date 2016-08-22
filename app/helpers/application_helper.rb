@@ -81,4 +81,10 @@ module ApplicationHelper
         end
     end
 
+    # Converts a date to a day string
+    def date_to_day date
+        date = Date.parse(date) unless date.respond_to? :strftime
+        return date.strftime('%Y%m%d')
+    end
+
 end

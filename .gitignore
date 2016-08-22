@@ -17,7 +17,7 @@
 /tmp
 
 # Ignore the byebug history
-.byebug_history
+/.byebug_history
 
 # Ignore my large assets (for now)
 /asset-sources

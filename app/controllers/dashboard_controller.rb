@@ -73,6 +73,20 @@ class DashboardController < ApplicationController
     # Turn them to the proper unit
     week_weights = week_weights.map { |w| [w[0], WeightEntry.get_display_value(w[1], current_user.unit)] }
 
+    # Now we want to calculate the calories burned/gained, including activities
+    tdee = current_user.adaptive_tdee || current_user.bmr || 2000
+    days_needed = week_calories.collect { |e| date_to_day e[0] }      # Collect all the days we need
+    activities = ActivityEntry.where(user_id: current_user.id, day: days_needed).to_a
+    week_differential = week_calories
+    week_differential.each do |day|
+      next if day[1] == 0
+      today = date_to_day(day[0]).to_i
+      day[1] = day[1] - tdee unless day[1] == 0
+      activities.each do |activity|
+        day[1] = day[1] - activity.calories if activity.day == today
+      end
+    end
+
     # Pop the last item from each
     week_calories.pop
     week_fat.pop
@@ -86,7 +100,8 @@ class DashboardController < ApplicationController
       week_fat: week_fat,
       week_carbs: week_carbs,
       week_protein: week_protein,
-      week_weights: week_weights
+      week_weights: week_weights,
+      week_differential: week_differential
     }
   end
 end
