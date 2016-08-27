@@ -41,11 +41,13 @@
       </div>
     </div>
 
-    <div id="dashboard-app" class="hide-if-no-js"></div>
+    <%= render "week_in_review" %>
 
     <noscript>
-      <strong>You need Javascript enabled to see the dashboard.</strong>
+      <strong>You need Javascript enabled to see dashboard charts.</strong>
     </noscript>
+
+    <div id="dashboard-app" class="hide-if-no-js"></div>
 
   </div>
 </div>
