@@ -107,7 +107,7 @@ class SearchFoodsController < ApplicationController
     if type == "json"
       query = params[:q].squish
       # Cache this request
-      results = Rails.cache.fetch("json-food-search-" + query + "-p-" + page.to_s, :expires_in => 1.second) do
+      results = Rails.cache.fetch("json-food-search-" + query + "-p-" + page.to_s, :expires_in => 15.minutes) do
         Food.autocomplete_foods(query)
             .limit(per_page + 1)
             .offset((page - 1) * per_page)

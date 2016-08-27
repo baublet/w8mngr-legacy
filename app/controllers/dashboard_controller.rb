@@ -3,16 +3,16 @@ class DashboardController < ApplicationController
   include ActionView::Helpers::DateHelper
 
   def index
-    #@dashboard_data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
+    @dashboard_data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 1.second) do
       @dashboard_data = week_in_review
       @dashboard_data = week_macros(@dashboard_data).merge(@dashboard_data)
       @dashboard_data = user_stats.merge(@dashboard_data)
-    #end
+    end
     respond_to do |format|
       format.json { render json: @dashboard_data }
       format.html {
-        @week_weights = @dashboard_data[:week_weights]
         @week_averages = @dashboard_data[:week_averages]
+        @week_weights = @dashboard_data[:week_weights]
         @week_calories = @dashboard_data[:week_calories]
         @week_fat = @dashboard_data[:week_fat]
         @week_carbs = @dashboard_data[:week_carbs]
@@ -68,6 +68,7 @@ class DashboardController < ApplicationController
     tdee = current_user.differential_metric
     days_needed = week_calories.collect { |e| date_to_day e[0] }      # Collect all the days we need to iterate through
     activities = ActivityEntry.where(user_id: current_user.id, day: days_needed).to_a
+
     # Clone our calories array (if we don't do this, ruby uses pointers for everything)
     week_differential = week_calories.map { |a| a.dup }
     week_differential.each do |day|
