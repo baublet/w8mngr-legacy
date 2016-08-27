@@ -19,5 +19,7 @@ class Measurement < ActiveRecord::Base
   def increment_popularity
     self.popularity = self.popularity + 1
     save()
+    self.food.popularity = self.food.popularity + 1
+    self.food.save()
   end
 end

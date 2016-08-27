@@ -36,6 +36,19 @@ class Food < ActiveRecord::Base
                               :dictionary => "english"
                           }
                       }
+  pg_search_scope :autocomplete_foods,
+                      :against => {
+                          :name => 'A',
+                          :description => 'B'
+                      },
+                      :ranked_by => "popularity + :tsearch",
+                      :using => {
+                          :tsearch => {
+                              :prefix => true,
+                              :negation => true,
+                              :dictionary => "english"
+                          }
+                      }
 
   def increment_popularity
     self.popularity = self.popularity + 1

@@ -21,6 +21,7 @@ module UserPreferences
 
       "activity_level": 2,
       "target_calories": "",
+      "differential_metric": 1,
 
       "faturday_enabled": false,
       "auto_faturdays": {
@@ -53,6 +54,26 @@ module UserPreferences
         self.preferences[pref.to_s] = default
       end
     end
+  end
+
+  def differential_metric
+    case self.preferences["differential_metric"]
+      when "1"
+        expended_values = []
+        expended_values << self.bmr.to_i
+        expended_values << self.adaptive_tdee.to_i
+        expended_values << self.preferences["target_calories"].to_i
+        return expended_values.max unless expended_values.max < 100
+      when "2"
+        return self.preferences["target_calories"].to_i unless self.preferences["target_calories"].to_i < 100
+      when "3"
+        return self.bmr.to_i unless self.bmr.nil?
+      when "4"
+        return self.adaptive_tdee.to_i unless self.adaptive_tdee.nil?
+    end
+
+    # Our default differential metric
+    return 2200
   end
 
   # Returns a string representation of their sex

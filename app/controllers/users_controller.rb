@@ -77,6 +77,8 @@ class UsersController < ApplicationController
         @user.preferences["faturday_carbs"] = params["faturday_carbs"].to_i
         @user.preferences["faturday_protein"] = params["faturday_protein"].to_i
 
+        @user.preferences["differential_metric"] = params["differential_metric"].to_i.between?(1, 4) ? params["differential_metric"].to_i : 1
+
         if @user.save
           flash.now[:success] = "Preferences saved"
         else

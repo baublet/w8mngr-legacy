@@ -3,11 +3,11 @@ class DashboardController < ApplicationController
   include ActionView::Helpers::DateHelper
 
   def index
-    @dashboard_data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
+    #@dashboard_data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
       @dashboard_data = week_in_review
       @dashboard_data = week_macros(@dashboard_data).merge(@dashboard_data)
       @dashboard_data = user_stats.merge(@dashboard_data)
-    end
+    #end
     respond_to do |format|
       format.json { render json: @dashboard_data }
       format.html {
@@ -65,7 +65,7 @@ class DashboardController < ApplicationController
     week_weights = week_weights.map { |w| [w[0], WeightEntry.get_display_value(w[1], current_user.unit)] }
 
     # Now we want to calculate the calories burned/gained, including activities
-    tdee = current_user.adaptive_tdee || current_user.bmr || 2000
+    tdee = current_user.differential_metric
     days_needed = week_calories.collect { |e| date_to_day e[0] }      # Collect all the days we need to iterate through
     activities = ActivityEntry.where(user_id: current_user.id, day: days_needed).to_a
     # Clone our calories array (if we don't do this, ruby uses pointers for everything)

@@ -69,44 +69,65 @@
     	<p>We offer two ways to calculate your Total Daily Expended Energy (TDEE), the number of
     	calories you burn every day.</p>
 
-    	<h4>Calculated TDEE</h4>
+    	<div class="grid breaker">
+    	  <div class="row">
+    	    <div class="col half">
+    	      <h4>Calculated TDEE</h4>
 
-    	<p>The simplest way to begin is with a quick calculator based on your age,
-    	height, weight, and estimated activity level.</p>
+          	<p>The simplest way to begin is with a quick calculator based on your age,
+          	height, weight, and estimated activity level.</p>
 
-    	<p>Before we can calculate your basal metabolic rate, we need your
-      height (<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>')  %>),
-      age (<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>),
-      and a recent weigh-in (<%= raw(@user.recent_most_weight.nil? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>).
-      It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
-    	</p>
+          	<p>Before we can calculate your basal metabolic rate, we need your
+            height (<%= raw(@user.preferences["height"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>')  %>),
+            age (<%= raw(@user.preferences["birthday"].blank? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>),
+            and a recent weigh-in (<%= raw(@user.recent_most_weight.nil? ? '<span class="dont-got-it"><i class="fa fa-times" aria-hidden="true"></i><span class="screen-reader-text">which we need</span></span>' : '<span class="got-it"><i class="fa fa-check" aria-hidden="true"></i><span class="screen-reader-text">which we have</span></span>') %>).
+            It also helps to know your sex and activity level, otherwise, our calculator will under-estimate your BMR.
+          	</p>
 
-    	<%= label_tag "activity_level", "Activity Level" %>
-    	<%= select_tag "activity_level", options_for_select([
-      	                            ["Sedentary", 1],
-      	                            ["Lightly Active", 2],
-      	                            ["Active", 3],
-      	                            ["Highly Active", 4],
-      	                            ["Intensely Active", 5],
-    	                            ], @user.preferences["activity_level"]) %>
+          	<%= label_tag "activity_level", "Activity Level" %>
+          	<%= select_tag "activity_level", options_for_select([
+            	                            ["Sedentary", 1],
+            	                            ["Lightly Active", 2],
+            	                            ["Active", 3],
+            	                            ["Highly Active", 4],
+            	                            ["Intensely Active", 5],
+          	                            ], @user.preferences["activity_level"]) %>
 
-    	<% bmr = @user.bmr %>
-    	<%= bmr.nil? ? "" : raw("<p><label>Calculated TDEE:</label> #{number_with_delimiter(bmr)}</p>") %>
+          	<% bmr = @user.bmr %>
+          	<%= bmr.nil? ? "" : raw("<p><label>Calculated TDEE:</label> #{number_with_delimiter(bmr)}</p>") %>
+    	    </div>
+
+    	    <div class="col half">
+          	<h4>Adaptive TDEE</h4>
+
+          	<p>Once we have enough information about your weight and the calories you eat,
+          	we can also adapt our system to generate a more precise basal metabolic rate. To
+          	begin doing this, we need at least two weeks of information.</p>
+
+          	<p><em>Note:</em> the more information we have, the more accurate this
+          	calculation becomes.</p>
+
+            <% tdee = @user.adaptive_tdee current_user.id %>
+            <p><%= tdee.nil? ? "We need more information to determine an accurate adaptive TDEE for you. Get to logging weights and calories!" : raw("<label>Adaptive TDEE:</label> #{number_with_delimiter(tdee.to_s)}") %></p>
+    	    </div>
+    	  </div>
+    	</div>
+
+
     </div>
 
     <div class="form-group">
-    	<h4>Adaptive TDEE</h4>
-
-    	<p>Once we have enough information about your weight and the calories you eat,
-    	we can also adapt our system to generate a more precise basal metabolic rate. To
-    	begin doing this, we need at least two weeks of information.</p>
-
-    	<p><em>Note:</em> the more information we have, the more accurate this
-    	calculation becomes.</p>
-
-      <% tdee = @user.adaptive_tdee current_user.id %>
-      <%= tdee.nil? ? "" : raw("<p><label>Adaptive TDEE:</label> #{number_with_delimiter(tdee.to_s)}</p>") %>
+      <h4>Calories Burned/Gained Metric</h4>
+      <p>Which of the above should we use for calculating your calories burned/gained?</p>
+      <%= select_tag "differential_metric", options_for_select([
+      	                            ["Highest possible", 1],
+      	                            ["Health Target", 2],
+      	                            ["Calculated TDEE", 3],
+      	                            ["Adaptive TDEE", 4]
+                                  ], @user.preferences["differential_metric"]) %>
+      <p class="form-info">If none of these are set, we use <strong>2,200</strong> as your estimated baseline.</p>
     </div>
+
 	</div>
 
 	<input type="radio" class="helper-input" name="edit-profile" id="ep-faturday" <%= params["p"] == "faturday" ? "checked='checked'" : "" %>>
