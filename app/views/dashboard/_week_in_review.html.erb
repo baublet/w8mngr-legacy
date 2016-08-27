@@ -33,7 +33,7 @@
               <%= @week_protein[i][1] > 0 ? number_with_delimiter(@week_protein[i][1]) : '-' %>
             </td>
             <td>
-              <%= @week_weights[i][1] > 0 ? WeightEntry.get_display_value(@week_weights[i][1], current_user.unit).to_s + " " + current_user.unit : '-' %>
+              <%= @week_weights[i][1] > 0 ? @week_weights[i][1].to_s + " " + current_user.unit : '-' %>
             </td>
             <td>
               <%= @week_differential[i][1] > 0 ? '+' : '' %><%= number_with_delimiter @week_differential[i][1].to_i %>
@@ -44,11 +44,16 @@
       <tfoot>
         <tr>
           <th>Average</th>
-          <td><%= number_with_delimiter(@week_averages["calories"].to_i) %></td>
-          <td><%= number_with_delimiter(@week_averages["fat"].to_i) %></td>
-          <td><%= number_with_delimiter(@week_averages["carbs"].to_i) %></td>
-          <td><%= number_with_delimiter(@week_averages["protein"].to_i) %></td>
-          <td><%= number_with_delimiter(WeightEntry.get_display_value(@week_averages["weight"].to_i, current_user.unit).to_s + " " + current_user.unit) %></td>
+          <td><%= @week_averages["calories"].to_i == 0 ? '-' : number_with_delimiter(@week_averages["calories"].to_i) %></td>
+          <td><%= @week_averages["fat"].to_i == 0 ? '-' : number_with_delimiter(@week_averages["fat"].to_i) %></td>
+          <td><%= @week_averages["carbs"].to_i == 0 ? '-' : number_with_delimiter(@week_averages["carbs"].to_i) %></td>
+          <td><%= @week_averages["protein"].to_i == 0 ? '-' : number_with_delimiter(@week_averages["protein"].to_i) %></td>
+          <td>
+            <%=
+              @week_averages["weights"].to_i == 0 ? '-' :
+               number_with_delimiter(WeightEntry.get_display_value(@week_averages["weights"].to_i, current_user.unit).to_s + " " + current_user.unit)
+            %>
+          </td>
           <td><%= number_with_delimiter(@week_differential.inject(0){|sum, x| sum + x[1] }.to_i) %></td>
         </tr>
       </tfoot>
