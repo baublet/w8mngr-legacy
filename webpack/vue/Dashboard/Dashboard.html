@@ -1,11 +1,13 @@
 <div class="dashboard-wrapper"  v-bind:class="{ loading: loading }">
   <div class="grid">
-    <div class="row">
-      <div class="col double">
+    <div class="row dashboard-charts">
+      <div class="col double card">
+        <h2><i class="fa fa-line-chart"></i> Progress</h2>
         <line-chart chart="quarter-calories"></line-chart>
       </div>
-      <div class="col">
-
+      <div class="col card">
+        <h2><i class="fa fa-pie-chart" aria-hidden="true"></i> Weekly Macros</h2>
+        <donut-chart :values="macroPie" :labels="macroPieLabels"></donut-chart>
       </div>
     </div>
   </div>

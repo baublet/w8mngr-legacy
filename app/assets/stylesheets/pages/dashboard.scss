@@ -1,20 +1,19 @@
-.user-stats {
-  background: $color-primary;
-  color: $white;
-  text-align: center;
-  border-radius: 5px;
-  .col:first-child {
-    padding-right: $spacing-small;
-  }
-  .col:last-child {
-    padding-left: $spacing-small;
-  }
-  label {
-    margin: 0;
-  }
+.week-review {
+  margin-bottom: $spacing-normal;
 }
 
 .week-review .day {
   font-weight: bold;
 }
 
+@include mqBeforeSize($desktop-breakpoint / 2) {
+  .dashboard-charts.row {
+    flex-wrap: wrap;
+  }
+  .dashboard-charts .col, .dashboard-charts .col.double {
+    width: 100%;
+    + .col {
+      //margin-top: $spacing-normal;
+    }
+  }
+}
