@@ -25,6 +25,7 @@ export default {
           wir.weekCarbs = app.MassageData(response.week_carbs)
           wir.weekProtein = app.MassageData(response.week_protein)
           wir.weekWeights = app.MassageData(response.week_weights)
+          wir.weekDifferential = app.MassageData(response.week_differential)
           // Iterate through the week averages and convert them to the desired
           // format. They often come as equations, so we need to compute them
           wir.weekAverages = response.week_averages
@@ -91,6 +92,7 @@ export default {
   },
   methods: {
     MassageData: function(data) {
+      if(!data.map) return
       return data.map(function(d) {
         return [d[0], (!d[1] ? '-': parseInt(d[1], 10).toLocaleString())]
       })

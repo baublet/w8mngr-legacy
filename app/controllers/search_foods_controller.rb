@@ -25,8 +25,8 @@ class SearchFoodsController < ApplicationController
     @base_url  = food_search_path
     @search_type = "Foods"
 
-    if !params[:q].blank?
-      search_foods  (params[:format] == "json")
+    unless params[:q].blank?
+      search_foods request.format.json? ? "json" : "html"
     end
 
     respond_to do |format|
@@ -95,7 +95,7 @@ class SearchFoodsController < ApplicationController
 
   # I'm abstracting this out because in a JSON end point, we're going to want
   # to return search results for both recipes and foods
-  def search_foods json = false
+  def search_foods type = "html"
     # Prepare the pagination with 10 per page
     page = params[:p].blank? || params[:p].to_i < 1 ? 1 : params[:p].to_i
     per_page = params[:per_page] || 10
@@ -104,14 +104,11 @@ class SearchFoodsController < ApplicationController
     # Search the wider database with a preference for the user's saved and liked foods
 
     # Break the search into its parts and search for each term
-    if json
-      # Our JSON query searches for LIKE instead
-      query = params[:q].squish.gsub(" ", "%")
-      query = "%#{query}%"
+    if type == "json"
+      query = params[:q].squish
       # Cache this request
-      results = Rails.cache.fetch("json-food-search-" + query + "-p-" + page, :expires_in => 12.hours) do
-        Food.where("name LIKE :q OR description LIKE :q", {q: query})
-            .order("popularity ASC")
+      results = Rails.cache.fetch("json-food-search-" + query + "-p-" + page.to_s, :expires_in => 1.second) do
+        Food.autocomplete_foods(query)
             .limit(per_page + 1)
             .offset((page - 1) * per_page)
             .includes(:measurements)

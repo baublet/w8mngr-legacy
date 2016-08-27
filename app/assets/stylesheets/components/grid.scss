@@ -151,3 +151,17 @@ column separations.)
     }
   }
 }
+
+@include mqBeforeSize($desktop-breakpoint / 2) {
+  .grid .row {
+    flex-wrap: wrap;
+  }
+  .grid.breaker, .grid.breaker .quarters, .grid.breaker .arbitrary {
+    .col, .col.full, .col.half {
+      width: 100%;
+      + .col {
+        margin-top: $spacing-normal;
+      }
+    }
+  }
+}

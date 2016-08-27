@@ -3,16 +3,23 @@ class DashboardController < ApplicationController
   include ActionView::Helpers::DateHelper
 
   def index
+    #@dashboard_data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
+      @dashboard_data = week_in_review
+      @dashboard_data = week_macros(@dashboard_data).merge(@dashboard_data)
+      @dashboard_data = user_stats.merge(@dashboard_data)
+    #end
     respond_to do |format|
-      format.json {
-        data = Rails.cache.fetch("user-dashboard-" + current_user.id.to_s, :expires_in => 24.hours) do
-          data = week_in_review
-          data = week_macros(data).merge(data)
-          data = user_stats.merge(data)
-        end
-        render json: data
+      format.json { render json: @dashboard_data }
+      format.html {
+        @week_weights = @dashboard_data[:week_weights]
+        @week_averages = @dashboard_data[:week_averages]
+        @week_calories = @dashboard_data[:week_calories]
+        @week_fat = @dashboard_data[:week_fat]
+        @week_carbs = @dashboard_data[:week_carbs]
+        @week_protein = @dashboard_data[:week_protein]
+        @week_differential = @dashboard_data[:week_differential]
+        render "index"
       }
-      format.html { render "index" }
     end
   end
 
@@ -20,27 +27,11 @@ class DashboardController < ApplicationController
 
   def user_stats
     # Get their TDEE and Adaptive TDEE
-    tdee = current_user.bmr
-    atdee = current_user.adaptive_tdee
-
-    # Get their first weight-in and most recent
-    first_weight = current_user.weightentries.first
-    last_weight = current_user.weightentries.last
-    weight_difference = first_weight.value - last_weight.value
-    max_weight =  current_user.weightentries.maximum(:value)
-    min_weight = current_user.weightentries.minimum(:value)
-
+    # We're wrapping this in a stats routine because in the future, I'll probably
+    # expand this functionality
     return {
-      tdee: tdee,
-      atdee: atdee,
-      first_weight: first_weight.display_value,
-      last_weight: last_weight.display_value,
-      weight_difference: WeightEntry.get_display_value(weight_difference, current_user.unit),
-      first_weight_date: first_weight.day_ts,
-      last_weight_date: last_weight.day_ts,
-      first_last_difference: distance_of_time_in_words(first_weight.day_ts, last_weight.day_ts),
-      max_weight: WeightEntry.get_display_value(max_weight, current_user.unit),
-      min_weight: WeightEntry.get_display_value(min_weight, current_user.unit)
+      tdee: current_user.bmr,
+      atdee: current_user.adaptive_tdee
     }
 
   end
@@ -73,6 +64,23 @@ class DashboardController < ApplicationController
     # Turn them to the proper unit
     week_weights = week_weights.map { |w| [w[0], WeightEntry.get_display_value(w[1], current_user.unit)] }
 
+    # Now we want to calculate the calories burned/gained, including activities
+    tdee = current_user.differential_metric
+    days_needed = week_calories.collect { |e| date_to_day e[0] }      # Collect all the days we need to iterate through
+    activities = ActivityEntry.where(user_id: current_user.id, day: days_needed).to_a
+    # Clone our calories array (if we don't do this, ruby uses pointers for everything)
+    week_differential = week_calories.map { |a| a.dup }
+    week_differential.each do |day|
+      next if day[1] == 0
+      today = date_to_day(day[0]).to_i
+      # Subtract this day's calories from the TDEE
+      day[1] = day[1] - tdee unless day[1] == 0
+      # And subtract all the activity calories from the day's calories
+      activities.each do |activity|
+        day[1] = day[1] - activity.calories if activity.day == today
+      end
+    end
+
     # Pop the last item from each
     week_calories.pop
     week_fat.pop
@@ -86,7 +94,8 @@ class DashboardController < ApplicationController
       week_fat: week_fat,
       week_carbs: week_carbs,
       week_protein: week_protein,
-      week_weights: week_weights
+      week_weights: week_weights,
+      week_differential: week_differential
     }
   end
 end

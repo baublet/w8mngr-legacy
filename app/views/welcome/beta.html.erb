@@ -16,6 +16,12 @@
 
   <h2>Change Log</h2>
 
+  <h3>Saturday, August 27</h3>
+
+  <p>We have updated the <%= link_to "Dashboard", dashboard_path %> to be more responsive and to include a whole new metric: calories gained or burned over the entire week. You can configure how we calculate this metric in your user settings page under Health Targets. By default, we use the highest value of what we calculate your TDEE, which we recommend. However, if you prefer other metrics, feel free to change it to suit your needs!</p>
+
+  <p>The food search has also been modified to heavily favor popular items over exact text matches. This is for quick additions to your logs. If you still need to search foods using a full-text match where popularity isn't quite as important, head over to the <%= link_to "Food Search Page", food_search_path %>.</p>
+
   <h3>Thursday, August 4</h3>
 
   <p>We now no longer ping the NDB API for each search request/attempt. Our foods database is MASSIVELY expanded (check out the search) from that source, so we no longer rely on the NDB being online to work. Woohoo!</p>

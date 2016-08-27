@@ -5,6 +5,7 @@
       <tr>
         <th>Day</th>
         <th>Calories</th>
+        <th>Burned</th>
         <th>Fat</th>
         <th>Carbs</th>
         <th>Protein</th>
@@ -14,6 +15,7 @@
     <tbody>
       <tr v-for="day in wirData.weekDays">
         <td class="day"><a href="{{ day[0] }}" v-text="day[1]"></a></a></td>
+        <td v-text="wirData.weekDifferential[$index][1]"></td>
         <td v-text="wirData.weekCalories[$index][1]"></td>
         <td v-text="wirData.weekFat[$index][1]"></td>
         <td v-text="wirData.weekCarbs[$index][1]"></td>
@@ -25,6 +27,7 @@
       <tr>
         <th>Average</th>
         <td v-text="wirData.weekAverages.calories"></td>
+        <td v-text="wirData.weekAverages.differential"></td>
         <td v-text="wirData.weekAverages.fat"></td>
         <td v-text="wirData.weekAverages.carbs"></td>
         <td v-text="wirData.weekAverages.protein"></td>
