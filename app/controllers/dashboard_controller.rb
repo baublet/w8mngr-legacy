@@ -88,6 +88,7 @@ class DashboardController < ApplicationController
     week_carbs.pop
     week_protein.pop
     week_weights.pop
+    week_differential.pop
 
     return {
       week_averages: week_averages,
