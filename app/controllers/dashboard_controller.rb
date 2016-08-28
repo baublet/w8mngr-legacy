@@ -90,8 +90,6 @@ class DashboardController < ApplicationController
     week_weights.pop
     week_differential.pop
 
-    byebug
-
     return {
       week_averages: week_averages,
       week_calories: week_calories,
