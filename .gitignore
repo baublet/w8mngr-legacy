@@ -26,3 +26,5 @@
 
 # CSV data to import
 /db/import/*
+
+/.byebug_history

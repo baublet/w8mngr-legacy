@@ -31,13 +31,15 @@ class RegistrationsController < ApplicationController
     @user = current_user
 
     # Save their preferences
+    height_display = params["height_display"].gsub("''", "\"")  # Some folks use double-single quotes ('') rather than " to denote inches
     begin
-      height_cm = params["height_display"].to_unit.convert_to("cm").scalar.to_i
+      height_cm = height_display.to_unit.convert_to("cm").scalar.to_i
     rescue
       height_cm = nil
     end
+
     date_time = Chronic.parse(params["birthday"])
-    @user.preferences["height_display"] = params["height_display"]
+    @user.preferences["height_display"] = height_display
     @user.preferences["height"] = height_cm.to_s
     @user.preferences["sex"] = params["sex"]
     @user.preferences["birthday"] = date_time.nil? ? "" : date_time.strftime("%B %-d, %Y")

@@ -46,6 +46,71 @@ module UserPreferences
     }
   end
 
+  # Sets the preferences to the user that you pass in
+  def set_preferences preferences
+
+    set_height preferences["height_display"] if preferences.try(:[], "height_display")
+    set_birthday preferences["birthday"] if preferences.try(:[], "birthday")
+    self.preferences["sex"] = preferences["sex"] if preferences.try(:[], "sex")
+    self.preferences["timezone"] = preferences["timezone"] if preferences.try(:[], "timezone")
+    self.preferences["units"] = preferences["units"] if preferences.try(:[], "units")
+    self.preferences["name"] = preferences["name"] if preferences.try(:[], "name")
+
+    set_target_calories preferences["target_calories"] if preferences.try(:[], "target_calories")
+    set_activity_level preferences["activity_level"] if preferences.try(:[], "activity_level")
+
+    self.preferences["faturday_enabled"] = (preferences["faturday_enabled"] ? true : false) if preferences.try(:[], "faturday_enabled")
+    set_auto_faturdays preferences["auto_faturdays"] if preferences.try(:[], "auto_faturdays")
+
+    self.preferences["faturday_calories"] = preferences["faturday_calories"].to_i if preferences.try(:[], "faturday_calories")
+    self.preferences["faturday_fat"] = preferences["faturday_fat"].to_i if preferences.try(:[], "faturday_fat")
+    self.preferences["faturday_carbs"] = preferences["faturday_carbs"].to_i if preferences.try(:[], "faturday_carbs")
+    self.preferences["faturday_protein"] = preferences["faturday_protein"].to_i if preferences.try(:[], "faturday_protein")
+
+    set_differential_metric preferences["differential_metric"] if preferences.try(:[], "differential_metric")
+
+  end
+
+  def set_height height_display
+    height_display = height_display.gsub("''", "\"")  # Some folks use double-single quotes ('') rather than " to denote inches
+    begin
+      height_cm = height_display.to_unit.convert_to("cm").scalar.to_i
+    rescue
+      height_cm = nil
+    end
+    self.preferences["height_cm"] = height_cm
+    self.preferences["height_display"] = height_display
+  end
+
+  def set_birthday birthday
+    date_time = Chronic.parse(birthday)
+    self.preferences["birthday"] = date_time.nil? ? "" : date_time.strftime("%B %-d, %Y")
+  end
+
+  def set_target_calories calories
+    target_calories = calories.to_i
+    self.preferences["target_calories"] = target_calories > 300 ? target_calories : ""
+  end
+
+  def set_activity_level level
+    activity_level = level.to_i
+    self.preferences["activity_level"] = activity_level.between?(1,5) ? activity_level : 2
+  end
+
+  def set_auto_faturdays faturdays
+    self.preferences["auto_faturdays"] = {}
+    if faturdays.try(:[], "faturday")
+      faturdays["faturday"].each do |day|
+        self.preferences["auto_faturdays"][day] = true
+      end
+    end
+  end
+
+  def set_differential_metric metric
+    diff_metric = metric.to_i
+    self.preferences["differential_metric"] = diff_metric.between?(1, 4) ? diff_metric : 1
+  end
+
   # Sets up the user preferences so various functions don't blow up if they haven't yet set values
   def setup_preferences
     defaults = default_preferences
