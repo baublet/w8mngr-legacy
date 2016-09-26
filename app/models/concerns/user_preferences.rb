@@ -84,7 +84,7 @@ module UserPreferences
 
   def set_birthday birthday
     date_time = Chronic.parse(birthday)
-    self.preferences["birthday"] = date_time.nil? ? "" : date_time.strftime("%B %-d, %Y")
+    self.preferences["birthday"] = date_time.nil? ? birthday : date_time.strftime("%B %-d, %Y")
   end
 
   def set_target_calories calories
@@ -99,10 +99,8 @@ module UserPreferences
 
   def set_auto_faturdays faturdays
     self.preferences["auto_faturdays"] = {}
-    if faturdays.try(:[], "faturday")
-      faturdays["faturday"].each do |day|
-        self.preferences["auto_faturdays"][day] = true
-      end
+    faturdays.each do |day|
+      self.preferences["auto_faturdays"][day[0]] = day[1]
     end
   end
 
