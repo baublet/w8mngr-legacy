@@ -1,6 +1,6 @@
 <div class="reps">
   <%= label_tag :reps, "Repetitions (how many time you lifted in this set)", class: "screen-reader-text" %>
-  <%= number_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps", class: "large" %>
+  <%= text_field_tag :reps, ((defined? entry) ? entry.reps : ""), placeholder: "Reps", class: "large" %>
 </div>
 
 <% if defined? entry %>
