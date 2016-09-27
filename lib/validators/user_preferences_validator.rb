@@ -6,6 +6,7 @@ class UserPreferencesValidator < ActiveModel::Validator
     validate_name record, "height_display", record.preferences["height_display"]
     validate_sex record, "sex", record.preferences["sex"]
     validate_unit record, "units", record.preferences["units"]
+    validate_timezone record, "timezone", record.preferences["timezone"]
   end
 
   def validate_unit record, attribute, units
@@ -29,10 +30,10 @@ class UserPreferencesValidator < ActiveModel::Validator
   end
 
   def validate_timezone record, attribute, timezone
-      return if timezone.blank?
-      if !ActiveSupport::TimeZone[timezone].present?
-          record.errors[attribute] << (options[:message] || "is an invalid timezone")
-      end
+    return if timezone.blank?
+    if !ActiveSupport::TimeZone[timezone].present?
+        record.errors[attribute] << (options[:message] || "is an invalid timezone")
+    end
   end
 
   def validate_birthday record, attribute, date
