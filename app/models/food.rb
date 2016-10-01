@@ -55,6 +55,35 @@ class Food < ActiveRecord::Base
     save()
   end
 
+  # Pass in a hash of measurements in the form of [measurement_id][elements]
+  # Returns an error message if one or more of the measurements could not be
+  # updated/deleted. Otherwise, returns false
+  def update_measurements measurements
+    return "No measurements passed." unless measurements.is_a?(Hash)
+    measurements.each do |id, measurement_data|
+      id = id.to_i
+      # Skip the ID 0, which is our "new measurement" box
+      next if id == 0
+      measurement_index = self.measurements.index { |m| m if m.id == id }
+      measurement = measurement_index.nil? ? nil : self.measurements[measurement_index]
+      return "Measurement not found on the food." if measurement.nil?
+      if measurement_data[:delete] == "yes"
+        return "Foods need at least one measurement." if self.measurements.count == 1
+        measurement.destroy
+        next
+      end
+      # We need to do it this way so strong params doesn't trigger an exception
+      measurement.amount = measurement_data[:amount]
+      measurement.unit = measurement_data[:unit]
+      measurement.calories = measurement_data[:calories]
+      measurement.fat = measurement_data[:fat]
+      measurement.carbs = measurement_data[:carbs]
+      measurement.protein = measurement_data[:protein]
+      return "One or more of your measurements failed to update." unless measurement.save
+    end
+    return true
+  end
+
   # Load the results passed from the USDA API into this object
   def populate_from_usda result
 

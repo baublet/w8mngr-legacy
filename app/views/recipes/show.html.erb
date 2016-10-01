@@ -16,14 +16,14 @@
   <div class="recipe">
     <div class="recipe-header">
       <h1><i class="fa fa-shopping-basket"></i> <%= @recipe.name %></h1>
-      <% if @recipe.user.id == current_user.id %>
-        <div class="page-meta">
+      <div class="page-meta">
+        <% if @recipe.user == current_user %>
           <%= link_to edit_recipe_path(@recipe), class: "meta", title: "Edit or Delete this recipe" do %>
             <i class="fa fa-pencil"></i>
             Edit Recipe
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
       <div class="description">
         <% if @recipe.servings > 0 %>
           <h4 class="serves">Serves <%= @recipe.servings %></h4>

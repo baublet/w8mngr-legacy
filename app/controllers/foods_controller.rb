@@ -4,7 +4,6 @@ class FoodsController < ApplicationController
 
   include FoodsHelper
 
-  # GET /foods
   def index
     per_page = 10
     @page = (params.try(:[], :p) || 1).to_i
@@ -17,7 +16,6 @@ class FoodsController < ApplicationController
     @foods.pop if @foods.count > 10
   end
 
-  # GET /foods/1
   def show
     @food = Food.includes(:measurements).find(params[:id])
     # Validate the day
@@ -36,21 +34,18 @@ class FoodsController < ApplicationController
     end
   end
 
-  # GET /foods/new
   def new
     @food = current_user.foods.new
     @newmeasurement = Measurement.new
   end
 
-  # GET /foods/1/edit
   def edit
     @newmeasurement = Measurement.new
   end
 
-  # POST /foods
   def create
-    @food = current_user.foods.new(food_params)
-    @measurement = @food.measurements.new(measurement_params(params[:measurement]['0']))
+    @food = current_user.foods.new food_params
+    @measurement = @food.measurements.new measurement_params
 
     if @food.save
         flash.now[:success] = "Your food was successfully created!"
@@ -62,63 +57,35 @@ class FoodsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /foods/1
   def update
+
+    @newmeasurement = Measurement.new
+    food_updated = true
+
+    if new_measurement_data_passed? && food_updated == true
+      @newmeasurement = @food.measurements.new(measurement_params)
+      food_updated = "Could not create new measurement." if !@newmeasurement.save
+      # Reload this if we updated the food so we can delete all of our current
+      # measurements while adding a new one
+      @food.reload if food_updated == true
+    end
+
+    # We update the food itself second so our validation occurs (which extends to
+    # measurement models) after the user modifies the measurements
+    food_updated = "Food failed to update." unless @food.update(food_params)
+    food_updated = @food.update_measurements(params.try(:[], :measurement)) if food_updated == true
+
+    # If everything checks out, reset the new measurement
+    # Reload the food to refresh our measurements
+    @food.reload
+    if food_updated == true
       @newmeasurement = Measurement.new
-      food_update_error = ''
-      if @food.update(food_params)
+      flash.now[:success] = "Food successfully saved."
+    else
+      flash.now[:error] = food_updated
+    end
 
-          # Update existing measurements
-          @food.measurements.each do |measurement|
-              if params[:measurement][measurement.id.to_s].present?
-                  if params[:measurement][measurement.id.to_s][:delete] == 'yes'
-                      # We don't want to delete the last measurement on a food item
-                      if @food.measurements.size > 1
-                          measurement.destroy
-                          # We have to reload here so the food associations are updated
-                          @food.reload
-                      else
-                          food_update_error = "Can't delete the selected measurement(s). You need at least one measurement on a food entry."
-                      end
-                  else
-                      if !measurement.update( measurement_params(params[:measurement][measurement.id.to_s]) )
-                          food_update_error = "One or more of your measurements failed to save."
-                      end
-                  end
-              end
-          end
-
-          # Add a new measurement, if the form is filled in
-          new_measurement_params = measurement_params(params[:measurement]['0'])
-          if  !new_measurement_params[:amount].blank? ||
-              !new_measurement_params[:unit].blank? ||
-              !new_measurement_params[:calories].blank? ||
-              !new_measurement_params[:fat].blank? ||
-              !new_measurement_params[:carbs].blank? ||
-              !new_measurement_params[:protein].blank?
-
-              @newmeasurement = @food.measurements.new(new_measurement_params)
-
-              if !@newmeasurement.save
-                  @food.reload
-                  food_update_error = "One or more of your measurements failed to save."
-              else
-                  @newmeasurement = Measurement.new
-              end
-
-          end
-
-      else
-          food_update_error = "Your food entry failed to save."
-      end
-
-      if food_update_error.blank?
-          flash.now[:success] = "Entry successfully saved!"
-      else
-          flash.now[:error] = food_update_error
-      end
-
-      render :edit
+    render :edit
   end
 
   # DELETE /foods/1
@@ -137,13 +104,25 @@ class FoodsController < ApplicationController
     params.require(:food).permit(:name, :description)
   end
 
-  def measurement_params(params)
-      params = ActionController::Parameters.new(params)
-      params.permit(:amount, :unit, :calories, :fat, :carbs, :protein)
-  end
-
   def correct_user
     @food = current_user.foods.find_by(id: params[:id])
     redirect_to root_url if @food.nil?
   end
+
+  def new_measurement_data_passed?
+    new_measurement_params = params.try(:[], :measurement).try(:[], '0')
+    return false if new_measurement_params.nil?
+    return true if  !new_measurement_params[:amount].blank? ||
+                    !new_measurement_params[:unit].blank? ||
+                    !new_measurement_params[:calories].blank? ||
+                    !new_measurement_params[:fat].blank? ||
+                    !new_measurement_params[:carbs].blank? ||
+                    !new_measurement_params[:protein].blank?
+    return false
+  end
+
+  def measurement_params
+    params.require(:measurement).require('0').permit(:amount, :unit, :calories, :fat, :carbs, :protein)
+  end
+
 end

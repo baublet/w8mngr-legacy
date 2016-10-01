@@ -3,3 +3,5 @@ WAIT=8
 # Try 6 times, if it still doesn't work, the deploy has failed and the old container (app) will be kept
 ATTEMPTS=6
 /check_deploy.txt success
+/ w8mngr
+/privacy Privacy Policy

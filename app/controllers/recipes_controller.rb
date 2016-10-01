@@ -1,27 +1,14 @@
 class RecipesController < ApplicationController
-  before_action :logged_in_user
-  before_action :correct_user, only: [:edit,
-                                      :update,
-                                      :destroy,
-                                      :add_ingredient,
-                                      :add_food,
-                                      :remove_ingredient
-                                     ]
+  before_action :logged_in_user, except: [:show]
+  before_action :find_recipe, except: [:index, :new, :create]
+  before_action :correct_user, except: [:index, :show]
 
   def index
     @recipes = current_user.recipes.all
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
-    html_renderer = Redcarpet::Render::HTML.new(
-      filter_html: true,
-      no_images: true,
-      no_links: true,
-      no_styles: true
-      )
-    markdown = Redcarpet::Markdown.new(html_renderer)
-    @preparation_instructions = markdown.render(@recipe.instructions.nil? ? "" : @recipe.instructions)
+    @preparation_instructions = MarkdownText.render_basic(@recipe.instructions.nil? ? "" : @recipe.instructions)
   end
 
   def edit
@@ -83,8 +70,13 @@ class RecipesController < ApplicationController
   private
 
   def correct_user
-    @recipe = current_user.recipes.find_by(id: params[:id])
-    redirect_to root_url if @recipe.nil?
+    return false if @recipe.nil?
+    show_404("Invalid recipe...") and return false if @recipe.user != current_user
+  end
+
+  def find_recipe
+    @recipe = Recipe.find_by(id: params[:id])
+    show_404("Invalid recipe...") and return false if @recipe.nil?
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -105,7 +97,7 @@ class RecipesController < ApplicationController
     new_ingredient_params.each do |key, value|
       passed = true if !value.blank?
     end
-    passed
+    return passed
   end
 
 end
