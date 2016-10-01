@@ -12,7 +12,7 @@ class NotifyAdminOfNewUserJob < ActiveJob::Base
     client.deliver_with_template({
      :from => "ryan@w8mngr.com",
      :to => "baublet@gmail.com",
-     :HtmlBody => "Woohoo! We got a new user: " + user.email
+     :html_body => "Woohoo! We got a new user: " + user.email
     })
 
   end
