@@ -14,10 +14,14 @@ class FoodEntriesController < ApplicationController
 
   def create
     @newfoodentry = current_user.foodentries.build(food_entry_params)
-    flash.now[:success] = "Entry added." if @newfoodentry.save
+    if @newfoodentry.save
+      flash.now[:success] = "Entry added."
+      @newfoodentry = current_user.foodentries.build(day: current_day, calories: nil)
+    else
+      flash.now[:error] = "Unable to save entry."
+    end
     respond_to do |format|
       format.html {
-        @newfoodentry = current_user.foodentries.build(day: current_day, calories: nil)
         show_list
       }
       format.json { render json: {success: true, id: @newfoodentry.try(:id)} }
@@ -25,7 +29,11 @@ class FoodEntriesController < ApplicationController
   end
 
   def update
-    flash.now[:success] = "Entry updated." if @foodentry.update(food_entry_params)
+    if @foodentry.update(food_entry_params)
+      flash.now[:success] = "Entry updated."
+    else
+      flash.now[:error] = "Unable to update entry."
+    end
     respond_to do |format|
       format.html { show_list }
       format.json { render json: {success: true} }

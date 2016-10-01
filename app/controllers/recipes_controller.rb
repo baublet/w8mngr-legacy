@@ -70,6 +70,7 @@ class RecipesController < ApplicationController
   private
 
   def correct_user
+    return false if @recipe.nil?
     show_404("Invalid recipe...") and return false if @recipe.user != current_user
   end
 

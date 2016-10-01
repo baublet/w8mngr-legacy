@@ -44,8 +44,8 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = current_user.foods.new(food_params)
-    @measurement = @food.measurements.new(measurement_params(params[:measurement]['0']))
+    @food = current_user.foods.new food_params
+    @measurement = @food.measurements.new measurement_params
 
     if @food.save
         flash.now[:success] = "Your food was successfully created!"
@@ -63,7 +63,7 @@ class FoodsController < ApplicationController
     food_updated = true
 
     if new_measurement_data_passed? && food_updated == true
-      @newmeasurement = @food.measurements.new(new_measurement_params)
+      @newmeasurement = @food.measurements.new(measurement_params)
       food_updated = "Could not create new measurement." if !@newmeasurement.save
       # Reload this if we updated the food so we can delete all of our current
       # measurements while adding a new one
@@ -121,7 +121,8 @@ class FoodsController < ApplicationController
     return false
   end
 
-  def new_measurement_params
+  def measurement_params
     params.require(:measurement).require('0').permit(:amount, :unit, :calories, :fat, :carbs, :protein)
   end
+
 end
