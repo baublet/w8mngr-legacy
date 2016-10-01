@@ -7,8 +7,8 @@ class SendWelcomeMessageJob < ActiveJob::Base
     return if Rails.env.test?
 
     client = Postmark::ApiClient.new(ENV["W8MNGR_API_KEY_POSTMARK"])
-    user = User.find user_id
-    message = PtMessage.find(message_id)
+    user = User.find(user_id)
+
     client.deliver_with_template({
      :from => "ryan@w8mngr.com",
      :to => user.email,

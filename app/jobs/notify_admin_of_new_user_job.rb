@@ -8,10 +8,12 @@ class NotifyAdminOfNewUserJob < ActiveJob::Base
 
     client = Postmark::ApiClient.new(ENV["W8MNGR_API_KEY_POSTMARK"])
     user = User.find(user_id)
-    message = PtMessage.find(message_id)
+
+    puts "Running new user admin message: " + user.email
     client.deliver_with_template({
      :from => "ryan@w8mngr.com",
      :to => "baublet@gmail.com",
+     :subject => "w8mngr: new user",
      :html_body => "Woohoo! We got a new user: " + user.email
     })
 
