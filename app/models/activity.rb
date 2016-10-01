@@ -50,6 +50,15 @@ class Activity < ActiveRecord::Base
     ActivityEntry.recent_most user_id, self.id, num, offset, day
   end
 
+  # Returns num Activities belonging to user_id or object. Pass 0 into num to not limit
+  # the number returned
+  def self.belonging_to_user user, num = 0, offset = 0,
+    user_object = user.is_a?(User) ? user : User.find_by(id: user)
+    activities = user_object.activities
+    activities = activities.limit(num).offset(offset) if num > 0
+    return activities
+  end
+
   # Returns the recent most entry for a user
   def last_entry user_id
     ActivityEntry.where(user_id: user_id, activity_id: self.id).maximum(:day)

@@ -9,28 +9,24 @@ class ActivityEntriesController < ApplicationController
   end
 
   def create
-    unless @activity.nil?
-      # Break the activity reps into x by x (e.g., 2x10, indicating two sets of 10)
-      # so users can enter multiple sets in a single go
-      entries = params[:reps].nil? ? [params[:reps]] : params[:reps].split('x')
-      sets = entries.count > 1 ? entries[0].to_i : 1
-      reps = entries.count > 1 ? entries[1].to_i : entries[0].to_i
-      sets.times do
-        @new_activityentry = current_user.activity_entries.build(activity_entries_params)
-        @new_activityentry.reps = reps
-        @new_activityentry.convert_unit_for_save reps, params[:work]
-        if @new_activityentry.save
-          flash[:success] = "Activity entry created!"
-        else
-          flash[:error] = "Unable to create activity entry..."
-          break
-        end
+    # Break the activity reps into x by x (e.g., 2x10, indicating two sets of 10)
+    # so users can enter multiple sets in a single go
+    entries = params[:reps].nil? ? [params[:reps]] : params[:reps].split('x')
+    sets = entries.count > 1 ? entries[0].to_i : 1
+    reps = entries.count > 1 ? entries[1].to_i : entries[0].to_i
+    sets.times do
+      @new_activityentry = current_user.activity_entries.build(activity_entries_params)
+      @new_activityentry.reps = reps
+      @new_activityentry.convert_unit_for_save reps, params[:work]
+      if @new_activityentry.save
+        flash[:success] = "Activity entry created!"
+      else
+        flash[:error] = "Unable to create activity entry..."
+        break
       end
-       redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day) if params.try(:[], :from_routine_id).nil?
-       redirect_to routine_day_path(params.try(:[], :from_routine_id), current_day) unless params.try(:[], :from_routine_id).nil?
-    else
-      show_404 "Invalid activity entry..."
     end
+    redirect_to activity_log_day_path(activity_id: params[:activity_id], day: current_day) if params.try(:[], :from_routine_id).nil?
+    redirect_to routine_day_path(params.try(:[], :from_routine_id), current_day) unless params.try(:[], :from_routine_id).nil?
   end
 
   def update
@@ -67,7 +63,7 @@ class ActivityEntriesController < ApplicationController
 
   def find_activity
     @activity = Activity.find(params[:activity_id]) rescue nil
-    show_404 "Invalid activity..." and return false if @activity.nil?
+    show_404("Invalid activity...") and return false if @activity.nil?
     return true
   end
 

@@ -1,7 +1,7 @@
 module FoodsHelper
 
     # Increments the popularity of food_id and measurement_id by 1
-    # Try not to only mass one. This function works if you pass nil to one
+    # Try not to only pass one. This function works if you pass nil to one
     # or the other, but our models have built-in functions to handle this
     # if you need to increment a single one (or, if you just know the ID,
     # use the functions below that ActiveRecord provides)
