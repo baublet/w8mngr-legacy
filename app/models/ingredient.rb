@@ -33,7 +33,7 @@ class Ingredient < ActiveRecord::Base
       rescue
         multiplier = 1
       end
-      multipler = 1 if multiplier == 0
+      multiplier = 1 if multiplier == 0
       self.calories = measurement.calories * multiplier
       self.carbs = measurement.carbs * multiplier
       self.fat = measurement.fat * multiplier
@@ -47,7 +47,6 @@ class Ingredient < ActiveRecord::Base
         measurement = Measurement.find(measurement_id)
       rescue
       end
-      #puts measurement
       if measurement.nil?
         errors.add(:name, "You must fully enter the name, calories, fat, carbs, and protein of your ingredient")
       end

@@ -1,4 +1,5 @@
 class IngredientsController < ApplicationController
+  before_action :logged_in_user
   before_action :correct_user, only: [:update, :destroy]
 
   def create
@@ -6,7 +7,7 @@ class IngredientsController < ApplicationController
     redirect_to root_url if @recipe.nil?
     @ingredient = @recipe.ingredients.build(ingredient_params)
     if @ingredient.save
-      flash[:success] = "Added ingredient to recipe"
+      flash[:success] = "Added ingredient to recipe."
       redirect_to edit_recipe_path(@recipe)
     else
       @newingredient = @ingredient
@@ -21,12 +22,7 @@ class IngredientsController < ApplicationController
     redirect_to root_url if @measurement.nil?
 
     amount = params[:amount] || 1
-
-    begin
-      amount = amount.to_r.to_f
-    rescue
-      amount = 0
-    end
+    amount = amount.to_r.to_f rescue 0
     amount = 1 if amount == 0
 
     @ingredient = @recipe.ingredients.build(

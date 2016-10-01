@@ -10,6 +10,8 @@ class RegistrationsController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      SendWelcomeMessageJob.perform_later @user.id
+      NotifyAdminOfNewUserJob.perform_later @user.id
       login @user
       @weightentry = @user.weightentries.build(day: current_day)
       render "metrics"
