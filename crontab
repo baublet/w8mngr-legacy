@@ -1,9 +1,9 @@
 # w8mngr crontab for our messages and events
 
 # Our Faturdays run twice a day, once in the morning hours, once at night (7am/pm)
-0 7,19 * * * dokku --rm-container run w8mngr rake faturday >/dev/null 2>&1
+* 7,19 * * * dokku --rm-container run w8mngr rake faturday >/dev/null 2>&1
 
 # Our Messages generator runs four times per day, with message delivery happening
 # every hour after that
-0 0,9,15,21 * * * dokku --rm-container run w8mngr rake generate_pt_messages >/dev/null 2>&1
-0 1,10,16,22 * * * dokku --rm-container run w8mngr rake deliver_pt_messages >/dev/null 2>&1
+* 0,9,15,21 * * * dokku --rm-container run w8mngr rake generate_pt_messages >/dev/null 2>&1
+* 1,10,16,22 * * * dokku --rm-container run w8mngr rake deliver_pt_messages >/dev/null 2>&1
