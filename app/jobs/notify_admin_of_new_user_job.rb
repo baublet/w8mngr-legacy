@@ -10,7 +10,7 @@ class NotifyAdminOfNewUserJob < ActiveJob::Base
     user = User.find(user_id)
 
     puts "Running new user admin message: " + user.email
-    client.deliver_with_template({
+    client.deliver({
      :from => "ryan@w8mngr.com",
      :to => "baublet@gmail.com",
      :subject => "w8mngr: new user",
