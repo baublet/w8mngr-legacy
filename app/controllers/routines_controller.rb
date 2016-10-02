@@ -10,14 +10,7 @@ class RoutinesController < ApplicationController
 
   def show
     unless @routine.nil?
-      html_renderer = Redcarpet::Render::HTML.new(
-        filter_html: true,
-        no_images: true,
-        no_links: true,
-        no_styles: true
-      )
-      markdown = Redcarpet::Markdown.new(html_renderer)
-      @routine_description = markdown.render(@routine.description)
+      @routine_description = MarkdownText.render_basic @routine.description
       @routine_activities = []
       @routine.activities.each do |activity_id|
         @routine_activities << Activity.find(activity_id)

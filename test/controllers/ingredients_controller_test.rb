@@ -20,7 +20,7 @@ class IngredientsControllerTest < ActionController::TestCase
       }
     }
     assert_response :redirect
-    assert_equal "Added ingredient to recipe", flash[:success]
+    assert_equal "Added ingredient to recipe.", flash[:success]
   end
 
   test "should post create_from_food" do
